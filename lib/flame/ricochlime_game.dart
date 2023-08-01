@@ -10,16 +10,17 @@ class RicochlimeGame extends FlameGame with PanDetector {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    player = Player()
-        ..position = size / 2
-        ..width = 50
-        ..height = 100
-        ..anchor = Anchor.center;
+    player = Player();
     add(player);
   }
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
-    player.position.add(info.delta.game);
+    player.move(info.delta.game);
+  }
+
+  @override
+  void onPanEnd(DragEndInfo info) {
+    player.move(Vector2.zero());
   }
 }
