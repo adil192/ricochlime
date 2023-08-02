@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
+import 'package:flame/palette.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
@@ -21,6 +22,9 @@ class RicochlimeGame extends FlameGame
     player = Player();
     add(player);
   }
+
+  @override
+  Color backgroundColor() => const Color(0xff589c64);
 
   @override
   void onMouseMove(PointerHoverInfo info) {
