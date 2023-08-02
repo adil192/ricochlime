@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
+import 'package:ricochlime/flame/components/background/background.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
@@ -20,6 +21,8 @@ class RicochlimeGame extends FlameGame
 
     assert(size.x == expectedWidth);
     assert(size.y == expectedHeight);
+
+    add(Background());
 
     add(Slime());
 
