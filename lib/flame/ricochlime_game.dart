@@ -3,7 +3,8 @@ import 'package:flame/input.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
 
-class RicochlimeGame extends FlameGame with PanDetector {
+class RicochlimeGame extends FlameGame
+    with PanDetector, TapDetector {
   late Player player;
 
   @override
@@ -24,5 +25,10 @@ class RicochlimeGame extends FlameGame with PanDetector {
   @override
   void onPanEnd(DragEndInfo info) {
     player.move(Vector2.zero());
+  }
+
+  @override
+  void onTap() {
+    player.attack();
   }
 }

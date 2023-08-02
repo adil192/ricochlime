@@ -11,11 +11,22 @@ enum PlayerState {
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameRef<RicochlimeGame> {
 
+  Player() : super(
+    removeOnFinish: {
+      PlayerState.dead: true,
+    },
+  );
+
   @override
   Future<void> onLoad() async {
     animations = await getAnimations();
     current = PlayerState.idle;
     await super.onLoad();
+
+    final attackTicker = animationTickers![PlayerState.attack]!;
+    attackTicker.onComplete = () {
+      current = PlayerState.idle;
+    };
 
     position = gameRef.size / 2;
     width = 48;
@@ -27,6 +38,12 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   void move(Vector2 delta) {
     setAnimationBasedOnMovement(delta);
     position.add(delta);
+  }
+
+  void attack() {
+    current = PlayerState.attack;
+    final attackTicker = animationTickers![PlayerState.attack]!;
+    attackTicker.reset();
   }
 
   void setAnimationBasedOnMovement(Vector2 delta) {
@@ -61,11 +78,12 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     PlayerState.attack: await gameRef.loadSpriteAnimation(
       'player.png',
       SpriteAnimationData.sequenced(
-        stepTime: 1 / 4,
+        stepTime: 1 / 6,
         textureSize: Vector2(48, 48),
         amount: 4,
         amountPerRow: 4,
         texturePosition: Vector2(0, 8 * 48),
+        loop: false,
       ),
     ),
     PlayerState.dead: await gameRef.loadSpriteAnimation(
@@ -73,10 +91,10 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       SpriteAnimationData.sequenced(
         stepTime: 1 / 3,
         textureSize: Vector2(48, 48),
-        loop: false,
         amount: 3,
         amountPerRow: 3,
         texturePosition: Vector2(0, 9 * 48),
+        loop: false,
       ),
     ),
   };
