@@ -10,6 +10,7 @@ enum PlayerState {
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameRef<RicochlimeGame> {
+  static double staticHeight = 48;
 
   Player() : super(
     removeOnFinish: {
@@ -28,9 +29,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       current = PlayerState.idle;
     };
 
-    position = gameRef.size / 2;
+    position = gameRef.size / 2 + Vector2(0, 200);
     width = 48;
-    height = 48;
+    height = staticHeight;
     scale = Vector2.all(3);
     anchor = Anchor.center;
   }
