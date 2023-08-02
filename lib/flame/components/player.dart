@@ -29,10 +29,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       current = PlayerState.idle;
     };
 
-    position = gameRef.size / 2 + Vector2(0, 200);
-    width = 48;
+    position = gameRef.size / 2 + Vector2(0, staticHeight);
+    width = staticHeight;
     height = staticHeight;
-    scale = Vector2.all(3);
     anchor = Anchor.center;
   }
 

@@ -21,10 +21,9 @@ class Slime extends SpriteAnimationGroupComponent<SlimeState>
     current = SlimeState.idle;
     await super.onLoad();
 
-    position = gameRef.size / 2 + Vector2(0, 100);
+    position = gameRef.size / 2;
     width = 32;
     height = 32;
-    scale = Vector2.all(3);
     anchor = Anchor.center;
   }
 

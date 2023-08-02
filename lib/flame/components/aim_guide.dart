@@ -23,7 +23,7 @@ class AimGuide extends PositionComponent
 
   /// Dots will be drawn in the direction we're aiming
   /// every [_dotInterval] units.
-  static const _dotInterval = 25;
+  static const _dotInterval = 10;
   /// The maximum number of dots to be drawn.
   static const _maxDots = 20;
 
@@ -31,7 +31,7 @@ class AimGuide extends PositionComponent
   Future<void> onLoad() async {
     await super.onLoad();
 
-    position = gameRef.size / 2 + Vector2(0, 200 + Player.staticHeight / 2);
+    position = gameRef.size / 2 + Vector2(0, Player.staticHeight * 1.25);
     width = 0;
     height = 0;
     anchor = Anchor.center;
@@ -46,7 +46,7 @@ class AimGuide extends PositionComponent
     for (int dotIndex = 0; dotIndex < _maxDots * _aimLength; dotIndex++) {
       final distFromCenter = _dotInterval * (dotIndex + 1);
       final dotPos = _unitDir! * distFromCenter.toDouble();
-      canvas.drawCircle(Offset(dotPos.x, dotPos.y), 5, _paint);
+      canvas.drawCircle(Offset(dotPos.x, dotPos.y), 2, _paint);
     }
   }
 

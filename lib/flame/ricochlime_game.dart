@@ -11,8 +11,8 @@ class RicochlimeGame extends FlameGame
   late Player player;
   late AimGuide aimGuide;
 
-  static const expectedWidth = 500.0;
-  static const expectedHeight = 1000.0;
+  static const expectedWidth = 160.0;
+  static const expectedHeight = expectedWidth * 2;
 
   @override
   Future<void> onLoad() async {
