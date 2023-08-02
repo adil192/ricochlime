@@ -4,15 +4,22 @@ import 'package:flame/palette.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
+import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 class RicochlimeGame extends FlameGame
     with PanDetector, TapDetector, MouseMovementDetector {
   late Player player;
   late AimGuide aimGuide;
 
+  static const expectedWidth = 500.0;
+  static const expectedHeight = 1000.0;
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    assert(size.x == expectedWidth);
+    assert(size.y == expectedHeight);
 
     add(Slime());
 
@@ -24,7 +31,7 @@ class RicochlimeGame extends FlameGame
   }
 
   @override
-  Color backgroundColor() => const Color(0xff589c64);
+  Color backgroundColor() => RicochlimePalette.grassColor;
 
   @override
   void onMouseMove(PointerHoverInfo info) {
