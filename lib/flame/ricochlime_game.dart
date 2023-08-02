@@ -1,7 +1,7 @@
-import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:ricochlime/flame/components/player.dart';
+import 'package:ricochlime/flame/components/slime.dart';
 
 class RicochlimeGame extends FlameGame with PanDetector {
   late Player player;
@@ -12,6 +12,8 @@ class RicochlimeGame extends FlameGame with PanDetector {
 
     player = Player();
     add(player);
+
+    add(Slime());
   }
 
   @override

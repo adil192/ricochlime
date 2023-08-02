@@ -11,7 +11,7 @@ enum PlayerState {
   attackForwards,
   attackRight,
   attackBackwards,
-  die,
+  dead,
 }
 enum PlayerDirection {
   forwards,
@@ -23,7 +23,6 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameRef<RicochlimeGame> {
 
   bool walking = false;
-  bool attacking = false;
   PlayerDirection direction = PlayerDirection.forwards;
 
   @override
@@ -46,7 +45,6 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   void setAnimationBasedOnMovement(Vector2 delta) {
     walking = !delta.isZero();
-    attacking = false;
     direction = getPlayerDirection(delta) ?? direction;
     scale.x = scale.x.abs() * (delta.x >= 0 ? 1 : -1);
 
@@ -177,7 +175,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         texturePosition: Vector2(0, 8 * 48),
       ),
     ),
-    PlayerState.die: await gameRef.loadSpriteAnimation(
+    PlayerState.dead: await gameRef.loadSpriteAnimation(
       'player.png',
       SpriteAnimationData.sequenced(
         stepTime: 1 / 3,
