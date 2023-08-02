@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: RicochlimePalette.grassColor,
-      child: Padding(
-        padding: const EdgeInsets.all(8),
+      child: SafeArea(
+        minimum: const EdgeInsets.all(8),
         child: FittedBox(
           child: DecoratedBox(
             decoration: BoxDecoration(
