@@ -1,3 +1,4 @@
+import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
@@ -32,6 +33,8 @@ class RicochlimeGame extends FlameGame with
 
     player = Player();
     add(player);
+
+    add(ScreenHitbox());
   }
 
   @override
