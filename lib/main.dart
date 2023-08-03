@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
     return ColoredBox(
       color: RicochlimePalette.grassColor,
       child: SafeArea(
-        minimum: const EdgeInsets.all(8),
         child: FittedBox(
           child: DecoratedBox(
             decoration: BoxDecoration(
