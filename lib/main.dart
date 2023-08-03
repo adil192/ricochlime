@@ -25,6 +25,12 @@ class MyApp extends StatelessWidget {
                   color: RicochlimePalette.grassColorDark.withOpacity(0.5),
                   blurRadius: 100,
                 ),
+                const BoxShadow(
+                  color: RicochlimePalette.waterColor,
+                  spreadRadius: RicochlimeGame.expectedHeight * 0.1,
+                  blurRadius: RicochlimeGame.expectedHeight * 0.1,
+                  offset: Offset(0, RicochlimeGame.expectedHeight * 0.9),
+                ),
               ],
             ),
             child: SizedBox(
