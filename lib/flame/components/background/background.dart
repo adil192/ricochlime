@@ -18,8 +18,8 @@ class Background extends PositionComponent
     size = gameRef.size;
 
     final random = Random();
-    for (int row = 0; row < tilesPerColumn; row++) {
-      for (int column = 0; column < tilesPerRow; column++) {
+    for (var row = 0; row < tilesPerColumn; row++) {
+      for (var column = 0; column < tilesPerRow; column++) {
         final tile = BackgroundWaterTile.random(
           position: Vector2(
             gameRef.size.x * column / tilesPerRow,

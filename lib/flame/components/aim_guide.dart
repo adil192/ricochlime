@@ -41,9 +41,11 @@ class AimGuide extends PositionComponent
   void render(Canvas canvas) {
     super.render(canvas);
 
-    if (_unitDir == null) return;
+    if (_unitDir == null) {
+      return;
+    }
 
-    for (int dotIndex = 0; dotIndex < _maxDots * _aimLength; dotIndex++) {
+    for (var dotIndex = 0; dotIndex < _maxDots * _aimLength; dotIndex++) {
       final distFromCenter = _dotInterval * (dotIndex + 1);
       final dotPos = _unitDir! * distFromCenter.toDouble();
       canvas.drawCircle(Offset(dotPos.x, dotPos.y), 2, _paint);

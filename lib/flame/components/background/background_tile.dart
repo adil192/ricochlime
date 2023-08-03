@@ -29,7 +29,9 @@ class BackgroundWaterTile extends SpriteAnimationComponent
     required Random random,
   }) : this(
     position: position,
-    type: BackgroundWaterTileType.values[random.nextInt(BackgroundWaterTileType.values.length)],
+    type: BackgroundWaterTileType.values[
+      random.nextInt(BackgroundWaterTileType.values.length)
+    ],
   );
 
   final BackgroundWaterTileType type;
@@ -53,7 +55,7 @@ class BackgroundWaterTile extends SpriteAnimationComponent
 
   Future<void> loadWaterTiles() async {
     assert(waterSpriteSheets.isEmpty);
-    for (int i = 0; i < 6; i++) {
+    for (var i = 0; i < 6; i++) {
       final spriteSheet = SpriteSheet.fromColumnsAndRows(
         image: await gameRef.images.load('water${i + 1}.png'),
         columns: 6,
