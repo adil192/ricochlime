@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
@@ -16,6 +17,7 @@ class AimGuide extends PositionComponent
   /// 
   /// This is null if the user isn't currently aiming.
   Vector2? _unitDir;
+  Vector2? get unitDir => _unitDir;
 
   /// The length of the aim guide:
   /// 1 means the aim guide is fully extended.
@@ -48,7 +50,7 @@ class AimGuide extends PositionComponent
     for (var dotIndex = 0; dotIndex < _maxDots * _aimLength; dotIndex++) {
       final distFromCenter = _dotInterval * (dotIndex + 1);
       final dotPos = _unitDir! * distFromCenter.toDouble();
-      canvas.drawCircle(Offset(dotPos.x, dotPos.y), 2, _paint);
+      canvas.drawCircle(Offset(dotPos.x, dotPos.y), Bullet.radius, _paint);
     }
   }
 

@@ -6,6 +6,7 @@ import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
+import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
@@ -79,5 +80,18 @@ class RicochlimeGame extends FlameGame with
   @override
   void onTap() {
     player.attack();
+    spawnBullet();
+  }
+
+  void spawnBullet() {
+    final unitDir = aimGuide.unitDir?.clone();
+    if (unitDir == null) {
+      return;
+    }
+    final bullet = Bullet(
+      position: player.position.clone(),
+      direction: unitDir,
+    );
+    add(bullet);
   }
 }
