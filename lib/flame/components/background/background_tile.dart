@@ -7,8 +7,8 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 enum BackgroundWaterTileType {
   rightOfGrass(1, 1),
   leftOfGrass(1, 3),
-  topOfGrass(0, 2),
-  bottomOfGrass(2, 2),
+  topOfGrass(2, 2),
+  bottomOfGrass(0, 2),
   justWater(1, 2);
 
   const BackgroundWaterTileType(this.tileRow, this.tileCol);
