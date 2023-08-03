@@ -5,10 +5,6 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 class Background extends PositionComponent
     with HasGameRef<RicochlimeGame> {
 
-  static const tilesPerRow = 10;
-  static const tilesPerColumn = tilesPerRow
-      * RicochlimeGame.expectedHeight ~/ RicochlimeGame.expectedWidth;
-
   late Vector2 tileSize;
 
   @override
@@ -18,19 +14,19 @@ class Background extends PositionComponent
     size = gameRef.size;
 
     tileSize = Vector2(
-      gameRef.size.x / tilesPerRow,
-      gameRef.size.y / tilesPerColumn,
+      gameRef.size.x / RicochlimeGame.tilesInWidth,
+      gameRef.size.y / RicochlimeGame.tilesInHeight,
     );
 
     addAll([
-      for (var column = 0; column < tilesPerRow; column++)
+      for (var column = 0; column < RicochlimeGame.tilesInWidth; column++)
         tile(
-          row: tilesPerColumn - 5,
+          row: RicochlimeGame.tilesInHeight - 5,
           column: column,
           type: BackgroundWaterTileType.bottomOfGrass,
         ),
-      for (var row = tilesPerColumn - 4; row < tilesPerColumn; row++)
-        for (var column = 0; column < tilesPerRow; column++)
+      for (var row = RicochlimeGame.tilesInHeight - 4; row < RicochlimeGame.tilesInHeight; row++)
+        for (var column = 0; column < RicochlimeGame.tilesInWidth; column++)
           tile(
             row: row,
             column: column,
@@ -45,8 +41,8 @@ class Background extends PositionComponent
     required BackgroundWaterTileType type,
   }) => BackgroundWaterTile(
     position: Vector2(
-      gameRef.size.x * column / tilesPerRow,
-      gameRef.size.y * row / tilesPerColumn,
+      gameRef.size.x * column / RicochlimeGame.tilesInWidth,
+      gameRef.size.y * row / RicochlimeGame.tilesInHeight,
     ),
     size: tileSize,
     type: type,

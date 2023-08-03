@@ -17,6 +17,9 @@ class RicochlimeGame extends FlameGame with
   static const expectedWidth = 160.0;
   static const expectedHeight = expectedWidth * 2;
 
+  static const tilesInWidth = 10;
+  static const tilesInHeight = tilesInWidth * expectedHeight ~/ expectedWidth;
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
