@@ -14,11 +14,14 @@ class RicochlimeGame extends FlameGame with
   late Player player;
   late AimGuide aimGuide;
 
+  /// Width to height aspect ratio
+  static const aspectRatio = 1 / 2;
+
   static const expectedWidth = 160.0;
-  static const expectedHeight = expectedWidth * 2;
+  static const expectedHeight = expectedWidth / aspectRatio;
 
   static const tilesInWidth = 10;
-  static const tilesInHeight = tilesInWidth * expectedHeight ~/ expectedWidth;
+  static const tilesInHeight = tilesInWidth ~/ aspectRatio;
 
   @override
   Future<void> onLoad() async {
