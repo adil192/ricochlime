@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
@@ -32,7 +34,22 @@ class RicochlimeGame extends FlameGame with
 
     add(Background());
 
-    add(Slime());
+    final random = Random();
+    for (var y = 0; y < tilesInHeight - 8; y++) {
+      for (var x = 0; x < tilesInWidth - 1; x++) {
+        if (random.nextDouble() > 0.2) {
+          continue;
+        }
+        add(
+          Slime(
+            position: Vector2(
+              expectedWidth * x / tilesInWidth,
+              expectedHeight * y / tilesInHeight,
+            ),
+          ),
+        );
+      }
+    }
 
     aimGuide = AimGuide();
     add(aimGuide);

@@ -14,6 +14,10 @@ enum SlimeState {
 
 class Slime extends SpriteAnimationGroupComponent<SlimeState>
     with HasGameRef<RicochlimeGame> {
+
+  Slime({
+    super.position,
+  });
   
   bool walking = false;
   bool attacking = false;
@@ -24,10 +28,9 @@ class Slime extends SpriteAnimationGroupComponent<SlimeState>
     current = SlimeState.idle;
     await super.onLoad();
 
-    position = gameRef.size / 2;
     width = 32;
     height = 32;
-    anchor = Anchor.center;
+    anchor = Anchor.topLeft;
 
     add(
       OctagonHitbox.relative(
