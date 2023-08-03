@@ -20,18 +20,21 @@ class BackgroundWaterTile extends SpriteAnimationComponent
     with HasGameRef<RicochlimeGame> {
   
   BackgroundWaterTile({
-    required Vector2 position,
+    required super.position,
     required this.type,
-  }) : super(position: position);
+    super.size,
+  });
 
   BackgroundWaterTile.random({
     required Vector2 position,
     required Random random,
+    Vector2? size,
   }) : this(
     position: position,
     type: BackgroundWaterTileType.values[
       random.nextInt(BackgroundWaterTileType.values.length)
     ],
+    size: size,
   );
 
   final BackgroundWaterTileType type;
@@ -40,7 +43,9 @@ class BackgroundWaterTile extends SpriteAnimationComponent
   @override
   Future<void> onLoad() async {
     super.onLoad();
-    size = Vector2.all(16);
+    if (size.isZero()) {
+      size = Vector2.all(16);
+    }
     anchor = Anchor.topLeft;
     await loadWaterTiles();
 
