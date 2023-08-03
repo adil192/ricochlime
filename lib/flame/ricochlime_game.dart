@@ -7,8 +7,9 @@ import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-class RicochlimeGame extends FlameGame
-    with PanDetector, TapDetector, MouseMovementDetector {
+class RicochlimeGame extends FlameGame with
+    PanDetector, TapDetector, MouseMovementDetector,
+    HasCollisionDetection {
   late Player player;
   late AimGuide aimGuide;
 

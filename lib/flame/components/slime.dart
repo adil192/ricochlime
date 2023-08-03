@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
@@ -25,6 +28,12 @@ class Slime extends SpriteAnimationGroupComponent<SlimeState>
     width = 32;
     height = 32;
     anchor = Anchor.center;
+
+    add(
+      OctagonHitbox.relative(
+        parentSize: size,
+      ),
+    );
   }
 
   Future<Map<SlimeState, SpriteAnimation>> getAnimations() async => {
@@ -78,4 +87,32 @@ class Slime extends SpriteAnimationGroupComponent<SlimeState>
       ),
     ),
   };
+}
+
+class OctagonHitbox extends PolygonHitbox {
+  OctagonHitbox.relative({
+    required super.parentSize,
+    super.position,
+    super.angle,
+    super.anchor,
+    super.isSolid,
+    super.collisionType,
+  }) : super.relative(
+    points.toList(),
+  );
+
+  static const sideLength = sqrt2 - 1;
+  static const gap = (1 - sideLength) / 2;
+
+  // points that form an octagon, in counter-clockwise order
+  static List<Vector2> get points => [
+    Vector2(gap, 0),
+    Vector2(0, gap),
+    Vector2(0, 1 - gap),
+    Vector2(gap, 1),
+    Vector2(1 - gap, 1),
+    Vector2(1, 1 - gap),
+    Vector2(1, gap),
+    Vector2(1 - gap, 0),
+  ];
 }
