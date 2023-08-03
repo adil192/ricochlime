@@ -19,10 +19,10 @@ class RicochlimeGame extends FlameGame with
   /// Width to height aspect ratio
   static const aspectRatio = 1 / 2;
 
-  static const expectedWidth = 160.0;
+  static const expectedWidth = tilesInWidth * 16.0;
   static const expectedHeight = expectedWidth / aspectRatio;
 
-  static const tilesInWidth = 10;
+  static const tilesInWidth = 8;
   static const tilesInHeight = tilesInWidth ~/ aspectRatio;
 
   @override
@@ -35,9 +35,9 @@ class RicochlimeGame extends FlameGame with
     add(Background());
 
     final random = Random();
-    for (var y = 0; y < tilesInHeight - 8; y++) {
+    for (var y = 0; y < tilesInHeight - 6; y++) {
       for (var x = 0; x < tilesInWidth - 1; x++) {
-        if (random.nextDouble() > 0.2) {
+        if (random.nextDouble() > 0.3) {
           continue;
         }
         add(

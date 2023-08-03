@@ -21,11 +21,11 @@ class Background extends PositionComponent
     addAll([
       for (var column = 0; column < RicochlimeGame.tilesInWidth; column++)
         tile(
-          row: RicochlimeGame.tilesInHeight - 5,
+          row: RicochlimeGame.tilesInHeight - 4,
           column: column,
           type: BackgroundWaterTileType.bottomOfGrass,
         ),
-      for (var row = RicochlimeGame.tilesInHeight - 4; row < RicochlimeGame.tilesInHeight; row++)
+      for (var row = RicochlimeGame.tilesInHeight - 3; row < RicochlimeGame.tilesInHeight; row++)
         for (var column = 0; column < RicochlimeGame.tilesInWidth; column++)
           tile(
             row: row,
