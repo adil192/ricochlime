@@ -33,11 +33,15 @@ class Bullet extends PositionComponent with
   @override
   void update(double dt) {
     super.update(dt);
-    handleCollisions(dt);
-    position += direction * speed * dt;
+    _handleCollisions(dt);
+    _moveForward(speed * dt);
   }
 
-  void handleCollisions(double dt) {
+  void _moveForward(double distance) {
+    position += direction * distance;
+  }
+
+  void _handleCollisions(double dt) {
     gameRef.collisionDetection.raycast(
       Ray2(
         origin: position,
@@ -46,11 +50,22 @@ class Bullet extends PositionComponent with
       maxDistance: speed * dt + radius,
       out: raycastResult,
     );
+
+    final collisionDistance = raycastResult.distance;
     final reflectionRay = raycastResult.reflectionRay;
-    if (reflectionRay == null) {
+    if (reflectionRay == null || collisionDistance == null) {
       return;
     }
+
+    // Move the bullet to the point of collision.
+    final movedForward = collisionDistance - radius;
+    _moveForward(movedForward);
+    // Reflect the bullet's direction.
     direction = reflectionRay.direction;
+    // Move the bullet backward in new direction
+    // to maintain speed. (Leave a little bit of
+    // space to avoid colliding again.)
+    _moveForward(-movedForward + radius / 2);
   }
 
   @override
