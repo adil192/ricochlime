@@ -33,8 +33,15 @@ class Slime extends SpriteAnimationGroupComponent<SlimeState>
     anchor = Anchor.topLeft;
 
     add(
-      OctagonHitbox.relative(
-        parentSize: size,
+      PolygonHitbox(
+        [
+          Vector2(13, 14),
+          Vector2(8, 20),
+          Vector2(8, 24),
+          Vector2(24, 24),
+          Vector2(24, 20),
+          Vector2(19, 14),
+        ]
       ),
     );
   }
