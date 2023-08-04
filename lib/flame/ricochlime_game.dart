@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
@@ -13,8 +14,6 @@ import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 class RicochlimeGame extends FlameGame with
     PanDetector, HasCollisionDetection {
-  late Player player;
-  late AimGuide aimGuide;
 
   /// Width to height aspect ratio
   static const aspectRatio = 1 / 2;
@@ -24,6 +23,12 @@ class RicochlimeGame extends FlameGame with
 
   static const tilesInWidth = 8;
   static const tilesInHeight = tilesInWidth ~/ aspectRatio;
+
+  late Player player;
+  late AimGuide aimGuide;
+  bool inputAllowed = true;
+
+  static const bulletTimeoutMs = 1 * 60 * 1000; // 1 minute
 
   @override
   Future<void> onLoad() async {
@@ -65,24 +70,65 @@ class RicochlimeGame extends FlameGame with
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
+    if (!inputAllowed) {
+      return;
+    }
     aimGuide.aim(info.eventPosition.game);
   }
   @override
   void onPanEnd(DragEndInfo info) {
-    spawnBullet();
-    aimGuide.finishAim();
-    player.attack();
+    if (!inputAllowed) {
+      return;
+    }
+    _spawnBullets();
   }
 
-  void spawnBullet() {
+  Future<void> _spawnBullets() async {
     final unitDir = aimGuide.unitDir?.clone();
     if (unitDir == null) {
       return;
     }
-    final bullet = Bullet(
-      initialPosition: aimGuide.position.clone(),
-      direction: unitDir,
-    );
-    add(bullet);
+
+    assert(inputAllowed);
+    inputAllowed = false;
+    aimGuide.finishAim();
+    player.attack();
+
+    /// TODO: increment this as the player progresses
+    const maxBullets = 20;
+
+    try {
+      final bullets = <Bullet>[];
+      for (var i = 0; i < maxBullets; i++) {
+        final bullet = Bullet(
+          initialPosition: aimGuide.position.clone(),
+          direction: unitDir,
+        );
+        bullets.add(bullet);
+        add(bullet);
+        await Future.delayed(const Duration(milliseconds: 50));
+      }
+
+      // wait until bullets are removed or timeout
+      var msElapsed = 0;
+      while (bullets.any((bullet) => bullet.parent != null)
+             && msElapsed < bulletTimeoutMs) {
+        msElapsed += 50;
+        await Future.delayed(const Duration(milliseconds: 50));
+      }
+
+      if (msElapsed >= bulletTimeoutMs) {
+        if (kDebugMode) {
+          print('Bullet timeout reached');
+        }
+        for (final bullet in bullets) {
+          if (bullet.parent != null) {
+            bullet.removeFromParent();
+          }
+        }
+      }
+    } finally {
+      inputAllowed = true;
+    }
   }
 }
