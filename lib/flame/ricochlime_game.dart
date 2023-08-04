@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
@@ -100,7 +99,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     aimGuide.finishAim();
     player.attack();
 
-    /// TODO: increment this as the player progresses
+    // TODO(adil192): Increment this as the player progresses
     const maxBullets = 20;
 
     try {
