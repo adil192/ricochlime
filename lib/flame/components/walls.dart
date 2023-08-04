@@ -20,7 +20,9 @@ class Wall extends BodyComponent {
   final Vector2 start;
   final Vector2 end;
 
-  Wall(this.start, this.end);
+  Wall(this.start, this.end) {
+    renderBody = false;
+  }
 
   @override
   Body createBody() {
