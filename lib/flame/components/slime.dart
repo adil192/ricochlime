@@ -33,16 +33,14 @@ class Slime extends SpriteAnimationGroupComponent<SlimeState>
     anchor = Anchor.topLeft;
 
     add(
-      PolygonHitbox(
-        [
-          Vector2(13, 14),
-          Vector2(8, 20),
-          Vector2(8, 24),
-          Vector2(24, 24),
-          Vector2(24, 20),
-          Vector2(19, 14),
-        ]
-      ),
+      PolygonHitbox([
+        Vector2(9, 15),
+        Vector2(9, 23),
+        Vector2(23, 23),
+        Vector2(23, 15),
+        Vector2(20, 12),
+        Vector2(12, 12),
+      ]),
     );
   }
 
