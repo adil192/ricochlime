@@ -1,0 +1,31 @@
+name: Publish to GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            /opt/hostedtoolcache/flutter
+            build
+          key: ${{ runner.OS }}-ricochlime-web-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
+          restore-keys: |
+            ${{ runner.OS }}-ricochlime-web-
+
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: stable
+
+      - uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          baseHref: /ricochlime/
