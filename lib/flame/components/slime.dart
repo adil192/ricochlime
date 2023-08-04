@@ -39,6 +39,7 @@ class Slime extends BodyComponent {
 
     final bodyDef = BodyDef(
       position: position,
+      fixedRotation: true,
     );
     return world.createBody(bodyDef)..createFixture(fixtureDef);
   }

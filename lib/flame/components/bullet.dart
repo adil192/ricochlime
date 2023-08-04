@@ -33,7 +33,6 @@ class Bullet extends BodyComponent {
       linearVelocity: velocity,
       type: BodyType.dynamic,
       fixedRotation: true,
-      bullet: true,
     );
 
     return world.createBody(bodyDef)
