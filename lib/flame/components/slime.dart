@@ -29,8 +29,8 @@ class Slime extends BodyComponent {
           Vector2(9, 23),
           Vector2(23, 23),
           Vector2(23, 15),
-          Vector2(20, 12),
-          Vector2(12, 12),
+          Vector2(20, 13),
+          Vector2(12, 13),
         ]);
     final fixtureDef = FixtureDef(
       shape,
