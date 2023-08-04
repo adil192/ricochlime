@@ -80,7 +80,7 @@ class RicochlimeGame extends FlameGame with
       return;
     }
     final bullet = Bullet(
-      position: aimGuide.position.clone(),
+      initialPosition: aimGuide.position.clone(),
       direction: unitDir,
     );
     add(bullet);

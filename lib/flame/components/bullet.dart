@@ -12,29 +12,31 @@ class Bullet extends PositionComponent with
   late final _paint = Paint()
     ..color = const Color(0xFFFFFFFF);
 
+  late Vector2 initialPosition;
   double speed = radius * 10;
   Vector2 direction;
 
   RaycastResult<ShapeHitbox> raycastResult = RaycastResult();
 
   Bullet({
-    required super.position,
+    required this.initialPosition,
     required this.direction,
-  }): super(
+  }): assert(direction.y < 0),
+      super(
+        position: initialPosition.clone(),
         size: Vector2.all(radius * 2),
         anchor: Anchor.center,
       );
-
-  @override
-  Future<void> onLoad() async {
-    await super.onLoad();
-  }
 
   @override
   void update(double dt) {
     super.update(dt);
     _handleCollisions(dt);
     _moveForward(speed * dt);
+
+    if (position.y > initialPosition.y) {
+      removeFromParent();
+    }
   }
 
   void _moveForward(double distance) {
