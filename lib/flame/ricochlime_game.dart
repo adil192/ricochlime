@@ -12,8 +12,7 @@ import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 class RicochlimeGame extends FlameGame with
-    PanDetector, TapDetector, MouseMovementDetector,
-    HasCollisionDetection {
+    PanDetector, HasCollisionDetection {
   late Player player;
   late AimGuide aimGuide;
 
@@ -65,22 +64,14 @@ class RicochlimeGame extends FlameGame with
   Color backgroundColor() => RicochlimePalette.grassColor;
 
   @override
-  void onMouseMove(PointerHoverInfo info) {
-    aimGuide.aim(info.eventPosition.game);
-  }
-  @override
   void onPanUpdate(DragUpdateInfo info) {
     aimGuide.aim(info.eventPosition.game);
   }
   @override
   void onPanEnd(DragEndInfo info) {
-    aimGuide.finishAim();
-  }
-
-  @override
-  void onTap() {
-    player.attack();
     spawnBullet();
+    aimGuide.finishAim();
+    player.attack();
   }
 
   void spawnBullet() {

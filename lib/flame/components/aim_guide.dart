@@ -19,6 +19,13 @@ class AimGuide extends PositionComponent
   Vector2? _unitDir;
   Vector2? get unitDir => _unitDir;
 
+  /// Whether the mouse is below the player.
+  /// This is used to let the player cancel the aim
+  /// by moving the mouse to the other side of the player.
+  /// 
+  /// This is null if the user isn't currently aiming.
+  bool? _mouseBelowPlayer;
+
   /// The length of the aim guide:
   /// 1 means the aim guide is fully extended.
   double _aimLength = 0;
@@ -56,7 +63,17 @@ class AimGuide extends PositionComponent
 
   void aim(Vector2 mousePosition) {
     var relativePosition = position - mousePosition;
-    if (relativePosition.y > 0) { // pointing down
+
+    final mouseBelowPlayer = relativePosition.y > 0;
+    if (_mouseBelowPlayer == null) {
+      _mouseBelowPlayer = mouseBelowPlayer;
+    } else if (_mouseBelowPlayer != mouseBelowPlayer) {
+      _aimLength = 0;
+      _unitDir = null;
+      return;
+    }
+
+    if (mouseBelowPlayer) {
       relativePosition = -relativePosition; // point up
     }
     _aimLength = min(1, relativePosition.length / _dotInterval / _maxDots * 2);
@@ -65,6 +82,7 @@ class AimGuide extends PositionComponent
   void finishAim() {
     _aimLength = 0;
     _unitDir = null;
+    _mouseBelowPlayer = false;
   }
 
 }
