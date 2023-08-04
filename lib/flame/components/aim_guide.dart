@@ -82,7 +82,7 @@ class AimGuide extends PositionComponent
   void finishAim() {
     _aimLength = 0;
     _unitDir = null;
-    _mouseBelowPlayer = false;
+    _mouseBelowPlayer = null;
   }
 
 }
