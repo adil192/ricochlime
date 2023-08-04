@@ -1,7 +1,5 @@
-import 'dart:math';
-
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
 enum SlimeState {
@@ -12,13 +10,43 @@ enum SlimeState {
   dead,
 }
 
-class Slime extends SpriteAnimationGroupComponent<SlimeState>
-    with HasGameRef<RicochlimeGame> {
+class Slime extends BodyComponent {
+  final Vector2 position;
+  final Vector2 size = Vector2(32, 32);
 
   Slime({
-    super.position,
-  });
-  
+    required this.position,
+  }) {
+    renderBody = false;
+    add(_SlimeAnimation());
+  }
+
+  @override
+  Body createBody() {
+    final shape = PolygonShape()
+        ..set([
+          Vector2(9, 15),
+          Vector2(9, 23),
+          Vector2(23, 23),
+          Vector2(23, 15),
+          Vector2(20, 12),
+          Vector2(12, 12),
+        ]);
+    final fixtureDef = FixtureDef(
+      shape,
+      userData: this,
+    );
+
+    final bodyDef = BodyDef(
+      position: position,
+    );
+    return world.createBody(bodyDef)..createFixture(fixtureDef);
+  }
+}
+
+class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
+    with HasGameRef<RicochlimeGame> {
+
   bool walking = false;
   bool attacking = false;
 
@@ -30,21 +58,6 @@ class Slime extends SpriteAnimationGroupComponent<SlimeState>
 
     width = 32;
     height = 32;
-    anchor = Anchor.topLeft;
-
-    add(
-      PolygonHitbox(
-        [
-          Vector2(9, 15),
-          Vector2(9, 23),
-          Vector2(23, 23),
-          Vector2(23, 15),
-          Vector2(20, 12),
-          Vector2(12, 12),
-        ],
-        isSolid: true,
-      ),
-    );
   }
 
   Future<Map<SlimeState, SpriteAnimation>> getAnimations() async => {
@@ -98,32 +111,4 @@ class Slime extends SpriteAnimationGroupComponent<SlimeState>
       ),
     ),
   };
-}
-
-class OctagonHitbox extends PolygonHitbox {
-  OctagonHitbox.relative({
-    required super.parentSize,
-    super.position,
-    super.angle,
-    super.anchor,
-    super.isSolid,
-    super.collisionType,
-  }) : super.relative(
-    points.toList(),
-  );
-
-  static const sideLength = sqrt2 - 1;
-  static const gap = (1 - sideLength) / 2;
-
-  // points that form an octagon, in counter-clockwise order
-  static List<Vector2> get points => [
-    Vector2(gap, 0),
-    Vector2(0, gap),
-    Vector2(0, 1 - gap),
-    Vector2(gap, 1),
-    Vector2(1 - gap, 1),
-    Vector2(1, 1 - gap),
-    Vector2(1, gap),
-    Vector2(1 - gap, 0),
-  ];
 }

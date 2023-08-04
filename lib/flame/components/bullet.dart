@@ -1,79 +1,55 @@
 import 'dart:ui';
 
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
-import 'package:ricochlime/flame/ricochlime_game.dart';
+import 'package:flame_forge2d/flame_forge2d.dart';
 
-class Bullet extends PositionComponent with
-    HasGameRef<RicochlimeGame> {
+class Bullet extends BodyComponent {
   static const radius = 2.0;
 
-  late final _paint = Paint()
-    ..color = const Color(0xFFFFFFFF);
-
-  late Vector2 initialPosition;
-  double speed = radius * 50;
+  Vector2 initialPosition;
+  final double speed = radius * 50;
   Vector2 direction;
-
-  RaycastResult<ShapeHitbox> raycastResult = RaycastResult();
 
   Bullet({
     required this.initialPosition,
     required this.direction,
-  }): assert(direction.y < 0),
-      super(
-        position: initialPosition.clone(),
-        size: Vector2.all(radius * 2),
-        anchor: Anchor.center,
-      );
+  }): assert(direction.y < 0);
+
+  @override
+  Body createBody() {
+    final shape = CircleShape()
+        ..radius = radius;
+    final fixtureDef = FixtureDef(
+      shape,
+      userData: this,
+      density: 1.0,
+      restitution: 1.0,
+      filter: Filter() // don't collide with other bullets
+        ..categoryBits = 1 << 2
+        ..maskBits = 0xFFFF & ~(1 << 2),
+    );
+
+    final velocity = direction * speed;
+    final bodyDef = BodyDef(
+      position: initialPosition.clone(),
+      //angle: direction.angleTo(Vector2(1, 0)),
+      linearVelocity: velocity,
+      type: BodyType.dynamic,
+      fixedRotation: true,
+      bullet: true,
+    );
+
+    return world.createBody(bodyDef)
+        ..createFixture(fixtureDef);
+  }
+
 
   @override
   void update(double dt) {
     super.update(dt);
-    _handleCollisions(dt);
-    _moveForward(speed * dt);
-
-    if (position.y > initialPosition.y) {
+    if (body.position.y > initialPosition.y) {
       removeFromParent();
     }
-  }
-
-  void _moveForward(double distance) {
-    position += direction * distance;
-  }
-
-  void _handleCollisions(double dt) {
-    gameRef.collisionDetection.raycast(
-      Ray2(
-        origin: position,
-        direction: direction,
-      ),
-      maxDistance: speed * dt + radius,
-      out: raycastResult,
-    );
-
-    final collisionDistance = raycastResult.distance;
-    final reflectionRay = raycastResult.reflectionRay;
-    if (reflectionRay == null || collisionDistance == null) {
-      return;
-    }
-
-    // Move the bullet to the point of collision.
-    final movedForward = collisionDistance - radius;
-    _moveForward(movedForward);
-    // Reflect the bullet's direction.
-    direction = reflectionRay.direction;
-    // Move the bullet backward in new direction
-    // to maintain speed. (Leave a little bit of
-    // space to avoid colliding again.)
-    _moveForward(-movedForward + radius / 2);
-  }
-
-  @override
-  void render(Canvas canvas) {
-    super.render(canvas);
-
-    canvas.drawCircle(Offset.zero, radius, _paint);
   }
 }

@@ -1,19 +1,24 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
+import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
+import 'package:ricochlime/flame/components/walls.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-class RicochlimeGame extends FlameGame with
-    PanDetector, HasCollisionDetection {
+class RicochlimeGame extends Forge2DGame with PanDetector {
+
+  RicochlimeGame(): super(
+    gravity: Vector2(0, 0),
+    zoom: 1.0,
+  );
 
   /// Width to height aspect ratio
   static const aspectRatio = 1 / 2;
@@ -62,7 +67,8 @@ class RicochlimeGame extends FlameGame with
     player = Player();
     add(player);
 
-    add(ScreenHitbox());
+    final boundaries = createBoundaries(expectedWidth, expectedHeight);
+    boundaries.forEach(add);
   }
 
   @override
