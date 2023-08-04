@@ -13,7 +13,7 @@ class Bullet extends PositionComponent with
     ..color = const Color(0xFFFFFFFF);
 
   late Vector2 initialPosition;
-  double speed = radius * 10;
+  double speed = radius * 50;
   Vector2 direction;
 
   RaycastResult<ShapeHitbox> raycastResult = RaycastResult();
