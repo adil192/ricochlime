@@ -89,7 +89,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
   }
 
   Future<void> _spawnBullets() async {
-    final unitDir = aimGuide.unitDir?.clone();
+    final unitDir = aimGuide.aimDetails?.unitDir;
     if (unitDir == null) {
       return;
     }
@@ -106,7 +106,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
       final bullets = <Bullet>[];
       for (var i = 0; i < maxBullets; i++) {
         final bullet = Bullet(
-          initialPosition: aimGuide.position.clone(),
+          initialPosition: aimGuide.position,
           direction: unitDir,
         );
         bullets.add(bullet);

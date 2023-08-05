@@ -12,23 +12,7 @@ class AimGuide extends PositionComponent
   final Paint _paint = Paint()
       ..color = Colors.white;
 
-  /// The unit direction vector in which the user is
-  /// currently aiming.
-  /// 
-  /// This is null if the user isn't currently aiming.
-  Vector2? _unitDir;
-  Vector2? get unitDir => _unitDir;
-
-  /// Whether the mouse is below the player.
-  /// This is used to let the player cancel the aim
-  /// by moving the mouse to the other side of the player.
-  /// 
-  /// This is null if the user isn't currently aiming.
-  bool? _mouseBelowPlayer;
-
-  /// The length of the aim guide:
-  /// 1 means the aim guide is fully extended.
-  double _aimLength = 0;
+  AimDetails? aimDetails;
 
   /// Dots will be drawn in the direction we're aiming
   /// every [_dotInterval] units.
@@ -50,39 +34,68 @@ class AimGuide extends PositionComponent
   void render(Canvas canvas) {
     super.render(canvas);
 
-    if (_unitDir == null) {
+    final aimDetails = this.aimDetails;
+    if (aimDetails == null || aimDetails.unitDir.isZero()) {
       return;
     }
 
-    for (var dotIndex = 0; dotIndex < _maxDots * _aimLength; dotIndex++) {
+    for (var dotIndex = 0; dotIndex < _maxDots * aimDetails.aimLength; dotIndex++) {
       final distFromCenter = _dotInterval * (dotIndex + 1);
-      final dotPos = _unitDir! * distFromCenter.toDouble();
+      final dotPos = aimDetails.unitDir * distFromCenter.toDouble();
       canvas.drawCircle(Offset(dotPos.x, dotPos.y), Bullet.radius, _paint);
     }
   }
 
   void aim(Vector2 mousePosition) {
     var relativePosition = position - mousePosition;
-
     final mouseBelowPlayer = relativePosition.y > 0;
-    if (_mouseBelowPlayer == null) {
-      _mouseBelowPlayer = mouseBelowPlayer;
-    } else if (_mouseBelowPlayer != mouseBelowPlayer) {
-      _aimLength = 0;
-      _unitDir = null;
+
+    if (aimDetails == null) {
+      // The user just started aiming.
+      aimDetails = AimDetails(
+        unitDir: Vector2.zero(),
+        aimLength: 0,
+        mouseBelowPlayer: mouseBelowPlayer,
+      );
+    } else if (aimDetails!.mouseBelowPlayer != mouseBelowPlayer) {
+      // The user moved the mouse to the other side of the player.
+      // This means they want to cancel the aim.
+      aimDetails!.unitDir.setZero();
       return;
     }
 
     if (mouseBelowPlayer) {
       relativePosition = -relativePosition; // point up
     }
-    _aimLength = min(1, relativePosition.length / _dotInterval / _maxDots * 2);
-    _unitDir = relativePosition.normalized();
+    aimDetails!.aimLength = min(1, relativePosition.length / _dotInterval / _maxDots * 2);
+    aimDetails!.unitDir.setFrom(relativePosition.normalized());
   }
   void finishAim() {
-    _aimLength = 0;
-    _unitDir = null;
-    _mouseBelowPlayer = null;
+    aimDetails = null;
   }
 
+}
+
+class AimDetails {
+  /// The unit direction vector in which the user is
+  /// currently aiming.
+  /// 
+  /// This is Vector2.zero() if the user's aim
+  /// is not valid.
+  final Vector2 unitDir;
+
+  /// The length of the aim guide:
+  /// 1 means the aim guide is fully extended.
+  double aimLength;
+
+  /// Whether the mouse is below the player.
+  /// This is used to let the player cancel the aim
+  /// by moving the mouse to the other side of the player.
+  bool mouseBelowPlayer;
+
+  AimDetails({
+    required this.unitDir,
+    required this.aimLength,
+    required this.mouseBelowPlayer,
+  });
 }
