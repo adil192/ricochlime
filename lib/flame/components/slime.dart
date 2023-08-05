@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
 enum SlimeState {
@@ -10,12 +11,15 @@ enum SlimeState {
   dead,
 }
 
-class Slime extends BodyComponent {
+class Slime extends BodyComponent with ContactCallbacks {
   final Vector2 position;
   final Vector2 size = Vector2(32, 32);
 
+  int hp;
+
   Slime({
     required this.position,
+    required this.hp,
   }) {
     renderBody = false;
     add(_SlimeAnimation());
@@ -43,6 +47,18 @@ class Slime extends BodyComponent {
       fixedRotation: true,
     );
     return world.createBody(bodyDef)..createFixture(fixtureDef);
+  }
+
+  @override
+  void beginContact(Object other, Contact contact) {
+    super.beginContact(other, contact);
+
+    if (other is Bullet) {
+      hp -= 1;
+      if (hp <= 0) {
+        removeFromParent();
+      }
+    }
   }
 }
 

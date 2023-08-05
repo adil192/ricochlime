@@ -55,6 +55,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
               expectedWidth * x / tilesInWidth,
               expectedHeight * y / tilesInHeight,
             ),
+            hp: 20,
           ),
         );
       }
