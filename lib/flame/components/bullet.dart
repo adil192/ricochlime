@@ -19,8 +19,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
     final fixtureDef = FixtureDef(
       shape,
       userData: this,
-      density: 1.0,
-      restitution: 1.0,
+      restitution: 1.1,
       filter: Filter() // don't collide with other bullets
         ..categoryBits = 1 << 2
         ..maskBits = 0xFFFF & ~(1 << 2),
@@ -29,7 +28,6 @@ class Bullet extends BodyComponent with ContactCallbacks {
     final velocity = direction * speed;
     final bodyDef = BodyDef(
       position: initialPosition.clone(),
-      //angle: direction.angleTo(Vector2(1, 0)),
       linearVelocity: velocity,
       type: BodyType.dynamic,
       fixedRotation: true,
@@ -38,7 +36,6 @@ class Bullet extends BodyComponent with ContactCallbacks {
     return world.createBody(bodyDef)
         ..createFixture(fixtureDef);
   }
-
 
   @override
   void update(double dt) {

@@ -39,7 +39,6 @@ class Slime extends BodyComponent with ContactCallbacks {
     final fixtureDef = FixtureDef(
       shape,
       userData: this,
-      restitution: 1.0,
     );
 
     final bodyDef = BodyDef(

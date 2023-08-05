@@ -29,7 +29,6 @@ class Wall extends BodyComponent {
     final shape = EdgeShape()..set(start, end);
     final fixtureDef = FixtureDef(
       shape,
-      restitution: 1.0,
     );
     final bodyDef = BodyDef(
       userData: this,
