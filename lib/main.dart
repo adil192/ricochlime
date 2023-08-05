@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  LocaleSettings.useDeviceLocale();
+  runApp(TranslationProvider(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,6 +19,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _router,
+
+      locale: TranslationProvider.of(context).flutterLocale,
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
       theme: ThemeData(
         useMaterial3: true,

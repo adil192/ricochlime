@@ -33,13 +33,17 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   flame: ^1.8.1
-
   flame_forge2d: ^0.14.1
 
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   
   go_router: ^10.0.0
+
+  slang: ^3.22.0
+  slang_flutter: any
 
 dev_dependencies:
   flame_lint: ^1.0.0

@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/pages/play.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ricochlime'),
+        title: Text(t.appName),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
             child: OpenContainer(
               closedBuilder: (context, openContainer) => ElevatedButton(
                 onPressed: openContainer,
-                child: const Text('Play'),
+                child: Text(t.homePage.playButton),
               ),
               closedColor: Colors.transparent,
               closedElevation: 0,
