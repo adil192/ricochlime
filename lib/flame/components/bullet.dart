@@ -4,7 +4,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
   static const radius = 2.0;
 
   Vector2 initialPosition;
-  final double speed = radius * 50;
+  final double speed = radius * 200;
   Vector2 direction;
 
   Bullet({
