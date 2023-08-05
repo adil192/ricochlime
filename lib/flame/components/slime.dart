@@ -35,6 +35,7 @@ class Slime extends BodyComponent {
     final fixtureDef = FixtureDef(
       shape,
       userData: this,
+      restitution: 1.0,
     );
 
     final bodyDef = BodyDef(

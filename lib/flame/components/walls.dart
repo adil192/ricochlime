@@ -27,7 +27,10 @@ class Wall extends BodyComponent {
   @override
   Body createBody() {
     final shape = EdgeShape()..set(start, end);
-    final fixtureDef = FixtureDef(shape);
+    final fixtureDef = FixtureDef(
+      shape,
+      restitution: 1.0,
+    );
     final bodyDef = BodyDef(
       userData: this,
       position: Vector2.zero(),
