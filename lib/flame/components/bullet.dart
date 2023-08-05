@@ -1,6 +1,6 @@
 import 'package:flame_forge2d/flame_forge2d.dart';
 
-class Bullet extends BodyComponent {
+class Bullet extends BodyComponent with ContactCallbacks {
   static const radius = 2.0;
 
   Vector2 initialPosition;
@@ -45,6 +45,31 @@ class Bullet extends BodyComponent {
     super.update(dt);
     if (body.position.y > initialPosition.y) {
       removeFromParent();
+    }
+  }
+
+  /// The number of collisions in a row that
+  /// the bullet has a horizontal velocity.
+  /// 
+  /// This is used to prevent the bullet from
+  /// getting stuck in a horizontal velocity.
+  int horizontalCollisions = 0;
+  static const horizontalVelocityThreshold = 0.01;
+  static const maxHorizontalCollisions = 3;
+
+  @override
+  void endContact(Object other, Contact contact) {
+    super.endContact(other, contact);
+    
+    final isVelocityHorizontal = body.linearVelocity.y.abs() < horizontalVelocityThreshold;
+    if (isVelocityHorizontal) {
+      horizontalCollisions += 1;
+    } else {
+      horizontalCollisions = 0;
+    }
+
+    if (horizontalCollisions >= maxHorizontalCollisions) {
+      body.linearVelocity.y += horizontalVelocityThreshold;
     }
   }
 }

@@ -15,7 +15,7 @@ import 'package:ricochlime/utils/ricochlime_palette.dart';
 class RicochlimeGame extends Forge2DGame with PanDetector {
 
   RicochlimeGame(): super(
-    gravity: Vector2(0, 0.01),
+    gravity: Vector2.zero(),
     zoom: 1.0,
   );
 
