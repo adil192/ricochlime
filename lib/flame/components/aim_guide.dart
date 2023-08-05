@@ -12,6 +12,7 @@ class AimGuide extends PositionComponent
   final Paint _paint = Paint()
       ..color = Colors.white;
 
+  @visibleForTesting
   AimDetails? aimDetails;
 
   /// Dots will be drawn in the direction we're aiming
@@ -70,8 +71,15 @@ class AimGuide extends PositionComponent
     aimDetails!.aimLength = min(1, relativePosition.length / _dotInterval / _maxDots * 2);
     aimDetails!.unitDir.setFrom(relativePosition.normalized());
   }
-  void finishAim() {
+
+  /// Resets the aim guide, and returns the current aim direction.
+  Vector2? finishAim() {
+    final aimDir = aimDetails?.unitDir;
     aimDetails = null;
+    if (aimDir == null || aimDir.isZero()) {
+      return null;
+    }
+    return aimDir;
   }
 
 }
