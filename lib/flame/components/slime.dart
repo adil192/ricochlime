@@ -39,11 +39,12 @@ class Slime extends BodyComponent with ContactCallbacks {
     if (_movement != null) {
       _movement!.elapsedSeconds += dt;
       if (_movement!.isFinished) {
+        body.setType(BodyType.static);
+        body.linearVelocity = Vector2.zero();
+        position.setFrom(_movement!.targetPosition);
         body.position.setFrom(_movement!.targetPosition);
         _movement = null;
         _animation.walking = false;
-      } else {
-        body.position.setFrom(_movement!.currentPosition);
       }
     }
   }
@@ -53,9 +54,11 @@ class Slime extends BodyComponent with ContactCallbacks {
     _movement = _SlimeMovement(
       startingPosition: body.position.clone(),
       targetPosition: body.position + Vector2(0, size.y / 2),
-      totalSeconds: duration.inSeconds,
+      totalSeconds: duration.inMilliseconds / 1000,
     );
     _animation.walking = true;
+    body.setType(BodyType.kinematic);
+    body.linearVelocity = _movement!.velocity;
   }
 
   @override
@@ -97,9 +100,10 @@ class Slime extends BodyComponent with ContactCallbacks {
 class _SlimeMovement {
   final Vector2 startingPosition;
   final Vector2 targetPosition;
-  late final Vector2 startToTargetVector = targetPosition - startingPosition;
-  final int totalSeconds;
+  final double totalSeconds;
   double elapsedSeconds = 0;
+
+  late final Vector2 velocity = (targetPosition - startingPosition) / totalSeconds;
 
   _SlimeMovement({
     required this.startingPosition,
@@ -108,9 +112,6 @@ class _SlimeMovement {
   });
 
   bool get isFinished => elapsedSeconds >= totalSeconds;
-
-  Vector2 get currentPosition => startingPosition
-      + startToTargetVector * (elapsedSeconds / totalSeconds);
 }
 
 class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
