@@ -91,6 +91,9 @@ class Slime extends BodyComponent with ContactCallbacks {
     if (other is Bullet) {
       hp -= 1;
       if (hp <= 0) {
+        _animation.current = SlimeState.dead;
+        _animation.position = body.position;
+        _animation.parent = parent;
         removeFromParent();
       }
     }
@@ -116,6 +119,12 @@ class _SlimeMovement {
 
 class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     with HasGameRef<RicochlimeGame> {
+
+  _SlimeAnimation(): super(
+    removeOnFinish: {
+      SlimeState.dead: true,
+    },
+  );
 
   bool _walking = false;
   bool get walking => _walking;
@@ -181,11 +190,12 @@ class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     SlimeState.dead: await gameRef.loadSpriteAnimation(
       'slime.png',
       SpriteAnimationData.sequenced(
-        stepTime: 1 / 5,
+        stepTime: 0.3 / 5,
         textureSize: Vector2(32, 32),
         amount: 5,
         amountPerRow: 5,
         texturePosition: Vector2(0, 4 * 32),
+        loop: false,
       ),
     ),
   };
