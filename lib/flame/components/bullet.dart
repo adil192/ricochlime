@@ -1,4 +1,5 @@
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flutter/foundation.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
   /// Radius of the bullet.
@@ -57,16 +58,25 @@ class Bullet extends BodyComponent with ContactCallbacks {
   /// This is used to prevent the bullet from
   /// getting stuck in a horizontal velocity.
   int horizontalCollisions = 0;
-  /// If the y component of the velocity is below
-  /// [horizontalVelocityThreshold], we consider
-  /// the velocity to be horizontal.
+  static const maxHorizontalCollisions = 3;
+  /// If the ratio between the y and x components
+  /// of the velocity is lower than this,
+  /// we consider the velocity to be
+  /// horizontal.
   /// 
   /// This is equivalent to a 5 degree angle.
   /// 
-  /// See `test/bullet_speeds_test.dart` for
-  /// where this value came from.
-  static const horizontalVelocityThreshold = speed * 0.08715574275;
-  static const maxHorizontalCollisions = 3;
+  /// Please use [isVelocityHorizontal] instead
+  /// of comparing the velocity directly.
+  static const horizontalVelocityRatio = 0.08715574275;
+  @visibleForTesting
+  static bool isVelocityHorizontal(Vector2 velocity) {
+    if (velocity.x == 0) {
+      return false;
+    }
+    final ratio = velocity.y / velocity.x;
+    return ratio.abs() < horizontalVelocityRatio;
+  }
 
   /// If both velocity components are below
   /// [slowVelocityThreshold], the bullet is
@@ -85,7 +95,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
       return;
     }
     
-    final isVelocityHorizontal = body.linearVelocity.y.abs() < horizontalVelocityThreshold;
+    final isVelocityHorizontal = Bullet.isVelocityHorizontal(body.linearVelocity);
     if (isVelocityHorizontal) {
       horizontalCollisions += 1;
     } else {
@@ -93,7 +103,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
     }
 
     if (horizontalCollisions >= maxHorizontalCollisions) {
-      body.linearVelocity.y += horizontalVelocityThreshold;
+      body.linearVelocity.y += speed * horizontalVelocityRatio;
     }
   }
 

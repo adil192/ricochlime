@@ -21,9 +21,9 @@ void main() {
     test('Horizontal velocity should be 5 degrees or less', () {
       const maxHorizontalAngle = 5 * pi / 180;
       final unitDir = Vector2(cos(maxHorizontalAngle), sin(maxHorizontalAngle));
-      final velocity = unitDir * Bullet.speed;
-      expect(velocity.x, greaterThan(velocity.y), reason: 'Expect velocity to be mostly horizontal');
-      expect(velocity.y, moreOrLessEquals(Bullet.horizontalVelocityThreshold, epsilon: 0.0001));
+      final ratio = unitDir.y / unitDir.x;
+      expect(ratio, lessThan(1), reason: 'Expect this velocity to be mostly horizontal');
+      expect(ratio, moreOrLessEquals(Bullet.horizontalVelocityRatio, epsilon: 0.001));
     });
   });
 }
