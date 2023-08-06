@@ -69,4 +69,19 @@ class Bullet extends BodyComponent with ContactCallbacks {
       body.linearVelocity.y += horizontalVelocityThreshold;
     }
   }
+
+  @override
+  void postSolve(Object other, Contact contact, ContactImpulse impulse) {
+    super.postSolve(other, contact, impulse);
+
+    // Round the velocity to make it less chaotic and more predictable.
+    body.linearVelocity.x = _round(body.linearVelocity.x, 5);
+    body.linearVelocity.y = _round(body.linearVelocity.y, 5);
+  }
+
+  double _round(double value, int decimalPlaces) {
+    assert(decimalPlaces >= 0);
+    final multiplier = 10.0 * decimalPlaces;
+    return (value * multiplier).roundToDouble() / multiplier;
+  }
 }
