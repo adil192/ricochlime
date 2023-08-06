@@ -57,7 +57,15 @@ class Bullet extends BodyComponent with ContactCallbacks {
   /// This is used to prevent the bullet from
   /// getting stuck in a horizontal velocity.
   int horizontalCollisions = 0;
-  static const horizontalVelocityThreshold = 0.01;
+  /// If the y component of the velocity is below
+  /// [horizontalVelocityThreshold], we consider
+  /// the velocity to be horizontal.
+  /// 
+  /// This is equivalent to a 5 degree angle.
+  /// 
+  /// See `test/bullet_speeds_test.dart` for
+  /// where this value came from.
+  static const horizontalVelocityThreshold = speed * 0.08715574275;
   static const maxHorizontalCollisions = 3;
 
   /// If both velocity components are below
