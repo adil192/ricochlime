@@ -138,19 +138,23 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
       await Future.delayed(moveDownDuration);
     }
 
-    for (var x = 0; x < tilesInWidth - 1; x++) {
-      if (random.nextDouble() > 0.3) {
-        continue;
+    var spawnedAtLeastOneSlime = false;
+    while (!spawnedAtLeastOneSlime) {
+      for (var x = 0; x < tilesInWidth - 1; x++) {
+        if (random.nextDouble() > 0.3) {
+          continue;
+        }
+        spawnedAtLeastOneSlime = true;
+        final slime = Slime(
+          position: Vector2(
+            expectedWidth * x / tilesInWidth,
+            0,
+          ),
+          hp: 20,
+        );
+        slimes.add(slime);
+        add(slime);
       }
-      final slime = Slime(
-        position: Vector2(
-          expectedWidth * x / tilesInWidth,
-          0,
-        ),
-        hp: 20,
-      );
-      slimes.add(slime);
-      add(slime);
     }
   }
 }
