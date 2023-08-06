@@ -17,12 +17,45 @@ class Slime extends BodyComponent with ContactCallbacks {
 
   int hp;
 
+  /// The current movement, if any
+  _SlimeMovement? _movement;
+
+  /// The animated sprite component
+  late final _SlimeAnimation _animation;
+
   Slime({
     required this.position,
     required this.hp,
   }) {
     renderBody = false;
-    add(_SlimeAnimation());
+    _animation = _SlimeAnimation();
+    add(_animation);
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    if (_movement != null) {
+      _movement!.elapsedSeconds += dt;
+      if (_movement!.isFinished) {
+        body.position.setFrom(_movement!.targetPosition);
+        _movement = null;
+        _animation.walking = false;
+      } else {
+        body.position.setFrom(_movement!.currentPosition);
+      }
+    }
+  }
+
+  /// Moves the slime down to the next row
+  void moveDown(Duration duration) {
+    _movement = _SlimeMovement(
+      startingPosition: body.position.clone(),
+      targetPosition: body.position + Vector2(0, size.y / 2),
+      totalSeconds: duration.inSeconds,
+    );
+    _animation.walking = true;
   }
 
   @override
@@ -61,11 +94,38 @@ class Slime extends BodyComponent with ContactCallbacks {
   }
 }
 
+class _SlimeMovement {
+  final Vector2 startingPosition;
+  final Vector2 targetPosition;
+  late final Vector2 startToTargetVector = targetPosition - startingPosition;
+  final int totalSeconds;
+  double elapsedSeconds = 0;
+
+  _SlimeMovement({
+    required this.startingPosition,
+    required this.targetPosition,
+    required this.totalSeconds,
+  });
+
+  bool get isFinished => elapsedSeconds >= totalSeconds;
+
+  Vector2 get currentPosition => startingPosition
+      + startToTargetVector * (elapsedSeconds / totalSeconds);
+}
+
 class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     with HasGameRef<RicochlimeGame> {
 
-  bool walking = false;
-  bool attacking = false;
+  bool _walking = false;
+  bool get walking => _walking;
+  set walking(bool value) {
+    _walking = value;
+    if (value) {
+      current = SlimeState.walk;
+    } else {
+      current = SlimeState.idle;
+    }
+  }
 
   @override
   Future<void> onLoad() async {
@@ -90,7 +150,7 @@ class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     SlimeState.walk: await gameRef.loadSpriteAnimation(
       'slime.png',
       SpriteAnimationData.sequenced(
-        stepTime: 1 / 6,
+        stepTime: 0.5 / 6,
         textureSize: Vector2(32, 32),
         amount: 6,
         amountPerRow: 6,

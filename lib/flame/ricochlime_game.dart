@@ -28,11 +28,14 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
   static const tilesInWidth = 8;
   static const tilesInHeight = tilesInWidth ~/ aspectRatio;
 
+  static const bulletTimeoutMs = 1 * 60 * 1000; // 1 minute
+
   late Player player;
   late AimGuide aimGuide;
   bool inputAllowed = true;
+  final List<Slime> slimes = [];
 
-  static const bulletTimeoutMs = 1 * 60 * 1000; // 1 minute
+  final random = Random();
 
   @override
   Future<void> onLoad() async {
@@ -43,23 +46,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
     add(Background());
 
-    final random = Random();
-    for (var y = 0; y < tilesInHeight - 6; y++) {
-      for (var x = 0; x < tilesInWidth - 1; x++) {
-        if (random.nextDouble() > 0.3) {
-          continue;
-        }
-        add(
-          Slime(
-            position: Vector2(
-              expectedWidth * x / tilesInWidth,
-              expectedHeight * y / tilesInHeight,
-            ),
-            hp: 20,
-          ),
-        );
-      }
-    }
+    spawnNewSlimes();
 
     aimGuide = AimGuide();
     add(aimGuide);
@@ -132,8 +119,38 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
           }
         }
       }
+
+      await spawnNewSlimes();
     } finally {
       inputAllowed = true;
+    }
+  }
+
+  /// Moves the existing slimes down and spawns new ones at the top
+  Future<void> spawnNewSlimes() async {
+    const moveDownDuration = Duration(seconds: 1);
+    // remove slimes that have been killed
+    slimes.removeWhere((slime) => slime.parent == null);
+    if (slimes.isNotEmpty) {
+      for (final slime in slimes) {
+        slime.moveDown(moveDownDuration);
+      }
+      await Future.delayed(moveDownDuration);
+    }
+
+    for (var x = 0; x < tilesInWidth - 1; x++) {
+      if (random.nextDouble() > 0.3) {
+        continue;
+      }
+      final slime = Slime(
+        position: Vector2(
+          expectedWidth * x / tilesInWidth,
+          0,
+        ),
+        hp: 20,
+      );
+      slimes.add(slime);
+      add(slime);
     }
   }
 }
