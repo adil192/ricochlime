@@ -22,6 +22,12 @@ class PlayPage extends StatelessWidget {
                   blurRadius: 100,
                 ),
                 const BoxShadow(
+                  color: RicochlimePalette.dirtColor,
+                  spreadRadius: RicochlimeGame.expectedHeight * 0.05,
+                  blurRadius: RicochlimeGame.expectedHeight * 0.1,
+                  offset: Offset(0, RicochlimeGame.expectedHeight * 0.85),
+                ),
+                const BoxShadow(
                   color: RicochlimePalette.waterColor,
                   spreadRadius: RicochlimeGame.expectedHeight * 0.1,
                   blurRadius: RicochlimeGame.expectedHeight * 0.1,
