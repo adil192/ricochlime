@@ -29,6 +29,7 @@ class AimGuide extends PositionComponent
     width = 0;
     height = 0;
     anchor = Anchor.center;
+    priority = 1;
   }
 
   @override

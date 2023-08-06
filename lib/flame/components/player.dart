@@ -33,6 +33,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     width = staticHeight;
     height = staticHeight;
     anchor = Anchor.center;
+    priority = 2;
   }
 
   void move(Vector2 delta) {
