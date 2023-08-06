@@ -60,7 +60,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
   /// This is used to prevent the bullet from
   /// getting stuck in a horizontal velocity.
   int horizontalCollisions = 0;
-  static const maxHorizontalCollisions = 3;
+  static const maxHorizontalCollisions = 7;
   /// If the ratio between the y and x components
   /// of the velocity is lower than this,
   /// we consider the velocity to be
