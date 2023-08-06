@@ -2,9 +2,9 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
   static const radius = 2.0;
+  static const speed = radius * 200;
 
   Vector2 initialPosition;
-  final double speed = radius * 200;
   Vector2 direction;
 
   Bullet({
@@ -54,9 +54,21 @@ class Bullet extends BodyComponent with ContactCallbacks {
   static const horizontalVelocityThreshold = 0.01;
   static const maxHorizontalCollisions = 3;
 
+  /// If both velocity components are below
+  /// [slowVelocityThreshold], the bullet is
+  /// removed from the game.
+  static const slowVelocityThreshold = speed * 0.1;
+
   @override
   void endContact(Object other, Contact contact) {
     super.endContact(other, contact);
+
+    final isTooSlow = body.linearVelocity.x.abs() < slowVelocityThreshold
+        && body.linearVelocity.y.abs() < slowVelocityThreshold;
+    if (isTooSlow) {
+      removeFromParent();
+      return;
+    }
     
     final isVelocityHorizontal = body.linearVelocity.y.abs() < horizontalVelocityThreshold;
     if (isVelocityHorizontal) {
