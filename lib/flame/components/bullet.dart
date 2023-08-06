@@ -1,7 +1,13 @@
 import 'package:flame_forge2d/flame_forge2d.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
+  /// Radius of the bullet.
   static const radius = 2.0;
+
+  /// Initial speed of the bullet.
+  /// 
+  /// Ideally, the speed should be constant
+  /// but it's not currently.
   static const speed = radius * 200;
 
   Vector2 initialPosition;
