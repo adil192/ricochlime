@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/foundation.dart';
 
@@ -116,9 +118,12 @@ class Bullet extends BodyComponent with ContactCallbacks {
     body.linearVelocity.y = _round(body.linearVelocity.y, 5);
   }
 
-  double _round(double value, int decimalPlaces) {
-    assert(decimalPlaces >= 0);
-    final multiplier = 10.0 * decimalPlaces;
-    return (value * multiplier).roundToDouble() / multiplier;
+  /// Rounds [value] to [numBits] decimal places (in binary)
+  /// using fast bitwise operations.
+  double _round(double value, int numBits) {
+    assert(numBits >= 0);
+    final multiplier = 1 << numBits;
+    assert(multiplier == pow(2, numBits));
+    return (value * multiplier).round() / multiplier;
   }
 }
