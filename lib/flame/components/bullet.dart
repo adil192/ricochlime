@@ -80,7 +80,8 @@ class Bullet extends BodyComponent with ContactCallbacks {
     final isTooSlow = body.linearVelocity.x.abs() < slowVelocityThreshold
         && body.linearVelocity.y.abs() < slowVelocityThreshold;
     if (isTooSlow) {
-      removeFromParent();
+      final unitDir = body.linearVelocity.normalized();
+      body.linearVelocity = unitDir * speed;
       return;
     }
     
