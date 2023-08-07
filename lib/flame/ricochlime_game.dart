@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
@@ -141,23 +142,56 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     }
 
     score.value++;
-    var spawnedAtLeastOneSlime = false;
-    while (!spawnedAtLeastOneSlime) {
-      for (var x = 0; x < tilesInWidth - 1; x++) {
-        if (random.nextDouble() > 0.3) {
-          continue;
-        }
-        spawnedAtLeastOneSlime = true;
-        final slime = Slime(
-          position: Vector2(
-            expectedWidth * x / tilesInWidth,
-            0,
-          ),
-          hp: score.value,
-        );
-        slimes.add(slime);
-        add(slime);
+    final row = createNewRow(
+      random: random,
+      slimeHp: score.value,
+    );
+    for (final component in row) {
+      if (component == null) {
+        continue;
       }
+      if (component is Slime) {
+        slimes.add(component);
+      }
+      add(component);
     }
+  }
+
+  @visibleForTesting
+  static int maxSlimesInRow = tilesInWidth - 2;
+  @visibleForTesting
+  static int minSlimesInRow = 1;
+  @visibleForTesting
+  static List<Component?> createNewRow({
+    required Random random,
+    required int slimeHp,
+  }) {
+    final slimeBools = <bool>[];
+    for (var i = 0; i < tilesInWidth - 1; i++) {
+      slimeBools.add(random.nextDouble() < 0.3);
+    }
+    while (slimeBools.where((e) => e).length > maxSlimesInRow) {
+      slimeBools[random.nextInt(slimeBools.length)] = false;
+    }
+    while (slimeBools.where((e) => e).length < minSlimesInRow) {
+      slimeBools[random.nextInt(slimeBools.length)] = true;
+    }
+    assert(slimeBools.length == tilesInWidth - 1); // last tile is always empty
+
+    final row = <Component?>[
+      for (var i = 0; i < slimeBools.length; i++)
+        if (!slimeBools[i])
+          null
+        else
+          Slime(
+            position: Vector2(
+              expectedWidth * i / tilesInWidth,
+              0,
+            ),
+            hp: slimeHp,
+          ),
+    ];
+    // TODO(adil192): Add bullet pickups to empty tiles
+    return row;
   }
 }
