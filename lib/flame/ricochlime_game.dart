@@ -37,6 +37,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
   late Player player;
   late AimGuide aimGuide;
   bool inputAllowed = false;
+  bool inputCancelled = false;
   final List<Slime> slimes = [];
 
   final random = Random();
@@ -64,15 +65,19 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     add(player);
 
     await Prefs.currentGame.waitUntilLoaded();
-    if (Prefs.currentGame.value != null) {
-      await importFromGame(Prefs.currentGame.value!);
-    } else {
-      await setupNewGame();
-    }
+    await importFromGame(Prefs.currentGame.value);
     inputAllowed = true;
   }
 
-  Future<void> importFromGame(GameData data) async {
+  Future<void> importFromGame(GameData? data) async {
+    if (data == null) {
+      // new game
+      score.value = 0;
+      // numBullets = 1;
+      await spawnNewSlimes();
+      return;
+    }
+
     score.value = data.score;
     // numBullets = data.numBullets;
     for (final slimeJson in data.slimes) {
@@ -90,9 +95,23 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     );
     await Prefs.currentGame.waitUntilSaved();
   }
-  Future<void> setupNewGame() async {
-    score.value = 0;
-    await spawnNewSlimes();
+
+  Future<void> cancelCurrentTurn() async {
+    if (inputAllowed) return;
+
+    inputCancelled = true;
+    while (!inputAllowed) {
+      // wait for the current turn to cancel gracefully
+      await Future.delayed(const Duration(milliseconds: 50));
+    }
+    assert(!inputCancelled);
+
+    children
+      ..whereType<Bullet>().forEach((bullet) => bullet.removeFromParent())
+      ..whereType<Slime>().forEach((slime) => slime.removeFromParent());
+    slimes.clear();
+
+    await importFromGame(Prefs.currentGame.value);
   }
 
   @override
@@ -121,6 +140,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
     assert(inputAllowed);
     inputAllowed = false;
+    inputCancelled = false;
     player.attack();
 
     try {
@@ -133,6 +153,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
         bullets.add(bullet);
         add(bullet);
         await Future.delayed(const Duration(milliseconds: 50));
+        if (inputCancelled) return;
       }
 
       // wait until bullets are removed or timeout
@@ -141,6 +162,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
              && msElapsed < bulletTimeoutMs) {
         msElapsed += 50;
         await Future.delayed(const Duration(milliseconds: 50));
+        if (inputCancelled) return;
       }
 
       if (msElapsed >= bulletTimeoutMs) {
@@ -154,9 +176,12 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
         }
       }
 
+      if (inputCancelled) return;
       await spawnNewSlimes();
+      if (inputCancelled) return;
     } finally {
       inputAllowed = true;
+      inputCancelled = false;
     }
   }
 
