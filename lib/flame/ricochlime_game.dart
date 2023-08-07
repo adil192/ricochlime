@@ -37,6 +37,10 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
   final random = Random();
 
+  int score = 0;
+  // TODO(adil192): Player should be able to pick up bullets
+  int get numBullets => score;
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -86,12 +90,9 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     inputAllowed = false;
     player.attack();
 
-    // TODO(adil192): Increment this as the player progresses
-    const maxBullets = 20;
-
     try {
       final bullets = <Bullet>[];
-      for (var i = 0; i < maxBullets; i++) {
+      for (var i = 0; i < numBullets; i++) {
         final bullet = Bullet(
           initialPosition: aimGuide.position,
           direction: aimDir,
@@ -138,6 +139,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
       await Future.delayed(moveDownDuration);
     }
 
+    score++;
     var spawnedAtLeastOneSlime = false;
     while (!spawnedAtLeastOneSlime) {
       for (var x = 0; x < tilesInWidth - 1; x++) {
@@ -150,7 +152,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
             expectedWidth * x / tilesInWidth,
             0,
           ),
-          hp: 20,
+          hp: score,
         );
         slimes.add(slime);
         add(slime);
