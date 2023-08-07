@@ -13,8 +13,9 @@ import 'package:ricochlime/flame/components/walls.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 class RicochlimeGame extends Forge2DGame with PanDetector {
-
-  RicochlimeGame(): super(
+  RicochlimeGame({
+    required this.score,
+  }): super(
     gravity: Vector2.zero(),
     zoom: 1.0,
   );
@@ -37,9 +38,9 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
   final random = Random();
 
-  int score = 0;
+  final ValueNotifier<int> score;
   // TODO(adil192): Player should be able to pick up bullets
-  int get numBullets => score;
+  int get numBullets => score.value;
 
   @override
   Future<void> onLoad() async {
@@ -139,7 +140,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
       await Future.delayed(moveDownDuration);
     }
 
-    score++;
+    score.value++;
     var spawnedAtLeastOneSlime = false;
     while (!spawnedAtLeastOneSlime) {
       for (var x = 0; x < tilesInWidth - 1; x++) {
@@ -152,7 +153,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
             expectedWidth * x / tilesInWidth,
             0,
           ),
-          hp: score,
+          hp: score.value,
         );
         slimes.add(slime);
         add(slime);
