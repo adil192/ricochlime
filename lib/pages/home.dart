@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
               closedShape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
-              openBuilder: (context, closeContainer) => PlayPage(),
+              openBuilder: (context, closeContainer) => const PlayPage(),
             ),
           ),
         ],

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-class PlayPage extends StatelessWidget {
-  PlayPage({super.key});
+final ValueNotifier<int> _score = ValueNotifier(0);
+final game = RicochlimeGame(
+  score: _score,
+);
 
-  final ValueNotifier<int> score = ValueNotifier(0);
-  late final game = RicochlimeGame(
-    score: score,
-  );
+class PlayPage extends StatelessWidget {
+  const PlayPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class PlayPage extends StatelessWidget {
               left: 0,
               right: 0,
               child: ValueListenableBuilder(
-                valueListenable: score,
+                valueListenable: _score,
                 builder: (context, value, child) => Text(
                   '$value',
                   textAlign: TextAlign.center,

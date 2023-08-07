@@ -75,7 +75,7 @@ final _router = GoRouter(
     ),
     GoRoute(
       path: '/play',
-      builder: (context, state) => PlayPage(),
+      builder: (context, state) => const PlayPage(),
     ),
   ],
 );
