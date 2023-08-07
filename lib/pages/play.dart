@@ -58,8 +58,8 @@ class PlayPage extends StatelessWidget {
                 builder: (context, value, child) => Text(
                   '$value',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.9),
                     fontSize: 32,
                   ),
                 ),
