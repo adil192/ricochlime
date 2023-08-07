@@ -11,6 +11,8 @@ import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/flame/components/walls.dart';
+import 'package:ricochlime/flame/game_data.dart';
+import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 class RicochlimeGame extends Forge2DGame with PanDetector {
@@ -34,7 +36,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
   late Player player;
   late AimGuide aimGuide;
-  bool inputAllowed = true;
+  bool inputAllowed = false;
   final List<Slime> slimes = [];
 
   final random = Random();
@@ -52,7 +54,8 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
     add(Background());
 
-    spawnNewSlimes();
+    final boundaries = createBoundaries(expectedWidth, expectedHeight);
+    boundaries.forEach(add);
 
     aimGuide = AimGuide();
     add(aimGuide);
@@ -60,8 +63,36 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     player = Player();
     add(player);
 
-    final boundaries = createBoundaries(expectedWidth, expectedHeight);
-    boundaries.forEach(add);
+    await Prefs.currentGame.waitUntilLoaded();
+    if (Prefs.currentGame.value != null) {
+      await importFromGame(Prefs.currentGame.value!);
+    } else {
+      await setupNewGame();
+    }
+    inputAllowed = true;
+  }
+
+  Future<void> importFromGame(GameData data) async {
+    score.value = data.score;
+    // numBullets = data.numBullets;
+    for (final slimeJson in data.slimes) {
+      final slime = Slime.fromJson(slimeJson);
+      slimes.add(slime);
+      add(slime);
+    }
+  }
+  Future saveGame() async {
+    assert(slimes.any((slime) => slime.position.y == 0));
+    Prefs.currentGame.value = GameData(
+      score: score.value,
+      numBullets: numBullets,
+      slimes: slimes,
+    );
+    await Prefs.currentGame.waitUntilSaved();
+  }
+  Future<void> setupNewGame() async {
+    score.value = 0;
+    await spawnNewSlimes();
   }
 
   @override
@@ -155,6 +186,8 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
       }
       add(component);
     }
+
+    await saveGame();
   }
 
   @visibleForTesting
@@ -188,7 +221,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
               expectedWidth * i / tilesInWidth,
               0,
             ),
-            hp: slimeHp,
+            maxHp: slimeHp,
           ),
     ];
     // TODO(adil192): Add bullet pickups to empty tiles

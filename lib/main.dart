@@ -5,11 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
+import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
+  Prefs.init();
   runApp(TranslationProvider(child: const MyApp()));
 }
 
