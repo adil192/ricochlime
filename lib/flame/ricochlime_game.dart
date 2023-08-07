@@ -43,8 +43,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
   final random = Random();
 
   final ValueNotifier<int> score;
-  // TODO(adil192): Player should be able to pick up bullets
-  int get numBullets => score.value;
+  int numBullets = 1;
 
   @override
   Future<void> onLoad() async {
@@ -73,13 +72,13 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     if (data == null) {
       // new game
       score.value = 0;
-      // numBullets = 1;
+      numBullets = 1;
       await spawnNewSlimes();
       return;
     }
 
     score.value = data.score;
-    // numBullets = data.numBullets;
+    numBullets = data.numBullets;
     for (final slimeJson in data.slimes) {
       final slime = Slime.fromJson(slimeJson);
       slimes.add(slime);
@@ -206,9 +205,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
       if (component == null) {
         continue;
       }
-      if (component is Slime) {
-        slimes.add(component);
-      }
+      slimes.add(component);
       add(component);
     }
 
@@ -218,9 +215,9 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
   @visibleForTesting
   static int maxSlimesInRow = tilesInWidth - 2;
   @visibleForTesting
-  static int minSlimesInRow = 1;
+  static int minSlimesInRow = 2;
   @visibleForTesting
-  static List<Component?> createNewRow({
+  static List<Slime?> createNewRow({
     required Random random,
     required int slimeHp,
   }) {
@@ -236,7 +233,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     }
     assert(slimeBools.length == tilesInWidth - 1); // last tile is always empty
 
-    final row = <Component?>[
+    final row = <Slime?>[
       for (var i = 0; i < slimeBools.length; i++)
         if (!slimeBools[i])
           null
@@ -249,7 +246,14 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
             maxHp: slimeHp,
           ),
     ];
-    // TODO(adil192): Add bullet pickups to empty tiles
+
+    // one of the slimes should give the user a bullet when it dies
+    int chosenIndex = random.nextInt(row.length);
+    while (row[chosenIndex] == null) {
+      chosenIndex = random.nextInt(row.length);
+    }
+    row[chosenIndex]!.givesPlayerABullet = true;
+
     return row;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
@@ -22,14 +23,20 @@ class Slime extends BodyComponent with ContactCallbacks {
   _SlimeMovement? _movement;
 
   /// The animated sprite component
-  late final _SlimeAnimation _animation;
+  late final _SlimeAnimation _animation = _SlimeAnimation();
+
+  bool _givesPlayerABullet = false;
+  bool get givesPlayerABullet => _givesPlayerABullet;
+  set givesPlayerABullet(bool value) {
+    _givesPlayerABullet = value;
+    _animation.givesPlayerABullet = value;
+  }
 
   Slime({
     required this.position,
     required this.maxHp,
   }) : hp = maxHp {
     renderBody = false;
-    _animation = _SlimeAnimation();
     add(_animation);
   }
 
@@ -40,8 +47,9 @@ class Slime extends BodyComponent with ContactCallbacks {
         ),
         hp = json['hp'] as int,
         maxHp = json['maxHp'] as int {
+    givesPlayerABullet = json['givesPlayerABullet'] as bool? ?? false;
+
     renderBody = false;
-    _animation = _SlimeAnimation();
     add(_animation);
   }
   Map<String, dynamic> toJson() => {
@@ -49,6 +57,7 @@ class Slime extends BodyComponent with ContactCallbacks {
     'py': _movement?.targetPosition.y ?? position.y,
     'hp': hp,
     'maxHp': maxHp,
+    'givesPlayerABullet': givesPlayerABullet,
   };
 
   @override
@@ -110,9 +119,14 @@ class Slime extends BodyComponent with ContactCallbacks {
     if (other is Bullet) {
       hp -= 1;
       if (hp <= 0) {
-        _animation.current = SlimeState.dead;
-        _animation.position = body.position;
+        if (givesPlayerABullet) {
+          (gameRef as RicochlimeGame).numBullets += 1;
+        }
+
         _animation.parent = parent;
+        _animation.position = body.position;
+        _animation.current = SlimeState.dead;
+
         removeFromParent();
       }
     }
@@ -154,6 +168,12 @@ class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     } else {
       current = SlimeState.idle;
     }
+  }
+
+  set givesPlayerABullet(bool value) {
+    getPaint().colorFilter = value
+        ? const ColorFilter.linearToSrgbGamma()
+        : null;
   }
 
   @override
