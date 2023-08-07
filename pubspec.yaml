@@ -44,6 +44,8 @@ dependencies:
 
   google_fonts: ^5.1.0
 
+  shared_preferences: ^2.2.0
+
   slang: ^3.22.0
   slang_flutter: any
 
