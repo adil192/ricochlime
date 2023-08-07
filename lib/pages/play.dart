@@ -65,6 +65,19 @@ class PlayPage extends StatelessWidget {
                 ),
               ),
             ),
+            Positioned.directional(
+              textDirection: Directionality.maybeOf(context) ?? TextDirection.ltr,
+              top: 0,
+              start: 0,
+              child: IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white.withOpacity(0.9),
+                  size: 32,
+                ),
+              ),
+            ),
           ],
         ),
       ),
