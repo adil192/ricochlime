@@ -172,7 +172,7 @@ class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
 
   set givesPlayerABullet(bool value) {
     getPaint().colorFilter = value
-        ? const ColorFilter.linearToSrgbGamma()
+        ? const ColorFilter.mode(Color(0xffffff55), BlendMode.modulate)
         : null;
   }
 
