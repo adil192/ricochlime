@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,10 +6,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
   static const radius = 2.0;
 
   /// Initial speed of the bullet.
-  /// 
-  /// Ideally, the speed should be constant
-  /// but it's not currently.
-  static const speed = radius * 200;
+  static const speed = radius * 100;
 
   Vector2 initialPosition;
   Vector2 direction;
@@ -80,17 +75,9 @@ class Bullet extends BodyComponent with ContactCallbacks {
     return ratio.abs() < horizontalVelocityRatio;
   }
 
-  /// If both velocity components are below
-  /// [slowVelocityThreshold], the bullet's
-  /// velocity is increased downward.
-  static const slowVelocityThreshold = speed * 0.1;
-
   @override
   void endContact(Object other, Contact contact) {
     super.endContact(other, contact);
-
-    final isTooSlow = body.linearVelocity.x.abs() < slowVelocityThreshold
-        && body.linearVelocity.y.abs() < slowVelocityThreshold;
     
     final isVelocityHorizontal = Bullet.isVelocityHorizontal(body.linearVelocity);
     if (isVelocityHorizontal) {
@@ -99,26 +86,8 @@ class Bullet extends BodyComponent with ContactCallbacks {
       horizontalCollisions = 0;
     }
 
-    if (isTooSlow || horizontalCollisions >= maxHorizontalCollisions) {
+    if (horizontalCollisions >= maxHorizontalCollisions) {
       body.linearVelocity.y += speed * horizontalVelocityRatio;
     }
-  }
-
-  @override
-  void postSolve(Object other, Contact contact, ContactImpulse impulse) {
-    super.postSolve(other, contact, impulse);
-
-    // Round the velocity to make it less chaotic and more predictable.
-    body.linearVelocity.x = _round(body.linearVelocity.x, 5);
-    body.linearVelocity.y = _round(body.linearVelocity.y, 5);
-  }
-
-  /// Rounds [value] to [numBits] decimal places (in binary)
-  /// using fast bitwise operations.
-  double _round(double value, int numBits) {
-    assert(numBits >= 0);
-    final multiplier = 1 << numBits;
-    assert(multiplier == pow(2, numBits));
-    return (value * multiplier).round() / multiplier;
   }
 }

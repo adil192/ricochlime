@@ -10,14 +10,6 @@ void main() {
       expect(Bullet.speed, greaterThan(Bullet.radius));
     });
 
-    test('Slow velocity threshold should be lower than speed', () {
-      expect(Bullet.slowVelocityThreshold, lessThan(Bullet.speed));
-
-      /// Max velocity wherein both components are below threshold
-      final maxSlowSpeed = sqrt(pow(Bullet.slowVelocityThreshold, 2) * 2);
-      expect(maxSlowSpeed, lessThan(Bullet.speed));
-    });
-
     test('Horizontal velocity should be 5 degrees or less', () {
       const maxHorizontalAngle = 5 * pi / 180;
       final unitDir = Vector2(cos(maxHorizontalAngle), sin(maxHorizontalAngle));
