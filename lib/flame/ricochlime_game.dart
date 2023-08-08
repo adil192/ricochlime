@@ -138,6 +138,16 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     _spawnBullets();
   }
 
+  @override
+  void update(double dt) {
+    if (dt > 0.5) {
+      // physics engine can't handle such a big dt
+      // e.g. when the app is resumed from background
+      return;
+    }
+    super.update(dt);
+  }
+
   Future<void> _spawnBullets() async {
     final aimDir = aimGuide.finishAim();
     if (aimDir == null) {
