@@ -77,19 +77,23 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
       return;
     }
 
-    score.value = data.score;
-    numBullets = data.numBullets;
+    int numSlimesThatGiveBullets = 0;
     for (final slimeJson in data.slimes) {
       final slime = Slime.fromJson(slimeJson);
       slimes.add(slime);
       add(slime);
+      if (slime.givesPlayerABullet) numSlimesThatGiveBullets++;
     }
+
+    score.value = data.score;
+    numBullets = 1 + score.value - numSlimesThatGiveBullets;
+    assert(numBullets >= 1);
+    assert(numBullets <= score.value);
   }
   Future saveGame() async {
     assert(slimes.any((slime) => slime.position.y == 0));
     Prefs.currentGame.value = GameData(
       score: score.value,
-      numBullets: numBullets,
       slimes: slimes,
     );
     await Prefs.currentGame.waitUntilSaved();
