@@ -2,6 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
+import 'package:ricochlime/flame/components/health_bar.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
 enum SlimeState {
@@ -13,8 +14,11 @@ enum SlimeState {
 }
 
 class Slime extends BodyComponent with ContactCallbacks {
+  static const staticWidth = 32.0;
+  static const staticHeight = staticWidth;
+
   final Vector2 position;
-  final Vector2 size = Vector2(32, 32);
+  final Vector2 size = Vector2(staticWidth, staticHeight);
 
   int maxHp;
   int hp;
@@ -24,6 +28,12 @@ class Slime extends BodyComponent with ContactCallbacks {
 
   /// The animated sprite component
   late final _SlimeAnimation _animation = _SlimeAnimation();
+  /// The health bar component
+  late final HealthBar _healthBar = HealthBar(
+    maxHp: maxHp,
+    hp: hp,
+    paint: _animation.paint,
+  );
 
   bool _givesPlayerABullet = false;
   bool get givesPlayerABullet => _givesPlayerABullet;
@@ -35,9 +45,13 @@ class Slime extends BodyComponent with ContactCallbacks {
   Slime({
     required this.position,
     required this.maxHp,
-  }) : hp = maxHp {
+  }): hp = maxHp,
+      super(
+        priority: 0,
+      ) {
     renderBody = false;
     add(_animation);
+    add(_healthBar);
   }
 
   Slime.fromJson(Map<String, dynamic> json)
@@ -51,6 +65,7 @@ class Slime extends BodyComponent with ContactCallbacks {
 
     renderBody = false;
     add(_animation);
+    add(_healthBar);
   }
   Map<String, dynamic> toJson() => {
     'px': _movement?.targetPosition.x ?? position.x,
@@ -118,6 +133,7 @@ class Slime extends BodyComponent with ContactCallbacks {
 
     if (other is Bullet) {
       hp -= 1;
+      _healthBar.hp = hp;
       if (hp <= 0) {
         if (givesPlayerABullet) {
           (gameRef as RicochlimeGame).numBullets += 1;
