@@ -40,6 +40,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   
+  forge2d: any
+  
   go_router: ^10.0.0
 
   google_fonts: ^5.1.0

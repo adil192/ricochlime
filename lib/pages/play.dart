@@ -24,8 +24,6 @@ class _PlayPageState extends State<PlayPage> {
 
   @override
   Widget build(BuildContext context) {
-    const gameWidth = RicochlimeGame.expectedWidth * RicochlimeGame.expectedZoom;
-    const gameHeight = RicochlimeGame.expectedHeight * RicochlimeGame.expectedZoom;
     return ColoredBox(
       color: RicochlimePalette.grassColor,
       child: SafeArea(
@@ -42,21 +40,21 @@ class _PlayPageState extends State<PlayPage> {
                       ),
                       const BoxShadow(
                         color: RicochlimePalette.dirtColor,
-                        spreadRadius: gameHeight * 0.05,
-                        blurRadius: gameHeight * 0.1,
-                        offset: Offset(0, gameHeight * 0.85),
+                        spreadRadius: RicochlimeGame.expectedHeight * 0.05,
+                        blurRadius: RicochlimeGame.expectedHeight * 0.1,
+                        offset: Offset(0, RicochlimeGame.expectedHeight * 0.85),
                       ),
                       const BoxShadow(
                         color: RicochlimePalette.waterColor,
-                        spreadRadius: gameHeight * 0.1,
-                        blurRadius: gameHeight * 0.1,
-                        offset: Offset(0, gameHeight * 0.9),
+                        spreadRadius: RicochlimeGame.expectedHeight * 0.1,
+                        blurRadius: RicochlimeGame.expectedHeight * 0.1,
+                        offset: Offset(0, RicochlimeGame.expectedHeight * 0.9),
                       ),
                     ],
                   ),
                   child: SizedBox(
-                    width: gameWidth,
-                    height: gameHeight,
+                    width: RicochlimeGame.expectedWidth,
+                    height: RicochlimeGame.expectedHeight,
                     child: GameWidget(game: game),
                   ),
                 ),

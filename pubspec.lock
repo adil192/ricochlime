@@ -142,7 +142,7 @@ packages:
     source: sdk
     version: "0.0.0"
   forge2d:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: forge2d
       sha256: "82e6e89bd1224d87066e9b164d534c4977f4895f554f931608a182534fac6e5e"

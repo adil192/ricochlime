@@ -1,10 +1,11 @@
 import 'dart:math';
 
-import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/foundation.dart';
+// ignore: implementation_imports
+import 'package:forge2d/src/settings.dart' as physics_settings;
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
@@ -20,17 +21,16 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     required this.score,
   }): super(
     gravity: Vector2.zero(),
-    zoom: expectedZoom,
-  );
+    zoom: 1.0,
+  ) {
+    physics_settings.maxTranslation = Bullet.speed;
+  }
 
   /// Width to height aspect ratio
   static const aspectRatio = 1 / 2;
 
   static const expectedWidth = tilesInWidth * 16.0;
   static const expectedHeight = expectedWidth / aspectRatio;
-  /// Units are zoomed to avoid the speed limit from Box2D/Forge2D:
-  /// see https://github.com/flame-engine/forge2d/pull/84
-  static const expectedZoom = 100.0;
 
   static const tilesInWidth = 8;
   static const tilesInHeight = tilesInWidth ~/ aspectRatio;
