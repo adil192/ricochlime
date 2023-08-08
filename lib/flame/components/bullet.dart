@@ -28,7 +28,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
     final fixtureDef = FixtureDef(
       shape,
       userData: this,
-      restitution: 1.1,
+      restitution: 1.0,
       filter: Filter() // don't collide with other bullets
         ..categoryBits = 1 << 2
         ..maskBits = 0xFFFF & ~(1 << 2),
@@ -81,8 +81,8 @@ class Bullet extends BodyComponent with ContactCallbacks {
   }
 
   /// If both velocity components are below
-  /// [slowVelocityThreshold], the bullet is
-  /// removed from the game.
+  /// [slowVelocityThreshold], the bullet's
+  /// velocity is increased downward.
   static const slowVelocityThreshold = speed * 0.1;
 
   @override
@@ -91,11 +91,6 @@ class Bullet extends BodyComponent with ContactCallbacks {
 
     final isTooSlow = body.linearVelocity.x.abs() < slowVelocityThreshold
         && body.linearVelocity.y.abs() < slowVelocityThreshold;
-    if (isTooSlow) {
-      final unitDir = body.linearVelocity.normalized();
-      body.linearVelocity = unitDir * speed;
-      return;
-    }
     
     final isVelocityHorizontal = Bullet.isVelocityHorizontal(body.linearVelocity);
     if (isVelocityHorizontal) {
@@ -104,7 +99,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
       horizontalCollisions = 0;
     }
 
-    if (horizontalCollisions >= maxHorizontalCollisions) {
+    if (isTooSlow || horizontalCollisions >= maxHorizontalCollisions) {
       body.linearVelocity.y += speed * horizontalVelocityRatio;
     }
   }

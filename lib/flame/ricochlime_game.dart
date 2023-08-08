@@ -20,7 +20,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     required this.score,
   }): super(
     gravity: Vector2.zero(),
-    zoom: 1.0,
+    zoom: expectedZoom,
   );
 
   /// Width to height aspect ratio
@@ -28,6 +28,9 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
   static const expectedWidth = tilesInWidth * 16.0;
   static const expectedHeight = expectedWidth / aspectRatio;
+  /// Units are zoomed to avoid the speed limit from Box2D/Forge2D:
+  /// see https://github.com/flame-engine/forge2d/pull/84
+  static const expectedZoom = 100.0;
 
   static const tilesInWidth = 8;
   static const tilesInHeight = tilesInWidth ~/ aspectRatio;
