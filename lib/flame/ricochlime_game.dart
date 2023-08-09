@@ -16,7 +16,15 @@ import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-class RicochlimeGame extends Forge2DGame with PanDetector {
+@visibleForTesting
+enum GameState {
+  idle,
+  shooting,
+  slimesMoving,
+}
+
+class RicochlimeGame extends Forge2DGame with
+    PanDetector, TapDetector {
   RicochlimeGame({
     required this.score,
   }): super(
@@ -37,9 +45,11 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
   static const bulletTimeoutMs = 1 * 60 * 1000; // 1 minute
 
+  GameState state = GameState.idle;
+
   late Player player;
   late AimGuide aimGuide;
-  bool inputAllowed = false;
+  bool get inputAllowed => state == GameState.idle;
   bool inputCancelled = false;
   final List<Slime> slimes = [];
 
@@ -47,6 +57,21 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
   final ValueNotifier<int> score;
   int numBullets = 1;
+
+  double _timeDilation = 1.0;
+  /// The time dilation to use for the physics simulation.
+  /// This is useful for speeding up bullets.
+  double get timeDilation {
+    if (state != GameState.shooting) return 1.0;
+    return _timeDilation;
+  }
+  set timeDilation(double value) {
+    if (state != GameState.shooting) {
+      _timeDilation = 1.0;
+    } else {
+      _timeDilation = value;
+    }
+  }
 
   @override
   Future<void> onLoad() async {
@@ -68,7 +93,6 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);
-    inputAllowed = true;
   }
 
   Future<void> importFromGame(GameData? data) async {
@@ -143,12 +167,23 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
   @override
   void update(double dt) {
-    if (dt > 0.5) {
+    const maxDt = 0.5;
+    if (dt > maxDt) {
       // physics engine can't handle such a big dt
       // e.g. when the app is resumed from background
       return;
     }
-    super.update(dt);
+    super.update(
+      min(dt * timeDilation, maxDt),
+    );
+  }
+  @override
+  void onTap() {
+    if (state == GameState.shooting) {
+      timeDilation += 0.5;
+    } else {
+      assert(timeDilation == 1.0);
+    }
   }
 
   Future<void> _spawnBullets() async {
@@ -158,7 +193,8 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     }
 
     assert(inputAllowed);
-    inputAllowed = false;
+    state = GameState.shooting;
+    assert(!inputAllowed);
     inputCancelled = false;
     player.attack();
 
@@ -196,10 +232,11 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
       }
 
       if (inputCancelled) return;
+      timeDilation = 1.0;
       await spawnNewSlimes();
       if (inputCancelled) return;
     } finally {
-      inputAllowed = true;
+      state = GameState.idle;
       inputCancelled = false;
     }
   }
@@ -207,6 +244,8 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
   /// Moves the existing slimes down and spawns new ones at the top
   Future<void> spawnNewSlimes() async {
     const slimeMoveDuration = Duration(seconds: 1);
+
+    state = GameState.slimesMoving;
 
     // remove slimes that have been killed
     slimes.removeWhere((slime) => slime.parent == null);
@@ -234,6 +273,7 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
     // wait for the slimes to move
     await Future.delayed(slimeMoveDuration);
+    state = GameState.idle;
 
     await saveGame();
   }
