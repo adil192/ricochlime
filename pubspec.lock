@@ -109,10 +109,10 @@ packages:
     dependency: transitive
     description:
       name: ffi
-      sha256: ed5337a5660c506388a9f012be0288fb38b49020ce2b45fe1f8b8323fe429f99
+      sha256: "7bf0adc28a23d395f19f3f1eb21dd7cfd1dd9f8e1c50051c069122e6853bc878"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.0"
   file:
     dependency: transitive
     description:
@@ -125,26 +125,26 @@ packages:
     dependency: "direct main"
     description:
       name: flame
-      sha256: "12db9de3cd31b86465b0c1ea173020fb71b15df424ca01b665fa5300b24864c8"
+      sha256: bd2b45f9fc0ec4939031b85c0b0a97cf09357c12ecd072d44389a4c577a2c0f0
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.1"
+    version: "1.8.2"
   flame_forge2d:
     dependency: "direct main"
     description:
       name: flame_forge2d
-      sha256: "939f221ab7fe1819fcc0452720e2a4fa47ba1474733a1dfe1f328055cb004b1d"
+      sha256: fae89e7074c5afecad8003ab3d246a7f025f6abc4b5e532a14dbf49939d9ac8f
       url: "https://pub.dev"
     source: hosted
-    version: "0.14.1"
+    version: "0.14.1+1"
   flame_lint:
     dependency: "direct dev"
     description:
       name: flame_lint
-      sha256: f9d519a8399fc50bdecda5abc4d3ce10bf51e95fa6d93768bb4ce587c03815ef
+      sha256: "216a327ecc169b8fa1286598485f9ec243b9d0c0e4f24127794b12f5cebe71f7"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -297,10 +297,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider
-      sha256: "3087813781ab814e4157b172f1a11c46be20179fcc9bea043e0fba36bc0acaa2"
+      sha256: "909b84830485dbcd0308edf6f7368bc8fd76afa26a270420f34cabea2a6467a0"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.15"
+    version: "2.1.0"
   path_provider_android:
     dependency: transitive
     description:
@@ -542,10 +542,10 @@ packages:
     dependency: transitive
     description:
       name: xdg_directories
-      sha256: e0b1147eec179d3911f1f19b59206448f78195ca1d20514134e10641b7d7fbff
+      sha256: f0c26453a2d47aa4c2570c6a033246a3fc62da2fe23c7ffdd0a7495086dc0247
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   xml:
     dependency: transitive
     description:
