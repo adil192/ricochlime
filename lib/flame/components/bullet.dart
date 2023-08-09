@@ -55,17 +55,17 @@ class Bullet extends BodyComponent with ContactCallbacks {
   /// This is used to prevent the bullet from
   /// getting stuck in a horizontal velocity.
   int horizontalCollisions = 0;
-  static const maxHorizontalCollisions = 7;
+  static const maxHorizontalCollisions = 15;
   /// If the ratio between the y and x components
   /// of the velocity is lower than this,
   /// we consider the velocity to be
   /// horizontal.
   /// 
-  /// This is equivalent to a 5 degree angle.
+  /// This is equivalent to a 1 degree angle.
   /// 
   /// Please use [isVelocityHorizontal] instead
   /// of comparing the velocity directly.
-  static const horizontalVelocityRatio = 0.08715574275;
+  static const horizontalVelocityRatio = 0.0524077792830412;
   @visibleForTesting
   static bool isVelocityHorizontal(Vector2 velocity) {
     if (velocity.x == 0) {
