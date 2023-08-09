@@ -27,6 +27,7 @@ class RicochlimeGame extends Forge2DGame with
     PanDetector, TapDetector {
   RicochlimeGame({
     required this.score,
+    required this.timeDilation,
   }): super(
     gravity: Vector2.zero(),
     zoom: 1.0,
@@ -45,7 +46,14 @@ class RicochlimeGame extends Forge2DGame with
 
   static const bulletTimeoutMs = 1 * 60 * 1000; // 1 minute
 
-  GameState state = GameState.idle;
+  GameState _state = GameState.idle;
+  GameState get state => _state;
+  set state(GameState value) {
+    _state = value;
+    if (value != GameState.shooting) {
+      timeDilation.value = 1.0;
+    }
+  }
 
   late Player player;
   late AimGuide aimGuide;
@@ -58,20 +66,7 @@ class RicochlimeGame extends Forge2DGame with
   final ValueNotifier<int> score;
   int numBullets = 1;
 
-  double _timeDilation = 1.0;
-  /// The time dilation to use for the physics simulation.
-  /// This is useful for speeding up bullets.
-  double get timeDilation {
-    if (state != GameState.shooting) return 1.0;
-    return _timeDilation;
-  }
-  set timeDilation(double value) {
-    if (state != GameState.shooting) {
-      _timeDilation = 1.0;
-    } else {
-      _timeDilation = value;
-    }
-  }
+  final ValueNotifier<double> timeDilation;
 
   @override
   Future<void> onLoad() async {
@@ -174,15 +169,15 @@ class RicochlimeGame extends Forge2DGame with
       return;
     }
     super.update(
-      min(dt * timeDilation, maxDt),
+      min(dt * timeDilation.value, maxDt),
     );
   }
   @override
   void onTap() {
     if (state == GameState.shooting) {
-      timeDilation += 0.5;
+      timeDilation.value += 0.5;
     } else {
-      assert(timeDilation == 1.0);
+      assert(timeDilation.value == 1.0);
     }
   }
 
@@ -232,7 +227,6 @@ class RicochlimeGame extends Forge2DGame with
       }
 
       if (inputCancelled) return;
-      timeDilation = 1.0;
       await spawnNewSlimes();
       if (inputCancelled) return;
     } finally {

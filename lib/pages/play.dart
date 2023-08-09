@@ -4,8 +4,10 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 final ValueNotifier<int> _score = ValueNotifier(0);
+final ValueNotifier<double> _timeDilation = ValueNotifier(1.0);
 final game = RicochlimeGame(
   score: _score,
+  timeDilation: _timeDilation,
 );
 
 class PlayPage extends StatefulWidget {
@@ -24,6 +26,7 @@ class _PlayPageState extends State<PlayPage> {
 
   @override
   Widget build(BuildContext context) {
+    final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
     return ColoredBox(
       color: RicochlimePalette.grassColor,
       child: SafeArea(
@@ -66,8 +69,8 @@ class _PlayPageState extends State<PlayPage> {
               right: 0,
               child: ValueListenableBuilder(
                 valueListenable: _score,
-                builder: (context, value, child) => Text(
-                  '$value',
+                builder: (context, score, child) => Text(
+                  '$score',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.9),
@@ -77,7 +80,26 @@ class _PlayPageState extends State<PlayPage> {
               ),
             ),
             Positioned.directional(
-              textDirection: Directionality.maybeOf(context) ?? TextDirection.ltr,
+              textDirection: textDirection,
+              top: 0,
+              end: 0,
+              child: ValueListenableBuilder(
+                valueListenable: _timeDilation,
+                builder: (context, timeDilation, child) => AnimatedOpacity(
+                  opacity: timeDilation == 1.0 ? 0.0 : 1.0,
+                  duration: const Duration(milliseconds: 200),
+                  child: Text(
+                    '${timeDilation.toStringAsFixed(1)}x',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 32,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned.directional(
+              textDirection: textDirection,
               top: 0,
               start: 0,
               child: IconButton(
