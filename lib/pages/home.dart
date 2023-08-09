@@ -10,7 +10,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(t.appName),
+        centerTitle: true,
+        title: Text(
+          t.appName,
+          style: const TextStyle(
+            fontSize: 50,
+          ),
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -19,7 +25,20 @@ class HomePage extends StatelessWidget {
             child: OpenContainer(
               closedBuilder: (context, openContainer) => ElevatedButton(
                 onPressed: openContainer,
-                child: Text(t.homePage.playButton),
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 16,
+                    ),
+                  ),
+                ),
+                child: Text(
+                  t.homePage.playButton,
+                  style: const TextStyle(
+                    fontSize: 32,
+                  ),
+                ),
               ),
               closedColor: Colors.transparent,
               closedElevation: 0,
