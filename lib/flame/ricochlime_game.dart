@@ -94,7 +94,10 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
     assert(numBullets <= score.value);
   }
   Future saveGame() async {
-    assert(slimes.any((slime) => slime.position.y == 0));
+    assert(
+      slimes.any((slime) => slime.position.y <= 0),
+      'The new row of slimes should be spawned before saving the game'
+    );
     Prefs.currentGame.value = GameData(
       score: score.value,
       slimes: slimes,
