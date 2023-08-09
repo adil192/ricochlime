@@ -1,4 +1,4 @@
-# Ricochlime
+# <img src="https://github.com/adil192/ricochlime/raw/main/assets/icon/icon.png" width="30" height="30" alt="Logo"> Ricochlime
 
 Ricochlime is a game where you attack the advancing slimes with your ricocheting projectiles. The game is made with the [Flame](https://flame-engine.org/) game engine and [Flutter](https://flutter.dev/).
 
