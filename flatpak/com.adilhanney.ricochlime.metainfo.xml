@@ -52,6 +52,16 @@
     </screenshots>
 
     <releases>
+        <release version="0.2.0" type="development" date="2023-08-09">
+            <description>
+                <ul>
+                    <li>Tap the screen to speed up bullets</li>
+                    <li>Added an app icon</li>
+                    <li>Improved the home page</li>
+                    <li>New slimes are now animated onto the screen</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.0" type="development" date="2023-08-09">
             <description>
                 <ul>
