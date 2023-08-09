@@ -1,0 +1,27 @@
+name: Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: stable
+
+      - run: flutter pub get
+
+      - name: Run tests
+        run: flutter test --reporter expanded --coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: coverage/lcov.info

@@ -1,0 +1,100 @@
+name: Build for Play Store
+
+on:
+  # Enable manual run
+  workflow_dispatch:
+  push:
+    tags:
+      - '**'
+
+jobs:
+  build-aab:
+    name: Build AAB for the Play Store
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Remove signingConfig
+        run: ./patches/remove_signing_android.sh
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - run: flutter pub get
+
+      - name: Build aab
+        run: |
+          flutter build appbundle
+
+      - name: Move unsigned apk
+        run: |
+          mkdir -p output
+          mv build/app/outputs/bundle/release/app-release.aab output/Ricochlime.aab
+
+      - name: Sign aab
+        uses: ilharp/sign-android-release@v1
+        id: sign_app
+        with:
+          releaseDir: output
+          signingKey: ${{ secrets.SIGNING_KEY }}
+          keyAlias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Rename signed apk
+        run: mv ${{ steps.sign_app.outputs.signedFile }} output/Ricochlime.aab
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ricochlime-Android-PlayStore
+          path: output/Ricochlime.aab
+
+  upload-to-play-store:
+    name: Upload to Play Store
+    runs-on: ubuntu-latest
+    needs: build-aab
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: Ricochlime-Android-PlayStore
+          path: output
+
+      - name: Prepare whatsnew directory from metadata/*/changelogs
+        working-directory: ${{ github.workspace }}
+        run: |
+          # display changelogs for debugging
+          find metadata -name '*.txt'
+
+          mkdir -p whatsnew
+
+          # get current version code from pubspec.yaml (the part after the +)
+          VERSION_CODE=$(grep -oP '(?<=version: ).*' pubspec.yaml | grep -oP '(?<=\+).*$')
+
+          # copy changelogs of each language to whatsnew
+          for dir in metadata/*/changelogs; do
+              # get language code from directory name
+              # e.g. metadata/en-US/changelogs -> en-US
+              lang=${dir#metadata/}
+              lang=${lang%/changelogs}
+
+              # copy changelog file to whatsnew
+              cp "$dir/$VERSION_CODE.txt" "whatsnew/whatsnew-${lang}"
+          done
+
+      - name: Upload to Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_STORE_JSON }}
+          packageName: com.adilhanney.ricochlime
+          releaseFiles: output/Ricochlime.aab
+          track: production
+          status: completed
+          whatsNewDirectory: whatsnew

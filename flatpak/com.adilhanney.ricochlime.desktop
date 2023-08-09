@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=Ricochlime
+Comment=Satisfying slime shooter
+Categories=Game;Shooter;
+
+Icon=com.adilhanney.ricochlime
+Exec=ricochlime
+Terminal=false
+StartupWMClass=ricochlime

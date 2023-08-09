@@ -1,0 +1,52 @@
+name: Build for Android
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: stable
+
+      - run: flutter pub get
+
+      - name: Build apk
+        run: flutter build apk
+      
+      - name: Move unsigned apk
+        run: |
+          mkdir -p output
+          mv build/app/outputs/flutter-apk/app-release.apk output/
+
+      - name: Sign apk
+        uses: ilharp/sign-android-release@v1
+        id: sign_app
+        with:
+          releaseDir: output
+          signingKey: ${{ secrets.SIGNING_KEY }}
+          keyAlias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Rename signed apk
+        id: rename_apk
+        run: |
+          buildName=$(grep "version: " pubspec.yaml | sed 's/version: //g' | sed 's/+.*//g')
+          apkName="Ricochlime_v${buildName}.apk"
+          mv ${{ steps.sign_app.outputs.signedFile }} output/$apkName
+          echo "apkName=$apkName" >> $GITHUB_OUTPUT
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ricochlime-Android
+          path: output/${{ steps.rename_apk.outputs.apkName }}

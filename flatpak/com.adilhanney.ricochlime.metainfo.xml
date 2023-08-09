@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Generator for metainfo & .desktop files:
+    https://www.freedesktop.org/software/appstream/metainfocreator/#/
+-->
+<component type="desktop-application">
+    <id>com.adilhanney.ricochlime</id>
+
+    <name>Ricochlime</name>
+    <summary>Satisfying slime shooter</summary>
+
+    <developer_name>Adil Hanney</developer_name>
+    <url type="homepage">https://github.com/adil192/ricochlime</url>
+
+    <metadata_license>MIT</metadata_license>
+    <project_license>AGPL-3.0-only</project_license>
+
+    <supports>
+        <control>pointing</control>
+        <control>keyboard</control>
+        <control>touch</control>
+    </supports>
+
+    <recommends>
+        <internet>first-run</internet>
+    </recommends>
+
+    <description>
+        <p>
+            Satisfying slime shooter
+        </p>
+    </description>
+
+    <launchable type="desktop-id">com.adilhanney.ricochlime.desktop</launchable>
+
+    <content_rating type="oars-1.1" />
+
+    <categories>
+        <category>Game</category>
+        <category>LogicGame</category>
+    </categories>
+
+    <keywords>
+        <keyword>nonogram</keyword>
+        <keyword>puzzle</keyword>
+    </keywords>
+
+    <screenshots>
+        <screenshot type="default">
+            <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/game.png</image>
+        </screenshot>
+    </screenshots>
+
+    <releases>
+    
+    </releases>
+</component>
