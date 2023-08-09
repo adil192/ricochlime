@@ -203,28 +203,34 @@ class RicochlimeGame extends Forge2DGame with PanDetector {
 
   /// Moves the existing slimes down and spawns new ones at the top
   Future<void> spawnNewSlimes() async {
-    const moveDownDuration = Duration(seconds: 1);
+    const slimeMoveDuration = Duration(seconds: 1);
+
     // remove slimes that have been killed
     slimes.removeWhere((slime) => slime.parent == null);
-    if (slimes.isNotEmpty) {
-      for (final slime in slimes) {
-        slime.moveDown(moveDownDuration);
-      }
-      await Future.delayed(moveDownDuration);
+    
+    // move existing slimes down
+    for (final slime in slimes) {
+      slime.moveDown(slimeMoveDuration);
     }
 
+    // spawn new slimes at the top
     score.value++;
     final row = createNewRow(
       random: random,
       slimeHp: score.value,
     );
-    for (final component in row) {
-      if (component == null) {
-        continue;
-      }
-      slimes.add(component);
-      add(component);
+    for (final slime in row) {
+      if (slime == null) continue;
+
+      slimes.add(slime);
+      add(slime);
+
+      // trigger the slime's animation
+      slime.moveInFromTop(slimeMoveDuration);
     }
+
+    // wait for the slimes to move
+    await Future.delayed(slimeMoveDuration);
 
     await saveGame();
   }

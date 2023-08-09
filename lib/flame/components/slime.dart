@@ -42,6 +42,11 @@ class Slime extends BodyComponent with ContactCallbacks {
     _animation.givesPlayerABullet = value;
   }
 
+  /// Whether the body has been created yet.
+  /// This is used to prevent the body from being created multiple times,
+  /// since the body is created before [onLoad] is called.
+  bool bodyCreated = false;
+
   Slime({
     required this.position,
     required this.maxHp,
@@ -92,20 +97,45 @@ class Slime extends BodyComponent with ContactCallbacks {
     }
   }
 
+  /// Moves a new slime in from the top of the screen
+  void moveInFromTop(Duration duration) {
+    assert(position.y == 0, 'Slime must be at the top of the screen');
+    _startMovement(_SlimeMovement(
+      startingPosition: position.clone()..y = size.y * -0.5,
+      targetPosition: position.clone(),
+      totalSeconds: duration.inMilliseconds / 1000,
+    ));
+  }
+
   /// Moves the slime down to the next row
   void moveDown(Duration duration) {
-    _movement = _SlimeMovement(
+    _startMovement(_SlimeMovement(
       startingPosition: body.position.clone(),
       targetPosition: body.position + Vector2(0, size.y / 2),
       totalSeconds: duration.inMilliseconds / 1000,
-    );
+    ));
+  }
+
+  void _startMovement(_SlimeMovement movement) {
+    _movement = movement;
     _animation.walking = true;
+
+    // Create body if it hasn't been created yet,
+    // and set its starting position
+    body = createBody();
+    position.setFrom(movement.startingPosition);
+    body.position.setFrom(movement.startingPosition);
+
+    // Set the body's velocity
     body.setType(BodyType.kinematic);
-    body.linearVelocity = _movement!.velocity;
+    body.linearVelocity = movement.velocity;
   }
 
   @override
   Body createBody() {
+    if (bodyCreated) return body;
+    bodyCreated = true;
+
     final shape = PolygonShape()
         ..set([
           Vector2(9, 15),
@@ -196,6 +226,7 @@ class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
   Future<void> onLoad() async {
     animations = await getAnimations();
     current = SlimeState.idle;
+    walking = _walking;
     await super.onLoad();
 
     width = 32;
