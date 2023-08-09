@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ricochlime" "\0"
+            VALUE "CompanyName", "Adil Hanney" "\0"
+            VALUE "FileDescription", "Ricochlime" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "ricochlime" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 Adil Hanney. All rights reserved." "\0"
             VALUE "OriginalFilename", "ricochlime.exe" "\0"
-            VALUE "ProductName", "ricochlime" "\0"
+            VALUE "ProductName", "Ricochlime" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
