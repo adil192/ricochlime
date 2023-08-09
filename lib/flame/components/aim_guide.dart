@@ -69,7 +69,12 @@ class AimGuide extends PositionComponent
     if (mouseBelowPlayer) {
       relativePosition = -relativePosition; // point up
     }
-    aimDetails!.aimLength = min(1, relativePosition.length / _dotInterval / _maxDots * 2);
+
+    final aimLengthMultiplier = mouseBelowPlayer ? 3 : 2;
+    aimDetails!.aimLength = min(
+      1,
+      relativePosition.length / _dotInterval / _maxDots * aimLengthMultiplier
+    );
     aimDetails!.unitDir.setFrom(relativePosition.normalized());
   }
 
