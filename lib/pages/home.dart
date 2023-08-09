@@ -11,10 +11,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          t.appName,
-          style: const TextStyle(
-            fontSize: 50,
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            t.appName,
+            style: const TextStyle(
+              fontSize: kToolbarHeight,
+            ),
           ),
         ),
       ),
