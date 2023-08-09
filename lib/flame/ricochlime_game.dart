@@ -243,33 +243,49 @@ class RicochlimeGame extends Forge2DGame with
 
     // remove slimes that have been killed
     slimes.removeWhere((slime) => slime.parent == null);
-    
-    // move existing slimes down
-    for (final slime in slimes) {
-      slime.moveDown(slimeMoveDuration);
+
+    // move slimes down and spawn new ones at the top
+    final newRows = numNewRowsEachRound(score.value);
+    for (int i = 0; i < newRows; ++i) {
+      // move existing slimes down
+      for (final slime in slimes) {
+        slime.moveDown(slimeMoveDuration);
+      }
+
+      // spawn new slimes at the top
+      score.value++;
+      final row = createNewRow(
+        random: random,
+        slimeHp: score.value,
+      );
+      for (final slime in row) {
+        if (slime == null) continue;
+
+        slimes.add(slime);
+        add(slime);
+
+        // trigger the slime's animation
+        slime.moveInFromTop(slimeMoveDuration);
+      }
+
+      // wait for the slimes to move
+      await Future.delayed(slimeMoveDuration);
     }
-
-    // spawn new slimes at the top
-    score.value++;
-    final row = createNewRow(
-      random: random,
-      slimeHp: score.value,
-    );
-    for (final slime in row) {
-      if (slime == null) continue;
-
-      slimes.add(slime);
-      add(slime);
-
-      // trigger the slime's animation
-      slime.moveInFromTop(slimeMoveDuration);
-    }
-
-    // wait for the slimes to move
-    await Future.delayed(slimeMoveDuration);
     state = GameState.idle;
 
     await saveGame();
+  }
+
+  @visibleForTesting
+  static int numNewRowsEachRound(int score) {
+    const int roundsBeforeIncreasingRows = 50;
+    int numNewRows = 1;
+    int maxScoreInRow = numNewRows * roundsBeforeIncreasingRows;
+    while (score >= maxScoreInRow) {
+      numNewRows++;
+      maxScoreInRow += numNewRows * roundsBeforeIncreasingRows;
+    }
+    return numNewRows;
   }
 
   @visibleForTesting

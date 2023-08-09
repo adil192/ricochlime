@@ -21,4 +21,22 @@ void main() {
       }
     });
   });
+
+  group('Number of new rows each round', () {
+    test('at score 1-49', () {
+      expect(RicochlimeGame.numNewRowsEachRound(1), 1);
+      expect(RicochlimeGame.numNewRowsEachRound(49), 1);
+      expect(RicochlimeGame.numNewRowsEachRound(50), isNot(1));
+    });
+    test('at score 50-149', () {
+      expect(RicochlimeGame.numNewRowsEachRound(50), 2);
+      expect(RicochlimeGame.numNewRowsEachRound(149), 2);
+      expect(RicochlimeGame.numNewRowsEachRound(150), isNot(2));
+    });
+    test('at score 150-299', () {
+      expect(RicochlimeGame.numNewRowsEachRound(150), 3);
+      expect(RicochlimeGame.numNewRowsEachRound(299), 3);
+      expect(RicochlimeGame.numNewRowsEachRound(300), isNot(3));
+    });
+  });
 }
