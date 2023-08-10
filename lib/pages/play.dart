@@ -64,14 +64,15 @@ class _PlayPageState extends State<PlayPage> {
                         Positioned.fill(
                           child: GameWidget(game: game),
                         ),
-                        const Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: BannerAdWidget(
-                            adSize: AdSize.banner,
+                        if (AdState.adsSupported)
+                          const Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: BannerAdWidget(
+                              adSize: AdSize.banner,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),
