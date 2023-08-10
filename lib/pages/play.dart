@@ -4,7 +4,7 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 final ValueNotifier<int> _score = ValueNotifier(0);
-final ValueNotifier<double> _timeDilation = ValueNotifier(1.0);
+final ValueNotifier<double> _timeDilation = ValueNotifier(1);
 final game = RicochlimeGame(
   score: _score,
   timeDilation: _timeDilation,

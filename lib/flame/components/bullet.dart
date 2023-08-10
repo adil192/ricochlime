@@ -23,7 +23,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
     final fixtureDef = FixtureDef(
       shape,
       userData: this,
-      restitution: 1.0,
+      restitution: 1,
       filter: Filter() // don't collide with other bullets
         ..categoryBits = 1 << 2
         ..maskBits = 0xFFFF & ~(1 << 2),

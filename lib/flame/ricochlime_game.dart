@@ -30,7 +30,7 @@ class RicochlimeGame extends Forge2DGame with
     required this.timeDilation,
   }): super(
     gravity: Vector2.zero(),
-    zoom: 1.0,
+    zoom: 1,
   ) {
     physics_settings.maxTranslation = Bullet.speed;
   }

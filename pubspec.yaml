@@ -52,7 +52,7 @@ dependencies:
   slang_flutter: any
 
 dev_dependencies:
-  flame_lint: ^1.0.0
+  flutter_lints: ^2.0.2
 
   flutter_test:
     sdk: flutter
