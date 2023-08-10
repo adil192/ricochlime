@@ -95,6 +95,6 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_STORE_JSON }}
           packageName: com.adilhanney.ricochlime
           releaseFiles: output/Ricochlime.aab
-          track: production
+          track: beta
           status: completed
           whatsNewDirectory: whatsnew
