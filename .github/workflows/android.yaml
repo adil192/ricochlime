@@ -13,6 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            /opt/hostedtoolcache/flutter
+            build
+          key: ${{ runner.OS }}-ricochlime-android-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
+          restore-keys: |
+            ${{ runner.OS }}-ricochlime-android-
+
       - uses: subosito/flutter-action@v1
         with:
           channel: stable

@@ -45,6 +45,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Setup cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            /Users/runner/hostedtoolcache/flutter
+            build
+          key: ${{ runner.OS }}-ricochlime-macos-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
+          restore-keys: |
+            ${{ runner.OS }}-ricochlime-macos-
+
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
