@@ -202,7 +202,7 @@ class RicochlimeGame extends Forge2DGame with
         );
         bullets.add(bullet);
         add(bullet);
-        await Future.delayed(const Duration(milliseconds: 50));
+        await Future.delayed(Duration(milliseconds: (50 / timeDilation.value).floor()));
         if (inputCancelled) return;
       }
 
