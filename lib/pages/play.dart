@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
@@ -58,7 +59,21 @@ class _PlayPageState extends State<PlayPage> {
                   child: SizedBox(
                     width: RicochlimeGame.expectedWidth,
                     height: RicochlimeGame.expectedHeight,
-                    child: GameWidget(game: game),
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: GameWidget(game: game),
+                        ),
+                        const Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: BannerAdWidget(
+                            adSize: AdSize.banner,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
