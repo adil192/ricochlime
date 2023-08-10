@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -147,25 +148,23 @@ class _BannerAdWidgetState extends State<BannerAdWidget> with AutomaticKeepAlive
     late final colorScheme = Theme.of(context).colorScheme;
 
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+      shape: ContinuousRectangleBorder(
+        borderRadius: BorderRadius.circular(min(widget.adSize.width, widget.adSize.height) / 10),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: SizedBox(
-            width: widget.adSize.width.toDouble(),
-            height: widget.adSize.height.toDouble(),
-            child: _bannerAd == null
-                ? Center(
-                    child: FaIcon(
-                      FontAwesomeIcons.rectangleAd,
-                      color: colorScheme.onSurface.withOpacity(0.5),
-                    ),
-                  )
-                : AdWidget(ad: _bannerAd!),
-          ),
+      clipBehavior: Clip.antiAlias,
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: SizedBox(
+          width: widget.adSize.width.toDouble(),
+          height: widget.adSize.height.toDouble(),
+          child: _bannerAd == null
+              ? Center(
+                  child: FaIcon(
+                    FontAwesomeIcons.rectangleAd,
+                    color: colorScheme.onSurface.withOpacity(0.5),
+                  ),
+                )
+              : AdWidget(ad: _bannerAd!),
         ),
       ),
     );
