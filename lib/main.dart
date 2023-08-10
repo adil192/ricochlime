@@ -34,6 +34,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocaleUtils.supportedLocales,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
+      debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
