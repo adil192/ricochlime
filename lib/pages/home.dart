@@ -46,9 +46,10 @@ class HomePage extends StatelessWidget {
               closedColor: Colors.transparent,
               closedElevation: 0,
               closedShape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: BorderRadius.all(Radius.circular(32)),
               ),
               openBuilder: (context, closeContainer) => const PlayPage(),
+              clipBehavior: Clip.none,
             ),
           ),
         ],
