@@ -134,12 +134,20 @@ class RicochlimeGame extends Forge2DGame with
     }
     assert(!inputCancelled);
 
-    children
-      ..whereType<Bullet>().forEach((bullet) => bullet.removeFromParent())
-      ..whereType<Slime>().forEach((slime) => slime.removeFromParent());
-    slimes.clear();
-
+    _resetChildren();
     await importFromGame(Prefs.currentGame.value);
+  }
+
+  /// Clears the current bullets and slimes
+  void _resetChildren() {
+    for (final component in children) {
+      switch (component) {
+        case (Bullet _):
+        case (Slime _):
+          component.removeFromParent();
+      }
+    }
+    slimes.clear();
   }
 
   @override
