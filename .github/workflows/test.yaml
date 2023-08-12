@@ -18,9 +18,9 @@ jobs:
           path: |
             /opt/hostedtoolcache/flutter
             build
-          key: ${{ runner.OS }}-ricochlime-test-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
+          key: ${{ runner.OS }}-ricochlime-ubuntu-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
-            ${{ runner.OS }}-ricochlime-test-
+            ${{ runner.OS }}-ricochlime-ubuntu-
 
       - uses: subosito/flutter-action@v1
         with:

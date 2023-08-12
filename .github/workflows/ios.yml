@@ -51,9 +51,9 @@ jobs:
           path: |
             /Users/runner/hostedtoolcache/flutter
             build
-          key: ${{ runner.OS }}-ricochlime-ios-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
+          key: ${{ runner.OS }}-ricochlime-macos-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
-            ${{ runner.OS }}-ricochlime-ios-
+            ${{ runner.OS }}-ricochlime-macos-
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
