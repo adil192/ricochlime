@@ -21,10 +21,10 @@ class HealthBar extends PositionComponent {
     anchor: Anchor.topLeft,
     position: Vector2(
       (Slime.staticWidth - staticWidth) / 2,
-      Slime.staticHeight / 3,
+      Slime.staticHeight * 0.2,
     ),
     size: Vector2(staticWidth, staticHeight),
-    priority: -1,
+    priority: 1,
   );
 
   Rect get backgroundRect {

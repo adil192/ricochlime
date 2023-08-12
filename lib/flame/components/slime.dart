@@ -14,8 +14,12 @@ enum SlimeState {
 }
 
 class Slime extends BodyComponent with ContactCallbacks {
-  static const staticWidth = 32.0;
+  static const staticWidth = 16.0;
   static const staticHeight = staticWidth;
+
+  /// The distance between the top of one slime
+  /// and the top of the slime in the next row.
+  static const _moveDownHeight = staticHeight * 0.8;
 
   final Vector2 position;
   final Vector2 size = Vector2(staticWidth, staticHeight);
@@ -101,7 +105,7 @@ class Slime extends BodyComponent with ContactCallbacks {
   void moveInFromTop(Duration duration) {
     assert(position.y == 0, 'Slime must be at the top of the screen');
     _startMovement(_SlimeMovement(
-      startingPosition: position.clone()..y = size.y * -0.5,
+      startingPosition: position.clone()..y = -_moveDownHeight,
       targetPosition: position.clone(),
       totalSeconds: duration.inMilliseconds / 1000,
     ));
@@ -111,7 +115,7 @@ class Slime extends BodyComponent with ContactCallbacks {
   void moveDown(Duration duration) {
     _startMovement(_SlimeMovement(
       startingPosition: body.position.clone(),
-      targetPosition: body.position + Vector2(0, size.y / 2),
+      targetPosition: body.position + Vector2(0, _moveDownHeight),
       totalSeconds: duration.inMilliseconds / 1000,
     ));
   }
@@ -138,12 +142,12 @@ class Slime extends BodyComponent with ContactCallbacks {
 
     final shape = PolygonShape()
         ..set([
-          Vector2(9, 15),
-          Vector2(9, 23),
-          Vector2(23, 23),
-          Vector2(23, 15),
-          Vector2(20, 13),
-          Vector2(12, 13),
+          Vector2(1, 7),
+          Vector2(1, 15),
+          Vector2(15, 15),
+          Vector2(15, 7),
+          Vector2(12, 5),
+          Vector2(4, 5),
         ]);
     final fixtureDef = FixtureDef(
       shape,
@@ -170,7 +174,7 @@ class Slime extends BodyComponent with ContactCallbacks {
         }
 
         _animation.parent = parent;
-        _animation.position = body.position;
+        _animation.position += body.position;
         _animation.current = SlimeState.dead;
 
         removeFromParent();
@@ -200,6 +204,7 @@ class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     with HasGameRef<RicochlimeGame> {
 
   _SlimeAnimation(): super(
+    position: Vector2(-Slime.staticWidth / 2, -Slime.staticHeight / 2),
     removeOnFinish: {
       SlimeState.dead: true,
     },

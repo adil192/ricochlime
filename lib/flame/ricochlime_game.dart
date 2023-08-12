@@ -38,7 +38,7 @@ class RicochlimeGame extends Forge2DGame with
   /// Width to height aspect ratio
   static const aspectRatio = 1 / 2;
 
-  static const expectedWidth = tilesInWidth * 16.0;
+  static const expectedWidth = tilesInWidth * Slime.staticWidth;
   static const expectedHeight = expectedWidth / aspectRatio;
 
   static const tilesInWidth = 8;
@@ -297,7 +297,7 @@ class RicochlimeGame extends Forge2DGame with
   }
 
   @visibleForTesting
-  static int maxSlimesInRow = tilesInWidth - 2;
+  static int maxSlimesInRow = tilesInWidth - 1;
   @visibleForTesting
   static int minSlimesInRow = 2;
   @visibleForTesting
@@ -306,7 +306,7 @@ class RicochlimeGame extends Forge2DGame with
     required int slimeHp,
   }) {
     final slimeBools = <bool>[];
-    for (var i = 0; i < tilesInWidth - 1; i++) {
+    for (var i = 0; i < tilesInWidth; i++) {
       slimeBools.add(random.nextDouble() < 0.3);
     }
     while (slimeBools.where((e) => e).length > maxSlimesInRow) {
@@ -315,7 +315,6 @@ class RicochlimeGame extends Forge2DGame with
     while (slimeBools.where((e) => e).length < minSlimesInRow) {
       slimeBools[random.nextInt(slimeBools.length)] = true;
     }
-    assert(slimeBools.length == tilesInWidth - 1); // last tile is always empty
 
     final row = <Slime?>[
       for (var i = 0; i < slimeBools.length; i++)
