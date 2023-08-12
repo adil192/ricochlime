@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 9
+/// Strings: 10
 ///
-/// Built on 2023-08-12 at 16:10 UTC
+/// Built on 2023-08-12 at 22:50 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -168,6 +168,7 @@ class _StringsSettingsPageEn {
 	// Translations
 	String get title => 'Settings';
 	String get adConsent => 'Change ad consent';
+	String get hyperlegibleFont => 'Use the Atkinson Hyperlegible font';
 }
 
 // Path: gameOverPage

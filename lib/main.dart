@@ -18,14 +18,39 @@ void main() {
   runApp(TranslationProvider(child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   static TextTheme _getTextTheme(Brightness brightness) {
     // TODO(adil192): Experiment with a pixel font
-    // TODO(adil192): Add a setting to use a hyperlegible font
+
     final baseTheme = ThemeData(brightness: brightness);
-    return GoogleFonts.vinaSansTextTheme(baseTheme.textTheme);
+    if (Prefs.hyperlegibleFont.value) {
+      return GoogleFonts.atkinsonHyperlegibleTextTheme(baseTheme.textTheme);
+    } else {
+      return GoogleFonts.vinaSansTextTheme(baseTheme.textTheme);
+    }
+  }
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    Prefs.hyperlegibleFont.addListener(_prefListener);
+  }
+
+  @override
+  void dispose() {
+    Prefs.hyperlegibleFont.removeListener(_prefListener);
+    super.dispose();
+  }
+
+  void _prefListener() {
+    setState(() {});
   }
 
   @override
@@ -45,7 +70,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: RicochlimePalette.grassColor,
         ),
-        textTheme: _getTextTheme(Brightness.light),
+        textTheme: MyApp._getTextTheme(Brightness.light),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
@@ -54,19 +79,19 @@ class MyApp extends StatelessWidget {
           seedColor: RicochlimePalette.grassColor,
           brightness: Brightness.dark,
         ),
-        textTheme: _getTextTheme(Brightness.dark),
+        textTheme: MyApp._getTextTheme(Brightness.dark),
       ),
       highContrastTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
         colorScheme: const ColorScheme.highContrastLight(),
-        textTheme: _getTextTheme(Brightness.light),
+        textTheme: MyApp._getTextTheme(Brightness.light),
       ),
       highContrastDarkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
         colorScheme: const ColorScheme.highContrastDark(),
-        textTheme: _getTextTheme(Brightness.dark),
+        textTheme: MyApp._getTextTheme(Brightness.dark),
       ),
     );
   }

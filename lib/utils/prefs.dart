@@ -21,8 +21,11 @@ abstract class Prefs {
 
   static late final PlainPref<GameData?> currentGame;
 
+  static late final PlainPref<bool> hyperlegibleFont;
+
   static void init() {
     currentGame = PlainPref('currentGame', null);
+    hyperlegibleFont = PlainPref('hyperlegibleFont', false);
   }
 }
 

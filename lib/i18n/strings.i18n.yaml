@@ -5,6 +5,7 @@ homePage:
 settingsPage:
   title: Settings
   adConsent: Change ad consent
+  hyperlegibleFont: Use the Atkinson Hyperlegible font
 gameOverPage:
   title: Game over!
   subtitle: You scored $p points!
