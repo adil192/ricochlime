@@ -16,11 +16,11 @@ import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-@visibleForTesting
 enum GameState {
   idle,
   shooting,
   slimesMoving,
+  gameOver,
 }
 
 class RicochlimeGame extends Forge2DGame with
@@ -40,6 +40,8 @@ class RicochlimeGame extends Forge2DGame with
 
   static const expectedWidth = tilesInWidth * Slime.staticWidth;
   static const expectedHeight = expectedWidth / aspectRatio;
+
+  static const waterPosition = expectedHeight * 0.8;
 
   static const tilesInWidth = 8;
   static const tilesInHeight = tilesInWidth ~/ aspectRatio;
@@ -67,6 +69,8 @@ class RicochlimeGame extends Forge2DGame with
   int numBullets = 1;
 
   final ValueNotifier<double> timeDilation;
+
+  void Function()? goToGameOverPage;
 
   @override
   Future<void> onLoad() async {
@@ -289,10 +293,26 @@ class RicochlimeGame extends Forge2DGame with
 
       // wait for the slimes to move
       await Future.delayed(slimeMoveDuration);
+
+      // check if the player has lost
+      const threshold = Background.waterThresholdPosition - Slime.staticHeight;
+      if (slimes.any((slime) => slime.position.y >= threshold)) {
+        return await gameOver();
+      }
     }
     state = GameState.idle;
 
     await saveGame();
+  }
+
+  Future<void> gameOver() async {
+    state = GameState.gameOver;
+    assert(!inputAllowed);
+
+    // TODO(adil192): Animate the slimes jumping into the water
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    goToGameOverPage?.call();
   }
 
   @visibleForTesting

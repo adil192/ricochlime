@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
@@ -20,9 +21,25 @@ class PlayPage extends StatefulWidget {
 
 class _PlayPageState extends State<PlayPage> {
   @override
+  void initState() {
+    if (game.state == GameState.gameOver) {
+      goToGameOverPage();
+    } else {
+      game.goToGameOverPage = goToGameOverPage;
+    }
+    super.initState();
+  }
+
+  @override
   void dispose() {
+    game.goToGameOverPage = null;
     game.cancelCurrentTurn();
     super.dispose();
+  }
+
+  void goToGameOverPage() {
+    if (!mounted) return;
+    context.replace('/game-over');
   }
 
   @override

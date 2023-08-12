@@ -1,5 +1,6 @@
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/foundation.dart';
+import 'package:ricochlime/flame/components/background/background.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
   /// Radius of the bullet.
@@ -44,7 +45,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
   @override
   void update(double dt) {
     super.update(dt);
-    if (body.position.y > initialPosition.y) {
+    if (body.position.y > Background.waterThresholdPosition) {
       removeFromParent();
     }
   }

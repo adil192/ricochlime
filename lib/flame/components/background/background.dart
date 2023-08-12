@@ -4,6 +4,10 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 
 class Background extends PositionComponent
     with HasGameRef<RicochlimeGame> {
+  
+  static const waterThresholdTile = RicochlimeGame.tilesInHeight - 4;
+  static const waterThresholdPosition = RicochlimeGame.expectedHeight
+      * waterThresholdTile / RicochlimeGame.tilesInHeight;
 
   late Vector2 tileSize;
 
@@ -21,11 +25,11 @@ class Background extends PositionComponent
     addAll([
       for (var column = 0; column < RicochlimeGame.tilesInWidth; column++)
         tile(
-          row: RicochlimeGame.tilesInHeight - 4,
+          row: waterThresholdTile,
           column: column,
           type: BackgroundWaterTileType.bottomOfGrass,
         ),
-      for (var row = RicochlimeGame.tilesInHeight - 3; row < RicochlimeGame.tilesInHeight; row++)
+      for (var row = waterThresholdTile + 1; row < RicochlimeGame.tilesInHeight; row++)
         for (var column = 0; column < RicochlimeGame.tilesInWidth; column++)
           tile(
             row: row,
