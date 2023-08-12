@@ -100,11 +100,22 @@ class RicochlimeGame extends Forge2DGame with
     }
 
     int numSlimesThatGiveBullets = 0;
+    bool topGapNeedsAdjusting = false;
     for (final slimeJson in data.slimes) {
       final slime = Slime.fromJson(slimeJson);
       slimes.add(slime);
       add(slime);
+
       if (slime.givesPlayerABullet) numSlimesThatGiveBullets++;
+      if (slime.position.y <= Slime.topGap) topGapNeedsAdjusting = true;
+    }
+
+    if (topGapNeedsAdjusting) {
+      // the top gap needs adjusting because the slimes were imported from a
+      // previous version of the game, where the top gap was smaller
+      for (final slime in slimes) {
+        slime.position.y += Slime.topGap;
+      }
     }
 
     score.value = data.score;
@@ -114,7 +125,7 @@ class RicochlimeGame extends Forge2DGame with
   }
   Future saveGame() async {
     assert(
-      slimes.any((slime) => slime.position.y <= 0),
+      slimes.any((slime) => slime.position.y <= Slime.topGap),
       'The new row of slimes should be spawned before saving the game'
     );
     Prefs.currentGame.value = GameData(
@@ -324,7 +335,7 @@ class RicochlimeGame extends Forge2DGame with
           Slime(
             position: Vector2(
               expectedWidth * i / tilesInWidth,
-              0,
+              Slime.topGap,
             ),
             maxHp: slimeHp,
           ),

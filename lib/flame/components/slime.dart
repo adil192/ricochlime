@@ -21,6 +21,9 @@ class Slime extends BodyComponent with ContactCallbacks {
   /// and the top of the slime in the next row.
   static const _moveDownHeight = staticHeight * 0.8;
 
+  /// The gap at the top above the first row of slimes.
+  static const topGap = staticHeight;
+
   final Vector2 position;
   final Vector2 size = Vector2(staticWidth, staticHeight);
 
@@ -103,9 +106,9 @@ class Slime extends BodyComponent with ContactCallbacks {
 
   /// Moves a new slime in from the top of the screen
   void moveInFromTop(Duration duration) {
-    assert(position.y == 0, 'Slime must be at the top of the screen');
+    assert(position.y <= topGap, 'Slime must be at the top of the screen');
     _startMovement(_SlimeMovement(
-      startingPosition: position.clone()..y = -_moveDownHeight,
+      startingPosition: position.clone()..y -= _moveDownHeight,
       targetPosition: position.clone(),
       totalSeconds: duration.inMilliseconds / 1000,
     ));
