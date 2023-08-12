@@ -1,0 +1,2 @@
+• Improved slime positioning
+• Added a game-over dialog
