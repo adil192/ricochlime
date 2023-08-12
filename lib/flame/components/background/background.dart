@@ -22,33 +22,30 @@ class Background extends PositionComponent
       gameRef.size.y / RicochlimeGame.tilesInHeight,
     );
 
-    addAll([
-      for (var column = 0; column < RicochlimeGame.tilesInWidth; column++)
-        tile(
-          row: waterThresholdTile,
-          column: column,
-          type: BackgroundWaterTileType.bottomOfGrass,
-        ),
-      for (var row = waterThresholdTile + 1; row < RicochlimeGame.tilesInHeight; row++)
-        for (var column = 0; column < RicochlimeGame.tilesInWidth; column++)
-          tile(
-            row: row,
-            column: column,
-            type: BackgroundWaterTileType.justWater,
-          ),
-    ]);
+    addAll(getTiles());
   }
 
-  BackgroundWaterTile tile({
-    required int row,
-    required int column,
-    required BackgroundWaterTileType type,
-  }) => BackgroundWaterTile(
-    position: Vector2(
-      gameRef.size.x * column / RicochlimeGame.tilesInWidth,
-      gameRef.size.y * row / RicochlimeGame.tilesInHeight,
-    ),
-    size: tileSize,
-    type: type,
-  );
+  Iterable<BackgroundWaterTile> getTiles() sync* {
+    for (var row = waterThresholdTile + 1; row < RicochlimeGame.tilesInHeight; row++) {
+      for (var column = 0; column < RicochlimeGame.tilesInWidth; column++) {
+        final BackgroundWaterTileType type;
+        if (row == waterThresholdTile) {
+          type = BackgroundWaterTileType.bottomOfGrass;
+        } else if (row > waterThresholdTile) {
+          type = BackgroundWaterTileType.justWater;
+        } else {
+          continue;
+        }
+
+        yield BackgroundWaterTile(
+          position: Vector2(
+            gameRef.size.x * column / RicochlimeGame.tilesInWidth,
+            gameRef.size.y * row / RicochlimeGame.tilesInHeight,
+          ),
+          size: tileSize,
+          type: type,
+        );
+      }
+    }
+  }
 }
