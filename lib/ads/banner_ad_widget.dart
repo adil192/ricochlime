@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -44,7 +45,22 @@ abstract class AdState {
 
   static void _startInitialize() async {
     if (_initializeStarted) return;
-    _checkForRequiredConsent();
+
+    if (!kIsWeb && Platform.isIOS) {
+      var status = await AppTrackingTransparency.trackingAuthorizationStatus;
+      if (status == TrackingStatus.notDetermined) {
+        // wait to avoid crash
+        await Future.delayed(const Duration(seconds: 3));
+
+        status = await AppTrackingTransparency.requestTrackingAuthorization();
+      }
+      if (status == TrackingStatus.authorized) {
+        _checkForRequiredConsent();
+      }
+    } else {
+      _checkForRequiredConsent();
+    }
+
     assert(_bannerAdUnitId.isNotEmpty);
     assert(_initializeCompleted == false);
     _initializeStarted = true;
