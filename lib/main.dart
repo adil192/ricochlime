@@ -6,6 +6,7 @@ import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
+import 'package:ricochlime/pages/settings.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
@@ -80,6 +81,10 @@ final _router = GoRouter(
     GoRoute(
       path: '/play',
       builder: (context, state) => const PlayPage(),
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const SettingsPage(),
     ),
   ],
 );

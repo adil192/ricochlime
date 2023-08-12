@@ -2,6 +2,3 @@
   - "Here are translations that exist in secondary locales but not in <en>."
   - "[--full enabled] Furthermore, translations not used in 'lib/' according to the 't.<path>' pattern are written into <en>."
 en:
-  appName: Ricochlime
-  homePage:
-    playButton: Play

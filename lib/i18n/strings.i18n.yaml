@@ -1,3 +1,7 @@
 appName: Ricochlime
 homePage:
   playButton: Play
+  settingsButton: Settings
+settingsPage:
+  title: Settings
+  adConsent: Change ad consent
