@@ -70,7 +70,7 @@ class RicochlimeGame extends Forge2DGame with
 
   final ValueNotifier<double> timeDilation;
 
-  void Function()? goToGameOverPage;
+  Future<void> Function()? showGameOverDialog;
 
   @override
   Future<void> onLoad() async {
@@ -97,9 +97,7 @@ class RicochlimeGame extends Forge2DGame with
   Future<void> importFromGame(GameData? data) async {
     if (data == null) {
       // new game
-      score.value = 0;
-      numBullets = 1;
-      await spawnNewSlimes();
+      reset();
       return;
     }
 
@@ -253,7 +251,9 @@ class RicochlimeGame extends Forge2DGame with
       await spawnNewSlimes();
       if (inputCancelled) return;
     } finally {
-      state = GameState.idle;
+      if (state != GameState.gameOver) {
+        state = GameState.idle;
+      }
       inputCancelled = false;
     }
   }
@@ -309,10 +309,25 @@ class RicochlimeGame extends Forge2DGame with
     state = GameState.gameOver;
     assert(!inputAllowed);
 
+    // remove saved game
+    Prefs.currentGame.value = null;
+
     // TODO(adil192): Animate the slimes jumping into the water
     await Future.delayed(const Duration(milliseconds: 500));
 
-    goToGameOverPage?.call();
+    if (showGameOverDialog != null) {
+      await showGameOverDialog!.call();
+      reset();
+    }
+  }
+
+  void reset() {
+    state = GameState.idle;
+    inputCancelled = false;
+    score.value = 0;
+    numBullets = 1;
+    _resetChildren();
+    spawnNewSlimes();
   }
 
   @visibleForTesting

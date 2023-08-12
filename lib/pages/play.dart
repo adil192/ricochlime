@@ -1,8 +1,8 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
+import 'package:ricochlime/pages/game_over.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 final ValueNotifier<int> _score = ValueNotifier(0);
@@ -22,24 +22,33 @@ class PlayPage extends StatefulWidget {
 class _PlayPageState extends State<PlayPage> {
   @override
   void initState() {
-    if (game.state == GameState.gameOver) {
-      goToGameOverPage();
-    } else {
-      game.goToGameOverPage = goToGameOverPage;
-    }
     super.initState();
+    game.showGameOverDialog = showGameOverDialog;
+    if (game.state == GameState.gameOver) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        showGameOverDialog();
+      });
+    }
   }
 
   @override
   void dispose() {
-    game.goToGameOverPage = null;
+    game.showGameOverDialog = null;
     game.cancelCurrentTurn();
     super.dispose();
   }
 
-  void goToGameOverPage() {
+  Future<void> showGameOverDialog() async {
+    assert(mounted);
     if (!mounted) return;
-    context.replace('/game-over');
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => GameOverDialog(
+        score: _score.value,
+        game: game,
+      ),
+    );
   }
 
   @override

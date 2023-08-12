@@ -5,3 +5,8 @@ homePage:
 settingsPage:
   title: Settings
   adConsent: Change ad consent
+gameOverPage:
+  title: Game over!
+  subtitle: You scored $p points!
+  playAgainButton: Play again
+  homeButton: Home
