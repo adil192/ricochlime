@@ -22,14 +22,14 @@ fi
 # This is the same as using the -q flag.
 EDITOR=$(which code)
 
-# get the current version name from pubspec.yaml (the part before the +)
+# get the current version name from lib/utils/version.dart
 function get_version_name {
-  grep -oP '(?<=version: ).*(?=\+)' pubspec.yaml
+  grep -oP "(?<=buildName = ').*(?=')" lib/utils/version.dart
 }
 
-# get the current version code from pubspec.yaml (the part after the +)
+# get the current version code from lib/utils/version.dart
 function get_version_code {
-  grep -oP '(?<=version: ).*' pubspec.yaml | grep -oP '(?<=\+).*$'
+  grep -oP '(?<=buildNumber = ).*(?=;)' lib/utils/version.dart
 }
 
 function print_help {
@@ -91,6 +91,15 @@ echo "Applying version $BUILD_NAME ($BUILD_NUMBER) ($DATE) to the relevant files
 
 echo " - Updating MyAppVersion in installers/desktop_inno_script.iss" # e.g. #define MyAppVersion "0.5.5"
 sed -i "s/#define MyAppVersion .*/#define MyAppVersion \"$BUILD_NAME\"/g" installers/desktop_inno_script.iss
+
+echo " - Updating buildNumber in lib/utils/version.dart" # e.g. const int buildNumber = 5050;
+sed -i "s/buildNumber = .*/buildNumber = $BUILD_NUMBER;/g" lib/utils/version.dart
+
+echo " - Updating buildName in lib/utils/version.dart" # e.g. const String buildName = "0.5.5";
+sed -i "s/buildName = .*/buildName = '$BUILD_NAME';/g" lib/utils/version.dart
+
+echo " - Updating buildYear in lib/utils/version.dart" # e.g. const int buildYear = 2023;
+sed -i "s/buildYear = .*/buildYear = $YEAR;/g" lib/utils/version.dart
 
 echo " - Updating version in pubspec.yaml" # e.g. version: 5.5.0+5050
 sed -i "s/version: .*/version: $BUILD_NAME+$BUILD_NUMBER/g" pubspec.yaml

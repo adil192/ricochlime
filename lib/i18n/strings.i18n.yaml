@@ -6,6 +6,10 @@ settingsPage:
   title: Settings
   adConsent: Change ad consent
   hyperlegibleFont: Use the Atkinson Hyperlegible font
+  appInfo: App info
+  licenseNotice: |-
+    Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
+    This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
 gameOverPage:
   title: Game over!
   subtitle: You scored $p points!

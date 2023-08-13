@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 10
+/// Strings: 12
 ///
-/// Built on 2023-08-12 at 22:50 UTC
+/// Built on 2023-08-13 at 00:19 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -169,6 +169,8 @@ class _StringsSettingsPageEn {
 	String get title => 'Settings';
 	String get adConsent => 'Change ad consent';
 	String get hyperlegibleFont => 'Use the Atkinson Hyperlegible font';
+	String get appInfo => 'App info';
+	String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
 }
 
 // Path: gameOverPage
