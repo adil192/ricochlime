@@ -67,6 +67,7 @@ class RicochlimeGame extends Forge2DGame with
 
   final ValueNotifier<int> score;
   int numBullets = 1;
+  int numNewRowsEachRound = 1;
 
   final ValueNotifier<double> timeDilation;
 
@@ -124,6 +125,8 @@ class RicochlimeGame extends Forge2DGame with
     numBullets = 1 + score.value - numSlimesThatGiveBullets;
     assert(numBullets >= 1);
     assert(numBullets <= score.value);
+    numNewRowsEachRound = getNumNewRowsEachRound(score.value);
+    numNewRowsEachRound = getNumNewRowsEachRound(score.value + numNewRowsEachRound);
   }
   Future saveGame() async {
     assert(
@@ -268,8 +271,8 @@ class RicochlimeGame extends Forge2DGame with
     slimes.removeWhere((slime) => slime.parent == null);
 
     // move slimes down and spawn new ones at the top
-    final newRows = numNewRowsEachRound(score.value);
-    for (int i = 0; i < newRows; ++i) {
+    assert(numNewRowsEachRound == getNumNewRowsEachRound(score.value));
+    for (int i = 0; i < numNewRowsEachRound; ++i) {
       // move existing slimes down
       for (final slime in slimes) {
         slime.moveDown(slimeMoveDuration);
@@ -300,6 +303,7 @@ class RicochlimeGame extends Forge2DGame with
         return await gameOver();
       }
     }
+    numNewRowsEachRound = getNumNewRowsEachRound(score.value + numNewRowsEachRound);
     state = GameState.idle;
 
     await saveGame();
@@ -326,12 +330,13 @@ class RicochlimeGame extends Forge2DGame with
     inputCancelled = false;
     score.value = 0;
     numBullets = 1;
+    numNewRowsEachRound = 1;
     _resetChildren();
     spawnNewSlimes();
   }
 
   @visibleForTesting
-  static int numNewRowsEachRound(int score) {
+  static int getNumNewRowsEachRound(int score) {
     const int roundsBeforeIncreasingRows = 50;
     int numNewRows = 1;
     int maxScoreInRow = numNewRows * roundsBeforeIncreasingRows;

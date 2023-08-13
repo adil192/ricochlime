@@ -10,6 +10,7 @@ class Background extends PositionComponent
       * waterThresholdTile / RicochlimeGame.tilesInHeight;
 
   late Vector2 tileSize;
+  int lastNumNewRowsEachRound = -1;
 
   @override
   Future<void> onLoad() async {
@@ -22,22 +23,26 @@ class Background extends PositionComponent
       gameRef.size.y / RicochlimeGame.tilesInHeight,
     );
 
+    lastNumNewRowsEachRound = gameRef.numNewRowsEachRound;
     addAll(getTiles());
   }
 
-  Iterable<BackgroundWaterTile> getTiles() sync* {
-    for (var row = waterThresholdTile + 1; row < RicochlimeGame.tilesInHeight; row++) {
-      for (var column = 0; column < RicochlimeGame.tilesInWidth; column++) {
-        final BackgroundWaterTileType type;
-        if (row == waterThresholdTile) {
-          type = BackgroundWaterTileType.bottomOfGrass;
-        } else if (row > waterThresholdTile) {
-          type = BackgroundWaterTileType.justWater;
-        } else {
-          continue;
-        }
+  @override
+  void update(double dt) {
+    if (lastNumNewRowsEachRound != gameRef.numNewRowsEachRound) {
+      lastNumNewRowsEachRound = gameRef.numNewRowsEachRound;
+      removeWhere((component) => component is BackgroundTile);
+      addAll(getTiles());
+    }
+    super.update(dt);
+  }
 
-        yield BackgroundWaterTile(
+  Iterable<BackgroundTile> getTiles() sync* {
+    for (var row = 0; row < RicochlimeGame.tilesInHeight; row++) {
+      for (var column = 0; column < RicochlimeGame.tilesInWidth; column++) {
+        final type = getTileType(row, column);
+        if (type == null) continue;
+        yield BackgroundTile(
           position: Vector2(
             gameRef.size.x * column / RicochlimeGame.tilesInWidth,
             gameRef.size.y * row / RicochlimeGame.tilesInHeight,
@@ -46,6 +51,61 @@ class Background extends PositionComponent
           type: type,
         );
       }
+    }
+  }
+
+  /// Determines the type of background tile at the given row and column.
+  /// This includes a soil patch for the area wherein the slimes will
+  /// reach the end in the next round,
+  /// as well as the water and grass tiles.
+  BackgroundTileType? getTileType(int row, int column) {
+    if (lastNumNewRowsEachRound <= 1) {
+      if (row == waterThresholdTile - 1) {
+        if (column == 0) {
+          return BackgroundTileType.leftOfThinSoil;
+        } else if (column == RicochlimeGame.tilesInWidth - 1) {
+          return BackgroundTileType.rightOfThinSoil;
+        } else {
+          return BackgroundTileType.centerOfThinSoil;
+        }
+      }
+    } else {
+      final topOfSoil = waterThresholdTile - lastNumNewRowsEachRound;
+      const bottomOfSoil = waterThresholdTile - 1;
+      if (row == topOfSoil) {
+        if (column == 0) {
+          return BackgroundTileType.topLeftOfSoil;
+        } else if (column == RicochlimeGame.tilesInWidth - 1) {
+          return BackgroundTileType.topRightOfSoil;
+        } else {
+          return BackgroundTileType.topCenterOfSoil;
+        }
+      } else if (row == bottomOfSoil) {
+        if (column == 0) {
+          return BackgroundTileType.bottomLeftOfSoil;
+        } else if (column == RicochlimeGame.tilesInWidth - 1) {
+          return BackgroundTileType.bottomRightOfSoil;
+        } else {
+          return BackgroundTileType.bottomCenterOfSoil;
+        }
+      } else if (row > topOfSoil && row < bottomOfSoil) {
+        if (column == 0) {
+          return BackgroundTileType.centerLeftOfSoil;
+        } else if (column == RicochlimeGame.tilesInWidth - 1) {
+          return BackgroundTileType.centerRightOfSoil;
+        } else {
+          return BackgroundTileType.centerCenterOfSoil;
+        }
+      }
+    }
+    
+    if (row == waterThresholdTile) {
+      return BackgroundTileType.bottomOfGrass;
+    } else if (row > waterThresholdTile) {
+      return BackgroundTileType.justWater;
+    } else {
+      // grass tiles just use the background color instead of a tile
+      return null;
     }
   }
 }
