@@ -105,22 +105,6 @@ class _PlayPageState extends State<PlayPage> {
                 ),
               ),
             ),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: ValueListenableBuilder(
-                valueListenable: _score,
-                builder: (context, score, child) => Text(
-                  '$score',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
-                    fontSize: 32,
-                  ),
-                ),
-              ),
-            ),
             Positioned.directional(
               textDirection: textDirection,
               top: 0,
@@ -140,16 +124,36 @@ class _PlayPageState extends State<PlayPage> {
                 ),
               ),
             ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: IgnorePointer(
+                child: ValueListenableBuilder(
+                  valueListenable: _score,
+                  builder: (context, score, child) => Text(
+                    '$score',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 32,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Positioned.directional(
               textDirection: textDirection,
               top: 0,
               start: 0,
-              child: IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white.withOpacity(0.9),
-                  size: 32,
+              child: IgnorePointer(
+                child: IconButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white.withOpacity(0.9),
+                    size: 32,
+                  ),
                 ),
               ),
             ),
