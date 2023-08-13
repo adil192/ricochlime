@@ -141,16 +141,19 @@ class _PlayPageState extends State<PlayPage> {
               top: 0,
               end: 0,
               child: IgnorePointer(
-                child: ValueListenableBuilder(
-                  valueListenable: _timeDilation,
-                  builder: (context, timeDilation, child) => AnimatedOpacity(
-                    opacity: timeDilation == 1.0 ? 0.0 : 1.0,
-                    duration: const Duration(milliseconds: 200),
-                    child: Text(
-                      '${timeDilation.toStringAsFixed(1)}x',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.9),
-                        fontSize: 32,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  child: ValueListenableBuilder(
+                    valueListenable: _timeDilation,
+                    builder: (context, timeDilation, child) => AnimatedOpacity(
+                      opacity: timeDilation == 1.0 ? 0.0 : 1.0,
+                      duration: const Duration(milliseconds: 200),
+                      child: Text(
+                        '${timeDilation.toStringAsFixed(1)}x',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 32,
+                        ),
                       ),
                     ),
                   ),
