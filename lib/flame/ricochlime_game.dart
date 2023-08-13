@@ -271,7 +271,7 @@ class RicochlimeGame extends Forge2DGame with
     slimes.removeWhere((slime) => slime.parent == null);
 
     // move slimes down and spawn new ones at the top
-    assert(numNewRowsEachRound == getNumNewRowsEachRound(score.value));
+    numNewRowsEachRound = getNumNewRowsEachRound(score.value);
     for (int i = 0; i < numNewRowsEachRound; ++i) {
       // move existing slimes down
       for (final slime in slimes) {
