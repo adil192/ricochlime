@@ -108,19 +108,13 @@ class _PlayPageState extends State<PlayPage> {
             Positioned.directional(
               textDirection: textDirection,
               top: 0,
-              end: 0,
-              child: ValueListenableBuilder(
-                valueListenable: _timeDilation,
-                builder: (context, timeDilation, child) => AnimatedOpacity(
-                  opacity: timeDilation == 1.0 ? 0.0 : 1.0,
-                  duration: const Duration(milliseconds: 200),
-                  child: Text(
-                    '${timeDilation.toStringAsFixed(1)}x',
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.9),
-                      fontSize: 32,
-                    ),
-                  ),
+              start: 0,
+              child: IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white.withOpacity(0.9),
+                  size: 32,
                 ),
               ),
             ),
@@ -145,14 +139,20 @@ class _PlayPageState extends State<PlayPage> {
             Positioned.directional(
               textDirection: textDirection,
               top: 0,
-              start: 0,
+              end: 0,
               child: IgnorePointer(
-                child: IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white.withOpacity(0.9),
-                    size: 32,
+                child: ValueListenableBuilder(
+                  valueListenable: _timeDilation,
+                  builder: (context, timeDilation, child) => AnimatedOpacity(
+                    opacity: timeDilation == 1.0 ? 0.0 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: Text(
+                      '${timeDilation.toStringAsFixed(1)}x',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.9),
+                        fontSize: 32,
+                      ),
+                    ),
                   ),
                 ),
               ),
