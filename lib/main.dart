@@ -51,13 +51,11 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   static TextTheme _getTextTheme(Brightness brightness) {
-    // TODO(adil192): Experiment with a pixel font
-
     final baseTheme = ThemeData(brightness: brightness);
     if (Prefs.hyperlegibleFont.value) {
       return GoogleFonts.atkinsonHyperlegibleTextTheme(baseTheme.textTheme);
     } else {
-      return GoogleFonts.vinaSansTextTheme(baseTheme.textTheme);
+      return GoogleFonts.silkscreenTextTheme(baseTheme.textTheme);
     }
   }
 
