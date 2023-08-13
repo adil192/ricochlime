@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +16,35 @@ void main() {
   LocaleSettings.useDeviceLocale();
   Prefs.init();
   AdState.init();
+  _addMysticWoodsLicense();
   runApp(TranslationProvider(child: const MyApp()));
+}
+
+void _addMysticWoodsLicense() {
+  LicenseRegistry.addLicense(() async* {
+
+    yield const LicenseEntryWithLineBreaks(
+      ['mystic_woods'],
+      '''
+Mystic Woods 2.1
+https://game-endeavor.itch.io/mystic-woods
+
+Howdy! Thank you for purchasing the Mystic Woods asset pack.
+
+This is an ongoing project that I will be adding content to over time, so let me know if there's anything you'd like for me to create.
+
+License
+  - You can use these assets in commercial projects.
+  - You can modify the assets.
+  - You can not redistribute or resale, even if modified.
+
+Follow me on Twitter for updates on all of my projects.
+https://twitter.com/GameEndeavor
+
+If you enjoy this then leave a rating and comment. It helps to support this project!
+''',
+    );
+  });
 }
 
 class MyApp extends StatefulWidget {
