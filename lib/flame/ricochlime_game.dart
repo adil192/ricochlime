@@ -110,12 +110,12 @@ class RicochlimeGame extends Forge2DGame with
       add(slime);
 
       if (slime.givesPlayerABullet) numSlimesThatGiveBullets++;
-      if (slime.position.y <= Slime.topGap) topGapNeedsAdjusting = true;
+      if (slime.position.y <= 0) topGapNeedsAdjusting = true;
     }
 
     if (topGapNeedsAdjusting) {
       // the top gap needs adjusting because the slimes were imported from a
-      // previous version of the game, where the top gap was smaller
+      // previous version of the game
       for (final slime in slimes) {
         slime.position.y += Slime.topGap;
       }
