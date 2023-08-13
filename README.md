@@ -27,5 +27,5 @@ Ricochlime is a game where you attack the advancing slimes with your ricocheting
 [google_play]: https://play.google.com/store/apps/details?id=com.adilhanney.ricochlime
 [app_store]: https://apps.apple.com/app/ricochlime/id6459539993
 [web_app]: https://ricochlime.adil.hanney.org
-[download_windows]: https://github.com/adil192/ricochlime/releases/download/v0.4.0/RicochlimeInstaller_v0.4.0.exe
-[download_appimage]: https://github.com/adil192/ricochlime/releases/download/v0.4.0/Ricochlime-0.4.0-x86_64.AppImage
+[download_windows]: https://github.com/adil192/ricochlime/releases/download/v0.4.1/RicochlimeInstaller_v0.4.1.exe
+[download_appimage]: https://github.com/adil192/ricochlime/releases/download/v0.4.1/Ricochlime-0.4.1-x86_64.AppImage
