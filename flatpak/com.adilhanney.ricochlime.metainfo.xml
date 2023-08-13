@@ -60,6 +60,16 @@
     </screenshots>
 
     <releases>
+        <release version="0.4.2" type="development" date="2023-08-13">
+            <description>
+                <ul>
+                    <li>Fixed slimes sometimes being shifted down when loaded from a save</li>
+                    <li>Use a new pixel font</li>
+                    <li>Fixed game over sometimes not triggering despite slimes being beyond reach</li>
+                    <li>Fixed the top of the play page not responding to touch</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.4.1" type="development" date="2023-08-13">
             <description>
                 <ul>
