@@ -226,7 +226,7 @@ class RicochlimeGame extends Forge2DGame with
         );
         bullets.add(bullet);
         add(bullet);
-        await Future.delayed(Duration(milliseconds: (50 / timeDilation.value).floor()));
+        await waitDilated(const Duration(milliseconds: 50));
         if (inputCancelled) return;
       }
 
@@ -333,6 +333,27 @@ class RicochlimeGame extends Forge2DGame with
     numNewRowsEachRound = 1;
     _resetChildren();
     spawnNewSlimes();
+  }
+
+  /// Waits for [duration] in 100ms increments
+  /// and applies the current time dilation.
+  /// 
+  /// This is better than just using [Future.delayed] because
+  /// [Future.delayed] looks stuttery when the time dilation
+  /// changes during the delay.
+  /// 
+  /// Note that this function isn't completely precise because
+  /// of the truncation at each iteration.
+  Future<void> waitDilated(Duration duration) async {
+    final increments = duration.inMilliseconds ~/ 100;
+    int elapsed = 0;
+
+    for (var i = 0; i < increments; i++) {
+      await Future.delayed(Duration(milliseconds: 100 ~/ timeDilation.value));
+      elapsed += 100;
+    }
+
+    await Future.delayed(Duration(milliseconds: duration.inMilliseconds - elapsed));
   }
 
   @visibleForTesting
