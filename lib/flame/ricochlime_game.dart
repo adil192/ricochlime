@@ -297,7 +297,7 @@ class RicochlimeGame extends Forge2DGame with
       await Future.delayed(slimeMoveDuration);
 
       // check if the player has lost
-      const threshold = Background.waterThresholdPosition - Slime.staticHeight * 1.5;
+      const threshold = Background.waterThresholdPosition - Slime.staticHeight * 1.2;
       if (slimes.any((slime) => slime.position.y >= threshold)) {
         return await gameOver();
       }
