@@ -2,6 +2,8 @@ appName: Ricochlime
 homePage:
   playButton: Play
   settingsButton: Settings
+playPage:
+  highScore: "Best: $p"
 settingsPage:
   title: Settings
   adConsent: Change ad consent

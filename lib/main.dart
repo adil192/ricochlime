@@ -11,12 +11,15 @@ import 'package:ricochlime/pages/settings.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
   Prefs.init();
   AdState.init();
   _addMysticWoodsLicense();
+
+  await Prefs.highScore.waitUntilLoaded();
+
   runApp(TranslationProvider(child: const MyApp()));
 }
 

@@ -2,10 +2,17 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
+import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/pages/game_over.dart';
+import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-final ValueNotifier<int> _score = ValueNotifier(0);
+final ValueNotifier<int> _score = ValueNotifier(0)
+    ..addListener(() {
+      if (_score.value > Prefs.highScore.value) {
+        Prefs.highScore.value = _score.value;
+      }
+    });
 final ValueNotifier<double> _timeDilation = ValueNotifier(1);
 final game = RicochlimeGame(
   score: _score,
@@ -119,20 +126,38 @@ class _PlayPageState extends State<PlayPage> {
               ),
             ),
             Positioned(
-              top: 0,
+              top: -1,
               left: 0,
               right: 0,
               child: IgnorePointer(
-                child: ValueListenableBuilder(
-                  valueListenable: _score,
-                  builder: (context, score, child) => Text(
-                    '$score',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.9),
-                      fontSize: 32,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 2),
+                    ValueListenableBuilder(
+                      valueListenable: Prefs.highScore,
+                      builder: (context, highScore, child) => Text(
+                        t.playPage.highScore(p: highScore),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 12,
+                          height: 1,
+                        ),
+                      ),
                     ),
-                  ),
+                    ValueListenableBuilder(
+                      valueListenable: _score,
+                      builder: (context, score, child) => Text(
+                        '$score',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 32,
+                          height: 0.7,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 12
+/// Strings: 13
 ///
-/// Built on 2023-08-13 at 00:19 UTC
+/// Built on 2023-08-15 at 12:31 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -144,6 +144,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	// Translations
 	String get appName => 'Ricochlime';
 	late final _StringsHomePageEn homePage = _StringsHomePageEn._(_root);
+	late final _StringsPlayPageEn playPage = _StringsPlayPageEn._(_root);
 	late final _StringsSettingsPageEn settingsPage = _StringsSettingsPageEn._(_root);
 	late final _StringsGameOverPageEn gameOverPage = _StringsGameOverPageEn._(_root);
 }
@@ -157,6 +158,16 @@ class _StringsHomePageEn {
 	// Translations
 	String get playButton => 'Play';
 	String get settingsButton => 'Settings';
+}
+
+// Path: playPage
+class _StringsPlayPageEn {
+	_StringsPlayPageEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String highScore({required Object p}) => 'Best: ${p}';
 }
 
 // Path: settingsPage
