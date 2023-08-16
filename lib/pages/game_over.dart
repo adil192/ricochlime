@@ -68,21 +68,26 @@ class _GameOverButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonSize = 28;
     return Center(
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
           padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(
-              horizontal: 32,
-              vertical: 16,
+              horizontal: buttonSize,
+              vertical: buttonSize / 2,
             ),
           ),
         ),
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 32,
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            text,
+            softWrap: false,
+            style: const TextStyle(
+              fontSize: buttonSize,
+            ),
           ),
         ),
       ),
