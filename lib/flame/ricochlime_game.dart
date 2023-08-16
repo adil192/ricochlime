@@ -328,9 +328,11 @@ class RicochlimeGame extends Forge2DGame with
     if (showGameOverDialog != null) {
       await showGameOverDialog!.call();
 
-      // remove saved game
-      Prefs.currentGame.value = null;
+      // save high score
+      Prefs.highScore.value = max(Prefs.highScore.value, score.value);
 
+      // reset game
+      Prefs.currentGame.value = null;
       reset();
     }
   }

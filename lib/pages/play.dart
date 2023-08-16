@@ -7,12 +7,7 @@ import 'package:ricochlime/pages/game_over.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-final ValueNotifier<int> _score = ValueNotifier(0)
-    ..addListener(() {
-      if (_score.value > Prefs.highScore.value) {
-        Prefs.highScore.value = _score.value;
-      }
-    });
+final ValueNotifier<int> _score = ValueNotifier(0);
 final ValueNotifier<double> _timeDilation = ValueNotifier(1);
 final game = RicochlimeGame(
   score: _score,
