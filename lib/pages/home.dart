@@ -10,21 +10,19 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            t.appName,
-            style: const TextStyle(
-              fontSize: kToolbarHeight,
-            ),
-          ),
-        ),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              t.appName,
+              style: const TextStyle(
+                fontSize: kToolbarHeight,
+              ),
+            ),
+          ),
+          const SizedBox(height: 32),
           _HomePageButton(
             text: t.homePage.playButton,
             openBuilder: (context, closeContainer) => const PlayPage(),
