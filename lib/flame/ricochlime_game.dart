@@ -126,6 +126,12 @@ class RicochlimeGame extends Forge2DGame with
     assert(numBullets >= 1);
     assert(numBullets <= score.value);
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
+
+    if (isGameOver()) {
+      await gameOver();
+    } else {
+      state = GameState.idle;
+    }
   }
   Future saveGame() async {
     assert(
@@ -297,8 +303,7 @@ class RicochlimeGame extends Forge2DGame with
       await Future.delayed(slimeMoveDuration);
 
       // check if the player has lost
-      const threshold = Background.waterThresholdPosition - Slime.staticHeight * 1.2;
-      if (slimes.any((slime) => slime.position.y >= threshold)) {
+      if (isGameOver()) {
         return await gameOver();
       }
     }
@@ -308,18 +313,24 @@ class RicochlimeGame extends Forge2DGame with
     await saveGame();
   }
 
+  bool isGameOver() {
+    const threshold = Background.waterThresholdPosition - Slime.staticHeight * 1.2;
+    return slimes.any((slime) => slime.position.y >= threshold);
+  }
+
   Future<void> gameOver() async {
     state = GameState.gameOver;
     assert(!inputAllowed);
-
-    // remove saved game
-    Prefs.currentGame.value = null;
 
     // TODO(adil192): Animate the slimes jumping into the water
     await Future.delayed(const Duration(milliseconds: 500));
 
     if (showGameOverDialog != null) {
       await showGameOverDialog!.call();
+
+      // remove saved game
+      Prefs.currentGame.value = null;
+
       reset();
     }
   }
