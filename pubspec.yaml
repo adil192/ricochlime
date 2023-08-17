@@ -42,8 +42,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  font_awesome_flutter: ^10.5.0
-
   forge2d: any
 
   go_router: ^10.0.0

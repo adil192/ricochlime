@@ -5,7 +5,6 @@ import 'dart:math';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 export 'package:google_mobile_ads/google_mobile_ads.dart' show AdSize;
@@ -175,8 +174,8 @@ class _BannerAdWidgetState extends State<BannerAdWidget> with AutomaticKeepAlive
           height: widget.adSize.height.toDouble(),
           child: _bannerAd == null
               ? Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.rectangleAd,
+                  child: Icon(
+                    Icons.ad_units,
                     color: colorScheme.onSurface.withOpacity(0.5),
                   ),
                 )
