@@ -73,7 +73,9 @@
         <release version="0.4.1" type="development" date="2023-08-13">
             <description>
                 <ul>
-                    <li>Release notes will be added here</li>
+                    <li>Added an option to use the hyperlegible font</li>
+                    <li>Added an app info and licenses section</li>
+                    <li>The danger zone is now shown as a soil patch; try to defeat the slimes before they get to it!</li>
                 </ul>
             </description>
         </release>
