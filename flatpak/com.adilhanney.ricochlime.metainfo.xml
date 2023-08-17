@@ -60,6 +60,16 @@
     </screenshots>
 
     <releases>
+        <release version="0.5.0" type="development" date="2023-08-16">
+            <description>
+                <ul>
+                    <li>Your high score is now recorded!</li>
+                    <li>Fixed the stutter when you tap to speed up the bullets</li>
+                    <li>Fixed the soil patch glitching at level 49</li>
+                    <li>Improved the home page appearance</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.4.2" type="development" date="2023-08-13">
             <description>
                 <ul>
