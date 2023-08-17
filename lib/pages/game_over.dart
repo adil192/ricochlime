@@ -32,36 +32,38 @@ class GameOverDialog extends StatelessWidget {
                 ),
               ),
             ),
-            Text.rich(
-              TextSpan(
-                style: TextStyle(
-                  fontSize: kToolbarHeight / 2,
-                  color: colorScheme.onSurface,
+            SingleChildScrollView(
+              child: Text.rich(
+                TextSpan(
+                  style: TextStyle(
+                    fontSize: kToolbarHeight / 2,
+                    color: colorScheme.onSurface,
+                  ),
+                  children: [
+                    if (score > Prefs.highScore.value)
+                      t.gameOverPage.highScoreBeaten(
+                        pOld: TextSpan(
+                          style: TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                            decorationThickness: kToolbarHeight / 20,
+                            decorationColor: colorScheme.onSurface.withOpacity(0.6),
+                          ),
+                          text: ' ${Prefs.highScore.value} ',
+                        ),
+                        pNew: TextSpan(
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: kToolbarHeight / 2,
+                          ),
+                          text: '$score',
+                        ),
+                      )
+                    else
+                      TextSpan(
+                        text: t.gameOverPage.highScoreNotBeaten(p: score),
+                      )
+                  ],
                 ),
-                children: [
-                  if (score > Prefs.highScore.value)
-                    t.gameOverPage.highScoreBeaten(
-                      pOld: TextSpan(
-                        style: TextStyle(
-                          decoration: TextDecoration.lineThrough,
-                          decorationThickness: kToolbarHeight / 20,
-                          decorationColor: colorScheme.onSurface.withOpacity(0.6),
-                        ),
-                        text: ' ${Prefs.highScore.value} ',
-                      ),
-                      pNew: TextSpan(
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: kToolbarHeight / 2,
-                        ),
-                        text: '$score',
-                      ),
-                    )
-                  else
-                    TextSpan(
-                      text: t.gameOverPage.highScoreNotBeaten(p: score),
-                    )
-                ],
               ),
             ),
             const SizedBox(height: 32),
