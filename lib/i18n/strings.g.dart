@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 13
+/// Strings: 14
 ///
-/// Built on 2023-08-15 at 12:31 UTC
+/// Built on 2023-08-16 at 22:52 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -192,7 +192,14 @@ class _StringsGameOverPageEn {
 
 	// Translations
 	String get title => 'Game over!';
-	String subtitle({required Object p}) => 'You scored ${p} points!';
+	String highScoreNotBeaten({required Object p}) => 'You scored ${p} points!';
+	TextSpan highScoreBeaten({required InlineSpan pOld, required InlineSpan pNew}) => TextSpan(children: [
+		const TextSpan(text: 'Your high score is now '),
+		pOld,
+		const TextSpan(text: ' '),
+		pNew,
+		const TextSpan(text: ' points!'),
+	]);
 	String get playAgainButton => 'Play again';
 	String get homeButton => 'Home';
 }

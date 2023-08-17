@@ -14,6 +14,7 @@ settingsPage:
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
 gameOverPage:
   title: Game over!
-  subtitle: You scored $p points!
+  highScoreNotBeaten: You scored $p points!
+  highScoreBeaten(rich): Your high score is now $pOld $pNew points!
   playAgainButton: Play again
   homeButton: Home

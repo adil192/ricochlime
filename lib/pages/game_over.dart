@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
+import 'package:ricochlime/utils/prefs.dart';
 
 class GameOverDialog extends StatelessWidget {
   const GameOverDialog({
@@ -15,41 +16,71 @@ class GameOverDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return AlertDialog(
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              t.gameOverPage.title,
-              style: const TextStyle(
-                fontSize: kToolbarHeight,
+      content: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 400),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                t.gameOverPage.title,
+                style: const TextStyle(
+                  fontSize: kToolbarHeight,
+                ),
               ),
             ),
-          ),
-          Text(
-            t.gameOverPage.subtitle(p: score),
-            style: const TextStyle(
-              fontSize: kToolbarHeight / 2,
+            Text.rich(
+              TextSpan(
+                style: TextStyle(
+                  fontSize: kToolbarHeight / 2,
+                  color: colorScheme.onSurface,
+                ),
+                children: [
+                  if (score > Prefs.highScore.value)
+                    t.gameOverPage.highScoreBeaten(
+                      pOld: TextSpan(
+                        style: TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                          decorationThickness: kToolbarHeight / 20,
+                          decorationColor: colorScheme.onSurface.withOpacity(0.6),
+                        ),
+                        text: ' ${Prefs.highScore.value} ',
+                      ),
+                      pNew: TextSpan(
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: kToolbarHeight / 2,
+                        ),
+                        text: '$score',
+                      ),
+                    )
+                  else
+                    TextSpan(
+                      text: t.gameOverPage.highScoreNotBeaten(p: score),
+                    )
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 32),
-          _GameOverButton(
-            onPressed: () {
-              context.pop();
-            },
-            text: t.gameOverPage.playAgainButton,
-          ),
-          const SizedBox(height: 32),
-          _GameOverButton(
-            onPressed: () {
-              context.pop(); // pop dialog
-              context.pop(); // pop play page
-            },
-            text: t.gameOverPage.homeButton,
-          ),
-        ],
+            const SizedBox(height: 32),
+            _GameOverButton(
+              onPressed: () {
+                context.pop();
+              },
+              text: t.gameOverPage.playAgainButton,
+            ),
+            const SizedBox(height: 32),
+            _GameOverButton(
+              onPressed: () {
+                context.pop(); // pop dialog
+                context.pop(); // pop play page
+              },
+              text: t.gameOverPage.homeButton,
+            ),
+          ],
+        ),
       ),
     );
   }
