@@ -65,19 +65,25 @@ class GameOverDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
-            _GameOverButton(
-              onPressed: () {
-                context.pop();
-              },
-              text: t.gameOverPage.playAgainButton,
-            ),
-            const SizedBox(height: 32),
-            _GameOverButton(
-              onPressed: () {
-                context.pop(); // pop dialog
-                context.pop(); // pop play page
-              },
-              text: t.gameOverPage.homeButton,
+
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Column(children: [
+                _GameOverButton(
+                  onPressed: () {
+                    context.pop();
+                  },
+                  text: t.gameOverPage.playAgainButton,
+                ),
+                const SizedBox(height: 32),
+                _GameOverButton(
+                  onPressed: () {
+                    context.pop(); // pop dialog
+                    context.pop(); // pop play page
+                  },
+                  text: t.gameOverPage.homeButton,
+                ),
+              ]),
             ),
           ],
         ),
@@ -111,14 +117,11 @@ class _GameOverButton extends StatelessWidget {
             ),
           ),
         ),
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            text,
-            softWrap: false,
-            style: const TextStyle(
-              fontSize: buttonSize,
-            ),
+        child: Text(
+          text,
+          softWrap: false,
+          style: const TextStyle(
+            fontSize: buttonSize,
           ),
         ),
       ),
