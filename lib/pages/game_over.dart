@@ -40,7 +40,7 @@ class GameOverDialog extends StatelessWidget {
                     color: colorScheme.onSurface,
                   ),
                   children: [
-                    if (score > Prefs.highScore.value)
+                    if (score > Prefs.highScore.value && Prefs.highScore.value > 0)
                       t.gameOverPage.highScoreBeaten(
                         pOld: TextSpan(
                           style: TextStyle(

@@ -131,7 +131,9 @@ class _PlayPageState extends State<PlayPage> {
                     ValueListenableBuilder(
                       valueListenable: Prefs.highScore,
                       builder: (context, highScore, child) => Text(
-                        t.playPage.highScore(p: highScore),
+                        highScore <= 0
+                            ? ''
+                            : t.playPage.highScore(p: highScore),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.9),
