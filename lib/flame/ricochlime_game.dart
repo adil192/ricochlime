@@ -317,7 +317,7 @@ class RicochlimeGame extends Forge2DGame with
   }
 
   bool isGameOver() {
-    const threshold = Background.waterThresholdPosition - Slime.staticHeight * 1.2;
+    const threshold = Background.waterThresholdPosition - Slime.staticHeight * 1.3;
     return slimes.any((slime) => slime.position.y >= threshold);
   }
 
