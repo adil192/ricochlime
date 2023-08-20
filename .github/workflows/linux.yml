@@ -69,7 +69,20 @@ jobs:
           archiveName="Ricochlime_v${{ needs.get-version.outputs.buildName }}.tar.gz"
           echo "archiveName=$archiveName" >> $GITHUB_OUTPUT
 
-          tar -C build/linux/x64/release/bundle -cvf $archiveName .
+          mkdir -p AppDir
+          mv build/linux/x64/release/bundle/* AppDir/
+          chmod +x AppDir/ricochlime
+
+          install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/share/metainfo/
+          install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/usr/share/metainfo/
+
+          mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
+          install -Dm644 assets/icon/resized/icon-512x512.png AppDir/share/icons/hicolor/512x512/apps/com.adilhanney.ricochlime.png
+          install -Dm644 assets/icon/resized/icon-512x512.png AppDir/usr/share/icons/hicolor/512x512/apps/com.adilhanney.ricochlime.png
+
+          install -Dm644 flatpak/com.adilhanney.ricochlime.desktop -t AppDir/share/applications/
+
+          tar -C AppDir -cvf $archiveName .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
@@ -157,20 +170,13 @@ jobs:
       - name: Prepare build files
         working-directory: appimage
         run: |
-          echo 1. Extracting app archive
           mkdir AppDir
           tar -xvf ../Ricochlime-Linux-Portable.tar.gz -C AppDir
-          echo 2. Copying icons
-          install -Dm644 ../assets/icon/resized/icon-16x16.png AppDir/usr/share/icons/hicolor/16x16/apps/com.adilhanney.ricochlime.png
-          install -Dm644 ../assets/icon/resized/icon-24x24.png AppDir/usr/share/icons/hicolor/24x24/apps/com.adilhanney.ricochlime.png
-          install -Dm644 ../assets/icon/resized/icon-32x32.png AppDir/usr/share/icons/hicolor/32x32/apps/com.adilhanney.ricochlime.png
-          install -Dm644 ../assets/icon/resized/icon-48x48.png AppDir/usr/share/icons/hicolor/48x48/apps/com.adilhanney.ricochlime.png
-          install -Dm644 ../assets/icon/resized/icon-64x64.png AppDir/usr/share/icons/hicolor/64x64/apps/com.adilhanney.ricochlime.png
-          install -Dm644 ../assets/icon/resized/icon-128x128.png AppDir/usr/share/icons/hicolor/128x128/apps/com.adilhanney.ricochlime.png
-          install -Dm644 ../assets/icon/resized/icon-256x256.png AppDir/usr/share/icons/hicolor/256x256/apps/com.adilhanney.ricochlime.png
-          install -Dm644 ../assets/icon/resized/icon-512x512.png AppDir/usr/share/icons/hicolor/512x512/apps/com.adilhanney.ricochlime.png
-          echo 3. Copying metadata
-          install -Dm644 ../flatpak/com.adilhanney.ricochlime.metainfo.xml AppDir/usr/share/metainfo/com.adilhanney.ricochlime.metainfo.xml
+      
+      - name: ls
+        working-directory: appimage/AppDir
+        run: |
+          ls -la
 
       - name: Set AppImage version
         working-directory: appimage
