@@ -81,6 +81,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icon/icon.png
+    - assets/google_fonts/Atkinson_Hyperlegible/
+    - assets/google_fonts/Silkscreen/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

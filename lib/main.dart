@@ -18,18 +18,26 @@ void main() async {
   LocaleSettings.useDeviceLocale();
   Prefs.init();
   AdState.init();
-  _addMysticWoodsLicense();
+  _addLicenses();
 
   await Prefs.highScore.waitUntilLoaded();
 
   runApp(TranslationProvider(child: const MyApp()));
 }
 
-void _addMysticWoodsLicense() {
+void _addLicenses() {
   LicenseRegistry.addLicense(() async* {
     yield LicenseEntryWithLineBreaks(
       ['mystic_woods'],
       await rootBundle.loadString('assets/images/LICENSE.txt'),
+    );
+    yield LicenseEntryWithLineBreaks(
+      ['google_fonts'],
+      await rootBundle.loadString('assets/google_fonts/Atkinson_Hyperlegible/OFL.txt'),
+    );
+    yield LicenseEntryWithLineBreaks(
+      ['google_fonts'],
+      await rootBundle.loadString('assets/google_fonts/Silkscreen/OFL.txt'),
     );
   });
 }
