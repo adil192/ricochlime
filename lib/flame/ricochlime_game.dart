@@ -32,6 +32,9 @@ class RicochlimeGame extends Forge2DGame with
     gravity: Vector2.zero(),
     zoom: 1,
   ) {
+    /// Sets the maximum movement per time step to [Bullet.speed].
+    /// This effectively sets the max time step to 1s,
+    /// rather than the default value which is much lower.
     physics_settings.maxTranslation = Bullet.speed;
   }
 
