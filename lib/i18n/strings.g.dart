@@ -6,7 +6,7 @@
 /// Locales: 1
 /// Strings: 21
 ///
-/// Built on 2023-08-20 at 21:10 UTC
+/// Built on 2023-08-20 at 21:17 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -216,7 +216,7 @@ class _StringsTutorialPageEn {
 	String get tutorial => 'Tutorial';
 	String get aimAtSlimes => 'Drag your finger to aim and release to shoot.';
 	String get emptyHealthbar => 'Defeat a slime by emptying its health bar.';
-	String get bounceOffWalls => 'Bounce your shots off walls to hit the most slimes.';
+	String get bounceOffWalls => 'Bounce your shots off the walls to hit the most slimes.';
 	String get dangerZone => 'If a slime reaches the danger zone, you\'ll lose on your next turn if you don\'t defeat it.';
 	String get moreSlimes => 'More rows of slimes will spawn each turn as you progress, so the danger zone will also get bigger.';
 }

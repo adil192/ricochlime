@@ -10,15 +10,47 @@ class TutorialPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(t.tutorialPage.tutorial),
       ),
-      body: ListView(
-        children: [
-          // TODO(adil192): Add images to tutorial
-          Text(t.tutorialPage.aimAtSlimes),
-          Text(t.tutorialPage.emptyHealthbar),
-          Text(t.tutorialPage.bounceOffWalls),
-          Text(t.tutorialPage.dangerZone),
-          Text(t.tutorialPage.moreSlimes),
-        ],
+      body: Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: 600,
+          ),
+          child: DefaultTextStyle.merge(
+            style: TextStyle(
+              fontSize: 18,
+            ),
+            child: ListView(
+              children: [
+                // TODO(adil192): Add images to tutorial
+                Text(
+                  t.tutorialPage.aimAtSlimes,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 18),
+                Text(
+                  t.tutorialPage.emptyHealthbar,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 18),
+                Text(
+                  t.tutorialPage.bounceOffWalls,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 18),
+                Text(
+                  t.tutorialPage.dangerZone,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 18),
+                Text(
+                  t.tutorialPage.moreSlimes,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 18),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

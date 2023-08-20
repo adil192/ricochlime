@@ -23,6 +23,6 @@ tutorialPage:
   tutorial: Tutorial
   aimAtSlimes: Drag your finger to aim and release to shoot.
   emptyHealthbar: Defeat a slime by emptying its health bar.
-  bounceOffWalls: Bounce your shots off walls to hit the most slimes.
+  bounceOffWalls: Bounce your shots off the walls to hit the most slimes.
   dangerZone: If a slime reaches the danger zone, you'll lose on your next turn if you don't defeat it.
   moreSlimes: More rows of slimes will spawn each turn as you progress, so the danger zone will also get bigger.
