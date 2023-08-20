@@ -21,10 +21,6 @@
         <control>touch</control>
     </supports>
 
-    <recommends>
-        <internet>first-run</internet>
-    </recommends>
-
     <description>
         <p>
             Satisfying slime shooter
