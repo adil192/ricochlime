@@ -12,11 +12,11 @@ class TutorialPage extends StatelessWidget {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 600,
           ),
           child: DefaultTextStyle.merge(
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
             child: ListView(
