@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 14
+/// Strings: 21
 ///
-/// Built on 2023-08-16 at 22:52 UTC
+/// Built on 2023-08-20 at 21:10 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -147,6 +147,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	late final _StringsPlayPageEn playPage = _StringsPlayPageEn._(_root);
 	late final _StringsSettingsPageEn settingsPage = _StringsSettingsPageEn._(_root);
 	late final _StringsGameOverPageEn gameOverPage = _StringsGameOverPageEn._(_root);
+	late final _StringsTutorialPageEn tutorialPage = _StringsTutorialPageEn._(_root);
 }
 
 // Path: homePage
@@ -158,6 +159,7 @@ class _StringsHomePageEn {
 	// Translations
 	String get playButton => 'Play';
 	String get settingsButton => 'Settings';
+	String get tutorialButton => 'Tutorial';
 }
 
 // Path: playPage
@@ -202,4 +204,19 @@ class _StringsGameOverPageEn {
 	]);
 	String get playAgainButton => 'Play again';
 	String get homeButton => 'Home';
+}
+
+// Path: tutorialPage
+class _StringsTutorialPageEn {
+	_StringsTutorialPageEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get tutorial => 'Tutorial';
+	String get aimAtSlimes => 'Drag your finger to aim and release to shoot.';
+	String get emptyHealthbar => 'Defeat a slime by emptying its health bar.';
+	String get bounceOffWalls => 'Bounce your shots off walls to hit the most slimes.';
+	String get dangerZone => 'If a slime reaches the danger zone, you\'ll lose on your next turn if you don\'t defeat it.';
+	String get moreSlimes => 'More rows of slimes will spawn each turn as you progress, so the danger zone will also get bigger.';
 }

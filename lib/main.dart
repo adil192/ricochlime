@@ -8,6 +8,7 @@ import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
+import 'package:ricochlime/pages/tutorial.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
@@ -136,6 +137,10 @@ final _router = GoRouter(
     GoRoute(
       path: '/play',
       builder: (context, state) => const PlayPage(),
+    ),
+    GoRoute(
+      path: '/tutorial',
+      builder: (context, state) => const TutorialPage(),
     ),
     GoRoute(
       path: '/settings',

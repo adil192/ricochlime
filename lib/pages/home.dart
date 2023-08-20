@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
+import 'package:ricochlime/pages/tutorial.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -26,6 +27,11 @@ class HomePage extends StatelessWidget {
           _HomePageButton(
             text: t.homePage.playButton,
             openBuilder: (context, closeContainer) => const PlayPage(),
+          ),
+          const SizedBox(height: 32),
+          _HomePageButton(
+            text: t.homePage.tutorialButton,
+            openBuilder: (context, closeContainer) => const TutorialPage(),
           ),
           const SizedBox(height: 32),
           _HomePageButton(
