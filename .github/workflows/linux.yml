@@ -124,6 +124,7 @@ jobs:
         with:
           bundle: Ricochlime.flatpak
           manifest-path: flatpak/com.adilhanney.ricochlime.json
+          cache-key: flatpak-builder-cache-${{ hashFiles('flatpak/com.adilhanney.ricochlime.json') }}
 
       - name: Rename .flatpak
         id: rename
