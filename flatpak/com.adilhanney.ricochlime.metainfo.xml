@@ -56,6 +56,15 @@
     </screenshots>
 
     <releases>
+        <release version="0.5.1" type="development" date="2023-08-21">
+            <description>
+                <ul>
+                    <li>Fixed the slimes sometimes getting past the player without triggering game</li>
+                    <li>Added a basic tutorial</li>
+                    <li>The app no longer needs access to the internet for fonts</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.5.0" type="development" date="2023-08-16">
             <description>
                 <ul>
