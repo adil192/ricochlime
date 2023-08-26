@@ -57,28 +57,30 @@ class Slime extends BodyComponent with ContactCallbacks {
   Slime({
     required this.position,
     required this.maxHp,
-  }): hp = maxHp,
+    int? hp,
+    bool? givesPlayerABullet,
+  }): hp = hp ?? maxHp,
       super(
         priority: 0,
       ) {
-    renderBody = false;
-    add(_animation);
-    add(_healthBar);
-  }
-
-  Slime.fromJson(Map<String, dynamic> json)
-      : position = Vector2(
-          json['px'] as double,
-          json['py'] as double,
-        ),
-        hp = json['hp'] as int,
-        maxHp = json['maxHp'] as int {
-    givesPlayerABullet = json['givesPlayerABullet'] as bool? ?? false;
+    if (givesPlayerABullet != null) {
+      this.givesPlayerABullet = givesPlayerABullet;
+    }
 
     renderBody = false;
     add(_animation);
     add(_healthBar);
   }
+
+  Slime.fromJson(Map<String, dynamic> json): this(
+    position: Vector2(
+      json['px'] as double,
+      json['py'] as double,
+    ),
+    hp: json['hp'] as int,
+    maxHp: json['maxHp'] as int,
+    givesPlayerABullet: json['givesPlayerABullet'] as bool? ?? false,
+  );
   Map<String, dynamic> toJson() => {
     'px': _movement?.targetPosition.x ?? position.x,
     'py': _movement?.targetPosition.y ?? position.y,
