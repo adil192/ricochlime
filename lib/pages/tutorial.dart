@@ -38,6 +38,11 @@ class TutorialPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 Text(
+                  t.tutorialPage.tapSpeedUp,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 18),
+                Text(
                   t.tutorialPage.dangerZone,
                   textAlign: TextAlign.center,
                 ),
