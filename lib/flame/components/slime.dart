@@ -1,3 +1,5 @@
+import 'dart:ui' show lerpDouble;
+
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +63,7 @@ class Slime extends BodyComponent with ContactCallbacks {
     bool? givesPlayerABullet,
   }): hp = hp ?? maxHp,
       super(
-        priority: 0,
+        priority: getPriorityFromPosition(position),
       ) {
     if (givesPlayerABullet != null) {
       this.givesPlayerABullet = givesPlayerABullet;
@@ -102,8 +104,22 @@ class Slime extends BodyComponent with ContactCallbacks {
         body.position.setFrom(_movement!.targetPosition);
         _movement = null;
         _animation.walking = false;
+        priority = getPriorityFromPosition(body.position);
       }
     }
+  }
+
+  /// The priority is used to determine the order in which the slimes are drawn.
+  /// 
+  /// We want the slimes to be drawn from top to bottom,
+  /// so we use a negative priority relating to the slime's y position.
+  @visibleForTesting
+  static int getPriorityFromPosition(Vector2 position) {
+    const minPriority = -100;
+    const maxPriority = 0;
+    final yRelative = position.y / RicochlimeGame.expectedHeight;
+    assert(yRelative >= 0 && yRelative <= 1);
+    return lerpDouble(minPriority, maxPriority, yRelative)!.floor();
   }
 
   /// Moves a new slime in from the top of the screen
