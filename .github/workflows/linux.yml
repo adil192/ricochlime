@@ -4,8 +4,6 @@ on:
   # Enable manual run
   workflow_dispatch:
   push:
-    tags:
-      - '**'
 
 jobs:
   get-version:
@@ -110,6 +108,7 @@ jobs:
 
           run: |
             # Build for linux
+            chown -R nonroot:nonroot .
             sudo -u nonroot /opt/flutter/bin/flutter build linux --target-platform linux-arm64
             mv build/linux/arm64/release/bundle/* /AppDir/
 
