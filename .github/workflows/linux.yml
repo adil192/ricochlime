@@ -101,7 +101,9 @@ jobs:
             useradd -m nonroot
 
             echo Installing Flutter
-            git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
+            mkdir -p /opt/flutter
+            chown nonroot:nonroot /opt/flutter
+            sudo -u nonroot git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
 
             echo flutter doctor
             sudo -u nonroot /opt/flutter/bin/flutter doctor -v
