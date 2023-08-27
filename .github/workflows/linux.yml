@@ -75,7 +75,7 @@ jobs:
 
           mkdir -p AppDir
           mv build/linux/x64/release/bundle/* AppDir/
-      
+
       - name: Build Linux (arm64)
         if: matrix.arch == 'arm64'
         uses: uraimo/run-on-arch-action@v2
@@ -88,20 +88,29 @@ jobs:
             mkdir -p "${PWD}/AppDir"
           dockerRunArgs: |
             --volume "${PWD}/AppDir:/AppDir"
-          
+
           install: |
+            echo Installing dependencies
             apt-get update -qq -y
             apt-get install -qq -y \
               bash curl file git unzip xz-utils zip \
               clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev
 
+            echo Creating non-root user
+            useradd -m nonroot
+
+            echo Installing Flutter
             git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
             export PATH="$PATH:/opt/flutter/bin"
-            flutter doctor -v
-          
+
+            echo flutter doctor
+            sudo -u nonroot flutter doctor -v
+
           run: |
             export PATH="$PATH:/opt/flutter/bin"
-            flutter build linux --target-platform linux-arm64
+
+            # Build for linux
+            sudo -u nonroot flutter build linux --target-platform linux-arm64
             mv build/linux/arm64/release/bundle/* /AppDir/
 
       - name: Compress Flutter build
@@ -110,7 +119,6 @@ jobs:
           archiveName="Ricochlime_v${{ needs.get-version.outputs.buildName }}_Linux_${{ matrix.arch }}.tar.gz"
           echo "archiveName=$archiveName" >> $GITHUB_OUTPUT
 
-          chown -R $USER:$USER AppDir
           chmod +x AppDir/ricochlime
 
           install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/share/metainfo/
