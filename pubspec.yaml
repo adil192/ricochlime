@@ -82,6 +82,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - assets/tutorial/
     - assets/icon/icon.png
     - assets/google_fonts/Atkinson_Hyperlegible/
     - assets/google_fonts/Silkscreen/

@@ -4,6 +4,8 @@ import 'package:ricochlime/i18n/strings.g.dart';
 class TutorialPage extends StatelessWidget {
   const TutorialPage({super.key});
 
+  static const maxWidth = 600.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +15,7 @@ class TutorialPage extends StatelessWidget {
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(
-            maxWidth: 600,
+            maxWidth: maxWidth,
           ),
           child: DefaultTextStyle.merge(
             style: const TextStyle(
@@ -21,35 +23,52 @@ class TutorialPage extends StatelessWidget {
             ),
             child: ListView(
               children: [
-                // TODO(adil192): Add images to tutorial
                 Text(
                   t.tutorialPage.aimAtSlimes,
                   textAlign: TextAlign.center,
+                ),
+                const _TutorialScreenshot(
+                  image: AssetImage('assets/tutorial/aimAtSlimes.png'),
                 ),
                 const SizedBox(height: 18),
                 Text(
                   t.tutorialPage.emptyHealthbar,
                   textAlign: TextAlign.center,
                 ),
+                const _TutorialScreenshot(
+                  image: AssetImage('assets/tutorial/emptyHealthbar.png'),
+                ),
                 const SizedBox(height: 18),
                 Text(
                   t.tutorialPage.bounceOffWalls,
                   textAlign: TextAlign.center,
+                ),
+                const _TutorialScreenshot(
+                  image: AssetImage('assets/tutorial/bounceOffWalls.png'),
                 ),
                 const SizedBox(height: 18),
                 Text(
                   t.tutorialPage.tapSpeedUp,
                   textAlign: TextAlign.center,
                 ),
+                const _TutorialScreenshot(
+                  image: AssetImage('assets/tutorial/tapSpeedUp.png'),
+                ),
                 const SizedBox(height: 18),
                 Text(
                   t.tutorialPage.dangerZone,
                   textAlign: TextAlign.center,
                 ),
+                const _TutorialScreenshot(
+                  image: AssetImage('assets/tutorial/dangerZone.png'),
+                ),
                 const SizedBox(height: 18),
                 Text(
                   t.tutorialPage.moreSlimes,
                   textAlign: TextAlign.center,
+                ),
+                const _TutorialScreenshot(
+                  image: AssetImage('assets/tutorial/moreSlimes.png'),
                 ),
                 const SizedBox(height: 18),
               ],
@@ -58,5 +77,32 @@ class TutorialPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _TutorialScreenshot extends StatelessWidget {
+  const _TutorialScreenshot({
+    // ignore: unused_element
+    super.key,
+    required this.image,
+  });
+
+  final ImageProvider image;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    if (size.width > TutorialPage.maxWidth) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image(
+          image: image,
+        ),
+      );
+    } else {
+      return Image(
+        image: image,
+      );
+    }
   }
 }
