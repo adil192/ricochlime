@@ -30,19 +30,26 @@ jobs:
           echo "buildNumber=$buildNumber" >> $GITHUB_OUTPUT
 
   build-flutter-app:
-    name: Build Flutter app
+    name: Build Flutter app (${{ matrix.arch }})
     runs-on: ubuntu-latest
     needs: get-version
+
+    strategy:
+      matrix:
+        arch: [x86_64, arm64]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Install Flutter dependencies
+        if: matrix.arch == 'x86_64'
         run: |
           sudo apt-get update
           sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev libsecret-1-dev libjsoncpp-dev
 
       - name: Setup cache
+        if: matrix.arch == 'x86_64'
         uses: actions/cache@v3
         with:
           path: |
@@ -53,24 +60,57 @@ jobs:
             ${{ runner.OS }}-ricochlime-ubuntu-
 
       - name: Setup Flutter
+        if: matrix.arch == 'x86_64'
         uses: subosito/flutter-action@v2
         with:
           channel: stable
 
       - run: flutter pub get
+        if: matrix.arch == 'x86_64'
 
-      - name: Build Linux portable
+      - name: Build Linux (x86_64)
+        if: matrix.arch == 'x86_64'
         run: |
           flutter build linux
+
+          mkdir -p AppDir
+          mv build/linux/x64/release/bundle/* AppDir/
+      
+      - name: Build Linux (arm64)
+        if: matrix.arch == 'arm64'
+        uses: uraimo/run-on-arch-action@v2
+        with:
+          arch: aarch64
+          distro: ubuntu_latest
+          githubToken: ${{ github.token }}
+
+          setup: |
+            mkdir -p "${PWD}/AppDir"
+          dockerRunArgs: |
+            --volume "${PWD}/AppDir:/AppDir"
+          
+          install: |
+            apt-get update -qq -y
+            apt-get install -qq -y \
+              bash curl file git unzip xz-utils zip \
+              clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev
+
+            git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
+            export PATH="$PATH:/opt/flutter/bin"
+            flutter doctor -v
+          
+          run: |
+            export PATH="$PATH:/opt/flutter/bin"
+            flutter build linux --target-platform linux-arm64
+            mv build/linux/arm64/release/bundle/* /AppDir/
 
       - name: Compress Flutter build
         id: compress
         run: |
-          archiveName="Ricochlime_v${{ needs.get-version.outputs.buildName }}.tar.gz"
+          archiveName="Ricochlime_v${{ needs.get-version.outputs.buildName }}_Linux_${{ matrix.arch }}.tar.gz"
           echo "archiveName=$archiveName" >> $GITHUB_OUTPUT
 
-          mkdir -p AppDir
-          mv build/linux/x64/release/bundle/* AppDir/
+          chown -R $USER:$USER AppDir
           chmod +x AppDir/ricochlime
 
           install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/share/metainfo/
@@ -87,7 +127,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Ricochlime-Archive
+          name: Ricochlime-Archive-${{ matrix.arch }}
           path: ${{ steps.compress.outputs.archiveName }}
 
       - name: Upload to GitHub release
@@ -113,7 +153,7 @@ jobs:
       - name: Download app archive
         uses: actions/download-artifact@v3
         with:
-          name: Ricochlime-Archive
+          name: Ricochlime-Archive-x86_64
 
       - name: Rename app archive
         run: |
@@ -156,7 +196,7 @@ jobs:
       - name: Download app archive
         uses: actions/download-artifact@v3
         with:
-          name: Ricochlime-Archive
+          name: Ricochlime-Archive-x86_64
 
       - name: Rename app archive
         run: |
