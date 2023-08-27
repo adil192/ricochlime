@@ -102,16 +102,13 @@ jobs:
 
             echo Installing Flutter
             git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
-            export PATH="$PATH:/opt/flutter/bin"
 
             echo flutter doctor
-            sudo -u nonroot flutter doctor -v
+            sudo -u nonroot /opt/flutter/bin/flutter doctor -v
 
           run: |
-            export PATH="$PATH:/opt/flutter/bin"
-
             # Build for linux
-            sudo -u nonroot flutter build linux --target-platform linux-arm64
+            sudo -u nonroot /opt/flutter/bin/flutter build linux --target-platform linux-arm64
             mv build/linux/arm64/release/bundle/* /AppDir/
 
       - name: Compress Flutter build
