@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:ricochlime/flame/components/background/background_tile.dart';
+import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
 class Background extends PositionComponent
@@ -17,6 +18,7 @@ class Background extends PositionComponent
     super.onLoad();
     position = Vector2.zero();
     size = gameRef.size;
+    priority = Slime.minPriority - 1;
 
     tileSize = Vector2(
       gameRef.size.x / RicochlimeGame.tilesInWidth,

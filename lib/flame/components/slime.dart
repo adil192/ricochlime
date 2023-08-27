@@ -115,12 +115,12 @@ class Slime extends BodyComponent with ContactCallbacks {
   /// so we use a negative priority relating to the slime's y position.
   @visibleForTesting
   static int getPriorityFromPosition(Vector2 position) {
-    const minPriority = -100;
     const maxPriority = 0;
     final yRelative = position.y / RicochlimeGame.expectedHeight;
     assert(yRelative >= 0 && yRelative <= 1);
     return lerpDouble(minPriority, maxPriority, yRelative)!.floor();
   }
+  static const minPriority = -100;
 
   /// Moves a new slime in from the top of the screen
   void moveInFromTop(Duration duration) {
