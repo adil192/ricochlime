@@ -99,18 +99,17 @@ jobs:
               bash curl file git unzip xz-utils zip \
               clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev
 
+            echo Installing Flutter
+            git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
+            /opt/flutter/bin/flutter doctor -v
+
+          run: |
             echo Creating (non-root) user
             useradd -m ${USER_NAME} -u ${USER_ID}
 
-            echo Installing Flutter
-            mkdir -p /opt/flutter
+            echo Chown flutter directory
             chown ${USER_NAME}:${USER_NAME} /opt/flutter
-            sudo -u ${USER_NAME} git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
 
-            echo flutter doctor
-            sudo -u ${USER_NAME} /opt/flutter/bin/flutter doctor -v
-
-          run: |
             # Build for linux
             chown -R ${USER_NAME}:${USER_NAME} .
             sudo -u ${USER_NAME} /opt/flutter/bin/flutter build linux --target-platform linux-arm64
