@@ -119,7 +119,7 @@ jobs:
           archiveName="Ricochlime_v${{ needs.get-version.outputs.buildName }}_Linux_${{ matrix.arch }}.tar.gz"
           echo "archiveName=$archiveName" >> $GITHUB_OUTPUT
 
-          chown -R $USER AppDir
+          sudo chown -R $USER AppDir
 
           install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/share/metainfo/
           install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/usr/share/metainfo/
