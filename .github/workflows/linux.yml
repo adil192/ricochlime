@@ -106,7 +106,7 @@ jobs:
             chown -R nonroot /opt/flutter
             chown -R nonroot .
 
-            echo Building Linux (arm64)
+            echo Building
             sudo -u nonroot /opt/flutter/bin/flutter build linux --target-platform linux-arm64
             mv build/linux/arm64/release/bundle/* /AppDir/
             chmod -R a+rw /AppDir/
