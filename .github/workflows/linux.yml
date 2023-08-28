@@ -86,6 +86,10 @@ jobs:
             mkdir -p "${PWD}/AppDir"
           dockerRunArgs: |
             --volume "${PWD}/AppDir:/AppDir"
+          
+          env: |
+            USER_NAME: $(id -un)
+            USER_ID: $(id -u)
 
           install: |
             echo Installing dependencies
@@ -95,21 +99,21 @@ jobs:
               bash curl file git unzip xz-utils zip \
               clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev
 
-            echo Creating non-root user
-            useradd -m nonroot
+            echo Creating (non-root) user
+            useradd -m ${USER_NAME} -u ${USER_ID}
 
             echo Installing Flutter
             mkdir -p /opt/flutter
-            chown nonroot:nonroot /opt/flutter
-            sudo -u nonroot git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
+            chown ${USER_NAME}:${USER_NAME} /opt/flutter
+            sudo -u ${USER_NAME} git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
 
             echo flutter doctor
-            sudo -u nonroot /opt/flutter/bin/flutter doctor -v
+            sudo -u ${USER_NAME} /opt/flutter/bin/flutter doctor -v
 
           run: |
             # Build for linux
-            chown -R nonroot:nonroot .
-            sudo -u nonroot /opt/flutter/bin/flutter build linux --target-platform linux-arm64
+            chown -R ${USER_NAME}:${USER_NAME} .
+            sudo -u ${USER_NAME} /opt/flutter/bin/flutter build linux --target-platform linux-arm64
             mv build/linux/arm64/release/bundle/* /AppDir/
 
       - name: Compress Flutter build
