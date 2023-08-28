@@ -109,6 +109,7 @@ jobs:
             echo Building
             sudo -u nonroot /opt/flutter/bin/flutter build linux --target-platform linux-arm64
             mv build/linux/arm64/release/bundle/* /AppDir/
+            chown -R nonroot /AppDir/
             chmod -R a+rw /AppDir/
             chmod +x /AppDir/ricochlime
 
@@ -117,6 +118,8 @@ jobs:
         run: |
           archiveName="Ricochlime_v${{ needs.get-version.outputs.buildName }}_Linux_${{ matrix.arch }}.tar.gz"
           echo "archiveName=$archiveName" >> $GITHUB_OUTPUT
+
+          chown -R $USER AppDir
 
           install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/share/metainfo/
           install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/usr/share/metainfo/
