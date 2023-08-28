@@ -4,6 +4,8 @@ on:
   # Enable manual run
   workflow_dispatch:
   push:
+    tags:
+      - '**'
 
 jobs:
   get-version:
