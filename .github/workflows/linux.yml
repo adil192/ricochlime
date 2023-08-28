@@ -73,6 +73,7 @@ jobs:
 
           mkdir -p AppDir
           mv build/linux/x64/release/bundle/* AppDir/
+          chmod +x AppDir/ricochlime
 
       - name: Build Linux (arm64)
         if: matrix.arch == 'arm64'
@@ -86,10 +87,6 @@ jobs:
             mkdir -p "${PWD}/AppDir"
           dockerRunArgs: |
             --volume "${PWD}/AppDir:/AppDir"
-          
-          env: |
-            USER_NAME: $(id -un)
-            USER_ID: $(id -u)
 
           install: |
             echo Installing dependencies
@@ -105,23 +102,21 @@ jobs:
 
           run: |
             echo Creating non-root user
-            useradd -m ${USER_NAME} -u ${USER_ID}
+            useradd -m nonroot
+            chown -R nonroot /opt/flutter
+            chown -R nonroot .
 
-            echo Chown flutter directory
-            chown ${USER_NAME}:${USER_NAME} /opt/flutter
-
-            # Build for linux
-            chown -R ${USER_NAME}:${USER_NAME} .
-            sudo -u ${USER_NAME} /opt/flutter/bin/flutter build linux --target-platform linux-arm64
+            echo Building Linux (arm64)
+            sudo -u nonroot /opt/flutter/bin/flutter build linux --target-platform linux-arm64
             mv build/linux/arm64/release/bundle/* /AppDir/
+            chmod -R a+rw /AppDir/
+            chmod +x /AppDir/ricochlime
 
       - name: Compress Flutter build
         id: compress
         run: |
           archiveName="Ricochlime_v${{ needs.get-version.outputs.buildName }}_Linux_${{ matrix.arch }}.tar.gz"
           echo "archiveName=$archiveName" >> $GITHUB_OUTPUT
-
-          chmod +x AppDir/ricochlime
 
           install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/share/metainfo/
           install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/usr/share/metainfo/
