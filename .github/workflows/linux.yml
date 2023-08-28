@@ -104,7 +104,7 @@ jobs:
             /opt/flutter/bin/flutter doctor -v
 
           run: |
-            echo Creating (non-root) user
+            echo Creating non-root user
             useradd -m ${USER_NAME} -u ${USER_ID}
 
             echo Chown flutter directory
