@@ -16,8 +16,12 @@ ThemeData nesThemeFrom({
       success: colorScheme.primary,
       warning: colorScheme.error,
       error: colorScheme.error,
-      lightLabelColor: colorScheme.onPrimary,
-      darkLabelColor: colorScheme.onSurface,
+      lightLabelColor: brightness == Brightness.light
+          ? colorScheme.onPrimary
+          : colorScheme.onSurface,
+      darkLabelColor: brightness == Brightness.light
+          ? colorScheme.onSurface
+          : colorScheme.onPrimary,
     )
   ).copyWith(
     useMaterial3: true,
