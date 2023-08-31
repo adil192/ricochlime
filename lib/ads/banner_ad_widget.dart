@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:nes_ui/nes_ui.dart';
 
 export 'package:google_mobile_ads/google_mobile_ads.dart' show AdSize;
 
@@ -163,25 +164,20 @@ class _BannerAdWidgetState extends State<BannerAdWidget> with AutomaticKeepAlive
 
     late final colorScheme = Theme.of(context).colorScheme;
 
-    return Card(
-      shape: ContinuousRectangleBorder(
-        borderRadius: BorderRadius.circular(min(widget.adSize.width, widget.adSize.height) / 10),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: FittedBox(
-        fit: BoxFit.fill,
-        child: SizedBox(
-          width: widget.adSize.width.toDouble(),
-          height: widget.adSize.height.toDouble(),
-          child: _bannerAd == null
-              ? Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.rectangleAd,
-                    color: colorScheme.onSurface.withOpacity(0.5),
-                  ),
-                )
-              : AdWidget(ad: _bannerAd!),
-        ),
+    return FittedBox(
+      fit: BoxFit.fitWidth,
+      child: NesContainer(
+        width: widget.adSize.width.toDouble(),
+        height: widget.adSize.height.toDouble(),
+        padding: EdgeInsets.zero,
+        child: _bannerAd == null
+            ? Center(
+                child: FaIcon(
+                  FontAwesomeIcons.rectangleAd,
+                  color: colorScheme.onSurface.withOpacity(0.5),
+                ),
+              )
+            : AdWidget(ad: _bannerAd!),
       ),
     );
   }
