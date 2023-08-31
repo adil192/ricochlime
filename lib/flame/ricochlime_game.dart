@@ -326,7 +326,7 @@ class RicochlimeGame extends Forge2DGame with
     assert(!inputAllowed);
 
     // TODO(adil192): Animate the slimes jumping into the water
-    await Future.delayed(const Duration(milliseconds: 500));
+    // await Future.delayed(const Duration(milliseconds: 500));
 
     if (showGameOverDialog != null) {
       await showGameOverDialog!.call();
