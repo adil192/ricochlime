@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
@@ -19,6 +20,7 @@ void main() async {
   Prefs.init();
   AdState.init();
   _addLicenses();
+  GoogleFonts.config.allowRuntimeFetching = false;
 
   await Prefs.highScore.waitUntilLoaded();
 
