@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/foundation.dart';
@@ -164,20 +163,38 @@ class _BannerAdWidgetState extends State<BannerAdWidget> with AutomaticKeepAlive
 
     late final colorScheme = Theme.of(context).colorScheme;
 
+    const nesPadding = EdgeInsets.all(3);
+
     return FittedBox(
       fit: BoxFit.fitWidth,
-      child: NesContainer(
-        width: widget.adSize.width.toDouble(),
-        height: widget.adSize.height.toDouble(),
-        padding: EdgeInsets.zero,
-        child: _bannerAd == null
-            ? Center(
-                child: FaIcon(
-                  FontAwesomeIcons.rectangleAd,
-                  color: colorScheme.onSurface.withOpacity(0.5),
-                ),
-              )
-            : AdWidget(ad: _bannerAd!),
+      child: Stack(
+        children: [
+          Positioned.fill(
+            left: nesPadding.left,
+            right: nesPadding.right,
+            top: nesPadding.top,
+            bottom: nesPadding.bottom,
+            child: _bannerAd == null
+                ? Center(
+                    child: FaIcon(
+                      FontAwesomeIcons.rectangleAd,
+                      color: colorScheme.onSurface.withOpacity(0.5),
+                    ),
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      nesPadding.horizontal * 1.5,
+                    ),
+                    child: AdWidget(ad: _bannerAd!),
+                  ),
+          ),
+          NesContainer(
+            width: widget.adSize.width + nesPadding.left + nesPadding.right,
+            height: widget.adSize.height + nesPadding.top + nesPadding.bottom,
+            padding: nesPadding,
+            backgroundColor: Colors.transparent,
+          ),
+        ],
       ),
     );
   }
