@@ -128,7 +128,7 @@ class _PlayPageState extends State<PlayPage> {
               child: IgnorePointer(
                 child: Column(
                   children: [
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 4),
                     ValueListenableBuilder(
                       valueListenable: Prefs.highScore,
                       builder: (context, highScore, child) => Text(
@@ -143,6 +143,7 @@ class _PlayPageState extends State<PlayPage> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 4),
                     ValueListenableBuilder(
                       valueListenable: _score,
                       builder: (context, score, child) => Text(
