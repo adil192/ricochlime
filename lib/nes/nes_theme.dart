@@ -22,6 +22,9 @@ ThemeData nesThemeFrom({
       darkLabelColor: brightness == Brightness.light
           ? colorScheme.onSurface
           : colorScheme.onPrimary,
+      borderColor: brightness == Brightness.light
+          ? Colors.black
+          : colorScheme.onPrimary,
     )
   ).copyWith(
     useMaterial3: true,
