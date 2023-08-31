@@ -167,34 +167,37 @@ class _BannerAdWidgetState extends State<BannerAdWidget> with AutomaticKeepAlive
 
     return FittedBox(
       fit: BoxFit.fitWidth,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            left: nesPadding.left,
-            right: nesPadding.right,
-            top: nesPadding.top,
-            bottom: nesPadding.bottom,
-            child: _bannerAd == null
-                ? Center(
-                    child: FaIcon(
-                      FontAwesomeIcons.rectangleAd,
-                      color: colorScheme.onSurface.withOpacity(0.5),
+      child: Padding(
+        padding: const EdgeInsets.all(3),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              left: nesPadding.left,
+              right: nesPadding.right,
+              top: nesPadding.top,
+              bottom: nesPadding.bottom,
+              child: _bannerAd == null
+                  ? Center(
+                      child: FaIcon(
+                        FontAwesomeIcons.rectangleAd,
+                        color: colorScheme.onSurface.withOpacity(0.5),
+                      ),
+                    )
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        nesPadding.horizontal * 1.5,
+                      ),
+                      child: AdWidget(ad: _bannerAd!),
                     ),
-                  )
-                : ClipRRect(
-                    borderRadius: BorderRadius.circular(
-                      nesPadding.horizontal * 1.5,
-                    ),
-                    child: AdWidget(ad: _bannerAd!),
-                  ),
-          ),
-          NesContainer(
-            width: widget.adSize.width + nesPadding.left + nesPadding.right,
-            height: widget.adSize.height + nesPadding.top + nesPadding.bottom,
-            padding: nesPadding,
-            backgroundColor: Colors.transparent,
-          ),
-        ],
+            ),
+            NesContainer(
+              width: widget.adSize.width + nesPadding.left + nesPadding.right,
+              height: widget.adSize.height + nesPadding.top + nesPadding.bottom,
+              padding: nesPadding,
+              backgroundColor: Colors.transparent,
+            ),
+          ],
+        ),
       ),
     );
   }
