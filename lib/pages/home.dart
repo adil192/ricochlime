@@ -12,34 +12,38 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              t.appName,
-              style: const TextStyle(
-                fontSize: kToolbarHeight,
-              ),
+      body: Center(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  t.appName,
+                  style: const TextStyle(
+                    fontSize: kToolbarHeight,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                _HomePageButton(
+                  text: t.homePage.playButton,
+                  openBuilder: (context, closeContainer) => const PlayPage(),
+                ),
+                const SizedBox(height: 32),
+                _HomePageButton(
+                  text: t.homePage.tutorialButton,
+                  openBuilder: (context, closeContainer) => const TutorialPage(),
+                ),
+                const SizedBox(height: 32),
+                _HomePageButton(
+                  text: t.homePage.settingsButton,
+                  openBuilder: (context, closeContainer) => const SettingsPage(),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 32),
-          _HomePageButton(
-            text: t.homePage.playButton,
-            openBuilder: (context, closeContainer) => const PlayPage(),
-          ),
-          const SizedBox(height: 32),
-          _HomePageButton(
-            text: t.homePage.tutorialButton,
-            openBuilder: (context, closeContainer) => const TutorialPage(),
-          ),
-          const SizedBox(height: 32),
-          _HomePageButton(
-            text: t.homePage.settingsButton,
-            openBuilder: (context, closeContainer) => const SettingsPage(),
-          ),
-        ],
+        ),
       ),
     );
   }
