@@ -88,7 +88,13 @@ jobs:
 
       - name: Build for macOS
         run: |
+          sudo chown -R $USER .
+          sudo chmod -R a+rwx .
+
           flutter build macos
+
+          sudo chown -R $USER .
+          sudo chmod -R a+rwx .
 
       - name: Package for App Store
         id: package
@@ -107,6 +113,9 @@ jobs:
                   | xargs)
           xcrun productsign --sign "$INSTALLER_CERT_NAME" unsigned.pkg "$PACKAGE_NAME"
           rm -f unsigned.pkg
+
+          sudo chown -R $USER .
+          sudo chmod -R a+rwx .
 
       - name: Compress macOS build
         id: compress
