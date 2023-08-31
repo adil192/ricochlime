@@ -1,0 +1,3 @@
+• Added images to the tutorial
+• Revamped the UI
+• Fixed a visual bug with overlapping slimes

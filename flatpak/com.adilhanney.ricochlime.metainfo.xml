@@ -58,6 +58,15 @@
     </screenshots>
 
     <releases>
+        <release version="0.5.2" type="development" date="2023-08-31">
+            <description>
+                <ul>
+                    <li>Added images to the tutorial</li>
+                    <li>Revamped the UI</li>
+                    <li>Fixed a visual bug with overlapping slimes</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.5.1" type="development" date="2023-08-21">
             <description>
                 <ul>
