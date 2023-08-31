@@ -194,7 +194,6 @@ class _BannerAdWidgetState extends State<BannerAdWidget> with AutomaticKeepAlive
               width: widget.adSize.width + nesPadding.left + nesPadding.right,
               height: widget.adSize.height + nesPadding.top + nesPadding.bottom,
               padding: nesPadding,
-              backgroundColor: Colors.transparent,
             ),
           ],
         ),

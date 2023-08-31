@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 ThemeData nesThemeFrom({
   required Brightness brightness,
   required ColorScheme colorScheme,
 }) {
+  final textTheme = _getTextTheme(brightness);
   return flutterNesTheme(
     brightness: brightness,
     primaryColor: colorScheme.primary,
@@ -24,12 +26,17 @@ ThemeData nesThemeFrom({
           : colorScheme.onPrimary,
       borderColor: brightness == Brightness.light
           ? Colors.black
-          : colorScheme.onPrimary,
-    )
+          : RicochlimePalette.grassColorDark,
+    ),
+    nesContainerTheme: NesContainerTheme(
+      borderColor: RicochlimePalette.grassColorDark,
+      backgroundColor: Colors.transparent,
+      labelTextStyle: textTheme.labelMedium ?? const TextStyle(),
+    ),
   ).copyWith(
     useMaterial3: true,
     colorScheme: colorScheme,
-    textTheme: _getTextTheme(brightness),
+    textTheme: textTheme,
   );
 }
 
