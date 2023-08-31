@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
@@ -113,10 +114,10 @@ class _PlayPageState extends State<PlayPage> {
               start: 0,
               child: IconButton(
                 onPressed: () => Navigator.of(context).pop(),
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white.withOpacity(0.9),
-                  size: 32,
+                icon: NesIcon(
+                  iconData: NesIcons.instance.leftArrowIndicator,
+                  primaryColor: Colors.white.withOpacity(0.9),
+                  size: const Size.square(20),
                 ),
               ),
             ),

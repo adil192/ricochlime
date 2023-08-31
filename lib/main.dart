@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
+import 'package:ricochlime/nes/nes_theme.dart';
 import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
@@ -45,15 +45,6 @@ void _addLicenses() {
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  static TextTheme _getTextTheme(Brightness brightness) {
-    final baseTheme = ThemeData(brightness: brightness);
-    if (Prefs.hyperlegibleFont.value) {
-      return GoogleFonts.atkinsonHyperlegibleTextTheme(baseTheme.textTheme);
-    } else {
-      return GoogleFonts.silkscreenTextTheme(baseTheme.textTheme);
-    }
-  }
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -86,34 +77,26 @@ class _MyAppState extends State<MyApp> {
 
       debugShowCheckedModeBanner: false,
 
-      theme: ThemeData(
-        useMaterial3: true,
+      theme: nesThemeFrom(
         brightness: Brightness.light,
         colorScheme: ColorScheme.fromSeed(
           seedColor: RicochlimePalette.grassColor,
         ),
-        textTheme: MyApp._getTextTheme(Brightness.light),
       ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
+      darkTheme: nesThemeFrom(
         brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
           seedColor: RicochlimePalette.grassColor,
           brightness: Brightness.dark,
         ),
-        textTheme: MyApp._getTextTheme(Brightness.dark),
       ),
-      highContrastTheme: ThemeData(
-        useMaterial3: true,
+      highContrastTheme: nesThemeFrom(
         brightness: Brightness.light,
         colorScheme: const ColorScheme.highContrastLight(),
-        textTheme: MyApp._getTextTheme(Brightness.light),
       ),
-      highContrastDarkTheme: ThemeData(
-        useMaterial3: true,
+      highContrastDarkTheme: nesThemeFrom(
         brightness: Brightness.dark,
         colorScheme: const ColorScheme.highContrastDark(),
-        textTheme: MyApp._getTextTheme(Brightness.dark),
       ),
     );
   }

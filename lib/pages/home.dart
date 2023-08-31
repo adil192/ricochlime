@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
@@ -58,16 +59,9 @@ class _HomePageButton<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: OpenContainer(
-        closedBuilder: (context, openContainer) => ElevatedButton(
+        closedBuilder: (context, openContainer) => NesButton(
           onPressed: openContainer,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.symmetric(
-                horizontal: 32,
-                vertical: 16,
-              ),
-            ),
-          ),
+          type: NesButtonType.primary,
           child: Text(
             text,
             style: const TextStyle(
@@ -77,9 +71,6 @@ class _HomePageButton<T> extends StatelessWidget {
         ),
         closedColor: Colors.transparent,
         closedElevation: 0,
-        closedShape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(32)),
-        ),
         openBuilder: openBuilder,
         clipBehavior: Clip.none,
       ),
