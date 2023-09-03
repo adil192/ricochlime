@@ -81,20 +81,10 @@ abstract class AdState {
     assert(_initializeCompleted == false);
     _initializeStarted = true;
     await MobileAds.instance.initialize();
-    await MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
-      maxAdContentRating: switch (age) {
-        < 13 => MaxAdContentRating.pg, // parental guidance
-        < 18 => MaxAdContentRating.t, // teen
-        _ => MaxAdContentRating.ma, // mature audiences
-      },
-      tagForChildDirectedTreatment: age < minAgeForPersonalizedAds
-          ? TagForChildDirectedTreatment.yes
-          : TagForChildDirectedTreatment.no,
-      tagForUnderAgeOfConsent: age < minAgeForPersonalizedAds
-          ? TagForUnderAgeOfConsent.yes
-          : TagForUnderAgeOfConsent.no,
-    ));
     _initializeCompleted = true;
+
+    updateRequestConfiguration();
+    Prefs.birthYear.addListener(updateRequestConfiguration);
   }
 
   static void _checkForRequiredConsent() {
@@ -125,6 +115,28 @@ abstract class AdState {
       },
       (formError) {},
     );
+  }
+  
+  static void updateRequestConfiguration() async {
+    final age = AdState.age;
+    await MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
+      maxAdContentRating: switch (age) {
+        null => MaxAdContentRating.pg, // parental guidance
+        < 13 => MaxAdContentRating.pg, // parental guidance
+        < 18 => MaxAdContentRating.t, // teen
+        _ => MaxAdContentRating.ma, // mature audiences
+      },
+      tagForChildDirectedTreatment: switch (age) {
+        null => TagForChildDirectedTreatment.unspecified,
+        < 13 => TagForChildDirectedTreatment.yes,
+        _ => TagForChildDirectedTreatment.no,
+      },
+      tagForUnderAgeOfConsent: switch (age) {
+        null => TagForUnderAgeOfConsent.unspecified,
+        < 13 => TagForUnderAgeOfConsent.yes,
+        _ => TagForUnderAgeOfConsent.no,
+      },
+    ));
   }
 
   static Future<BannerAd?> _createBannerAd(AdSize adSize) async {
