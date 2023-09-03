@@ -24,11 +24,15 @@ abstract class Prefs {
 
   static late final PlainPref<bool> hyperlegibleFont;
 
+  static late final PlainPref<int?> birthYear;
+
   static void init() {
     currentGame = PlainPref('currentGame', null);
     highScore = PlainPref('highScore', 0);
 
     hyperlegibleFont = PlainPref('hyperlegibleFont', false);
+
+    birthYear = PlainPref('birthYear', null);
   }
 }
 
@@ -118,6 +122,7 @@ class PlainPref<T> extends IPref<T> {
     super.deprecatedKeys,
   }): assert(
     T == bool || T == int || T == double || T == String
+      || T == typeOf<int?>()
       || T == typeOf<Uint8List?>()
       || T == typeOf<List<String>>() || T == typeOf<Set<String>>()
       || T == typeOf<Queue<String>>()
@@ -162,8 +167,12 @@ class PlainPref<T> extends IPref<T> {
 
       if (T == bool) {
         return await _prefs!.setBool(key, value as bool);
-      } else if (T == int) {
-        return await _prefs!.setInt(key, value as int);
+      } else if (T == int || T == typeOf<int?>()) {
+        if (value == null) {
+          return await _prefs!.remove(key);
+        } else {
+          return await _prefs!.setInt(key, value as int);
+        }
       } else if (T == double) {
         return await _prefs!.setDouble(key, value as double);
       } else if (T == typeOf<Uint8List?>()) {

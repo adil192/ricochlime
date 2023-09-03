@@ -18,11 +18,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
   Prefs.init();
-  AdState.init();
   _addLicenses();
   GoogleFonts.config.allowRuntimeFetching = false;
 
-  await Prefs.highScore.waitUntilLoaded();
+  await Future.wait([
+    Prefs.highScore.waitUntilLoaded(),
+    Prefs.birthYear.waitUntilLoaded(),
+  ]);
+
+  AdState.init();
 
   runApp(TranslationProvider(child: const MyApp()));
 }

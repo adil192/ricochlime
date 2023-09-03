@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nes_ui/nes_ui.dart';
+import 'package:ricochlime/utils/prefs.dart';
 
 export 'package:google_mobile_ads/google_mobile_ads.dart' show AdSize;
 
@@ -16,6 +17,15 @@ abstract class AdState {
   static late final String _bannerAdUnitId;
 
   static bool get adsSupported => _bannerAdUnitId.isNotEmpty;
+
+  static const int minAgeForPersonalizedAds = 13;
+  static int? get age {
+    final birthYear = Prefs.birthYear.value;
+    if (birthYear == null) return null;
+
+    // Subtract 1 because the user might not have had their birthday yet this year.
+    return DateTime.now().year - birthYear - 1;
+  }
 
   static void init() {
     if (kDebugMode) { // test ads
@@ -46,25 +56,44 @@ abstract class AdState {
   static void _startInitialize() async {
     if (_initializeStarted) return;
 
-    if (!kIsWeb && Platform.isIOS) {
-      var status = await AppTrackingTransparency.trackingAuthorizationStatus;
-      if (status == TrackingStatus.notDetermined) {
-        // wait to avoid crash
-        await Future.delayed(const Duration(seconds: 3));
+    // We need to know the user's age to determine if we can use personalized ads.
+    final age = AdState.age;
+    if (age == null) return;
 
-        status = await AppTrackingTransparency.requestTrackingAuthorization();
-      }
-      if (status == TrackingStatus.authorized) {
+    if (age >= minAgeForPersonalizedAds) {
+      if (!kIsWeb && Platform.isIOS) {
+        var status = await AppTrackingTransparency.trackingAuthorizationStatus;
+        if (status == TrackingStatus.notDetermined) {
+          // wait to avoid crash
+          await Future.delayed(const Duration(seconds: 3));
+
+          status = await AppTrackingTransparency.requestTrackingAuthorization();
+        }
+        if (status == TrackingStatus.authorized) {
+          _checkForRequiredConsent();
+        }
+      } else {
         _checkForRequiredConsent();
       }
-    } else {
-      _checkForRequiredConsent();
     }
 
     assert(_bannerAdUnitId.isNotEmpty);
     assert(_initializeCompleted == false);
     _initializeStarted = true;
     await MobileAds.instance.initialize();
+    await MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
+      maxAdContentRating: switch (age) {
+        < 13 => MaxAdContentRating.pg, // parental guidance
+        < 18 => MaxAdContentRating.t, // teen
+        _ => MaxAdContentRating.ma, // mature audiences
+      },
+      tagForChildDirectedTreatment: age < minAgeForPersonalizedAds
+          ? TagForChildDirectedTreatment.yes
+          : TagForChildDirectedTreatment.no,
+      tagForUnderAgeOfConsent: age < minAgeForPersonalizedAds
+          ? TagForUnderAgeOfConsent.yes
+          : TagForUnderAgeOfConsent.no,
+    ));
     _initializeCompleted = true;
   }
 
