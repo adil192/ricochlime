@@ -7,14 +7,16 @@ playPage:
   highScore: "Best: $p"
 settingsPage:
   title: Settings
-  birthYear: Your birth year
-  birthYearUnknown: Unknown
   adConsent: Change ad consent
   hyperlegibleFont: Use the Atkinson Hyperlegible font
   appInfo: App info
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
+birthYear:
+  yourBirthYear: Your birth year
+  unknown: Unknown
+  reason: We need to know your birth year to make sure the ads you see are appropriate for your age.
 gameOverPage:
   title: Game over!
   highScoreNotBeaten: You scored $p points!
@@ -29,3 +31,6 @@ tutorialPage:
   tapSpeedUp: Tap the screen to speed up your shots.
   dangerZone: If a slime reaches the danger zone, you'll lose on your next turn if you don't defeat it.
   moreSlimes: More rows of slimes will spawn each turn as you progress, so the danger zone will also get bigger.
+common:
+  cancel: Cancel
+  ok: Okay

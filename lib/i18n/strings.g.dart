@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 24
+/// Strings: 27
 ///
-/// Built on 2023-09-04 at 00:46 UTC
+/// Built on 2023-09-04 at 16:14 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -146,8 +146,10 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	late final _StringsHomePageEn homePage = _StringsHomePageEn._(_root);
 	late final _StringsPlayPageEn playPage = _StringsPlayPageEn._(_root);
 	late final _StringsSettingsPageEn settingsPage = _StringsSettingsPageEn._(_root);
+	late final _StringsBirthYearEn birthYear = _StringsBirthYearEn._(_root);
 	late final _StringsGameOverPageEn gameOverPage = _StringsGameOverPageEn._(_root);
 	late final _StringsTutorialPageEn tutorialPage = _StringsTutorialPageEn._(_root);
+	late final _StringsCommonEn common = _StringsCommonEn._(_root);
 }
 
 // Path: homePage
@@ -180,12 +182,22 @@ class _StringsSettingsPageEn {
 
 	// Translations
 	String get title => 'Settings';
-	String get birthYear => 'Your birth year';
-	String get birthYearUnknown => 'Unknown';
 	String get adConsent => 'Change ad consent';
 	String get hyperlegibleFont => 'Use the Atkinson Hyperlegible font';
 	String get appInfo => 'App info';
 	String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
+}
+
+// Path: birthYear
+class _StringsBirthYearEn {
+	_StringsBirthYearEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get yourBirthYear => 'Your birth year';
+	String get unknown => 'Unknown';
+	String get reason => 'We need to know your birth year to make sure the ads you see are appropriate for your age.';
 }
 
 // Path: gameOverPage
@@ -222,4 +234,15 @@ class _StringsTutorialPageEn {
 	String get tapSpeedUp => 'Tap the screen to speed up your shots.';
 	String get dangerZone => 'If a slime reaches the danger zone, you\'ll lose on your next turn if you don\'t defeat it.';
 	String get moreSlimes => 'More rows of slimes will spawn each turn as you progress, so the danger zone will also get bigger.';
+}
+
+// Path: common
+class _StringsCommonEn {
+	_StringsCommonEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get cancel => 'Cancel';
+	String get ok => 'Okay';
 }

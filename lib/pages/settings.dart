@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:collapsible/collapsible.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
+import 'package:ricochlime/ads/birth_year_dialog.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/version.dart';
@@ -24,15 +25,18 @@ class SettingsPage extends StatelessWidget {
           if (AdState.adsSupported) ...[
             ListTile(
               onTap: () {
-                // TODO(adil192): show dialog to select birth year
+                showDialog(
+                  context: context,
+                  builder: (context) => const BirthYearDialog(),
+                );
               },
-              title: Text(t.settingsPage.birthYear),
+              title: Text(t.birthYear.yourBirthYear),
               trailing: ValueListenableBuilder(
                 valueListenable: Prefs.birthYear,
                 builder: (context, birthYear, child) {
                   return Text(
                     switch (birthYear) {
-                      null => t.settingsPage.birthYearUnknown,
+                      null => t.birthYear.unknown,
                       _ => '$birthYear',
                     },
                   );
