@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
+import 'package:ricochlime/main.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
 import 'package:ricochlime/pages/tutorial.dart';
@@ -11,8 +12,17 @@ import 'package:ricochlime/utils/brightness_extension.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  static bool handledConsent = false;
+
   @override
   Widget build(BuildContext context) {
+    if (!handledConsent) {
+      handledConsent = true;
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        handleCurrentConsentStage(context);
+      });
+    }
+
     final colorScheme = Theme.of(context).colorScheme;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(

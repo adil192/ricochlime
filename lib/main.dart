@@ -50,7 +50,7 @@ void _addLicenses() {
   });
 }
 
-void _handleCurrentConsentStage(BuildContext context) async {
+void handleCurrentConsentStage(BuildContext context) async {
   if (kIsWeb) return;
   if (!Platform.isAndroid && !Platform.isIOS) return;
 
@@ -79,8 +79,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool handledConsent = false;
-
   @override
   void initState() {
     super.initState();
@@ -95,15 +93,6 @@ class _MyAppState extends State<MyApp> {
 
   void _prefListener() {
     setState(() {});
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!handledConsent) {
-      handledConsent = true;
-      _handleCurrentConsentStage(context);
-    }
   }
 
   @override
