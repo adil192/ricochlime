@@ -58,6 +58,13 @@
     </screenshots>
 
     <releases>
+        <release version="0.5.3" type="development" date="2023-09-04">
+            <description>
+                <ul>
+                    <li>No changes for the Linux version</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.5.2" type="development" date="2023-08-31">
             <description>
                 <ul>
