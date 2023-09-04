@@ -154,7 +154,12 @@ abstract class AdState {
 
     return BannerAd(
       adUnitId: _bannerAdUnitId,
-      request: const AdRequest(),
+      request: AdRequest(
+        nonPersonalizedAds: switch (Prefs.consentStage.value) {
+          ConsentStage.askForBirthYear => true,
+          ConsentStage.askForPersonalizedAds => null,
+        },
+      ),
       size: adSize,
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
