@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
+import 'package:ricochlime/ads/birth_year_dialog.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
 import 'package:ricochlime/pages/home.dart';
@@ -26,8 +29,6 @@ void main() async {
     Prefs.birthYear.waitUntilLoaded(),
   ]);
 
-  AdState.init();
-
   runApp(TranslationProvider(child: const MyApp()));
 }
 
@@ -48,6 +49,20 @@ void _addLicenses() {
   });
 }
 
+void _handleCurrentConsentStage(BuildContext context) async {
+  if (kIsWeb) return;
+  if (!Platform.isAndroid && !Platform.isIOS) return;
+
+  if (Prefs.birthYear.value == null) {
+    await showDialog(
+      context: context,
+      builder: (context) => const BirthYearDialog(),
+    );
+  }
+
+  AdState.init();
+}
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -56,6 +71,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool handledConsent = false;
+
   @override
   void initState() {
     super.initState();
@@ -70,6 +87,15 @@ class _MyAppState extends State<MyApp> {
 
   void _prefListener() {
     setState(() {});
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!handledConsent) {
+      handledConsent = true;
+      _handleCurrentConsentStage(context);
+    }
   }
 
   @override
