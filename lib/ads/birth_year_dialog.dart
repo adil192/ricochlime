@@ -6,7 +6,10 @@ import 'package:ricochlime/utils/prefs.dart';
 class BirthYearDialog extends StatefulWidget {
   const BirthYearDialog({
     super.key,
+    this.dismissible = true,
   });
+
+  final bool dismissible;
 
   @override
   State<BirthYearDialog> createState() => _BirthYearDialogState();
@@ -45,7 +48,7 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
         ),
       ),
       actions: [
-        TextButton(
+        if (widget.dismissible) TextButton(
           onPressed: () {
             context.pop();
           },

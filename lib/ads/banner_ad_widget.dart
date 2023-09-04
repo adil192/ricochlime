@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nes_ui/nes_ui.dart';
+import 'package:ricochlime/ads/consent_stage.dart';
 import 'package:ricochlime/utils/prefs.dart';
 
 export 'package:google_mobile_ads/google_mobile_ads.dart' show AdSize;
@@ -56,11 +57,10 @@ abstract class AdState {
   static void _startInitialize() async {
     if (_initializeStarted) return;
 
-    // We need to know the user's age to determine if we can use personalized ads.
     final age = AdState.age;
-    if (age == null) return;
-
-    if (age >= minAgeForPersonalizedAds) {
+    final correctConsentStage = Prefs.consentStage.value == ConsentStage.askForPersonalizedAds;
+    final canConsent = age != null && age >= minAgeForPersonalizedAds;
+    if (correctConsentStage && canConsent) {
       if (!kIsWeb && Platform.isIOS) {
         var status = await AppTrackingTransparency.trackingAuthorizationStatus;
         if (status == TrackingStatus.notDetermined) {
@@ -127,12 +127,12 @@ abstract class AdState {
         _ => MaxAdContentRating.ma, // mature audiences
       },
       tagForChildDirectedTreatment: switch (age) {
-        null => TagForChildDirectedTreatment.unspecified,
+        null => TagForChildDirectedTreatment.yes,
         < 13 => TagForChildDirectedTreatment.yes,
         _ => TagForChildDirectedTreatment.no,
       },
       tagForUnderAgeOfConsent: switch (age) {
-        null => TagForUnderAgeOfConsent.unspecified,
+        null => TagForUnderAgeOfConsent.yes,
         < 13 => TagForUnderAgeOfConsent.yes,
         _ => TagForUnderAgeOfConsent.no,
       },
