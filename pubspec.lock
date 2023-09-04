@@ -65,6 +65,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  collapsible:
+    dependency: "direct main"
+    description:
+      name: collapsible
+      sha256: d57126aba739f918562dd9e2ce8435cbfc446d52cf02befcaf22f75c01824ee8
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   collection:
     dependency: transitive
     description:

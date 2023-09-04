@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 22
+/// Strings: 24
 ///
-/// Built on 2023-08-26 at 23:48 UTC
+/// Built on 2023-09-04 at 00:46 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -180,6 +180,8 @@ class _StringsSettingsPageEn {
 
 	// Translations
 	String get title => 'Settings';
+	String get birthYear => 'Your birth year';
+	String get birthYearUnknown => 'Unknown';
 	String get adConsent => 'Change ad consent';
 	String get hyperlegibleFont => 'Use the Atkinson Hyperlegible font';
 	String get appInfo => 'App info';

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:collapsible/collapsible.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
@@ -20,13 +21,44 @@ class SettingsPage extends StatelessWidget {
       body: ListView(
         children: [
           // ad consent
-          if (AdState.adsSupported)
+          if (AdState.adsSupported) ...[
             ListTile(
               onTap: () {
-                AdState.showConsentForm();
+                // TODO(adil192): show dialog to select birth year
               },
-              title: Text(t.settingsPage.adConsent),
+              title: Text(t.settingsPage.birthYear),
+              trailing: ValueListenableBuilder(
+                valueListenable: Prefs.birthYear,
+                builder: (context, birthYear, child) {
+                  return Text(
+                    switch (birthYear) {
+                      null => t.settingsPage.birthYearUnknown,
+                      _ => '$birthYear',
+                    },
+                  );
+                },
+              ),
             ),
+
+            ValueListenableBuilder(
+              valueListenable: Prefs.birthYear,
+              builder: (context, birthYear, child) {
+                final age = AdState.age;
+                final collapsed = age == null || age < AdState.minAgeForPersonalizedAds;
+                return Collapsible(
+                  collapsed: collapsed,
+                  axis: CollapsibleAxis.vertical,
+                  child: child!,
+                );
+              },
+              child: ListTile(
+                onTap: () {
+                  AdState.showConsentForm();
+                  },
+                title: Text(t.settingsPage.adConsent),
+              ),
+            ),
+          ],
 
           // Hyperlegible font
           ValueListenableBuilder(

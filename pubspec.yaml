@@ -59,6 +59,8 @@ dependencies:
 
   nes_ui: ^0.7.0
 
+  collapsible: ^1.0.0
+
 dev_dependencies:
   flutter_lints: ^2.0.2
 
