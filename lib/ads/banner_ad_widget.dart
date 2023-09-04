@@ -75,6 +75,8 @@ abstract class AdState {
       } else {
         _checkForRequiredConsent();
       }
+    } else {
+      _checkForRequiredConsent(shouldShowConsentForm: false);
     }
 
     assert(_bannerAdUnitId.isNotEmpty);
@@ -87,7 +89,9 @@ abstract class AdState {
     Prefs.birthYear.addListener(updateRequestConfiguration);
   }
 
-  static void _checkForRequiredConsent() {
+  static void _checkForRequiredConsent({
+    bool shouldShowConsentForm = true,
+  }) {
     final params = ConsentRequestParameters();
     ConsentInformation.instance.requestConsentInfoUpdate(
       params,
@@ -95,7 +99,11 @@ abstract class AdState {
         final status = await ConsentInformation.instance.getConsentStatus();
         if (status != ConsentStatus.required) return;
         if (await ConsentInformation.instance.isConsentFormAvailable()) {
-          showConsentForm();
+          if (shouldShowConsentForm) {
+            showConsentForm();
+          } else {
+            // otherwise, the form is kept locally and can be shown later
+          }
         }
       },
       (formError) {},
