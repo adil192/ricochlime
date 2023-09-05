@@ -58,10 +58,10 @@
     </screenshots>
 
     <releases>
-        <release version="0.5.3" type="development" date="2023-09-04">
+        <release version="0.5.4" type="development" date="2023-09-05">
             <description>
                 <ul>
-                    <li>No changes for the Linux version</li>
+                    <li>Home screen improvements</li>
                 </ul>
             </description>
         </release>
