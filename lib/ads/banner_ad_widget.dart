@@ -9,6 +9,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/consent_stage.dart';
 import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 export 'package:google_mobile_ads/google_mobile_ads.dart' show AdSize;
 
@@ -225,6 +226,12 @@ class _BannerAdWidgetState extends State<BannerAdWidget> with AutomaticKeepAlive
         padding: const EdgeInsets.all(3),
         child: Stack(
           children: [
+            NesContainer(
+              width: widget.adSize.width + nesPadding.left + nesPadding.right,
+              height: widget.adSize.height + nesPadding.top + nesPadding.bottom,
+              padding: nesPadding,
+              backgroundColor: RicochlimePalette.grassColor,
+            ),
             Positioned.fill(
               left: nesPadding.left,
               right: nesPadding.right,
