@@ -48,6 +48,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
+                    type: NesButtonType.primary,
                     text: t.homePage.playButton,
                     openBuilder: (context, closeContainer) => const PlayPage(),
                   ),
@@ -74,10 +75,12 @@ class HomePage extends StatelessWidget {
 class _HomePageButton<T> extends StatelessWidget {
   const _HomePageButton({
     super.key,
+    this.type = NesButtonType.normal,
     required this.text,
     required this.openBuilder,
   });
 
+  final NesButtonType type;
   final String text;
   final OpenContainerBuilder<T> openBuilder;
 
@@ -87,7 +90,7 @@ class _HomePageButton<T> extends StatelessWidget {
       child: OpenContainer(
         closedBuilder: (context, openContainer) => NesButton(
           onPressed: openContainer,
-          type: NesButtonType.primary,
+          type: type,
           child: Text(
             text,
             style: const TextStyle(

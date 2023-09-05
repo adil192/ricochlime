@@ -13,7 +13,11 @@ ThemeData nesThemeFrom({
     brightness: brightness,
     primaryColor: colorScheme.primary,
     nesButtonTheme: NesButtonTheme(
-      normal: colorScheme.surface,
+      normal: Color.lerp(
+        colorScheme.surface,
+        colorScheme.primary,
+        0.3,
+      ) ?? colorScheme.primary,
       primary: colorScheme.primary,
       success: colorScheme.primary,
       warning: colorScheme.error,
