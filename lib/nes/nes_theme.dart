@@ -37,6 +37,10 @@ ThemeData nesThemeFrom({
       backgroundColor: Colors.transparent,
       labelTextStyle: textTheme.labelMedium ?? const TextStyle(),
     ),
+    nesIconTheme: NesIconTheme(
+      primary: colorScheme.onSurface,
+      secondary: colorScheme.onPrimary,
+    ),
   ).copyWith(
     useMaterial3: true,
     colorScheme: colorScheme,

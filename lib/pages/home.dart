@@ -106,11 +106,11 @@ class _HomePageButton<T> extends StatelessWidget {
                 // TODO(adil192): remove after https://github.com/erickzanardo/nes_ui/issues/70
                 primaryColor: switch (type) {
                   NesButtonType.primary => colorScheme.onPrimary,
-                  _ => colorScheme.onSurface,
+                  _ => null,
                 },
                 secondaryColor: switch (type) {
                   NesButtonType.primary => colorScheme.primary,
-                  _ => colorScheme.onPrimary,
+                  _ => null,
                 }
               ),
               const SizedBox(width: 16),

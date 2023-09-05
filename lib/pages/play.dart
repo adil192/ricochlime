@@ -128,7 +128,7 @@ class _PlayPageState extends State<PlayPage> {
                   icon: NesIcon(
                     iconData: NesIcons.instance.leftArrowIndicator,
                     primaryColor: colorScheme.onPrimary.withOpacity(0.9),
-                    secondaryColor: colorScheme.primary.withOpacity(0.9),
+                    secondaryColor: colorScheme.onSurface.withOpacity(0.9),
                     size: const Size.square(20),
                   ),
                 ),
