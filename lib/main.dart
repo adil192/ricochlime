@@ -30,6 +30,8 @@ void main() async {
     Prefs.birthYear.waitUntilLoaded(),
   ]);
 
+  AdState.init();
+
   runApp(TranslationProvider(child: const MyApp()));
 }
 
@@ -68,7 +70,9 @@ void handleCurrentConsentStage(BuildContext context) async {
     Prefs.consentStage.value = Prefs.consentStage.value.next;
   }
 
-  AdState.init();
+  if (Prefs.consentStage.value == ConsentStage.askForPersonalizedAds) {
+    AdState.showConsentForm();
+  }
 }
 
 class MyApp extends StatefulWidget {
