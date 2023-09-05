@@ -67,6 +67,12 @@ class SettingsPage extends StatelessWidget {
                           null => t.birthYear.unknown,
                           _ => '$birthYear',
                         },
+                        style: TextStyle(
+                          fontSize: switch (birthYear) {
+                            null => null,
+                            _ => 18,
+                          },
+                        ),
                       );
                     },
                   ),
