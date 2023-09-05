@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
                       fontSize: kToolbarHeight,
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 64),
                   _HomePageButton(
                     type: NesButtonType.primary,
                     icon: NesIcons.instance.rightArrowIndicator,
