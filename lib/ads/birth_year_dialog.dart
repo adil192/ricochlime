@@ -16,7 +16,9 @@ class BirthYearDialog extends StatefulWidget {
 }
 
 class _BirthYearDialogState extends State<BirthYearDialog> {
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime(
+    Prefs.birthYear.value ?? DateTime.now().year,
+  );
 
   @override
   Widget build(BuildContext context) {
