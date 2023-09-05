@@ -49,16 +49,19 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 32),
                   _HomePageButton(
                     type: NesButtonType.primary,
+                    icon: NesIcons.instance.rightArrowIndicator,
                     text: t.homePage.playButton,
                     openBuilder: (context, closeContainer) => const PlayPage(),
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
+                    icon: NesIcons.instance.questionMarkBlock,
                     text: t.homePage.tutorialButton,
                     openBuilder: (context, closeContainer) => const TutorialPage(),
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
+                    icon: NesIcons.instance.openFolder,
                     text: t.homePage.settingsButton,
                     openBuilder: (context, closeContainer) => const SettingsPage(),
                   ),
@@ -76,26 +79,48 @@ class _HomePageButton<T> extends StatelessWidget {
   const _HomePageButton({
     super.key,
     this.type = NesButtonType.normal,
+    required this.icon,
     required this.text,
     required this.openBuilder,
   });
 
   final NesButtonType type;
+  final NesIconData icon;
   final String text;
   final OpenContainerBuilder<T> openBuilder;
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Center(
       child: OpenContainer(
         closedBuilder: (context, openContainer) => NesButton(
           onPressed: openContainer,
           type: type,
-          child: Text(
-            text,
-            style: const TextStyle(
-              fontSize: 32,
-            ),
+          child: Row(
+            children: [
+              NesIcon(
+                iconData: icon,
+                size: const Size.square(32),
+
+                // TODO(adil192): remove after https://github.com/erickzanardo/nes_ui/issues/70
+                primaryColor: switch (type) {
+                  NesButtonType.primary => colorScheme.onPrimary,
+                  _ => colorScheme.onSurface,
+                },
+                secondaryColor: switch (type) {
+                  NesButtonType.primary => colorScheme.primary,
+                  _ => colorScheme.onPrimary,
+                }
+              ),
+              const SizedBox(width: 16),
+              Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 32,
+                ),
+              ),
+            ],
           ),
         ),
         closedColor: Colors.transparent,
