@@ -29,7 +29,7 @@ ThemeData nesThemeFrom({
           ? colorScheme.onSurface
           : colorScheme.onPrimary,
       borderColor: brightness == Brightness.light
-          ? Colors.black
+          ? colorScheme.onSurface
           : RicochlimePalette.grassColorDark,
     ),
     nesContainerTheme: NesContainerTheme(

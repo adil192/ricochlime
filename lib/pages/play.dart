@@ -127,7 +127,8 @@ class _PlayPageState extends State<PlayPage> {
                   onPressed: () => Navigator.of(context).pop(),
                   icon: NesIcon(
                     iconData: NesIcons.instance.leftArrowIndicator,
-                    primaryColor: Colors.white.withOpacity(0.9),
+                    primaryColor: colorScheme.onPrimary.withOpacity(0.9),
+                    secondaryColor: colorScheme.primary.withOpacity(0.9),
                     size: const Size.square(20),
                   ),
                 ),
