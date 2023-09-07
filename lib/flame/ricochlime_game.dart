@@ -168,6 +168,7 @@ class RicochlimeGame extends Forge2DGame with
       switch (component) {
         case (Bullet _):
         case (Slime _):
+        case (SlimeAnimation _):
           component.removeFromParent();
       }
     }

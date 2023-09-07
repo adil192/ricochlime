@@ -36,7 +36,7 @@ class Slime extends BodyComponent with ContactCallbacks {
   _SlimeMovement? _movement;
 
   /// The animated sprite component
-  late final _SlimeAnimation _animation = _SlimeAnimation();
+  late final SlimeAnimation _animation = SlimeAnimation();
   /// The health bar component
   late final HealthBar _healthBar = HealthBar(
     maxHp: maxHp,
@@ -221,10 +221,15 @@ class _SlimeMovement {
   bool get isFinished => elapsedSeconds >= totalSeconds;
 }
 
-class _SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
+/// The animated sprite component,
+/// used internally by the [Slime] class.
+///
+/// It should not be used directly,
+/// but only for type checking.
+class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     with HasGameRef<RicochlimeGame> {
 
-  _SlimeAnimation(): super(
+  SlimeAnimation(): super(
     position: Vector2(-Slime.staticWidth / 2, -Slime.staticHeight / 2),
     removeOnFinish: {
       SlimeState.dead: true,
