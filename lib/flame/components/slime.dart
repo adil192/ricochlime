@@ -36,7 +36,7 @@ class Slime extends BodyComponent with ContactCallbacks {
   _SlimeMovement? _movement;
 
   /// The animated sprite component
-  late final SlimeAnimation _animation = SlimeAnimation();
+  late final SlimeAnimation _animation = SlimeAnimation._();
   /// The health bar component
   late final HealthBar _healthBar = HealthBar(
     maxHp: maxHp,
@@ -229,7 +229,7 @@ class _SlimeMovement {
 class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     with HasGameRef<RicochlimeGame> {
 
-  SlimeAnimation(): super(
+  SlimeAnimation._(): super(
     position: Vector2(-Slime.staticWidth / 2, -Slime.staticHeight / 2),
     removeOnFinish: {
       SlimeState.dead: true,
