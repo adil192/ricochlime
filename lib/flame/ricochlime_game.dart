@@ -24,7 +24,7 @@ enum GameState {
 }
 
 class RicochlimeGame extends Forge2DGame with
-    PanDetector, TapDetector {
+    PanDetector, TapDetector, SingleGameInstance {
   RicochlimeGame({
     required this.score,
     required this.timeDilation,
