@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
@@ -410,7 +411,7 @@ class RicochlimeGame extends Forge2DGame with
           null
         else
           Slime(
-            position: Vector2(
+            initialPosition: Vector2(
               expectedWidth * i / tilesInWidth,
               Slime.topGap,
             ),

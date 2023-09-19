@@ -26,7 +26,7 @@ class Slime extends BodyComponent with ContactCallbacks {
   /// The gap at the top above the first row of slimes.
   static const topGap = staticHeight;
 
-  final Vector2 position;
+  final Vector2 initialPosition;
   final Vector2 size = Vector2(staticWidth, staticHeight);
 
   int maxHp;
@@ -57,13 +57,13 @@ class Slime extends BodyComponent with ContactCallbacks {
   bool bodyCreated = false;
 
   Slime({
-    required this.position,
+    required this.initialPosition,
     required this.maxHp,
     int? hp,
     bool? givesPlayerABullet,
   }): hp = hp ?? maxHp,
       super(
-        priority: getPriorityFromPosition(position),
+        priority: getPriorityFromPosition(initialPosition),
       ) {
     if (givesPlayerABullet != null) {
       this.givesPlayerABullet = givesPlayerABullet;
@@ -75,7 +75,7 @@ class Slime extends BodyComponent with ContactCallbacks {
   }
 
   Slime.fromJson(Map<String, dynamic> json): this(
-    position: Vector2(
+    initialPosition: Vector2(
       json['px'] as double,
       json['py'] as double,
     ),
@@ -100,7 +100,6 @@ class Slime extends BodyComponent with ContactCallbacks {
       if (_movement!.isFinished) {
         body.setType(BodyType.static);
         body.linearVelocity = Vector2.zero();
-        position.setFrom(_movement!.targetPosition);
         body.position.setFrom(_movement!.targetPosition);
         _movement = null;
         _animation.walking = false;
@@ -145,10 +144,8 @@ class Slime extends BodyComponent with ContactCallbacks {
     _movement = movement;
     _animation.walking = true;
 
-    // Create body if it hasn't been created yet,
-    // and set its starting position
+    // Create body and set its starting position
     body = createBody();
-    position.setFrom(movement.startingPosition);
     body.position.setFrom(movement.startingPosition);
 
     // Set the body's velocity
