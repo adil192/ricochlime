@@ -14,6 +14,7 @@ import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/flame/components/walls.dart';
 import 'package:ricochlime/flame/game_data.dart';
+import 'package:ricochlime/flame/ticker.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
@@ -26,6 +27,8 @@ enum GameState {
 
 class RicochlimeGame extends Forge2DGame with
     PanDetector, TapDetector, SingleGameInstance {
+  static RicochlimeGame? _instance;
+
   RicochlimeGame({
     required this.score,
     required this.timeDilation,
@@ -33,6 +36,13 @@ class RicochlimeGame extends Forge2DGame with
     gravity: Vector2.zero(),
     zoom: 1,
   ) {
+    if (_instance != null) {
+      // If we were to create and dispose a game instance,
+      // we'd need to dispose the ticker as well.
+      throw StateError('Only one instance of RicochlimeGame can be created');
+    }
+    _instance = this;
+
     /// Sets the maximum movement per time step to [Bullet.speed].
     /// This effectively sets the max time step to 1s,
     /// rather than the default value which is much lower.
@@ -50,7 +60,7 @@ class RicochlimeGame extends Forge2DGame with
   static const tilesInWidth = 8;
   static const tilesInHeight = tilesInWidth ~/ aspectRatio;
 
-  static const bulletTimeoutMs = 1 * 60 * 1000; // 1 minute
+  static const bulletTimeoutSecs = 60; // 1 minute
 
   GameState _state = GameState.idle;
   GameState get state => _state;
@@ -73,6 +83,7 @@ class RicochlimeGame extends Forge2DGame with
   int numBullets = 1;
   int numNewRowsEachRound = 1;
 
+  final Ticker ticker = Ticker();
   final ValueNotifier<double> timeDilation;
 
   Future<void> Function()? showGameOverDialog;
@@ -155,7 +166,7 @@ class RicochlimeGame extends Forge2DGame with
     inputCancelled = true;
     while (!inputAllowed) {
       // wait for the current turn to cancel gracefully
-      await Future.delayed(const Duration(milliseconds: 50));
+      await ticker.delayed(const Duration(milliseconds: 50));
     }
     assert(!inputCancelled);
 
@@ -202,9 +213,10 @@ class RicochlimeGame extends Forge2DGame with
       // e.g. when the app is resumed from background
       return;
     }
-    super.update(
-      min(dt * timeDilation.value, maxDt),
-    );
+    
+    final dilatedDt = min(dt * timeDilation.value, maxDt);
+    ticker.tick(dilatedDt);
+    super.update(dilatedDt);
   }
   @override
   void onTap() {
@@ -236,20 +248,20 @@ class RicochlimeGame extends Forge2DGame with
         );
         bullets.add(bullet);
         add(bullet);
-        await waitDilated(const Duration(milliseconds: 50));
+        await ticker.delayed(const Duration(milliseconds: 50));
         if (inputCancelled) return;
       }
 
       // wait until bullets are removed or timeout
-      var msElapsed = 0;
-      while (bullets.any((bullet) => bullet.parent != null)
-             && msElapsed < bulletTimeoutMs) {
-        msElapsed += 50;
-        await Future.delayed(const Duration(milliseconds: 50));
+      var elapsedSeconds = 0.0;
+      await for (final tick in ticker.onTick) {
         if (inputCancelled) return;
+        elapsedSeconds += tick;
+        if (bullets.every((bullet) => bullet.parent == null)) break;
+        if (elapsedSeconds >= bulletTimeoutSecs) break;
       }
 
-      if (msElapsed >= bulletTimeoutMs) {
+      if (elapsedSeconds >= bulletTimeoutSecs) {
         if (kDebugMode) {
           print('Bullet timeout reached');
         }
@@ -305,7 +317,7 @@ class RicochlimeGame extends Forge2DGame with
       }
 
       // wait for the slimes to move
-      await Future.delayed(slimeMoveDuration);
+      await ticker.delayed(slimeMoveDuration);
 
       // check if the player has lost
       if (isGameOver()) {
@@ -328,7 +340,7 @@ class RicochlimeGame extends Forge2DGame with
     assert(!inputAllowed);
 
     // TODO(adil192): Animate the slimes jumping into the water
-    // await Future.delayed(const Duration(milliseconds: 500));
+    // await ticker.delayed(const Duration(milliseconds: 500));
 
     if (showGameOverDialog != null) {
       await showGameOverDialog!.call();
@@ -350,27 +362,6 @@ class RicochlimeGame extends Forge2DGame with
     numNewRowsEachRound = 1;
     _resetChildren();
     spawnNewSlimes();
-  }
-
-  /// Waits for [duration] in 100ms increments
-  /// and applies the current time dilation.
-  /// 
-  /// This is better than just using [Future.delayed] because
-  /// [Future.delayed] looks stuttery when the time dilation
-  /// changes during the delay.
-  /// 
-  /// Note that this function isn't completely precise because
-  /// of the truncation at each iteration.
-  Future<void> waitDilated(Duration duration) async {
-    final increments = duration.inMilliseconds ~/ 100;
-    int elapsed = 0;
-
-    for (var i = 0; i < increments; i++) {
-      await Future.delayed(Duration(milliseconds: 100 ~/ timeDilation.value));
-      elapsed += 100;
-    }
-
-    await Future.delayed(Duration(milliseconds: duration.inMilliseconds - elapsed));
   }
 
   @visibleForTesting
