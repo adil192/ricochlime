@@ -32,6 +32,15 @@ class Slime extends BodyComponent with ContactCallbacks {
   int maxHp;
   int hp;
 
+  @override
+  Vector2 get position {
+    if (bodyCreated) {
+      return body.position;
+    } else {
+      return initialPosition;
+    }
+  }
+
   /// The current movement, if any
   _SlimeMovement? _movement;
 
@@ -173,7 +182,7 @@ class Slime extends BodyComponent with ContactCallbacks {
     );
 
     final bodyDef = BodyDef(
-      position: position,
+      position: initialPosition,
       fixedRotation: true,
     );
     return world.createBody(bodyDef)..createFixture(fixtureDef);
