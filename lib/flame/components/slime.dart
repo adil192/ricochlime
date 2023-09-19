@@ -192,7 +192,7 @@ class Slime extends BodyComponent with ContactCallbacks {
         }
 
         _animation.parent = parent;
-        _animation.position += body.position;
+        _animation.position = SlimeAnimation._relativePosition + body.position;
         _animation.current = SlimeState.dead;
 
         removeFromParent();
@@ -225,9 +225,13 @@ class _SlimeMovement {
 /// but only for type checking.
 class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     with HasGameRef<RicochlimeGame> {
+  static final Vector2 _relativePosition = Vector2(
+    -Slime.staticWidth / 2,
+    -Slime.staticHeight / 2,
+  );
 
   SlimeAnimation._(): super(
-    position: Vector2(-Slime.staticWidth / 2, -Slime.staticHeight / 2),
+    position: _relativePosition.clone(),
     removeOnFinish: {
       SlimeState.dead: true,
     },
