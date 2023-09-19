@@ -188,7 +188,7 @@ class Slime extends BodyComponent with ContactCallbacks {
       _healthBar.hp = hp;
       if (hp <= 0) {
         if (givesPlayerABullet) {
-          (gameRef as RicochlimeGame).numBullets += 1;
+          (game as RicochlimeGame).numBullets += 1;
         }
 
         _animation.parent = parent;

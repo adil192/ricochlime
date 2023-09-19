@@ -148,18 +148,20 @@ packages:
   flame:
     dependency: "direct main"
     description:
-      name: flame
-      sha256: bd2b45f9fc0ec4939031b85c0b0a97cf09357c12ecd072d44389a4c577a2c0f0
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/flame"
+      ref: adil192-patch-1
+      resolved-ref: "3a49b6443d490c16d08948eaf4d92475a16e1c8f"
+      url: "https://github.com/adil192/flame.git"
+    source: git
     version: "1.8.2"
   flame_forge2d:
     dependency: "direct main"
     description:
-      name: flame_forge2d
-      sha256: fae89e7074c5afecad8003ab3d246a7f025f6abc4b5e532a14dbf49939d9ac8f
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/flame_forge2d"
+      ref: adil192-patch-1
+      resolved-ref: "3a49b6443d490c16d08948eaf4d92475a16e1c8f"
+      url: "https://github.com/adil192/flame.git"
+    source: git
     version: "0.14.1+1"
   flutter:
     dependency: "direct main"
