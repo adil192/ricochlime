@@ -111,7 +111,7 @@ class _HomePageButton<T> extends StatelessWidget {
                 secondaryColor: switch (type) {
                   NesButtonType.primary => colorScheme.primary,
                   _ => null,
-                }
+                },
               ),
               const SizedBox(width: 16),
               Text(

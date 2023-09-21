@@ -79,6 +79,7 @@ class GameOverDialog extends StatelessWidget {
                         context.pop();
                       },
                       type: NesButtonType.primary,
+                      icon: NesIcons.instance.redo,
                       text: t.gameOverPage.playAgainButton,
                     ),
                     const SizedBox(height: 32),
@@ -87,6 +88,7 @@ class GameOverDialog extends StatelessWidget {
                         context.pop(); // pop dialog
                         context.pop(); // pop play page
                       },
+                      icon: NesIcons.instance.leftArrowIndicator,
                       text: t.gameOverPage.homeButton,
                     ),
                   ],
@@ -106,26 +108,48 @@ class _GameOverButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.type = NesButtonType.normal,
+    this.icon,
     required this.text,
   });
 
   final VoidCallback onPressed;
   final NesButtonType type;
+  final NesIconData? icon;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     const double buttonSize = 28;
+    late final colorScheme = Theme.of(context).colorScheme;
     return Center(
       child: NesButton(
         onPressed: onPressed,
         type: type,
-        child: Text(
-          text,
-          softWrap: false,
-          style: const TextStyle(
-            fontSize: buttonSize,
-          ),
+        child: Row(
+          children: [
+            if (icon != null)
+              NesIcon(
+                iconData: icon!,
+
+                // TODO(adil192): remove after https://github.com/erickzanardo/nes_ui/issues/70
+                primaryColor: switch (type) {
+                  NesButtonType.primary => colorScheme.onPrimary,
+                  _ => null,
+                },
+                secondaryColor: switch (type) {
+                  NesButtonType.primary => colorScheme.primary,
+                  _ => null,
+                },
+              ),
+            const SizedBox(width: 12),
+            Text(
+              text,
+              softWrap: false,
+              style: const TextStyle(
+                fontSize: buttonSize,
+              ),
+            ),
+          ],
         ),
       ),
     );
