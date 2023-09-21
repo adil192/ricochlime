@@ -86,7 +86,7 @@ class GameOverDialog extends StatelessWidget {
                         },
                         type: NesButtonType.primary,
                         icon: NesIcons.instance.shield,
-                        text: t.gameOverPage.continueButton,
+                        text: t.gameOverPage.continueWithAdButton,
                       ),
                       const SizedBox(height: 32),
                     ],
@@ -96,7 +96,7 @@ class GameOverDialog extends StatelessWidget {
                       },
                       type: NesButtonType.primary,
                       icon: NesIcons.instance.redo,
-                      text: t.gameOverPage.playAgainButton,
+                      text: t.gameOverPage.restartGameButton,
                     ),
                     const SizedBox(height: 32),
                     _GameOverButton(

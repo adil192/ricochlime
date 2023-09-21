@@ -21,8 +21,8 @@ gameOverPage:
   title: Game over!
   highScoreNotBeaten: You scored $p points!
   highScoreBeaten(rich): Your high score is now $pOld $pNew points!
-  continueButton: Continue
-  playAgainButton: Play again
+  continueWithAdButton: Continue with ad
+  restartGameButton: Restart game
   homeButton: Home
 tutorialPage:
   tutorial: Tutorial

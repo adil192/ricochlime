@@ -6,7 +6,7 @@
 /// Locales: 1
 /// Strings: 28
 ///
-/// Built on 2023-09-21 at 20:31 UTC
+/// Built on 2023-09-21 at 23:01 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -216,8 +216,8 @@ class _StringsGameOverPageEn {
 		pNew,
 		const TextSpan(text: ' points!'),
 	]);
-	String get continueButton => 'Continue';
-	String get playAgainButton => 'Play again';
+	String get continueWithAdButton => 'Continue with ad';
+	String get restartGameButton => 'Restart game';
 	String get homeButton => 'Home';
 }
 
