@@ -28,68 +28,69 @@ class GameOverDialog extends StatelessWidget {
             children: [
               FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Text(
-                  t.gameOverPage.title,
-                  style: const TextStyle(
-                    fontSize: kToolbarHeight,
-                  ),
-                ),
-              ),
-              SingleChildScrollView(
-                child: Text.rich(
-                  TextSpan(
-                    style: TextStyle(
-                      fontSize: kToolbarHeight / 2,
-                      color: colorScheme.onSurface,
+                child: Column(
+                  children: [
+                    Text(
+                      t.gameOverPage.title,
+                      style: const TextStyle(
+                        fontSize: kToolbarHeight,
+                      ),
                     ),
-                    children: [
-                      if (score > Prefs.highScore.value && Prefs.highScore.value > 0)
-                        t.gameOverPage.highScoreBeaten(
-                          pOld: TextSpan(
-                            style: TextStyle(
-                              decoration: TextDecoration.lineThrough,
-                              decorationThickness: kToolbarHeight / 20,
-                              decorationColor: colorScheme.onSurface.withOpacity(0.6),
-                            ),
-                            text: ' ${Prefs.highScore.value} ',
-                          ),
-                          pNew: TextSpan(
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: kToolbarHeight / 2,
-                            ),
-                            text: '$score',
-                          ),
-                        )
-                      else
+                    const SizedBox(height: 32),
+                    SizedBox(
+                      width: 300,
+                      child: Text.rich(
+                        textAlign: TextAlign.center,
                         TextSpan(
-                          text: t.gameOverPage.highScoreNotBeaten(p: score),
-                        )
-                    ],
-                  ),
+                          style: TextStyle(
+                            fontSize: kToolbarHeight / 2,
+                            color: colorScheme.onSurface,
+                          ),
+                          children: [
+                            if (score > Prefs.highScore.value && Prefs.highScore.value > 0)
+                              t.gameOverPage.highScoreBeaten(
+                                pOld: TextSpan(
+                                  style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    decorationThickness: kToolbarHeight / 20,
+                                    decorationColor: colorScheme.onSurface.withOpacity(0.6),
+                                  ),
+                                  text: ' ${Prefs.highScore.value} ',
+                                ),
+                                pNew: TextSpan(
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: kToolbarHeight / 2,
+                                  ),
+                                  text: '$score',
+                                ),
+                              )
+                            else
+                              TextSpan(
+                                text: t.gameOverPage.highScoreNotBeaten(p: score),
+                              )
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    _GameOverButton(
+                      onPressed: () {
+                        context.pop();
+                      },
+                      type: NesButtonType.primary,
+                      text: t.gameOverPage.playAgainButton,
+                    ),
+                    const SizedBox(height: 32),
+                    _GameOverButton(
+                      onPressed: () {
+                        context.pop(); // pop dialog
+                        context.pop(); // pop play page
+                      },
+                      text: t.gameOverPage.homeButton,
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 32),
-            
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Column(children: [
-                  _GameOverButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    type: NesButtonType.primary,
-                    text: t.gameOverPage.playAgainButton,
-                  ),
-                  const SizedBox(height: 32),
-                  _GameOverButton(
-                    onPressed: () {
-                      context.pop(); // pop dialog
-                      context.pop(); // pop play page
-                    },
-                    text: t.gameOverPage.homeButton,
-                  ),
-                ]),
               ),
             ],
           ),
