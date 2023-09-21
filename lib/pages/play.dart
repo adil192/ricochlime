@@ -43,17 +43,18 @@ class _PlayPageState extends State<PlayPage> {
     super.dispose();
   }
 
-  Future<void> showGameOverDialog() async {
+  Future<GameOverAction> showGameOverDialog() async {
     assert(mounted);
-    if (!mounted) return;
-    await showDialog(
+    if (!mounted) return GameOverAction.nothingYet;
+
+    return await showDialog<GameOverAction>(
       context: context,
       barrierDismissible: false,
       builder: (context) => GameOverDialog(
         score: _score.value,
         game: game,
       ),
-    );
+    ) ?? GameOverAction.nothingYet;
   }
 
   @override

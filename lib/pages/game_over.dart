@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nes_ui/nes_ui.dart';
+import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/utils/prefs.dart';
@@ -74,9 +75,24 @@ class GameOverDialog extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 32),
+                    if (AdState.adsSupported) ...[
+                      _GameOverButton(
+                        onPressed: () async {
+                          final rewardGranted = await AdState.showRewardedAd();
+                          if (!context.mounted) return;
+                          if (rewardGranted) {
+                            context.pop<GameOverAction>(GameOverAction.continueGame);
+                          }
+                        },
+                        type: NesButtonType.primary,
+                        icon: NesIcons.instance.shield,
+                        text: t.gameOverPage.continueButton,
+                      ),
+                      const SizedBox(height: 32),
+                    ],
                     _GameOverButton(
                       onPressed: () {
-                        context.pop();
+                        context.pop<GameOverAction>(GameOverAction.restartGame);
                       },
                       type: NesButtonType.primary,
                       icon: NesIcons.instance.redo,
@@ -85,7 +101,7 @@ class GameOverDialog extends StatelessWidget {
                     const SizedBox(height: 32),
                     _GameOverButton(
                       onPressed: () {
-                        context.pop(); // pop dialog
+                        context.pop<GameOverAction>(GameOverAction.nothingYet); // pop dialog
                         context.pop(); // pop play page
                       },
                       icon: NesIcons.instance.leftArrowIndicator,
@@ -154,4 +170,10 @@ class _GameOverButton extends StatelessWidget {
       ),
     );
   }
+}
+
+enum GameOverAction {
+  continueGame,
+  restartGame,
+  nothingYet,
 }

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 27
+/// Strings: 28
 ///
-/// Built on 2023-09-04 at 16:14 UTC
+/// Built on 2023-09-21 at 20:31 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -216,6 +216,7 @@ class _StringsGameOverPageEn {
 		pNew,
 		const TextSpan(text: ' points!'),
 	]);
+	String get continueButton => 'Continue';
 	String get playAgainButton => 'Play again';
 	String get homeButton => 'Home';
 }

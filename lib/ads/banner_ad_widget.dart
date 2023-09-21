@@ -16,7 +16,10 @@ export 'package:google_mobile_ads/google_mobile_ads.dart' show AdSize;
 abstract class AdState {
   static bool _initializeStarted = false;
   static bool _initializeCompleted = false;
+
   static late final String _bannerAdUnitId;
+  static late final String _rewardedAdUnitId;
+  static RewardedAd? _rewardedAd;
 
   static bool get adsSupported => _bannerAdUnitId.isNotEmpty;
 
@@ -33,22 +36,30 @@ abstract class AdState {
     if (kDebugMode) { // test ads
       if (kIsWeb) {
         _bannerAdUnitId = '';
+        _rewardedAdUnitId = '';
       } else if (Platform.isAndroid) {
         _bannerAdUnitId = 'ca-app-pub-3940256099942544/6300978111';
+        _rewardedAdUnitId = 'ca-app-pub-3940256099942544/5224354917';
       } else if (Platform.isIOS) {
         _bannerAdUnitId = 'ca-app-pub-3940256099942544/2934735716';
+        _rewardedAdUnitId = 'ca-app-pub-3940256099942544/1712485313';
       } else {
         _bannerAdUnitId = '';
+        _rewardedAdUnitId = '';
       }
     } else { // actual ads
       if (kIsWeb) {
         _bannerAdUnitId = '';
+        _rewardedAdUnitId = '';
       } else if (Platform.isAndroid) {
         _bannerAdUnitId = 'ca-app-pub-1312561055261176/8961545046';
+        _rewardedAdUnitId = 'ca-app-pub-1312561055261176/9247398730';
       } else if (Platform.isIOS) {
         _bannerAdUnitId = 'ca-app-pub-1312561055261176/8306938920';
+        _rewardedAdUnitId = 'ca-app-pub-1312561055261176/9513076323';
       } else {
         _bannerAdUnitId = '';
+        _rewardedAdUnitId = '';
       }
     }
 
@@ -86,8 +97,10 @@ abstract class AdState {
     await MobileAds.instance.initialize();
     _initializeCompleted = true;
 
-    updateRequestConfiguration();
     Prefs.birthYear.addListener(updateRequestConfiguration);
+    await updateRequestConfiguration();
+
+    _preloadRewardedAd();
   }
 
   static void _checkForRequiredConsent({
@@ -125,8 +138,34 @@ abstract class AdState {
       (formError) {},
     );
   }
+
+  static Future<bool> _preloadRewardedAd() {
+    assert(adsSupported);
+    final completer = Completer<bool>();
+    RewardedAd.load(
+      adUnitId: _rewardedAdUnitId,
+      request: AdRequest(
+        nonPersonalizedAds: switch (Prefs.consentStage.value) {
+          ConsentStage.askForBirthYear => true,
+          ConsentStage.askForPersonalizedAds => null,
+        },
+      ),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (RewardedAd ad) {
+          if (kDebugMode) print('Rewarded ad loaded!');
+          _rewardedAd = ad;
+          completer.complete(true);
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          if (kDebugMode) print('Rewarded ad failed to load: $error');
+          completer.complete(false);
+        },
+      ),
+    );
+    return completer.future;
+  }
   
-  static void updateRequestConfiguration() async {
+  static Future<void> updateRequestConfiguration() async {
     final age = AdState.age;
     await MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
       maxAdContentRating: switch (age) {
@@ -180,6 +219,53 @@ abstract class AdState {
         },
       ),
     )..load();
+  }
+
+  /// Returns whether the reward was earned.
+  static Future<bool> showRewardedAd() async {
+    assert(adsSupported);
+
+    if (_rewardedAd == null) {
+      if (kDebugMode) print('Rewarded ad is null, loading now...');
+      final loaded = await _preloadRewardedAd();
+      if (!loaded) {
+        if (kDebugMode) print('Rewarded ad failed to load.');
+        return false;
+      }
+      assert(_rewardedAd != null);
+    }
+
+    final completer = Completer<bool>();
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        if (kDebugMode) print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        if (!completer.isCompleted) {
+        _rewardedAd = null;
+        _preloadRewardedAd();
+          completer.complete(false);
+        }
+      },
+    );
+    _rewardedAd!.show(
+      onUserEarnedReward: (ad, reward) {
+        ad.dispose();
+        _rewardedAd = null;
+        _preloadRewardedAd();
+        completer.complete(true);
+      },
+    );
+
+    return completer.future.timeout(
+      const Duration(minutes: 2),
+      onTimeout: () {
+        if (kDebugMode) print('Rewarded ad timed out, granting reward anyway.');
+        _rewardedAd?.dispose();
+        _rewardedAd = null;
+        _preloadRewardedAd();
+        return true;
+      },
+    );
   }
 }
 

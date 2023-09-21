@@ -15,6 +15,7 @@ import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/flame/components/walls.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/flame/ticker.dart';
+import 'package:ricochlime/pages/game_over.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
@@ -86,7 +87,7 @@ class RicochlimeGame extends Forge2DGame with
   final Ticker ticker = Ticker();
   final ValueNotifier<double> timeDilation;
 
-  Future<void> Function()? showGameOverDialog;
+  Future<GameOverAction> Function()? showGameOverDialog;
 
   @override
   Future<void> onLoad() async {
@@ -342,15 +343,37 @@ class RicochlimeGame extends Forge2DGame with
     // TODO(adil192): Animate the slimes jumping into the water
     // await ticker.delayed(const Duration(milliseconds: 500));
 
-    if (showGameOverDialog != null) {
-      await showGameOverDialog!.call();
+    final GameOverAction gameOverAction = showGameOverDialog == null
+        ? GameOverAction.nothingYet
+        : await showGameOverDialog!.call();
 
-      // save high score
-      Prefs.highScore.value = max(Prefs.highScore.value, score.value);
+    switch (gameOverAction) {
+      case GameOverAction.nothingYet:
+        // do nothing
+        break;
+      case GameOverAction.continueGame:
+        final numRowsToRemove = max(
+          numNewRowsEachRound * 3 + 1, // clears 3 rounds worth of slimes plus the one that killed the player
+          5, // clears at least 5 rows
+        );
+        /// The y position of the first row of slimes to remove
+        final threshold = Background.waterThresholdPosition
+            - RicochlimeGame.expectedHeight * (numRowsToRemove / RicochlimeGame.tilesInHeight);
+        if (kDebugMode) print('Removing $numRowsToRemove rows (slimes with y > $threshold)');
+        for (final slime in slimes) {
+          if (slime.position.y > threshold) {
+            slime.removeFromParent();
+          }
+        }
+        slimes.removeWhere((slime) => slime.parent == null);
+        state = GameState.idle;
+      case GameOverAction.restartGame:
+        // save high score
+        Prefs.highScore.value = max(Prefs.highScore.value, score.value);
 
-      // reset game
-      Prefs.currentGame.value = null;
-      reset();
+        // reset game
+        Prefs.currentGame.value = null;
+        reset();
     }
   }
 
