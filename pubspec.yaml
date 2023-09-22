@@ -35,7 +35,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   flame: ^1.8.1
-  flame_forge2d: ^0.14.1
+  flame_forge2d: ^0.15.0+1
 
   flutter:
     sdk: flutter
@@ -46,7 +46,7 @@ dependencies:
 
   forge2d: any
 
-  go_router: ^10.0.0
+  go_router: ^11.0.0
 
   google_fonts: ^5.1.0
 
