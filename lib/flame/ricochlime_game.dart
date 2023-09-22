@@ -367,6 +367,7 @@ class RicochlimeGame extends Forge2DGame with
         }
         slimes.removeWhere((slime) => slime.parent == null);
         state = GameState.idle;
+        await saveGame();
       case GameOverAction.restartGame:
         // save high score
         Prefs.highScore.value = max(Prefs.highScore.value, score.value);
