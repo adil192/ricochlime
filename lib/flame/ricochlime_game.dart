@@ -358,7 +358,7 @@ class RicochlimeGame extends Forge2DGame with
         );
         /// The y position of the first row of slimes to remove
         final threshold = Background.waterThresholdPosition
-            - RicochlimeGame.expectedHeight * (numRowsToRemove / RicochlimeGame.tilesInHeight);
+            - expectedHeight * (numRowsToRemove / tilesInHeight);
         if (kDebugMode) print('Removing $numRowsToRemove rows (slimes with y > $threshold)');
         for (final slime in slimes) {
           if (slime.position.y > threshold) {
