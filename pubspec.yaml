@@ -69,18 +69,6 @@ dev_dependencies:
 
   icons_launcher: ^2.1.3
 
-dependency_overrides:
-  flame:
-    git:
-      url: https://github.com/adil192/flame.git
-      ref: adil192-patch-1
-      path: packages/flame
-  flame_forge2d:
-    git:
-      url: https://github.com/adil192/flame.git
-      ref: adil192-patch-1
-      path: packages/flame_forge2d
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

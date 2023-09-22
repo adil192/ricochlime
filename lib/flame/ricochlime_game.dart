@@ -96,16 +96,16 @@ class RicochlimeGame extends Forge2DGame with
     assert(size.x == expectedWidth);
     assert(size.y == expectedHeight);
 
-    add(Background());
+    world.add(Background());
 
     final boundaries = createBoundaries(expectedWidth, expectedHeight);
     boundaries.forEach(add);
 
     aimGuide = AimGuide();
-    add(aimGuide);
+    world.add(aimGuide);
 
     player = Player();
-    add(player);
+    world.add(player);
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);
@@ -123,7 +123,7 @@ class RicochlimeGame extends Forge2DGame with
     for (final slimeJson in data.slimes) {
       final slime = Slime.fromJson(slimeJson);
       slimes.add(slime);
-      add(slime);
+      world.add(slime);
 
       if (slime.givesPlayerABullet) numSlimesThatGiveBullets++;
       if (slime.position.y <= 0) topGapNeedsAdjusting = true;
@@ -248,7 +248,7 @@ class RicochlimeGame extends Forge2DGame with
           direction: aimDir,
         );
         bullets.add(bullet);
-        add(bullet);
+        world.add(bullet);
         await ticker.delayed(const Duration(milliseconds: 50));
         if (inputCancelled) return;
       }
@@ -311,7 +311,7 @@ class RicochlimeGame extends Forge2DGame with
         if (slime == null) continue;
 
         slimes.add(slime);
-        add(slime);
+        world.add(slime);
 
         // trigger the slime's animation
         slime.moveInFromTop(slimeMoveDuration);
