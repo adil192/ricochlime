@@ -76,32 +76,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: FOSS patches
         run: |
           ./patches/foss.sh
 
-      - name: Setup cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            build
-          key: ${{ runner.OS }}-ricochlimefoss-ubuntu-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
-          restore-keys: |
-            ${{ runner.OS }}-ricochlimefoss-ubuntu-
-
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          cache: true
-          cache-key: 'flutter-:os:-:channel:-:version:-:arch:'
-
-      - run: flutter pub get
+      - name: flutter pub get
+        run: submodules/flutter/bin/flutter pub get
 
       - name: Build apk
-        run: flutter build apk
+        run: submodules/flutter/bin/flutter build apk
 
       - name: Move unsigned apk
         run: |
