@@ -116,13 +116,12 @@ jobs:
 
       - name: Rename signed apk
         run: |
-          buildName=$(grep "version: " pubspec.yaml | sed 's/version: //g' | sed 's/+.*//g')
+          buildNumber=$(grep "version: " pubspec.yaml | sed 's/version: //g' | sed 's/.*+//g')
           mkdir -p output
-          archs=(arm64-v8a armeabi-v7a x86_64)
-          for arch in "${archs[@]}"; do
-            apkName="Ricochlime_FOSS_v${buildName}_${arch}.apk"
-            mv "signme/app-${arch}-release-signed.apk" output/$apkName
-          done
+          # See ext.abiCodes in android/app/build.gradle for the list of architectures
+          mv "signme/app-armeabi-v7a-release-signed.apk" output/_Ricochlime_FOSS_split_${buildNumber}1.apk
+          mv "signme/app-arm64-v8a-release-signed.apk" output/_Ricochlime_FOSS_split_${buildNumber}2.apk
+          mv "signme/app-x86_64-release-signed.apk" output/_Ricochlime_FOSS_split_${buildNumber}3.apk
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
