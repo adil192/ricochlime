@@ -84,11 +84,25 @@ jobs:
         run: |
           ./patches/foss.sh
 
+      - name: Setup Flutter
+        run: |
+          echo Add Flutter to PATH
+          export PATH="$PATH:$(pwd)/submodules/flutter/bin"
+          echo "PATH=$PATH" >> $GITHUB_ENV
+
+          echo Set Flutter channel
+          git submodule foreach git fetch --all
+          flutter channel stable
+
+      - name: flutter doctor
+        run: |
+          flutter doctor -v
+
       - name: flutter pub get
-        run: submodules/flutter/bin/flutter pub get
+        run: flutter pub get
 
       - name: Build split apks
-        run: submodules/flutter/bin/flutter build apk --split-per-abi
+        run: flutter build apk --split-per-abi
 
       - name: Move unsigned apk
         run: |
