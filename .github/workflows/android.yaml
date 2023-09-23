@@ -7,7 +7,8 @@ on:
       - '**'
 
 jobs:
-  build:
+  build-regular-apk:
+    name: Build regular apk
     runs-on: ubuntu-latest
 
     steps:
@@ -34,6 +35,67 @@ jobs:
       - name: Build apk
         run: flutter build apk
       
+      - name: Move unsigned apk
+        run: |
+          mkdir -p output
+          mv build/app/outputs/flutter-apk/app-release.apk output/
+
+      - name: Sign apk
+        uses: ilharp/sign-android-release@v1
+        id: sign_app
+        with:
+          releaseDir: output
+          signingKey: ${{ secrets.SIGNING_KEY }}
+          keyAlias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Rename signed apk
+        id: rename_apk
+        run: |
+          buildName=$(grep "version: " pubspec.yaml | sed 's/version: //g' | sed 's/+.*//g')
+          apkName="Ricochlime_v${buildName}.apk"
+          mv ${{ steps.sign_app.outputs.signedFile }} output/$apkName
+          echo "apkName=$apkName" >> $GITHUB_OUTPUT
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ricochlime-Android
+          path: output/${{ steps.rename_apk.outputs.apkName }}
+
+  build-foss-apk:
+    name: Build FOSS apk
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: FOSS patches
+        run: |
+          ./patches/foss.sh
+
+      - name: Setup cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            build
+          key: ${{ runner.OS }}-ricochlimefoss-ubuntu-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
+          restore-keys: |
+            ${{ runner.OS }}-ricochlimefoss-ubuntu-
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:'
+
+      - run: flutter pub get
+
+      - name: Build apk
+        run: flutter build apk
+
       - name: Move unsigned apk
         run: |
           mkdir -p output
