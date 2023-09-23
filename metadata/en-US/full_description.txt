@@ -1,0 +1,1 @@
+Ricochlime is a game where you attack the advancing slimes with your ricocheting projectiles. The game is made with the Flame game engine and Flutter.
