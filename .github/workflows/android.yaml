@@ -76,23 +76,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
+      - uses: actions/checkout@v2
 
       - name: FOSS patches
         run: |
           ./patches/foss.sh
 
-      - name: Setup Flutter
-        run: |
-          echo Add Flutter to PATH
-          export PATH="$PATH:$(pwd)/submodules/flutter/bin"
-          echo "PATH=$PATH" >> $GITHUB_ENV
-
-          echo Set Flutter channel
-          git submodule foreach git fetch --all
-          flutter channel stable
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:'
 
       - name: flutter doctor
         run: |
