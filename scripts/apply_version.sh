@@ -129,6 +129,14 @@ else
   echo "• $DUMMY_CHANGELOG" > "$CHANGELOG_FILE"
 fi
 
+CHANGELOG_FILE_LINK="metadata/en-US/changelogs/${BUILD_NUMBER}3.txt"
+if [ -f "$CHANGELOG_FILE_LINK" ]; then
+  echo " - Changelog file already exists at $CHANGELOG_FILE_LINK"
+else
+  echo " - (*) Creating a symlink to the changelog file at $CHANGELOG_FILE_LINK"
+  ln -s "$CHANGELOG_FILE" "$CHANGELOG_FILE_LINK"
+fi
+
 FLATPAK_FILE="flatpak/com.adilhanney.ricochlime.metainfo.xml"
 if grep -q "$BUILD_NAME" "$FLATPAK_FILE"; then
   echo " - <release> tag already exists in $FLATPAK_FILE"
