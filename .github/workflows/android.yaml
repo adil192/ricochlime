@@ -124,5 +124,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Ricochlime-Android
+          name: Ricochlime-Android-FOSS
           path: output/${{ steps.rename_apk.outputs.apkName }}
