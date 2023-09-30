@@ -49,19 +49,19 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 64),
                   _HomePageButton(
                     type: NesButtonType.primary,
-                    icon: NesIcons.instance.rightArrowIndicator,
+                    icon: NesIcons.rightArrowIndicator,
                     text: t.homePage.playButton,
                     openBuilder: (context, closeContainer) => const PlayPage(),
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
-                    icon: NesIcons.instance.questionMarkBlock,
+                    icon: NesIcons.questionMarkBlock,
                     text: t.homePage.tutorialButton,
                     openBuilder: (context, closeContainer) => const TutorialPage(),
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
-                    icon: NesIcons.instance.openFolder,
+                    icon: NesIcons.openFolder,
                     text: t.homePage.settingsButton,
                     openBuilder: (context, closeContainer) => const SettingsPage(),
                   ),

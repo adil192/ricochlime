@@ -85,7 +85,7 @@ class GameOverDialog extends StatelessWidget {
                           }
                         },
                         type: NesButtonType.primary,
-                        icon: NesIcons.instance.tv,
+                        icon: NesIcons.tv,
                         text: t.gameOverPage.continueWithAdButton,
                       ),
                       const SizedBox(height: 32),
@@ -95,7 +95,7 @@ class GameOverDialog extends StatelessWidget {
                         context.pop<GameOverAction>(GameOverAction.restartGame);
                       },
                       type: NesButtonType.primary,
-                      icon: NesIcons.instance.redo,
+                      icon: NesIcons.redo,
                       text: t.gameOverPage.restartGameButton,
                     ),
                     const SizedBox(height: 32),
@@ -104,7 +104,7 @@ class GameOverDialog extends StatelessWidget {
                         context.pop<GameOverAction>(GameOverAction.nothingYet); // pop dialog
                         context.pop(); // pop play page
                       },
-                      icon: NesIcons.instance.leftArrowIndicator,
+                      icon: NesIcons.leftArrowIndicator,
                       text: t.gameOverPage.homeButton,
                     ),
                   ],

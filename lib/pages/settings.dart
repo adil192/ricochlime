@@ -57,7 +57,7 @@ class SettingsPage extends StatelessWidget {
                   contentPadding: listTileContentPadding,
                   title: Text(t.birthYear.yourBirthYear),
                   leading: NesIcon(
-                    iconData: NesIcons.instance.textFile,
+                    iconData: NesIcons.textFile,
                   ),
                   trailing: ValueListenableBuilder(
                     valueListenable: Prefs.birthYear,
@@ -104,7 +104,7 @@ class SettingsPage extends StatelessWidget {
                     contentPadding: listTileContentPadding,
                     title: Text(t.settingsPage.adConsent),
                     leading: NesIcon(
-                      iconData: NesIcons.instance.tv,
+                      iconData: NesIcons.tv,
                     ),
                   ),
                 ),
@@ -123,7 +123,7 @@ class SettingsPage extends StatelessWidget {
                   return CheckboxListTile.adaptive(
                     title: child,
                     secondary: NesIcon(
-                      iconData: NesIcons.instance.openEye,
+                      iconData: NesIcons.openEye,
                     ),
                     tileColor: listTileColor,
                     shape: listTileShape,
@@ -166,7 +166,7 @@ class SettingsPage extends StatelessWidget {
                 contentPadding: listTileContentPadding,
                 title: Text(t.settingsPage.appInfo),
                 leading: NesIcon(
-                  iconData: NesIcons.instance.zoomIn,
+                  iconData: NesIcons.zoomIn,
                 ),
               ),
             ),

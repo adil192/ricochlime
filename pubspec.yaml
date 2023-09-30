@@ -48,7 +48,7 @@ dependencies:
 
   go_router: ^11.0.0
 
-  google_fonts: ^5.1.0
+  google_fonts: ^6.1.0
 
   google_mobile_ads: ^3.0.0
 
