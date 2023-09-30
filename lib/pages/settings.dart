@@ -80,21 +80,21 @@ class SettingsPage extends StatelessWidget {
               ),
             ),
 
-            Padding(
-              padding: listTilePadding,
-              child: NesContainer(
-                padding: EdgeInsets.zero,
-                child: ValueListenableBuilder(
-                  valueListenable: Prefs.birthYear,
-                  builder: (context, birthYear, child) {
-                    final age = AdState.age;
-                    final collapsed = age == null || age < AdState.minAgeForPersonalizedAds;
-                    return Collapsible(
-                      collapsed: collapsed,
-                      axis: CollapsibleAxis.vertical,
-                      child: child!,
-                    );
-                  },
+            ValueListenableBuilder(
+              valueListenable: Prefs.birthYear,
+              builder: (context, birthYear, child) {
+                final age = AdState.age;
+                final collapsed = age == null || age < AdState.minAgeForPersonalizedAds;
+                return Collapsible(
+                  collapsed: collapsed,
+                  axis: CollapsibleAxis.vertical,
+                  child: child!,
+                );
+              },
+              child: Padding(
+                padding: listTilePadding,
+                child: NesContainer(
+                  padding: EdgeInsets.zero,
                   child: ListTile(
                     onTap: () {
                       AdState.showConsentForm();
