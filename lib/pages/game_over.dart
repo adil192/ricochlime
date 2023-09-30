@@ -85,7 +85,7 @@ class GameOverDialog extends StatelessWidget {
                           }
                         },
                         type: NesButtonType.primary,
-                        icon: NesIcons.instance.shield,
+                        icon: NesIcons.instance.tv,
                         text: t.gameOverPage.continueWithAdButton,
                       ),
                       const SizedBox(height: 32),

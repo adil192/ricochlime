@@ -104,7 +104,7 @@ class SettingsPage extends StatelessWidget {
                     contentPadding: listTileContentPadding,
                     title: Text(t.settingsPage.adConsent),
                     leading: NesIcon(
-                      iconData: NesIcons.instance.gallery,
+                      iconData: NesIcons.instance.tv,
                     ),
                   ),
                 ),
