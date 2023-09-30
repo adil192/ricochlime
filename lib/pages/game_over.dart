@@ -136,7 +136,6 @@ class _GameOverButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double buttonSize = 28;
-    late final colorScheme = Theme.of(context).colorScheme;
     return Center(
       child: NesButton(
         onPressed: onPressed,
@@ -144,19 +143,7 @@ class _GameOverButton extends StatelessWidget {
         child: Row(
           children: [
             if (icon != null)
-              NesIcon(
-                iconData: icon!,
-
-                // TODO(adil192): remove after https://github.com/erickzanardo/nes_ui/issues/70
-                primaryColor: switch (type) {
-                  NesButtonType.primary => colorScheme.onPrimary,
-                  _ => null,
-                },
-                secondaryColor: switch (type) {
-                  NesButtonType.primary => colorScheme.primary,
-                  _ => null,
-                },
-              ),
+              NesIcon(iconData: icon!),
             const SizedBox(width: 12),
             Text(
               text,

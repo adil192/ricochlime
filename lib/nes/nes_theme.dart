@@ -28,6 +28,14 @@ ThemeData nesThemeFrom({
       darkLabelColor: brightness == Brightness.light
           ? colorScheme.onSurface
           : colorScheme.onPrimary,
+      lightIconTheme: NesIconTheme(
+        primary: colorScheme.onPrimary,
+        secondary: colorScheme.primary.withOpacity(0.5),
+      ),
+      darkIconTheme: NesIconTheme(
+        primary: colorScheme.onSurface,
+        secondary: colorScheme.surface,
+      ),
       borderColor: brightness == Brightness.light
           ? colorScheme.onSurface
           : RicochlimePalette.grassColorDark,

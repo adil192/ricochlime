@@ -91,7 +91,6 @@ class _HomePageButton<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     return Center(
       child: OpenContainer(
         closedBuilder: (context, openContainer) => NesButton(
@@ -102,16 +101,6 @@ class _HomePageButton<T> extends StatelessWidget {
               NesIcon(
                 iconData: icon,
                 size: const Size.square(32),
-
-                // TODO(adil192): remove after https://github.com/erickzanardo/nes_ui/issues/70
-                primaryColor: switch (type) {
-                  NesButtonType.primary => colorScheme.onPrimary,
-                  _ => null,
-                },
-                secondaryColor: switch (type) {
-                  NesButtonType.primary => colorScheme.primary,
-                  _ => null,
-                },
               ),
               const SizedBox(width: 16),
               Text(

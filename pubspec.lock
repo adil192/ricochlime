@@ -352,10 +352,11 @@ packages:
   nes_ui:
     dependency: "direct main"
     description:
-      name: nes_ui
-      sha256: "4c07e98123a6a5589d9aecaf8c4c1f71a5afea01d1b777c0a5f82bcaed506285"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "1b4fbf90197658aff3a858debf16a644af49e5dc"
+      url: "https://github.com/erickzanardo/nes_ui"
+    source: git
     version: "0.8.0"
   ordered_set:
     dependency: transitive
@@ -724,4 +725,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.1.0-185.0.dev <4.0.0"
-  flutter: ">=3.10.0"
+  flutter: ">=3.7.0"
