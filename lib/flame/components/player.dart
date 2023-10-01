@@ -20,7 +20,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   @override
   Future<void> onLoad() async {
-    animations = await getAnimations();
+    animations = getAnimations();
     current = PlayerState.idle;
     await super.onLoad();
 
@@ -55,48 +55,57 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     }
   }
 
-  Future<Map<PlayerState, SpriteAnimation>> getAnimations() async => {
-    PlayerState.idle: await gameRef.loadSpriteAnimation(
-      'player.png',
-      SpriteAnimationData.sequenced(
-        stepTime: 1 / 6,
-        textureSize: Vector2(48, 48),
-        amount: 6,
-        amountPerRow: 6,
-        texturePosition: Vector2(0, 2 * 48),
+  static Future<void> preloadSprites({
+    required RicochlimeGame gameRef,
+  }) {
+    return gameRef.images.load('player.png');
+  }
+
+  Map<PlayerState, SpriteAnimation> getAnimations() {
+    final playerImage = gameRef.images.fromCache('player.png');
+    return {
+      PlayerState.idle: SpriteAnimation.fromFrameData(
+        playerImage,
+        SpriteAnimationData.sequenced(
+          stepTime: 1 / 6,
+          textureSize: Vector2(48, 48),
+          amount: 6,
+          amountPerRow: 6,
+          texturePosition: Vector2(0, 2 * 48),
+        ),
       ),
-    ),
-    PlayerState.walk: await gameRef.loadSpriteAnimation(
-      'player.png',
-      SpriteAnimationData.sequenced(
-        stepTime: 1 / 6,
-        textureSize: Vector2(48, 48),
-        amount: 6,
-        amountPerRow: 6,
-        texturePosition: Vector2(0, 5 * 48),
+      PlayerState.walk: SpriteAnimation.fromFrameData(
+        playerImage,
+        SpriteAnimationData.sequenced(
+          stepTime: 1 / 6,
+          textureSize: Vector2(48, 48),
+          amount: 6,
+          amountPerRow: 6,
+          texturePosition: Vector2(0, 5 * 48),
+        ),
       ),
-    ),
-    PlayerState.attack: await gameRef.loadSpriteAnimation(
-      'player.png',
-      SpriteAnimationData.sequenced(
-        stepTime: 1 / 6,
-        textureSize: Vector2(48, 48),
-        amount: 4,
-        amountPerRow: 4,
-        texturePosition: Vector2(0, 8 * 48),
-        loop: false,
+      PlayerState.attack: SpriteAnimation.fromFrameData(
+        playerImage,
+        SpriteAnimationData.sequenced(
+          stepTime: 1 / 6,
+          textureSize: Vector2(48, 48),
+          amount: 4,
+          amountPerRow: 4,
+          texturePosition: Vector2(0, 8 * 48),
+          loop: false,
+        ),
       ),
-    ),
-    PlayerState.dead: await gameRef.loadSpriteAnimation(
-      'player.png',
-      SpriteAnimationData.sequenced(
-        stepTime: 1 / 3,
-        textureSize: Vector2(48, 48),
-        amount: 3,
-        amountPerRow: 3,
-        texturePosition: Vector2(0, 9 * 48),
-        loop: false,
+      PlayerState.dead: SpriteAnimation.fromFrameData(
+        playerImage,
+        SpriteAnimationData.sequenced(
+          stepTime: 1 / 3,
+          textureSize: Vector2(48, 48),
+          amount: 3,
+          amountPerRow: 3,
+          texturePosition: Vector2(0, 9 * 48),
+          loop: false,
+        ),
       ),
-    ),
-  };
+    };
+  }
 }

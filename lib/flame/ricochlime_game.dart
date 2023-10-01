@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:forge2d/src/settings.dart' as physics_settings;
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
+import 'package:ricochlime/flame/components/background/background_tile.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/components/slime.dart';
@@ -88,6 +89,14 @@ class RicochlimeGame extends Forge2DGame with
   final ValueNotifier<double> timeDilation;
 
   Future<GameOverAction> Function()? showGameOverDialog;
+
+  Future<void> preloadSprites() {
+    return Future.wait([
+      BackgroundTile.preloadSprites(gameRef: this),
+      SlimeAnimation.preloadSprites(gameRef: this),
+      Player.preloadSprites(gameRef: this),
+    ]);
+  }
 
   @override
   Future<void> onLoad() async {

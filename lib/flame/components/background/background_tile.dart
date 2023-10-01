@@ -46,8 +46,6 @@ class BackgroundTile extends SpriteAnimationComponent
   });
 
   final BackgroundTileType type;
-  late List<SpriteSheet> waterSpriteSheets = [];
-  late SpriteSheet plainsSpriteSheet;
 
   @override
   Future<void> onLoad() async {
@@ -57,7 +55,6 @@ class BackgroundTile extends SpriteAnimationComponent
     }
     anchor = Anchor.topLeft;
 
-    await loadSpriteSheets();
     animation = SpriteAnimation.spriteList(
       switch (type.spriteSheetType) {
         SpriteSheetType.water => [
@@ -72,24 +69,49 @@ class BackgroundTile extends SpriteAnimationComponent
     );
   }
 
-  Future<void> loadSpriteSheets() async {
-    switch (type.spriteSheetType) {
-      case SpriteSheetType.water:
-        assert(waterSpriteSheets.isEmpty);
-        for (var i = 0; i < 6; i++) {
-          final spriteSheet = SpriteSheet.fromColumnsAndRows(
-            image: await gameRef.images.load('water${i + 1}.png'),
-            columns: 6,
-            rows: 4,
+  static List<SpriteSheet> waterSpriteSheets = [];
+  static late SpriteSheet plainsSpriteSheet;
+  /// Preloads all sprite sheets so they can be
+  /// accessed synchronously later.
+  static Future<void> preloadSprites({
+    required RicochlimeGame gameRef,
+  }) {
+    final futures = <Future>[];
+
+    // here we use a for loop and switch statement
+    // so that the compiler warns us if we forget a case
+    for (final type in SpriteSheetType.values) {
+      switch (type) {
+        case SpriteSheetType.water:
+          futures.add(
+            Future.wait([
+              for (int i = 0; i < 6; ++i)
+                gameRef.images.load('water${i + 1}.png'),
+            ]).then((images) {
+              for (final image in images) {
+                waterSpriteSheets.add(
+                  SpriteSheet.fromColumnsAndRows(
+                    image: image,
+                    columns: 6,
+                    rows: 4,
+                  ),
+                );
+              }
+            }),
           );
-          waterSpriteSheets.add(spriteSheet);
-        }
-      case SpriteSheetType.plains:
-        plainsSpriteSheet = SpriteSheet.fromColumnsAndRows(
-          image: await gameRef.images.load('plains.png'),
-          columns: 6,
-          rows: 12,
-        );
+        case SpriteSheetType.plains:
+          futures.add(
+            gameRef.images.load('plains.png').then((image) {
+              plainsSpriteSheet = SpriteSheet.fromColumnsAndRows(
+                image: image,
+                columns: 6,
+                rows: 12,
+              );
+            }),
+          );
+      }
     }
+
+    return Future.wait(futures);
   }
 }

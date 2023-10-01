@@ -265,7 +265,7 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
 
   @override
   Future<void> onLoad() async {
-    animations = await getAnimations();
+    animations = getAnimations();
     current = SlimeState.idle;
     walking = _walking;
     await super.onLoad();
@@ -274,56 +274,65 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     height = 32;
   }
 
-  Future<Map<SlimeState, SpriteAnimation>> getAnimations() async => {
-    SlimeState.idle: await gameRef.loadSpriteAnimation(
-      'slime.png',
-      SpriteAnimationData.sequenced(
-        stepTime: 1 / 4,
-        textureSize: Vector2(32, 32),
-        amount: 4,
-        amountPerRow: 4,
+  static Future<void> preloadSprites({
+    required RicochlimeGame gameRef,
+  }) {
+    return gameRef.images.load('slime.png');
+  }
+
+  Map<SlimeState, SpriteAnimation> getAnimations() {
+    final slimeImage = gameRef.images.fromCache('slime.png');
+    return {
+      SlimeState.idle: SpriteAnimation.fromFrameData(
+        slimeImage,
+        SpriteAnimationData.sequenced(
+          stepTime: 1 / 4,
+          textureSize: Vector2(32, 32),
+          amount: 4,
+          amountPerRow: 4,
+        ),
       ),
-    ),
-    SlimeState.walk: await gameRef.loadSpriteAnimation(
-      'slime.png',
-      SpriteAnimationData.sequenced(
-        stepTime: 0.5 / 6,
-        textureSize: Vector2(32, 32),
-        amount: 6,
-        amountPerRow: 6,
-        texturePosition: Vector2(0, 1 * 32),
+      SlimeState.walk: SpriteAnimation.fromFrameData(
+        slimeImage,
+        SpriteAnimationData.sequenced(
+          stepTime: 0.5 / 6,
+          textureSize: Vector2(32, 32),
+          amount: 6,
+          amountPerRow: 6,
+          texturePosition: Vector2(0, 1 * 32),
+        ),
       ),
-    ),
-    SlimeState.attack: await gameRef.loadSpriteAnimation(
-      'slime.png',
-      SpriteAnimationData.sequenced(
-        stepTime: 1 / 7,
-        textureSize: Vector2(32, 32),
-        amount: 7,
-        amountPerRow: 7,
-        texturePosition: Vector2(0, 2 * 32),
+      SlimeState.attack: SpriteAnimation.fromFrameData(
+        slimeImage,
+        SpriteAnimationData.sequenced(
+          stepTime: 1 / 7,
+          textureSize: Vector2(32, 32),
+          amount: 7,
+          amountPerRow: 7,
+          texturePosition: Vector2(0, 2 * 32),
+        ),
       ),
-    ),
-    SlimeState.hurt: await gameRef.loadSpriteAnimation(
-      'slime.png',
-      SpriteAnimationData.sequenced(
-        stepTime: 1 / 3,
-        textureSize: Vector2(32, 32),
-        amount: 3,
-        amountPerRow: 3,
-        texturePosition: Vector2(0, 3 * 32),
+      SlimeState.hurt: SpriteAnimation.fromFrameData(
+        slimeImage,
+        SpriteAnimationData.sequenced(
+          stepTime: 1 / 3,
+          textureSize: Vector2(32, 32),
+          amount: 3,
+          amountPerRow: 3,
+          texturePosition: Vector2(0, 3 * 32),
+        ),
       ),
-    ),
-    SlimeState.dead: await gameRef.loadSpriteAnimation(
-      'slime.png',
-      SpriteAnimationData.sequenced(
-        stepTime: 0.3 / 5,
-        textureSize: Vector2(32, 32),
-        amount: 5,
-        amountPerRow: 5,
-        texturePosition: Vector2(0, 4 * 32),
-        loop: false,
+      SlimeState.dead: SpriteAnimation.fromFrameData(
+        slimeImage,
+        SpriteAnimationData.sequenced(
+          stepTime: 0.3 / 5,
+          textureSize: Vector2(32, 32),
+          amount: 5,
+          amountPerRow: 5,
+          texturePosition: Vector2(0, 4 * 32),
+          loop: false,
+        ),
       ),
-    ),
-  };
+    };
+  }
 }
