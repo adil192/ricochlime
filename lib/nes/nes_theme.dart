@@ -28,14 +28,24 @@ ThemeData nesThemeFrom({
       darkLabelColor: brightness == Brightness.light
           ? colorScheme.onSurface
           : colorScheme.onPrimary,
-      lightIconTheme: NesIconTheme(
-        primary: colorScheme.onPrimary,
-        secondary: colorScheme.primary.withOpacity(0.5),
-      ),
-      darkIconTheme: NesIconTheme(
-        primary: colorScheme.onSurface,
-        secondary: colorScheme.surface,
-      ),
+      lightIconTheme: brightness == Brightness.light
+          ? NesIconTheme(
+              primary: colorScheme.onPrimary,
+              secondary: colorScheme.primary,
+            )
+          : NesIconTheme(
+              primary: colorScheme.onSurface,
+              secondary: colorScheme.background.withOpacity(0.5),
+            ),
+      darkIconTheme: brightness == Brightness.light
+          ? NesIconTheme(
+              primary: colorScheme.onSurface,
+              secondary: colorScheme.background,
+            )
+          : NesIconTheme(
+              primary: colorScheme.onPrimary,
+              secondary: colorScheme.primary.withOpacity(0.5),
+            ),
       borderColor: brightness == Brightness.light
           ? colorScheme.onSurface
           : RicochlimePalette.grassColorDark,
