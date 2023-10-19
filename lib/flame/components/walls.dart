@@ -1,4 +1,4 @@
-/// Adapted from https://github.com/flame-engine/flame/blob/main/examples/lib/stories/bridge_libraries/forge2d/utils/boundaries.dart
+// Adapted from https://github.com/flame-engine/flame/blob/main/examples/lib/stories/bridge_libraries/forge2d/utils/boundaries.dart
 
 import 'package:flame_forge2d/flame_forge2d.dart';
 

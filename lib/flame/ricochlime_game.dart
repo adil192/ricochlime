@@ -1,10 +1,11 @@
 import 'dart:math';
 
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
-import 'package:flame/palette.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:forge2d/src/settings.dart' as physics_settings;
 import 'package:ricochlime/flame/components/aim_guide.dart';
@@ -205,7 +206,7 @@ class RicochlimeGame extends Forge2DGame with
     if (!inputAllowed) {
       return;
     }
-    aimGuide.aim(info.eventPosition.game);
+    aimGuide.aim(info.eventPosition.widget);
   }
   @override
   void onPanEnd(DragEndInfo info) {
