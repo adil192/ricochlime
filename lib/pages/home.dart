@@ -47,11 +47,17 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 64),
-                  _HomePageButton(
-                    type: NesButtonType.primary,
-                    icon: NesIcons.rightArrowIndicator,
-                    text: t.homePage.playButton,
-                    openBuilder: (_, __) => const PlayPage(),
+                  FutureBuilder(
+                    future: game.preloadSprites,
+                    builder: (context, snapshot) {
+                      return _HomePageButton(
+                        type: NesButtonType.primary,
+                        icon: NesIcons.rightArrowIndicator,
+                        text: t.homePage.playButton,
+                        openBuilder: (_, __) => const PlayPage(),
+                        disabled: !snapshot.hasData,
+                      );
+                    }
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
@@ -82,19 +88,21 @@ class _HomePageButton<T> extends StatelessWidget {
     required this.icon,
     required this.text,
     required this.openBuilder,
+    this.disabled = false,
   });
 
   final NesButtonType type;
   final NesIconData icon;
   final String text;
   final OpenContainerBuilder<T> openBuilder;
+  final bool disabled;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: OpenContainer(
         closedBuilder: (context, openContainer) => NesButton(
-          onPressed: openContainer,
+          onPressed: disabled ? null : openContainer,
           type: type,
           child: Row(
             children: [

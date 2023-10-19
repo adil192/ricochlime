@@ -91,13 +91,12 @@ class RicochlimeGame extends Forge2DGame with
 
   Future<GameOverAction> Function()? showGameOverDialog;
 
-  Future<void> preloadSprites() {
-    return Future.wait([
-      BackgroundTile.preloadSprites(gameRef: this),
-      SlimeAnimation.preloadSprites(gameRef: this),
-      Player.preloadSprites(gameRef: this),
-    ]);
-  }
+  /// A future that completes when all the sprites are loaded.
+  late Future<bool> preloadSprites = Future.wait([
+    BackgroundTile.preloadSprites(gameRef: this),
+    SlimeAnimation.preloadSprites(gameRef: this),
+    Player.preloadSprites(gameRef: this),
+  ]).then((_) => true);
 
   @override
   Future<void> onLoad() async {
