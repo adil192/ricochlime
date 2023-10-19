@@ -13,6 +13,7 @@ import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 export 'package:google_mobile_ads/google_mobile_ads.dart' show AdSize;
 
+/// Helper class for ads.
 abstract class AdState {
   static bool _initializeStarted = false;
   static bool _initializeCompleted = false;
@@ -21,17 +22,24 @@ abstract class AdState {
   static late final String _rewardedAdUnitId;
   static RewardedAd? _rewardedAd;
 
+  /// Whether ads are supported on this platform.
   static bool get adsSupported => _bannerAdUnitId.isNotEmpty;
 
+  /// The minimum age required to show personalized ads.
   static const int minAgeForPersonalizedAds = 13;
+  /// The user's age,
+  /// calculated from their birth year,
+  /// or null if the user has not entered their birth year.
   static int? get age {
     final birthYear = Prefs.birthYear.value;
     if (birthYear == null) return null;
 
-    // Subtract 1 because the user might not have had their birthday yet this year.
+    // Subtract 1 because the user might not have
+    // had their birthday yet this year.
     return DateTime.now().year - birthYear - 1;
   }
 
+  /// Initializes ads.
   static void init() {
     if (kDebugMode) { // test ads
       if (kIsWeb) {
@@ -66,11 +74,12 @@ abstract class AdState {
     if (adsSupported) _startInitialize();
   }
 
-  static void _startInitialize() async {
+  static Future<void> _startInitialize() async {
     if (_initializeStarted) return;
 
     final age = AdState.age;
-    final correctConsentStage = Prefs.consentStage.value == ConsentStage.askForPersonalizedAds;
+    final correctConsentStage = Prefs.consentStage.value
+        == ConsentStage.askForPersonalizedAds;
     final canConsent = age != null && age >= minAgeForPersonalizedAds;
     if (correctConsentStage && canConsent) {
       if (!kIsWeb && Platform.isIOS) {
@@ -100,7 +109,7 @@ abstract class AdState {
     Prefs.birthYear.addListener(updateRequestConfiguration);
     await updateRequestConfiguration();
 
-    _preloadRewardedAd();
+    unawaited(_preloadRewardedAd());
   }
 
   static void _checkForRequiredConsent({
@@ -123,6 +132,10 @@ abstract class AdState {
       (formError) {},
     );
   }
+  /// Shows the consent form.
+  ///
+  /// It is assumed that [_checkForRequiredConsent]
+  /// has already been called.
   static void showConsentForm() {
     ConsentForm.loadConsentForm(
       (ConsentForm consentForm) async {
@@ -164,7 +177,9 @@ abstract class AdState {
     );
     return completer.future;
   }
-  
+
+  /// Updates the ad request configuration
+  /// based on the user's age.
   static Future<void> updateRequestConfiguration() async {
     final age = AdState.age;
     await MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
@@ -200,7 +215,7 @@ abstract class AdState {
       await Future.delayed(const Duration(milliseconds: 100));
     }
 
-    return BannerAd(
+    final bannerAd = BannerAd(
       adUnitId: _bannerAdUnitId,
       request: AdRequest(
         nonPersonalizedAds: switch (Prefs.consentStage.value) {
@@ -218,9 +233,15 @@ abstract class AdState {
           ad.dispose();
         },
       ),
-    )..load();
+    );
+
+    unawaited(bannerAd.load());
+
+    return bannerAd;
   }
 
+  /// Shows a rewarded ad.
+  ///
   /// Returns whether the reward was earned.
   static Future<bool> showRewardedAd() async {
     assert(adsSupported);
@@ -247,14 +268,14 @@ abstract class AdState {
         }
       },
     );
-    _rewardedAd!.show(
+    unawaited(_rewardedAd!.show(
       onUserEarnedReward: (ad, reward) {
         ad.dispose();
         _rewardedAd = null;
         _preloadRewardedAd();
         completer.complete(true);
       },
-    );
+    ));
 
     return completer.future.timeout(
       const Duration(minutes: 2),
@@ -269,19 +290,23 @@ abstract class AdState {
   }
 }
 
+/// A widget that displays a banner ad.
 class BannerAdWidget extends StatefulWidget {
+  // ignore: public_member_api_docs
   const BannerAdWidget({
     super.key,
     required this.adSize,
   });
 
+  /// The requested banner ad size.
   final AdSize adSize;
 
   @override
   State<BannerAdWidget> createState() => _BannerAdWidgetState();
 }
 
-class _BannerAdWidgetState extends State<BannerAdWidget> with AutomaticKeepAliveClientMixin {
+class _BannerAdWidgetState extends State<BannerAdWidget>
+    with AutomaticKeepAliveClientMixin {
   BannerAd? _bannerAd;
 
   @override
@@ -339,8 +364,10 @@ class _BannerAdWidgetState extends State<BannerAdWidget> with AutomaticKeepAlive
             ),
             IgnorePointer(
               child: NesContainer(
-                width: widget.adSize.width + nesPadding.left + nesPadding.right,
-                height: widget.adSize.height + nesPadding.top + nesPadding.bottom,
+                width: widget.adSize.width
+                    + nesPadding.left + nesPadding.right,
+                height: widget.adSize.height
+                    + nesPadding.top + nesPadding.bottom,
                 padding: nesPadding,
               ),
             ),

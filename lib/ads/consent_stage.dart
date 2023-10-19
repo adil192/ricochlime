@@ -9,6 +9,7 @@ enum ConsentStage {
   askForPersonalizedAds,
   ;
 
+  /// The next consent stage.
   ConsentStage get next {
     switch (this) {
       case ConsentStage.askForBirthYear:

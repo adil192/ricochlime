@@ -3,14 +3,22 @@ import 'package:ricochlime/flame/components/background/background_tile.dart';
 import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
+/// The background component which is
+/// comprised of [BackgroundTile]s.
 class Background extends PositionComponent
     with HasGameRef<RicochlimeGame> {
   
+  /// The threshold below which we have water tiles.
   static const waterThresholdTile = RicochlimeGame.tilesInHeight - 4;
+  /// The threshold below which we have water tiles,
+  /// in pixels.
   static const waterThresholdPosition = RicochlimeGame.expectedHeight
       * waterThresholdTile / RicochlimeGame.tilesInHeight;
 
+  /// The size of each tile.
   late Vector2 tileSize;
+  /// The number of new rows of slimes that will be added
+  /// in the next round.
   int lastNumNewRowsEachRound = -1;
 
   @override
@@ -26,7 +34,7 @@ class Background extends PositionComponent
     );
 
     lastNumNewRowsEachRound = gameRef.numNewRowsEachRound;
-    addAll(getTiles());
+    await addAll(getTiles());
   }
 
   @override
@@ -39,6 +47,7 @@ class Background extends PositionComponent
     super.update(dt);
   }
 
+  /// Returns an iterable of all the background tiles.
   Iterable<BackgroundTile> getTiles() sync* {
     for (var row = 0; row < RicochlimeGame.tilesInHeight; row++) {
       for (var column = 0; column < RicochlimeGame.tilesInWidth; column++) {
@@ -57,6 +66,7 @@ class Background extends PositionComponent
   }
 
   /// Determines the type of background tile at the given row and column.
+  ///
   /// This includes a soil patch for the area wherein the slimes will
   /// reach the end in the next round,
   /// as well as the water and grass tiles.

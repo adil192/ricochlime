@@ -7,16 +7,63 @@ import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/health_bar.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
+/// The animation state of the slime.
 enum SlimeState {
+  /// The slime is idle.
   idle,
+  /// The slime is walking.
   walk,
+  /// The slime is attacking.
   attack,
+  /// The slime is hurt.
   hurt,
+  /// The slime is dead.
   dead,
 }
 
+/// A slime component.
 class Slime extends BodyComponent with ContactCallbacks {
+  // ignore: public_member_api_docs
+  Slime({
+    required this.initialPosition,
+    required this.maxHp,
+    int? hp,
+    bool? givesPlayerABullet,
+  }): hp = hp ?? maxHp,
+      super(
+        priority: getPriorityFromPosition(initialPosition),
+      ) {
+    if (givesPlayerABullet != null) {
+      this.givesPlayerABullet = givesPlayerABullet;
+    }
+
+    renderBody = false;
+    add(_animation);
+    add(_healthBar);
+  }
+
+  /// Creates a slime from JSON data.
+  Slime.fromJson(Map<String, dynamic> json): this(
+    initialPosition: Vector2(
+      json['px'] as double,
+      json['py'] as double,
+    ),
+    hp: json['hp'] as int,
+    maxHp: json['maxHp'] as int,
+    givesPlayerABullet: json['givesPlayerABullet'] as bool? ?? false,
+  );
+  /// Converts the slime's data to a JSON map.
+  Map<String, dynamic> toJson() => {
+    'px': _movement?.targetPosition.x ?? position.x,
+    'py': _movement?.targetPosition.y ?? position.y,
+    'hp': hp,
+    'maxHp': maxHp,
+    'givesPlayerABullet': givesPlayerABullet,
+  };
+
+  /// The width of the slime.
   static const staticWidth = 16.0;
+  /// The height of the slime.
   static const staticHeight = staticWidth;
 
   /// The distance between the top of one slime
@@ -26,10 +73,16 @@ class Slime extends BodyComponent with ContactCallbacks {
   /// The gap at the top above the first row of slimes.
   static const topGap = staticHeight;
 
+  /// The initial position of the slime.
+  ///
+  /// See [position] for the current position.
   final Vector2 initialPosition;
+  /// The size of the slime.
   final Vector2 size = Vector2(staticWidth, staticHeight);
 
+  /// The maximum health.
   int maxHp;
+  /// The current health.
   int hp;
 
   @override
@@ -54,6 +107,7 @@ class Slime extends BodyComponent with ContactCallbacks {
   );
 
   bool _givesPlayerABullet = false;
+  /// Whether the slime gives the player a bullet when it dies.
   bool get givesPlayerABullet => _givesPlayerABullet;
   set givesPlayerABullet(bool value) {
     _givesPlayerABullet = value;
@@ -65,41 +119,6 @@ class Slime extends BodyComponent with ContactCallbacks {
   /// since the body is created before [onLoad] is called.
   bool bodyCreated = false;
 
-  Slime({
-    required this.initialPosition,
-    required this.maxHp,
-    int? hp,
-    bool? givesPlayerABullet,
-  }): hp = hp ?? maxHp,
-      super(
-        priority: getPriorityFromPosition(initialPosition),
-      ) {
-    if (givesPlayerABullet != null) {
-      this.givesPlayerABullet = givesPlayerABullet;
-    }
-
-    renderBody = false;
-    add(_animation);
-    add(_healthBar);
-  }
-
-  Slime.fromJson(Map<String, dynamic> json): this(
-    initialPosition: Vector2(
-      json['px'] as double,
-      json['py'] as double,
-    ),
-    hp: json['hp'] as int,
-    maxHp: json['maxHp'] as int,
-    givesPlayerABullet: json['givesPlayerABullet'] as bool? ?? false,
-  );
-  Map<String, dynamic> toJson() => {
-    'px': _movement?.targetPosition.x ?? position.x,
-    'py': _movement?.targetPosition.y ?? position.y,
-    'hp': hp,
-    'maxHp': maxHp,
-    'givesPlayerABullet': givesPlayerABullet,
-  };
-
   @override
   void update(double dt) {
     super.update(dt);
@@ -107,9 +126,10 @@ class Slime extends BodyComponent with ContactCallbacks {
     if (_movement != null) {
       _movement!.elapsedSeconds += dt;
       if (_movement!.isFinished) {
-        body.setType(BodyType.static);
-        body.linearVelocity = Vector2.zero();
-        body.position.setFrom(_movement!.targetPosition);
+        body
+          ..setType(BodyType.static)
+          ..linearVelocity = Vector2.zero()
+          ..position.setFrom(_movement!.targetPosition);
         _movement = null;
         _animation.walking = false;
         priority = getPriorityFromPosition(body.position);
@@ -128,6 +148,8 @@ class Slime extends BodyComponent with ContactCallbacks {
     assert(yRelative >= 0 && yRelative <= 1);
     return lerpDouble(minPriority, maxPriority, yRelative)!.floor();
   }
+  /// The minimum priority,
+  /// used for the slimes at the top of the screen.
   static const minPriority = -100;
 
   /// Moves a new slime in from the top of the screen
@@ -158,8 +180,9 @@ class Slime extends BodyComponent with ContactCallbacks {
     body.position.setFrom(movement.startingPosition);
 
     // Set the body's velocity
-    body.setType(BodyType.kinematic);
-    body.linearVelocity = movement.velocity;
+    body
+      ..setType(BodyType.kinematic)
+      ..linearVelocity = movement.velocity;
   }
 
   @override
@@ -200,9 +223,10 @@ class Slime extends BodyComponent with ContactCallbacks {
           (game as RicochlimeGame).numBullets += 1;
         }
 
-        _animation.parent = parent;
-        _animation.position = SlimeAnimation._relativePosition + body.position;
-        _animation.current = SlimeState.dead;
+        _animation
+            ..parent = parent
+            ..position = SlimeAnimation._relativePosition + body.position
+            ..current = SlimeState.dead;
 
         removeFromParent();
       }
@@ -210,19 +234,22 @@ class Slime extends BodyComponent with ContactCallbacks {
   }
 }
 
+/// Data about a movement of a slime,
+/// including the [startingPosition] and [targetPosition].
 class _SlimeMovement {
-  final Vector2 startingPosition;
-  final Vector2 targetPosition;
-  final double totalSeconds;
-  double elapsedSeconds = 0;
-
-  late final Vector2 velocity = (targetPosition - startingPosition) / totalSeconds;
-
   _SlimeMovement({
     required this.startingPosition,
     required this.targetPosition,
     required this.totalSeconds,
   });
+
+  final Vector2 startingPosition;
+  final Vector2 targetPosition;
+  final double totalSeconds;
+  double elapsedSeconds = 0;
+
+  late final Vector2 velocity = (targetPosition - startingPosition)
+      / totalSeconds;
 
   bool get isFinished => elapsedSeconds >= totalSeconds;
 }
@@ -234,11 +261,6 @@ class _SlimeMovement {
 /// but only for type checking.
 class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     with HasGameRef<RicochlimeGame> {
-  static final Vector2 _relativePosition = Vector2(
-    -Slime.staticWidth / 2,
-    -Slime.staticHeight / 2,
-  );
-
   SlimeAnimation._(): super(
     position: _relativePosition.clone(),
     removeOnFinish: {
@@ -246,7 +268,13 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     },
   );
 
+  static final Vector2 _relativePosition = Vector2(
+    -Slime.staticWidth / 2,
+    -Slime.staticHeight / 2,
+  );
+
   bool _walking = false;
+  /// Whether the slime is walking.
   bool get walking => _walking;
   set walking(bool value) {
     _walking = value;
@@ -257,6 +285,8 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     }
   }
 
+  /// Whether the slime gives the player a bullet when it dies.
+  bool get givesPlayerABullet => getPaint().colorFilter != null;
   set givesPlayerABullet(bool value) {
     getPaint().colorFilter = value
         ? const ColorFilter.mode(Color(0xffffff55), BlendMode.modulate)
@@ -274,12 +304,14 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     height = 32;
   }
 
+  /// Preloads the sprites for the slime.
   static Future<void> preloadSprites({
     required RicochlimeGame gameRef,
   }) {
     return gameRef.images.load('slime.png');
   }
 
+  /// The list of animations for the slime.
   Map<SlimeState, SpriteAnimation> getAnimations() {
     final slimeImage = gameRef.images.fromCache('slime.png');
     return {

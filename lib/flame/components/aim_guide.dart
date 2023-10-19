@@ -6,12 +6,17 @@ import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
+/// A component that draws a dotted line
+/// to show the user where they're aiming.
 class AimGuide extends PositionComponent
     with HasGameRef<RicochlimeGame> {
   
   final Paint _paint = Paint()
       ..color = Colors.white;
 
+  /// Information about the current aim.
+  ///
+  /// This is null if the user is not aiming.
   @visibleForTesting
   AimDetails? aimDetails;
 
@@ -41,13 +46,14 @@ class AimGuide extends PositionComponent
       return;
     }
 
-    for (var dotIndex = 0; dotIndex < _maxDots * aimDetails.aimLength; dotIndex++) {
-      final distFromCenter = _dotInterval * (dotIndex + 1);
+    for (var dot = 0; dot < _maxDots * aimDetails.aimLength; dot++) {
+      final distFromCenter = _dotInterval * (dot + 1);
       final dotPos = aimDetails.unitDir * distFromCenter.toDouble();
       canvas.drawCircle(Offset(dotPos.x, dotPos.y), Bullet.radius, _paint);
     }
   }
 
+  /// Updates the aim guide based on the given mouse position.
   void aim(Vector2 mousePosition) {
     var relativePosition = position - mousePosition;
     final mouseBelowPlayer = relativePosition.y > 0;
@@ -90,7 +96,15 @@ class AimGuide extends PositionComponent
 
 }
 
+/// Information about the current aim.
 class AimDetails {
+  // ignore: public_member_api_docs
+  AimDetails({
+    required this.unitDir,
+    required this.aimLength,
+    required this.mouseBelowPlayer,
+  });
+
   /// The unit direction vector in which the user is
   /// currently aiming.
   /// 
@@ -106,10 +120,4 @@ class AimDetails {
   /// This is used to let the player cancel the aim
   /// by moving the mouse to the other side of the player.
   bool mouseBelowPlayer;
-
-  AimDetails({
-    required this.unitDir,
-    required this.aimLength,
-    required this.mouseBelowPlayer,
-  });
 }

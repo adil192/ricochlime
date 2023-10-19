@@ -3,6 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
+  Bullet({
+    required this.initialPosition,
+    required this.direction,
+  }): assert(direction.y < 0);
+
   /// Radius of the bullet.
   static const radius = 2.0;
 
@@ -11,11 +16,6 @@ class Bullet extends BodyComponent with ContactCallbacks {
 
   Vector2 initialPosition;
   Vector2 direction;
-
-  Bullet({
-    required this.initialPosition,
-    required this.direction,
-  }): assert(direction.y < 0);
 
   @override
   Body createBody() {
@@ -80,7 +80,9 @@ class Bullet extends BodyComponent with ContactCallbacks {
   void endContact(Object other, Contact contact) {
     super.endContact(other, contact);
     
-    final isVelocityHorizontal = Bullet.isVelocityHorizontal(body.linearVelocity);
+    final isVelocityHorizontal = Bullet.isVelocityHorizontal(
+      body.linearVelocity,
+    );
     if (isVelocityHorizontal) {
       horizontalCollisions += 1;
     } else {

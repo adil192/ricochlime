@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
@@ -9,14 +10,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class Prefs {
 
-  /// If true, the user's preferences will not be loaded and the default values will be used instead.
+  /// If true, the user's preferences will not be loaded and the default values
+  /// will be used instead.
   /// The values will not be saved either.
   @visibleForTesting
   static bool testingMode = false;
 
-  /// If true, a warning will be printed if a pref is accessed before it is loaded.
+  /// If true, a warning will be printed if a pref is accessed before
+  /// it is loaded.
   ///
-  /// If [testingMode] is true, the warning will not be printed even if this is true.
+  /// If [testingMode] is true, the warning will not be printed
+  /// even if this is true.
   @visibleForTesting
   static bool warnIfPrefAccessedBeforeLoaded = true;
 
@@ -40,20 +44,6 @@ abstract class Prefs {
 }
 
 abstract class IPref<T> extends ValueNotifier<T> {
-  final String key;
-  /// The keys that were used in the past for this Pref. If one of these keys is found, the value will be migrated to the current key.
-  final List<String> historicalKeys;
-  /// The keys that were used in the past for a similar Pref. If one of these keys is found, it will be deleted.
-  final List<String> deprecatedKeys;
-
-  final T defaultValue;
-
-  bool _loaded = false;
-
-  /// Whether this pref has changes that have yet to be saved to disk.
-  @protected
-  bool _saved = true;
-
   IPref(this.key, this.defaultValue, {
     List<String>? historicalKeys,
     List<String>? deprecatedKeys,
@@ -75,20 +65,38 @@ abstract class IPref<T> extends ValueNotifier<T> {
     }
   }
 
+  final String key;
+  /// The keys that were used in the past for this Pref.
+  /// If one of these keys is found, the value will be moved to the current key.
+  final List<String> historicalKeys;
+  /// The keys that were used in the past for a similar Pref.
+  /// If one of these keys is found, it will be deleted.
+  final List<String> deprecatedKeys;
+
+  final T defaultValue;
+
+  bool _loaded = false;
+
+  /// Whether this pref has changes that have yet to be saved to disk.
+  @protected
+  bool _saved = true;
+
   Future<T?> _load();
   Future<void> _afterLoad();
   Future<void> _save();
   @protected
   Future<T?> getValueWithKey(String key);
 
-  /// Removes the value from shared preferences, and resets the pref to its default value.
+  /// Removes the value from shared prefs, and resets it to its default value.
   @visibleForTesting
   Future<void> delete();
 
   @override
   T get value {
     if (!loaded && !Prefs.testingMode && Prefs.warnIfPrefAccessedBeforeLoaded) {
-      if (kDebugMode) print("WARNING: Pref '$key' accessed before it was loaded.");
+      if (kDebugMode) {
+        print("WARNING: Pref '$key' accessed before it was loaded.");
+      }
     }
     return super.value;
   }
@@ -116,8 +124,6 @@ abstract class IPref<T> extends ValueNotifier<T> {
   void notifyListeners() => super.notifyListeners();
 }
 class PlainPref<T> extends IPref<T> {
-  SharedPreferences? _prefs;
-
   PlainPref(
     super.key,
     super.defaultValue, {
@@ -134,6 +140,8 @@ class PlainPref<T> extends IPref<T> {
       || T == ConsentStage
   );
 
+  SharedPreferences? _prefs;
+
   @override
   Future<T?> _load() async {
     _prefs ??= await SharedPreferences.getInstance();
@@ -147,13 +155,13 @@ class PlainPref<T> extends IPref<T> {
 
       // migrate to new key
       await _save();
-      _prefs!.remove(historicalKey);
+      unawaited(_prefs!.remove(historicalKey));
 
       return currentValue;
     }
 
     for (final deprecatedKey in deprecatedKeys) {
-      _prefs!.remove(deprecatedKey);
+      unawaited(_prefs!.remove(deprecatedKey));
     }
 
     return null;
@@ -170,41 +178,41 @@ class PlainPref<T> extends IPref<T> {
       _prefs ??= await SharedPreferences.getInstance();
 
       if (T == bool) {
-        return await _prefs!.setBool(key, value as bool);
+        return _prefs!.setBool(key, value as bool);
       } else if (T == int || T == typeOf<int?>()) {
         if (value == null) {
-          return await _prefs!.remove(key);
+          return _prefs!.remove(key);
         } else {
-          return await _prefs!.setInt(key, value as int);
+          return _prefs!.setInt(key, value as int);
         }
       } else if (T == double) {
-        return await _prefs!.setDouble(key, value as double);
+        return _prefs!.setDouble(key, value as double);
       } else if (T == typeOf<Uint8List?>()) {
         final bytes = value as Uint8List?;
         if (bytes == null) {
-          return await _prefs!.remove(key);
+          return _prefs!.remove(key);
         } else {
-          return await _prefs!.setString(key, base64Encode(bytes));
+          return _prefs!.setString(key, base64Encode(bytes));
         }
       } else if (T == typeOf<List<String>>()) {
-        return await _prefs!.setStringList(key, value as List<String>);
+        return _prefs!.setStringList(key, value as List<String>);
       } else if (T == typeOf<Set<String>>()) {
-        return await _prefs!.setStringList(key, (value as Set<String>).toList());
+        return _prefs!.setStringList(key, (value as Set<String>).toList());
       } else if (T == typeOf<Queue<String>>()) {
-        return await _prefs!.setStringList(key, (value as Queue<String>).toList());
+        return _prefs!.setStringList(key, (value as Queue<String>).toList());
       } else if (T == AxisDirection) {
-        return await _prefs!.setInt(key, (value as AxisDirection).index);
+        return _prefs!.setInt(key, (value as AxisDirection).index);
       } else if (T == ThemeMode) {
-        return await _prefs!.setInt(key, (value as ThemeMode).index);
+        return _prefs!.setInt(key, (value as ThemeMode).index);
       } else if (T == TargetPlatform) {
-        return await _prefs!.setInt(key, (value as TargetPlatform).index);
+        return _prefs!.setInt(key, (value as TargetPlatform).index);
       } else if (T == typeOf<GameData?>()) {
         final json = jsonEncode(value);
-        return await _prefs!.setString(key, json);
+        return _prefs!.setString(key, json);
       } else if (T == ConsentStage) {
-        return await _prefs!.setInt(key, (value as ConsentStage).index);
+        return _prefs!.setInt(key, (value as ConsentStage).index);
       } else {
-        return await _prefs!.setString(key, value as String);
+        return _prefs!.setString(key, value as String);
       }
     } finally {
       _saved = true;

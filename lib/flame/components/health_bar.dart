@@ -5,14 +5,6 @@ import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 class HealthBar extends PositionComponent {
-  static const double staticWidth = 12;
-  static const double staticHeight = 2;
-
-  final int maxHp;
-  int hp;
-
-  final Paint paint;
-
   HealthBar({
     required this.maxHp,
     required this.hp,
@@ -26,6 +18,14 @@ class HealthBar extends PositionComponent {
     size: Vector2(staticWidth, staticHeight),
     priority: 1,
   );
+
+  static const double staticWidth = 12;
+  static const double staticHeight = 2;
+
+  final int maxHp;
+  int hp;
+
+  final Paint paint;
 
   Rect get backgroundRect {
     return Offset.zero & size.toSize();
@@ -45,16 +45,16 @@ class HealthBar extends PositionComponent {
     final paint = Paint()
         ..colorFilter = this.paint.colorFilter;
 
-    // background
-    canvas.drawRect(
-      backgroundRect,
-      paint..color = RicochlimePalette.healthBarBackgroundColor,
-    );
-
-    // foreground
-    canvas.drawRect(
-      foregroundRect,
-      paint..color = RicochlimePalette.healthBarForegroundColor,
-    );
+    canvas
+      // background
+      ..drawRect(
+        backgroundRect,
+        paint..color = RicochlimePalette.healthBarBackgroundColor,
+      )
+      // foreground
+      ..drawRect(
+        foregroundRect,
+        paint..color = RicochlimePalette.healthBarForegroundColor,
+      );
   }
 }

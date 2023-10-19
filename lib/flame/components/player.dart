@@ -10,13 +10,13 @@ enum PlayerState {
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameRef<RicochlimeGame> {
-  static double staticHeight = 48;
-
   Player() : super(
     removeOnFinish: {
       PlayerState.dead: true,
     },
   );
+
+  static double staticHeight = 48;
 
   @override
   Future<void> onLoad() async {
@@ -24,8 +24,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     current = PlayerState.idle;
     await super.onLoad();
 
-    final attackTicker = animationTickers![PlayerState.attack]!;
-    attackTicker.onComplete = () {
+    animationTickers![PlayerState.attack]!.onComplete = () {
       current = PlayerState.idle;
     };
 
@@ -43,8 +42,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   void attack() {
     current = PlayerState.attack;
-    final attackTicker = animationTickers![PlayerState.attack]!;
-    attackTicker.reset();
+    animationTickers![PlayerState.attack]!.reset();
   }
 
   void setAnimationBasedOnMovement(Vector2 delta) {

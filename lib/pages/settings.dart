@@ -84,7 +84,8 @@ class SettingsPage extends StatelessWidget {
               valueListenable: Prefs.birthYear,
               builder: (context, birthYear, child) {
                 final age = AdState.age;
-                final collapsed = age == null || age < AdState.minAgeForPersonalizedAds;
+                final collapsed = age == null
+                    || age < AdState.minAgeForPersonalizedAds;
                 return Collapsible(
                   collapsed: collapsed,
                   axis: CollapsibleAxis.vertical,
@@ -130,7 +131,6 @@ class SettingsPage extends StatelessWidget {
                     contentPadding: listTileContentPadding,
                     value: Prefs.hyperlegibleFont.value,
                     onChanged: (value) {
-                      assert(value != null, 'value should not be null since tristate is false');
                       Prefs.hyperlegibleFont.value = value!;
                     },
                   );
@@ -158,7 +158,9 @@ class SettingsPage extends StatelessWidget {
                       width: iconSize,
                       height: iconSize,
                     ),
-                    applicationLegalese: t.settingsPage.licenseNotice(buildYear: buildYear),
+                    applicationLegalese: t.settingsPage.licenseNotice(
+                      buildYear: buildYear,
+                    ),
                   );
                 },
                 tileColor: listTileColor,

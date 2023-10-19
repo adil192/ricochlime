@@ -3,48 +3,73 @@ import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
+/// Enum for the different sprite sheets.
 @visibleForTesting
 enum SpriteSheetType {
+  /// The water sprite sheets.
   water,
+  /// The plains sprite sheet.
   plains,
 }
+
+/// Enum for the different background tile types.
 enum BackgroundTileType {
   // rightOfGrass(SpriteSheetType.water, 1, 1),
   // leftOfGrass(SpriteSheetType.water, 1, 3),
   // topOfGrass(SpriteSheetType.water, 2, 2),
+  // ignore: public_member_api_docs
   bottomOfGrass(SpriteSheetType.water, 0, 2),
+  // ignore: public_member_api_docs
   justWater(SpriteSheetType.water, 1, 2),
 
+  // ignore: public_member_api_docs
   topLeftOfSoil(SpriteSheetType.plains, 0, 1),
+  // ignore: public_member_api_docs
   topCenterOfSoil(SpriteSheetType.plains, 0, 2),
+  // ignore: public_member_api_docs
   topRightOfSoil(SpriteSheetType.plains, 0, 3),
+  // ignore: public_member_api_docs
   centerLeftOfSoil(SpriteSheetType.plains, 1, 1),
+  // ignore: public_member_api_docs
   centerCenterOfSoil(SpriteSheetType.plains, 1, 2),
+  // ignore: public_member_api_docs
   centerRightOfSoil(SpriteSheetType.plains, 1, 3),
+  // ignore: public_member_api_docs
   bottomLeftOfSoil(SpriteSheetType.plains, 2, 1),
+  // ignore: public_member_api_docs
   bottomCenterOfSoil(SpriteSheetType.plains, 2, 2),
+  // ignore: public_member_api_docs
   bottomRightOfSoil(SpriteSheetType.plains, 2, 3),
 
+  // ignore: public_member_api_docs
   leftOfThinSoil(SpriteSheetType.plains, 3, 1),
+  // ignore: public_member_api_docs
   centerOfThinSoil(SpriteSheetType.plains, 3, 2),
+  // ignore: public_member_api_docs
   rightOfThinSoil(SpriteSheetType.plains, 3, 3),
-
   ;
+
   const BackgroundTileType(this.spriteSheetType, this.tileRow, this.tileCol);
+  /// The sprite sheet(s) type that this tile is in.
   final SpriteSheetType spriteSheetType;
+  /// The row of the tile in the sprite sheet.
   final int tileRow;
+  /// The column of the tile in the sprite sheet.
   final int tileCol;
 }
 
+/// A component for a background tile.
 class BackgroundTile extends SpriteAnimationComponent
     with HasGameRef<RicochlimeGame> {
-  
+
+  // ignore: public_member_api_docs
   BackgroundTile({
     required super.position,
     required this.type,
     super.size,
   });
 
+  /// The type of this background tile.
   final BackgroundTileType type;
 
   @override
@@ -69,7 +94,11 @@ class BackgroundTile extends SpriteAnimationComponent
     );
   }
 
+  /// The water sprite sheets,
+  /// preloaded by [preloadSprites].
   static List<SpriteSheet> waterSpriteSheets = [];
+  /// The plains sprite sheet,
+  /// preloaded by [preloadSprites].
   static late SpriteSheet plainsSpriteSheet;
   /// Preloads all sprite sheets so they can be
   /// accessed synchronously later.

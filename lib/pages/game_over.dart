@@ -48,13 +48,15 @@ class GameOverDialog extends StatelessWidget {
                             color: colorScheme.onSurface,
                           ),
                           children: [
-                            if (score > Prefs.highScore.value && Prefs.highScore.value > 0)
+                            if (score > Prefs.highScore.value
+                                && Prefs.highScore.value > 0)
                               t.gameOverPage.highScoreBeaten(
                                 pOld: TextSpan(
                                   style: TextStyle(
                                     decoration: TextDecoration.lineThrough,
                                     decorationThickness: kToolbarHeight / 20,
-                                    decorationColor: colorScheme.onSurface.withOpacity(0.6),
+                                    decorationColor: colorScheme.onSurface
+                                        .withOpacity(0.6),
                                   ),
                                   text: ' ${Prefs.highScore.value} ',
                                 ),
@@ -68,7 +70,9 @@ class GameOverDialog extends StatelessWidget {
                               )
                             else
                               TextSpan(
-                                text: t.gameOverPage.highScoreNotBeaten(p: score),
+                                text: t.gameOverPage.highScoreNotBeaten(
+                                  p: score,
+                                ),
                               )
                           ],
                         ),
@@ -81,7 +85,9 @@ class GameOverDialog extends StatelessWidget {
                           final rewardGranted = await AdState.showRewardedAd();
                           if (!context.mounted) return;
                           if (rewardGranted) {
-                            context.pop<GameOverAction>(GameOverAction.continueGame);
+                            context.pop<GameOverAction>(
+                              GameOverAction.continueGame,
+                            );
                           }
                         },
                         type: NesButtonType.primary,
@@ -101,8 +107,11 @@ class GameOverDialog extends StatelessWidget {
                     const SizedBox(height: 32),
                     _GameOverButton(
                       onPressed: () {
-                        context.pop<GameOverAction>(GameOverAction.nothingYet); // pop dialog
-                        context.pop(); // pop play page
+                        context
+                          // pop dialog
+                          ..pop<GameOverAction>(GameOverAction.nothingYet)
+                          // pop play page
+                          ..pop();
                       },
                       icon: NesIcons.leftArrowIndicator,
                       text: t.gameOverPage.homeButton,

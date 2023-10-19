@@ -31,6 +31,8 @@ class Ticker {
       elapsed += dt;
       if (elapsed >= durationInSeconds) return elapsed;
     }
-    throw StateError('Ticker.delayed: Game was disposed before the duration passed');
+    throw StateError(
+      'Ticker.delayed: Game was disposed before the duration passed',
+    );
   }
 }

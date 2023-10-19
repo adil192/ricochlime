@@ -4,12 +4,19 @@ import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/utils/prefs.dart';
 
+/// A dialog which asks the user to input
+/// their birth year.
 class BirthYearDialog extends StatefulWidget {
+  // ignore: public_member_api_docs
   const BirthYearDialog({
     super.key,
     this.dismissible = true,
   });
 
+  /// Whether the dialog can be dismissed.
+  /// 
+  /// This should be `false` if the user hasn't inputted
+  /// their birth year before. 
   final bool dismissible;
 
   @override

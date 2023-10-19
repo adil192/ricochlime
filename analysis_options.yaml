@@ -16,8 +16,7 @@ linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`
   # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at
-  # https://dart-lang.github.io/linter/lints/index.html.
+  # and their documentation is published at https://dart.dev/lints.
   #
   # Instead of disabling a lint rule for the entire project in the
   # section below, it can also be suppressed for a single line of code
@@ -33,6 +32,9 @@ linter:
     always_use_package_imports: true
     avoid_relative_lib_imports: true
 
+    avoid_dynamic_calls: true
+    avoid_annotating_with_dynamic: true
+
     avoid_slow_async_io: true
 
     cancel_subscriptions: true
@@ -44,8 +46,6 @@ linter:
     eol_at_end_of_file: true
 
     exhaustive_cases: true
-
-    join_return_with_assignment: true
 
     leading_newlines_in_multiline_strings: true
 
@@ -71,6 +71,54 @@ linter:
     use_named_constants: true
 
     use_string_buffers: true
+
+    no_adjacent_strings_in_list: true
+
+    unnecessary_statements: true
+
+    avoid_double_and_int_checks: true
+
+    avoid_positional_boolean_parameters: true
+
+    avoid_returning_this: true
+
+    avoid_setters_without_getters: true
+
+    cascade_invocations: true
+
+    cast_nullable_to_non_nullable: true
+
+    flutter_style_todos: true
+
+    lines_longer_than_80_chars: true
+
+    matching_super_parameters: true
+
+    missing_whitespace_between_adjacent_strings: true
+
+    noop_primitive_operations: true
+
+    package_api_docs: true
+    # public_member_api_docs: true
+
+    prefer_asserts_in_initializer_lists: true
+
+    prefer_constructors_over_static_methods: true
+
+    prefer_final_locals: true
+
+    sized_box_shrink_expand: true
+
+    sort_unnamed_constructors_first: true
+    sort_constructors_first: true
+
+    unawaited_futures: true
+    unnecessary_await_in_return: true
+    avoid_void_async: true
+
+    use_setters_to_change_properties: true
+
+    sort_pub_dependencies: true
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

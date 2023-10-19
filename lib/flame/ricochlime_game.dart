@@ -30,8 +30,6 @@ enum GameState {
 
 class RicochlimeGame extends Forge2DGame with
     PanDetector, TapDetector, SingleGameInstance {
-  static RicochlimeGame? _instance;
-
   RicochlimeGame({
     required this.score,
     required this.timeDilation,
@@ -51,6 +49,8 @@ class RicochlimeGame extends Forge2DGame with
     /// rather than the default value which is much lower.
     physics_settings.maxTranslation = Bullet.speed;
   }
+
+  static RicochlimeGame? _instance;
 
   /// Width to height aspect ratio
   static const aspectRatio = 1 / 2;
@@ -108,8 +108,7 @@ class RicochlimeGame extends Forge2DGame with
 
     add(Background());
 
-    final boundaries = createBoundaries(expectedWidth, expectedHeight);
-    boundaries.forEach(add);
+    createBoundaries(expectedWidth, expectedHeight).forEach(add);
 
     aimGuide = AimGuide();
     add(aimGuide);
@@ -332,7 +331,7 @@ class RicochlimeGame extends Forge2DGame with
 
       // check if the player has lost
       if (isGameOver()) {
-        return await gameOver();
+        return gameOver();
       }
     }
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
@@ -342,7 +341,8 @@ class RicochlimeGame extends Forge2DGame with
   }
 
   bool isGameOver() {
-    const threshold = Background.waterThresholdPosition - Slime.staticHeight * 1.3;
+    const threshold = Background.waterThresholdPosition
+        - Slime.staticHeight * 1.3;
     return slimes.any((slime) => slime.position.y >= threshold);
   }
 
@@ -363,13 +363,17 @@ class RicochlimeGame extends Forge2DGame with
         break;
       case GameOverAction.continueGame:
         final numRowsToRemove = max(
-          numNewRowsEachRound * 3 + 1, // clears 3 rounds worth of slimes plus the one that killed the player
-          5, // clears at least 5 rows
+          // clears 3 rounds worth of slimes plus the one that killed the player
+          numNewRowsEachRound * 3 + 1,
+          // or at least 5 rows
+          5,
         );
         /// The y position of the first row of slimes to remove
         final threshold = Background.waterThresholdPosition
             - expectedHeight * (numRowsToRemove / tilesInHeight);
-        if (kDebugMode) print('Removing $numRowsToRemove rows (slimes with y > $threshold)');
+        if (kDebugMode) {
+          print('Removing $numRowsToRemove rows (slimes with y > $threshold)');
+        }
         for (final slime in slimes) {
           if (slime.position.y > threshold) {
             slime.removeFromParent();

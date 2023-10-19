@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -21,7 +22,7 @@ import 'package:ricochlime/utils/ricochlime_palette.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
-  game.preloadSprites();
+  unawaited(game.preloadSprites());
   Prefs.init();
   _addLicenses();
   GoogleFonts.config.allowRuntimeFetching = false;
@@ -53,7 +54,7 @@ void _addLicenses() {
   });
 }
 
-void handleCurrentConsentStage(BuildContext context) async {
+Future<void> handleCurrentConsentStage(BuildContext context) async {
   if (kIsWeb) return;
   if (!Platform.isAndroid && !Platform.isIOS) return;
 

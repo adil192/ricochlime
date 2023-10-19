@@ -80,20 +80,27 @@ class _PlayPageState extends State<PlayPage> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: RicochlimePalette.grassColorDark.withOpacity(0.5),
+                          color: RicochlimePalette.grassColorDark
+                              .withOpacity(0.5),
                           blurRadius: 100,
                         ),
                         const BoxShadow(
                           color: RicochlimePalette.dirtColor,
                           spreadRadius: RicochlimeGame.expectedHeight * 0.05,
                           blurRadius: RicochlimeGame.expectedHeight * 0.1,
-                          offset: Offset(0, RicochlimeGame.expectedHeight * 0.85),
+                          offset: Offset(
+                            0,
+                            RicochlimeGame.expectedHeight * 0.85,
+                          ),
                         ),
                         const BoxShadow(
                           color: RicochlimePalette.waterColor,
                           spreadRadius: RicochlimeGame.expectedHeight * 0.1,
                           blurRadius: RicochlimeGame.expectedHeight * 0.1,
-                          offset: Offset(0, RicochlimeGame.expectedHeight * 0.9),
+                          offset: Offset(
+                            0,
+                            RicochlimeGame.expectedHeight * 0.9,
+                          ),
                         ),
                       ],
                     ),
@@ -182,7 +189,7 @@ class _PlayPageState extends State<PlayPage> {
                     padding: const EdgeInsets.only(left: 8, right: 8),
                     child: ValueListenableBuilder(
                       valueListenable: _timeDilation,
-                      builder: (context, timeDilation, child) => AnimatedOpacity(
+                      builder: (context, timeDilation, _) => AnimatedOpacity(
                         opacity: timeDilation == 1.0 ? 0.0 : 1.0,
                         duration: const Duration(milliseconds: 200),
                         child: Text(

@@ -2,6 +2,7 @@
 
 import 'package:flame_forge2d/flame_forge2d.dart';
 
+/// Creates the [Wall]s that make up the boundaries of the world.
 List<Wall> createBoundaries(double width, double height) {
   final topLeft = Vector2.zero();
   final bottomRight = Vector2(width, height);
@@ -16,13 +17,17 @@ List<Wall> createBoundaries(double width, double height) {
   ];
 }
 
+/// A simple component to represent a wall collider;
 class Wall extends BodyComponent {
-  final Vector2 start;
-  final Vector2 end;
-
+  // ignore: public_member_api_docs
   Wall(this.start, this.end) {
     renderBody = false;
   }
+
+  /// The start point of the wall.
+  final Vector2 start;
+  /// The end point of the wall.
+  final Vector2 end;
 
   @override
   Body createBody() {
