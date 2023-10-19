@@ -58,6 +58,13 @@
     </screenshots>
 
     <releases>
+        <release version="1.0.3" type="development" date="2023-10-19">
+            <description>
+                <ul>
+                    <li>Sprites are loaded sooner for faster startup</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.0.2" type="development" date="2023-09-24">
             <description>
                 <ul>

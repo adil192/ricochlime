@@ -1,0 +1,4 @@
+• Better icons
+• Removed empty box in Settings for underage users
+• Sprites are loaded sooner for faster startup
+• The age dialog is now a little minigame
