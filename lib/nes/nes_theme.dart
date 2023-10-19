@@ -20,7 +20,7 @@ ThemeData nesThemeFrom({
       ) ?? colorScheme.primary,
       primary: colorScheme.primary,
       success: colorScheme.primary,
-      warning: colorScheme.error,
+      warning: colorScheme.secondary,
       error: colorScheme.error,
       lightLabelColor: brightness == Brightness.light
           ? colorScheme.onPrimary

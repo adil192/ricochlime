@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 28
+/// Strings: 34
 ///
-/// Built on 2023-09-21 at 23:01 UTC
+/// Built on 2023-10-19 at 21:19 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -146,7 +146,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	late final _StringsHomePageEn homePage = _StringsHomePageEn._(_root);
 	late final _StringsPlayPageEn playPage = _StringsPlayPageEn._(_root);
 	late final _StringsSettingsPageEn settingsPage = _StringsSettingsPageEn._(_root);
-	late final _StringsBirthYearEn birthYear = _StringsBirthYearEn._(_root);
+	late final _StringsAgeDialogEn ageDialog = _StringsAgeDialogEn._(_root);
 	late final _StringsGameOverPageEn gameOverPage = _StringsGameOverPageEn._(_root);
 	late final _StringsTutorialPageEn tutorialPage = _StringsTutorialPageEn._(_root);
 	late final _StringsCommonEn common = _StringsCommonEn._(_root);
@@ -188,16 +188,22 @@ class _StringsSettingsPageEn {
 	String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
 }
 
-// Path: birthYear
-class _StringsBirthYearEn {
-	_StringsBirthYearEn._(this._root);
+// Path: ageDialog
+class _StringsAgeDialogEn {
+	_StringsAgeDialogEn._(this._root);
 
 	final _StringsEn _root; // ignore: unused_field
 
 	// Translations
-	String get yourBirthYear => 'Your birth year';
+	String get yourAge => 'Your age';
+	String get title => 'Guessing your age';
 	String get unknown => 'Unknown';
-	String get reason => 'We need to know your birth year to make sure the ads you see are appropriate for your age.';
+	String get reason => 'We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.';
+	String areYou({required Object age}) => 'Are you ${age}?';
+	String get younger => 'No, I\'m younger';
+	String get older => 'No, I\'m older';
+	String yesMyAgeIs({required Object age}) => 'Yes, I\'m ${age}';
+	String get reset => 'Reset';
 }
 
 // Path: gameOverPage

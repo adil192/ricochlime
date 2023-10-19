@@ -4,8 +4,10 @@ import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/utils/prefs.dart';
 
-/// A dialog which asks the user to input
-/// their birth year.
+/// A dialog which asks the user how old they are.
+///
+/// This is a small minigame in itself
+/// since it uses a binary search guessing game.
 class BirthYearDialog extends StatefulWidget {
   // ignore: public_member_api_docs
   const BirthYearDialog({
@@ -24,13 +26,13 @@ class BirthYearDialog extends StatefulWidget {
 }
 
 class _BirthYearDialogState extends State<BirthYearDialog> {
-  DateTime selectedDate = DateTime(
-    Prefs.birthYear.value ?? DateTime.now().year,
-  );
+  static const int initialAgeGuess = 20;
+  int minAge = 0;
+  int maxAge = 120;
+  int guessedAge = initialAgeGuess;
 
   @override
   Widget build(BuildContext context) {
-    final currentYear = DateTime.now().year;
     final colorScheme = Theme.of(context).colorScheme;
     return Center(
       child: NesContainer(
@@ -42,49 +44,99 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                t.birthYear.yourBirthYear,
+                t.ageDialog.title,
+                style: const TextStyle(
+                  fontSize: kToolbarHeight / 2,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(t.ageDialog.reason),
+              const SizedBox(height: 24),
+
+              // Age guess
+              Text(
+                t.ageDialog.areYou(age: guessedAge),
                 style: const TextStyle(
                   fontSize: kToolbarHeight / 2,
                 ),
               ),
               const SizedBox(height: 16),
-              Text(t.birthYear.reason),
-              SizedBox(
-                height: 300,
-                child: StatefulBuilder(
-                  builder: (context, setState) {
-                    return YearPicker(
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(currentYear),
-                      initialDate: DateTime(currentYear),
-                      selectedDate: selectedDate,
-                      onChanged: (value) {
-                        setState(() => selectedDate = value);
-                      },
-                    );
-                  },
+
+              NesButton(
+                type: NesButtonType.error,
+                child: Row(
+                  children: [
+                    NesIcon(
+                      iconData: NesIcons.redo,
+                    ),
+                    const SizedBox(width: 16),
+                    Text(t.ageDialog.reset),
+                  ],
                 ),
+                onPressed: () {
+                  setState(() {
+                    minAge = 0;
+                    maxAge = 120;
+                    guessedAge = initialAgeGuess;
+                  });
+                },
               ),
-              const SizedBox(height: 16),
-              Wrap(
-                children: [
-                  if (widget.dismissible) NesButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    type: NesButtonType.warning,
-                    child: Text(t.common.cancel),
-                  ),
-                  const SizedBox(width: 16),
-                  NesButton(
-                    onPressed: () {
-                      Prefs.birthYear.value = selectedDate.year;
-                      context.pop();
-                    },
-                    type: NesButtonType.primary,
-                    child: Text(t.common.ok),
-                  ),
-                ],
+              const SizedBox(height: 8),
+              NesButton(
+                type: NesButtonType.warning,
+                child: Row(
+                  children: [
+                    NesIcon(
+                      iconData: NesIcons.topArrowIndicator,
+                    ),
+                    const SizedBox(width: 16),
+                    Text(t.ageDialog.older),
+                  ],
+                ),
+                onPressed: () {
+                  setState(() {
+                    minAge = guessedAge + 1;
+                    guessedAge = (minAge + maxAge) ~/ 2;
+                  });
+                },
+              ),
+              const SizedBox(height: 8),
+              NesButton(
+                type: NesButtonType.primary,
+                child: Row(
+                  children: [
+                    NesIcon(
+                      iconData: NesIcons.check,
+                    ),
+                    const SizedBox(width: 16),
+                    Text(t.ageDialog.yesMyAgeIs(age: guessedAge))
+                  ],
+                ),
+                onPressed: () {
+                  final currentYear = DateTime.now().year;
+                  final birthYear = currentYear - guessedAge;
+                  Prefs.birthYear.value = birthYear;
+                  context.pop();
+                },
+              ),
+              const SizedBox(height: 8),
+              NesButton(
+                type: NesButtonType.warning,
+                child: Row(
+                  children: [
+                    NesIcon(
+                      iconData: NesIcons.bottomArrowIndicator,
+                    ),
+                    const SizedBox(width: 16),
+                    Text(t.ageDialog.younger),
+                  ],
+                ),
+                onPressed: () {
+                  setState(() {
+                    maxAge = guessedAge - 1;
+                    guessedAge = (minAge + maxAge) ~/ 2;
+                  });
+                },
               ),
             ],
           ),

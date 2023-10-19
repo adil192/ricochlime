@@ -55,7 +55,7 @@ class SettingsPage extends StatelessWidget {
                   tileColor: listTileColor,
                   shape: listTileShape,
                   contentPadding: listTileContentPadding,
-                  title: Text(t.birthYear.yourBirthYear),
+                  title: Text(t.ageDialog.yourAge),
                   leading: NesIcon(
                     iconData: NesIcons.textFile,
                   ),
@@ -64,7 +64,7 @@ class SettingsPage extends StatelessWidget {
                     builder: (context, birthYear, child) {
                       return Text(
                         switch (birthYear) {
-                          null => t.birthYear.unknown,
+                          null => t.ageDialog.unknown,
                           _ => '$birthYear',
                         },
                         style: TextStyle(

@@ -13,10 +13,16 @@ settingsPage:
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
-birthYear:
-  yourBirthYear: Your birth year
+ageDialog:
+  yourAge: Your age
+  title: Guessing your age
   unknown: Unknown
-  reason: We need to know your birth year to make sure the ads you see are appropriate for your age.
+  reason: We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.
+  areYou: Are you $age?
+  younger: No, I'm younger
+  older: No, I'm older
+  yesMyAgeIs: Yes, I'm $age
+  reset: Reset
 gameOverPage:
   title: Game over!
   highScoreNotBeaten: You scored $p points!
