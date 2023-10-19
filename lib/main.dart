@@ -56,7 +56,7 @@ void _addLicenses() {
 
 Future<void> handleCurrentConsentStage(BuildContext context) async {
   if (kIsWeb) return;
-  if (!Platform.isAndroid && !Platform.isIOS) return;
+  if (!AdState.adsSupported) return;
 
   if (Prefs.birthYear.value == null) {
     assert(Prefs.consentStage.value == ConsentStage.askForBirthYear);
