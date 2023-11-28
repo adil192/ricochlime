@@ -11,9 +11,11 @@ import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 final ValueNotifier<int> _score = ValueNotifier(0);
+final ValueNotifier<bool> _isDarkMode = ValueNotifier(false);
 final ValueNotifier<double> _timeDilation = ValueNotifier(1);
 final game = RicochlimeGame(
   score: _score,
+  isDarkMode: _isDarkMode,
   timeDilation: _timeDilation,
 );
 
@@ -34,6 +36,12 @@ class _PlayPageState extends State<PlayPage> {
         showGameOverDialog();
       });
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _isDarkMode.value = Theme.of(context).brightness == Brightness.dark;
   }
 
   @override
@@ -71,7 +79,9 @@ class _PlayPageState extends State<PlayPage> {
         systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: ColoredBox(
-        color: RicochlimePalette.grassColor,
+        color: _isDarkMode.value
+            ? RicochlimePalette.grassColorDark
+            : RicochlimePalette.grassColor,
         child: SafeArea(
           child: Stack(
             children: [
@@ -81,27 +91,33 @@ class _PlayPageState extends State<PlayPage> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              RicochlimePalette.grassColorDark.withOpacity(0.5),
-                          blurRadius: 100,
-                        ),
-                        const BoxShadow(
-                          color: RicochlimePalette.dirtColor,
+                          color: _isDarkMode.value
+                              ? RicochlimePalette.dirtColor.withOpacity(0.5)
+                              : RicochlimePalette.dirtColor,
                           spreadRadius: RicochlimeGame.expectedHeight * 0.05,
                           blurRadius: RicochlimeGame.expectedHeight * 0.1,
-                          offset: Offset(
+                          offset: const Offset(
                             0,
                             RicochlimeGame.expectedHeight * 0.85,
                           ),
                         ),
-                        const BoxShadow(
-                          color: RicochlimePalette.waterColor,
+                        BoxShadow(
+                          color: _isDarkMode.value
+                              ? RicochlimePalette.waterColor.withOpacity(0.5)
+                              : RicochlimePalette.waterColor,
                           spreadRadius: RicochlimeGame.expectedHeight * 0.1,
                           blurRadius: RicochlimeGame.expectedHeight * 0.1,
-                          offset: Offset(
+                          offset: const Offset(
                             0,
                             RicochlimeGame.expectedHeight * 0.9,
                           ),
+                        ),
+                        BoxShadow(
+                          color: _isDarkMode.value
+                              ? Colors.black.withOpacity(0.5)
+                              : RicochlimePalette.grassColorDark
+                                  .withOpacity(0.5),
+                          blurRadius: 100,
                         ),
                       ],
                     ),

@@ -22,6 +22,8 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
   /// in the next round.
   int lastNumNewRowsEachRound = -1;
 
+  final List<BackgroundTile> tiles = [];
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
@@ -35,7 +37,11 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
     );
 
     lastNumNewRowsEachRound = gameRef.numNewRowsEachRound;
-    await addAll(getTiles());
+
+    tiles
+      ..clear()
+      ..addAll(getTiles());
+    await addAll(tiles);
   }
 
   @override

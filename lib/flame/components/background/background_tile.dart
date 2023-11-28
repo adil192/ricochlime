@@ -75,6 +75,19 @@ class BackgroundTile extends SpriteAnimationComponent
   /// The type of this background tile.
   final BackgroundTileType type;
 
+  bool _isDarkened = false;
+  bool get isDarkened => _isDarkened;
+  set isDarkened(bool isDarkened) {
+    if (isDarkened == _isDarkened) return;
+    _isDarkened = isDarkened;
+    getPaint().colorFilter = isDarkened
+        ? const ColorFilter.mode(
+            Color.fromARGB(255, 175, 175, 175),
+            BlendMode.modulate,
+          )
+        : null;
+  }
+
   @override
   Future<void> onLoad() async {
     super.onLoad();

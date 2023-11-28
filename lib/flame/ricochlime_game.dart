@@ -32,6 +32,7 @@ class RicochlimeGame extends Forge2DGame
     with PanDetector, TapDetector, SingleGameInstance {
   RicochlimeGame({
     required this.score,
+    required this.isDarkMode,
     required this.timeDilation,
   }) : super(
           gravity: Vector2.zero(),
@@ -48,6 +49,9 @@ class RicochlimeGame extends Forge2DGame
     /// This effectively sets the max time step to 1s,
     /// rather than the default value which is much lower.
     physics_settings.maxTranslation = Bullet.speed;
+
+    isDarkMode.addListener(_onDarkModeChanged);
+    _onDarkModeChanged();
   }
 
   static RicochlimeGame? _instance;
@@ -76,6 +80,7 @@ class RicochlimeGame extends Forge2DGame
 
   late Player player;
   late AimGuide aimGuide;
+  late Background background;
   bool get inputAllowed => state == GameState.idle;
   bool inputCancelled = false;
   final List<Slime> slimes = [];
@@ -83,6 +88,7 @@ class RicochlimeGame extends Forge2DGame
   final random = Random();
 
   final ValueNotifier<int> score;
+  final ValueNotifier<bool> isDarkMode;
   int numBullets = 1;
   int numNewRowsEachRound = 1;
 
@@ -105,7 +111,8 @@ class RicochlimeGame extends Forge2DGame
     assert(size.x == expectedWidth);
     assert(size.y == expectedHeight);
 
-    add(Background());
+    background = Background();
+    add(background);
 
     createBoundaries(expectedWidth, expectedHeight).forEach(add);
 
@@ -184,6 +191,13 @@ class RicochlimeGame extends Forge2DGame
     await importFromGame(Prefs.currentGame.value);
   }
 
+  void _onDarkModeChanged() {
+    if (!isLoaded) return;
+    for (final tile in background.tiles) {
+      tile.isDarkened = isDarkMode.value;
+    }
+  }
+
   /// Clears the current bullets and slimes
   void _resetChildren() {
     for (final component in children) {
@@ -198,7 +212,9 @@ class RicochlimeGame extends Forge2DGame
   }
 
   @override
-  Color backgroundColor() => RicochlimePalette.grassColor;
+  Color backgroundColor() => isDarkMode.value
+      ? RicochlimePalette.grassColorDark
+      : RicochlimePalette.grassColor;
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
