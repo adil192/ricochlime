@@ -286,12 +286,13 @@ packages:
     source: hosted
     version: "0.6.7"
   json2yaml:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: json2yaml
-      sha256: da94630fbc56079426fdd167ae58373286f603371075b69bf46d848d63ba3e51
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: fix-string-ends-with-colon
+      resolved-ref: "618fc6b7c57acd17cfa98ef7895a771938374456"
+      url: "https://github.com/adil192/json2yaml"
+    source: git
     version: "3.0.1"
   lints:
     dependency: transitive
@@ -525,6 +526,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  simplytranslate:
+    dependency: "direct dev"
+    description:
+      name: simplytranslate
+      sha256: "6d272fa96498ce45e257f2f302ab908a83b6b9431436a24dff45c1b79e61bd48"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.4"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -707,7 +716,7 @@ packages:
     source: hosted
     version: "6.4.2"
   yaml:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: yaml
       sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"

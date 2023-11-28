@@ -71,6 +71,16 @@ dev_dependencies:
 
   process_run: ^0.13.1
 
+  simplytranslate: ^1.0.0
+  yaml: ^3.1.2
+
+dependency_overrides:
+  # https://github.com/alexei-sintotski/json2yaml/pull/30
+  json2yaml:
+    git:
+      url: https://github.com/adil192/json2yaml
+      ref: fix-string-ends-with-colon
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
