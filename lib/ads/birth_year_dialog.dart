@@ -28,11 +28,17 @@ class BirthYearDialog extends StatefulWidget {
 }
 
 class _BirthYearDialogState extends State<BirthYearDialog> {
-  static const int initialAgeGuess = 1;
+  static const int minLowerBound = 1;
+  static const int maxUpperBound = 120;
+  static const int initialAgeGuess = minLowerBound;
   int guessNumber = 1;
-  int minAge = 0;
-  int maxAge = 120;
+  int lowerBound = minLowerBound;
+  int upperBound = maxUpperBound;
   int guessedAge = initialAgeGuess;
+
+  bool get canGoOlder => lowerBound < upperBound && guessedAge < maxUpperBound;
+  bool get canGoYounger =>
+      upperBound > lowerBound && guessedAge > minLowerBound;
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +77,24 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
               ),
               const SizedBox(height: 8),
               _RangeBar(
-                currentLowerBound: minAge,
-                currentUpperBound: maxAge,
-                minLowerBound: 0,
-                maxUpperBound: 120,
+                currentLowerBound: lowerBound,
+                currentUpperBound: upperBound,
+                minLowerBound: minLowerBound,
+                maxUpperBound: maxUpperBound,
               ),
               const SizedBox(height: 16),
 
               NesButton(
                 type: NesButtonType.warning,
+                onPressed: canGoOlder
+                    ? () {
+                        setState(() {
+                          guessNumber++;
+                          lowerBound = guessedAge + 1;
+                          guessedAge = (lowerBound + upperBound) ~/ 2;
+                        });
+                      }
+                    : null,
                 child: Row(
                   children: [
                     NesIcon(
@@ -89,17 +104,16 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
                     Text(t.ageDialog.older),
                   ],
                 ),
-                onPressed: () {
-                  setState(() {
-                    guessNumber++;
-                    minAge = guessedAge + 1;
-                    guessedAge = (minAge + maxAge) ~/ 2;
-                  });
-                },
               ),
               const SizedBox(height: 8),
               NesButton(
                 type: NesButtonType.primary,
+                onPressed: () {
+                  final currentYear = DateTime.now().year;
+                  final birthYear = currentYear - guessedAge;
+                  Prefs.birthYear.value = birthYear;
+                  context.pop();
+                },
                 child: Row(
                   children: [
                     NesIcon(
@@ -109,16 +123,19 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
                     Text(t.ageDialog.yesMyAgeIs(age: guessedAge))
                   ],
                 ),
-                onPressed: () {
-                  final currentYear = DateTime.now().year;
-                  final birthYear = currentYear - guessedAge;
-                  Prefs.birthYear.value = birthYear;
-                  context.pop();
-                },
               ),
               const SizedBox(height: 8),
               NesButton(
                 type: NesButtonType.warning,
+                onPressed: canGoYounger
+                    ? () {
+                        setState(() {
+                          guessNumber++;
+                          upperBound = guessedAge - 1;
+                          guessedAge = (lowerBound + upperBound) ~/ 2;
+                        });
+                      }
+                    : null,
                 child: Row(
                   children: [
                     NesIcon(
@@ -128,13 +145,6 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
                     Text(t.ageDialog.younger),
                   ],
                 ),
-                onPressed: () {
-                  setState(() {
-                    guessNumber++;
-                    maxAge = guessedAge - 1;
-                    guessedAge = (minAge + maxAge) ~/ 2;
-                  });
-                },
               ),
               const SizedBox(height: 16),
               NesButton(
@@ -151,8 +161,8 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
                 onPressed: () {
                   setState(() {
                     guessNumber = 1;
-                    minAge = 0;
-                    maxAge = 120;
+                    lowerBound = minLowerBound;
+                    upperBound = maxUpperBound;
                     guessedAge = initialAgeGuess;
                   });
                 },
