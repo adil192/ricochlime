@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nes_ui/nes_ui.dart';
@@ -66,6 +68,13 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
                 style: const TextStyle(
                   fontSize: kToolbarHeight / 2,
                 ),
+              ),
+              const SizedBox(height: 8),
+              _RangeBar(
+                currentLowerBound: minAge,
+                currentUpperBound: maxAge,
+                minLowerBound: 0,
+                maxUpperBound: 120,
               ),
               const SizedBox(height: 16),
 
@@ -153,5 +162,55 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
         ),
       ),
     );
+  }
+}
+
+class _RangeBar extends StatelessWidget {
+  const _RangeBar({
+    // ignore: unused_element
+    super.key,
+    required this.currentLowerBound,
+    required this.currentUpperBound,
+    required this.minLowerBound,
+    required this.maxUpperBound,
+  });
+
+  final int currentLowerBound;
+  final int currentUpperBound;
+  final int minLowerBound;
+  final int maxUpperBound;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    const barHeight = 2.0;
+    return LayoutBuilder(builder: (context, constraints) {
+      return NesContainer(
+        width: constraints.maxWidth,
+        height: barHeight,
+        backgroundColor: colorScheme.primary.withAlpha(100),
+        padding: EdgeInsets.zero,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.easeInOut,
+              left: (currentLowerBound / maxUpperBound) * constraints.maxWidth,
+              width: math.max(
+                1,
+                ((currentUpperBound - currentLowerBound) / maxUpperBound) *
+                    constraints.maxWidth,
+              ),
+              top: -1,
+              bottom: -1,
+              child: ColoredBox(
+                color: colorScheme.primary,
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
