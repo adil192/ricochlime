@@ -9,7 +9,6 @@ import 'package:ricochlime/flame/game_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class Prefs {
-
   /// If true, the user's preferences will not be loaded and the default values
   /// will be used instead.
   /// The values will not be saved either.
@@ -44,10 +43,12 @@ abstract class Prefs {
 }
 
 abstract class IPref<T> extends ValueNotifier<T> {
-  IPref(this.key, this.defaultValue, {
+  IPref(
+    this.key,
+    this.defaultValue, {
     List<String>? historicalKeys,
     List<String>? deprecatedKeys,
-  }) : historicalKeys = historicalKeys ?? [],
+  })  : historicalKeys = historicalKeys ?? [],
         deprecatedKeys = deprecatedKeys ?? [],
         super(defaultValue) {
     if (Prefs.testingMode) {
@@ -66,9 +67,11 @@ abstract class IPref<T> extends ValueNotifier<T> {
   }
 
   final String key;
+
   /// The keys that were used in the past for this Pref.
   /// If one of these keys is found, the value will be moved to the current key.
   final List<String> historicalKeys;
+
   /// The keys that were used in the past for a similar Pref.
   /// If one of these keys is found, it will be deleted.
   final List<String> deprecatedKeys;
@@ -100,6 +103,7 @@ abstract class IPref<T> extends ValueNotifier<T> {
     }
     return super.value;
   }
+
   bool get loaded => _loaded;
   bool get saved => _saved;
 
@@ -123,22 +127,29 @@ abstract class IPref<T> extends ValueNotifier<T> {
   @override
   void notifyListeners() => super.notifyListeners();
 }
+
 class PlainPref<T> extends IPref<T> {
   PlainPref(
     super.key,
     super.defaultValue, {
     super.historicalKeys,
     super.deprecatedKeys,
-  }): assert(
-    T == bool || T == int || T == double || T == String
-      || T == typeOf<int?>()
-      || T == typeOf<Uint8List?>()
-      || T == typeOf<List<String>>() || T == typeOf<Set<String>>()
-      || T == typeOf<Queue<String>>()
-      || T == AxisDirection || T == ThemeMode || T == TargetPlatform
-      || T == typeOf<GameData?>()
-      || T == ConsentStage
-  );
+  }) : assert(
+          T == bool ||
+              T == int ||
+              T == double ||
+              T == String ||
+              T == typeOf<int?>() ||
+              T == typeOf<Uint8List?>() ||
+              T == typeOf<List<String>>() ||
+              T == typeOf<Set<String>>() ||
+              T == typeOf<Queue<String>>() ||
+              T == AxisDirection ||
+              T == ThemeMode ||
+              T == TargetPlatform ||
+              T == typeOf<GameData?>() ||
+              T == ConsentStage,
+        );
 
   SharedPreferences? _prefs;
 
@@ -166,6 +177,7 @@ class PlainPref<T> extends IPref<T> {
 
     return null;
   }
+
   @override
   Future<void> _afterLoad() async {
     _prefs = null;

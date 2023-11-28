@@ -8,11 +8,8 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 
 /// A component that draws a dotted line
 /// to show the user where they're aiming.
-class AimGuide extends PositionComponent
-    with HasGameRef<RicochlimeGame> {
-  
-  final Paint _paint = Paint()
-      ..color = Colors.white;
+class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
+  final Paint _paint = Paint()..color = Colors.white;
 
   /// Information about the current aim.
   ///
@@ -23,6 +20,7 @@ class AimGuide extends PositionComponent
   /// Dots will be drawn in the direction we're aiming
   /// every [_dotInterval] units.
   static const _dotInterval = 10;
+
   /// The maximum number of dots to be drawn.
   static const _maxDots = 20;
 
@@ -79,7 +77,7 @@ class AimGuide extends PositionComponent
     final aimLengthMultiplier = mouseBelowPlayer ? 3 : 2;
     aimDetails!.aimLength = min(
       1,
-      relativePosition.length / _dotInterval / _maxDots * aimLengthMultiplier
+      relativePosition.length / _dotInterval / _maxDots * aimLengthMultiplier,
     );
     aimDetails!.unitDir.setFrom(relativePosition.normalized());
   }
@@ -93,7 +91,6 @@ class AimGuide extends PositionComponent
     }
     return aimDir;
   }
-
 }
 
 /// Information about the current aim.
@@ -107,7 +104,7 @@ class AimDetails {
 
   /// The unit direction vector in which the user is
   /// currently aiming.
-  /// 
+  ///
   /// This is Vector2.zero() if the user's aim
   /// is not valid.
   final Vector2 unitDir;

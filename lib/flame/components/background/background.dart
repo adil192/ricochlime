@@ -5,18 +5,19 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 
 /// The background component which is
 /// comprised of [BackgroundTile]s.
-class Background extends PositionComponent
-    with HasGameRef<RicochlimeGame> {
-  
+class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
   /// The threshold below which we have water tiles.
   static const waterThresholdTile = RicochlimeGame.tilesInHeight - 4;
+
   /// The threshold below which we have water tiles,
   /// in pixels.
-  static const waterThresholdPosition = RicochlimeGame.expectedHeight
-      * waterThresholdTile / RicochlimeGame.tilesInHeight;
+  static const waterThresholdPosition = RicochlimeGame.expectedHeight *
+      waterThresholdTile /
+      RicochlimeGame.tilesInHeight;
 
   /// The size of each tile.
   late Vector2 tileSize;
+
   /// The number of new rows of slimes that will be added
   /// in the next round.
   int lastNumNewRowsEachRound = -1;
@@ -110,7 +111,7 @@ class Background extends PositionComponent
         }
       }
     }
-    
+
     if (row == waterThresholdTile) {
       return BackgroundTileType.bottomOfGrass;
     } else if (row > waterThresholdTile) {

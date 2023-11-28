@@ -44,7 +44,8 @@ void _addLicenses() {
     );
     yield LicenseEntryWithLineBreaks(
       ['google_fonts'],
-      await rootBundle.loadString('assets/google_fonts/Atkinson_Hyperlegible/OFL.txt'),
+      await rootBundle
+          .loadString('assets/google_fonts/Atkinson_Hyperlegible/OFL.txt'),
     );
     yield LicenseEntryWithLineBreaks(
       ['google_fonts'],
@@ -104,13 +105,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _router,
-
       locale: TranslationProvider.of(context).flutterLocale,
       supportedLocales: AppLocaleUtils.supportedLocales,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
-
       debugShowCheckedModeBanner: false,
-
       theme: nesThemeFrom(
         brightness: Brightness.light,
         colorScheme: ColorScheme.fromSeed(

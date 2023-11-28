@@ -26,6 +26,7 @@ class Wall extends BodyComponent {
 
   /// The start point of the wall.
   final Vector2 start;
+
   /// The end point of the wall.
   final Vector2 end;
 

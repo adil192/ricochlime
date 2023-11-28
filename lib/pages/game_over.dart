@@ -48,15 +48,15 @@ class GameOverDialog extends StatelessWidget {
                             color: colorScheme.onSurface,
                           ),
                           children: [
-                            if (score > Prefs.highScore.value
-                                && Prefs.highScore.value > 0)
+                            if (score > Prefs.highScore.value &&
+                                Prefs.highScore.value > 0)
                               t.gameOverPage.highScoreBeaten(
                                 pOld: TextSpan(
                                   style: TextStyle(
                                     decoration: TextDecoration.lineThrough,
                                     decorationThickness: kToolbarHeight / 20,
-                                    decorationColor: colorScheme.onSurface
-                                        .withOpacity(0.6),
+                                    decorationColor:
+                                        colorScheme.onSurface.withOpacity(0.6),
                                   ),
                                   text: ' ${Prefs.highScore.value} ',
                                 ),
@@ -151,8 +151,7 @@ class _GameOverButton extends StatelessWidget {
         type: type,
         child: Row(
           children: [
-            if (icon != null)
-              NesIcon(iconData: icon!),
+            if (icon != null) NesIcon(iconData: icon!),
             const SizedBox(width: 12),
             Text(
               text,

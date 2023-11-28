@@ -6,7 +6,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
   Bullet({
     required this.initialPosition,
     required this.direction,
-  }): assert(direction.y < 0);
+  }) : assert(direction.y < 0);
 
   /// Radius of the bullet.
   static const radius = 2.0;
@@ -19,8 +19,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
 
   @override
   Body createBody() {
-    final shape = CircleShape()
-        ..radius = radius;
+    final shape = CircleShape()..radius = radius;
     final fixtureDef = FixtureDef(
       shape,
       userData: this,
@@ -38,8 +37,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
       fixedRotation: true,
     );
 
-    return world.createBody(bodyDef)
-        ..createFixture(fixtureDef);
+    return world.createBody(bodyDef)..createFixture(fixtureDef);
   }
 
   @override
@@ -52,18 +50,19 @@ class Bullet extends BodyComponent with ContactCallbacks {
 
   /// The number of collisions in a row that
   /// the bullet has a horizontal velocity.
-  /// 
+  ///
   /// This is used to prevent the bullet from
   /// getting stuck in a horizontal velocity.
   int horizontalCollisions = 0;
   static const maxHorizontalCollisions = 50;
+
   /// If the ratio between the y and x components
   /// of the velocity is lower than this,
   /// we consider the velocity to be
   /// horizontal.
-  /// 
+  ///
   /// This is equivalent to a 1 degree angle.
-  /// 
+  ///
   /// Please use [isVelocityHorizontal] instead
   /// of comparing the velocity directly.
   static const horizontalVelocityRatio = 0.0524077792830412;
@@ -79,7 +78,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
   @override
   void endContact(Object other, Contact contact) {
     super.endContact(other, contact);
-    
+
     final isVelocityHorizontal = Bullet.isVelocityHorizontal(
       body.linearVelocity,
     );

@@ -48,13 +48,14 @@ class _PlayPageState extends State<PlayPage> {
     if (!mounted) return GameOverAction.nothingYet;
 
     return await showDialog<GameOverAction>(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => GameOverDialog(
-        score: _score.value,
-        game: game,
-      ),
-    ) ?? GameOverAction.nothingYet;
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => GameOverDialog(
+            score: _score.value,
+            game: game,
+          ),
+        ) ??
+        GameOverAction.nothingYet;
   }
 
   @override
@@ -80,8 +81,8 @@ class _PlayPageState extends State<PlayPage> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: RicochlimePalette.grassColorDark
-                              .withOpacity(0.5),
+                          color:
+                              RicochlimePalette.grassColorDark.withOpacity(0.5),
                           blurRadius: 100,
                         ),
                         const BoxShadow(

@@ -27,6 +27,7 @@ abstract class AdState {
 
   /// The minimum age required to show personalized ads.
   static const int minAgeForPersonalizedAds = 13;
+
   /// The user's age,
   /// calculated from their birth year,
   /// or null if the user has not entered their birth year.
@@ -41,7 +42,8 @@ abstract class AdState {
 
   /// Initializes ads.
   static void init() {
-    if (kDebugMode) { // test ads
+    if (kDebugMode) {
+      // test ads
       if (kIsWeb) {
         _bannerAdUnitId = '';
         _rewardedAdUnitId = '';
@@ -55,7 +57,8 @@ abstract class AdState {
         _bannerAdUnitId = '';
         _rewardedAdUnitId = '';
       }
-    } else { // actual ads
+    } else {
+      // actual ads
       if (kIsWeb) {
         _bannerAdUnitId = '';
         _rewardedAdUnitId = '';
@@ -78,8 +81,8 @@ abstract class AdState {
     if (_initializeStarted) return;
 
     final age = AdState.age;
-    final correctConsentStage = Prefs.consentStage.value
-        == ConsentStage.askForPersonalizedAds;
+    final correctConsentStage =
+        Prefs.consentStage.value == ConsentStage.askForPersonalizedAds;
     final canConsent = age != null && age >= minAgeForPersonalizedAds;
     if (correctConsentStage && canConsent) {
       if (!kIsWeb && Platform.isIOS) {
@@ -132,6 +135,7 @@ abstract class AdState {
       (formError) {},
     );
   }
+
   /// Shows the consent form.
   ///
   /// It is assumed that [_checkForRequiredConsent]
@@ -139,14 +143,12 @@ abstract class AdState {
   static void showConsentForm() {
     ConsentForm.loadConsentForm(
       (ConsentForm consentForm) async {
-        consentForm.show(
-          (formError) async {
-            if (formError != null) {
-              // Handle dismissal by reloading form
-              showConsentForm();
-            }
+        consentForm.show((formError) async {
+          if (formError != null) {
+            // Handle dismissal by reloading form
+            showConsentForm();
           }
-        );
+        });
       },
       (formError) {},
     );
@@ -262,8 +264,8 @@ abstract class AdState {
         if (kDebugMode) print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
         if (!completer.isCompleted) {
-        _rewardedAd = null;
-        _preloadRewardedAd();
+          _rewardedAd = null;
+          _preloadRewardedAd();
           completer.complete(false);
         }
       },
@@ -364,10 +366,9 @@ class _BannerAdWidgetState extends State<BannerAdWidget>
             ),
             IgnorePointer(
               child: NesContainer(
-                width: widget.adSize.width
-                    + nesPadding.left + nesPadding.right,
-                height: widget.adSize.height
-                    + nesPadding.top + nesPadding.bottom,
+                width: widget.adSize.width + nesPadding.left + nesPadding.right,
+                height:
+                    widget.adSize.height + nesPadding.top + nesPadding.bottom,
                 padding: nesPadding,
               ),
             ),
@@ -383,7 +384,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget>
     _bannerAd = null;
     super.dispose();
   }
-  
+
   @override
   bool get wantKeepAlive => _bannerAd != null;
 }

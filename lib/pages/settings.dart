@@ -79,13 +79,12 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
             ),
-
             ValueListenableBuilder(
               valueListenable: Prefs.birthYear,
               builder: (context, birthYear, child) {
                 final age = AdState.age;
-                final collapsed = age == null
-                    || age < AdState.minAgeForPersonalizedAds;
+                final collapsed =
+                    age == null || age < AdState.minAgeForPersonalizedAds;
                 return Collapsible(
                   collapsed: collapsed,
                   axis: CollapsibleAxis.vertical,

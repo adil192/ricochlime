@@ -8,6 +8,7 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 enum SpriteSheetType {
   /// The water sprite sheets.
   water,
+
   /// The plains sprite sheet.
   plains,
 }
@@ -50,10 +51,13 @@ enum BackgroundTileType {
   ;
 
   const BackgroundTileType(this.spriteSheetType, this.tileRow, this.tileCol);
+
   /// The sprite sheet(s) type that this tile is in.
   final SpriteSheetType spriteSheetType;
+
   /// The row of the tile in the sprite sheet.
   final int tileRow;
+
   /// The column of the tile in the sprite sheet.
   final int tileCol;
 }
@@ -61,7 +65,6 @@ enum BackgroundTileType {
 /// A component for a background tile.
 class BackgroundTile extends SpriteAnimationComponent
     with HasGameRef<RicochlimeGame> {
-
   // ignore: public_member_api_docs
   BackgroundTile({
     required super.position,
@@ -83,12 +86,12 @@ class BackgroundTile extends SpriteAnimationComponent
     animation = SpriteAnimation.spriteList(
       switch (type.spriteSheetType) {
         SpriteSheetType.water => [
-          for (final spriteSheet in waterSpriteSheets)
-            spriteSheet.getSprite(type.tileRow, type.tileCol)
-        ],
+            for (final spriteSheet in waterSpriteSheets)
+              spriteSheet.getSprite(type.tileRow, type.tileCol)
+          ],
         SpriteSheetType.plains => [
-          plainsSpriteSheet.getSprite(type.tileRow, type.tileCol)
-        ],
+            plainsSpriteSheet.getSprite(type.tileRow, type.tileCol)
+          ],
       },
       stepTime: 1 / 6,
     );
@@ -97,9 +100,11 @@ class BackgroundTile extends SpriteAnimationComponent
   /// The water sprite sheets,
   /// preloaded by [preloadSprites].
   static List<SpriteSheet> waterSpriteSheets = [];
+
   /// The plains sprite sheet,
   /// preloaded by [preloadSprites].
   static late SpriteSheet plainsSpriteSheet;
+
   /// Preloads all sprite sheets so they can be
   /// accessed synchronously later.
   static Future<void> preloadSprites({

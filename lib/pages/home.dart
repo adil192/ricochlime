@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                         openBuilder: (_, __) => const PlayPage(),
                         disabled: !snapshot.hasData,
                       );
-                    }
+                    },
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(

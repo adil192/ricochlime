@@ -16,9 +16,9 @@ class BirthYearDialog extends StatefulWidget {
   });
 
   /// Whether the dialog can be dismissed.
-  /// 
+  ///
   /// This should be `false` if the user hasn't inputted
-  /// their birth year before. 
+  /// their birth year before.
   final bool dismissible;
 
   @override

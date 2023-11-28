@@ -16,6 +16,7 @@ abstract class AdState {
   /// This is an arbitrarily high number.
   @Deprecated(_kDummyAdMessage)
   static const int minAgeForPersonalizedAds = 1000;
+
   /// The users age, or null if unknown.
   ///
   /// This is always null.
@@ -33,7 +34,7 @@ abstract class AdState {
   /// This is a no-op.
   @Deprecated(_kDummyAdMessage)
   static void showConsentForm() {}
-  
+
   /// Updates the ad request configuration.
   ///
   /// This is a no-op.
@@ -88,6 +89,7 @@ class AdSize {
   /// The requested banner ad width.
   @Deprecated(_kDummyAdMessage)
   final int width;
+
   /// The requested banner ad height.
   @Deprecated(_kDummyAdMessage)
   final int height;

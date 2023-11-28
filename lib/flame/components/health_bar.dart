@@ -9,15 +9,15 @@ class HealthBar extends PositionComponent {
     required this.maxHp,
     required this.hp,
     required this.paint,
-  }): super(
-    anchor: Anchor.topLeft,
-    position: Vector2(
-      (Slime.staticWidth - staticWidth) / 2,
-      Slime.staticHeight * 0.2,
-    ),
-    size: Vector2(staticWidth, staticHeight),
-    priority: 1,
-  );
+  }) : super(
+          anchor: Anchor.topLeft,
+          position: Vector2(
+            (Slime.staticWidth - staticWidth) / 2,
+            Slime.staticHeight * 0.2,
+          ),
+          size: Vector2(staticWidth, staticHeight),
+          priority: 1,
+        );
 
   static const double staticWidth = 12;
   static const double staticHeight = 2;
@@ -30,6 +30,7 @@ class HealthBar extends PositionComponent {
   Rect get backgroundRect {
     return Offset.zero & size.toSize();
   }
+
   Rect get foregroundRect {
     const padding = staticHeight / 4;
     return Rect.fromLTWH(
@@ -42,8 +43,7 @@ class HealthBar extends PositionComponent {
 
   @override
   void render(Canvas canvas) {
-    final paint = Paint()
-        ..colorFilter = this.paint.colorFilter;
+    final paint = Paint()..colorFilter = this.paint.colorFilter;
 
     canvas
       // background

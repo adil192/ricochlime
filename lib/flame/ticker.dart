@@ -8,7 +8,7 @@ class Ticker {
   }
 
   /// The stream of ticks.
-  /// 
+  ///
   /// Each value is the (dilated) time in seconds
   /// since the last tick.
   Stream<double> get onTick => _streamController.stream;
@@ -19,10 +19,10 @@ class Ticker {
   }
 
   /// Waits for the given [duration] to pass.
-  /// 
+  ///
   /// The actual time may be slightly longer than the given
   /// [duration] since it is rounded to the next tick.
-  /// 
+  ///
   /// Returns the elapsed time in seconds.
   Future<double> delayed(Duration duration) async {
     final durationInSeconds = duration.inMilliseconds / 1000;

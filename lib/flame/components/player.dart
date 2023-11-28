@@ -10,11 +10,12 @@ enum PlayerState {
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameRef<RicochlimeGame> {
-  Player() : super(
-    removeOnFinish: {
-      PlayerState.dead: true,
-    },
-  );
+  Player()
+      : super(
+          removeOnFinish: {
+            PlayerState.dead: true,
+          },
+        );
 
   static double staticHeight = 48;
 
