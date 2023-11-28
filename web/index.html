@@ -1,54 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Satisfying slime shooter">
 
-  <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="ricochlime">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="icons/Icon-192.png"/>
 
   <title>Ricochlime</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    html, #loading {
+      background-color: #fcfdf7;
+    }
+    @media (prefers-color-scheme: dark) {
+      html, #loading {
+        background-color: #191c19;
+      }
+    }
+    html {
+      image-rendering: pixelated;
+    }
+    #loading {
+      height: 100vh;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+      position: relative;
+      z-index: 1000;
+    }
+    #loading::before {
+      position: absolute;
+      content: '';
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      width: 192px;
+      height: 192px;
+      background: url('icons/Icon-192.png') no-repeat center / contain;
+      opacity: 0;
+      animation: pulse 1.5s infinite;
+    }
+    #loading.loaded {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #loading.loaded::before {
+      animation-iteration-count: 1;
+    }
+    @keyframes pulse {
+      0% { opacity: 0; }
+      33% { opacity: 1; }
+      66% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
 
   <script>
     // The value below is injected by flutter build, do not touch.
     var serviceWorkerVersion = null;
   </script>
-  <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <div id="loading"></div>
   <script>
     window.addEventListener('load', function(ev) {
-      // Download main.dart.js
+      const loading = document.getElementById('loading');
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
+            loading.classList.add('loaded');
             appRunner.runApp();
           });
         }
