@@ -32,5 +32,10 @@
 	<string>public.app-category.games</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>kk</string>
+	</array>
 </dict>
 </plist>

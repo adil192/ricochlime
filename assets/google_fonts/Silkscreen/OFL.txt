@@ -1,4 +1,5 @@
 Copyright 2001 The Silkscreen Project Authors (https://github.com/googlefonts/silkscreen)
+Copyright 2023 Fontan 030 <pomanfedurin@gmail.com> (Cyrillic glyphs)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
