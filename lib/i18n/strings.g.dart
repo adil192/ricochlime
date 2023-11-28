@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 68 (34 per locale)
+/// Strings: 69 (34 per locale)
 ///
-/// Built on 2023-11-06 at 19:03 UTC
+/// Built on 2023-11-28 at 13:23 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -197,9 +197,10 @@ class _StringsAgeDialogEn {
 
 	// Translations
 	String get yourAge => 'Your age';
-	String get title => 'Guessing your age';
+	String get title => 'Let me guess your age';
 	String get unknown => 'Unknown';
 	String get reason => 'We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.';
+	String guessNumber({required Object n}) => 'Guess \#${n}';
 	String areYou({required Object age}) => 'Are you ${age}?';
 	String get younger => 'No, I\'m younger';
 	String get older => 'No, I\'m older';

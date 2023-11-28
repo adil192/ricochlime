@@ -15,9 +15,10 @@ settingsPage:
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
 ageDialog:
   yourAge: Your age
-  title: Guessing your age
+  title: Let me guess your age
   unknown: Unknown
   reason: We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.
+  guessNumber: Guess \#$n
   areYou: Are you $age?
   younger: No, I'm younger
   older: No, I'm older

@@ -57,7 +57,7 @@ class SettingsPage extends StatelessWidget {
                   contentPadding: listTileContentPadding,
                   title: Text(t.ageDialog.yourAge),
                   leading: NesIcon(
-                    iconData: NesIcons.textFile,
+                    iconData: NesIcons.user,
                   ),
                   trailing: ValueListenableBuilder(
                     valueListenable: Prefs.birthYear,

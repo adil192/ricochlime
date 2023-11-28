@@ -27,6 +27,7 @@ class BirthYearDialog extends StatefulWidget {
 
 class _BirthYearDialogState extends State<BirthYearDialog> {
   static const int initialAgeGuess = 20;
+  int guessNumber = 1;
   int minAge = 0;
   int maxAge = 120;
   int guessedAge = initialAgeGuess;
@@ -55,6 +56,12 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
 
               // Age guess
               Text(
+                t.ageDialog.guessNumber(n: guessNumber),
+                style: const TextStyle(
+                  height: 1,
+                ),
+              ),
+              Text(
                 t.ageDialog.areYou(age: guessedAge),
                 style: const TextStyle(
                   fontSize: kToolbarHeight / 2,
@@ -75,6 +82,7 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
                 ),
                 onPressed: () {
                   setState(() {
+                    guessNumber = 1;
                     minAge = 0;
                     maxAge = 120;
                     guessedAge = initialAgeGuess;
@@ -95,6 +103,7 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
                 ),
                 onPressed: () {
                   setState(() {
+                    guessNumber++;
                     minAge = guessedAge + 1;
                     guessedAge = (minAge + maxAge) ~/ 2;
                   });
@@ -133,6 +142,7 @@ class _BirthYearDialogState extends State<BirthYearDialog> {
                 ),
                 onPressed: () {
                   setState(() {
+                    guessNumber++;
                     maxAge = guessedAge - 1;
                     guessedAge = (minAge + maxAge) ~/ 2;
                   });
