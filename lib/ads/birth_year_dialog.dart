@@ -26,7 +26,7 @@ class BirthYearDialog extends StatefulWidget {
 }
 
 class _BirthYearDialogState extends State<BirthYearDialog> {
-  static const int initialAgeGuess = 20;
+  static const int initialAgeGuess = 1;
   int guessNumber = 1;
   int minAge = 0;
   int maxAge = 120;
