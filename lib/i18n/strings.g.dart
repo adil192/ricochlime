@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 69 (34 per locale)
+/// Strings: 70 (35 per locale)
 ///
-/// Built on 2023-11-28 at 13:23 UTC
+/// Built on 2023-11-28 at 15:27 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -334,6 +334,7 @@ class _StringsAgeDialogKk extends _StringsAgeDialogEn {
 	@override String get title => 'Жасыңызды болжау';
 	@override String get unknown => 'Белгісіз';
 	@override String get reason => 'Сіз көретін жарнама сізге қолайлы болатынына көз жеткізу үшін жасыңызды білуіміз керек. Ойынның өзіне бұл әсер етпейді.';
+	@override String guessNumber({required Object n}) => 'Ойланыңыз \#${n}';
 	@override String areYou({required Object age}) => 'Жасыңыз ${age}?';
 	@override String get younger => 'Жоқ, жасым кішірек';
 	@override String get older => 'Жоқ, жасым үлкенірек';
