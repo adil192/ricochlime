@@ -160,6 +160,11 @@ echo
 echo "Make sure to update the two changelog files:"
 echo " - $CHANGELOG_FILE"
 echo " - $FLATPAK_FILE"
+echo "And then run:"
+echo " - dart scripts/translate_changelogs.dart"
+echo "Next steps:"
+echo " - Publish to the App Store: https://appstoreconnect.apple.com/apps/1671523739/appstore"
+echo " - Publish to the Amazon Appstore: https://developer.amazon.com/apps-and-games/console/app/list"
 
 if [ "$EDITOR" != "" ]; then
   echo

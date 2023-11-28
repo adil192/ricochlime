@@ -1,0 +1,3 @@
+• Improved the age picker, and made it a neutral age screen
+• Added a Kazakh translation, thanks to @Fontan030!
+• Updated to Flutter 3.16 with performance improvements and bug fixes
