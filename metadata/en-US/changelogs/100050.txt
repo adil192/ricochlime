@@ -1,0 +1,2 @@
+• Added a dark mode to the Play page
+• Added a new age input method
