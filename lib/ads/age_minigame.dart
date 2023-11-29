@@ -32,7 +32,7 @@ class _AgeMinigameState extends State<_AgeMinigame> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          t.ageDialog.title,
+          t.ageDialog.letMeGuessYourAge,
           style: const TextStyle(
             fontSize: kToolbarHeight / 2,
           ),

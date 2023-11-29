@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 72 (36 per locale)
+/// Strings: 74 (37 per locale)
 ///
-/// Built on 2023-11-29 at 18:28 UTC
+/// Built on 2023-11-29 at 18:47 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -197,7 +197,7 @@ class _StringsAgeDialogEn {
 
 	// Translations
 	String get yourAge => 'Your age';
-	String get title => 'Let me guess your age';
+	String get letMeGuessYourAge => 'Let me guess your age';
 	String get unknown => 'Unknown';
 	String get reason => 'We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.';
 	String guessNumber({required Object n}) => 'Guess \#${n}';
@@ -206,6 +206,8 @@ class _StringsAgeDialogEn {
 	String get older => 'No, I\'m older';
 	String yesMyAgeIs({required Object age}) => 'Yes, I\'m ${age}';
 	String get reset => 'Reset';
+	String get howOldAreYou => 'How old are you?';
+	String get invalidAge => 'Please enter a valid age';
 	String get useMinigame => 'Play the age guessing minigame';
 	String get useSimpleInput => 'I want to enter my age manually';
 }
@@ -333,7 +335,7 @@ class _StringsAgeDialogKk extends _StringsAgeDialogEn {
 
 	// Translations
 	@override String get yourAge => 'Жасыңыз';
-	@override String get title => 'Жасыңызды болжау';
+	@override String get letMeGuessYourAge => 'Жасыңызды болжау';
 	@override String get unknown => 'Белгісіз';
 	@override String get reason => 'Сіз көретін жарнама сізге қолайлы болатынына көз жеткізу үшін жасыңызды білуіміз керек. Ойынның өзіне бұл әсер етпейді.';
 	@override String guessNumber({required Object n}) => 'Ойланыңыз \#${n}';

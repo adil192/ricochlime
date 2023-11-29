@@ -52,7 +52,10 @@ class _AgeDialogState extends State<AgeDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _useMinigame ? const _AgeMinigame() : const _AgeSimpleInput(),
+              if (_useMinigame)
+                const _AgeMinigame()
+              else
+                const _AgeSimpleInput(),
               const SizedBox(height: 32),
               TextButton(
                 onPressed: () => setState(() => _useMinigame = !_useMinigame),

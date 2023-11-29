@@ -15,7 +15,7 @@ settingsPage:
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
 ageDialog:
   yourAge: Your age
-  title: Let me guess your age
+  letMeGuessYourAge: Let me guess your age
   unknown: Unknown
   reason: We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.
   guessNumber: Guess \#$n
@@ -24,6 +24,8 @@ ageDialog:
   older: No, I'm older
   yesMyAgeIs: Yes, I'm $age
   reset: Reset
+  howOldAreYou: How old are you?
+  invalidAge: Please enter a valid age
   useMinigame: Play the age guessing minigame
   useSimpleInput: I want to enter my age manually
 gameOverPage:
