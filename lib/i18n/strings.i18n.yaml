@@ -24,6 +24,8 @@ ageDialog:
   older: No, I'm older
   yesMyAgeIs: Yes, I'm $age
   reset: Reset
+  useMinigame: Play the age guessing minigame
+  useSimpleInput: I want to enter my age manually
 gameOverPage:
   title: Game over!
   highScoreNotBeaten: You scored $p points!

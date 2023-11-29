@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nes_ui/nes_ui.dart';
@@ -32,6 +34,12 @@ class AgeDialog extends StatefulWidget {
 }
 
 class _AgeDialogState extends State<AgeDialog> {
+  /// The minigame is iffy with Google Play policies,
+  /// so on Android, we use a simple input field instead.
+  ///
+  /// The user can still choose to use the minigame.
+  bool _useMinigame = kIsWeb || !Platform.isAndroid;
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -41,7 +49,21 @@ class _AgeDialogState extends State<AgeDialog> {
         padding: const EdgeInsets.all(32),
         backgroundColor: colorScheme.surface,
         child: Material(
-          child: _AgeMinigame(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _useMinigame ? const _AgeMinigame() : const _AgeSimpleInput(),
+              const SizedBox(height: 32),
+              TextButton(
+                onPressed: () => setState(() => _useMinigame = !_useMinigame),
+                child: Text(
+                  _useMinigame
+                      ? t.ageDialog.useSimpleInput
+                      : t.ageDialog.useMinigame,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

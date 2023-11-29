@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 70 (35 per locale)
+/// Strings: 72 (36 per locale)
 ///
-/// Built on 2023-11-28 at 15:27 UTC
+/// Built on 2023-11-29 at 18:28 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -206,6 +206,8 @@ class _StringsAgeDialogEn {
 	String get older => 'No, I\'m older';
 	String yesMyAgeIs({required Object age}) => 'Yes, I\'m ${age}';
 	String get reset => 'Reset';
+	String get useMinigame => 'Play the age guessing minigame';
+	String get useSimpleInput => 'I want to enter my age manually';
 }
 
 // Path: gameOverPage

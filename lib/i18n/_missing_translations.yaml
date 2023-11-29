@@ -4,3 +4,5 @@
 kk:
   ageDialog:
     guessNumber(OUTDATED): Guess \#$n
+    useMinigame: Play the age guessing minigame
+    useSimpleInput: I want to enter my age manually
