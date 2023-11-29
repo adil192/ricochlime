@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ricochlime/ads/age_dialog.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
-import 'package:ricochlime/ads/birth_year_dialog.dart';
 import 'package:ricochlime/ads/consent_stage.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
@@ -63,7 +63,7 @@ Future<void> handleCurrentConsentStage(BuildContext context) async {
     await showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => const BirthYearDialog(
+      builder: (context) => const AgeDialog(
         dismissible: false,
       ),
     );

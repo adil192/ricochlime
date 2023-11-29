@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:collapsible/collapsible.dart';
 import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
+import 'package:ricochlime/ads/age_dialog.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
-import 'package:ricochlime/ads/birth_year_dialog.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/version.dart';
@@ -49,7 +49,7 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {
                     showDialog(
                       context: context,
-                      builder: (context) => const BirthYearDialog(),
+                      builder: (context) => const AgeDialog(),
                     );
                   },
                   tileColor: listTileColor,
