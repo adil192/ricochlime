@@ -4,7 +4,7 @@
 kk:
   ageDialog:
     guessNumber(OUTDATED): Guess \#$n
-    howOldAreYou: "How old are you?"
-    invalidAge: Please enter a valid age
-    useMinigame: Play the age guessing minigame
-    useSimpleInput: I want to enter my age manually
+    howOldAreYou(OUTDATED): "How old are you?"
+    invalidAge(OUTDATED): Please enter a valid age
+    useMinigame(OUTDATED): Play the age guessing minigame
+    useSimpleInput(OUTDATED): I want to enter my age manually

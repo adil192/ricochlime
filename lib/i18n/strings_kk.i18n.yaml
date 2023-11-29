@@ -18,12 +18,16 @@ ageDialog:
   letMeGuessYourAge: Жасыңызды болжау
   unknown: Белгісіз
   reason: Сіз көретін жарнама сізге қолайлы болатынына көз жеткізу үшін жасыңызды білуіміз керек. Ойынның өзіне бұл әсер етпейді.
-  guessNumber(OUTDATED): Ойланыңыз \#$n
   areYou: "Жасыңыз $age?"
   younger: "Жоқ, жасым кішірек"
   older: "Жоқ, жасым үлкенірек"
   yesMyAgeIs: "Иә, жасым $age"
   reset: Арылту
+  howOldAreYou(OUTDATED): "Сен қанша жастасың?"
+  invalidAge(OUTDATED): Жарамды жасты енгізіңіз
+  useMinigame(OUTDATED): Жасты болжайтын шағын ойынды ойнаңыз
+  useSimpleInput(OUTDATED): Мен жасымды қолмен енгізгім келеді
+  guessNumber(OUTDATED): Ойланыңыз \#$n
 gameOverPage:
   title: "Ойын бітті!"
   highScoreNotBeaten: "$p ұпай жинадыңыз!"
