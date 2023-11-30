@@ -97,11 +97,13 @@ class _TutorialScreenshot extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         child: Image(
           image: image,
+          filterQuality: FilterQuality.none,
         ),
       );
     } else {
       return Image(
         image: image,
+        filterQuality: FilterQuality.none,
       );
     }
   }
