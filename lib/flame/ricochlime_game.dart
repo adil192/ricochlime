@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flame/events.dart';
@@ -124,6 +125,10 @@ class RicochlimeGame extends Forge2DGame
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);
+
+    unawaited(Future.value().then((_) {
+      _onDarkModeChanged();
+    }));
   }
 
   Future<void> importFromGame(GameData? data) async {
