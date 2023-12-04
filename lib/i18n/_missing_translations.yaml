@@ -8,3 +8,8 @@ kk:
     invalidAge(OUTDATED): Please enter a valid age
     useMinigame(OUTDATED): Play the age guessing minigame
     useSimpleInput(OUTDATED): I want to enter my age manually
+  restartGameDialog:
+    title(OUTDATED): "Restart game?"
+    areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
+    waitCancel(OUTDATED): "Wait, cancel!"
+    yesImSure(OUTDATED): "Yes I'm sure!"

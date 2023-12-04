@@ -35,6 +35,11 @@ gameOverPage:
   continueWithAdButton: "Жарнама көріп, жалғастыру"
   restartGameButton: Жаңадан бастау
   homeButton: Мәзір
+restartGameDialog:
+  title(OUTDATED): "Ойынды қайта бастау керек пе?"
+  areYouSure(OUTDATED): "Қайта іске қосқыңыз келетініне сенімдісіз бе? Мұны қайтара алмайсыз"
+  waitCancel(OUTDATED): "Күте тұрыңыз, бас тартыңыз!"
+  yesImSure(OUTDATED): "Иә мен сенімдімін!"
 tutorialPage:
   tutorial: Нұсқаулық
   aimAtSlimes: "Көздеу үшін саусағыңызды жылжытыңыз, ату үшін босатып жіберіңіз."

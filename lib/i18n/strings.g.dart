@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 82 (41 per locale)
+/// Strings: 86 (43 per locale)
 ///
-/// Built on 2023-12-04 at 17:12 UTC
+/// Built on 2023-12-04 at 17:20 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -301,6 +301,7 @@ class _StringsKk extends _StringsEn {
 	@override late final _StringsSettingsPageKk settingsPage = _StringsSettingsPageKk._(_root);
 	@override late final _StringsAgeDialogKk ageDialog = _StringsAgeDialogKk._(_root);
 	@override late final _StringsGameOverPageKk gameOverPage = _StringsGameOverPageKk._(_root);
+	@override late final _StringsRestartGameDialogKk restartGameDialog = _StringsRestartGameDialogKk._(_root);
 	@override late final _StringsTutorialPageKk tutorialPage = _StringsTutorialPageKk._(_root);
 	@override late final _StringsCommonKk common = _StringsCommonKk._(_root);
 }
@@ -383,6 +384,19 @@ class _StringsGameOverPageKk extends _StringsGameOverPageEn {
 	@override String get continueWithAdButton => 'Жарнама көріп, жалғастыру';
 	@override String get restartGameButton => 'Жаңадан бастау';
 	@override String get homeButton => 'Мәзір';
+}
+
+// Path: restartGameDialog
+class _StringsRestartGameDialogKk extends _StringsRestartGameDialogEn {
+	_StringsRestartGameDialogKk._(_StringsKk root) : this._root = root, super._(root);
+
+	@override final _StringsKk _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Ойынды қайта бастау керек пе?';
+	@override String get areYouSure => 'Қайта іске қосқыңыз келетініне сенімдісіз бе? Мұны қайтара алмайсыз';
+	@override String get waitCancel => 'Күте тұрыңыз, бас тартыңыз!';
+	@override String get yesImSure => 'Иә мен сенімдімін!';
 }
 
 // Path: tutorialPage
