@@ -58,6 +58,15 @@
         </screenshot>
     </screenshots>
 
+        <release version="1.0.6" type="development" date="2023-12-04">
+            <description>
+                <ul>
+                    <li>Added a restart button</li>
+                    <li>Fixed a bug with dark mode</li>
+                    <li>Improved the quality of the tutorial images</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.0.5" type="development" date="2023-11-29">
             <description>
                 <ul>
