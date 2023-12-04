@@ -35,6 +35,11 @@ gameOverPage:
   continueWithAdButton: Continue with ad
   restartGameButton: Restart game
   homeButton: Home
+restartGameDialog:
+  title: Restart game?
+  areYouSure: Are you sure you want to restart? You can't undo this
+  waitCancel: Wait, cancel!
+  yesImSure: Yes I'm sure!
 tutorialPage:
   tutorial: Tutorial
   aimAtSlimes: Drag your finger to aim and release to shoot.

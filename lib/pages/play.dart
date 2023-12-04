@@ -6,6 +6,7 @@ import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/pages/game_over.dart';
+import 'package:ricochlime/pages/restart_game.dart';
 import 'package:ricochlime/utils/brightness_extension.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
@@ -152,6 +153,25 @@ class _PlayPageState extends State<PlayPage> {
                   onPressed: () => Navigator.of(context).pop(),
                   icon: NesIcon(
                     iconData: NesIcons.leftArrowIndicator,
+                    primaryColor: colorScheme.onPrimary.withOpacity(0.9),
+                    secondaryColor: colorScheme.onSurface.withOpacity(0.9),
+                    size: const Size.square(20),
+                  ),
+                ),
+              ),
+              Positioned.directional(
+                textDirection: textDirection,
+                top: 0,
+                end: 0,
+                child: IconButton(
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => RestartGameDialog(
+                      restartGame: game.reset,
+                    ),
+                  ),
+                  icon: NesIcon(
+                    iconData: NesIcons.redo,
                     primaryColor: colorScheme.onPrimary.withOpacity(0.9),
                     secondaryColor: colorScheme.onSurface.withOpacity(0.9),
                     size: const Size.square(20),

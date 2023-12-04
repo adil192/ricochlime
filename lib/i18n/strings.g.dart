@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 78 (39 per locale)
+/// Strings: 82 (41 per locale)
 ///
-/// Built on 2023-11-29 at 18:50 UTC
+/// Built on 2023-12-04 at 17:12 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -149,6 +149,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	late final _StringsSettingsPageEn settingsPage = _StringsSettingsPageEn._(_root);
 	late final _StringsAgeDialogEn ageDialog = _StringsAgeDialogEn._(_root);
 	late final _StringsGameOverPageEn gameOverPage = _StringsGameOverPageEn._(_root);
+	late final _StringsRestartGameDialogEn restartGameDialog = _StringsRestartGameDialogEn._(_root);
 	late final _StringsTutorialPageEn tutorialPage = _StringsTutorialPageEn._(_root);
 	late final _StringsCommonEn common = _StringsCommonEn._(_root);
 }
@@ -231,6 +232,19 @@ class _StringsGameOverPageEn {
 	String get continueWithAdButton => 'Continue with ad';
 	String get restartGameButton => 'Restart game';
 	String get homeButton => 'Home';
+}
+
+// Path: restartGameDialog
+class _StringsRestartGameDialogEn {
+	_StringsRestartGameDialogEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Restart game?';
+	String get areYouSure => 'Are you sure you want to restart? You can\'t undo this';
+	String get waitCancel => 'Wait, cancel!';
+	String get yesImSure => 'Yes I\'m sure!';
 }
 
 // Path: tutorialPage

@@ -416,6 +416,9 @@ class RicochlimeGame extends Forge2DGame
     }
   }
 
+  /// Resets the game,
+  /// sets the score to zero,
+  /// and spawns a single row of slimes.
   void reset() {
     state = GameState.idle;
     inputCancelled = false;

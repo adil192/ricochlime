@@ -4,6 +4,7 @@ import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
+import 'package:ricochlime/nes/dialog_button.dart';
 import 'package:ricochlime/utils/prefs.dart';
 
 class GameOverDialog extends StatelessWidget {
@@ -80,7 +81,7 @@ class GameOverDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 32),
                     if (AdState.adsSupported) ...[
-                      _GameOverButton(
+                      DialogButton(
                         onPressed: () async {
                           final rewardGranted = await AdState.showRewardedAd();
                           if (!context.mounted) return;
@@ -96,7 +97,7 @@ class GameOverDialog extends StatelessWidget {
                       ),
                       const SizedBox(height: 32),
                     ],
-                    _GameOverButton(
+                    DialogButton(
                       onPressed: () {
                         context.pop<GameOverAction>(GameOverAction.restartGame);
                       },
@@ -105,7 +106,7 @@ class GameOverDialog extends StatelessWidget {
                       text: t.gameOverPage.restartGameButton,
                     ),
                     const SizedBox(height: 32),
-                    _GameOverButton(
+                    DialogButton(
                       onPressed: () {
                         context
                           // pop dialog
@@ -121,46 +122,6 @@ class GameOverDialog extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _GameOverButton extends StatelessWidget {
-  const _GameOverButton({
-    // ignore: unused_element
-    super.key,
-    required this.onPressed,
-    this.type = NesButtonType.normal,
-    this.icon,
-    required this.text,
-  });
-
-  final VoidCallback onPressed;
-  final NesButtonType type;
-  final NesIconData? icon;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    const double buttonSize = 28;
-    return Center(
-      child: NesButton(
-        onPressed: onPressed,
-        type: type,
-        child: Row(
-          children: [
-            if (icon != null) NesIcon(iconData: icon!),
-            const SizedBox(width: 12),
-            Text(
-              text,
-              softWrap: false,
-              style: const TextStyle(
-                fontSize: buttonSize,
-              ),
-            ),
-          ],
         ),
       ),
     );
