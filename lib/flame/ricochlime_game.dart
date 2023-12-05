@@ -134,7 +134,7 @@ class RicochlimeGame extends Forge2DGame
   Future<void> importFromGame(GameData? data) async {
     if (data == null) {
       // new game
-      reset();
+      _reset();
       return;
     }
 
@@ -407,19 +407,22 @@ class RicochlimeGame extends Forge2DGame
         state = GameState.idle;
         await saveGame();
       case GameOverAction.restartGame:
-        // save high score
-        Prefs.highScore.value = max(Prefs.highScore.value, score.value);
-
-        // reset game
-        Prefs.currentGame.value = null;
-        reset();
+        restartGame();
     }
   }
 
-  /// Resets the game,
+  /// Restarts the game:
+  /// Saves the high score,
+  /// and clears the current game.
+  void restartGame() {
+    Prefs.highScore.value = max(Prefs.highScore.value, score.value);
+    Prefs.currentGame.value = null;
+    _reset();
+  }
+  /// Resets the game:
   /// sets the score to zero,
   /// and spawns a single row of slimes.
-  void reset() {
+  void _reset() {
     state = GameState.idle;
     inputCancelled = false;
     score.value = 0;
