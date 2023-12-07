@@ -75,19 +75,6 @@ class BackgroundTile extends SpriteAnimationComponent
   /// The type of this background tile.
   final BackgroundTileType type;
 
-  bool _isDarkened = false;
-  bool get isDarkened => _isDarkened;
-  set isDarkened(bool isDarkened) {
-    if (isDarkened == _isDarkened) return;
-    _isDarkened = isDarkened;
-    getPaint().colorFilter = isDarkened
-        ? const ColorFilter.mode(
-            Color.fromARGB(255, 175, 175, 175),
-            BlendMode.modulate,
-          )
-        : null;
-  }
-
   @override
   Future<void> onLoad() async {
     super.onLoad();
@@ -108,6 +95,33 @@ class BackgroundTile extends SpriteAnimationComponent
       },
       stepTime: 1 / 6,
     );
+
+    _onBrightnessChange();
+  }
+
+  @override
+  void onMount() {
+    super.onMount();
+    gameRef.isDarkMode.addListener(_onBrightnessChange);
+    _onBrightnessChange();
+  }
+
+  @override
+  void onRemove() {
+    super.onRemove();
+    gameRef.isDarkMode.removeListener(_onBrightnessChange);
+  }
+
+  bool _isDarkened = false;
+  void _onBrightnessChange() {
+    if (gameRef.isDarkMode.value == _isDarkened) return;
+    _isDarkened = gameRef.isDarkMode.value;
+    getPaint().colorFilter = gameRef.isDarkMode.value
+        ? const ColorFilter.mode(
+            Color.fromARGB(255, 175, 175, 175),
+            BlendMode.modulate,
+          )
+        : null;
   }
 
   /// The water sprite sheets,

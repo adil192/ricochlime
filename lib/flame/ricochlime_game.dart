@@ -50,9 +50,6 @@ class RicochlimeGame extends Forge2DGame
     /// This effectively sets the max time step to 1s,
     /// rather than the default value which is much lower.
     physics_settings.maxTranslation = Bullet.speed;
-
-    isDarkMode.addListener(_onDarkModeChanged);
-    _onDarkModeChanged();
   }
 
   static RicochlimeGame? _instance;
@@ -125,10 +122,6 @@ class RicochlimeGame extends Forge2DGame
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);
-
-    unawaited(Future.value().then((_) {
-      _onDarkModeChanged();
-    }));
   }
 
   Future<void> importFromGame(GameData? data) async {
@@ -194,13 +187,6 @@ class RicochlimeGame extends Forge2DGame
 
     _resetChildren();
     await importFromGame(Prefs.currentGame.value);
-  }
-
-  void _onDarkModeChanged() {
-    if (!isLoaded) return;
-    for (final tile in background.tiles) {
-      tile.isDarkened = isDarkMode.value;
-    }
   }
 
   /// Clears the current bullets and slimes
