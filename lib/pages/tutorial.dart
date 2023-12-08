@@ -24,11 +24,11 @@ class TutorialPage extends StatelessWidget {
             child: ListView(
               children: [
                 Text(
-                  t.tutorialPage.aimAtSlimes,
+                  t.tutorialPage.aimAtMonsters,
                   textAlign: TextAlign.center,
                 ),
                 const _TutorialScreenshot(
-                  image: AssetImage('assets/tutorial/aimAtSlimes.png'),
+                  image: AssetImage('assets/tutorial/aimAtMonsters.png'),
                 ),
                 const SizedBox(height: 18),
                 Text(
@@ -64,11 +64,11 @@ class TutorialPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  t.tutorialPage.moreSlimes,
+                  t.tutorialPage.moreMonsters,
                   textAlign: TextAlign.center,
                 ),
                 const _TutorialScreenshot(
-                  image: AssetImage('assets/tutorial/moreSlimes.png'),
+                  image: AssetImage('assets/tutorial/moreMonsters.png'),
                 ),
                 const SizedBox(height: 18),
               ],

@@ -39,7 +39,7 @@ void main() async {
 void _addLicenses() {
   LicenseRegistry.addLicense(() async* {
     yield LicenseEntryWithLineBreaks(
-      ['mystic_woods'],
+      ['gfx'],
       await rootBundle.loadString('assets/images/LICENSE.txt'),
     );
     yield LicenseEntryWithLineBreaks(

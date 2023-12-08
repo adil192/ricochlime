@@ -91,17 +91,7 @@ class _PlayPageState extends State<PlayPage> {
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       boxShadow: [
-                        BoxShadow(
-                          color: _isDarkMode.value
-                              ? RicochlimePalette.dirtColor.withOpacity(0.5)
-                              : RicochlimePalette.dirtColor,
-                          spreadRadius: RicochlimeGame.expectedHeight * 0.05,
-                          blurRadius: RicochlimeGame.expectedHeight * 0.1,
-                          offset: const Offset(
-                            0,
-                            RicochlimeGame.expectedHeight * 0.85,
-                          ),
-                        ),
+                        // TODO(adil192): revise blur bg effect with new assets
                         BoxShadow(
                           color: _isDarkMode.value
                               ? RicochlimePalette.waterColor.withOpacity(0.5)

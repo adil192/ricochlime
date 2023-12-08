@@ -1,10 +1,10 @@
 # Privacy policy - Ricochlime
 
-Ricochlime is a slime shooting game developed by Adil Hanney.
+Ricochlime is a monster shooting game developed by Adil Hanney.
 
 ## First party data collection
 
-Ricochlime does not collect any data about you (besides the data collected by third parties, see below). All progress is stored locally on your device, including your score and slime locations on the screen.
+Ricochlime does not collect any data about you (besides the data collected by third parties, see below). All progress is stored locally on your device, including your score and monster locations on the screen.
 
 ## Third party data collection
 

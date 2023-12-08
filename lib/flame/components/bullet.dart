@@ -1,6 +1,6 @@
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/foundation.dart';
-import 'package:ricochlime/flame/components/background/background.dart';
+import 'package:ricochlime/flame/ricochlime_game.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
   Bullet({
@@ -43,7 +43,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
   @override
   void update(double dt) {
     super.update(dt);
-    if (body.position.y > Background.waterThresholdPosition) {
+    if (body.position.y > (game as RicochlimeGame).player.bottomY) {
       removeFromParent();
     }
   }

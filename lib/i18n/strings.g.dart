@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 86 (43 per locale)
 ///
-/// Built on 2023-12-04 at 17:20 UTC
+/// Built on 2023-12-08 at 13:25 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -255,12 +255,12 @@ class _StringsTutorialPageEn {
 
 	// Translations
 	String get tutorial => 'Tutorial';
-	String get aimAtSlimes => 'Drag your finger to aim and release to shoot.';
-	String get emptyHealthbar => 'Defeat a slime by emptying its health bar.';
-	String get bounceOffWalls => 'Bounce your shots off the walls to hit the most slimes.';
+	String get aimAtMonsters => 'Drag your finger to aim and release to shoot.';
+	String get emptyHealthbar => 'Defeat a monster by emptying its health bar.';
+	String get bounceOffWalls => 'Bounce your shots off the walls to hit the most monsters.';
 	String get tapSpeedUp => 'Tap the screen to speed up your shots.';
-	String get dangerZone => 'If a slime reaches the danger zone, you\'ll lose on your next turn if you don\'t defeat it.';
-	String get moreSlimes => 'More rows of slimes will spawn each turn as you progress, so the danger zone will also get bigger.';
+	String get dangerZone => 'If a monster reaches the danger zone, you\'ll lose on your next turn if you don\'t defeat it.';
+	String get moreMonsters => 'More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger.';
 }
 
 // Path: common
@@ -407,12 +407,12 @@ class _StringsTutorialPageKk extends _StringsTutorialPageEn {
 
 	// Translations
 	@override String get tutorial => 'Нұсқаулық';
-	@override String get aimAtSlimes => 'Көздеу үшін саусағыңызды жылжытыңыз, ату үшін босатып жіберіңіз.';
+	@override String get aimAtMonsters => 'Көздеу үшін саусағыңызды жылжытыңыз, ату үшін босатып жіберіңіз.';
 	@override String get emptyHealthbar => 'Шырышты жеңу үшін оның денсаулық жолағын нөлге дейін жеткізіңіз.';
 	@override String get bounceOffWalls => 'Қабырғадан ыршыған оқ көбірек шырышқа тие алады.';
 	@override String get tapSpeedUp => 'Оқ қозғалысын тездету үшін экранды түртіңіз.';
 	@override String get dangerZone => 'Қауіпті аймаққа кірген шырышты жеңбесеңіз, келесі жүрісте ұтыласыз.';
-	@override String get moreSlimes => 'Жүріс жасалған сайын жаңа шырыш қатары шығады. Ойын барысында бір жүрістен кейін пайда болатын қатарлар көбейіп, қауіпті аймақ та кеңейеді.';
+	@override String get moreMonsters => 'Жүріс жасалған сайын жаңа шырыш қатары шығады. Ойын барысында бір жүрістен кейін пайда болатын қатарлар көбейіп, қауіпті аймақ та кеңейеді.';
 }
 
 // Path: common

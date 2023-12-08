@@ -7,28 +7,28 @@ import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/health_bar.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
-/// The animation state of the slime.
-enum SlimeState {
-  /// The slime is idle.
+/// The animation state of the monster.
+enum MonsterState {
+  /// The monster is idle.
   idle,
 
-  /// The slime is walking.
+  /// The monster is walking.
   walk,
 
-  /// The slime is attacking.
+  /// The monster is attacking.
   attack,
 
-  /// The slime is hurt.
+  /// The monster is hurt.
   hurt,
 
-  /// The slime is dead.
+  /// The monster is dead.
   dead,
 }
 
-/// A slime component.
-class Slime extends BodyComponent with ContactCallbacks {
+/// A monster component.
+class Monster extends BodyComponent with ContactCallbacks {
   // ignore: public_member_api_docs
-  Slime({
+  Monster({
     required this.initialPosition,
     required this.maxHp,
     int? hp,
@@ -46,8 +46,8 @@ class Slime extends BodyComponent with ContactCallbacks {
     add(_healthBar);
   }
 
-  /// Creates a slime from JSON data.
-  Slime.fromJson(Map<String, dynamic> json)
+  /// Creates a Monster from JSON data.
+  Monster.fromJson(Map<String, dynamic> json)
       : this(
           initialPosition: Vector2(
             json['px'] as double,
@@ -58,7 +58,7 @@ class Slime extends BodyComponent with ContactCallbacks {
           givesPlayerABullet: json['givesPlayerABullet'] as bool? ?? false,
         );
 
-  /// Converts the slime's data to a JSON map.
+  /// Converts the monster's data to a JSON map.
   Map<String, dynamic> toJson() => {
         'px': _movement?.targetPosition.x ?? position.x,
         'py': _movement?.targetPosition.y ?? position.y,
@@ -67,25 +67,28 @@ class Slime extends BodyComponent with ContactCallbacks {
         'givesPlayerABullet': givesPlayerABullet,
       };
 
-  /// The width of the slime.
-  static const staticWidth = 16.0;
+  /// How many monsters there are in each row.
+  static const monstersPerRow = 8;
 
-  /// The height of the slime.
+  /// The width of the monster.
+  static const staticWidth = RicochlimeGame.expectedWidth / monstersPerRow;
+
+  /// The height of the monster.
   static const staticHeight = staticWidth;
 
-  /// The distance between the top of one slime
-  /// and the top of the slime in the next row.
+  /// The distance between the top of one monster
+  /// and the top of the monster in the next row.
   static const _moveDownHeight = staticHeight * 0.8;
 
-  /// The gap at the top above the first row of slimes.
+  /// The gap at the top above the first row of monsters.
   static const topGap = staticHeight;
 
-  /// The initial position of the slime.
+  /// The initial position of the monster.
   ///
   /// See [position] for the current position.
   final Vector2 initialPosition;
 
-  /// The size of the slime.
+  /// The size of the monster.
   final Vector2 size = Vector2(staticWidth, staticHeight);
 
   /// The maximum health.
@@ -104,10 +107,10 @@ class Slime extends BodyComponent with ContactCallbacks {
   }
 
   /// The current movement, if any
-  _SlimeMovement? _movement;
+  _MonsterMovement? _movement;
 
   /// The animated sprite component
-  late final SlimeAnimation _animation = SlimeAnimation._();
+  late final MonsterAnimation _animation = MonsterAnimation._();
 
   /// The health bar component
   late final HealthBar _healthBar = HealthBar(
@@ -118,7 +121,7 @@ class Slime extends BodyComponent with ContactCallbacks {
 
   bool _givesPlayerABullet = false;
 
-  /// Whether the slime gives the player a bullet when it dies.
+  /// Whether the monster gives the player a bullet when it dies.
   bool get givesPlayerABullet => _givesPlayerABullet;
   set givesPlayerABullet(bool value) {
     _givesPlayerABullet = value;
@@ -148,10 +151,11 @@ class Slime extends BodyComponent with ContactCallbacks {
     }
   }
 
-  /// The priority is used to determine the order in which the slimes are drawn.
+  /// The priority is used to determine the order in which
+  /// the monsters are drawn.
   ///
-  /// We want the slimes to be drawn from top to bottom,
-  /// so we use a negative priority relating to the slime's y position.
+  /// We want the monsters to be drawn from top to bottom,
+  /// so we use a negative priority relating to the monster's y position.
   @visibleForTesting
   static int getPriorityFromPosition(Vector2 position) {
     const maxPriority = 0;
@@ -161,29 +165,29 @@ class Slime extends BodyComponent with ContactCallbacks {
   }
 
   /// The minimum priority,
-  /// used for the slimes at the top of the screen.
+  /// used for the monsters at the top of the screen.
   static const minPriority = -100;
 
-  /// Moves a new slime in from the top of the screen
+  /// Moves a new monster in from the top of the screen
   void moveInFromTop(Duration duration) {
-    assert(position.y <= topGap, 'Slime must be at the top of the screen');
-    _startMovement(_SlimeMovement(
+    assert(position.y <= topGap, 'Monster must be at the top of the screen');
+    _startMovement(_MonsterMovement(
       startingPosition: position.clone()..y -= _moveDownHeight,
       targetPosition: position.clone(),
       totalSeconds: duration.inMilliseconds / 1000,
     ));
   }
 
-  /// Moves the slime down to the next row
+  /// Moves the monster down to the next row
   void moveDown(Duration duration) {
-    _startMovement(_SlimeMovement(
+    _startMovement(_MonsterMovement(
       startingPosition: body.position.clone(),
       targetPosition: body.position + Vector2(0, _moveDownHeight),
       totalSeconds: duration.inMilliseconds / 1000,
     ));
   }
 
-  void _startMovement(_SlimeMovement movement) {
+  void _startMovement(_MonsterMovement movement) {
     _movement = movement;
     _animation.walking = true;
 
@@ -237,8 +241,8 @@ class Slime extends BodyComponent with ContactCallbacks {
 
         _animation
           ..parent = parent
-          ..position = SlimeAnimation._relativePosition + body.position
-          ..current = SlimeState.dead;
+          ..position = MonsterAnimation._relativePosition + body.position
+          ..current = MonsterState.dead;
 
         removeFromParent();
       }
@@ -246,10 +250,10 @@ class Slime extends BodyComponent with ContactCallbacks {
   }
 }
 
-/// Data about a movement of a slime,
+/// Data about a movement of a monster,
 /// including the [startingPosition] and [targetPosition].
-class _SlimeMovement {
-  _SlimeMovement({
+class _MonsterMovement {
+  _MonsterMovement({
     required this.startingPosition,
     required this.targetPosition,
     required this.totalSeconds,
@@ -267,39 +271,39 @@ class _SlimeMovement {
 }
 
 /// The animated sprite component,
-/// used internally by the [Slime] class.
+/// used internally by the [Monster] class.
 ///
 /// It should not be used directly,
 /// but only for type checking.
-class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
+class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
     with HasGameRef<RicochlimeGame> {
-  SlimeAnimation._()
+  MonsterAnimation._()
       : super(
           position: _relativePosition.clone(),
           removeOnFinish: {
-            SlimeState.dead: true,
+            MonsterState.dead: true,
           },
         );
 
   static final Vector2 _relativePosition = Vector2(
-    -Slime.staticWidth / 2,
-    -Slime.staticHeight / 2,
+    -Monster.staticWidth / 2,
+    -Monster.staticHeight / 2,
   );
 
   bool _walking = false;
 
-  /// Whether the slime is walking.
+  /// Whether the monster is walking.
   bool get walking => _walking;
   set walking(bool value) {
     _walking = value;
     if (value) {
-      current = SlimeState.walk;
+      current = MonsterState.walk;
     } else {
-      current = SlimeState.idle;
+      current = MonsterState.idle;
     }
   }
 
-  /// Whether the slime gives the player a bullet when it dies.
+  /// Whether the monster gives the player a bullet when it dies.
   bool get givesPlayerABullet => getPaint().colorFilter != null;
   set givesPlayerABullet(bool value) {
     getPaint().colorFilter = value
@@ -310,7 +314,7 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
   @override
   Future<void> onLoad() async {
     animations = getAnimations();
-    current = SlimeState.idle;
+    current = MonsterState.idle;
     walking = _walking;
     await super.onLoad();
 
@@ -318,19 +322,19 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
     height = 32;
   }
 
-  /// Preloads the sprites for the slime.
+  /// Preloads the sprites for the monster.
   static Future<void> preloadSprites({
     required RicochlimeGame gameRef,
   }) {
-    return gameRef.images.load('slime.png');
+    return gameRef.images.load('monster.png');
   }
 
-  /// The list of animations for the slime.
-  Map<SlimeState, SpriteAnimation> getAnimations() {
-    final slimeImage = gameRef.images.fromCache('slime.png');
+  /// The list of animations for the monster.
+  Map<MonsterState, SpriteAnimation> getAnimations() {
+    final monsterImage = gameRef.images.fromCache('monster.png');
     return {
-      SlimeState.idle: SpriteAnimation.fromFrameData(
-        slimeImage,
+      MonsterState.idle: SpriteAnimation.fromFrameData(
+        monsterImage,
         SpriteAnimationData.sequenced(
           stepTime: 1 / 4,
           textureSize: Vector2(32, 32),
@@ -338,8 +342,8 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
           amountPerRow: 4,
         ),
       ),
-      SlimeState.walk: SpriteAnimation.fromFrameData(
-        slimeImage,
+      MonsterState.walk: SpriteAnimation.fromFrameData(
+        monsterImage,
         SpriteAnimationData.sequenced(
           stepTime: 0.5 / 6,
           textureSize: Vector2(32, 32),
@@ -348,8 +352,8 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
           texturePosition: Vector2(0, 1 * 32),
         ),
       ),
-      SlimeState.attack: SpriteAnimation.fromFrameData(
-        slimeImage,
+      MonsterState.attack: SpriteAnimation.fromFrameData(
+        monsterImage,
         SpriteAnimationData.sequenced(
           stepTime: 1 / 7,
           textureSize: Vector2(32, 32),
@@ -358,8 +362,8 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
           texturePosition: Vector2(0, 2 * 32),
         ),
       ),
-      SlimeState.hurt: SpriteAnimation.fromFrameData(
-        slimeImage,
+      MonsterState.hurt: SpriteAnimation.fromFrameData(
+        monsterImage,
         SpriteAnimationData.sequenced(
           stepTime: 1 / 3,
           textureSize: Vector2(32, 32),
@@ -368,8 +372,8 @@ class SlimeAnimation extends SpriteAnimationGroupComponent<SlimeState>
           texturePosition: Vector2(0, 3 * 32),
         ),
       ),
-      SlimeState.dead: SpriteAnimation.fromFrameData(
-        slimeImage,
+      MonsterState.dead: SpriteAnimation.fromFrameData(
+        monsterImage,
         SpriteAnimationData.sequenced(
           stepTime: 0.3 / 5,
           textureSize: Vector2(32, 32),

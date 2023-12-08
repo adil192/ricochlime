@@ -7,7 +7,7 @@
     <id>com.adilhanney.ricochlime</id>
 
     <name>Ricochlime</name>
-    <summary>Satisfying slime shooter</summary>
+    <summary>Satisfying monster shooter</summary>
 
     <developer_name>Adil Hanney</developer_name>
     <url type="homepage">https://github.com/adil192/ricochlime</url>
@@ -24,7 +24,7 @@
     <description>
         <p>
             Ricochlime is a game where you attack the advancing
-            slimes with your ricocheting projectiles. The game is
+            monsters with your ricocheting projectiles. The game is
             made with the Flame game engine and Flutter.
         </p>
     </description>
@@ -41,7 +41,7 @@
     <keywords>
         <keyword>flutter</keyword>
         <keyword>flame-engine</keyword>
-        <keyword>slime</keyword>
+        <keyword>monster</keyword>
         <keyword>shooter</keyword>
         <keyword>game</keyword>
         <keyword>open-source</keyword>

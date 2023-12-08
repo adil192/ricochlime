@@ -1,6 +1,6 @@
 # <img src="assets/icon/icon.png" width="30" height="30" alt="Logo"> Ricochlime
 
-Ricochlime is a game where you attack the advancing slimes with your ricocheting projectiles. The game is made with the [Flame](https://flame-engine.org/) game engine and [Flutter](https://flutter.dev/).
+Ricochlime is a game where you attack the advancing monsters with your ricocheting projectiles. The game is made with the [Flame](https://flame-engine.org/) game engine and [Flutter](https://flutter.dev/).
 
 [<img src='assets_raw/google-play-badge.png'
     alt='Get it on Google Play'
@@ -30,7 +30,7 @@ Ricochlime is a game where you attack the advancing slimes with your ricocheting
     alt="Get it as an AppImage"
     height=80>][download_appimage]
 
-<img src='metadata/en-US/images/tenInchScreenshots/game.png' alt='Game screen with a player at the bottom facing multiple slimes' />
+<img src='metadata/en-US/images/tenInchScreenshots/game.png' alt='Game screen with a player at the bottom facing multiple monsters' />
 
 [google_play]: https://play.google.com/store/apps/details?id=com.adilhanney.ricochlime
 [amazon_appstore]: https://www.amazon.co.uk/Adil-Hanney-Ricochlime/dp/B0CFK76XNX/
