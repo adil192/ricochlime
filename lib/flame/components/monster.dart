@@ -15,12 +15,6 @@ enum MonsterState {
   /// The monster is walking.
   walk,
 
-  /// The monster is attacking.
-  attack,
-
-  /// The monster is hurt.
-  hurt,
-
   /// The monster is dead.
   dead,
 }
@@ -326,60 +320,41 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
   static Future<void> preloadSprites({
     required RicochlimeGame gameRef,
   }) {
-    return gameRef.images.load('monster.png');
+    return gameRef.images.load('log_subset.png');
   }
 
   /// The list of animations for the monster.
   Map<MonsterState, SpriteAnimation> getAnimations() {
-    final monsterImage = gameRef.images.fromCache('monster.png');
+    final monsterImage = gameRef.images.fromCache('log_subset.png');
     return {
       MonsterState.idle: SpriteAnimation.fromFrameData(
         monsterImage,
         SpriteAnimationData.sequenced(
-          stepTime: 1 / 4,
-          textureSize: Vector2(32, 32),
-          amount: 4,
+          amount: 1,
+          stepTime: 0.5 / 1,
+          textureSize: Vector2(24, 24),
           amountPerRow: 4,
+          texturePosition: Vector2(0, 0),
         ),
       ),
       MonsterState.walk: SpriteAnimation.fromFrameData(
         monsterImage,
         SpriteAnimationData.sequenced(
-          stepTime: 0.5 / 6,
-          textureSize: Vector2(32, 32),
-          amount: 6,
-          amountPerRow: 6,
-          texturePosition: Vector2(0, 1 * 32),
-        ),
-      ),
-      MonsterState.attack: SpriteAnimation.fromFrameData(
-        monsterImage,
-        SpriteAnimationData.sequenced(
-          stepTime: 1 / 7,
-          textureSize: Vector2(32, 32),
-          amount: 7,
-          amountPerRow: 7,
-          texturePosition: Vector2(0, 2 * 32),
-        ),
-      ),
-      MonsterState.hurt: SpriteAnimation.fromFrameData(
-        monsterImage,
-        SpriteAnimationData.sequenced(
-          stepTime: 1 / 3,
-          textureSize: Vector2(32, 32),
-          amount: 3,
-          amountPerRow: 3,
-          texturePosition: Vector2(0, 3 * 32),
+          amount: 4,
+          stepTime: 0.5 / 4,
+          textureSize: Vector2(24, 24),
+          amountPerRow: 4,
+          texturePosition: Vector2(0, 0),
         ),
       ),
       MonsterState.dead: SpriteAnimation.fromFrameData(
         monsterImage,
         SpriteAnimationData.sequenced(
-          stepTime: 0.3 / 5,
-          textureSize: Vector2(32, 32),
-          amount: 5,
-          amountPerRow: 5,
-          texturePosition: Vector2(0, 4 * 32),
+          amount: 3,
+          stepTime: 0.3 / 3,
+          textureSize: Vector2(24, 24),
+          amountPerRow: 4,
+          texturePosition: Vector2(0, 1 * 24),
           loop: false,
         ),
       ),
