@@ -78,7 +78,7 @@ class RicochlimeGame extends Forge2DGame
   bool inputCancelled = false;
   final List<Monster> monsters = [];
 
-  final random = Random();
+  late var random = Random();
 
   final ValueNotifier<int> score;
   final ValueNotifier<bool> isDarkMode;
