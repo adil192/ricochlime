@@ -53,7 +53,7 @@ class BridgeSprite extends SpriteComponent
     super.onLoad();
     sprite = Sprite(
       gameRef.images.fromCache('overworld.png'),
-      srcPosition: Vector2(0, 16),
+      srcPosition: Vector2(91, 104),
       srcSize: Vector2(26, 33),
     );
   }

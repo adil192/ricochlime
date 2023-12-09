@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:ricochlime/flame/components/background/background_tile.dart';
 import 'package:ricochlime/flame/components/monster.dart';
@@ -39,28 +41,50 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
   /// Returns an iterable of all the background tiles.
   /// Used in [_updateChildren].
   Iterable<DarkeningSprite> _getTiles() sync* {
-    add(HouseSprite(
-      position: gameRef.player.position + Vector2(-45, 0),
-      size: Vector2(80, 80),
-    ));
-    add(HouseSprite(
-      position: gameRef.player.position + Vector2(45, 0),
-      size: Vector2(80, 80),
-    ));
-    /*for (var row = 0; row < RicochlimeGame.tilesInHeight; row++) {
-      for (var column = 0; column < RicochlimeGame.tilesInWidth; column++) {
-        final type = getTileType(row, column);
-        if (type == null) continue;
-        yield BackgroundTile(
-          position: Vector2(
-            gameRef.size.x * column / RicochlimeGame.tilesInWidth,
-            gameRef.size.y * row / RicochlimeGame.tilesInHeight,
-          ),
-          size: tileSize,
-          type: type,
+    final random = Random(123);
+    final bridgeY = gameRef.player.position.y -
+        Monster.moveDownHeight * gameRef.numNewRowsEachRound;
+
+    for (var y = 0.0; y < bridgeY; y += 8) {
+      final left = random.nextDouble() * 8;
+      final right = random.nextDouble() * 8;
+      for (var x = -left; x < gameRef.size.x + right; x += 8) {
+        yield GrassSprite(
+          position: Vector2(x, y),
+          size: Vector2(8, 8),
         );
       }
-    }*/
+    }
+
+    {
+      final y = bridgeY;
+      for (var x = 0.0; x < gameRef.size.x; x += Monster.staticWidth) {
+        yield BridgeSprite(
+          position: Vector2(x, y),
+          size: Vector2(Monster.staticWidth, Monster.moveDownHeight),
+        );
+      }
+    }
+
+    for (var y = bridgeY + Monster.moveDownHeight; y < gameRef.size.y; y += 8) {
+      final left = random.nextDouble() * 8;
+      final right = random.nextDouble() * 8;
+      for (var x = -left; x < gameRef.size.x + right; x += 8) {
+        yield GrassSprite(
+          position: Vector2(x, y),
+          size: Vector2(8, 8),
+        );
+      }
+    }
+
+    yield HouseSprite(
+      position: gameRef.player.position + Vector2(-45, 0),
+      size: Vector2(80, 80),
+    );
+    yield HouseSprite(
+      position: gameRef.player.position + Vector2(45, 0),
+      size: Vector2(80, 80),
+    );
   }
 
   /// Preloads all sprite sheets so they can be

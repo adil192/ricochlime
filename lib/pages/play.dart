@@ -88,49 +88,24 @@ class _PlayPageState extends State<PlayPage> {
             children: [
               Positioned.fill(
                 child: FittedBox(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        // TODO(adil192): revise blur bg effect with new assets
-                        BoxShadow(
-                          color: _isDarkMode.value
-                              ? RicochlimePalette.waterColor.withOpacity(0.5)
-                              : RicochlimePalette.waterColor,
-                          spreadRadius: RicochlimeGame.expectedHeight * 0.1,
-                          blurRadius: RicochlimeGame.expectedHeight * 0.1,
-                          offset: const Offset(
-                            0,
-                            RicochlimeGame.expectedHeight * 0.9,
-                          ),
+                  child: SizedBox(
+                    width: RicochlimeGame.expectedWidth,
+                    height: RicochlimeGame.expectedHeight,
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: GameWidget(game: game),
                         ),
-                        BoxShadow(
-                          color: _isDarkMode.value
-                              ? Colors.black.withOpacity(0.5)
-                              : RicochlimePalette.grassColorDark
-                                  .withOpacity(0.5),
-                          blurRadius: 100,
-                        ),
-                      ],
-                    ),
-                    child: SizedBox(
-                      width: RicochlimeGame.expectedWidth,
-                      height: RicochlimeGame.expectedHeight,
-                      child: Stack(
-                        children: [
-                          Positioned.fill(
-                            child: GameWidget(game: game),
-                          ),
-                          if (AdState.adsSupported)
-                            const Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: BannerAdWidget(
-                                adSize: AdSize.banner,
-                              ),
+                        if (AdState.adsSupported)
+                          const Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: BannerAdWidget(
+                              adSize: AdSize.banner,
                             ),
-                        ],
-                      ),
+                          ),
+                      ],
                     ),
                   ),
                 ),

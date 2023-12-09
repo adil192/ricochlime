@@ -72,7 +72,7 @@ class Monster extends BodyComponent with ContactCallbacks {
 
   /// The distance between the top of one monster
   /// and the top of the monster in the next row.
-  static const _moveDownHeight = MonsterAnimation.staticHeight * 0.8;
+  static const moveDownHeight = MonsterAnimation.staticHeight * 0.8;
 
   /// The gap at the top above the first row of monsters.
   static const topGap = staticHeight;
@@ -166,7 +166,7 @@ class Monster extends BodyComponent with ContactCallbacks {
   void moveInFromTop(Duration duration) {
     assert(position.y <= topGap, 'Monster must be at the top of the screen');
     _startMovement(_MonsterMovement(
-      startingPosition: position.clone()..y -= _moveDownHeight,
+      startingPosition: position.clone()..y -= moveDownHeight,
       targetPosition: position.clone(),
       totalSeconds: duration.inMilliseconds / 1000,
     ));
@@ -176,7 +176,7 @@ class Monster extends BodyComponent with ContactCallbacks {
   void moveDown(Duration duration) {
     _startMovement(_MonsterMovement(
       startingPosition: body.position.clone(),
-      targetPosition: body.position + Vector2(0, _moveDownHeight),
+      targetPosition: body.position + Vector2(0, moveDownHeight),
       totalSeconds: duration.inMilliseconds / 1000,
     ));
   }
