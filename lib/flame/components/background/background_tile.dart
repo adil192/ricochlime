@@ -9,6 +9,7 @@ class HouseSprite extends SpriteComponent
   HouseSprite({
     super.position,
     super.size,
+    super.priority = 10000,
     super.anchor = Anchor.topCenter,
   });
 

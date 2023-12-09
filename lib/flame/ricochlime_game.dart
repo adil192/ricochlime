@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:forge2d/src/settings.dart' as physics_settings;
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
+import 'package:ricochlime/flame/components/background/background_tile.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/monster.dart';
 import 'package:ricochlime/flame/components/player.dart';
@@ -113,6 +114,16 @@ class RicochlimeGame extends Forge2DGame
 
     aimGuide = AimGuide();
     add(aimGuide);
+
+    // Houses
+    add(HouseSprite(
+      position: player.position + Vector2(-45, 0),
+      size: Vector2(80, 80),
+    ));
+    add(HouseSprite(
+      position: player.position + Vector2(45, 0),
+      size: Vector2(80, 80),
+    ));
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);

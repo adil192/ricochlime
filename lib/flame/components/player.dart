@@ -8,6 +8,18 @@ enum PlayerState {
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameRef<RicochlimeGame> {
+  Player()
+      : super(
+          size: Vector2(staticWidth, staticHeight),
+          anchor: Anchor.center,
+          priority: 3,
+        ) {
+    position = Vector2(
+      RicochlimeGame.expectedWidth * 0.5,
+      RicochlimeGame.expectedHeight * 0.75,
+    );
+  }
+
   static const staticWidth = 17.0 * 0.8;
   static const staticHeight = 23.0 * 0.8;
 
@@ -22,15 +34,6 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     animationTickers![PlayerState.attack]!.onComplete = () {
       current = PlayerState.idle;
     };
-
-    position = Vector2(
-      gameRef.size.x / 2,
-      gameRef.size.y * 0.75,
-    );
-    width = staticWidth;
-    height = staticHeight;
-    anchor = Anchor.center;
-    priority = 3;
   }
 
   void attack() {

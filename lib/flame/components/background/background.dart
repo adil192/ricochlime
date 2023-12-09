@@ -98,15 +98,6 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
         );
       }
     }
-
-    yield HouseSprite(
-      position: gameRef.player.position + Vector2(-45, 0),
-      size: Vector2(80, 80),
-    );
-    yield HouseSprite(
-      position: gameRef.player.position + Vector2(45, 0),
-      size: Vector2(80, 80),
-    );
   }
 
   /// Preloads all sprite sheets so they can be
