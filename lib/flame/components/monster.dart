@@ -72,7 +72,7 @@ class Monster extends BodyComponent with ContactCallbacks {
 
   /// The distance between the top of one monster
   /// and the top of the monster in the next row.
-  static const _moveDownHeight = staticHeight * 0.8;
+  static const _moveDownHeight = MonsterAnimation.staticHeight * 0.8;
 
   /// The gap at the top above the first row of monsters.
   static const topGap = staticHeight;
