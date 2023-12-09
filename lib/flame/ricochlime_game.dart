@@ -118,7 +118,7 @@ class RicochlimeGame extends Forge2DGame
     // Houses
     for (final dx in <double>[-94, -32, 32, 94]) {
       add(HouseSprite(
-        position: player.position + Vector2(dx, 0),
+        position: player.position + Vector2(dx, -Player.staticHeight * 0.25),
         size: Vector2(60, 60),
       ));
     }
@@ -348,7 +348,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   bool isGameOver() {
-    final threshold = player.bottomY - Monster.staticHeight * 1.3;
+    final threshold = player.bottomY - Monster.staticHeight * 2;
     return monsters.any((monster) => monster.position.y >= threshold);
   }
 

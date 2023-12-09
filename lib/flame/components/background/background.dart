@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:ricochlime/flame/components/background/background_tile.dart';
 import 'package:ricochlime/flame/components/monster.dart';
+import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
 /// The background component which contains all the background tiles.
@@ -43,6 +44,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
   Iterable<DarkeningSprite> _getTiles() sync* {
     final random = Random(123);
     final bridgeY = gameRef.player.position.y -
+        Player.staticHeight * 0.5 -
         Monster.moveDownHeight * gameRef.numNewRowsEachRound;
 
     // Grass
