@@ -76,8 +76,10 @@ class _PlayPageState extends State<PlayPage> {
         statusBarColor: Colors.transparent,
         statusBarBrightness: colorScheme.brightness,
         statusBarIconBrightness: colorScheme.brightness.opposite,
-        systemNavigationBarColor: RicochlimePalette.waterColor,
-        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: _isDarkMode.value
+            ? RicochlimePalette.grassColorDark
+            : RicochlimePalette.grassColor,
+        systemNavigationBarIconBrightness: colorScheme.brightness.opposite,
       ),
       child: ColoredBox(
         color: _isDarkMode.value
