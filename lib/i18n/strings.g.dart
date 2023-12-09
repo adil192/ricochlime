@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 86 (43 per locale)
 ///
-/// Built on 2023-12-08 at 13:25 UTC
+/// Built on 2023-12-09 at 01:45 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -412,7 +412,7 @@ class _StringsTutorialPageKk extends _StringsTutorialPageEn {
 	@override String get bounceOffWalls => 'Қабырғадан ыршыған оқ көбірек шырышқа тие алады.';
 	@override String get tapSpeedUp => 'Оқ қозғалысын тездету үшін экранды түртіңіз.';
 	@override String get dangerZone => 'Қауіпті аймаққа кірген шырышты жеңбесеңіз, келесі жүрісте ұтыласыз.';
-	@override String get moreMonsters => 'Жүріс жасалған сайын жаңа шырыш қатары шығады. Ойын барысында бір жүрістен кейін пайда болатын қатарлар көбейіп, қауіпті аймақ та кеңейеді.';
+	@override String get moreMonsters => 'Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды.';
 }
 
 // Path: common
