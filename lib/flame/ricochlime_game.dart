@@ -108,11 +108,11 @@ class RicochlimeGame extends Forge2DGame
 
     createBoundaries(expectedWidth, expectedHeight).forEach(add);
 
-    aimGuide = AimGuide();
-    add(aimGuide);
-
     player = Player();
     add(player);
+
+    aimGuide = AimGuide();
+    add(aimGuide);
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);

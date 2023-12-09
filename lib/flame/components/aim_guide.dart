@@ -28,7 +28,8 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    position = gameRef.size / 2 + Vector2(0, Player.staticHeight * 1.25);
+    assert(gameRef.player.isLoaded, 'Player must be loaded before AimGuide');
+    position = gameRef.player.position;
     width = 0;
     height = 0;
     anchor = Anchor.center;
