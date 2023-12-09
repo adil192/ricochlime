@@ -435,7 +435,7 @@ class RicochlimeGame extends Forge2DGame
   }) {
     final monsterBools = List.filled(Monster.monstersPerRow, false);
     for (var i = 0; i < Monster.monstersPerRow; i++) {
-      monsterBools.add(random.nextDouble() < 0.3);
+      monsterBools[i] = random.nextDouble() < 0.3;
     }
     while (monsterBools.where((e) => e).length < minMonstersInRow) {
       monsterBools[random.nextInt(monsterBools.length)] = true;
