@@ -5,7 +5,7 @@ Licensed under CC0:
 https://creativecommons.org/publicdomain/zero/1.0/
 
 Some of these sprites were modified by me, such as `character_subset.png`
-being a subset of the original `character.png`.
+being a modified subset of the original `character.png`.
 These works are licensed under CC0 as well.
 
 ---
