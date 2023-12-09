@@ -8,7 +8,8 @@ class GameData {
 
   GameData.fromJson(Map<String, dynamic> json)
       : score = json['score'] as int,
-        monsters = (json['monsters'] as List).cast<Map<String, dynamic>>();
+        monsters = ((json['monsters'] ?? json['slimes']) as List)
+            .cast<Map<String, dynamic>>();
 
   final int score;
 
