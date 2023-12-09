@@ -8,7 +8,8 @@ enum PlayerState {
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameRef<RicochlimeGame> {
-  static double staticHeight = 48;
+  static const staticWidth = 17.0 * 0.8;
+  static const staticHeight = 23.0 * 0.8;
 
   double get bottomY => position.y + staticHeight;
 
@@ -23,7 +24,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     };
 
     position = gameRef.size / 2 + Vector2(0, staticHeight * 0.95);
-    width = staticHeight;
+    width = staticWidth;
     height = staticHeight;
     anchor = Anchor.center;
     priority = 3;
