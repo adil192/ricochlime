@@ -194,14 +194,9 @@ class RicochlimeGame extends Forge2DGame
 
   /// Clears the current bullets and monsters
   void _resetChildren() {
-    for (final component in children) {
-      switch (component) {
-        case (Bullet _):
-        case (Monster _):
-        case (MonsterAnimation _):
-          component.removeFromParent();
-      }
-    }
+    removeWhere((component) => component is Bullet);
+    removeWhere((component) => component is Monster);
+    removeWhere((component) => component is MonsterAnimation);
     monsters.clear();
   }
 
