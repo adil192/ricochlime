@@ -279,9 +279,11 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
           },
         );
 
-  static final Vector2 _relativePosition = Vector2(
-    -Monster.staticWidth / 2,
-    -Monster.staticHeight / 2,
+  static const staticWidth = 20.0;
+  static const staticHeight = staticWidth;
+  static final _relativePosition = Vector2(
+    (Monster.staticWidth - staticWidth) / 2,
+    (Monster.staticHeight - staticHeight) / 2,
   );
 
   bool _walking = false;
@@ -312,8 +314,8 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
     walking = _walking;
     await super.onLoad();
 
-    width = 32;
-    height = 32;
+    width = staticWidth;
+    height = staticHeight;
   }
 
   /// Preloads the sprites for the monster.
@@ -333,7 +335,7 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
           amount: 1,
           stepTime: 0.5 / 1,
           textureSize: Vector2(24, 24),
-          amountPerRow: 4,
+          amountPerRow: 1,
           texturePosition: Vector2(0, 0),
         ),
       ),
@@ -353,7 +355,7 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
           amount: 3,
           stepTime: 0.3 / 3,
           textureSize: Vector2(24, 24),
-          amountPerRow: 4,
+          amountPerRow: 3,
           texturePosition: Vector2(0, 1 * 24),
           loop: false,
         ),
