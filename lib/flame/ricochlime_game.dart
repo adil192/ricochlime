@@ -13,8 +13,8 @@ import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
 import 'package:ricochlime/flame/components/background/background_tile.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
+import 'package:ricochlime/flame/components/monster.dart';
 import 'package:ricochlime/flame/components/player.dart';
-import 'package:ricochlime/flame/components/slime.dart';
 import 'package:ricochlime/flame/components/walls.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/flame/ticker.dart';
@@ -25,7 +25,7 @@ import 'package:ricochlime/utils/ricochlime_palette.dart';
 enum GameState {
   idle,
   shooting,
-  slimesMoving,
+  monstersMoving,
   gameOver,
 }
 
@@ -57,13 +57,8 @@ class RicochlimeGame extends Forge2DGame
   /// Width to height aspect ratio
   static const aspectRatio = 1 / 2;
 
-  static const expectedWidth = tilesInWidth * Slime.staticWidth;
+  static const expectedWidth = 128.0;
   static const expectedHeight = expectedWidth / aspectRatio;
-
-  static const waterPosition = expectedHeight * 0.8;
-
-  static const tilesInWidth = 8;
-  static const tilesInHeight = tilesInWidth ~/ aspectRatio;
 
   static const bulletTimeoutSecs = 60; // 1 minute
 
@@ -81,7 +76,7 @@ class RicochlimeGame extends Forge2DGame
   late Background background;
   bool get inputAllowed => state == GameState.idle;
   bool inputCancelled = false;
-  final List<Slime> slimes = [];
+  final List<Monster> monsters = [];
 
   final random = Random();
 
@@ -97,8 +92,8 @@ class RicochlimeGame extends Forge2DGame
 
   /// A future that completes when all the sprites are loaded.
   late Future<bool> preloadSprites = Future.wait([
-    BackgroundTile.preloadSprites(gameRef: this),
-    SlimeAnimation.preloadSprites(gameRef: this),
+    Background.preloadSprites(gameRef: this),
+    MonsterAnimation.preloadSprites(gameRef: this),
     Player.preloadSprites(gameRef: this),
   ]).then((_) => true);
 
@@ -114,11 +109,21 @@ class RicochlimeGame extends Forge2DGame
 
     createBoundaries(expectedWidth, expectedHeight).forEach(add);
 
+    player = Player();
+    add(player);
+
     aimGuide = AimGuide();
     add(aimGuide);
 
-    player = Player();
-    add(player);
+    // Houses
+    add(HouseSprite(
+      position: player.position + Vector2(-45, 0),
+      size: Vector2(80, 80),
+    ));
+    add(HouseSprite(
+      position: player.position + Vector2(45, 0),
+      size: Vector2(80, 80),
+    ));
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);
@@ -131,27 +136,27 @@ class RicochlimeGame extends Forge2DGame
       return;
     }
 
-    int numSlimesThatGiveBullets = 0;
+    int numMonstersThatGiveBullets = 0;
     bool topGapNeedsAdjusting = false;
-    for (final slimeJson in data.slimes) {
-      final slime = Slime.fromJson(slimeJson);
-      slimes.add(slime);
-      add(slime);
+    for (final monsterJson in data.monsters) {
+      final monster = Monster.fromJson(monsterJson);
+      monsters.add(monster);
+      add(monster);
 
-      if (slime.givesPlayerABullet) numSlimesThatGiveBullets++;
-      if (slime.position.y <= 0) topGapNeedsAdjusting = true;
+      if (monster.givesPlayerABullet) numMonstersThatGiveBullets++;
+      if (monster.position.y <= 0) topGapNeedsAdjusting = true;
     }
 
     if (topGapNeedsAdjusting) {
-      // the top gap needs adjusting because the slimes were imported from a
+      // the top gap needs adjusting because the monsters were imported from a
       // previous version of the game
-      for (final slime in slimes) {
-        slime.position.y += Slime.topGap;
+      for (final monster in monsters) {
+        monster.position.y += Monster.topGap;
       }
     }
 
     score.value = data.score;
-    numBullets = 1 + score.value - numSlimesThatGiveBullets;
+    numBullets = 1 + score.value - numMonstersThatGiveBullets;
     assert(numBullets >= 1);
     assert(numBullets <= score.value);
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
@@ -165,12 +170,12 @@ class RicochlimeGame extends Forge2DGame
 
   Future saveGame() async {
     assert(
-      slimes.any((slime) => slime.position.y <= Slime.topGap),
-      'The new row of slimes should be spawned before saving the game',
+      monsters.any((monster) => monster.position.y <= Monster.topGap),
+      'The new row of monsters should be spawned before saving the game',
     );
     Prefs.currentGame.value = GameData(
       score: score.value,
-      slimes: slimes,
+      monsters: monsters,
     );
     await Prefs.currentGame.waitUntilSaved();
   }
@@ -189,17 +194,17 @@ class RicochlimeGame extends Forge2DGame
     await importFromGame(Prefs.currentGame.value);
   }
 
-  /// Clears the current bullets and slimes
+  /// Clears the current bullets and monsters
   void _resetChildren() {
     for (final component in children) {
       switch (component) {
         case (Bullet _):
-        case (Slime _):
-        case (SlimeAnimation _):
+        case (Monster _):
+        case (MonsterAnimation _):
           component.removeFromParent();
       }
     }
-    slimes.clear();
+    monsters.clear();
   }
 
   @override
@@ -292,7 +297,7 @@ class RicochlimeGame extends Forge2DGame
       }
 
       if (inputCancelled) return;
-      await spawnNewSlimes();
+      await spawnNewMonsters();
       if (inputCancelled) return;
     } finally {
       if (state != GameState.gameOver) {
@@ -302,41 +307,41 @@ class RicochlimeGame extends Forge2DGame
     }
   }
 
-  /// Moves the existing slimes down and spawns new ones at the top
-  Future<void> spawnNewSlimes() async {
-    const slimeMoveDuration = Duration(seconds: 1);
+  /// Moves the existing monsters down and spawns new ones at the top
+  Future<void> spawnNewMonsters() async {
+    const monsterMoveDuration = Duration(seconds: 1);
 
-    state = GameState.slimesMoving;
+    state = GameState.monstersMoving;
 
-    // remove slimes that have been killed
-    slimes.removeWhere((slime) => slime.parent == null);
+    // remove monsters that have been killed
+    monsters.removeWhere((monster) => monster.parent == null);
 
-    // move slimes down and spawn new ones at the top
+    // move monsters down and spawn new ones at the top
     assert(numNewRowsEachRound == getNumNewRowsEachRound(score.value));
     for (int i = 0; i < numNewRowsEachRound; ++i) {
-      // move existing slimes down
-      for (final slime in slimes) {
-        slime.moveDown(slimeMoveDuration);
+      // move existing monsters down
+      for (final monster in monsters) {
+        monster.moveDown(monsterMoveDuration);
       }
 
-      // spawn new slimes at the top
+      // spawn new monsters at the top
       score.value++;
       final row = createNewRow(
         random: random,
-        slimeHp: score.value,
+        monsterHp: score.value,
       );
-      for (final slime in row) {
-        if (slime == null) continue;
+      for (final monster in row) {
+        if (monster == null) continue;
 
-        slimes.add(slime);
-        add(slime);
+        monsters.add(monster);
+        add(monster);
 
-        // trigger the slime's animation
-        slime.moveInFromTop(slimeMoveDuration);
+        // trigger the monster's animation
+        monster.moveInFromTop(monsterMoveDuration);
       }
 
-      // wait for the slimes to move
-      await ticker.delayed(slimeMoveDuration);
+      // wait for the monsters to move
+      await ticker.delayed(monsterMoveDuration);
 
       // check if the player has lost
       if (isGameOver()) {
@@ -350,16 +355,15 @@ class RicochlimeGame extends Forge2DGame
   }
 
   bool isGameOver() {
-    const threshold =
-        Background.waterThresholdPosition - Slime.staticHeight * 1.3;
-    return slimes.any((slime) => slime.position.y >= threshold);
+    final threshold = player.bottomY - Monster.staticHeight * 1.3;
+    return monsters.any((monster) => monster.position.y >= threshold);
   }
 
   Future<void> gameOver() async {
     state = GameState.gameOver;
     assert(!inputAllowed);
 
-    // TODO(adil192): Animate the slimes jumping into the water
+    // TODO(adil192): Animate the monsters jumping into the water
     // await ticker.delayed(const Duration(milliseconds: 500));
 
     final GameOverAction gameOverAction = showGameOverDialog == null
@@ -372,24 +376,26 @@ class RicochlimeGame extends Forge2DGame
         break;
       case GameOverAction.continueGame:
         final numRowsToRemove = max(
-          // clears 3 rounds worth of slimes plus the one that killed the player
+          // clears 3 rounds worth of monsters
+          // plus the one that killed the player
           numNewRowsEachRound * 3 + 1,
           // or at least 5 rows
           5,
         );
 
-        /// The y position of the first row of slimes to remove
-        final threshold = Background.waterThresholdPosition -
-            expectedHeight * (numRowsToRemove / tilesInHeight);
+        /// The y position of the first row of monsters to remove
+        final threshold =
+            player.bottomY - numRowsToRemove * Monster.staticHeight;
         if (kDebugMode) {
-          print('Removing $numRowsToRemove rows (slimes with y > $threshold)');
+          print(
+              'Removing $numRowsToRemove rows (monsters with y > $threshold)');
         }
-        for (final slime in slimes) {
-          if (slime.position.y > threshold) {
-            slime.removeFromParent();
+        for (final monster in monsters) {
+          if (monster.position.y > threshold) {
+            monster.removeFromParent();
           }
         }
-        slimes.removeWhere((slime) => slime.parent == null);
+        monsters.removeWhere((monster) => monster.parent == null);
         state = GameState.idle;
         await saveGame();
       case GameOverAction.restartGame:
@@ -405,9 +411,10 @@ class RicochlimeGame extends Forge2DGame
     Prefs.currentGame.value = null;
     _reset();
   }
+
   /// Resets the game:
   /// sets the score to zero,
-  /// and spawns a single row of slimes.
+  /// and spawns a single row of monsters.
   void _reset() {
     state = GameState.idle;
     inputCancelled = false;
@@ -415,7 +422,7 @@ class RicochlimeGame extends Forge2DGame
     numBullets = 1;
     numNewRowsEachRound = 1;
     _resetChildren();
-    spawnNewSlimes();
+    spawnNewMonsters();
   }
 
   @visibleForTesting
@@ -431,40 +438,35 @@ class RicochlimeGame extends Forge2DGame
   }
 
   @visibleForTesting
-  static int maxSlimesInRow = tilesInWidth - 1;
+  static int minMonstersInRow = 2;
   @visibleForTesting
-  static int minSlimesInRow = 2;
-  @visibleForTesting
-  static List<Slime?> createNewRow({
+  static List<Monster?> createNewRow({
     required Random random,
-    required int slimeHp,
+    required int monsterHp,
   }) {
-    final slimeBools = <bool>[];
-    for (var i = 0; i < tilesInWidth; i++) {
-      slimeBools.add(random.nextDouble() < 0.3);
+    final monsterBools = List.filled(Monster.monstersPerRow, false);
+    for (var i = 0; i < Monster.monstersPerRow; i++) {
+      monsterBools[i] = random.nextDouble() < 0.3;
     }
-    while (slimeBools.where((e) => e).length > maxSlimesInRow) {
-      slimeBools[random.nextInt(slimeBools.length)] = false;
-    }
-    while (slimeBools.where((e) => e).length < minSlimesInRow) {
-      slimeBools[random.nextInt(slimeBools.length)] = true;
+    while (monsterBools.where((e) => e).length < minMonstersInRow) {
+      monsterBools[random.nextInt(monsterBools.length)] = true;
     }
 
-    final row = <Slime?>[
-      for (var i = 0; i < slimeBools.length; i++)
-        if (!slimeBools[i])
+    final row = <Monster?>[
+      for (var i = 0; i < monsterBools.length; i++)
+        if (!monsterBools[i])
           null
         else
-          Slime(
+          Monster(
             initialPosition: Vector2(
-              expectedWidth * i / tilesInWidth,
-              Slime.topGap,
+              expectedWidth * i / Monster.monstersPerRow,
+              Monster.topGap,
             ),
-            maxHp: slimeHp,
+            maxHp: monsterHp,
           ),
     ];
 
-    // one of the slimes should give the user a bullet when it dies
+    // one of the monsters should give the user a bullet when it dies
     int chosenIndex = random.nextInt(row.length);
     while (row[chosenIndex] == null) {
       chosenIndex = random.nextInt(row.length);

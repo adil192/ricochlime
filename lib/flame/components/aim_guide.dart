@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
-import 'package:ricochlime/flame/components/player.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
 /// A component that draws a dotted line
@@ -28,7 +27,7 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    position = gameRef.size / 2 + Vector2(0, Player.staticHeight * 1.25);
+    position = gameRef.player.position;
     width = 0;
     height = 0;
     anchor = Anchor.center;

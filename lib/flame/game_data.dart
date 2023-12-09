@@ -1,22 +1,23 @@
-import 'package:ricochlime/flame/components/slime.dart';
+import 'package:ricochlime/flame/components/monster.dart';
 
 class GameData {
   GameData({
     required this.score,
-    required List<Slime> slimes,
-  }) : slimes = slimes.map((slime) => slime.toJson()).toList();
+    required List<Monster> monsters,
+  }) : monsters = monsters.map((monster) => monster.toJson()).toList();
 
   GameData.fromJson(Map<String, dynamic> json)
       : score = json['score'] as int,
-        slimes = (json['slimes'] as List).cast<Map<String, dynamic>>();
+        monsters = ((json['monsters'] ?? json['slimes']) as List)
+            .cast<Map<String, dynamic>>();
 
   final int score;
 
-  /// The result of calling [Slime.toJson] on each slime in the game.
-  final List<Map<String, dynamic>> slimes;
+  /// The result of calling [monster.toJson] on each monster in the game.
+  final List<Map<String, dynamic>> monsters;
 
   Map<String, dynamic> toJson() => {
         'score': score,
-        'slimes': slimes,
+        'monsters': monsters,
       };
 }

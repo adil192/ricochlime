@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:ricochlime/flame/components/slime.dart';
+import 'package:ricochlime/flame/components/monster.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 class HealthBar extends PositionComponent {
@@ -12,8 +12,8 @@ class HealthBar extends PositionComponent {
   }) : super(
           anchor: Anchor.topLeft,
           position: Vector2(
-            (Slime.staticWidth - staticWidth) / 2,
-            Slime.staticHeight * 0.2,
+            (Monster.staticWidth - staticWidth) / 2,
+            Monster.staticHeight * 0.1,
           ),
           size: Vector2(staticWidth, staticHeight),
           priority: 1,

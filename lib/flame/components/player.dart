@@ -3,21 +3,27 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 
 enum PlayerState {
   idle,
-  walk,
   attack,
-  dead,
 }
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameRef<RicochlimeGame> {
   Player()
       : super(
-          removeOnFinish: {
-            PlayerState.dead: true,
-          },
-        );
+          size: Vector2(staticWidth, staticHeight),
+          anchor: Anchor.center,
+          priority: 3,
+        ) {
+    position = Vector2(
+      RicochlimeGame.expectedWidth * 0.5,
+      RicochlimeGame.expectedHeight * 0.75,
+    );
+  }
 
-  static double staticHeight = 48;
+  static const staticWidth = 17.0 * 0.8;
+  static const staticHeight = 23.0 * 0.8;
+
+  double get bottomY => position.y + staticHeight;
 
   @override
   Future<void> onLoad() async {
@@ -28,17 +34,6 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     animationTickers![PlayerState.attack]!.onComplete = () {
       current = PlayerState.idle;
     };
-
-    position = gameRef.size / 2 + Vector2(0, staticHeight * 0.95);
-    width = staticHeight;
-    height = staticHeight;
-    anchor = Anchor.center;
-    priority = 3;
-  }
-
-  void move(Vector2 delta) {
-    setAnimationBasedOnMovement(delta);
-    position.add(delta);
   }
 
   void attack() {
@@ -46,62 +41,33 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     animationTickers![PlayerState.attack]!.reset();
   }
 
-  void setAnimationBasedOnMovement(Vector2 delta) {
-    if (delta.isZero()) {
-      current = PlayerState.idle;
-    } else {
-      current = PlayerState.walk;
-    }
-  }
-
   static Future<void> preloadSprites({
     required RicochlimeGame gameRef,
   }) {
-    return gameRef.images.load('player.png');
+    return gameRef.images.load('character_subset.png');
   }
 
   Map<PlayerState, SpriteAnimation> getAnimations() {
-    final playerImage = gameRef.images.fromCache('player.png');
+    final playerImage = gameRef.images.fromCache('character_subset.png');
     return {
       PlayerState.idle: SpriteAnimation.fromFrameData(
         playerImage,
         SpriteAnimationData.sequenced(
-          stepTime: 1 / 6,
-          textureSize: Vector2(48, 48),
-          amount: 6,
-          amountPerRow: 6,
-          texturePosition: Vector2(0, 2 * 48),
-        ),
-      ),
-      PlayerState.walk: SpriteAnimation.fromFrameData(
-        playerImage,
-        SpriteAnimationData.sequenced(
-          stepTime: 1 / 6,
-          textureSize: Vector2(48, 48),
-          amount: 6,
-          amountPerRow: 6,
-          texturePosition: Vector2(0, 5 * 48),
+          amount: 2,
+          stepTime: 1 / 2,
+          textureSize: Vector2(17, 23),
+          amountPerRow: 2,
+          texturePosition: Vector2(0, 0),
         ),
       ),
       PlayerState.attack: SpriteAnimation.fromFrameData(
         playerImage,
         SpriteAnimationData.sequenced(
-          stepTime: 1 / 6,
-          textureSize: Vector2(48, 48),
           amount: 4,
+          stepTime: 0.5 / 4,
+          textureSize: Vector2(17, 23),
           amountPerRow: 4,
-          texturePosition: Vector2(0, 8 * 48),
-          loop: false,
-        ),
-      ),
-      PlayerState.dead: SpriteAnimation.fromFrameData(
-        playerImage,
-        SpriteAnimationData.sequenced(
-          stepTime: 1 / 3,
-          textureSize: Vector2(48, 48),
-          amount: 3,
-          amountPerRow: 3,
-          texturePosition: Vector2(0, 9 * 48),
+          texturePosition: Vector2(0, 1 * 23),
           loop: false,
         ),
       ),
