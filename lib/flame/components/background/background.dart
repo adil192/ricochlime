@@ -39,6 +39,14 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
   /// Returns an iterable of all the background tiles.
   /// Used in [_updateChildren].
   Iterable<DarkeningSprite> _getTiles() sync* {
+    add(HouseSprite(
+      position: gameRef.player.position + Vector2(-45, 0),
+      size: Vector2(80, 80),
+    ));
+    add(HouseSprite(
+      position: gameRef.player.position + Vector2(45, 0),
+      size: Vector2(80, 80),
+    ));
     /*for (var row = 0; row < RicochlimeGame.tilesInHeight; row++) {
       for (var column = 0; column < RicochlimeGame.tilesInWidth; column++) {
         final type = getTileType(row, column);
