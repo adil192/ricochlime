@@ -45,9 +45,10 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
     final bridgeY = gameRef.player.position.y -
         Monster.moveDownHeight * gameRef.numNewRowsEachRound;
 
+    var left = 0.0;
     for (var y = 0.0; y < bridgeY; y += 8) {
-      final left = random.nextDouble() * 8;
-      final right = random.nextDouble() * 8;
+      left = left * 0.8 + random.nextDouble() * 8 * 20 * 0.2;
+      final right = left * 0.8 + random.nextDouble() * 8 * 20 * 0.2;
       for (var x = -left; x < gameRef.size.x + right; x += 8) {
         yield GrassSprite(
           position: Vector2(x, y),
@@ -56,8 +57,8 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
       }
     }
     for (var y = bridgeY + Monster.moveDownHeight; y < gameRef.size.y; y += 8) {
-      final left = random.nextDouble() * 8;
-      final right = random.nextDouble() * 8;
+      left = left * 0.8 + random.nextDouble() * 8 * 20 * 0.2;
+      final right = left * 0.8 + random.nextDouble() * 8 * 20 * 0.2;
       for (var x = -left; x < gameRef.size.x + right; x += 8) {
         yield GrassSprite(
           position: Vector2(x, y),
