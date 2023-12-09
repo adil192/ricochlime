@@ -59,8 +59,31 @@ class BridgeSprite extends SpriteComponent
   }
 }
 
+class WaterSprite extends SpriteAnimationComponent
+    with HasGameRef<RicochlimeGame>, DarkeningSprite {
+  WaterSprite({
+    super.position,
+    super.size,
+  });
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    animation = SpriteAnimation.fromFrameData(
+      gameRef.images.fromCache('overworld.png'),
+      SpriteAnimationData.sequenced(
+        amount: 8,
+        stepTime: 4 / 8,
+        textureSize: Vector2(16, 16),
+        amountPerRow: 4,
+        texturePosition: Vector2(0, 16),
+      ),
+    );
+  }
+}
+
 /// A sprite that darkens when the game is in dark mode.
-mixin DarkeningSprite on HasPaint, SpriteComponent, HasGameRef<RicochlimeGame> {
+mixin DarkeningSprite on HasPaint, HasGameRef<RicochlimeGame> {
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();

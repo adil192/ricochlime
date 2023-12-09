@@ -55,17 +55,6 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
         );
       }
     }
-
-    {
-      final y = bridgeY;
-      for (var x = 0.0; x < gameRef.size.x; x += Monster.staticWidth) {
-        yield BridgeSprite(
-          position: Vector2(x, y),
-          size: Vector2(Monster.staticWidth, Monster.moveDownHeight),
-        );
-      }
-    }
-
     for (var y = bridgeY + Monster.moveDownHeight; y < gameRef.size.y; y += 8) {
       final left = random.nextDouble() * 8;
       final right = random.nextDouble() * 8;
@@ -73,6 +62,24 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
         yield GrassSprite(
           position: Vector2(x, y),
           size: Vector2(8, 8),
+        );
+      }
+    }
+
+    {
+      final y = bridgeY;
+      const waterSize = Monster.moveDownHeight * 0.75;
+      final gameWidth = gameRef.size.x;
+      for (var x = -gameWidth * 2; x < gameWidth * 3; x += waterSize) {
+        yield WaterSprite(
+          position: Vector2(x, y + (Monster.moveDownHeight - waterSize) / 2),
+          size: Vector2(waterSize, waterSize),
+        );
+      }
+      for (var x = 0.0; x < gameWidth; x += Monster.staticWidth) {
+        yield BridgeSprite(
+          position: Vector2(x, y),
+          size: Vector2(Monster.staticWidth, Monster.moveDownHeight),
         );
       }
     }
