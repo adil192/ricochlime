@@ -58,6 +58,15 @@
         </screenshot>
     </screenshots>
 
+    <releases>
+        <release version="1.1.0" type="development" date="2023-12-09">
+            <description>
+                <ul>
+                    <li>Major visual refresh of the game, plus a new icon</li>
+                    <li>Your highscore is saved even if you use the restart button</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.0.6" type="development" date="2023-12-04">
             <description>
                 <ul>
@@ -74,7 +83,6 @@
                 </ul>
             </description>
         </release>
-    <releases>
         <release version="1.0.4" type="development" date="2023-11-28">
             <description>
                 <ul>
