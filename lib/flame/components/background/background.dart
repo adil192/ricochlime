@@ -45,6 +45,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
     final bridgeY = gameRef.player.position.y -
         Monster.moveDownHeight * gameRef.numNewRowsEachRound;
 
+    // Grass
     var left = 0.0;
     for (var y = 0.0; y < bridgeY; y += 8) {
       left = left * 0.8 + random.nextDouble() * 8 * 20 * 0.2;
@@ -67,6 +68,19 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
       }
     }
 
+    // Fences
+    for (var y = 0.0; y + 33 < bridgeY; y += 33) {
+      yield BushSprite(
+        position: Vector2(-14, y),
+        size: Vector2(15, 30),
+      );
+      yield BushSprite(
+        position: Vector2(gameRef.size.x, y),
+        size: Vector2(15, 30),
+      );
+    }
+
+    // Bridges and water
     {
       final y = bridgeY;
       const waterSize = Monster.moveDownHeight * 0.75;

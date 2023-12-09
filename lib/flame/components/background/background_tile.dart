@@ -82,6 +82,24 @@ class WaterSprite extends SpriteAnimationComponent
   }
 }
 
+class BushSprite extends SpriteComponent
+    with HasGameRef<RicochlimeGame>, DarkeningSprite {
+  BushSprite({
+    super.position,
+    super.size,
+  });
+
+  @override
+  void onLoad() {
+    super.onLoad();
+    sprite = Sprite(
+      gameRef.images.fromCache('overworld.png'),
+      srcPosition: Vector2(1, 225),
+      srcSize: Vector2(15, 31),
+    );
+  }
+}
+
 /// A sprite that darkens when the game is in dark mode.
 mixin DarkeningSprite on HasPaint, HasGameRef<RicochlimeGame> {
   @override
