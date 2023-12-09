@@ -332,10 +332,10 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
       MonsterState.idle: SpriteAnimation.fromFrameData(
         monsterImage,
         SpriteAnimationData.sequenced(
-          amount: 1,
-          stepTime: 0.5 / 1,
+          amount: 2,
+          stepTime: 1 / 2,
           textureSize: Vector2(24, 24),
-          amountPerRow: 1,
+          amountPerRow: 2,
           texturePosition: Vector2(0, 0),
         ),
       ),
@@ -343,10 +343,10 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
         monsterImage,
         SpriteAnimationData.sequenced(
           amount: 4,
-          stepTime: 0.5 / 4,
+          stepTime: 1 / 4,
           textureSize: Vector2(24, 24),
           amountPerRow: 4,
-          texturePosition: Vector2(0, 0),
+          texturePosition: Vector2(0, 1 * 24),
         ),
       ),
       MonsterState.dead: SpriteAnimation.fromFrameData(
@@ -356,7 +356,7 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
           stepTime: 0.3 / 3,
           textureSize: Vector2(24, 24),
           amountPerRow: 3,
-          texturePosition: Vector2(0, 1 * 24),
+          texturePosition: Vector2(0, 2 * 24),
           loop: false,
         ),
       ),
