@@ -116,14 +116,12 @@ class RicochlimeGame extends Forge2DGame
     add(aimGuide);
 
     // Houses
-    add(HouseSprite(
-      position: player.position + Vector2(-45, 0),
-      size: Vector2(80, 80),
-    ));
-    add(HouseSprite(
-      position: player.position + Vector2(45, 0),
-      size: Vector2(80, 80),
-    ));
+    for (final dx in <double>[-94, -32, 32, 94]) {
+      add(HouseSprite(
+        position: player.position + Vector2(dx, 0),
+        size: Vector2(60, 60),
+      ));
+    }
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);
