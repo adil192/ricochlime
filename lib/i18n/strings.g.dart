@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 86 (43 per locale)
+/// Strings: 84 (42 per locale)
 ///
-/// Built on 2023-12-09 at 01:45 UTC
+/// Built on 2023-12-09 at 04:20 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -255,8 +255,7 @@ class _StringsTutorialPageEn {
 
 	// Translations
 	String get tutorial => 'Tutorial';
-	String get aimAtMonsters => 'Drag your finger to aim and release to shoot.';
-	String get emptyHealthbar => 'Defeat a monster by emptying its health bar.';
+	String get aimAtMonsters => 'Drag your finger to aim and release to shoot. Defeat a monster by emptying its health bar.';
 	String get bounceOffWalls => 'Bounce your shots off the walls to hit the most monsters.';
 	String get tapSpeedUp => 'Tap the screen to speed up your shots.';
 	String get dangerZone => 'If a monster reaches the danger zone, you\'ll lose on your next turn if you don\'t defeat it.';
@@ -407,8 +406,7 @@ class _StringsTutorialPageKk extends _StringsTutorialPageEn {
 
 	// Translations
 	@override String get tutorial => 'Нұсқаулық';
-	@override String get aimAtMonsters => 'Көздеу үшін саусағыңызды жылжытыңыз, ату үшін босатып жіберіңіз.';
-	@override String get emptyHealthbar => 'Шырышты жеңу үшін оның денсаулық жолағын нөлге дейін жеткізіңіз.';
+	@override String get aimAtMonsters => 'Көздеу үшін саусағыңызды жылжытыңыз, ату үшін босатып жіберіңіз. Шырышты жеңу үшін оның денсаулық жолағын нөлге дейін жеткізіңіз.';
 	@override String get bounceOffWalls => 'Қабырғадан ыршыған оқ көбірек шырышқа тие алады.';
 	@override String get tapSpeedUp => 'Оқ қозғалысын тездету үшін экранды түртіңіз.';
 	@override String get dangerZone => 'Қауіпті аймаққа кірген шырышты жеңбесеңіз, келесі жүрісте ұтыласыз.';

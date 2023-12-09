@@ -42,8 +42,7 @@ restartGameDialog:
   yesImSure: Yes I'm sure!
 tutorialPage:
   tutorial: Tutorial
-  aimAtMonsters: Drag your finger to aim and release to shoot.
-  emptyHealthbar: Defeat a monster by emptying its health bar.
+  aimAtMonsters: Drag your finger to aim and release to shoot. Defeat a monster by emptying its health bar.
   bounceOffWalls: Bounce your shots off the walls to hit the most monsters.
   tapSpeedUp: Tap the screen to speed up your shots.
   dangerZone: If a monster reaches the danger zone, you'll lose on your next turn if you don't defeat it.

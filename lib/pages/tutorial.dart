@@ -32,14 +32,6 @@ class TutorialPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  t.tutorialPage.emptyHealthbar,
-                  textAlign: TextAlign.center,
-                ),
-                const _TutorialScreenshot(
-                  image: AssetImage('assets/tutorial/emptyHealthbar.png'),
-                ),
-                const SizedBox(height: 18),
-                Text(
                   t.tutorialPage.bounceOffWalls,
                   textAlign: TextAlign.center,
                 ),
