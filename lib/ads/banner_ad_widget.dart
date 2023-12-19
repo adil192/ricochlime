@@ -102,14 +102,14 @@ abstract class AdState {
       _checkForRequiredConsent(shouldShowConsentForm: false);
     }
 
+    Prefs.birthYear.addListener(updateRequestConfiguration);
+    await updateRequestConfiguration();
+
     assert(_bannerAdUnitId.isNotEmpty);
-    assert(_initializeCompleted == false);
+    assert(!_initializeCompleted);
     _initializeStarted = true;
     await MobileAds.instance.initialize();
     _initializeCompleted = true;
-
-    Prefs.birthYear.addListener(updateRequestConfiguration);
-    await updateRequestConfiguration();
 
     unawaited(_preloadRewardedAd());
   }
