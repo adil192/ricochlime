@@ -70,17 +70,25 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
       }
     }
 
-    // Fences
-    for (var y = 0.0; y + 33 < bridgeY; y += 33) {
-      yield BushSprite(
-        position: Vector2(-14, y),
-        size: Vector2(15, 30),
-      );
-      yield BushSprite(
-        position: Vector2(gameRef.size.x, y),
-        size: Vector2(15, 30),
-      );
+    // Bushes along either side of the canvas
+    const bushH = Monster.moveDownHeight * 31 / 27;
+    const bushW = bushH / 2;
+    final bushes = <BushSprite>[];
+    for (var bushTop = bridgeY - bushH;
+        bushTop >= -bushH;
+        bushTop -= Monster.moveDownHeight) {
+      bushes
+        ..add(BushSprite(
+          position: Vector2(-bushW * 14 / 15, bushTop),
+          size: Vector2(bushW, bushH),
+        ))
+        ..add(BushSprite(
+          position: Vector2(gameRef.size.x, bushTop),
+          size: Vector2(bushW, bushH),
+        ));
     }
+    // reversed so we draw from the top down
+    yield* bushes.reversed;
 
     // Bridges and water
     {
