@@ -1,9 +1,7 @@
 import 'dart:math';
 
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
