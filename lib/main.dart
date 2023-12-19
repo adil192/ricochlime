@@ -8,7 +8,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/ads/age_dialog.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
-import 'package:ricochlime/ads/consent_stage.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
 import 'package:ricochlime/pages/home.dart';
@@ -59,7 +58,6 @@ Future<void> handleCurrentConsentStage(BuildContext context) async {
   if (!AdState.adsSupported) return;
 
   if (Prefs.birthYear.value == null) {
-    assert(Prefs.consentStage.value == ConsentStage.askForBirthYear);
     await showDialog(
       context: context,
       barrierDismissible: false,
@@ -68,11 +66,7 @@ Future<void> handleCurrentConsentStage(BuildContext context) async {
       ),
     );
     assert(Prefs.birthYear.value != null);
-  } else if (Prefs.consentStage.value == ConsentStage.askForBirthYear) {
-    Prefs.consentStage.value = Prefs.consentStage.value.next;
-  }
-
-  if (Prefs.consentStage.value == ConsentStage.askForPersonalizedAds) {
+  } else {
     AdState.showConsentForm();
   }
 }

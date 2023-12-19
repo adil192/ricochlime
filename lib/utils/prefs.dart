@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ricochlime/ads/consent_stage.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,7 +28,6 @@ abstract class Prefs {
   static late final PlainPref<bool> hyperlegibleFont;
 
   static late final PlainPref<int?> birthYear;
-  static late final PlainPref<ConsentStage> consentStage;
 
   static void init() {
     currentGame = PlainPref('currentGame', null);
@@ -38,7 +36,6 @@ abstract class Prefs {
     hyperlegibleFont = PlainPref('hyperlegibleFont', false);
 
     birthYear = PlainPref('birthYear', null);
-    consentStage = PlainPref('consentStage', ConsentStage.values.first);
   }
 }
 
@@ -147,8 +144,7 @@ class PlainPref<T> extends IPref<T> {
               T == AxisDirection ||
               T == ThemeMode ||
               T == TargetPlatform ||
-              T == typeOf<GameData?>() ||
-              T == ConsentStage,
+              T == typeOf<GameData?>(),
         );
 
   SharedPreferences? _prefs;
@@ -221,8 +217,6 @@ class PlainPref<T> extends IPref<T> {
       } else if (T == typeOf<GameData?>()) {
         final json = jsonEncode(value);
         return _prefs!.setString(key, json);
-      } else if (T == ConsentStage) {
-        return _prefs!.setInt(key, (value as ConsentStage).index);
       } else {
         return _prefs!.setString(key, value as String);
       }
@@ -264,9 +258,6 @@ class PlainPref<T> extends IPref<T> {
         final decoded = jsonDecode(json) as Map<String, dynamic>?;
         if (decoded == null) return null;
         return GameData.fromJson(decoded) as T;
-      } else if (T == ConsentStage) {
-        final index = _prefs!.getInt(key);
-        return index != null ? ConsentStage.values[index] as T? : null;
       } else {
         return _prefs!.get(key) as T?;
       }

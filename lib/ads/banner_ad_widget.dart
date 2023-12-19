@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nes_ui/nes_ui.dart';
-import 'package:ricochlime/ads/consent_stage.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
@@ -83,10 +82,8 @@ abstract class AdState {
     if (_initializeStarted) return;
 
     final age = AdState.age;
-    final correctConsentStage =
-        Prefs.consentStage.value == ConsentStage.askForPersonalizedAds;
     final canConsent = age != null && age >= minAgeForPersonalizedAds;
-    if (correctConsentStage && canConsent) {
+    if (canConsent) {
       if (!kIsWeb && Platform.isIOS) {
         var status = await AppTrackingTransparency.trackingAuthorizationStatus;
         if (status == TrackingStatus.notDetermined) {
@@ -162,10 +159,7 @@ abstract class AdState {
     RewardedAd.load(
       adUnitId: _rewardedAdUnitId,
       request: AdRequest(
-        nonPersonalizedAds: switch (Prefs.consentStage.value) {
-          ConsentStage.askForBirthYear => true,
-          ConsentStage.askForPersonalizedAds => null,
-        },
+        nonPersonalizedAds: age == null ? true : null,
       ),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (RewardedAd ad) {
@@ -222,10 +216,7 @@ abstract class AdState {
     final bannerAd = BannerAd(
       adUnitId: _bannerAdUnitId,
       request: AdRequest(
-        nonPersonalizedAds: switch (Prefs.consentStage.value) {
-          ConsentStage.askForBirthYear => true,
-          ConsentStage.askForPersonalizedAds => null,
-        },
+        nonPersonalizedAds: age == null ? true : null,
       ),
       size: adSize,
       listener: BannerAdListener(
