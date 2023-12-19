@@ -303,7 +303,10 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
   bool get givesPlayerABullet => getPaint().colorFilter != null;
   set givesPlayerABullet(bool value) {
     getPaint().colorFilter = value
-        ? const ColorFilter.mode(Color(0xffffff55), BlendMode.modulate)
+        ? ColorFilter.mode(
+            const HSLColor.fromAHSL(1, 0, 0.5, 0.7).toColor(),
+            BlendMode.modulate,
+          )
         : null;
   }
 
