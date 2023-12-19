@@ -59,6 +59,14 @@
     </screenshots>
 
     <releases>
+        <release version="1.1.1" type="development" date="2023-12-19">
+            <description>
+                <ul>
+                    <li>Improved the scale of bushes</li>
+                    <li>Monsters that give you an extra bullet are now better distinguishable</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.1.0" type="development" date="2023-12-09">
             <description>
                 <ul>
