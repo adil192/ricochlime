@@ -32,6 +32,8 @@ abstract class AdState {
   /// calculated from their birth year,
   /// or null if the user has not entered their birth year.
   static int? get age {
+    assert(Prefs.birthYear.loaded);
+
     final birthYear = Prefs.birthYear.value;
     if (birthYear == null) return null;
 
