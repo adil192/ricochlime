@@ -362,6 +362,7 @@ class RicochlimeGame extends Forge2DGame
     final GameOverAction gameOverAction = showGameOverDialog == null
         ? GameOverAction.nothingYet
         : await showGameOverDialog!.call();
+    if (kDebugMode) print('gameOverAction: $gameOverAction');
 
     switch (gameOverAction) {
       case GameOverAction.nothingYet:

@@ -33,9 +33,9 @@ class _PlayPageState extends State<PlayPage> {
     super.initState();
     game.showGameOverDialog = showGameOverDialog;
     if (game.state == GameState.gameOver) {
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        showGameOverDialog();
-      });
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => game.gameOver(),
+      );
     }
   }
 
