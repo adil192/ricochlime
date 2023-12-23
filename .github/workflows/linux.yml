@@ -128,7 +128,8 @@ jobs:
             apt-get install -qq -y \
               sudo \
               bash curl file git unzip xz-utils zip \
-              clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev
+              clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev \
+              libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-good
 
             echo Installing Flutter
             git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
