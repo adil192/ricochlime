@@ -48,13 +48,13 @@ dependencies:
 
   forge2d: any
 
-  go_router: ^12.0.0
+  go_router: ^13.0.0
 
   google_fonts: ^6.1.0
 
-  google_mobile_ads: ^3.0.0
+  google_mobile_ads: ^4.0.0
 
-  nes_ui: ^0.10.0
+  nes_ui: ^0.11.0
 
   shared_preferences: ^2.2.0
 
