@@ -38,8 +38,8 @@ void main() async {
 void _addLicenses() {
   LicenseRegistry.addLicense(() async* {
     yield LicenseEntryWithLineBreaks(
-      ['gfx'],
-      await rootBundle.loadString('assets/images/LICENSE.txt'),
+      ['_gfx'],
+      await rootBundle.loadString('assets/images/LICENSE.md'),
     );
     yield LicenseEntryWithLineBreaks(
       ['google_fonts'],
