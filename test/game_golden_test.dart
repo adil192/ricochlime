@@ -11,25 +11,15 @@ import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void _mockAudioPlayer() {
-  const channel = MethodChannel('xyz.luan/audioplayers');
-  TestWidgetsFlutterBinding.ensureInitialized();
-  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-      .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
-    // do nothing
-    return '';
-  });
-}
-
 void main() {
   testWidgets('Golden game test', (tester) async {
     TestWidgetsFlutterBinding.ensureInitialized();
     SharedPreferences.setMockInitialValues({});
-    _mockAudioPlayer();
     Prefs.testingMode = true;
     Prefs.init();
     AdState.init();
 
+    RicochlimeGame.disableBgMusic = true;
     game.random = Random(123);
     await tester.runAsync(() => game.preloadSprites);
 

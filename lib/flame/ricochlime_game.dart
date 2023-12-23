@@ -136,9 +136,13 @@ class RicochlimeGame extends Forge2DGame
   /// Handles fading in/out the background music.
   Timer? _bgMusicFadeTimer;
 
+  @visibleForTesting
+  static bool disableBgMusic = false;
+
   /// Initializes the background music,
   /// and starts playing it.
   void _initBgMusic() {
+    if (disableBgMusic) return;
     if (kDebugMode) print('Initializing bg music');
     FlameAudio.bgm.initialize();
     FlameAudio.bgm.play('bgm/Ludum_Dare_32_Track_4.ogg');
