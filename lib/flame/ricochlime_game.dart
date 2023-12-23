@@ -4,7 +4,8 @@ import 'dart:math';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
-import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flame_audio/flame_audio.dart';
+import 'package:flame_forge2d/flame_forge2d.dart' hide Timer;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // ignore: implementation_imports
@@ -104,6 +105,8 @@ class RicochlimeGame extends Forge2DGame
     assert(size.x == expectedWidth);
     assert(size.y == expectedHeight);
 
+    _initBgMusic();
+
     background = Background();
     add(background);
 
@@ -125,6 +128,72 @@ class RicochlimeGame extends Forge2DGame
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);
+  }
+
+  /// Whether [_initBgMusic] has been run.
+  bool bgMusicInitialized = false;
+
+  /// Handles fading in/out the background music.
+  Timer? _bgMusicFadeTimer;
+
+  /// Initializes the background music,
+  /// and starts playing it.
+  void _initBgMusic() {
+    if (kDebugMode) print('Initializing bg music');
+    FlameAudio.bgm.initialize();
+    FlameAudio.bgm.play('bgm/Ludum_Dare_32_Track_4.ogg');
+    bgMusicInitialized = true;
+  }
+
+  void pauseBgMusic() {
+    if (kDebugMode) print('Fading out bg music');
+    _bgMusicFadeTimer?.cancel();
+    _bgMusicFadeTimer = _fadeBgmInOut(
+      startingVolume: FlameAudio.bgm.audioPlayer.volume,
+      targetVolume: 0,
+      onFinished: FlameAudio.bgm.pause,
+    );
+  }
+
+  void resumeBgMusic() {
+    if (kDebugMode) print('Fading in bg music');
+    _bgMusicFadeTimer?.cancel();
+    _bgMusicFadeTimer = _fadeBgmInOut(
+      startingVolume: FlameAudio.bgm.audioPlayer.volume,
+      targetVolume: 1,
+      onFinished: null,
+    );
+  }
+
+  Timer _fadeBgmInOut({
+    required double startingVolume,
+    required double targetVolume,
+    required void Function()? onFinished,
+    int steps = 10,
+    int totalMs = 1000,
+  }) {
+    if (!FlameAudio.bgm.isPlaying) {
+      FlameAudio.bgm.resume();
+    }
+    return Timer.periodic(
+      Duration(milliseconds: totalMs ~/ steps),
+      (_) {
+        final newVolume = FlameAudio.bgm.audioPlayer.volume +
+            (targetVolume - startingVolume) / steps;
+        final finished = targetVolume > startingVolume
+            ? newVolume >= targetVolume
+            : newVolume <= targetVolume;
+        if (finished) {
+          _bgMusicFadeTimer?.cancel();
+          _bgMusicFadeTimer = null;
+          FlameAudio.bgm.audioPlayer.setVolume(targetVolume);
+          onFinished?.call();
+          if (kDebugMode) print('Finished fading bgm in/out to $targetVolume');
+        } else {
+          FlameAudio.bgm.audioPlayer.setVolume(newVolume);
+        }
+      },
+    );
   }
 
   Future<void> importFromGame(GameData? data) async {

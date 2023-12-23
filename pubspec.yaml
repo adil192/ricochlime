@@ -98,11 +98,12 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/images/
-    - assets/tutorial/
     - assets/icon/icon.png
+    - assets/images/
     - assets/google_fonts/Atkinson_Hyperlegible/
     - assets/google_fonts/Silkscreen/
+    - assets/audio/bgm/
+    - assets/tutorial/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

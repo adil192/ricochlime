@@ -32,6 +32,9 @@ class _PlayPageState extends State<PlayPage> {
   void initState() {
     super.initState();
     game.showGameOverDialog = showGameOverDialog;
+    if (game.bgMusicInitialized) {
+      game.resumeBgMusic();
+    }
     if (game.state == GameState.gameOver) {
       WidgetsBinding.instance.addPostFrameCallback(
         (_) => game.gameOver(),
@@ -47,8 +50,10 @@ class _PlayPageState extends State<PlayPage> {
 
   @override
   void dispose() {
-    game.showGameOverDialog = null;
-    game.cancelCurrentTurn();
+    game
+      ..showGameOverDialog = null
+      ..cancelCurrentTurn()
+      ..pauseBgMusic();
     super.dispose();
   }
 

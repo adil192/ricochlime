@@ -42,6 +42,10 @@ void _addLicenses() {
       await rootBundle.loadString('assets/images/LICENSE.md'),
     );
     yield LicenseEntryWithLineBreaks(
+      ['_ludum_dare_32_track_4'],
+      await rootBundle.loadString('assets/audio/bgm/LICENSE.txt'),
+    );
+    yield LicenseEntryWithLineBreaks(
       ['google_fonts'],
       await rootBundle
           .loadString('assets/google_fonts/Atkinson_Hyperlegible/OFL.txt'),
