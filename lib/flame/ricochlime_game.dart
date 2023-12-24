@@ -150,6 +150,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   void pauseBgMusic() {
+    if (disableBgMusic) return;
     if (kDebugMode) print('Fading out bg music');
     _bgMusicFadeTimer?.cancel();
     _bgMusicFadeTimer = _fadeBgmInOut(
@@ -160,6 +161,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   void resumeBgMusic() {
+    if (disableBgMusic) return;
     if (kDebugMode) print('Fading in bg music');
     _bgMusicFadeTimer?.cancel();
     _bgMusicFadeTimer = _fadeBgmInOut(

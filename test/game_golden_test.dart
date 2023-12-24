@@ -66,6 +66,7 @@ class GameEnvironment extends StatelessWidget {
           seedColor: RicochlimePalette.grassColor,
         ),
       ),
+      themeAnimationDuration: Duration.zero,
       home: FittedBox(
         child: SizedBox(
           width: screenSize.width,
