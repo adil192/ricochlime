@@ -15,6 +15,10 @@ class HomePage extends StatelessWidget {
 
   static bool handledConsent = false;
 
+  /// The last known value of the bgm volume,
+  /// excluding when the volume is 0.
+  static double lastKnownOnVolume = 0.7;
+
   @override
   Widget build(BuildContext context) {
     if (!handledConsent) {
@@ -52,12 +56,17 @@ class HomePage extends StatelessWidget {
                       ListenableBuilder(
                         listenable: Prefs.bgmVolume,
                         builder: (context, child) {
+                          if (Prefs.bgmVolume.value > 0.05) {
+                            lastKnownOnVolume = Prefs.bgmVolume.value;
+                          }
                           return IconButton(
                             tooltip: '${t.settingsPage.bgmVolume}: '
                                 '${Prefs.bgmVolume.value * 100 ~/ 1}%',
                             onPressed: () {
                               Prefs.bgmVolume.value =
-                                  Prefs.bgmVolume.value <= 0.05 ? 0.7 : 0;
+                                  Prefs.bgmVolume.value <= 0.05
+                                      ? lastKnownOnVolume
+                                      : 0;
                             },
                             icon: Opacity(
                               opacity: Prefs.bgmVolume.value <= 0.05 ? 0.25 : 1,
