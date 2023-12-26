@@ -142,8 +142,8 @@ class RicochlimeGame extends Forge2DGame
   /// Initializes the background music,
   /// and starts playing it.
   void _initBgMusic() {
-    assert(!bgMusicInitialized);
     if (disableBgMusic) return;
+    if (bgMusicInitialized) return;
     if (Prefs.bgmVolume.value <= 0.05) return;
 
     if (kDebugMode) print('Initializing bg music');
