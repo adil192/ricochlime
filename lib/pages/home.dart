@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                                 '${Prefs.bgmVolume.value * 100 ~/ 1}%',
                             onPressed: () {
                               Prefs.bgmVolume.value =
-                                  Prefs.bgmVolume.value <= 0.05 ? 1 : 0;
+                                  Prefs.bgmVolume.value <= 0.05 ? 0.7 : 0;
                             },
                             icon: Opacity(
                               opacity: Prefs.bgmVolume.value <= 0.05 ? 0.25 : 1,
