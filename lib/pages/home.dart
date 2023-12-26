@@ -8,6 +8,7 @@ import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
 import 'package:ricochlime/pages/tutorial.dart';
 import 'package:ricochlime/utils/brightness_extension.dart';
+import 'package:ricochlime/utils/prefs.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -46,7 +47,32 @@ class HomePage extends StatelessWidget {
                       fontSize: kToolbarHeight,
                     ),
                   ),
-                  const SizedBox(height: 64),
+                  Row(
+                    children: [
+                      ListenableBuilder(
+                        listenable: Prefs.bgmVolume,
+                        builder: (context, child) {
+                          return IconButton(
+                            tooltip: '${t.settingsPage.bgmVolume}: '
+                                '${Prefs.bgmVolume.value * 100 ~/ 1}%',
+                            onPressed: () {
+                              Prefs.bgmVolume.value =
+                                  Prefs.bgmVolume.value <= 0.05 ? 1 : 0;
+                            },
+                            icon: Opacity(
+                              opacity: Prefs.bgmVolume.value <= 0.05 ? 0.25 : 1,
+                              child: child,
+                            ),
+                          );
+                        },
+                        child: NesIcon(
+                          iconData: NesIcons.musicNote,
+                          size: const Size.square(32),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 32),
                   FutureBuilder(
                     future: game.preloadSprites,
                     builder: (context, snapshot) {
