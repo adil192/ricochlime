@@ -188,23 +188,22 @@ class _PlayPageState extends State<PlayPage> {
                   ),
                 ),
               ),
-              Positioned.directional(
-                textDirection: textDirection,
-                top: 0,
-                end: 0,
+              Positioned.fill(
                 child: IgnorePointer(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8, right: 8),
-                    child: ValueListenableBuilder(
-                      valueListenable: _timeDilation,
-                      builder: (context, timeDilation, _) => AnimatedOpacity(
-                        opacity: timeDilation == 1.0 ? 0.0 : 1.0,
-                        duration: const Duration(milliseconds: 200),
-                        child: Text(
-                          '${timeDilation.toStringAsFixed(1)}x',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.9),
-                            fontSize: 32,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: ValueListenableBuilder(
+                        valueListenable: _timeDilation,
+                        builder: (context, timeDilation, _) => AnimatedOpacity(
+                          opacity: timeDilation == 1.0 ? 0.0 : 1.0,
+                          duration: const Duration(milliseconds: 200),
+                          child: Text(
+                            '${timeDilation.toStringAsFixed(1)}x',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
+                              fontSize: 32,
+                            ),
                           ),
                         ),
                       ),
