@@ -9,6 +9,7 @@ settingsPage:
   title: Settings
   adConsent: Change ad consent
   hyperlegibleFont: Use the Atkinson Hyperlegible font
+  bgmVolume: Background music volume
   appInfo: App info
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney

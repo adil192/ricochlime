@@ -29,6 +29,8 @@ abstract class Prefs {
 
   static late final PlainPref<int?> birthYear;
 
+  static late final PlainPref<double> bgmVolume;
+
   static void init() {
     currentGame = PlainPref('currentGame', null);
     highScore = PlainPref('highScore', 0);
@@ -36,6 +38,8 @@ abstract class Prefs {
     hyperlegibleFont = PlainPref('hyperlegibleFont', false);
 
     birthYear = PlainPref('birthYear', null);
+
+    bgmVolume = PlainPref('bgmVolume', 0);
   }
 }
 

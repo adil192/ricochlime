@@ -142,15 +142,23 @@ class RicochlimeGame extends Forge2DGame
   /// Initializes the background music,
   /// and starts playing it.
   void _initBgMusic() {
+    assert(!bgMusicInitialized);
     if (disableBgMusic) return;
+    if (Prefs.bgmVolume.value <= 0.05) return;
+
     if (kDebugMode) print('Initializing bg music');
     FlameAudio.bgm.initialize();
-    FlameAudio.bgm.play('bgm/Ludum_Dare_32_Track_4.ogg');
+    FlameAudio.bgm.play(
+      'bgm/Ludum_Dare_32_Track_4.ogg',
+      volume: Prefs.bgmVolume.value,
+    );
     bgMusicInitialized = true;
   }
 
   void pauseBgMusic() {
     if (disableBgMusic) return;
+    if (!bgMusicInitialized) return;
+
     if (kDebugMode) print('Fading out bg music');
     _bgMusicFadeTimer?.cancel();
     _bgMusicFadeTimer = _fadeBgmInOut(
@@ -162,11 +170,14 @@ class RicochlimeGame extends Forge2DGame
 
   void resumeBgMusic() {
     if (disableBgMusic) return;
+    if (!bgMusicInitialized) _initBgMusic();
+    if (!bgMusicInitialized) return;
+
     if (kDebugMode) print('Fading in bg music');
     _bgMusicFadeTimer?.cancel();
     _bgMusicFadeTimer = _fadeBgmInOut(
       startingVolume: FlameAudio.bgm.audioPlayer.volume,
-      targetVolume: 1,
+      targetVolume: Prefs.bgmVolume.value,
       onFinished: null,
     );
   }

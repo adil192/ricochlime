@@ -139,6 +139,37 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
+          // Background music volume
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ListTile(
+                tileColor: listTileColor,
+                shape: listTileShape,
+                contentPadding: listTileContentPadding,
+                title: Text(t.settingsPage.bgmVolume),
+                leading: NesIcon(
+                  iconData: NesIcons.musicNote,
+                ),
+                trailing: SizedBox(
+                  width: 200,
+                  child: ListenableBuilder(
+                    listenable: Prefs.bgmVolume,
+                    builder: (context, _) {
+                      return Slider.adaptive(
+                        value: Prefs.bgmVolume.value,
+                        onChanged: (value) {
+                          Prefs.bgmVolume.value = value;
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+
           // App info dialog
           Padding(
             padding: listTilePadding,
