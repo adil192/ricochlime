@@ -1,0 +1,4 @@
+• Se corrigió un error por el cual el botón "Reiniciar juego" no funcionaba a veces
+• Se agregó música de fondo (que está deshabilitada de forma predeterminada)
+• Se corrigió la posición del indicador de velocidad.
+• Oculto el botón "Continuar con el anuncio" para niños

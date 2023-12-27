@@ -1,0 +1,4 @@
+• Fixed a bug where the "Restart game" button wouldn't work sometimes
+• Added background music (which is disabled by default)
+• Fixed the position of the speed indicator
+• Hidden the "Continue with ad" button for children
