@@ -6,7 +6,7 @@
 /// Locales: 3
 /// Strings: 127 (42 per locale)
 ///
-/// Built on 2023-12-27 at 02:04 UTC
+/// Built on 2023-12-27 at 02:33 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -379,7 +379,7 @@ class _StringsGameOverPageEs extends _StringsGameOverPageEn {
 		pNew,
 		const TextSpan(text: '!'),
 	]);
-	@override String get continueWithAdButton => 'Continuar con el anuncio';
+	@override String get continueWithAdButton => 'Continuar con un anuncio';
 	@override String get restartGameButton => 'Reinicia el juego';
 	@override String get homeButton => 'Hogar';
 }
