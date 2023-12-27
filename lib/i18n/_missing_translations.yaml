@@ -1,7 +1,62 @@
 "@@info":
   - "Here are translations that exist in <en> but not in secondary locales."
-  - "After editing this file, you can run 'dart run slang apply' to quickly apply the newly added translations."
+  - "After editing this file, you can run 'dart run slang apply --locale=<locale>' to quickly apply the newly added translations."
+es:
+  homePage:
+    playButton(OUTDATED): Play
+    settingsButton(OUTDATED): Settings
+    tutorialButton: Tutorial
+  playPage:
+    highScore(OUTDATED): "Best: $p"
+  settingsPage:
+    title(OUTDATED): Settings
+    adConsent(OUTDATED): Change ad consent
+    hyperlegibleFont(OUTDATED): Use the Atkinson Hyperlegible font
+    bgmVolume(OUTDATED): Background music volume
+    appInfo(OUTDATED): App info
+    licenseNotice(OUTDATED): |-
+      Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
+      This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
+  ageDialog:
+    yourAge(OUTDATED): Your age
+    letMeGuessYourAge(OUTDATED): Let me guess your age
+    unknown(OUTDATED): Unknown
+    reason(OUTDATED): We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.
+    guessNumber(OUTDATED): Guess \#$n
+    areYou(OUTDATED): "Are you $age?"
+    younger(OUTDATED): "No, I'm younger"
+    older(OUTDATED): "No, I'm older"
+    yesMyAgeIs(OUTDATED): "Yes, I'm $age"
+    reset(OUTDATED): Reset
+    howOldAreYou(OUTDATED): "How old are you?"
+    invalidAge(OUTDATED): Please enter a valid age
+    useMinigame(OUTDATED): Play the age guessing minigame
+    useSimpleInput(OUTDATED): I want to enter my age manually
+  gameOverPage:
+    title(OUTDATED): "Game over!"
+    highScoreNotBeaten(OUTDATED): "You scored $p points!"
+    highScoreBeaten(rich)(OUTDATED): "Your high score is now $pOld $pNew points!"
+    continueWithAdButton(OUTDATED): Continue with ad
+    restartGameButton(OUTDATED): Restart game
+    homeButton(OUTDATED): Home
+  restartGameDialog:
+    title(OUTDATED): "Restart game?"
+    areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
+    waitCancel(OUTDATED): "Wait, cancel!"
+    yesImSure(OUTDATED): "Yes I'm sure!"
+  tutorialPage:
+    tutorial: Tutorial
+    aimAtMonsters(OUTDATED): Drag your finger to aim and release to shoot. Defeat a monster by emptying its health bar.
+    bounceOffWalls(OUTDATED): Bounce your shots off the walls to hit the most monsters.
+    tapSpeedUp(OUTDATED): Tap the screen to speed up your shots.
+    dangerZone(OUTDATED): "If a monster reaches the danger zone, you'll lose on your next turn if you don't defeat it."
+    moreMonsters(OUTDATED): "More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger."
+  common:
+    cancel(OUTDATED): Cancel
+    ok(OUTDATED): Okay
 kk:
+  settingsPage:
+    bgmVolume(OUTDATED): Background music volume
   ageDialog:
     guessNumber(OUTDATED): Guess \#$n
     howOldAreYou(OUTDATED): "How old are you?"

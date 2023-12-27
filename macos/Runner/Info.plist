@@ -35,6 +35,7 @@
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>
+		<string>es</string>
 		<string>kk</string>
 	</array>
 </dict>

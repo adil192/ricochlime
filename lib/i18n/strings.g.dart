@@ -3,10 +3,10 @@
 /// Original: lib/i18n
 /// To regenerate, run: `dart run slang`
 ///
-/// Locales: 2
-/// Strings: 85 (42 per locale)
+/// Locales: 3
+/// Strings: 127 (42 per locale)
 ///
-/// Built on 2023-12-26 at 22:52 UTC
+/// Built on 2023-12-27 at 02:04 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -26,6 +26,7 @@ const AppLocale _baseLocale = AppLocale.en;
 /// - if (LocaleSettings.currentLocale == AppLocale.en) // locale check
 enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 	en(languageCode: 'en', build: Translations.build),
+	es(languageCode: 'es', build: _StringsEs.build),
 	kk(languageCode: 'kk', build: _StringsKk.build);
 
 	const AppLocale({required this.languageCode, this.scriptCode, this.countryCode, required this.build}); // ignore: unused_element
@@ -273,6 +274,155 @@ class _StringsCommonEn {
 }
 
 // Path: <root>
+class _StringsEs extends Translations {
+	/// You can call this constructor and build your own translation instance of this locale.
+	/// Constructing via the enum [AppLocale.build] is preferred.
+	_StringsEs.build({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
+		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
+		  $meta = TranslationMetadata(
+		    locale: AppLocale.es,
+		    overrides: overrides ?? {},
+		    cardinalResolver: cardinalResolver,
+		    ordinalResolver: ordinalResolver,
+		  ),
+		  super.build(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver);
+
+	/// Metadata for the translations of <es>.
+	@override final TranslationMetadata<AppLocale, Translations> $meta;
+
+	@override late final _StringsEs _root = this; // ignore: unused_field
+
+	// Translations
+	@override String get appName => 'Ricochlime';
+	@override late final _StringsHomePageEs homePage = _StringsHomePageEs._(_root);
+	@override late final _StringsPlayPageEs playPage = _StringsPlayPageEs._(_root);
+	@override late final _StringsSettingsPageEs settingsPage = _StringsSettingsPageEs._(_root);
+	@override late final _StringsAgeDialogEs ageDialog = _StringsAgeDialogEs._(_root);
+	@override late final _StringsGameOverPageEs gameOverPage = _StringsGameOverPageEs._(_root);
+	@override late final _StringsRestartGameDialogEs restartGameDialog = _StringsRestartGameDialogEs._(_root);
+	@override late final _StringsTutorialPageEs tutorialPage = _StringsTutorialPageEs._(_root);
+	@override late final _StringsCommonEs common = _StringsCommonEs._(_root);
+}
+
+// Path: homePage
+class _StringsHomePageEs extends _StringsHomePageEn {
+	_StringsHomePageEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get playButton => 'Jugar';
+	@override String get settingsButton => 'Ajustes';
+}
+
+// Path: playPage
+class _StringsPlayPageEs extends _StringsPlayPageEn {
+	_StringsPlayPageEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String highScore({required Object p}) => 'Mejor: ${p}';
+}
+
+// Path: settingsPage
+class _StringsSettingsPageEs extends _StringsSettingsPageEn {
+	_StringsSettingsPageEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Ajustes';
+	@override String get adConsent => 'Cambiar el consentimiento de los anuncios';
+	@override String get hyperlegibleFont => 'Utilice la fuente Atkinson Hyperlegible';
+	@override String get bgmVolume => 'Volumen de la música de fondo';
+	@override String get appInfo => 'Informacion de la applicacion';
+	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nEste programa no tiene ninguna garantía. Este es un software gratuito y puede redistribuirlo bajo ciertas condiciones.\n';
+}
+
+// Path: ageDialog
+class _StringsAgeDialogEs extends _StringsAgeDialogEn {
+	_StringsAgeDialogEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get yourAge => 'Tu edad';
+	@override String get letMeGuessYourAge => 'Déjame adivinar tu edad';
+	@override String get unknown => 'Desconocida';
+	@override String get reason => 'Necesitamos saber su edad para asegurarnos de que los anuncios que ve sean apropiados para usted. Esto no afectará el juego.';
+	@override String guessNumber({required Object n}) => 'Adivina \#${n}';
+	@override String areYou({required Object age}) => '¿Tienes ${age} años?';
+	@override String get younger => 'No, soy más joven';
+	@override String get older => 'No, soy mayor';
+	@override String yesMyAgeIs({required Object age}) => 'Sí, soy ${age}';
+	@override String get reset => 'Reiniciar';
+	@override String get howOldAreYou => '¿Cuántos años tiene?';
+	@override String get invalidAge => 'Por favor ingresa una edad válida';
+	@override String get useMinigame => 'Juega al minijuego de adivinar la edad';
+	@override String get useSimpleInput => 'Quiero ingresar mi edad manualmente';
+}
+
+// Path: gameOverPage
+class _StringsGameOverPageEs extends _StringsGameOverPageEn {
+	_StringsGameOverPageEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '¡Juego terminado!';
+	@override String highScoreNotBeaten({required Object p}) => '¡Obtuviste ${p} puntos!';
+	@override TextSpan highScoreBeaten({required InlineSpan pOld, required InlineSpan pNew}) => TextSpan(children: [
+		const TextSpan(text: '¡Tu puntuación más alta ahora es '),
+		pOld,
+		const TextSpan(text: ' antiguos '),
+		pNew,
+		const TextSpan(text: '!'),
+	]);
+	@override String get continueWithAdButton => 'Continuar con el anuncio';
+	@override String get restartGameButton => 'Reinicia el juego';
+	@override String get homeButton => 'Hogar';
+}
+
+// Path: restartGameDialog
+class _StringsRestartGameDialogEs extends _StringsRestartGameDialogEn {
+	_StringsRestartGameDialogEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '¿Reinicia el juego?';
+	@override String get areYouSure => '¿Estás seguro de que quieres reiniciar? No puedes deshacer esto';
+	@override String get waitCancel => '¡Espera, cancela!';
+	@override String get yesImSure => '¡Sí estoy seguro!';
+}
+
+// Path: tutorialPage
+class _StringsTutorialPageEs extends _StringsTutorialPageEn {
+	_StringsTutorialPageEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get aimAtMonsters => 'Arrastra el dedo para apuntar y suelta para disparar. Derrota a un monstruo vaciando su barra de salud.';
+	@override String get bounceOffWalls => 'Rebota tus tiros en las paredes para golpear a la mayor cantidad de monstruos.';
+	@override String get tapSpeedUp => 'Toca la pantalla para acelerar tus disparos.';
+	@override String get dangerZone => 'Si un monstruo llega a la zona de peligro, perderás en tu próximo turno si no lo derrotas.';
+	@override String get moreMonsters => 'Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande.';
+}
+
+// Path: common
+class _StringsCommonEs extends _StringsCommonEn {
+	_StringsCommonEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get cancel => 'Cancelar';
+	@override String get ok => 'Bueno';
+}
+
+// Path: <root>
 class _StringsKk extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
@@ -335,6 +485,7 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	@override String get title => 'Баптау';
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible қарпін қолдану';
+	@override String get bgmVolume => 'Фондық музыканың дыбыс деңгейі';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
 }

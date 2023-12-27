@@ -9,6 +9,7 @@ settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау
   hyperlegibleFont: Atkinson Hyperlegible қарпін қолдану
+  bgmVolume(OUTDATED): Фондық музыканың дыбыс деңгейі
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney

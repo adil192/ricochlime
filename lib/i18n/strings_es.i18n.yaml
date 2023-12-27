@@ -1,0 +1,51 @@
+appName: Ricochlime
+homePage:
+  playButton(OUTDATED): Jugar
+  settingsButton(OUTDATED): Ajustes
+playPage:
+  highScore(OUTDATED): "Mejor: $p"
+settingsPage:
+  title(OUTDATED): Ajustes
+  adConsent(OUTDATED): Cambiar el consentimiento de los anuncios
+  hyperlegibleFont(OUTDATED): Utilice la fuente Atkinson Hyperlegible
+  bgmVolume(OUTDATED): Volumen de la música de fondo
+  appInfo(OUTDATED): Informacion de la applicacion
+  licenseNotice(OUTDATED): |
+    Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
+    Este programa no tiene ninguna garantía. Este es un software gratuito y puede redistribuirlo bajo ciertas condiciones.
+ageDialog:
+  yourAge(OUTDATED): Tu edad
+  letMeGuessYourAge(OUTDATED): Déjame adivinar tu edad
+  unknown(OUTDATED): Desconocida
+  reason(OUTDATED): Necesitamos saber su edad para asegurarnos de que los anuncios que ve sean apropiados para usted. Esto no afectará el juego.
+  guessNumber(OUTDATED): Adivina \#$n
+  areYou(OUTDATED): "¿Tienes $age años?"
+  younger(OUTDATED): "No, soy más joven"
+  older(OUTDATED): "No, soy mayor"
+  yesMyAgeIs(OUTDATED): "Sí, soy $age"
+  reset(OUTDATED): Reiniciar
+  howOldAreYou(OUTDATED): "¿Cuántos años tiene?"
+  invalidAge(OUTDATED): Por favor ingresa una edad válida
+  useMinigame(OUTDATED): Juega al minijuego de adivinar la edad
+  useSimpleInput(OUTDATED): Quiero ingresar mi edad manualmente
+gameOverPage:
+  title(OUTDATED): "¡Juego terminado!"
+  highScoreNotBeaten(OUTDATED): "¡Obtuviste $p puntos!"
+  highScoreBeaten(rich, OUTDATED): "¡Tu puntuación más alta ahora es $pOld antiguos $pNew!"
+  continueWithAdButton(OUTDATED): Continuar con el anuncio
+  restartGameButton(OUTDATED): Reinicia el juego
+  homeButton(OUTDATED): Hogar
+restartGameDialog:
+  title(OUTDATED): "¿Reinicia el juego?"
+  areYouSure(OUTDATED): "¿Estás seguro de que quieres reiniciar? No puedes deshacer esto"
+  waitCancel(OUTDATED): "¡Espera, cancela!"
+  yesImSure(OUTDATED): "¡Sí estoy seguro!"
+tutorialPage:
+  aimAtMonsters(OUTDATED): Arrastra el dedo para apuntar y suelta para disparar. Derrota a un monstruo vaciando su barra de salud.
+  bounceOffWalls(OUTDATED): Rebota tus tiros en las paredes para golpear a la mayor cantidad de monstruos.
+  tapSpeedUp(OUTDATED): Toca la pantalla para acelerar tus disparos.
+  dangerZone(OUTDATED): "Si un monstruo llega a la zona de peligro, perderás en tu próximo turno si no lo derrotas."
+  moreMonsters(OUTDATED): "Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande."
+common:
+  cancel(OUTDATED): Cancelar
+  ok(OUTDATED): Bueno

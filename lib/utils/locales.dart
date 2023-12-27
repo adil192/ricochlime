@@ -6,5 +6,6 @@
 /// (see https://pub.dev/packages/flutter_localized_locales)
 final Map<String, String> localeNames = {
   'en': 'English',
+  'es': 'español',
   'kk': 'қазақ тілі',
 };

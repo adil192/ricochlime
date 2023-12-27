@@ -55,11 +55,11 @@ Future<void> translateTree(
     // error occured in translation, so skip for now
     if (translated == null || translated == value) continue;
 
+    final sanitized = translated.replaceAll('"', '\\"').replaceAll('\n', '\\n');
+
     try {
-      await shell.run(
-        'dart run slang add $languageCode $pathToKey '
-        '"${translated.replaceAll('"', '\\"')}"',
-      );
+      await shell
+          .run('dart run slang add $languageCode $pathToKey "$sanitized"');
     } catch (e) {
       print('    Adding translation failed: $e');
       errorOccurredInTranslatingTree = true;
@@ -103,10 +103,16 @@ Future<void> translateList(
     // error occurred in translation, so skip for now
     if (translated == null || translated == value) continue;
 
-    await shell.run(
-      'dart run slang add $languageCode $pathToKey '
-      '"${translated.replaceAll('"', '\\"')}"',
-    );
+    final sanitized = translated.replaceAll('"', '\\"').replaceAll('\n', '\\n');
+
+    try {
+      await shell
+          .run('dart run slang add $languageCode $pathToKey "$sanitized"');
+    } catch (e) {
+      print('    Adding translation failed: $e');
+      errorOccurredInTranslatingTree = true;
+      continue;
+    }
     newlyTranslatedPaths.add('$languageCode/$pathToKey');
   }
 
@@ -159,7 +165,7 @@ Future<String?> translateString(
     return english;
   }
 
-  return translatedText.replaceAll('Sabre', 'Saber');
+  return translatedText;
 }
 
 bool errorOccurredInTranslatingTree = false;
