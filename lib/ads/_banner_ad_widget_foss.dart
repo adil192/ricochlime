@@ -11,6 +11,10 @@ abstract class AdState {
   @Deprecated(_kDummyAdMessage)
   static bool get adsSupported => false;
 
+  /// Whether we can show rewarded ads,
+  /// which is always false.
+  static bool get rewardedAdsSupported => false;
+
   /// The minimum age required to show personalized ads.
   ///
   /// This is an arbitrarily high number.
