@@ -24,6 +24,14 @@ abstract class AdState {
   /// Whether ads are supported on this platform.
   static bool get adsSupported => _bannerAdUnitId.isNotEmpty;
 
+  /// Whether we can show rewarded ads.
+  /// This is true if ads are supported and the user is old enough.
+  static bool get rewardedAdsSupported {
+    if (!adsSupported) return false;
+    final age = AdState.age;
+    return age != null && age >= minAgeForPersonalizedAds;
+  }
+
   /// The minimum age required to show personalized ads.
   static const int minAgeForPersonalizedAds = 13;
 

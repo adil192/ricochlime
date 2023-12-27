@@ -80,7 +80,7 @@ class GameOverDialog extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 32),
-                    if (AdState.adsSupported) ...[
+                    if (AdState.rewardedAdsSupported) ...[
                       DialogButton(
                         onPressed: () async {
                           final rewardGranted = await AdState.showRewardedAd();
