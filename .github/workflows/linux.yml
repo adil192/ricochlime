@@ -180,49 +180,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.compress.outputs.archiveName }}
 
-  build-flatpak:
-    name: Build flatpak
-    runs-on: ubuntu-latest
-    needs: [build-flutter-app-x86_64, get-version]
-    container:
-      image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
-      options: --privileged
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          submodules: true
-
-      - name: Download app archive
-        uses: actions/download-artifact@v3
-        with:
-          name: Ricochlime-Archive-x86_64
-
-      - name: Rename app archive
-        run: |
-          mv Ricochlime_*.tar.gz Ricochlime-Linux-Portable.tar.gz
-
-      - name: Build .flatpak
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
-        with:
-          bundle: Ricochlime.flatpak
-          manifest-path: flatpak/com.adilhanney.ricochlime.json
-          cache-key: flatpak-builder-cache-${{ hashFiles('flatpak/com.adilhanney.ricochlime.json') }}
-
-      - name: Rename .flatpak
-        id: rename
-        run: |
-          flatpakName="Ricochlime_v${{ needs.get-version.outputs.buildName }}.flatpak"
-          echo "flatpakName=$flatpakName" >> $GITHUB_OUTPUT
-
-          mv Ricochlime.flatpak $flatpakName
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Flatpak artifact
-          path: ${{ steps.rename.outputs.flatpakName }}
-
   build-appimage:
     name: Build AppImage
     needs: [build-flutter-app-x86_64, get-version]
