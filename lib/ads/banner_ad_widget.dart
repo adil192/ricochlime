@@ -194,8 +194,7 @@ abstract class AdState {
       maxAdContentRating: switch (age) {
         null => MaxAdContentRating.pg, // parental guidance
         < 13 => MaxAdContentRating.pg, // parental guidance
-        < 18 => MaxAdContentRating.t, // teen
-        _ => MaxAdContentRating.ma, // mature audiences
+        _ => MaxAdContentRating.t, // teen
       },
       tagForChildDirectedTreatment: switch (age) {
         null => TagForChildDirectedTreatment.yes,
