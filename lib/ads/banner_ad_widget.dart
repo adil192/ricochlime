@@ -164,7 +164,7 @@ abstract class AdState {
   }
 
   static Future<bool> _preloadRewardedAd() {
-    assert(adsSupported);
+    if (!rewardedAdsSupported) return Future.value(false);
     final completer = Completer<bool>();
     RewardedAd.load(
       adUnitId: _rewardedAdUnitId,
@@ -249,7 +249,7 @@ abstract class AdState {
   ///
   /// Returns whether the reward was earned.
   static Future<bool> showRewardedAd() async {
-    assert(adsSupported);
+    if (!rewardedAdsSupported) return false;
 
     if (_rewardedAd == null) {
       if (kDebugMode) print('Rewarded ad is null, loading now...');
