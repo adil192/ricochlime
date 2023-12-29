@@ -119,6 +119,8 @@ abstract class AdState {
     await MobileAds.instance.initialize();
     _initializeCompleted = true;
 
+    await updateRequestConfiguration();
+
     unawaited(_preloadRewardedAd());
   }
 
