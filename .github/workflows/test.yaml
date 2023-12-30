@@ -9,10 +9,26 @@ jobs:
   tests:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        patch: [regular, foss]
+      fail-fast: false
+
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup cache
+      - name: Setup cache (restore only)
+        if: ${{ matrix.patch == 'foss' }}
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            build
+          key: ${{ runner.OS }}-ricochlime-ubuntu-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
+          restore-keys: |
+            ${{ runner.OS }}-ricochlime-ubuntu-
+
+      - name: Setup cache (restore and save)
+        if: ${{ matrix.patch == 'regular' }}
         uses: actions/cache@v3
         with:
           path: |
@@ -20,6 +36,11 @@ jobs:
           key: ${{ runner.OS }}-ricochlime-ubuntu-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
             ${{ runner.OS }}-ricochlime-ubuntu-
+
+      - name: FOSS patches
+        if: ${{ matrix.patch == 'foss' }}
+        run: |
+          ./patches/foss.sh
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
@@ -34,6 +55,7 @@ jobs:
         run: flutter test --reporter expanded --coverage
 
       - name: Upload coverage reports to Codecov
+        if: ${{ matrix.patch == 'regular' }}
         uses: codecov/codecov-action@v3
         with:
           files: coverage/lcov.info
