@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 127 (42 per locale)
+/// Strings: 128 (42 per locale)
 ///
-/// Built on 2023-12-27 at 02:33 UTC
+/// Built on 2024-01-22 at 21:20 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -186,6 +186,7 @@ class _StringsSettingsPageEn {
 	String get adConsent => 'Change ad consent';
 	String get hyperlegibleFont => 'Use the Atkinson Hyperlegible font';
 	String get bgmVolume => 'Background music volume';
+	String get showColliders => 'Show monster colliders';
 	String get appInfo => 'App info';
 	String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
 }

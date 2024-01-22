@@ -31,6 +31,8 @@ abstract class Prefs {
 
   static late final PlainPref<double> bgmVolume;
 
+  static late final PlainPref<bool> showColliders;
+
   static void init() {
     currentGame = PlainPref('currentGame', null);
     highScore = PlainPref('highScore', 0);
@@ -40,6 +42,8 @@ abstract class Prefs {
     birthYear = PlainPref('birthYear', null);
 
     bgmVolume = PlainPref('bgmVolume', 0);
+
+    showColliders = PlainPref('showColliders', false);
   }
 }
 

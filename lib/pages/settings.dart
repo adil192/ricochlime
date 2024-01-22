@@ -170,6 +170,33 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
+          // Whether to show colliders
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ValueListenableBuilder(
+                valueListenable: Prefs.showColliders,
+                builder: (context, _, child) {
+                  return CheckboxListTile.adaptive(
+                    title: child,
+                    secondary: NesIcon(
+                      iconData: NesIcons.lamp,
+                    ),
+                    tileColor: listTileColor,
+                    shape: listTileShape,
+                    contentPadding: listTileContentPadding,
+                    value: Prefs.showColliders.value,
+                    onChanged: (value) {
+                      Prefs.showColliders.value = value!;
+                    },
+                  );
+                },
+                child: Text(t.settingsPage.showColliders),
+              ),
+            ),
+          ),
+
           // App info dialog
           Padding(
             padding: listTilePadding,

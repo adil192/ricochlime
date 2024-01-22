@@ -10,6 +10,7 @@ settingsPage:
   adConsent: Change ad consent
   hyperlegibleFont: Use the Atkinson Hyperlegible font
   bgmVolume: Background music volume
+  showColliders: Show monster colliders
   appInfo: App info
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
