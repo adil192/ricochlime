@@ -3,12 +3,16 @@ import 'dart:math';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ricochlime/flame/components/monster.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
+import 'package:ricochlime/utils/prefs.dart';
 
 void main() {
   group('New row generation', () {
     test(
         'At least ${RicochlimeGame.minMonstersInRow} and '
         'at most ${Monster.monstersPerRow} monsters are generated', () {
+      Prefs.testingMode = true;
+      Prefs.init();
+
       final random = Random(12);
       expect(RicochlimeGame.minMonstersInRow, lessThan(Monster.monstersPerRow));
 
