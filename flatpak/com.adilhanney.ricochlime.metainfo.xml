@@ -59,6 +59,11 @@
     </screenshots>
 
     <releases>
+        <release version="1.1.3" type="development" date="2024-01-22">
+            <description>
+                <p>Added a setting to show the colliders of the monsters, and cleaned up the collision polygon.</p>
+            </description>
+        </release>
         <release version="1.1.2" type="development" date="2023-12-27">
             <description>
                 <ul>

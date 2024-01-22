@@ -1,0 +1,1 @@
+Se agregó una configuración para mostrar los colisionadores de los monstruos y se limpió el polígono de colisión.
