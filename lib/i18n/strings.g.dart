@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 128 (42 per locale)
+/// Strings: 130 (43 per locale)
 ///
-/// Built on 2024-01-22 at 21:20 UTC
+/// Built on 2024-01-22 at 21:45 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -333,6 +333,7 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get showColliders => 'Mostrar colisionadores de monstruos';
 	@override String get title => 'Ajustes';
 	@override String get adConsent => 'Cambiar el consentimiento de los anuncios';
 	@override String get hyperlegibleFont => 'Utilice la fuente Atkinson Hyperlegible';
@@ -486,9 +487,10 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	@override String get title => 'Баптау';
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible қарпін қолдану';
-	@override String get bgmVolume => 'Фондық музыканың дыбыс деңгейі';
+	@override String get showColliders => 'Құбыжық коллайдерлерін көрсетіңіз';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get bgmVolume => 'Фондық музыканың дыбыс деңгейі';
 }
 
 // Path: ageDialog

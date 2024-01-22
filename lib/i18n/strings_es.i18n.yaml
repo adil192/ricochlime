@@ -5,6 +5,7 @@ homePage:
 playPage:
   highScore(OUTDATED): "Mejor: $p"
 settingsPage:
+  showColliders(OUTDATED): Mostrar colisionadores de monstruos
   title(OUTDATED): Ajustes
   adConsent(OUTDATED): Cambiar el consentimiento de los anuncios
   hyperlegibleFont(OUTDATED): Utilice la fuente Atkinson Hyperlegible

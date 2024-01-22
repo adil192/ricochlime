@@ -13,6 +13,7 @@ es:
     adConsent(OUTDATED): Change ad consent
     hyperlegibleFont(OUTDATED): Use the Atkinson Hyperlegible font
     bgmVolume(OUTDATED): Background music volume
+    showColliders(OUTDATED): Show monster colliders
     appInfo(OUTDATED): App info
     licenseNotice(OUTDATED): |-
       Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
@@ -57,6 +58,7 @@ es:
 kk:
   settingsPage:
     bgmVolume(OUTDATED): Background music volume
+    showColliders(OUTDATED): Show monster colliders
   ageDialog:
     guessNumber(OUTDATED): Guess \#$n
     howOldAreYou(OUTDATED): "How old are you?"
