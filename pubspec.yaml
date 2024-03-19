@@ -38,7 +38,7 @@ dependencies:
 
   flame: ^1.8.1
   flame_audio: ^2.1.6
-  flame_forge2d: ^0.16.0
+  flame_forge2d: ^0.17.0
 
   flutter:
     sdk: flutter
@@ -55,7 +55,7 @@ dependencies:
 
   google_mobile_ads: ^4.0.0
 
-  nes_ui: ^0.13.0
+  nes_ui: ^0.19.0
 
   shared_preferences: ^2.2.0
 
