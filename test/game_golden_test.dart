@@ -19,6 +19,7 @@ void main() {
     AdState.init();
 
     RicochlimeGame.disableBgMusic = true;
+    RicochlimeGame.reduceAnimations = true;
     game.random = Random(123);
     await tester.runAsync(() => game.preloadSprites);
 

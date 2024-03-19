@@ -139,6 +139,10 @@ class RicochlimeGame extends Forge2DGame
   @visibleForTesting
   static bool disableBgMusic = false;
 
+  /// Whether to reduce sprite animations.
+  /// If true, certain animations will just show the first frame.
+  static bool reduceAnimations = false;
+
   /// Initializes the background music,
   /// and starts playing it.
   void _initBgMusic() {

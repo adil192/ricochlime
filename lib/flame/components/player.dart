@@ -53,20 +53,18 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       PlayerState.idle: SpriteAnimation.fromFrameData(
         playerImage,
         SpriteAnimationData.sequenced(
-          amount: 2,
+          amount: RicochlimeGame.reduceAnimations ? 1 : 2,
           stepTime: 1 / 2,
           textureSize: Vector2(17, 23),
-          amountPerRow: 2,
           texturePosition: Vector2(0, 0),
         ),
       ),
       PlayerState.attack: SpriteAnimation.fromFrameData(
         playerImage,
         SpriteAnimationData.sequenced(
-          amount: 4,
+          amount: RicochlimeGame.reduceAnimations ? 1 : 4,
           stepTime: 0.5 / 4,
           textureSize: Vector2(17, 23),
-          amountPerRow: 4,
           texturePosition: Vector2(0, 1 * 23),
           loop: false,
         ),
