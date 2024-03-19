@@ -70,6 +70,9 @@ ThemeData nesThemeFrom({
       accent: colorScheme.secondary,
       shadow: Colors.grey,
     ),
+    nesOverlayTransitionTheme: NesOverlayTransitionTheme(
+      color: brightness == Brightness.light ? Colors.white : Colors.black,
+    ),
   ).copyWith(
     colorScheme: colorScheme,
     textTheme: textTheme,

@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/ads/age_dialog.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
@@ -12,8 +11,6 @@ import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
 import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
-import 'package:ricochlime/pages/settings.dart';
-import 'package:ricochlime/pages/tutorial.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
@@ -101,8 +98,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
+    return MaterialApp(
       title: t.appName,
       locale: TranslationProvider.of(context).flutterLocale,
       supportedLocales: AppLocaleUtils.supportedLocales,
@@ -129,27 +125,7 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.dark,
         colorScheme: const ColorScheme.highContrastDark(),
       ),
+      home: const HomePage(),
     );
   }
 }
-
-final _router = GoRouter(
-  routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const HomePage(),
-    ),
-    GoRoute(
-      path: '/play',
-      builder: (context, state) => const PlayPage(),
-    ),
-    GoRoute(
-      path: '/tutorial',
-      builder: (context, state) => const TutorialPage(),
-    ),
-    GoRoute(
-      path: '/settings',
-      builder: (context, state) => const SettingsPage(),
-    ),
-  ],
-);

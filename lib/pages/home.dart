@@ -1,4 +1,3 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nes_ui/nes_ui.dart';
@@ -89,7 +88,7 @@ class HomePage extends StatelessWidget {
                         type: NesButtonType.primary,
                         icon: NesIcons.rightArrowIndicator,
                         text: t.homePage.playButton,
-                        openBuilder: (_, __) => const PlayPage(),
+                        openBuilder: (_, __, ___) => const PlayPage(),
                         disabled: !snapshot.hasData,
                       );
                     },
@@ -98,13 +97,13 @@ class HomePage extends StatelessWidget {
                   _HomePageButton(
                     icon: NesIcons.questionMarkBlock,
                     text: t.homePage.tutorialButton,
-                    openBuilder: (_, __) => const TutorialPage(),
+                    openBuilder: (_, __, ___) => const TutorialPage(),
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
                     icon: NesIcons.openFolder,
                     text: t.homePage.settingsButton,
-                    openBuilder: (_, __) => const SettingsPage(),
+                    openBuilder: (_, __, ___) => const SettingsPage(),
                   ),
                 ],
               ),
@@ -129,36 +128,38 @@ class _HomePageButton<T> extends StatelessWidget {
   final NesButtonType type;
   final NesIconData icon;
   final String text;
-  final OpenContainerBuilder<T> openBuilder;
+  final RoutePageBuilder openBuilder;
   final bool disabled;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: OpenContainer(
-        closedBuilder: (context, openContainer) => NesButton(
-          onPressed: disabled ? null : openContainer,
-          type: type,
-          child: Row(
-            children: [
-              NesIcon(
-                iconData: icon,
-                size: const Size.square(32),
+      child: NesButton(
+        onPressed: disabled
+            ? null
+            : () {
+                Navigator.of(context).push(
+                  NesVerticalCloseTransition.route<void>(
+                    pageBuilder: openBuilder,
+                  ),
+                );
+              },
+        type: type,
+        child: Row(
+          children: [
+            NesIcon(
+              iconData: icon,
+              size: const Size.square(32),
+            ),
+            const SizedBox(width: 16),
+            Text(
+              text,
+              style: const TextStyle(
+                fontSize: 32,
               ),
-              const SizedBox(width: 16),
-              Text(
-                text,
-                style: const TextStyle(
-                  fontSize: 32,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-        closedColor: Colors.transparent,
-        closedElevation: 0,
-        openBuilder: openBuilder,
-        clipBehavior: Clip.none,
       ),
     );
   }

@@ -74,7 +74,7 @@ class _AgeSimpleInputState extends State<_AgeSimpleInput> {
                       final currentYear = DateTime.now().year;
                       final birthYear = currentYear - age!;
                       Prefs.birthYear.value = birthYear;
-                      context.pop();
+                      Navigator.of(context).pop();
                     }
                   : null,
               child: Row(

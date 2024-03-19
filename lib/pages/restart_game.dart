@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/dialog_button.dart';
@@ -46,7 +45,7 @@ class RestartGameDialog extends StatelessWidget {
                 DialogButton(
                   onPressed: () {
                     restartGame();
-                    context.pop(true);
+                    Navigator.of(context).pop(true);
                   },
                   type: NesButtonType.error,
                   icon: NesIcons.redo,
@@ -54,7 +53,7 @@ class RestartGameDialog extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 DialogButton(
-                  onPressed: () => context.pop(false),
+                  onPressed: () => Navigator.of(context).pop(false),
                   type: NesButtonType.normal,
                   icon: NesIcons.leftArrowIndicator,
                   text: t.restartGameDialog.waitCancel,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
@@ -86,7 +85,7 @@ class GameOverDialog extends StatelessWidget {
                           final rewardGranted = await AdState.showRewardedAd();
                           if (!context.mounted) return;
                           if (rewardGranted) {
-                            context.pop<GameOverAction>(
+                            Navigator.of(context).pop<GameOverAction>(
                               GameOverAction.continueGame,
                             );
                           }
@@ -99,7 +98,9 @@ class GameOverDialog extends StatelessWidget {
                     ],
                     DialogButton(
                       onPressed: () {
-                        context.pop<GameOverAction>(GameOverAction.restartGame);
+                        Navigator.of(context).pop<GameOverAction>(
+                          GameOverAction.restartGame,
+                        );
                       },
                       type: NesButtonType.primary,
                       icon: NesIcons.redo,
@@ -108,7 +109,7 @@ class GameOverDialog extends StatelessWidget {
                     const SizedBox(height: 32),
                     DialogButton(
                       onPressed: () {
-                        context
+                        Navigator.of(context)
                           // pop dialog
                           ..pop<GameOverAction>(GameOverAction.nothingYet)
                           // pop play page

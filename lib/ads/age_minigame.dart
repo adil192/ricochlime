@@ -91,7 +91,7 @@ class _AgeMinigameState extends State<_AgeMinigame> {
             final currentYear = DateTime.now().year;
             final birthYear = currentYear - guessedAge;
             Prefs.birthYear.value = birthYear;
-            context.pop();
+            Navigator.of(context).pop();
           },
           child: Row(
             children: [
