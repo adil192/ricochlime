@@ -32,6 +32,8 @@ dependencies:
 
   app_tracking_transparency: ^2.0.4
 
+  battery_plus: ^5.0.3
+
   collapsible: ^1.0.0
 
   cupertino_icons: ^1.0.2

@@ -71,6 +71,8 @@ class _PlayPageState extends State<PlayPage> {
         GameOverAction.nothingYet;
   }
 
+  final Future<bool> shouldShowBannerAd = AdState.shouldShowBannerAd();
+
   @override
   Widget build(BuildContext context) {
     final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
@@ -102,15 +104,19 @@ class _PlayPageState extends State<PlayPage> {
                         Positioned.fill(
                           child: GameWidget(game: game),
                         ),
-                        if (AdState.adsSupported)
-                          const Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: BannerAdWidget(
-                              adSize: AdSize.banner,
-                            ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: FutureBuilder(
+                            future: shouldShowBannerAd,
+                            builder: (context, snapshot) {
+                              return snapshot.data ?? false
+                                  ? const BannerAdWidget(adSize: AdSize.banner)
+                                  : const SizedBox.shrink();
+                            },
                           ),
+                        ),
                       ],
                     ),
                   ),

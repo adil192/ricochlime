@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,6 +31,18 @@ abstract class AdState {
     if (!adsSupported) return false;
     final age = AdState.age;
     return age != null && age >= minAgeForPersonalizedAds;
+  }
+
+  /// Whether we should show banner ads.
+  ///
+  /// E.g. if the user is in battery save mode, we should not show a
+  /// banner ad.
+  static Future<bool> shouldShowBannerAd() async {
+    if (!adsSupported) return false;
+
+    if (await Battery().isInBatterySaveMode) return false;
+
+    return true;
   }
 
   /// The minimum age required to show personalized ads.
