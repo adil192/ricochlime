@@ -1,5 +1,8 @@
 {
     "dart.analysisExcludedFolders": [
         "submodules"
-    ]
+    ],
+    "files.exclude": {
+        "submodules": true
+    }
 }
