@@ -33,19 +33,27 @@ ThemeData nesThemeFrom({
           ? NesIconTheme(
               primary: colorScheme.onPrimary,
               secondary: colorScheme.primary,
+              accent: colorScheme.secondary,
+              shadow: Colors.grey,
             )
           : NesIconTheme(
               primary: colorScheme.onSurface,
               secondary: colorScheme.background.withOpacity(0.5),
+              accent: colorScheme.secondary,
+              shadow: Colors.grey,
             ),
       darkIconTheme: brightness == Brightness.light
           ? NesIconTheme(
               primary: colorScheme.onSurface,
               secondary: colorScheme.background,
+              accent: colorScheme.secondary,
+              shadow: Colors.grey,
             )
           : NesIconTheme(
               primary: colorScheme.onPrimary,
               secondary: colorScheme.primary.withOpacity(0.5),
+              accent: colorScheme.secondary,
+              shadow: Colors.grey,
             ),
       borderColor: brightness == Brightness.light
           ? colorScheme.onSurface
@@ -59,9 +67,10 @@ ThemeData nesThemeFrom({
     nesIconTheme: NesIconTheme(
       primary: colorScheme.onSurface,
       secondary: colorScheme.onPrimary,
+      accent: colorScheme.secondary,
+      shadow: Colors.grey,
     ),
   ).copyWith(
-    useMaterial3: true,
     colorScheme: colorScheme,
     textTheme: textTheme,
   );
