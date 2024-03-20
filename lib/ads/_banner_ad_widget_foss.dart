@@ -13,7 +13,12 @@ abstract class AdState {
 
   /// Whether we can show rewarded ads,
   /// which is always false.
+  @Deprecated(_kDummyAdMessage)
   static bool get rewardedAdsSupported => false;
+
+  /// Whether we should show banner ads.
+  @Deprecated(_kDummyAdMessage)
+  static Future<bool> shouldShowBannerAd() async => false;
 
   /// The minimum age required to show personalized ads.
   ///
