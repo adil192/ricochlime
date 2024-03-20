@@ -8,9 +8,11 @@
 
     <name>Ricochlime</name>
     <summary>Satisfying monster shooter</summary>
-
-    <developer_name>Adil Hanney</developer_name>
     <url type="homepage">https://github.com/adil192/ricochlime</url>
+
+    <developer id="com.adilhanney">
+        <name>Adil Hanney</name>
+    </developer>
 
     <metadata_license>MIT</metadata_license>
     <project_license>AGPL-3.0-only</project_license>
@@ -54,6 +56,8 @@
     <screenshots>
         <screenshot type="default">
             <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/home.png</image>
+        </screenshot>
+        <screenshot type="default">
             <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/game.png</image>
         </screenshot>
     </screenshots>
