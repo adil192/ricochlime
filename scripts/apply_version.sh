@@ -145,6 +145,7 @@ else
   # shellcheck disable=SC1078,SC1079
   RELEASE_TAG="""\
         <release version=\"$BUILD_NAME\" type=\"development\" date=\"$DATE\">
+            <url type=\"details\">https://github.com/adil192/ricochlime/releases/tag/v$BUILD_NAME</url>
             <description>
                 <ul>
                     <li>$DUMMY_CHANGELOG</li>
@@ -152,7 +153,7 @@ else
             </description>
         </release>\
 """
-  awk -v release="$RELEASE_TAG" 'NR==62{print release}1' "$FLATPAK_FILE" > "${FLATPAK_FILE}.tmp"
+  awk -v release="$RELEASE_TAG" 'NR==66{print release}1' "$FLATPAK_FILE" > "${FLATPAK_FILE}.tmp"
   mv "${FLATPAK_FILE}.tmp" "$FLATPAK_FILE"
 fi
 

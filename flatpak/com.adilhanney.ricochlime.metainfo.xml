@@ -64,6 +64,7 @@
 
     <releases>
         <release version="1.2.0" type="development" date="2024-03-20">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.2.0</url>
             <description>
                 <ul>
                     <li>Improved the UI throughout the app</li>
