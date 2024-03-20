@@ -61,7 +61,7 @@ ThemeData nesThemeFrom({
     ),
     nesContainerTheme: NesContainerTheme(
       borderColor: RicochlimePalette.grassColorDark,
-      backgroundColor: Colors.transparent,
+      backgroundColor: colorScheme.surface,
       labelTextStyle: textTheme.labelMedium ?? const TextStyle(),
     ),
     nesIconTheme: NesIconTheme(

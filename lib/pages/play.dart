@@ -60,9 +60,8 @@ class _PlayPageState extends State<PlayPage> {
     assert(mounted);
     if (!mounted) return GameOverAction.nothingYet;
 
-    return await showDialog<GameOverAction>(
+    return await NesDialog.show<GameOverAction>(
           context: context,
-          barrierDismissible: false,
           builder: (context) => GameOverDialog(
             score: _score.value,
             game: game,
