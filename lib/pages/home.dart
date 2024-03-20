@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nes_ui/nes_ui.dart';
@@ -81,17 +83,12 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 32),
-                  FutureBuilder(
-                    future: game.preloadSprites,
-                    builder: (context, snapshot) {
-                      return _HomePageButton(
-                        type: NesButtonType.primary,
-                        icon: NesIcons.play,
-                        text: t.homePage.playButton,
-                        openBuilder: (_, __, ___) => const PlayPage(),
-                        disabled: !snapshot.hasData,
-                      );
-                    },
+                  _HomePageButton(
+                    type: NesButtonType.primary,
+                    icon: NesIcons.play,
+                    text: t.homePage.playButton,
+                    openBuilder: (_, __, ___) => const PlayPage(),
+                    ready: game.preloadSprites,
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
@@ -115,45 +112,77 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class _HomePageButton<T> extends StatelessWidget {
+class _HomePageButton<T> extends StatefulWidget {
   const _HomePageButton({
     super.key,
     this.type = NesButtonType.normal,
     required this.icon,
     required this.text,
     required this.openBuilder,
-    this.disabled = false,
+    this.ready,
   });
 
   final NesButtonType type;
   final NesIconData icon;
   final String text;
   final RoutePageBuilder openBuilder;
-  final bool disabled;
+  final Completer? ready;
+
+  @override
+  State<_HomePageButton<T>> createState() => _HomePageButtonState<T>();
+}
+
+class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
+  /// If the user presses the button while [widget.ready] is not completed,
+  /// [loading] will be set to true and the button will be replaced
+  /// with a loading indicator. Then when [widget.ready] is completed,
+  /// [loading] will be set to false and [onPressed] will be
+  /// called automatically.
+  ///
+  /// Note that [ready] is only expected to take a few milliseconds
+  /// to complete, so the user won't have to wait long.
+  bool loading = false;
+
+  void onPressed() {
+    assert(!loading, 'onPressed should be set to null when loading');
+    if (loading) return;
+
+    if (widget.ready != null && !widget.ready!.isCompleted) {
+      setState(() {
+        loading = true;
+      });
+      widget.ready!.future.then((_) {
+        if (!mounted) return;
+        setState(() {
+          loading = false;
+        });
+        onPressed();
+      });
+      return;
+    }
+
+    Navigator.of(context).push(
+      NesVerticalCloseTransition.route<void>(
+        pageBuilder: widget.openBuilder,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: NesButton(
-        onPressed: disabled
-            ? null
-            : () {
-                Navigator.of(context).push(
-                  NesVerticalCloseTransition.route<void>(
-                    pageBuilder: openBuilder,
-                  ),
-                );
-              },
-        type: type,
+        onPressed: loading ? null : onPressed,
+        type: widget.type,
         child: Row(
           children: [
-            NesIcon(
-              iconData: icon,
-              size: const Size.square(32),
-            ),
+            if (loading)
+              const NesHourglassLoadingIndicator()
+            else
+              NesIcon(iconData: widget.icon),
             const SizedBox(width: 16),
             Text(
-              text,
+              widget.text,
               style: const TextStyle(
                 fontSize: 32,
               ),

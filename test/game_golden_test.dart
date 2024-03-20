@@ -21,7 +21,7 @@ void main() {
     RicochlimeGame.disableBgMusic = true;
     RicochlimeGame.reduceAnimations = true;
     game.random = Random(123);
-    await tester.runAsync(() => game.preloadSprites);
+    await tester.runAsync(() => game.preloadSprites.future);
 
     var widget = GameEnvironment(
       game: game,

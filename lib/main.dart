@@ -17,7 +17,7 @@ import 'package:ricochlime/utils/ricochlime_palette.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
-  unawaited(game.preloadSprites);
+  unawaited(game.preloadSprites.future);
   Prefs.init();
   _addLicenses();
   GoogleFonts.config.allowRuntimeFetching = false;
