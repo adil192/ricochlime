@@ -135,35 +135,33 @@ class _PlayPageState extends State<PlayPage> {
                 ),
                 Positioned.directional(
                   textDirection: textDirection,
-                  top: 0,
-                  start: 0,
-                  child: IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: NesIcon(
-                      iconData: NesIcons.leftArrowIndicator,
-                      primaryColor: colorScheme.onPrimary.withOpacity(0.9),
-                      secondaryColor: colorScheme.onSurface.withOpacity(0.9),
-                      size: const Size.square(20),
-                    ),
+                  top: kToolbarHeight / 4,
+                  start: kToolbarHeight / 4,
+                  child: NesIconButton(
+                    onPress: () => Navigator.of(context).pop(),
+                    icon: NesIcons.leftArrowIndicator,
+                    primaryColor: Colors.white.withOpacity(0.9),
+                    secondaryColor:
+                        RicochlimePalette.grassColorDark.withOpacity(0.9),
+                    size: const Size.square(20),
                   ),
                 ),
                 Positioned.directional(
                   textDirection: textDirection,
-                  top: 0,
-                  end: 0,
-                  child: IconButton(
-                    onPressed: () => NesDialog.show(
+                  top: kToolbarHeight / 4,
+                  end: kToolbarHeight / 4,
+                  child: NesIconButton(
+                    onPress: () => NesDialog.show(
                       context: context,
                       builder: (context) => RestartGameDialog(
                         restartGame: game.restartGame,
                       ),
                     ),
-                    icon: NesIcon(
-                      iconData: NesIcons.redo,
-                      primaryColor: colorScheme.onPrimary.withOpacity(0.9),
-                      secondaryColor: colorScheme.onSurface.withOpacity(0.9),
-                      size: const Size.square(20),
-                    ),
+                    icon: NesIcons.redo,
+                    primaryColor: Colors.white.withOpacity(0.9),
+                    secondaryColor:
+                        RicochlimePalette.grassColorDark.withOpacity(0.9),
+                    size: const Size.square(20),
                   ),
                 ),
                 Positioned(
