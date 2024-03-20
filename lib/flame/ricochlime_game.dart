@@ -428,7 +428,9 @@ class RicochlimeGame extends Forge2DGame
 
       // check if the player has lost
       if (isGameOver()) {
-        return gameOver();
+        await saveGame();
+        await gameOver();
+        return;
       }
     }
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
