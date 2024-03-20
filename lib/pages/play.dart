@@ -86,128 +86,132 @@ class _PlayPageState extends State<PlayPage> {
             : RicochlimePalette.grassColor,
         systemNavigationBarIconBrightness: colorScheme.brightness.opposite,
       ),
-      child: ColoredBox(
-        color: _isDarkMode.value
-            ? RicochlimePalette.grassColorDark
-            : RicochlimePalette.grassColor,
-        child: SafeArea(
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: FittedBox(
-                  child: SizedBox(
-                    width: RicochlimeGame.expectedWidth,
-                    height: RicochlimeGame.expectedHeight,
-                    child: Stack(
+      child: Scaffold(
+        body: ColoredBox(
+          color: _isDarkMode.value
+              ? RicochlimePalette.grassColorDark
+              : RicochlimePalette.grassColor,
+          child: SafeArea(
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: FittedBox(
+                    child: SizedBox(
+                      width: RicochlimeGame.expectedWidth,
+                      height: RicochlimeGame.expectedHeight,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                            child: GameWidget(game: game),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: FutureBuilder(
+                              future: shouldShowBannerAd,
+                              builder: (context, snapshot) {
+                                return snapshot.data ?? false
+                                    ? const BannerAdWidget(
+                                        adSize: AdSize.banner)
+                                    : const SizedBox.shrink();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned.directional(
+                  textDirection: textDirection,
+                  top: 0,
+                  start: 0,
+                  child: IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: NesIcon(
+                      iconData: NesIcons.leftArrowIndicator,
+                      primaryColor: colorScheme.onPrimary.withOpacity(0.9),
+                      secondaryColor: colorScheme.onSurface.withOpacity(0.9),
+                      size: const Size.square(20),
+                    ),
+                  ),
+                ),
+                Positioned.directional(
+                  textDirection: textDirection,
+                  top: 0,
+                  end: 0,
+                  child: IconButton(
+                    onPressed: () => NesDialog.show(
+                      context: context,
+                      builder: (context) => RestartGameDialog(
+                        restartGame: game.restartGame,
+                      ),
+                    ),
+                    icon: NesIcon(
+                      iconData: NesIcons.redo,
+                      primaryColor: colorScheme.onPrimary.withOpacity(0.9),
+                      secondaryColor: colorScheme.onSurface.withOpacity(0.9),
+                      size: const Size.square(20),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: -1,
+                  left: 0,
+                  right: 0,
+                  child: IgnorePointer(
+                    child: Column(
                       children: [
-                        Positioned.fill(
-                          child: GameWidget(game: game),
+                        const SizedBox(height: 4),
+                        ValueListenableBuilder(
+                          valueListenable: Prefs.highScore,
+                          builder: (context, highScore, child) => Text(
+                            highScore <= 0
+                                ? ''
+                                : t.playPage.highScore(p: highScore),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
+                              fontSize: 12,
+                              height: 1,
+                            ),
+                          ),
                         ),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: FutureBuilder(
-                            future: shouldShowBannerAd,
-                            builder: (context, snapshot) {
-                              return snapshot.data ?? false
-                                  ? const BannerAdWidget(adSize: AdSize.banner)
-                                  : const SizedBox.shrink();
-                            },
+                        const SizedBox(height: 4),
+                        ValueListenableBuilder(
+                          valueListenable: _score,
+                          builder: (context, score, child) => Text(
+                            '$score',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
+                              fontSize: 32,
+                              height: 0.7,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-              ),
-              Positioned.directional(
-                textDirection: textDirection,
-                top: 0,
-                start: 0,
-                child: IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: NesIcon(
-                    iconData: NesIcons.leftArrowIndicator,
-                    primaryColor: colorScheme.onPrimary.withOpacity(0.9),
-                    secondaryColor: colorScheme.onSurface.withOpacity(0.9),
-                    size: const Size.square(20),
-                  ),
-                ),
-              ),
-              Positioned.directional(
-                textDirection: textDirection,
-                top: 0,
-                end: 0,
-                child: IconButton(
-                  onPressed: () => NesDialog.show(
-                    context: context,
-                    builder: (context) => RestartGameDialog(
-                      restartGame: game.restartGame,
-                    ),
-                  ),
-                  icon: NesIcon(
-                    iconData: NesIcons.redo,
-                    primaryColor: colorScheme.onPrimary.withOpacity(0.9),
-                    secondaryColor: colorScheme.onSurface.withOpacity(0.9),
-                    size: const Size.square(20),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: -1,
-                left: 0,
-                right: 0,
-                child: IgnorePointer(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 4),
-                      ValueListenableBuilder(
-                        valueListenable: Prefs.highScore,
-                        builder: (context, highScore, child) => Text(
-                          highScore <= 0
-                              ? ''
-                              : t.playPage.highScore(p: highScore),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.9),
-                            fontSize: 12,
-                            height: 1,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      ValueListenableBuilder(
-                        valueListenable: _score,
-                        builder: (context, score, child) => Text(
-                          '$score',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.9),
-                            fontSize: 32,
-                            height: 0.7,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: IgnorePointer(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: ValueListenableBuilder(
-                        valueListenable: _timeDilation,
-                        builder: (context, timeDilation, _) => AnimatedOpacity(
-                          opacity: timeDilation == 1.0 ? 0.0 : 1.0,
-                          duration: const Duration(milliseconds: 200),
-                          child: Text(
-                            '${timeDilation.toStringAsFixed(1)}x',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
-                              fontSize: 32,
+                Positioned.fill(
+                  child: IgnorePointer(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: ValueListenableBuilder(
+                          valueListenable: _timeDilation,
+                          builder: (context, timeDilation, _) =>
+                              AnimatedOpacity(
+                            opacity: timeDilation == 1.0 ? 0.0 : 1.0,
+                            duration: const Duration(milliseconds: 200),
+                            child: Text(
+                              '${timeDilation.toStringAsFixed(1)}x',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.9),
+                                fontSize: 32,
+                              ),
                             ),
                           ),
                         ),
@@ -215,8 +219,8 @@ class _PlayPageState extends State<PlayPage> {
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
