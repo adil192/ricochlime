@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
                     builder: (context, snapshot) {
                       return _HomePageButton(
                         type: NesButtonType.primary,
-                        icon: NesIcons.rightArrowIndicator,
+                        icon: NesIcons.play,
                         text: t.homePage.playButton,
                         openBuilder: (_, __, ___) => const PlayPage(),
                         disabled: !snapshot.hasData,
@@ -101,7 +101,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
-                    icon: NesIcons.openFolder,
+                    icon: NesIcons.gamepad,
                     text: t.homePage.settingsButton,
                     openBuilder: (_, __, ___) => const SettingsPage(),
                   ),
