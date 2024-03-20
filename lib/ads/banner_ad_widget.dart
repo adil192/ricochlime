@@ -385,6 +385,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget>
                 height:
                     widget.adSize.height + nesPadding.top + nesPadding.bottom,
                 padding: nesPadding,
+                backgroundColor: Colors.transparent,
               ),
             ),
           ],
