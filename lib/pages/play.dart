@@ -56,18 +56,28 @@ class _PlayPageState extends State<PlayPage> {
     super.dispose();
   }
 
+  /// Whether the game over dialog is currently showing,
+  /// used to prevent multiple dialogs from showing at once.
+  static bool showingGameOverDialog = false;
+
   Future<GameOverAction> showGameOverDialog() async {
     assert(mounted);
     if (!mounted) return GameOverAction.nothingYet;
 
-    return await NesDialog.show<GameOverAction>(
-          context: context,
-          builder: (context) => GameOverDialog(
-            score: _score.value,
-            game: game,
-          ),
-        ) ??
-        GameOverAction.nothingYet;
+    if (showingGameOverDialog) return GameOverAction.nothingYet;
+    showingGameOverDialog = true;
+    try {
+      return await NesDialog.show<GameOverAction>(
+            context: context,
+            builder: (context) => GameOverDialog(
+              score: _score.value,
+              game: game,
+            ),
+          ) ??
+          GameOverAction.nothingYet;
+    } finally {
+      showingGameOverDialog = false;
+    }
   }
 
   final Future<bool> shouldShowBannerAd = AdState.shouldShowBannerAd();
