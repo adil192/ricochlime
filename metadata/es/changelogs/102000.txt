@@ -1,0 +1,5 @@
+• Se mejoró la interfaz de usuario en toda la aplicación.
+• Transiciones de página añadidas
+• Los anuncios no se muestran cuando tienes activado el ahorro de batería
+• Se corrigió que el monstruo tuviera colisiones insatisfactorias en su lado derecho.
+• Pequeñas correcciones de errores y mejoras de rendimiento
