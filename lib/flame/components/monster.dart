@@ -231,7 +231,7 @@ class Monster extends BodyComponent with ContactCallbacks {
         Vector2(2, 8),
         Vector2(4, 12),
         Vector2(12, 12),
-        Vector2(14, 1),
+        Vector2(12, 1),
         Vector2(10, -2),
       ]);
     final fixtureDef = FixtureDef(
