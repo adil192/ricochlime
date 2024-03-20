@@ -128,18 +128,24 @@ class SettingsPage extends StatelessWidget {
               child: ValueListenableBuilder(
                 valueListenable: Prefs.hyperlegibleFont,
                 builder: (context, _, child) {
-                  return CheckboxListTile.adaptive(
-                    title: child,
-                    secondary: NesIcon(
-                      iconData: NesIcons.openEye,
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: NesIcon(
+                        iconData: NesIcons.openEye,
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.hyperlegibleFont.value,
+                        onChange: (value) {
+                          Prefs.hyperlegibleFont.value = value;
+                        },
+                      ),
+                      onTap: () => Prefs.hyperlegibleFont.value =
+                          !Prefs.hyperlegibleFont.value,
                     ),
-                    tileColor: listTileColor,
-                    shape: listTileShape,
-                    contentPadding: listTileContentPadding,
-                    value: Prefs.hyperlegibleFont.value,
-                    onChanged: (value) {
-                      Prefs.hyperlegibleFont.value = value!;
-                    },
                   );
                 },
                 child: Text(t.settingsPage.hyperlegibleFont),
@@ -186,18 +192,24 @@ class SettingsPage extends StatelessWidget {
               child: ValueListenableBuilder(
                 valueListenable: Prefs.showColliders,
                 builder: (context, _, child) {
-                  return CheckboxListTile.adaptive(
-                    title: child,
-                    secondary: NesIcon(
-                      iconData: NesIcons.lamp,
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: NesIcon(
+                        iconData: NesIcons.lamp,
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.showColliders.value,
+                        onChange: (value) {
+                          Prefs.showColliders.value = value;
+                        },
+                      ),
+                      onTap: () => Prefs.showColliders.value =
+                          !Prefs.showColliders.value,
                     ),
-                    tileColor: listTileColor,
-                    shape: listTileShape,
-                    contentPadding: listTileContentPadding,
-                    value: Prefs.showColliders.value,
-                    onChanged: (value) {
-                      Prefs.showColliders.value = value!;
-                    },
                   );
                 },
                 child: Text(t.settingsPage.showColliders),
