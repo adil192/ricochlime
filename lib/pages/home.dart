@@ -58,24 +58,24 @@ class HomePage extends StatelessWidget {
                           if (Prefs.bgmVolume.value > 0.05) {
                             lastKnownOnVolume = Prefs.bgmVolume.value;
                           }
-                          return IconButton(
-                            tooltip: '${t.settingsPage.bgmVolume}: '
+                          return NesTooltip(
+                            message: '${t.settingsPage.bgmVolume}: '
                                 '${Prefs.bgmVolume.value * 100 ~/ 1}%',
-                            onPressed: () {
-                              Prefs.bgmVolume.value =
-                                  Prefs.bgmVolume.value <= 0.05
-                                      ? lastKnownOnVolume
-                                      : 0;
-                            },
-                            icon: Opacity(
+                            child: Opacity(
                               opacity: Prefs.bgmVolume.value <= 0.05 ? 0.25 : 1,
-                              child: child,
+                              child: child!,
                             ),
                           );
                         },
-                        child: NesIcon(
-                          iconData: NesIcons.musicNote,
+                        child: NesIconButton(
+                          onPress: () {
+                            Prefs.bgmVolume.value =
+                                Prefs.bgmVolume.value <= 0.05
+                                    ? lastKnownOnVolume
+                                    : 0;
+                          },
                           size: const Size.square(32),
+                          icon: NesIcons.musicNote,
                         ),
                       ),
                     ],
