@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 
 class TutorialPage extends StatelessWidget {
@@ -11,6 +12,14 @@ class TutorialPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(t.tutorialPage.tutorial),
+        toolbarHeight: kToolbarHeight,
+        leading: Center(
+          child: NesIconButton(
+            onPress: () => Navigator.of(context).pop(),
+            size: const Size.square(kToolbarHeight * 0.4),
+            icon: NesIcons.leftArrowIndicator,
+          ),
+        ),
       ),
       body: Center(
         child: ConstrainedBox(

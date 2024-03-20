@@ -36,6 +36,14 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(t.settingsPage.title),
+        toolbarHeight: kToolbarHeight,
+        leading: Center(
+          child: NesIconButton(
+            onPress: () => Navigator.of(context).pop(),
+            size: const Size.square(kToolbarHeight * 0.4),
+            icon: NesIcons.leftArrowIndicator,
+          ),
+        ),
       ),
       body: ListView(
         children: [
