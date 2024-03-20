@@ -250,7 +250,8 @@ class RicochlimeGame extends Forge2DGame
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
 
     if (isGameOver()) {
-      await gameOver();
+      // allow the game to render before showing the game over dialog
+      Future.delayed(const Duration(milliseconds: 50), gameOver);
     } else {
       state = GameState.idle;
     }
