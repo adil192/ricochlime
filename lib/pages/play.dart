@@ -140,7 +140,7 @@ class _PlayPageState extends State<PlayPage> {
                 top: 0,
                 end: 0,
                 child: IconButton(
-                  onPressed: () => showDialog(
+                  onPressed: () => NesDialog.show(
                     context: context,
                     builder: (context) => RestartGameDialog(
                       restartGame: game.restartGame,
