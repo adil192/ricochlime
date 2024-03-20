@@ -12,7 +12,7 @@ es:
     title(OUTDATED): Settings
     adConsent(OUTDATED): Change ad consent
     hyperlegibleFont(OUTDATED): Use the Atkinson Hyperlegible font
-    bgmVolume(OUTDATED): Background music volume
+    bgmVolume(OUTDATED): Bg music volume
     showColliders(OUTDATED): Show monster colliders
     appInfo(OUTDATED): App info
     licenseNotice(OUTDATED): |-
@@ -57,7 +57,7 @@ es:
     ok(OUTDATED): Okay
 kk:
   settingsPage:
-    bgmVolume(OUTDATED): Background music volume
+    bgmVolume(OUTDATED): Bg music volume
     showColliders(OUTDATED): Show monster colliders
   ageDialog:
     guessNumber(OUTDATED): Guess \#$n

@@ -6,7 +6,7 @@
 /// Locales: 3
 /// Strings: 130 (43 per locale)
 ///
-/// Built on 2024-01-22 at 21:45 UTC
+/// Built on 2024-03-20 at 20:09 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -185,7 +185,7 @@ class _StringsSettingsPageEn {
 	String get title => 'Settings';
 	String get adConsent => 'Change ad consent';
 	String get hyperlegibleFont => 'Use the Atkinson Hyperlegible font';
-	String get bgmVolume => 'Background music volume';
+	String get bgmVolume => 'Bg music volume';
 	String get showColliders => 'Show monster colliders';
 	String get appInfo => 'App info';
 	String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
