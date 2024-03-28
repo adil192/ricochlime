@@ -8,6 +8,7 @@ es:
     tutorialButton: Tutorial
   playPage:
     highScore(OUTDATED): "Best: $p"
+    undo(OUTDATED): Undo move
   settingsPage:
     title(OUTDATED): Settings
     adConsent(OUTDATED): Change ad consent
@@ -56,6 +57,8 @@ es:
     cancel(OUTDATED): Cancel
     ok(OUTDATED): Okay
 kk:
+  playPage:
+    undo(OUTDATED): Undo move
   settingsPage:
     bgmVolume(OUTDATED): Bg music volume
     showColliders(OUTDATED): Show monster colliders

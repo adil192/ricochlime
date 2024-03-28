@@ -204,26 +204,57 @@ class _PlayPageState extends State<PlayPage> {
                   ),
                 ),
                 Positioned.fill(
-                  child: IgnorePointer(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: ValueListenableBuilder(
-                          valueListenable: _timeDilation,
-                          builder: (context, timeDilation, _) =>
-                              AnimatedOpacity(
-                            opacity: timeDilation == 1.0 ? 0.0 : 1.0,
-                            duration: const Duration(milliseconds: 200),
-                            child: Text(
-                              '${timeDilation.toStringAsFixed(1)}x',
-                              style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
-                                fontSize: 32,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8, right: 8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IgnorePointer(
+                          child: ValueListenableBuilder(
+                            valueListenable: _timeDilation,
+                            builder: (context, timeDilation, _) =>
+                                AnimatedOpacity(
+                              opacity: timeDilation == 1.0 ? 0.0 : 1.0,
+                              duration: const Duration(milliseconds: 200),
+                              child: Text(
+                                '${timeDilation.toStringAsFixed(1)}x',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.9),
+                                  fontSize: 32,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                        ValueListenableBuilder(
+                          valueListenable: game.state,
+                          builder: (context, state, child) {
+                            final show = state == GameState.shooting;
+                            return AnimatedOpacity(
+                              opacity: show ? 1 : 0,
+                              duration: const Duration(milliseconds: 200),
+                              child: IgnorePointer(
+                                ignoring: !show,
+                                child: child,
+                              ),
+                            );
+                          },
+                          child: NesTooltip(
+                            message: t.playPage.undo,
+                            arrowDirection: NesTooltipArrowDirection.bottom,
+                            child: NesIconButton(
+                              onPress: game.cancelCurrentTurn,
+                              icon: NesIcons.delete,
+                              primaryColor: Colors.white.withOpacity(0.9),
+                              secondaryColor: RicochlimePalette.grassColorDark
+                                  .withOpacity(0.9),
+                              size: const Size.square(20),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

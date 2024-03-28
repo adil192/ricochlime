@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 130 (43 per locale)
+/// Strings: 133 (44 per locale)
 ///
-/// Built on 2024-03-20 at 20:09 UTC
+/// Built on 2024-03-28 at 20:20 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -173,6 +173,7 @@ class _StringsPlayPageEn {
 
 	// Translations
 	String highScore({required Object p}) => 'Best: ${p}';
+	String get undo => 'Undo move';
 }
 
 // Path: settingsPage
@@ -323,6 +324,7 @@ class _StringsPlayPageEs extends _StringsPlayPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get undo => 'Deshacer movimiento';
 	@override String highScore({required Object p}) => 'Mejor: ${p}';
 }
 
@@ -475,6 +477,7 @@ class _StringsPlayPageKk extends _StringsPlayPageEn {
 
 	// Translations
 	@override String highScore({required Object p}) => 'Үздік: ${p}';
+	@override String get undo => 'Қозғалысты болдырмау';
 }
 
 // Path: settingsPage

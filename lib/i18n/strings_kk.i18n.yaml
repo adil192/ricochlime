@@ -5,6 +5,7 @@ homePage:
   tutorialButton: Нұсқаулық
 playPage:
   highScore: "Үздік: $p"
+  undo(OUTDATED): Қозғалысты болдырмау
 settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау

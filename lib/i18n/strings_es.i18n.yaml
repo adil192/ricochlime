@@ -3,6 +3,7 @@ homePage:
   playButton(OUTDATED): Jugar
   settingsButton(OUTDATED): Ajustes
 playPage:
+  undo(OUTDATED): Deshacer movimiento
   highScore(OUTDATED): "Mejor: $p"
 settingsPage:
   showColliders(OUTDATED): Mostrar colisionadores de monstruos

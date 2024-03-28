@@ -5,6 +5,7 @@ homePage:
   tutorialButton: Tutorial
 playPage:
   highScore: "Best: $p"
+  undo: Undo move
 settingsPage:
   title: Settings
   adConsent: Change ad consent
