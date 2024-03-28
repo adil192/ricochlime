@@ -34,7 +34,7 @@ class _PlayPageState extends State<PlayPage> {
     game
       ..showGameOverDialog = showGameOverDialog
       ..resumeBgMusic();
-    if (game.state == GameState.gameOver) {
+    if (game.state.value == GameState.gameOver) {
       WidgetsBinding.instance.addPostFrameCallback(
         (_) => game.gameOver(),
       );

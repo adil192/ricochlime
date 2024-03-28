@@ -63,19 +63,17 @@ class RicochlimeGame extends Forge2DGame
 
   static const bulletTimeoutSecs = 60; // 1 minute
 
-  GameState _state = GameState.idle;
-  GameState get state => _state;
-  set state(GameState value) {
-    _state = value;
-    if (value != GameState.shooting) {
-      timeDilation.value = 1.0;
-    }
-  }
+  late final ValueNotifier<GameState> state = ValueNotifier(GameState.idle)
+    ..addListener(() {
+      if (state.value != GameState.shooting) {
+        timeDilation.value = 1.0;
+      }
+    });
 
   late Player player;
   late AimGuide aimGuide;
   late Background background;
-  bool get inputAllowed => state == GameState.idle;
+  bool get inputAllowed => state.value == GameState.idle;
   bool inputCancelled = false;
   final List<Monster> monsters = [];
 
@@ -257,7 +255,7 @@ class RicochlimeGame extends Forge2DGame
       // allow the game to render before showing the game over dialog
       Future.delayed(const Duration(milliseconds: 50), gameOver);
     } else {
-      state = GameState.idle;
+      state.value = GameState.idle;
     }
   }
 
@@ -332,7 +330,7 @@ class RicochlimeGame extends Forge2DGame
 
   @override
   void onTap() {
-    if (state == GameState.shooting) {
+    if (state.value == GameState.shooting) {
       timeDilation.value += 0.5;
     } else {
       assert(timeDilation.value == 1.0);
@@ -346,7 +344,7 @@ class RicochlimeGame extends Forge2DGame
     }
 
     assert(inputAllowed);
-    state = GameState.shooting;
+    state.value = GameState.shooting;
     assert(!inputAllowed);
     inputCancelled = false;
     player.attack();
@@ -388,8 +386,8 @@ class RicochlimeGame extends Forge2DGame
       await spawnNewMonsters();
       if (inputCancelled) return;
     } finally {
-      if (state != GameState.gameOver) {
-        state = GameState.idle;
+      if (state.value != GameState.gameOver) {
+        state.value = GameState.idle;
       }
       inputCancelled = false;
     }
@@ -399,7 +397,7 @@ class RicochlimeGame extends Forge2DGame
   Future<void> spawnNewMonsters() async {
     const monsterMoveDuration = Duration(seconds: 1);
 
-    state = GameState.monstersMoving;
+    state.value = GameState.monstersMoving;
 
     // remove monsters that have been killed
     monsters.removeWhere((monster) => monster.parent == null);
@@ -439,7 +437,7 @@ class RicochlimeGame extends Forge2DGame
       }
     }
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
-    state = GameState.idle;
+    state.value = GameState.idle;
 
     await saveGame();
   }
@@ -450,7 +448,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   Future<void> gameOver() async {
-    state = GameState.gameOver;
+    state.value = GameState.gameOver;
     assert(!inputAllowed);
 
     // TODO(adil192): Animate the monsters jumping into the water
@@ -487,7 +485,7 @@ class RicochlimeGame extends Forge2DGame
           }
         }
         monsters.removeWhere((monster) => monster.parent == null);
-        state = GameState.idle;
+        state.value = GameState.idle;
         await saveGame();
       case GameOverAction.restartGame:
         restartGame();
@@ -507,7 +505,7 @@ class RicochlimeGame extends Forge2DGame
   /// sets the score to zero,
   /// and spawns a single row of monsters.
   void _reset() {
-    state = GameState.idle;
+    state.value = GameState.idle;
     inputCancelled = false;
     score.value = 0;
     numBullets = 1;
