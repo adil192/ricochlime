@@ -150,18 +150,26 @@ class _PlayPageState extends State<PlayPage> {
                   textDirection: textDirection,
                   top: kToolbarHeight / 4,
                   end: kToolbarHeight / 4,
-                  child: NesIconButton(
-                    onPress: () => NesDialog.show(
-                      context: context,
-                      builder: (context) => RestartGameDialog(
-                        restartGame: game.restartGame,
+                  child: NesTooltip(
+                    message: t.restartGameDialog.title,
+                    arrowPlacement: switch (textDirection) {
+                      TextDirection.ltr => NesTooltipArrowPlacement.right,
+                      TextDirection.rtl => NesTooltipArrowPlacement.left,
+                    },
+                    arrowDirection: NesTooltipArrowDirection.bottom,
+                    child: NesIconButton(
+                      onPress: () => NesDialog.show(
+                        context: context,
+                        builder: (context) => RestartGameDialog(
+                          restartGame: game.restartGame,
+                        ),
                       ),
+                      icon: NesIcons.redo,
+                      primaryColor: Colors.white.withOpacity(0.9),
+                      secondaryColor:
+                          RicochlimePalette.grassColorDark.withOpacity(0.9),
+                      size: const Size.square(20),
                     ),
-                    icon: NesIcons.redo,
-                    primaryColor: Colors.white.withOpacity(0.9),
-                    secondaryColor:
-                        RicochlimePalette.grassColorDark.withOpacity(0.9),
-                    size: const Size.square(20),
                   ),
                 ),
                 Positioned(
