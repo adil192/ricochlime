@@ -5,12 +5,10 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:process_run/shell.dart';
 import 'package:simplytranslate/simplytranslate.dart';
 import 'package:simplytranslate/src/langs/language.dart';
 import 'package:yaml/yaml.dart';
 
-final Shell shell = Shell(verbose: false);
 late SimplyTranslator translator;
 
 final Set<String> newlyTranslatedPaths = {};
@@ -55,11 +53,9 @@ Future<void> translateTree(
     // error occured in translation, so skip for now
     if (translated == null || translated == value) continue;
 
-    final sanitized = translated.replaceAll('"', '\\"').replaceAll('\n', '\\n');
-
     try {
-      await shell
-          .run('dart run slang add $languageCode $pathToKey "$sanitized"');
+      await Process.run(
+          'dart', ['run', 'slang', 'add', languageCode, pathToKey, translated]);
     } catch (e) {
       print('    Adding translation failed: $e');
       errorOccurredInTranslatingTree = true;
@@ -103,11 +99,15 @@ Future<void> translateList(
     // error occurred in translation, so skip for now
     if (translated == null || translated == value) continue;
 
-    final sanitized = translated.replaceAll('"', '\\"').replaceAll('\n', '\\n');
-
     try {
-      await shell
-          .run('dart run slang add $languageCode $pathToKey "$sanitized"');
+      await Process.run('dart', [
+        'run',
+        'slang',
+        'add',
+        languageCode,
+        pathToKey,
+        translated,
+      ]);
     } catch (e) {
       print('    Adding translation failed: $e');
       errorOccurredInTranslatingTree = true;
@@ -217,6 +217,6 @@ void main() async {
       newlyTranslatedPaths.map((e) => e.substring(e.indexOf('/') + 1)).toSet();
   for (final path in pathsWithoutLanguageCode) {
     print('Marking $path as outdated...');
-    await shell.run('dart run slang outdated $path');
+    await Process.run('dart', ['run', 'slang', 'outdated', path]);
   }
 }
