@@ -53,7 +53,7 @@ jobs:
       - run: flutter pub get
 
       - name: Run tests
-        run: flutter test --reporter expanded --coverage
+        run: flutter test --coverage
 
       - name: Upload coverage reports to Codecov
         if: ${{ matrix.patch == 'regular' }}
