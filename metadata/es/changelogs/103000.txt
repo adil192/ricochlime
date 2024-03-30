@@ -1,0 +1,3 @@
+• Se agregó un botón que te permite rehacer una ronda si apuntaste mal
+• Se corrigió que los anuncios quedaran atascados como un cuadro negro.
+• Se corrigió algún texto que se desbordaba en la página de configuración.

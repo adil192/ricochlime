@@ -1,0 +1,3 @@
+• Added a button to let you redo a round if you aimed badly
+• Fixed ads being stuck as a black box
+• Fixed some text overflowing in the settings page
