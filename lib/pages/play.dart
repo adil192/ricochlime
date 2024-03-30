@@ -82,10 +82,21 @@ class _PlayPageState extends State<PlayPage> {
 
   final Future<bool> shouldShowBannerAd = AdState.shouldShowBannerAd();
 
+  double _playerPos(Size screenSize) {
+    final fitted = applyBoxFit(
+      BoxFit.contain,
+      const Size(RicochlimeGame.expectedWidth, RicochlimeGame.expectedHeight),
+      screenSize,
+    );
+    final top = (screenSize.height - fitted.destination.height) / 2;
+    return top + fitted.destination.height * 0.72;
+  }
+
   @override
   Widget build(BuildContext context) {
     final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final colorScheme = Theme.of(context).colorScheme;
+    final screenSize = MediaQuery.sizeOf(context);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -212,10 +223,11 @@ class _PlayPageState extends State<PlayPage> {
                   ),
                 ),
                 Positioned.fill(
+                  bottom: screenSize.height - _playerPos(screenSize),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8, right: 8),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
