@@ -6,6 +6,10 @@ Ricochlime is a game where you attack the advancing monsters with your ricocheti
     alt='Get it on Google Play'
     height=80>][google_play]
 &nbsp;
+[<img src='assets_raw/f-droid-badge.png'
+    alt='Get it on F-Droid'
+    height=80>][f_droid]
+&nbsp;
 [<img src='https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png'
     alt='Available at Amazon Appstore'
     height=80>][amazon_appstore]
@@ -33,6 +37,7 @@ Ricochlime is a game where you attack the advancing monsters with your ricocheti
 <img src='metadata/en-US/images/tenInchScreenshots/game.png' alt='Game screen with a player at the bottom facing multiple monsters' />
 
 [google_play]: https://play.google.com/store/apps/details?id=com.adilhanney.ricochlime
+[f_droid]: https://f-droid.org/packages/com.adilhanney.ricochlime/
 [amazon_appstore]: https://www.amazon.co.uk/Adil-Hanney-Ricochlime/dp/B0CFK76XNX/
 [app_store]: https://apps.apple.com/app/ricochlime/id6459539993
 [web_app]: https://ricochlime.adil.hanney.org
