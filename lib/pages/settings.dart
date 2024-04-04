@@ -184,6 +184,37 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
+          // Whether to show the undo button
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ValueListenableBuilder(
+                valueListenable: Prefs.showUndoButton,
+                builder: (context, _, child) {
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: NesIcon(
+                        iconData: NesIcons.delete,
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.showUndoButton.value,
+                        onChange: (value) => Prefs.showUndoButton.value = value,
+                      ),
+                      onTap: () => Prefs.showUndoButton.value =
+                          !Prefs.showUndoButton.value,
+                    ),
+                  );
+                },
+                child: Text(t.settingsPage.showUndoButton),
+              ),
+            ),
+          ),
+
           // Whether to show colliders
           Padding(
             padding: listTilePadding,

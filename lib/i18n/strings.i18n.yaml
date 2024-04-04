@@ -11,6 +11,7 @@ settingsPage:
   adConsent: Change ad consent
   hyperlegibleFont: Use the Atkinson Hyperlegible font
   bgmVolume: Bg music volume
+  showUndoButton: Allow undoing moves
   showColliders: Show monster colliders
   appInfo: App info
   licenseNotice: |-

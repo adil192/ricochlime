@@ -248,32 +248,33 @@ class _PlayPageState extends State<PlayPage> {
                             ),
                           ),
                         ),
-                        ValueListenableBuilder(
-                          valueListenable: game.state,
-                          builder: (context, state, child) {
-                            final show = state == GameState.shooting;
-                            return AnimatedOpacity(
-                              opacity: show ? 1 : 0,
-                              duration: const Duration(milliseconds: 200),
-                              child: IgnorePointer(
-                                ignoring: !show,
-                                child: child,
+                        if (Prefs.showUndoButton.value)
+                          ValueListenableBuilder(
+                            valueListenable: game.state,
+                            builder: (context, state, child) {
+                              final show = state == GameState.shooting;
+                              return AnimatedOpacity(
+                                opacity: show ? 1 : 0,
+                                duration: const Duration(milliseconds: 200),
+                                child: IgnorePointer(
+                                  ignoring: !show,
+                                  child: child,
+                                ),
+                              );
+                            },
+                            child: NesTooltip(
+                              message: t.playPage.undo,
+                              arrowDirection: NesTooltipArrowDirection.bottom,
+                              child: NesIconButton(
+                                onPress: game.cancelCurrentTurn,
+                                icon: NesIcons.delete,
+                                primaryColor: Colors.white.withOpacity(0.9),
+                                secondaryColor: RicochlimePalette.grassColorDark
+                                    .withOpacity(0.9),
+                                size: const Size.square(20),
                               ),
-                            );
-                          },
-                          child: NesTooltip(
-                            message: t.playPage.undo,
-                            arrowDirection: NesTooltipArrowDirection.bottom,
-                            child: NesIconButton(
-                              onPress: game.cancelCurrentTurn,
-                              icon: NesIcons.delete,
-                              primaryColor: Colors.white.withOpacity(0.9),
-                              secondaryColor: RicochlimePalette.grassColorDark
-                                  .withOpacity(0.9),
-                              size: const Size.square(20),
                             ),
                           ),
-                        ),
                       ],
                     ),
                   ),

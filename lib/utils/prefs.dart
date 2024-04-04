@@ -31,6 +31,7 @@ abstract class Prefs {
 
   static late final PlainPref<double> bgmVolume;
 
+  static late final PlainPref<bool> showUndoButton;
   static late final PlainPref<bool> showColliders;
 
   static void init() {
@@ -43,6 +44,7 @@ abstract class Prefs {
 
     bgmVolume = PlainPref('bgmVolume', 0);
 
+    showUndoButton = PlainPref('showUndoButton', true);
     showColliders = PlainPref('showColliders', false);
   }
 }

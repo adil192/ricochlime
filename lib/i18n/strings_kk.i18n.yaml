@@ -10,11 +10,12 @@ settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау
   hyperlegibleFont: Atkinson Hyperlegible қарпін қолдану
-  showColliders(OUTDATED): Құбыжық коллайдерлерін көрсетіңіз
+  showUndoButton(OUTDATED): Қозғалысты қайтаруға рұқсат беріңіз
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
+  showColliders(OUTDATED): Құбыжық коллайдерлерін көрсетіңіз
   bgmVolume(OUTDATED): Фондық музыканың дыбыс деңгейі
 ageDialog:
   yourAge: Жасыңыз

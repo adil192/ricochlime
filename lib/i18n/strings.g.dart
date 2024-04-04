@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 133 (44 per locale)
+/// Strings: 136 (45 per locale)
 ///
-/// Built on 2024-03-28 at 20:20 UTC
+/// Built on 2024-04-04 at 11:31 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -187,6 +187,7 @@ class _StringsSettingsPageEn {
 	String get adConsent => 'Change ad consent';
 	String get hyperlegibleFont => 'Use the Atkinson Hyperlegible font';
 	String get bgmVolume => 'Bg music volume';
+	String get showUndoButton => 'Allow undoing moves';
 	String get showColliders => 'Show monster colliders';
 	String get appInfo => 'App info';
 	String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
@@ -335,6 +336,7 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get showUndoButton => 'Permitir deshacer movimientos';
 	@override String get showColliders => 'Mostrar colisionadores de monstruos';
 	@override String get title => 'Ajustes';
 	@override String get adConsent => 'Cambiar el consentimiento de los anuncios';
@@ -490,9 +492,10 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	@override String get title => 'Баптау';
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible қарпін қолдану';
-	@override String get showColliders => 'Құбыжық коллайдерлерін көрсетіңіз';
+	@override String get showUndoButton => 'Қозғалысты қайтаруға рұқсат беріңіз';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get showColliders => 'Құбыжық коллайдерлерін көрсетіңіз';
 	@override String get bgmVolume => 'Фондық музыканың дыбыс деңгейі';
 }
 
