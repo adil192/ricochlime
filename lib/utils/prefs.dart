@@ -34,6 +34,8 @@ abstract class Prefs {
   static late final PlainPref<bool> showUndoButton;
   static late final PlainPref<bool> showColliders;
 
+  static late final PlainPref<bool> fasterPageTransitions;
+
   static void init() {
     currentGame = PlainPref('currentGame', null);
     highScore = PlainPref('highScore', 0);
@@ -46,6 +48,8 @@ abstract class Prefs {
 
     showUndoButton = PlainPref('showUndoButton', true);
     showColliders = PlainPref('showColliders', false);
+
+    fasterPageTransitions = PlainPref('fasterPageTransitions', false);
   }
 }
 

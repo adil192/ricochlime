@@ -248,6 +248,39 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
+          // Speed up page transitions
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ValueListenableBuilder(
+                valueListenable: Prefs.fasterPageTransitions,
+                builder: (context, _, child) {
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: NesIcon(
+                        iconData: NesIcons.energy,
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.fasterPageTransitions.value,
+                        onChange: (value) {
+                          Prefs.fasterPageTransitions.value = value;
+                        },
+                      ),
+                      onTap: () => Prefs.fasterPageTransitions.value =
+                          !Prefs.fasterPageTransitions.value,
+                    ),
+                  );
+                },
+                child: Text(t.settingsPage.fasterPageTransitions),
+              ),
+            ),
+          ),
+
           // App info dialog
           Padding(
             padding: listTilePadding,

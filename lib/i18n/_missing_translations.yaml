@@ -16,6 +16,7 @@ es:
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     showColliders(OUTDATED): Show monster colliders
+    fasterPageTransitions(OUTDATED): Faster page transitions
     appInfo(OUTDATED): App info
     licenseNotice(OUTDATED): |-
       Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
@@ -64,6 +65,7 @@ kk:
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     showColliders(OUTDATED): Show monster colliders
+    fasterPageTransitions(OUTDATED): Faster page transitions
   ageDialog:
     guessNumber(OUTDATED): Guess \#$n
     howOldAreYou(OUTDATED): "How old are you?"
