@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ricochlime"
-#define MyAppVersion "1.3.0"
+#define MyAppVersion "1.3.1"
 #define MyAppPublisher "Adil Hanney"
 #define MyAppURL "https://github.com/adil192/ricochlime"
 #define MyAppExeName "ricochlime.exe"
