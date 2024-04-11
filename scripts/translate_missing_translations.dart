@@ -138,14 +138,10 @@ Future<String?> translateString(
     '  Translating into $languageCode: '
     '${english.length > 20 ? '${english.substring(0, 20)}...' : english}',
   );
-  Translation translation;
+  List<String> translations;
   try {
-    translation = await translator
-        .translateSimply(
-          english,
-          from: 'en',
-          to: _nearestLocaleCode(languageCode),
-        )
+    translations = await translator
+        .translateLingva(english, 'en', _nearestLocaleCode(languageCode))
         .timeout(const Duration(seconds: 3));
   } catch (e) {
     print('    Translation failed: $e');
@@ -153,7 +149,7 @@ Future<String?> translateString(
     return null;
   }
 
-  final translatedText = translation.translations.text;
+  final translatedText = translations.first;
   final errorTexts = [
     'Invalid request',
     'None is not supported',
