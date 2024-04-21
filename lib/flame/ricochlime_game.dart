@@ -149,8 +149,8 @@ class RicochlimeGame extends Forge2DGame
   /// and starts playing it.
   void _initBgMusic() {
     if (disableBgMusic) return;
+    if (Prefs.bgmVolume.value < 0.01) return;
     if (bgMusicInitialized) return;
-    if (Prefs.bgmVolume.value <= 0.05) return;
 
     if (kDebugMode) print('Initializing bg music');
     FlameAudio.bgm.initialize();
@@ -163,6 +163,7 @@ class RicochlimeGame extends Forge2DGame
 
   void pauseBgMusic() {
     if (disableBgMusic) return;
+    if (Prefs.bgmVolume.value < 0.01) return;
     if (!bgMusicInitialized) return;
 
     if (kDebugMode) print('Fading out bg music');
@@ -176,6 +177,7 @@ class RicochlimeGame extends Forge2DGame
 
   void resumeBgMusic() {
     if (disableBgMusic) return;
+    if (Prefs.bgmVolume.value < 0.01) return;
     if (!bgMusicInitialized) _initBgMusic();
     if (!bgMusicInitialized) return;
 
