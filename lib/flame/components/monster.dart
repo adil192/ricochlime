@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/health_bar.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 /// The animation state of the monster.
@@ -33,12 +32,11 @@ class Monster extends BodyComponent with ContactCallbacks {
         super(
           paint: Paint()..color = RicochlimePalette.monsterColor,
           priority: getPriorityFromPosition(initialPosition),
+          renderBody: false,
         ) {
     if (givesPlayerABullet != null) {
       this.givesPlayerABullet = givesPlayerABullet;
     }
-
-    _onShowCollidersChange();
 
     add(_animation);
     add(_healthBar);
@@ -130,26 +128,6 @@ class Monster extends BodyComponent with ContactCallbacks {
   /// This is used to prevent the body from being created multiple times,
   /// since the body is created before [onLoad] is called.
   bool bodyCreated = false;
-
-  @override
-  void onMount() {
-    super.onMount();
-    Prefs.showColliders.addListener(_onShowCollidersChange);
-    _onShowCollidersChange();
-  }
-
-  @override
-  void onRemove() {
-    super.onRemove();
-    Prefs.showColliders.removeListener(_onShowCollidersChange);
-  }
-
-  void _onShowCollidersChange() {
-    renderBody = Prefs.showColliders.value;
-    _animation.paint.color = Colors.white.withOpacity(
-      Prefs.showColliders.value ? 0.7 : 1,
-    );
-  }
 
   @override
   void update(double dt) {

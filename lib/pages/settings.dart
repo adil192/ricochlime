@@ -215,39 +215,6 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
-          // Whether to show colliders
-          Padding(
-            padding: listTilePadding,
-            child: NesContainer(
-              padding: EdgeInsets.zero,
-              child: ValueListenableBuilder(
-                valueListenable: Prefs.showColliders,
-                builder: (context, _, child) {
-                  return MergeSemantics(
-                    child: ListTile(
-                      title: child,
-                      leading: NesIcon(
-                        iconData: NesIcons.lamp,
-                      ),
-                      tileColor: listTileColor,
-                      shape: listTileShape,
-                      contentPadding: listTileContentPadding,
-                      trailing: NesCheckBox(
-                        value: Prefs.showColliders.value,
-                        onChange: (value) {
-                          Prefs.showColliders.value = value;
-                        },
-                      ),
-                      onTap: () => Prefs.showColliders.value =
-                          !Prefs.showColliders.value,
-                    ),
-                  );
-                },
-                child: Text(t.settingsPage.showColliders),
-              ),
-            ),
-          ),
-
           // Speed up page transitions
           Padding(
             padding: listTilePadding,
