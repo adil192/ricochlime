@@ -1,0 +1,2 @@
+• Simplified the monster sprites to be perfect rectangles
+• Fixed a bug where the music would block other sounds even when muted

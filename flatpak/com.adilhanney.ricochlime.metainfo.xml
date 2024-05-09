@@ -68,6 +68,15 @@
     </branding>
 
     <releases>
+        <release version="1.4.0" type="development" date="2024-05-09">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.4.0</url>
+            <description>
+                <ul>
+                    <li>Simplified the monster sprites to be perfect rectangles</li>
+                    <li>Fixed a bug where the music would block other sounds even when muted</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.3.1" type="development" date="2024-04-11">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.3.1</url>
             <description>
