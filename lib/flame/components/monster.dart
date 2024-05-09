@@ -224,16 +224,7 @@ class Monster extends BodyComponent with ContactCallbacks {
     if (bodyCreated) return body;
     bodyCreated = true;
 
-    final shape = PolygonShape()
-      ..set([
-        Vector2(6, -2),
-        Vector2(2, 1),
-        Vector2(2, 8),
-        Vector2(4, 12),
-        Vector2(12, 12),
-        Vector2(12, 1),
-        Vector2(10, -2),
-      ]);
+    final shape = PolygonShape()..setAsBox(5, 7, Vector2(7.5, 5), 0);
     final fixtureDef = FixtureDef(
       shape,
       userData: this,
