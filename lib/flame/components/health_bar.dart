@@ -11,10 +11,7 @@ class HealthBar extends PositionComponent {
     required this.paint,
   }) : super(
           anchor: Anchor.topLeft,
-          position: Vector2(
-            (Monster.staticWidth - staticWidth) / 2,
-            Monster.staticHeight * 0.1,
-          ),
+          position: Vector2((Monster.staticWidth - staticWidth) / 2, 0),
           size: Vector2(staticWidth, staticHeight),
           priority: 1,
         );
