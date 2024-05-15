@@ -73,10 +73,10 @@ class WaterSprite extends SpriteAnimationComponent
     animation = SpriteAnimation.fromFrameData(
       gameRef.images.fromCache('overworld.png'),
       SpriteAnimationData.sequenced(
-        amount: RicochlimeGame.reduceAnimations ? 1 : 8,
+        amount: RicochlimeGame.reproducibleGoldenMode ? 1 : 8,
         stepTime: 4 / 8,
         textureSize: Vector2(16, 16),
-        amountPerRow: RicochlimeGame.reduceAnimations ? 1 : 4,
+        amountPerRow: RicochlimeGame.reproducibleGoldenMode ? 1 : 4,
         texturePosition: Vector2(0, 16),
       ),
     );

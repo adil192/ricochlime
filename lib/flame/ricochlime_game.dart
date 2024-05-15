@@ -141,9 +141,9 @@ class RicochlimeGame extends Forge2DGame
   @visibleForTesting
   static bool disableBgMusic = false;
 
-  /// Whether to reduce sprite animations.
+  /// Reduces sprite animations to make golden tests more predictable.
   /// If true, certain animations will just show the first frame.
-  static bool reduceAnimations = false;
+  static bool reproducibleGoldenMode = false;
 
   /// Initializes the background music,
   /// and starts playing it.

@@ -53,7 +53,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       PlayerState.idle: SpriteAnimation.fromFrameData(
         playerImage,
         SpriteAnimationData.sequenced(
-          amount: RicochlimeGame.reduceAnimations ? 1 : 2,
+          amount: RicochlimeGame.reproducibleGoldenMode ? 1 : 2,
           stepTime: 1 / 2,
           textureSize: Vector2(17, 23),
           texturePosition: Vector2(0, 0),
@@ -62,7 +62,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       PlayerState.attack: SpriteAnimation.fromFrameData(
         playerImage,
         SpriteAnimationData.sequenced(
-          amount: RicochlimeGame.reduceAnimations ? 1 : 4,
+          amount: RicochlimeGame.reproducibleGoldenMode ? 1 : 4,
           stepTime: 0.5 / 4,
           textureSize: Vector2(17, 23),
           texturePosition: Vector2(0, 1 * 23),
