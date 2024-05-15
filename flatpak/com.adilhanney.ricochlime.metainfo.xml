@@ -68,6 +68,14 @@
     </branding>
 
     <releases>
+        <release version="1.4.1" type="development" date="2024-05-15">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.4.1</url>
+            <description>
+                <ul>
+                    <li>Fixed a bug stopping new users from playing the game</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.4.0" type="development" date="2024-05-09">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.4.0</url>
             <description>
