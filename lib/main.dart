@@ -14,8 +14,12 @@ import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+Future<void> main({
+  WidgetsBinding? Function() initWidgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized,
+  void Function(Widget) runApp = runApp,
+}) async {
+  initWidgetsBinding();
   LocaleSettings.useDeviceLocale();
   unawaited(game.preloadSprites.future);
   Prefs.init();
