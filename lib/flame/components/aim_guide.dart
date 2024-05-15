@@ -8,7 +8,7 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 /// A component that draws a dotted line
 /// to show the user where they're aiming.
 class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
-  final Paint _paint = Paint()..color = Colors.white;
+  final Paint _paint = Paint()..color = Colors.white.withOpacity(0.9);
 
   /// Information about the current aim.
   ///
