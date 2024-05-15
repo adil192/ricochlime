@@ -513,14 +513,19 @@ class RicochlimeGame extends Forge2DGame
   /// Resets the game:
   /// sets the score to zero,
   /// and spawns a single row of monsters.
-  void _reset() {
+  Future<void> _reset() async {
     state.value = GameState.idle;
     inputCancelled = false;
     score.value = 0;
     numBullets = 1;
     numNewRowsEachRound = 1;
     _resetChildren();
-    spawnNewMonsters();
+    try {
+      await spawnNewMonsters();
+    } finally {
+      inputCancelled = false;
+      state.value = GameState.idle;
+    }
   }
 
   @visibleForTesting
