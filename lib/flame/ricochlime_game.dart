@@ -224,8 +224,7 @@ class RicochlimeGame extends Forge2DGame
   Future<void> importFromGame(GameData? data) async {
     if (data == null) {
       // new game
-      _reset();
-      return;
+      return _reset();
     }
 
     int numMonstersThatGiveBullets = 0;
