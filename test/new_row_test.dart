@@ -16,7 +16,7 @@ void main() {
       final random = Random(12);
       expect(RicochlimeGame.minMonstersInRow, lessThan(Monster.monstersPerRow));
 
-      for (var _ = 0; _ < 100; ++_) {
+      for (var t = 0; t < 100; ++t) {
         final row = RicochlimeGame.createNewRow(
           random: random,
           monsterHp: 1,

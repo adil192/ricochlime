@@ -38,14 +38,14 @@ ThemeData nesThemeFrom({
             )
           : NesIconTheme(
               primary: colorScheme.onSurface,
-              secondary: colorScheme.background.withOpacity(0.5),
+              secondary: colorScheme.surface.withOpacity(0.5),
               accent: colorScheme.secondary,
               shadow: Colors.grey,
             ),
       darkIconTheme: brightness == Brightness.light
           ? NesIconTheme(
               primary: colorScheme.onSurface,
-              secondary: colorScheme.background,
+              secondary: colorScheme.surface,
               accent: colorScheme.secondary,
               shadow: Colors.grey,
             )

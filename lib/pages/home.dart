@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
         statusBarColor: Colors.transparent,
         statusBarBrightness: colorScheme.brightness,
         statusBarIconBrightness: colorScheme.brightness.opposite,
-        systemNavigationBarColor: colorScheme.background,
+        systemNavigationBarColor: colorScheme.surface,
         systemNavigationBarIconBrightness: colorScheme.brightness.opposite,
       ),
       child: Scaffold(
