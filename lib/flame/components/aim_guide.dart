@@ -23,6 +23,9 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   /// The maximum number of dots to be drawn.
   static const _maxDots = 20;
 
+  /// A time value between 0 and 1 used to animate the aim guide.
+  double t = 0;
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -35,6 +38,12 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   }
 
   @override
+  void update(double dt) {
+    t = (t + dt) % 1;
+    super.update(dt);
+  }
+
+  @override
   void render(Canvas canvas) {
     super.render(canvas);
 
@@ -44,9 +53,9 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
     }
 
     for (var dot = 0; dot < _maxDots * aimDetails.aimLength; dot++) {
-      final distFromCenter = _dotInterval * (dot + 1);
-      final dotPos = aimDetails.unitDir * distFromCenter.toDouble();
-      canvas.drawCircle(Offset(dotPos.x, dotPos.y), Bullet.radius, _paint);
+      final distFromCenter = _dotInterval * (dot + 1 + t);
+      final pos = aimDetails.unitDir * distFromCenter;
+      canvas.drawCircle(pos.toOffset(), Bullet.radius, _paint);
     }
   }
 
