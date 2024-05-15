@@ -39,7 +39,7 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
 
   @override
   void update(double dt) {
-    t = (t + dt) % 1;
+    t = RicochlimeGame.reduceMotion ? 0 : (t + dt) % 1;
     super.update(dt);
   }
 

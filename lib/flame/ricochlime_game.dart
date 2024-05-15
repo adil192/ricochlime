@@ -145,6 +145,11 @@ class RicochlimeGame extends Forge2DGame
   /// If true, certain animations will just show the first frame.
   static bool reproducibleGoldenMode = false;
 
+  /// Whether the user has the "Reduce motion" accessibility setting enabled.
+  /// Not to be confused with [reproducibleGoldenMode] which turns off sprite
+  /// animations and doesn't reduce moving elements.
+  static bool reduceMotion = false;
+
   /// Initializes the background music,
   /// and starts playing it.
   void _initBgMusic() {

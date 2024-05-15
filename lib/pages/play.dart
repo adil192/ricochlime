@@ -44,6 +44,7 @@ class _PlayPageState extends State<PlayPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    RicochlimeGame.reduceMotion = MediaQuery.of(context).disableAnimations;
     _isDarkMode.value = Theme.of(context).brightness == Brightness.dark;
   }
 
