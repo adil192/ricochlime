@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flame/extensions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -117,17 +118,22 @@ class _MyAppState extends State<MyApp> {
       darkTheme: nesThemeFrom(
         brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: RicochlimePalette.grassColor,
+          seedColor: RicochlimePalette.grassColorDark,
+          primary: RicochlimePalette.grassColor.brighten(0.1),
           brightness: Brightness.dark,
         ),
       ),
       highContrastTheme: nesThemeFrom(
         brightness: Brightness.light,
-        colorScheme: const ColorScheme.highContrastLight(),
+        colorScheme: ColorScheme.highContrastLight(
+          primary: RicochlimePalette.grassColor.darken(0.5),
+        ),
       ),
       highContrastDarkTheme: nesThemeFrom(
         brightness: Brightness.dark,
-        colorScheme: const ColorScheme.highContrastDark(),
+        colorScheme: ColorScheme.highContrastDark(
+          primary: RicochlimePalette.grassColorDark.darken(0.5),
+        ),
       ),
       home: const HomePage(),
     );
