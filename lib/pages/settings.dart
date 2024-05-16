@@ -255,7 +255,7 @@ class SettingsPage extends StatelessWidget {
               padding: EdgeInsets.zero,
               child: ListTile(
                 onTap: () {
-                  final screenWidth = MediaQuery.of(context).size.width;
+                  final screenWidth = MediaQuery.sizeOf(context).width;
                   final iconSize = min<double>(64, screenWidth * 0.15);
                   showAboutDialog(
                     context: context,

@@ -92,7 +92,7 @@ class _TutorialScreenshot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
     if (size.width > TutorialPage.maxWidth) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(8),
