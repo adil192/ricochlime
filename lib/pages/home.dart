@@ -161,14 +161,17 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
       return;
     }
 
-    Navigator.of(context).push(
-      NesVerticalCloseTransition.route<void>(
-        pageBuilder: widget.openBuilder,
-        duration: Prefs.fasterPageTransitions.value
-            ? const Duration(milliseconds: 450)
-            : const Duration(milliseconds: 750),
-      ),
-    );
+    final route = MediaQuery.disableAnimationsOf(context)
+        ? PageRouteBuilder(
+            pageBuilder: widget.openBuilder,
+          )
+        : NesVerticalCloseTransition.route<void>(
+            pageBuilder: widget.openBuilder,
+            duration: Prefs.fasterPageTransitions.value
+                ? const Duration(milliseconds: 450)
+                : const Duration(milliseconds: 750),
+          );
+    Navigator.of(context).push(route);
   }
 
   @override
