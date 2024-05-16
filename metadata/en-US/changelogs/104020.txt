@@ -1,0 +1,3 @@
+• The aim guide is now animated
+• Fixed the momentary glitch when a monster dies where its position flickers
+• Lots of accessibility improvements
