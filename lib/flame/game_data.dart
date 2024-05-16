@@ -3,7 +3,7 @@ import 'package:ricochlime/flame/components/monster.dart';
 class GameData {
   GameData({
     required this.score,
-    required List<Monster> monsters,
+    required Iterable<Monster> monsters,
   }) : monsters = monsters.map((monster) => monster.toJson()).toList();
 
   GameData.fromJson(Map<String, dynamic> json)

@@ -93,6 +93,8 @@ class Monster extends BodyComponent with ContactCallbacks {
   /// The current health.
   int hp;
 
+  bool get isDead => hp <= 0;
+
   @override
   Vector2 get position {
     if (bodyCreated) {
@@ -132,6 +134,18 @@ class Monster extends BodyComponent with ContactCallbacks {
   @override
   void update(double dt) {
     super.update(dt);
+
+    if (isDead) {
+      if (body.isActive) body.setActive(false);
+
+      if (_animation.parent == null) {
+        // Animation component deleted itself after dead animation finished,
+        // so we can safely remove the monster now.
+        parent = null;
+      }
+
+      return;
+    }
 
     if (_movement != null) {
       _movement!.elapsedSeconds += dt;
@@ -219,20 +233,17 @@ class Monster extends BodyComponent with ContactCallbacks {
   void beginContact(Object other, Contact contact) {
     super.beginContact(other, contact);
 
+    if (isDead) return;
+
     if (other is Bullet) {
       hp -= 1;
       _healthBar.hp = hp;
-      if (hp <= 0) {
-        if (givesPlayerABullet) {
-          (game as RicochlimeGame).numBullets += 1;
-        }
 
-        _animation
-          ..parent = parent
-          ..position = MonsterAnimation._relativePosition + body.position
-          ..current = MonsterState.dead;
+      if (isDead) {
+        _animation.current = MonsterState.dead;
+        remove(_healthBar);
 
-        removeFromParent();
+        if (givesPlayerABullet) (game as RicochlimeGame).numBullets += 1;
       }
     }
   }

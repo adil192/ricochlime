@@ -273,7 +273,7 @@ class RicochlimeGame extends Forge2DGame
     );
     Prefs.currentGame.value = GameData(
       score: score.value,
-      monsters: monsters,
+      monsters: monsters.where((monster) => !monster.isDead),
     );
     await Prefs.currentGame.waitUntilSaved();
   }
