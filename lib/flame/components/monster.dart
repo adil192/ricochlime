@@ -1,8 +1,9 @@
 import 'dart:ui' show lerpDouble;
 
 import 'package:flame/components.dart';
+import 'package:flame/image_composition.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Image;
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/health_bar.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
@@ -20,6 +21,17 @@ enum MonsterState {
   dead,
 }
 
+enum KillReward {
+  /// No reward for killing this monster
+  none,
+
+  /// Gives the player an extra bullet
+  bullet,
+
+  /// Gives the player a coin
+  coin,
+}
+
 /// A monster component.
 class Monster extends BodyComponent with ContactCallbacks {
   // ignore: public_member_api_docs
@@ -27,32 +39,47 @@ class Monster extends BodyComponent with ContactCallbacks {
     required this.initialPosition,
     required this.maxHp,
     int? hp,
-    bool? givesPlayerABullet,
+    KillReward? killReward,
   })  : hp = hp ?? maxHp,
         super(
           paint: Paint()..color = RicochlimePalette.monsterColor,
           priority: getPriorityFromPosition(initialPosition),
           renderBody: false,
         ) {
-    if (givesPlayerABullet != null) {
-      this.givesPlayerABullet = givesPlayerABullet;
-    }
+    if (killReward != null) this.killReward = killReward;
 
     add(_animation);
     add(_healthBar);
   }
 
   /// Creates a Monster from JSON data.
-  Monster.fromJson(Map<String, dynamic> json)
-      : this(
-          initialPosition: Vector2(
-            json['px'] as double,
-            json['py'] as double,
-          ),
-          hp: json['hp'] as int,
-          maxHp: json['maxHp'] as int,
-          givesPlayerABullet: json['givesPlayerABullet'] as bool? ?? false,
-        );
+  factory Monster.fromJson(Map<String, dynamic> json) {
+    final initialPosition = Vector2(
+      json['px'] as double,
+      json['py'] as double,
+    );
+    final hp = json['hp'] as int;
+    final maxHp = json['maxHp'] as int;
+
+    final KillReward killReward;
+    if (json['killReward'] != null) {
+      print('killReward: ${json['killReward']}');
+      killReward = KillReward.values[json['killReward'] as int];
+    } else if (json['givesPlayerABullet'] as bool? ?? false) {
+      print('givesPlayerABullet: ${json['givesPlayerABullet']}');
+      killReward = KillReward.bullet;
+    } else {
+      print('killReward: none');
+      killReward = KillReward.none;
+    }
+
+    return Monster(
+      initialPosition: initialPosition,
+      maxHp: maxHp,
+      hp: hp,
+      killReward: killReward,
+    );
+  }
 
   /// Converts the monster's data to a JSON map.
   Map<String, dynamic> toJson() => {
@@ -60,7 +87,7 @@ class Monster extends BodyComponent with ContactCallbacks {
         'py': _movement?.targetPosition.y ?? position.y,
         'hp': hp,
         'maxHp': maxHp,
-        'givesPlayerABullet': givesPlayerABullet,
+        'killReward': killReward.index,
       };
 
   /// How many monsters there are in each row.
@@ -117,13 +144,12 @@ class Monster extends BodyComponent with ContactCallbacks {
     paint: _animation.paint,
   );
 
-  bool _givesPlayerABullet = false;
-
-  /// Whether the monster gives the player a bullet when it dies.
-  bool get givesPlayerABullet => _givesPlayerABullet;
-  set givesPlayerABullet(bool value) {
-    _givesPlayerABullet = value;
-    _animation.givesPlayerABullet = value;
+  /// The reward for killing this monster
+  KillReward get killReward => _killReward;
+  KillReward _killReward = KillReward.none;
+  set killReward(KillReward killReward) {
+    _killReward = killReward;
+    _animation.setSpriteFromKillReward(killReward);
   }
 
   /// Whether the body has been created yet.
@@ -243,7 +269,15 @@ class Monster extends BodyComponent with ContactCallbacks {
         _animation.current = MonsterState.dead;
         remove(_healthBar);
 
-        if (givesPlayerABullet) (game as RicochlimeGame).numBullets += 1;
+        switch (killReward) {
+          case KillReward.none:
+            break;
+          case KillReward.bullet:
+            (game as RicochlimeGame).numBullets += 1;
+          case KillReward.coin:
+            // TODO(adil192): Implement coin reward
+            throw UnimplementedError();
+        }
       }
     }
   }
@@ -304,17 +338,6 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
     }
   }
 
-  /// Whether the monster gives the player a bullet when it dies.
-  bool get givesPlayerABullet => getPaint().colorFilter != null;
-  set givesPlayerABullet(bool value) {
-    getPaint().colorFilter = value
-        ? ColorFilter.mode(
-            const HSLColor.fromAHSL(1, 0, 0.5, 0.7).toColor(),
-            BlendMode.modulate,
-          )
-        : null;
-  }
-
   @override
   Future<void> onLoad() async {
     animations = getAnimations();
@@ -330,12 +353,35 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
   static Future<void> preloadSprites({
     required RicochlimeGame gameRef,
   }) {
-    return gameRef.images.load('log_subset.png');
+    return Future.wait([
+      gameRef.images.load('log_normal.png'),
+      gameRef.images.load('log_green.png'),
+      gameRef.images.load('log_gold.png'),
+    ]);
+  }
+
+  String monsterImagePath = 'log_normal.png';
+  void setSpriteFromKillReward(KillReward killReward) {
+    monsterImagePath = switch (killReward) {
+      KillReward.none => 'log_normal.png',
+      KillReward.bullet => 'log_green.png',
+      KillReward.coin => 'log_gold.png',
+    };
+
+    final animations = this.animations;
+    if (animations == null) return;
+
+    final monsterImage = gameRef.images.fromCache(monsterImagePath);
+    for (final animation in animations.values) {
+      for (final frame in animation.frames) {
+        frame.sprite.image = monsterImage;
+      }
+    }
   }
 
   /// The list of animations for the monster.
   Map<MonsterState, SpriteAnimation> getAnimations() {
-    final monsterImage = gameRef.images.fromCache('log_subset.png');
+    final monsterImage = gameRef.images.fromCache(monsterImagePath);
     return {
       MonsterState.idle: SpriteAnimation.fromFrameData(
         monsterImage,

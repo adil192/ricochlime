@@ -240,7 +240,7 @@ class RicochlimeGame extends Forge2DGame
       monsters.add(monster);
       add(monster);
 
-      if (monster.givesPlayerABullet) numMonstersThatGiveBullets++;
+      if (monster.killReward == KillReward.bullet) numMonstersThatGiveBullets++;
       if (monster.position.y <= 0) topGapNeedsAdjusting = true;
     }
 
@@ -575,11 +575,11 @@ class RicochlimeGame extends Forge2DGame
     ];
 
     // one of the monsters should give the user a bullet when it dies
-    int chosenIndex = random.nextInt(row.length);
-    while (row[chosenIndex] == null) {
-      chosenIndex = random.nextInt(row.length);
+    int bulletRewardIndex = random.nextInt(row.length);
+    while (row[bulletRewardIndex] == null) {
+      bulletRewardIndex = random.nextInt(row.length);
     }
-    row[chosenIndex]!.givesPlayerABullet = true;
+    row[bulletRewardIndex]!.killReward = KillReward.bullet;
 
     return row;
   }

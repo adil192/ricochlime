@@ -6,7 +6,7 @@ https://creativecommons.org/publicdomain/zero/1.0/
 
 Some of these sprites were modified by me, such as `character_subset.png`
 being a modified subset of the original `character.png`,
-and `log_subset.png` being modified from the original `log.png` to be more
+and `log_normal.png` being modified from the original `log.png` to be more
 rectangular.
 These works are licensed under CC0 as well.
 
