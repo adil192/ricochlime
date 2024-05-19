@@ -8,12 +8,14 @@ class DialogButton extends StatelessWidget {
     required this.onPressed,
     this.type = NesButtonType.normal,
     this.icon,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
     required this.text,
   });
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final NesButtonType type;
-  final NesIconData? icon;
+  final Widget? icon;
+  final CrossAxisAlignment crossAxisAlignment;
   final String text;
 
   @override
@@ -24,9 +26,12 @@ class DialogButton extends StatelessWidget {
         onPressed: onPressed,
         type: type,
         child: Row(
+          crossAxisAlignment: crossAxisAlignment,
           children: [
-            if (icon != null) NesIcon(iconData: icon!),
-            const SizedBox(width: 12),
+            if (icon != null) ...[
+              icon!,
+              const SizedBox(width: buttonSize * 0.4),
+            ],
             Text(
               text,
               softWrap: false,

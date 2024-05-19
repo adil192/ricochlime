@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
-import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/dialog_button.dart';
@@ -74,23 +73,29 @@ class GameOverDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              if (AdState.rewardedAdsSupported) ...[
-                DialogButton(
-                  onPressed: () async {
-                    final rewardGranted = await AdState.showRewardedAd();
-                    if (!context.mounted) return;
-                    if (rewardGranted) {
-                      Navigator.of(context).pop<GameOverAction>(
-                        GameOverAction.continueGame,
-                      );
-                    }
-                  },
-                  type: NesButtonType.primary,
-                  icon: NesIcons.tv,
-                  text: t.gameOverPage.continueWithAdButton,
+              DialogButton(
+                onPressed: Prefs.coins.value < 100
+                    ? null
+                    : () async {
+                        if (Prefs.coins.value < 100) return;
+                        Prefs.coins.value -= 100;
+                        Navigator.of(context).pop<GameOverAction>(
+                          GameOverAction.continueGame,
+                        );
+                      },
+                type: NesButtonType.primary,
+                icon: Image.asset(
+                  'assets/images/coin.png',
+                  filterQuality: FilterQuality.none,
+                  width: 28,
+                  height: 28,
+                  fit: BoxFit.contain,
+                  semanticLabel: t.playPage.coins,
                 ),
-                const SizedBox(height: 32),
-              ],
+                crossAxisAlignment: CrossAxisAlignment.end,
+                text: t.gameOverPage.continueWithCoins,
+              ),
+              const SizedBox(height: 32),
               DialogButton(
                 onPressed: () {
                   Navigator.of(context).pop<GameOverAction>(
@@ -98,7 +103,7 @@ class GameOverDialog extends StatelessWidget {
                   );
                 },
                 type: NesButtonType.primary,
-                icon: NesIcons.redo,
+                icon: NesIcon(iconData: NesIcons.redo),
                 text: t.gameOverPage.restartGameButton,
               ),
               const SizedBox(height: 32),
@@ -110,7 +115,7 @@ class GameOverDialog extends StatelessWidget {
                     // pop play page
                     ..pop();
                 },
-                icon: NesIcons.leftArrowIndicator,
+                icon: NesIcon(iconData: NesIcons.leftArrowIndicator),
                 text: t.gameOverPage.homeButton,
               ),
             ],

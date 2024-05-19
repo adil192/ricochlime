@@ -37,7 +37,7 @@ gameOverPage:
   title: Game over!
   highScoreNotBeaten: You scored $p points!
   highScoreBeaten(rich): Your high score is now $pOld $pNew points!
-  continueWithAdButton: Continue with ad
+  continueWithCoins: 100 to continue
   restartGameButton: Restart game
   homeButton: Home
 restartGameDialog:

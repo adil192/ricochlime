@@ -37,7 +37,6 @@ gameOverPage:
   title: "Ойын бітті!"
   highScoreNotBeaten: "$p ұпай жинадыңыз!"
   highScoreBeaten(rich): "Енді үздік нәтижеңіз $pOld $pNew ұпай!"
-  continueWithAdButton: "Жарнама көріп, жалғастыру"
   restartGameButton: Жаңадан бастау
   homeButton: Мәзір
 restartGameDialog:

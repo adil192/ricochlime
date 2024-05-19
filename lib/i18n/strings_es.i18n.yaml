@@ -36,7 +36,6 @@ gameOverPage:
   title(OUTDATED): "¡Juego terminado!"
   highScoreNotBeaten(OUTDATED): "¡Obtuviste $p puntos!"
   highScoreBeaten(rich, OUTDATED): "¡Tu puntuación más alta ahora es $pOld antiguos $pNew!"
-  continueWithAdButton(OUTDATED): Continuar con un anuncio
   restartGameButton(OUTDATED): Reinicia el juego
   homeButton(OUTDATED): Hogar
 restartGameDialog:

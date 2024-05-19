@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 139 (46 per locale)
+/// Strings: 137 (45 per locale)
 ///
-/// Built on 2024-05-19 at 14:27 UTC
+/// Built on 2024-05-19 at 14:42 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -233,7 +233,7 @@ class _StringsGameOverPageEn {
 		pNew,
 		const TextSpan(text: ' points!'),
 	]);
-	String get continueWithAdButton => 'Continue with ad';
+	String get continueWithCoins => '100 to continue';
 	String get restartGameButton => 'Restart game';
 	String get homeButton => 'Home';
 }
@@ -387,7 +387,6 @@ class _StringsGameOverPageEs extends _StringsGameOverPageEn {
 		pNew,
 		const TextSpan(text: '!'),
 	]);
-	@override String get continueWithAdButton => 'Continuar con un anuncio';
 	@override String get restartGameButton => 'Reinicia el juego';
 	@override String get homeButton => 'Hogar';
 }
@@ -541,7 +540,6 @@ class _StringsGameOverPageKk extends _StringsGameOverPageEn {
 		pNew,
 		const TextSpan(text: ' ұпай!'),
 	]);
-	@override String get continueWithAdButton => 'Жарнама көріп, жалғастыру';
 	@override String get restartGameButton => 'Жаңадан бастау';
 	@override String get homeButton => 'Мәзір';
 }
