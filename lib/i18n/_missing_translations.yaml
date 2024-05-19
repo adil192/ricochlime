@@ -40,7 +40,7 @@ es:
     title(OUTDATED): "Game over!"
     highScoreNotBeaten(OUTDATED): "You scored $p points!"
     highScoreBeaten(rich)(OUTDATED): "Your high score is now $pOld $pNew points!"
-    continueWithAdButton(OUTDATED): Continue with ad
+    continueWithCoins(OUTDATED): 100 to continue
     restartGameButton(OUTDATED): Restart game
     homeButton(OUTDATED): Home
   restartGameDialog:
@@ -72,6 +72,8 @@ kk:
     invalidAge(OUTDATED): Please enter a valid age
     useMinigame(OUTDATED): Play the age guessing minigame
     useSimpleInput(OUTDATED): I want to enter my age manually
+  gameOverPage:
+    continueWithCoins(OUTDATED): 100 to continue
   restartGameDialog:
     title(OUTDATED): "Restart game?"
     areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
