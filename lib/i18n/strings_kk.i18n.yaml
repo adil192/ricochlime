@@ -17,7 +17,6 @@ settingsPage:
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
   fasterPageTransitions(OUTDATED): Беттерді жылдамырақ ауыстыру
   showUndoButton(OUTDATED): Қозғалысты қайтаруға рұқсат беріңіз
-  showColliders(OUTDATED): Құбыжық коллайдерлерін көрсетіңіз
   bgmVolume(OUTDATED): Фондық музыканың дыбыс деңгейі
 ageDialog:
   yourAge: Жасыңыз

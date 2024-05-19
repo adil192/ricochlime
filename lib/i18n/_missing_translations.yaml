@@ -16,7 +16,6 @@ es:
     hyperlegibleFont(OUTDATED): Use the Atkinson Hyperlegible font
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
-    showColliders(OUTDATED): Show monster colliders
     fasterPageTransitions(OUTDATED): Faster page transitions
     appInfo(OUTDATED): App info
     licenseNotice(OUTDATED): |-
@@ -66,7 +65,6 @@ kk:
   settingsPage:
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
-    showColliders(OUTDATED): Show monster colliders
     fasterPageTransitions(OUTDATED): Faster page transitions
   ageDialog:
     guessNumber(OUTDATED): Guess \#$n

@@ -9,7 +9,6 @@ playPage:
 settingsPage:
   fasterPageTransitions(OUTDATED): Transiciones de página más rápidas
   showUndoButton(OUTDATED): Permitir deshacer movimientos
-  showColliders(OUTDATED): Mostrar colisionadores de monstruos
   title(OUTDATED): Ajustes
   adConsent(OUTDATED): Cambiar el consentimiento de los anuncios
   hyperlegibleFont(OUTDATED): Utilice la fuente Atkinson Hyperlegible
