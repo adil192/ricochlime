@@ -574,12 +574,24 @@ class RicochlimeGame extends Forge2DGame
           ),
     ];
 
-    // one of the monsters should give the user a bullet when it dies
+    // one of the monsters should give the user a bullet
     int bulletRewardIndex = random.nextInt(row.length);
-    while (row[bulletRewardIndex] == null) {
+    while (row[bulletRewardIndex] == null ||
+        row[bulletRewardIndex]!.killReward != KillReward.none) {
       bulletRewardIndex = random.nextInt(row.length);
     }
     row[bulletRewardIndex]!.killReward = KillReward.bullet;
+
+    // one of the monsters should give the user a coin
+    int coinRewardIndex = random.nextInt(row.length);
+    while (row[coinRewardIndex] == null ||
+        row[coinRewardIndex]!.killReward != KillReward.none) {
+      coinRewardIndex = random.nextInt(row.length);
+    }
+    row[coinRewardIndex]!.killReward = KillReward.coin;
+
+    // Note: If you're adding new rewards, make sure to update
+    // [minMonstersInRow] to avoid an infinite loop.
 
     return row;
   }

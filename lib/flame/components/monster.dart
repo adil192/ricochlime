@@ -1,12 +1,12 @@
 import 'dart:ui' show lerpDouble;
 
 import 'package:flame/components.dart';
-import 'package:flame/image_composition.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/health_bar.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
+import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 /// The animation state of the monster.
@@ -63,13 +63,10 @@ class Monster extends BodyComponent with ContactCallbacks {
 
     final KillReward killReward;
     if (json['killReward'] != null) {
-      print('killReward: ${json['killReward']}');
       killReward = KillReward.values[json['killReward'] as int];
     } else if (json['givesPlayerABullet'] as bool? ?? false) {
-      print('givesPlayerABullet: ${json['givesPlayerABullet']}');
       killReward = KillReward.bullet;
     } else {
-      print('killReward: none');
       killReward = KillReward.none;
     }
 
@@ -275,8 +272,7 @@ class Monster extends BodyComponent with ContactCallbacks {
           case KillReward.bullet:
             (game as RicochlimeGame).numBullets += 1;
           case KillReward.coin:
-            // TODO(adil192): Implement coin reward
-            throw UnimplementedError();
+            Prefs.coins.value += 1;
         }
       }
     }

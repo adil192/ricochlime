@@ -35,6 +35,8 @@ abstract class Prefs {
 
   static late final PlainPref<bool> fasterPageTransitions;
 
+  static late final PlainPref<int> coins;
+
   static void init() {
     currentGame = PlainPref('currentGame', null);
     highScore = PlainPref('highScore', 0);
@@ -48,6 +50,8 @@ abstract class Prefs {
     showUndoButton = PlainPref('showUndoButton', true);
 
     fasterPageTransitions = PlainPref('fasterPageTransitions', false);
+
+    coins = PlainPref('coins', 0);
   }
 }
 
