@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:forge2d/src/settings.dart' as physics_settings;
+import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
 import 'package:ricochlime/flame/components/background/background_tile.dart';
@@ -445,6 +446,7 @@ class RicochlimeGame extends Forge2DGame
 
       // check if the player has lost
       if (isGameOver()) {
+        unawaited(showRewardedInterstitial());
         await saveGame();
         await gameOver();
         return;
@@ -459,6 +461,20 @@ class RicochlimeGame extends Forge2DGame
   bool isGameOver() {
     final threshold = player.bottomY - Monster.staticHeight * 2;
     return monsters.any((monster) => monster.position.y >= threshold);
+  }
+
+  Timer? showRewardedInterstitialTimeout;
+  Future<void> showRewardedInterstitial() async {
+    if (showRewardedInterstitialTimeout != null) return;
+    showRewardedInterstitialTimeout = Timer(
+      const Duration(minutes: 10),
+      () => showRewardedInterstitialTimeout = null,
+    );
+
+    final rewardGranted = await AdState.showRewardedInterstitialAd();
+    if (!rewardGranted) return;
+
+    Prefs.coins.value += 100;
   }
 
   Future<void> gameOver() async {

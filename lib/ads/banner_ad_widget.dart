@@ -19,15 +19,15 @@ abstract class AdState {
   static bool _initializeCompleted = false;
 
   static late final String _bannerAdUnitId;
-  static late final String _rewardedAdUnitId;
-  static RewardedAd? _rewardedAd;
+  static late final String _rewardedInterstitialAdUnitId;
+  static RewardedInterstitialAd? _rewardedInterstitialAd;
 
   /// Whether ads are supported on this platform.
   static bool get adsSupported => _bannerAdUnitId.isNotEmpty;
 
-  /// Whether we can show rewarded ads.
+  /// Whether we can show rewarded interstitial ads.
   /// This is true if ads are supported and the user is old enough.
-  static bool get rewardedAdsSupported {
+  static bool get rewardedInterstitialAdsSupported {
     if (!adsSupported) return false;
     final age = AdState.age;
     return age != null && age >= minAgeForPersonalizedAds;
@@ -68,32 +68,42 @@ abstract class AdState {
       // test ads
       if (kIsWeb) {
         _bannerAdUnitId = '';
-        _rewardedAdUnitId = '';
+        _rewardedInterstitialAdUnitId = '';
       } else if (Platform.isAndroid) {
         _bannerAdUnitId = 'ca-app-pub-3940256099942544/6300978111';
-        _rewardedAdUnitId = 'ca-app-pub-3940256099942544/5224354917';
+        _rewardedInterstitialAdUnitId =
+            'ca-app-pub-3940256099942544/5354046379';
       } else if (Platform.isIOS) {
         _bannerAdUnitId = 'ca-app-pub-3940256099942544/2934735716';
-        _rewardedAdUnitId = 'ca-app-pub-3940256099942544/1712485313';
+        _rewardedInterstitialAdUnitId =
+            'ca-app-pub-3940256099942544/6978759866';
       } else {
         _bannerAdUnitId = '';
-        _rewardedAdUnitId = '';
+        _rewardedInterstitialAdUnitId = '';
       }
+      assert(_bannerAdUnitId.startsWith('ca-app-pub-3940256099942544'));
+      assert(_rewardedInterstitialAdUnitId
+          .startsWith('ca-app-pub-3940256099942544'));
     } else {
       // actual ads
       if (kIsWeb) {
         _bannerAdUnitId = '';
-        _rewardedAdUnitId = '';
+        _rewardedInterstitialAdUnitId = '';
       } else if (Platform.isAndroid) {
         _bannerAdUnitId = 'ca-app-pub-1312561055261176/8961545046';
-        _rewardedAdUnitId = 'ca-app-pub-1312561055261176/9247398730';
+        _rewardedInterstitialAdUnitId =
+            'ca-app-pub-1312561055261176/1010163793';
       } else if (Platform.isIOS) {
         _bannerAdUnitId = 'ca-app-pub-1312561055261176/8306938920';
-        _rewardedAdUnitId = 'ca-app-pub-1312561055261176/9513076323';
+        _rewardedInterstitialAdUnitId =
+            'ca-app-pub-1312561055261176/1654776024';
       } else {
         _bannerAdUnitId = '';
-        _rewardedAdUnitId = '';
+        _rewardedInterstitialAdUnitId = '';
       }
+      assert(_bannerAdUnitId.startsWith('ca-app-pub-1312561055261176'));
+      assert(_rewardedInterstitialAdUnitId
+          .startsWith('ca-app-pub-1312561055261176'));
     }
 
     if (adsSupported) _startInitialize();
@@ -134,7 +144,7 @@ abstract class AdState {
 
     await updateRequestConfiguration();
 
-    unawaited(_preloadRewardedAd());
+    unawaited(_preloadRewardedInterstitialAd());
   }
 
   static void _checkForRequiredConsent({
@@ -176,22 +186,24 @@ abstract class AdState {
     );
   }
 
-  static Future<bool> _preloadRewardedAd() {
-    if (!rewardedAdsSupported) return Future.value(false);
+  static Future<bool> _preloadRewardedInterstitialAd() {
+    if (!rewardedInterstitialAdsSupported) return Future.value(false);
     final completer = Completer<bool>();
-    RewardedAd.load(
-      adUnitId: _rewardedAdUnitId,
+    RewardedInterstitialAd.load(
+      adUnitId: _rewardedInterstitialAdUnitId,
       request: AdRequest(
         nonPersonalizedAds: age == null ? true : null,
       ),
-      rewardedAdLoadCallback: RewardedAdLoadCallback(
-        onAdLoaded: (RewardedAd ad) {
-          if (kDebugMode) print('Rewarded ad loaded!');
-          _rewardedAd = ad;
+      rewardedInterstitialAdLoadCallback: RewardedInterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          if (kDebugMode) print('Rewarded interstitial ad loaded!');
+          _rewardedInterstitialAd = ad;
           completer.complete(true);
         },
         onAdFailedToLoad: (LoadAdError error) {
-          if (kDebugMode) print('Rewarded ad failed to load: $error');
+          if (kDebugMode) {
+            print('Rewarded interstitial ad failed to load: $error');
+          }
           completer.complete(false);
         },
       ),
@@ -257,39 +269,40 @@ abstract class AdState {
     return bannerAd;
   }
 
-  /// Shows a rewarded ad.
+  /// Shows a rewarded interstitial ad.
   ///
   /// Returns whether the reward was earned.
-  static Future<bool> showRewardedAd() async {
-    if (!rewardedAdsSupported) return false;
+  static Future<bool> showRewardedInterstitialAd() async {
+    if (!rewardedInterstitialAdsSupported) return false;
 
-    if (_rewardedAd == null) {
-      if (kDebugMode) print('Rewarded ad is null, loading now...');
-      final loaded = await _preloadRewardedAd();
+    if (_rewardedInterstitialAd == null) {
+      if (kDebugMode) print('Rewarded interstitial ad is null, loading now...');
+      final loaded = await _preloadRewardedInterstitialAd();
       if (!loaded) {
         if (kDebugMode) print('Rewarded ad failed to load.');
         return false;
       }
-      assert(_rewardedAd != null);
+      assert(_rewardedInterstitialAd != null);
     }
 
     final completer = Completer<bool>();
-    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdDismissedFullScreenContent: (RewardedAd ad) {
+    _rewardedInterstitialAd!.fullScreenContentCallback =
+        FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (ad) {
         if (kDebugMode) print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
         if (!completer.isCompleted) {
-          _rewardedAd = null;
-          _preloadRewardedAd();
+          _rewardedInterstitialAd = null;
+          _preloadRewardedInterstitialAd();
           completer.complete(false);
         }
       },
     );
-    unawaited(_rewardedAd!.show(
+    unawaited(_rewardedInterstitialAd!.show(
       onUserEarnedReward: (ad, reward) {
         ad.dispose();
-        _rewardedAd = null;
-        _preloadRewardedAd();
+        _rewardedInterstitialAd = null;
+        _preloadRewardedInterstitialAd();
         completer.complete(true);
       },
     ));
@@ -297,10 +310,12 @@ abstract class AdState {
     return completer.future.timeout(
       const Duration(minutes: 2),
       onTimeout: () {
-        if (kDebugMode) print('Rewarded ad timed out, granting reward anyway.');
-        _rewardedAd?.dispose();
-        _rewardedAd = null;
-        _preloadRewardedAd();
+        if (kDebugMode) {
+          print('Rewarded interstitial ad timed out, granting reward anyway.');
+        }
+        _rewardedInterstitialAd?.dispose();
+        _rewardedInterstitialAd = null;
+        _preloadRewardedInterstitialAd();
         return true;
       },
     );

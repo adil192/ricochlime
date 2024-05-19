@@ -73,18 +73,26 @@ class GameOverDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              DialogButton(
-                onPressed: Prefs.coins.value < 100
-                    ? null
-                    : () async {
-                        if (Prefs.coins.value < 100) return;
-                        Prefs.coins.value -= 100;
-                        Navigator.of(context).pop<GameOverAction>(
-                          GameOverAction.continueGame,
-                        );
-                      },
-                type: NesButtonType.primary,
-                icon: Image.asset(
+              ValueListenableBuilder(
+                valueListenable: Prefs.coins,
+                builder: (context, _, icon) {
+                  return DialogButton(
+                    onPressed: Prefs.coins.value < 100
+                        ? null
+                        : () async {
+                            if (Prefs.coins.value < 100) return;
+                            Prefs.coins.value -= 100;
+                            Navigator.of(context).pop<GameOverAction>(
+                              GameOverAction.continueGame,
+                            );
+                          },
+                    type: NesButtonType.primary,
+                    icon: icon,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    text: t.gameOverPage.continueWithCoins,
+                  );
+                },
+                child: Image.asset(
                   'assets/images/coin.png',
                   filterQuality: FilterQuality.none,
                   width: 28,
@@ -92,8 +100,6 @@ class GameOverDialog extends StatelessWidget {
                   fit: BoxFit.contain,
                   semanticLabel: t.playPage.coins,
                 ),
-                crossAxisAlignment: CrossAxisAlignment.end,
-                text: t.gameOverPage.continueWithCoins,
               ),
               const SizedBox(height: 32),
               DialogButton(
