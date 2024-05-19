@@ -9,6 +9,7 @@ es:
   playPage:
     highScore(OUTDATED): "Best: $p"
     undo(OUTDATED): Undo move
+    coins(OUTDATED): Coins
   settingsPage:
     title(OUTDATED): Settings
     adConsent(OUTDATED): Change ad consent
@@ -61,6 +62,7 @@ es:
 kk:
   playPage:
     undo(OUTDATED): Undo move
+    coins(OUTDATED): Coins
   settingsPage:
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves

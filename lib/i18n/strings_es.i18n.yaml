@@ -3,6 +3,7 @@ homePage:
   playButton(OUTDATED): Jugar
   settingsButton(OUTDATED): Ajustes
 playPage:
+  coins(OUTDATED): monedas
   undo(OUTDATED): Deshacer movimiento
   highScore(OUTDATED): "Mejor: $p"
 settingsPage:

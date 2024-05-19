@@ -5,16 +5,17 @@ homePage:
   tutorialButton: Нұсқаулық
 playPage:
   highScore: "Үздік: $p"
+  coins(OUTDATED): Монеталар
   undo(OUTDATED): Қозғалысты болдырмау
 settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау
   hyperlegibleFont: Atkinson Hyperlegible қарпін қолдану
-  fasterPageTransitions(OUTDATED): Беттерді жылдамырақ ауыстыру
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
+  fasterPageTransitions(OUTDATED): Беттерді жылдамырақ ауыстыру
   showUndoButton(OUTDATED): Қозғалысты қайтаруға рұқсат беріңіз
   showColliders(OUTDATED): Құбыжық коллайдерлерін көрсетіңіз
   bgmVolume(OUTDATED): Фондық музыканың дыбыс деңгейі

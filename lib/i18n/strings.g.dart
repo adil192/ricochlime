@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 139 (46 per locale)
+/// Strings: 140 (46 per locale)
 ///
-/// Built on 2024-04-11 at 12:42 UTC
+/// Built on 2024-05-19 at 14:21 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -174,6 +174,7 @@ class _StringsPlayPageEn {
 	// Translations
 	String highScore({required Object p}) => 'Best: ${p}';
 	String get undo => 'Undo move';
+	String get coins => 'Coins';
 }
 
 // Path: settingsPage

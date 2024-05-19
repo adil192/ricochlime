@@ -149,39 +149,70 @@ class _PlayPageState extends State<PlayPage> {
                   textDirection: textDirection,
                   top: kToolbarHeight / 4,
                   start: kToolbarHeight / 4,
-                  child: NesIconButton(
-                    onPress: () => Navigator.of(context).pop(),
-                    icon: NesIcons.leftArrowIndicator,
-                    primaryColor: Colors.white.withOpacity(0.9),
-                    secondaryColor:
-                        RicochlimePalette.grassColorDark.withOpacity(0.9),
-                    size: const Size.square(20),
+                  child: Row(
+                    children: [
+                      NesIconButton(
+                        onPress: () => Navigator.of(context).pop(),
+                        icon: NesIcons.leftArrowIndicator,
+                        primaryColor: Colors.white.withOpacity(0.9),
+                        secondaryColor:
+                            RicochlimePalette.grassColorDark.withOpacity(0.9),
+                        size: const Size.square(20),
+                      ),
+                      const SizedBox(width: 8),
+                      NesTooltip(
+                        message: t.restartGameDialog.title,
+                        arrowPlacement: switch (textDirection) {
+                          TextDirection.ltr => NesTooltipArrowPlacement.right,
+                          TextDirection.rtl => NesTooltipArrowPlacement.left,
+                        },
+                        arrowDirection: NesTooltipArrowDirection.bottom,
+                        child: NesIconButton(
+                          onPress: () => NesDialog.show(
+                            context: context,
+                            builder: (context) => RestartGameDialog(
+                              restartGame: game.restartGame,
+                            ),
+                          ),
+                          icon: NesIcons.redo,
+                          primaryColor: Colors.white.withOpacity(0.9),
+                          secondaryColor:
+                              RicochlimePalette.grassColorDark.withOpacity(0.9),
+                          size: const Size.square(20),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 Positioned.directional(
                   textDirection: textDirection,
                   top: kToolbarHeight / 4,
                   end: kToolbarHeight / 4,
-                  child: NesTooltip(
-                    message: t.restartGameDialog.title,
-                    arrowPlacement: switch (textDirection) {
-                      TextDirection.ltr => NesTooltipArrowPlacement.right,
-                      TextDirection.rtl => NesTooltipArrowPlacement.left,
-                    },
-                    arrowDirection: NesTooltipArrowDirection.bottom,
-                    child: NesIconButton(
-                      onPress: () => NesDialog.show(
-                        context: context,
-                        builder: (context) => RestartGameDialog(
-                          restartGame: game.restartGame,
-                        ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ValueListenableBuilder(
+                        valueListenable: Prefs.coins,
+                        builder: (context, coins, _) {
+                          return Text(
+                            coins.toString(),
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
+                              fontSize: 32,
+                              height: 0.65,
+                            ),
+                          );
+                        },
                       ),
-                      icon: NesIcons.redo,
-                      primaryColor: Colors.white.withOpacity(0.9),
-                      secondaryColor:
-                          RicochlimePalette.grassColorDark.withOpacity(0.9),
-                      size: const Size.square(20),
-                    ),
+                      Image.asset(
+                        'assets/images/coin.png',
+                        filterQuality: FilterQuality.none,
+                        width: 24,
+                        height: 24,
+                        fit: BoxFit.contain,
+                        semanticLabel: t.playPage.coins,
+                      ),
+                    ],
                   ),
                 ),
                 Positioned(

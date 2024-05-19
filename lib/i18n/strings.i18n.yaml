@@ -6,6 +6,7 @@ homePage:
 playPage:
   highScore: "Best: $p"
   undo: Undo move
+  coins: Coins
 settingsPage:
   title: Settings
   adConsent: Change ad consent
