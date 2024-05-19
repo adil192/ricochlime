@@ -68,6 +68,13 @@
     </branding>
 
     <releases>
+        <release version="1.5.0" type="development" date="2024-05-19">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.5.0</url>
+            <description>
+                <p>Golden monsters now give you a coin when killed, and you can use 100 coins to continue after dying.</p>
+                <p>You can also earn 100 coins by watching a rewarded interstitial ad.</p>
+            </description>
+        </release>
         <release version="1.4.2" type="development" date="2024-05-16">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.4.2</url>
             <description>
