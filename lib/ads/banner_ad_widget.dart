@@ -81,9 +81,11 @@ abstract class AdState {
         _bannerAdUnitId = '';
         _rewardedInterstitialAdUnitId = '';
       }
-      assert(_bannerAdUnitId.startsWith('ca-app-pub-3940256099942544'));
-      assert(_rewardedInterstitialAdUnitId
-          .startsWith('ca-app-pub-3940256099942544'));
+      assert(_bannerAdUnitId.isEmpty ||
+          _bannerAdUnitId.startsWith('ca-app-pub-3940256099942544'));
+      assert(_rewardedInterstitialAdUnitId.isEmpty ||
+          _rewardedInterstitialAdUnitId
+              .startsWith('ca-app-pub-3940256099942544'));
     } else {
       // actual ads
       if (kIsWeb) {
@@ -101,9 +103,11 @@ abstract class AdState {
         _bannerAdUnitId = '';
         _rewardedInterstitialAdUnitId = '';
       }
-      assert(_bannerAdUnitId.startsWith('ca-app-pub-1312561055261176'));
-      assert(_rewardedInterstitialAdUnitId
-          .startsWith('ca-app-pub-1312561055261176'));
+      assert(_bannerAdUnitId.isEmpty ||
+          _bannerAdUnitId.startsWith('ca-app-pub-1312561055261176'));
+      assert(_rewardedInterstitialAdUnitId.isEmpty ||
+          _rewardedInterstitialAdUnitId
+              .startsWith('ca-app-pub-1312561055261176'));
     }
 
     if (adsSupported) _startInitialize();
