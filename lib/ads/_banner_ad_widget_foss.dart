@@ -9,12 +9,12 @@ abstract class AdState {
   /// Whether ads are supported,
   /// which is always false.
   @Deprecated(_kDummyAdMessage)
-  static bool get adsSupported => false;
+  static const adsSupported = false;
 
-  /// Whether we can show rewarded ads,
+  /// Whether we can show rewarded interstitial ads,
   /// which is always false.
   @Deprecated(_kDummyAdMessage)
-  static bool get rewardedAdsSupported => false;
+  static const rewardedInterstitialAdsSupported = false;
 
   /// Whether we should show banner ads.
   @Deprecated(_kDummyAdMessage)
@@ -30,7 +30,7 @@ abstract class AdState {
   ///
   /// This is always null.
   @Deprecated(_kDummyAdMessage)
-  static int? get age => null;
+  static const int? age = null;
 
   /// Initializes ads.
   ///
@@ -50,12 +50,12 @@ abstract class AdState {
   @Deprecated(_kDummyAdMessage)
   static Future<void> updateRequestConfiguration() async {}
 
-  /// Shows a rewarded ad (no-op).
+  /// Shows a rewarded interstitial ad (no-op).
   ///
   /// Returns whether the reward was earned,
   /// which is always false.
   @Deprecated(_kDummyAdMessage)
-  static Future<bool> showRewardedAd() async => false;
+  static Future<bool> showRewardedInterstitialAd() async => false;
 }
 
 /// A widget that displays a banner ad.
