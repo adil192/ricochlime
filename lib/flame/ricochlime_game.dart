@@ -526,6 +526,7 @@ class RicochlimeGame extends Forge2DGame
   /// Saves the high score,
   /// and clears the current game.
   void restartGame() {
+    showRewardedInterstitial();
     Prefs.highScore.value = max(Prefs.highScore.value, score.value);
     Prefs.currentGame.value = null;
     _reset();
