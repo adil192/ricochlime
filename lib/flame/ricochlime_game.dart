@@ -467,7 +467,7 @@ class RicochlimeGame extends Forge2DGame
   Future<void> showRewardedInterstitial() async {
     if (showRewardedInterstitialTimeout != null) return;
     showRewardedInterstitialTimeout = Timer(
-      const Duration(minutes: 10),
+      const Duration(minutes: 5),
       () => showRewardedInterstitialTimeout = null,
     );
 
