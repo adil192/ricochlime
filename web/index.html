@@ -64,30 +64,10 @@
       100% { opacity: 0; }
     }
   </style>
-
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
-  </script>
-  <script src="flutter.js" defer></script>
 </head>
 <body>
   <div id="loading"></div>
-  <script>
-    window.addEventListener('load', function(ev) {
-      const loading = document.getElementById('loading');
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            loading.classList.add('loaded');
-            appRunner.runApp();
-          });
-        }
-      });
-    });
-  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
