@@ -474,7 +474,7 @@ class RicochlimeGame extends Forge2DGame
     final rewardGranted = await AdState.showRewardedInterstitialAd();
     if (!rewardGranted) return;
 
-    Prefs.coins.value += 100;
+    Prefs.addCoins(100, allowOverMax: true);
   }
 
   Future<void> gameOver() async {

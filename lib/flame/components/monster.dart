@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui' show lerpDouble;
 
 import 'package:flame/components.dart';
@@ -272,7 +273,7 @@ class Monster extends BodyComponent with ContactCallbacks {
           case KillReward.bullet:
             (game as RicochlimeGame).numBullets += 1;
           case KillReward.coin:
-            Prefs.coins.value += 1;
+            Prefs.addCoins(1);
         }
       }
     }

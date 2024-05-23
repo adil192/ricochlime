@@ -37,6 +37,20 @@ abstract class Prefs {
 
   static late final PlainPref<int> coins;
 
+  static void addCoins(int toAdd, {bool allowOverMax = false}) {
+    const maxCoins = 10 * 1000;
+    late final sum = coins.value + toAdd;
+    if (allowOverMax) {
+      coins.value = sum;
+    } else if (coins.value > maxCoins) {
+      // don't add or remove coins if we're already above the max
+    } else if (sum > maxCoins) {
+      coins.value = maxCoins;
+    } else {
+      coins.value = sum;
+    }
+  }
+
   static void init() {
     currentGame = PlainPref('currentGame', null);
     highScore = PlainPref('highScore', 0);
