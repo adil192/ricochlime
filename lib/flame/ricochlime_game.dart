@@ -88,6 +88,7 @@ class RicochlimeGame extends Forge2DGame
   final Ticker ticker = Ticker();
   final ValueNotifier<double> timeDilation;
 
+  Future<bool> Function()? showAdWarning;
   Future<GameOverAction> Function()? showGameOverDialog;
 
   /// A completer that completes when all the sprites are loaded.
@@ -446,9 +447,9 @@ class RicochlimeGame extends Forge2DGame
 
       // check if the player has lost
       if (isGameOver()) {
+        unawaited(saveGame());
+        unawaited(gameOver());
         unawaited(showRewardedInterstitial());
-        await saveGame();
-        await gameOver();
         return;
       }
     }
@@ -465,11 +466,16 @@ class RicochlimeGame extends Forge2DGame
 
   Timer? showRewardedInterstitialTimeout;
   Future<void> showRewardedInterstitial() async {
+    if (!AdState.rewardedInterstitialAdsSupported) return;
+
     if (showRewardedInterstitialTimeout != null) return;
     showRewardedInterstitialTimeout = Timer(
       const Duration(minutes: 5),
       () => showRewardedInterstitialTimeout = null,
     );
+
+    final showAd = await showAdWarning?.call() ?? false;
+    if (!showAd) return;
 
     final rewardGranted = await AdState.showRewardedInterstitialAd();
     if (!rewardGranted) return;
@@ -541,7 +547,7 @@ class RicochlimeGame extends Forge2DGame
   /// Saves the high score,
   /// and clears the current game.
   void restartGame() {
-    showRewardedInterstitial();
+    Future.delayed(const Duration(milliseconds: 100), showRewardedInterstitial);
     Prefs.highScore.value = max(Prefs.highScore.value, score.value);
     Prefs.currentGame.value = null;
     _reset();

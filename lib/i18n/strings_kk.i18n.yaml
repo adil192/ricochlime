@@ -40,6 +40,8 @@ gameOverPage:
   continueWithCoins(OUTDATED): Жалғастыру үшін 100
   restartGameButton: Жаңадан бастау
   homeButton: Мәзір
+adWarning:
+  getCoins(rich, OUTDATED): Осы жарнамадан кейін $c 100 алыңыз ($t)
 restartGameDialog:
   title(OUTDATED): "Ойынды қайта бастау керек пе?"
   areYouSure(OUTDATED): "Қайта іске қосқыңыз келетініне сенімдісіз бе? Мұны қайтара алмайсыз"

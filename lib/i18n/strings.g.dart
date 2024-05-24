@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 137 (45 per locale)
+/// Strings: 144 (48 per locale)
 ///
-/// Built on 2024-05-19 at 14:42 UTC
+/// Built on 2024-05-24 at 23:14 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -148,6 +148,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsSettingsPageEn settingsPage = _StringsSettingsPageEn._(_root);
 	late final _StringsAgeDialogEn ageDialog = _StringsAgeDialogEn._(_root);
 	late final _StringsGameOverPageEn gameOverPage = _StringsGameOverPageEn._(_root);
+	late final _StringsAdWarningEn adWarning = _StringsAdWarningEn._(_root);
 	late final _StringsRestartGameDialogEn restartGameDialog = _StringsRestartGameDialogEn._(_root);
 	late final _StringsTutorialPageEn tutorialPage = _StringsTutorialPageEn._(_root);
 	late final _StringsCommonEn common = _StringsCommonEn._(_root);
@@ -238,6 +239,22 @@ class _StringsGameOverPageEn {
 	String get homeButton => 'Home';
 }
 
+// Path: adWarning
+class _StringsAdWarningEn {
+	_StringsAdWarningEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
+		const TextSpan(text: 'Get '),
+		c,
+		const TextSpan(text: ' 100 after this ad ('),
+		t,
+		const TextSpan(text: ')'),
+	]);
+}
+
 // Path: restartGameDialog
 class _StringsRestartGameDialogEn {
 	_StringsRestartGameDialogEn._(this._root);
@@ -303,6 +320,7 @@ class _StringsEs extends Translations {
 	@override late final _StringsSettingsPageEs settingsPage = _StringsSettingsPageEs._(_root);
 	@override late final _StringsAgeDialogEs ageDialog = _StringsAgeDialogEs._(_root);
 	@override late final _StringsGameOverPageEs gameOverPage = _StringsGameOverPageEs._(_root);
+	@override late final _StringsAdWarningEs adWarning = _StringsAdWarningEs._(_root);
 	@override late final _StringsRestartGameDialogEs restartGameDialog = _StringsRestartGameDialogEs._(_root);
 	@override late final _StringsTutorialPageEs tutorialPage = _StringsTutorialPageEs._(_root);
 	@override late final _StringsCommonEs common = _StringsCommonEs._(_root);
@@ -315,6 +333,7 @@ class _StringsHomePageEs extends _StringsHomePageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get tutorialButton => 'tutorial';
 	@override String get playButton => 'Jugar';
 	@override String get settingsButton => 'Ajustes';
 }
@@ -378,6 +397,7 @@ class _StringsGameOverPageEs extends _StringsGameOverPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get continueWithCoins => '100 para continuar';
 	@override String get title => '¡Juego terminado!';
 	@override String highScoreNotBeaten({required Object p}) => '¡Obtuviste ${p} puntos!';
 	@override TextSpan highScoreBeaten({required InlineSpan pOld, required InlineSpan pNew}) => TextSpan(children: [
@@ -389,6 +409,22 @@ class _StringsGameOverPageEs extends _StringsGameOverPageEn {
 	]);
 	@override String get restartGameButton => 'Reinicia el juego';
 	@override String get homeButton => 'Hogar';
+}
+
+// Path: adWarning
+class _StringsAdWarningEs extends _StringsAdWarningEn {
+	_StringsAdWarningEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
+		const TextSpan(text: 'Obtenga '),
+		c,
+		const TextSpan(text: ' 100 después de este anuncio ('),
+		t,
+		const TextSpan(text: ')'),
+	]);
 }
 
 // Path: restartGameDialog
@@ -411,6 +447,7 @@ class _StringsTutorialPageEs extends _StringsTutorialPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get tutorial => 'tutorial';
 	@override String get aimAtMonsters => 'Arrastra el dedo para apuntar y suelta para disparar. Derrota a un monstruo vaciando su barra de salud.';
 	@override String get bounceOffWalls => 'Rebota tus tiros en las paredes para golpear a la mayor cantidad de monstruos.';
 	@override String get tapSpeedUp => 'Toca la pantalla para acelerar tus disparos.';
@@ -455,6 +492,7 @@ class _StringsKk extends Translations {
 	@override late final _StringsSettingsPageKk settingsPage = _StringsSettingsPageKk._(_root);
 	@override late final _StringsAgeDialogKk ageDialog = _StringsAgeDialogKk._(_root);
 	@override late final _StringsGameOverPageKk gameOverPage = _StringsGameOverPageKk._(_root);
+	@override late final _StringsAdWarningKk adWarning = _StringsAdWarningKk._(_root);
 	@override late final _StringsRestartGameDialogKk restartGameDialog = _StringsRestartGameDialogKk._(_root);
 	@override late final _StringsTutorialPageKk tutorialPage = _StringsTutorialPageKk._(_root);
 	@override late final _StringsCommonKk common = _StringsCommonKk._(_root);
@@ -540,8 +578,25 @@ class _StringsGameOverPageKk extends _StringsGameOverPageEn {
 		pNew,
 		const TextSpan(text: ' ұпай!'),
 	]);
+	@override String get continueWithCoins => 'Жалғастыру үшін 100';
 	@override String get restartGameButton => 'Жаңадан бастау';
 	@override String get homeButton => 'Мәзір';
+}
+
+// Path: adWarning
+class _StringsAdWarningKk extends _StringsAdWarningEn {
+	_StringsAdWarningKk._(_StringsKk root) : this._root = root, super._(root);
+
+	@override final _StringsKk _root; // ignore: unused_field
+
+	// Translations
+	@override TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
+		const TextSpan(text: 'Осы жарнамадан кейін '),
+		c,
+		const TextSpan(text: ' 100 алыңыз ('),
+		t,
+		const TextSpan(text: ')'),
+	]);
 }
 
 // Path: restartGameDialog

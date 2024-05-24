@@ -5,7 +5,7 @@ es:
   homePage:
     playButton(OUTDATED): Play
     settingsButton(OUTDATED): Settings
-    tutorialButton: Tutorial
+    tutorialButton(OUTDATED): Tutorial
   playPage:
     highScore(OUTDATED): "Best: $p"
     undo(OUTDATED): Undo move
@@ -43,13 +43,15 @@ es:
     continueWithCoins(OUTDATED): 100 to continue
     restartGameButton(OUTDATED): Restart game
     homeButton(OUTDATED): Home
+  adWarning:
+    getCoins(rich)(OUTDATED): Get $c 100 after this ad ($t)
   restartGameDialog:
     title(OUTDATED): "Restart game?"
     areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
     waitCancel(OUTDATED): "Wait, cancel!"
     yesImSure(OUTDATED): "Yes I'm sure!"
   tutorialPage:
-    tutorial: Tutorial
+    tutorial(OUTDATED): Tutorial
     aimAtMonsters(OUTDATED): Drag your finger to aim and release to shoot. Defeat a monster by emptying its health bar.
     bounceOffWalls(OUTDATED): Bounce your shots off the walls to hit the most monsters.
     tapSpeedUp(OUTDATED): Tap the screen to speed up your shots.
@@ -74,6 +76,8 @@ kk:
     useSimpleInput(OUTDATED): I want to enter my age manually
   gameOverPage:
     continueWithCoins(OUTDATED): 100 to continue
+  adWarning:
+    getCoins(rich)(OUTDATED): Get $c 100 after this ad ($t)
   restartGameDialog:
     title(OUTDATED): "Restart game?"
     areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"

@@ -1,5 +1,6 @@
 appName: Ricochlime
 homePage:
+  tutorialButton(OUTDATED): tutorial
   playButton(OUTDATED): Jugar
   settingsButton(OUTDATED): Ajustes
 playPage:
@@ -39,12 +40,15 @@ gameOverPage:
   highScoreBeaten(rich, OUTDATED): "¡Tu puntuación más alta ahora es $pOld antiguos $pNew!"
   restartGameButton(OUTDATED): Reinicia el juego
   homeButton(OUTDATED): Hogar
+adWarning:
+  getCoins(rich, OUTDATED): Obtenga $c 100 después de este anuncio ($t)
 restartGameDialog:
   title(OUTDATED): "¿Reinicia el juego?"
   areYouSure(OUTDATED): "¿Estás seguro de que quieres reiniciar? No puedes deshacer esto"
   waitCancel(OUTDATED): "¡Espera, cancela!"
   yesImSure(OUTDATED): "¡Sí estoy seguro!"
 tutorialPage:
+  tutorial(OUTDATED): tutorial
   aimAtMonsters(OUTDATED): Arrastra el dedo para apuntar y suelta para disparar. Derrota a un monstruo vaciando su barra de salud.
   bounceOffWalls(OUTDATED): Rebota tus tiros en las paredes para golpear a la mayor cantidad de monstruos.
   tapSpeedUp(OUTDATED): Toca la pantalla para acelerar tus disparos.

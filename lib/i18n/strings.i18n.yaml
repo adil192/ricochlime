@@ -40,6 +40,8 @@ gameOverPage:
   continueWithCoins: 100 to continue
   restartGameButton: Restart game
   homeButton: Home
+adWarning:
+  getCoins(rich): Get $c 100 after this ad ($t)
 restartGameDialog:
   title: Restart game?
   areYouSure: Are you sure you want to restart? You can't undo this
