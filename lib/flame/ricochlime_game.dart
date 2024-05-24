@@ -475,7 +475,15 @@ class RicochlimeGame extends Forge2DGame
     );
 
     final showAd = await showAdWarning?.call() ?? false;
-    if (!showAd) return;
+    if (!showAd) {
+      // user cancelled the ad, ask again in > 10 seconds
+      showRewardedInterstitialTimeout?.cancel();
+      showRewardedInterstitialTimeout = Timer(
+        const Duration(seconds: 10),
+        () => showRewardedInterstitialTimeout = null,
+      );
+      return;
+    }
 
     final rewardGranted = await AdState.showRewardedInterstitialAd();
     if (!rewardGranted) return;
