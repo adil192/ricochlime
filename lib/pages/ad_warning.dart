@@ -23,7 +23,6 @@ class AdWarning extends StatelessWidget {
             valueListenable: secondsLeft,
             builder: (context, secondsLeft, _) {
               final theme = Theme.of(context);
-              final colorScheme = theme.colorScheme;
               final textTheme = theme.textTheme;
               return RichText(
                 text: TextSpan(
