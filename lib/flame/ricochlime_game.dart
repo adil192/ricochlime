@@ -494,29 +494,44 @@ class RicochlimeGame extends Forge2DGame
         // do nothing
         break;
       case GameOverAction.continueGame:
-        final numRowsToRemove = max(
+        state.value = GameState.monstersMoving;
+
+        final totalRowsToRemove = max(
           // clears 3 rounds worth of monsters
           // plus the one that killed the player
           numNewRowsEachRound * 3 + 1,
           // or at least 5 rows
           5,
         );
+        try {
+          for (int numRowsToRemove = 0;
+              numRowsToRemove < totalRowsToRemove;
+              ++numRowsToRemove) {
+            final threshold =
+                player.bottomY - numRowsToRemove * Monster.staticHeight;
+            if (kDebugMode) {
+              print('Removing row $numRowsToRemove out of $totalRowsToRemove '
+                  '(monsters with y > $threshold)');
+            }
 
-        /// The y position of the first row of monsters to remove
-        final threshold =
-            player.bottomY - numRowsToRemove * Monster.staticHeight;
-        if (kDebugMode) {
-          print(
-              'Removing $numRowsToRemove rows (monsters with y > $threshold)');
-        }
-        for (final monster in monsters) {
-          if (monster.position.y > threshold) {
-            monster.removeFromParent();
+            bool removedAnyMonsters = false;
+            for (final monster in monsters) {
+              if (monster.position.y > threshold) {
+                removedAnyMonsters = true;
+                monster.hp = 0;
+              }
+            }
+            monsters.removeWhere((monster) => monster.parent == null);
+
+            if (removedAnyMonsters && numRowsToRemove < totalRowsToRemove - 1) {
+              await ticker.delayed(const Duration(milliseconds: 500));
+            }
           }
+
+          await saveGame();
+        } finally {
+          state.value = GameState.idle;
         }
-        monsters.removeWhere((monster) => monster.parent == null);
-        state.value = GameState.idle;
-        await saveGame();
       case GameOverAction.restartGame:
         restartGame();
     }

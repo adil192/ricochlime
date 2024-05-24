@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui' show lerpDouble;
 
 import 'package:flame/components.dart';
@@ -41,7 +40,7 @@ class Monster extends BodyComponent with ContactCallbacks {
     required this.maxHp,
     int? hp,
     KillReward? killReward,
-  })  : hp = hp ?? maxHp,
+  })  : _hp = hp ?? maxHp,
         super(
           paint: Paint()..color = RicochlimePalette.monsterColor,
           priority: getPriorityFromPosition(initialPosition),
@@ -116,9 +115,32 @@ class Monster extends BodyComponent with ContactCallbacks {
   int maxHp;
 
   /// The current health.
-  int hp;
+  int get hp => _hp;
+  int _hp;
+  set hp(int value) {
+    _hp = value;
+    _healthBar.hp = value;
+
+    if (isDead) {
+      _animation.current = MonsterState.dead;
+      _healthBar.removeFromParent();
+
+      if (!killRewardGiven) {
+        switch (killReward) {
+          case KillReward.none:
+            break;
+          case KillReward.bullet:
+            (game as RicochlimeGame).numBullets += 1;
+          case KillReward.coin:
+            Prefs.addCoins(1);
+        }
+        killRewardGiven = true;
+      }
+    }
+  }
 
   bool get isDead => hp <= 0;
+  bool killRewardGiven = false;
 
   @override
   Vector2 get position {
@@ -259,24 +281,7 @@ class Monster extends BodyComponent with ContactCallbacks {
 
     if (isDead) return;
 
-    if (other is Bullet) {
-      hp -= 1;
-      _healthBar.hp = hp;
-
-      if (isDead) {
-        _animation.current = MonsterState.dead;
-        remove(_healthBar);
-
-        switch (killReward) {
-          case KillReward.none:
-            break;
-          case KillReward.bullet:
-            (game as RicochlimeGame).numBullets += 1;
-          case KillReward.coin:
-            Prefs.addCoins(1);
-        }
-      }
-    }
+    if (other is Bullet) hp -= 1;
   }
 }
 
