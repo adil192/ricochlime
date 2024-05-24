@@ -5,6 +5,7 @@ import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
+import 'package:ricochlime/nes/coin.dart';
 import 'package:ricochlime/pages/game_over.dart';
 import 'package:ricochlime/pages/restart_game.dart';
 import 'package:ricochlime/utils/brightness_extension.dart';
@@ -206,14 +207,7 @@ class _PlayPageState extends State<PlayPage> {
                           );
                         },
                       ),
-                      Image.asset(
-                        'assets/images/coin.png',
-                        filterQuality: FilterQuality.none,
-                        width: 24,
-                        height: 24,
-                        fit: BoxFit.contain,
-                        semanticLabel: t.playPage.coins,
-                      ),
+                      const CoinIcon(size: 24),
                     ],
                   ),
                 ),
