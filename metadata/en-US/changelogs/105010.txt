@@ -1,0 +1,2 @@
+• When continuing a game with 100 coins, the monsters will now be removed row by row with an animation.
+• You are now notified when you're about to see an ad, and have the choice to skip it.

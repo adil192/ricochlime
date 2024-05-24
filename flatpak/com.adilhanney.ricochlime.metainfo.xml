@@ -68,6 +68,14 @@
     </branding>
 
     <releases>
+        <release version="1.5.1" type="development" date="2024-05-25">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.5.1</url>
+            <description>
+                <ul>
+                    <li>When continuing a game with 100 coins, the monsters will now be removed row by row with an animation.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.5.0" type="development" date="2024-05-19">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.5.0</url>
             <description>
