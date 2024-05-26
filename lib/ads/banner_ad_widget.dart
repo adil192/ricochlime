@@ -339,22 +339,54 @@ class BannerAdWidget extends StatefulWidget {
 
   @override
   State<BannerAdWidget> createState() => _BannerAdWidgetState();
+
+  /// Switches the banner ad at natural transition points in the game,
+  /// if 20 seconds have passed since the last refresh.
+  static void refreshBannerAds() {
+    _BannerAdWidgetState._refreshNotifier.value = DateTime.now();
+  }
 }
 
 class _BannerAdWidgetState extends State<BannerAdWidget>
     with AutomaticKeepAliveClientMixin {
+  static final _refreshNotifier = ValueNotifier(DateTime.now());
+
+  DateTime _lastRefresh = DateTime.fromMillisecondsSinceEpoch(0);
   BannerAd? _bannerAd;
 
   @override
   void initState() {
     super.initState();
-    AdState._createBannerAd(widget.adSize).then((bannerAd) {
+    _refreshNow();
+    _refreshNotifier.addListener(_refreshNotifierListener);
+  }
+
+  void _refreshNotifierListener() {
+    if (!mounted) return;
+    // If the first ad has not been loaded yet, don't refresh.
+    if (_bannerAd == null) return;
+
+    final timeSinceLastRefresh =
+        _refreshNotifier.value.difference(_lastRefresh);
+    if (timeSinceLastRefresh < const Duration(seconds: 20)) return;
+
+    _lastRefresh = _refreshNotifier.value;
+    _refreshNow();
+  }
+
+  void _refreshNow() {
+    AdState._createBannerAd(widget.adSize).then((newBannerAd) {
+      if (newBannerAd == null) return;
+
+      _bannerAd?.dispose();
       if (mounted) {
-        setState(() => _bannerAd = bannerAd);
+        _lastRefresh = DateTime.now();
+        setState(() => _bannerAd = newBannerAd);
       } else {
         _bannerAd = null;
-        bannerAd?.dispose();
+        newBannerAd.dispose();
       }
+
       updateKeepAlive();
     });
   }
@@ -415,8 +447,10 @@ class _BannerAdWidgetState extends State<BannerAdWidget>
 
   @override
   void dispose() {
+    _refreshNotifier.removeListener(_refreshNotifierListener);
     _bannerAd?.dispose();
     _bannerAd = null;
+    _lastRefresh = DateTime.fromMillisecondsSinceEpoch(0);
     super.dispose();
   }
 

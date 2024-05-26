@@ -75,6 +75,11 @@ class BannerAdWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const SizedBox();
+
+  /// Switches the banner ad at natural transition points in the game.
+  ///
+  /// This is a no-op.
+  static void refreshBannerAds() {}
 }
 
 /// A banner ad size.
