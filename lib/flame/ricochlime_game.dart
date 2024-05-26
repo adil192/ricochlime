@@ -474,7 +474,7 @@ class RicochlimeGame extends Forge2DGame
   /// There are no rewarded interstitials in the first 2 minutes of the game,
   /// and no more than one every 5 minutes.
   Timer showRewardedInterstitialTimeout =
-      Timer(const Duration(minutes: 2), () {});
+      Timer(kDebugMode ? Duration.zero : const Duration(minutes: 2), () {});
   Future<void> showRewardedInterstitial() async {
     if (!AdState.rewardedInterstitialAdsSupported) return;
 
