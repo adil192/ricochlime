@@ -409,10 +409,7 @@ class RicochlimeGame extends Forge2DGame
     const monsterMoveDuration = Duration(seconds: monsterMoveSeconds);
 
     state.value = GameState.monstersMoving;
-
-    // Ads if enough time has passed
     unawaited(showRewardedInterstitial());
-    BannerAdWidget.refreshBannerAds();
 
     // remove monsters that have been killed
     monsters.removeWhere((monster) => monster.parent == null);
@@ -561,11 +558,8 @@ class RicochlimeGame extends Forge2DGame
   /// and clears the current game.
   void restartGame() {
     Future.delayed(const Duration(milliseconds: 100), showRewardedInterstitial);
-    BannerAdWidget.refreshBannerAds();
-
     Prefs.highScore.value = max(Prefs.highScore.value, score.value);
     Prefs.currentGame.value = null;
-
     _reset();
   }
 
