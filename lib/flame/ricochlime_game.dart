@@ -409,6 +409,7 @@ class RicochlimeGame extends Forge2DGame
     const monsterMoveDuration = Duration(seconds: monsterMoveSeconds);
 
     state.value = GameState.monstersMoving;
+    unawaited(showRewardedInterstitial());
 
     // remove monsters that have been killed
     monsters.removeWhere((monster) => monster.parent == null);
@@ -464,24 +465,25 @@ class RicochlimeGame extends Forge2DGame
     return monsters.any((monster) => monster.position.y >= threshold);
   }
 
-  Timer? showRewardedInterstitialTimeout;
+  /// A timer that prevents rewarded interstitial ads from being shown too
+  /// often.
+  ///
+  /// There are no rewarded interstitials in the first 2 minutes of the game,
+  /// and no more than one every 5 minutes.
+  Timer showRewardedInterstitialTimeout =
+      Timer(const Duration(minutes: 2), () {});
   Future<void> showRewardedInterstitial() async {
     if (!AdState.rewardedInterstitialAdsSupported) return;
 
-    if (showRewardedInterstitialTimeout != null) return;
-    showRewardedInterstitialTimeout = Timer(
-      const Duration(minutes: 5),
-      () => showRewardedInterstitialTimeout = null,
-    );
+    if (showRewardedInterstitialTimeout.isActive) return;
+    showRewardedInterstitialTimeout = Timer(const Duration(minutes: 5), () {});
 
     final showAd = await showAdWarning?.call() ?? false;
     if (!showAd) {
-      // user cancelled the ad, ask again in > 10 seconds
-      showRewardedInterstitialTimeout?.cancel();
-      showRewardedInterstitialTimeout = Timer(
-        const Duration(seconds: 10),
-        () => showRewardedInterstitialTimeout = null,
-      );
+      // user cancelled the ad, ask again in > 30 seconds
+      showRewardedInterstitialTimeout.cancel();
+      showRewardedInterstitialTimeout =
+          Timer(const Duration(seconds: 30), () {});
       return;
     }
 
