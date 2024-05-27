@@ -203,8 +203,8 @@ class _PlayPageState extends State<PlayPage> {
                       NesTooltip(
                         message: t.restartGameDialog.title,
                         arrowPlacement: switch (textDirection) {
-                          TextDirection.ltr => NesTooltipArrowPlacement.right,
-                          TextDirection.rtl => NesTooltipArrowPlacement.left,
+                          TextDirection.ltr => NesTooltipArrowPlacement.left,
+                          TextDirection.rtl => NesTooltipArrowPlacement.right,
                         },
                         arrowDirection: NesTooltipArrowDirection.bottom,
                         child: NesIconButton(
