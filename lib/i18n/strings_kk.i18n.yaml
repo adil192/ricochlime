@@ -11,6 +11,7 @@ settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау
   hyperlegibleFont: Atkinson Hyperlegible қарпін қолдану
+  maxFps(OUTDATED): Максималды FPS
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
@@ -37,9 +38,9 @@ gameOverPage:
   title: "Ойын бітті!"
   highScoreNotBeaten: "$p ұпай жинадыңыз!"
   highScoreBeaten(rich): "Енді үздік нәтижеңіз $pOld $pNew ұпай!"
-  continueWithCoins(OUTDATED): Жалғастыру үшін 100
   restartGameButton: Жаңадан бастау
   homeButton: Мәзір
+  continueWithCoins(OUTDATED): Жалғастыру үшін 100
 adWarning:
   getCoins(rich, OUTDATED): Осы жарнамадан кейін $c 100 алыңыз ($t)
 restartGameDialog:

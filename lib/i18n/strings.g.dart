@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 144 (48 per locale)
+/// Strings: 145 (48 per locale)
 ///
-/// Built on 2024-05-24 at 23:14 UTC
+/// Built on 2024-05-27 at 21:38 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -191,6 +191,7 @@ class _StringsSettingsPageEn {
 	String get bgmVolume => 'Bg music volume';
 	String get showUndoButton => 'Allow undoing moves';
 	String get fasterPageTransitions => 'Faster page transitions';
+	String get maxFps => 'Max FPS';
 	String get appInfo => 'App info';
 	String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
 }

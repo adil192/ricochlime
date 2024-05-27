@@ -37,6 +37,8 @@ abstract class Prefs {
 
   static late final PlainPref<int> coins;
 
+  static late final PlainPref<int> maxFps;
+
   static void addCoins(int toAdd, {bool allowOverMax = false}) {
     const maxCoins = 10 * 1000;
     late final sum = coins.value + toAdd;
@@ -66,6 +68,8 @@ abstract class Prefs {
     fasterPageTransitions = PlainPref('fasterPageTransitions', false);
 
     coins = PlainPref('coins', 0);
+
+    maxFps = PlainPref('maxFps', -1);
   }
 }
 

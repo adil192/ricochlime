@@ -17,6 +17,7 @@ es:
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     fasterPageTransitions(OUTDATED): Faster page transitions
+    maxFps(OUTDATED): Max FPS
     appInfo(OUTDATED): App info
     licenseNotice(OUTDATED): |-
       Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
@@ -68,6 +69,7 @@ kk:
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     fasterPageTransitions(OUTDATED): Faster page transitions
+    maxFps(OUTDATED): Max FPS
   ageDialog:
     guessNumber(OUTDATED): Guess \#$n
     howOldAreYou(OUTDATED): "How old are you?"

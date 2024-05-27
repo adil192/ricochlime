@@ -323,6 +323,11 @@ class RicochlimeGame extends Forge2DGame
     _spawnBullets();
   }
 
+  /// If the user wants to limit the frame rate to e.g. 30fps,
+  /// this is used to sum up the dt values
+  /// and only update the game when the sum is greater than 1/30.
+  double groupedUpdateDt = 0;
+
   @override
   void update(double dt) {
     const maxDt = 0.5;
@@ -333,8 +338,17 @@ class RicochlimeGame extends Forge2DGame
     }
 
     final dilatedDt = min(dt * timeDilation.value, maxDt);
-    ticker.tick(dilatedDt);
-    super.update(dilatedDt);
+    groupedUpdateDt += dilatedDt;
+
+    final minDt = 1 / Prefs.maxFps.value;
+    if (groupedUpdateDt < minDt) return;
+
+    try {
+      ticker.tick(groupedUpdateDt);
+      super.update(groupedUpdateDt);
+    } finally {
+      groupedUpdateDt = 0;
+    }
   }
 
   @override

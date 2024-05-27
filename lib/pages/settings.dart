@@ -78,7 +78,7 @@ class SettingsPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: switch (birthYear) {
                             null => null,
-                            _ => 18,
+                            _ => 20,
                           },
                         ),
                       );
@@ -244,6 +244,41 @@ class SettingsPage extends StatelessWidget {
                   );
                 },
                 child: Text(t.settingsPage.fasterPageTransitions),
+              ),
+            ),
+          ),
+
+          // Max FPS
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ListTile(
+                tileColor: listTileColor,
+                shape: listTileShape,
+                contentPadding: listTileContentPadding,
+                title: Text(t.settingsPage.maxFps),
+                leading: NesIcon(
+                  iconData: NesIcons.camera,
+                ),
+                trailing: ValueListenableBuilder(
+                  valueListenable: Prefs.maxFps,
+                  builder: (context, maxFps, _) {
+                    return Text(
+                      switch (maxFps) { -1 => '∞', _ => maxFps.toString() },
+                      style: TextStyle(
+                          fontSize: switch (maxFps) { -1 => 30, _ => 20 }),
+                    );
+                  },
+                ),
+                onTap: () {
+                  Prefs.maxFps.value = switch (Prefs.maxFps.value) {
+                    -1 => 60,
+                    60 => 30,
+                    30 => -1,
+                    _ => 60,
+                  };
+                },
               ),
             ),
           ),
