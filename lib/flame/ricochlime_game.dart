@@ -423,7 +423,8 @@ class RicochlimeGame extends Forge2DGame
     const monsterMoveDuration = Duration(seconds: monsterMoveSeconds);
 
     state.value = GameState.monstersMoving;
-    unawaited(showRewardedInterstitial());
+
+    if (!notEnoughAdsTimer.isActive) unawaited(showRewardedInterstitial());
 
     // move monsters down and spawn new ones at the top
     assert(numNewRowsEachRound == getNumNewRowsEachRound(score.value));
@@ -481,22 +482,34 @@ class RicochlimeGame extends Forge2DGame
   ///
   /// There are no rewarded interstitials in the first 2 minutes of the game,
   /// and no more than one every 5 minutes.
-  Timer showRewardedInterstitialTimeout =
+  ///
+  /// If this timer is active, don't show any interstitial ads.
+  Timer tooManyAdsTimer =
       Timer(kDebugMode ? Duration.zero : const Duration(minutes: 2), () {});
+
+  /// A timer that shows an ad after the user plays a turn,
+  /// if no ads have been shown in a while.
+  ///
+  /// If this timer is active, don't show an ad in between turns.
+  Timer notEnoughAdsTimer =
+      Timer(kDebugMode ? Duration.zero : const Duration(minutes: 5), () {});
+
   Future<void> showRewardedInterstitial() async {
     if (!AdState.rewardedInterstitialAdsSupported) return;
 
-    if (showRewardedInterstitialTimeout.isActive) return;
-    showRewardedInterstitialTimeout = Timer(const Duration(minutes: 5), () {});
+    if (tooManyAdsTimer.isActive) return;
+    tooManyAdsTimer = Timer(const Duration(minutes: 5), () {});
 
     final showAd = await showAdWarning?.call() ?? false;
     if (!showAd) {
       // user cancelled the ad, ask again in > 30 seconds
-      showRewardedInterstitialTimeout.cancel();
-      showRewardedInterstitialTimeout =
-          Timer(const Duration(seconds: 30), () {});
+      tooManyAdsTimer.cancel();
+      tooManyAdsTimer = Timer(const Duration(seconds: 30), () {});
       return;
     }
+
+    notEnoughAdsTimer.cancel();
+    notEnoughAdsTimer = Timer(const Duration(minutes: 5), () {});
 
     final rewardGranted = await AdState.showRewardedInterstitialAd();
     if (!rewardGranted) return;
