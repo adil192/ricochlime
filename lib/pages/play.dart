@@ -333,7 +333,10 @@ class _PlayPageState extends State<PlayPage> {
                               message: t.playPage.undo,
                               arrowDirection: NesTooltipArrowDirection.bottom,
                               child: NesIconButton(
-                                onPress: game.cancelCurrentTurn,
+                                onPress: () {
+                                  game.cancelCurrentTurn();
+                                  Prefs.totalMovesUndone.value++;
+                                },
                                 icon: NesIcons.delete,
                                 primaryColor: Colors.white.withOpacity(0.9),
                                 secondaryColor: RicochlimePalette.grassColorDark

@@ -39,16 +39,27 @@ abstract class Prefs {
 
   static late final PlainPref<int> maxFps;
 
+  static late final PlainPref<int> totalCoinsGained,
+      totalBulletsGained,
+      totalMonstersKilled,
+      totalGameOvers,
+      totalAdsWatched,
+      totalGamesContinued,
+      totalMovesUndone;
+
   static void addCoins(int toAdd, {bool allowOverMax = false}) {
     const maxCoins = 10 * 1000;
     late final sum = coins.value + toAdd;
     if (allowOverMax) {
+      Prefs.totalCoinsGained.value += toAdd;
       coins.value = sum;
     } else if (coins.value > maxCoins) {
       // don't add or remove coins if we're already above the max
     } else if (sum > maxCoins) {
+      Prefs.totalCoinsGained.value += maxCoins - coins.value;
       coins.value = maxCoins;
     } else {
+      Prefs.totalCoinsGained.value += toAdd;
       coins.value = sum;
     }
   }
@@ -70,6 +81,14 @@ abstract class Prefs {
     coins = PlainPref('coins', 0);
 
     maxFps = PlainPref('maxFps', -1);
+
+    totalCoinsGained = PlainPref('totalCoinsGained', 0);
+    totalBulletsGained = PlainPref('totalBulletsGained', 0);
+    totalMonstersKilled = PlainPref('totalMonstersKilled', 0);
+    totalGameOvers = PlainPref('totalGameOvers', 0);
+    totalAdsWatched = PlainPref('totalAdsWatched', 0);
+    totalGamesContinued = PlainPref('totalTimesContinued', 0);
+    totalMovesUndone = PlainPref('totalTimesUndone', 0);
   }
 }
 

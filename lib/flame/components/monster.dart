@@ -126,11 +126,13 @@ class Monster extends BodyComponent with ContactCallbacks {
       _healthBar.removeFromParent();
 
       if (!killRewardGiven) {
+        Prefs.totalMonstersKilled.value += 1;
         switch (killReward) {
           case KillReward.none:
             break;
           case KillReward.bullet:
             (game as RicochlimeGame).numBullets += 1;
+            Prefs.totalBulletsGained.value += 1;
           case KillReward.coin:
             Prefs.addCoins(1);
         }

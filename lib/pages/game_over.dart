@@ -83,6 +83,7 @@ class GameOverDialog extends StatelessWidget {
                         : () async {
                             if (Prefs.coins.value < 100) return;
                             Prefs.coins.value -= 100;
+                            Prefs.totalGamesContinued.value++;
                             Navigator.of(context).pop<GameOverAction>(
                               GameOverAction.continueGame,
                             );

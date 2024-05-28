@@ -462,6 +462,7 @@ class RicochlimeGame extends Forge2DGame
 
       // check if the player has lost
       if (isGameOver()) {
+        Prefs.totalGameOvers.value++;
         unawaited(saveGame());
         unawaited(gameOver());
         unawaited(showRewardedInterstitial());
@@ -504,6 +505,7 @@ class RicochlimeGame extends Forge2DGame
     final rewardGranted = await AdState.showRewardedInterstitialAd();
     if (!rewardGranted) return;
 
+    Prefs.totalAdsWatched.value++;
     Prefs.addCoins(100, allowOverMax: true);
   }
 
