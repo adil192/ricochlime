@@ -1,0 +1,4 @@
+• Started tallying some gameplay stats like "monsters killed" and "coins earned" in preparation for future updates.
+• Added more information about how ads are shown in the privacy policy. No extra data is being collected.
+• If you have a less powerful device or would like to save battery, you can now set the max FPS in settings.
+• Various bug fixes.

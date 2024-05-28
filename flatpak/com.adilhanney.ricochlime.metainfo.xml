@@ -68,6 +68,16 @@
     </branding>
 
     <releases>
+        <release version="1.5.2" type="development" date="2024-05-28">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.5.2</url>
+            <description>
+                <ul>
+                    <li>Started tallying some gameplay stats like "monsters killed" and "coins earned" in preparation for future updates.</li>
+                    <li>If you have a less powerful device or would like to save battery, you can now set the max FPS in settings.</li>
+                    <li>Various bug fixes.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.5.1" type="development" date="2024-05-25">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.5.1</url>
             <description>

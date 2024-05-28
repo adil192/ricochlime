@@ -1,0 +1,4 @@
+• Comenzó a contar algunas estadísticas del juego como "monstruos asesinados" y "monedas ganadas" en preparación para futuras actualizaciones.
+• Se agregó más información sobre cómo se muestran los anuncios en la política de privacidad. No se recopilan datos adicionales.
+• Si tiene un dispositivo menos potente o desea ahorrar batería, ahora puede configurar el FPS máximo en la configuración.
+• Varias correcciones de errores.
