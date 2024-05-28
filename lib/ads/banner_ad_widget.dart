@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:logging/logging.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
@@ -15,6 +16,8 @@ export 'package:google_mobile_ads/google_mobile_ads.dart' show AdSize;
 
 /// Helper class for ads.
 abstract class AdState {
+  static final log = Logger('AdState');
+
   static bool _initializeStarted = false;
   static bool _initializeCompleted = false;
 
@@ -200,14 +203,12 @@ abstract class AdState {
       ),
       rewardedInterstitialAdLoadCallback: RewardedInterstitialAdLoadCallback(
         onAdLoaded: (ad) {
-          if (kDebugMode) print('Rewarded interstitial ad loaded!');
+          log.info('Rewarded interstitial ad loaded!');
           _rewardedInterstitialAd = ad;
           completer.complete(true);
         },
-        onAdFailedToLoad: (LoadAdError error) {
-          if (kDebugMode) {
-            print('Rewarded interstitial ad failed to load: $error');
-          }
+        onAdFailedToLoad: (error) {
+          log.warning('Rewarded interstitial ad failed to load: $error', error);
           completer.complete(false);
         },
       ),
@@ -240,10 +241,10 @@ abstract class AdState {
 
   static Future<BannerAd?> _createBannerAd(AdSize adSize) async {
     if (!adsSupported) {
-      if (kDebugMode) print('Banner ad unit ID is empty.');
+      log.warning('Banner ad unit ID is empty.');
       return null;
     } else if (!_initializeStarted) {
-      if (kDebugMode) print('Ad initialization has not started.');
+      log.warning('Ad initialization has not started.');
       return null;
     }
 
@@ -259,10 +260,10 @@ abstract class AdState {
       size: adSize,
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
-          if (kDebugMode) print('Ad loaded!');
+          log.fine('Ad loaded!');
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          if (kDebugMode) print('Ad failed to load: $error');
+          log.warning('Ad failed to load: $error', error);
           ad.dispose();
         },
       ),
@@ -280,10 +281,10 @@ abstract class AdState {
     if (!rewardedInterstitialAdsSupported) return false;
 
     if (_rewardedInterstitialAd == null) {
-      if (kDebugMode) print('Rewarded interstitial ad is null, loading now...');
+      log.info('Rewarded interstitial ad is null, loading now...');
       final loaded = await _preloadRewardedInterstitialAd();
       if (!loaded) {
-        if (kDebugMode) print('Rewarded ad failed to load.');
+        log.warning('Rewarded ad failed to load.');
         return false;
       }
       assert(_rewardedInterstitialAd != null);
@@ -293,7 +294,7 @@ abstract class AdState {
     _rewardedInterstitialAd!.fullScreenContentCallback =
         FullScreenContentCallback(
       onAdDismissedFullScreenContent: (ad) {
-        if (kDebugMode) print('$ad onAdDismissedFullScreenContent.');
+        log.info('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
         if (!completer.isCompleted) {
           _rewardedInterstitialAd = null;
@@ -314,9 +315,7 @@ abstract class AdState {
     return completer.future.timeout(
       const Duration(minutes: 2),
       onTimeout: () {
-        if (kDebugMode) {
-          print('Rewarded interstitial ad timed out, granting reward anyway.');
-        }
+        log.warning('Rewarded interstitial timed out, granting reward anyway.');
         _rewardedInterstitialAd?.dispose();
         _rewardedInterstitialAd = null;
         _preloadRewardedInterstitialAd();

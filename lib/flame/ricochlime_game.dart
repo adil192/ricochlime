@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:forge2d/src/settings.dart' as physics_settings;
+import 'package:logging/logging.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
@@ -55,6 +56,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   static RicochlimeGame? _instance;
+  static final log = Logger('RicochlimeGame');
 
   /// Width to height aspect ratio
   static const aspectRatio = 1 / 2;
@@ -158,7 +160,7 @@ class RicochlimeGame extends Forge2DGame
     if (Prefs.bgmVolume.value < 0.01) return;
     if (bgMusicInitialized) return;
 
-    if (kDebugMode) print('Initializing bg music');
+    log.info('Initializing bg music');
     FlameAudio.bgm.initialize();
     FlameAudio.bgm.play(
       'bgm/Ludum_Dare_32_Track_4.ogg',
@@ -172,7 +174,7 @@ class RicochlimeGame extends Forge2DGame
     if (Prefs.bgmVolume.value < 0.01) return;
     if (!bgMusicInitialized) return;
 
-    if (kDebugMode) print('Fading out bg music');
+    log.info('Fading out bg music');
     _bgMusicFadeTimer?.cancel();
     _bgMusicFadeTimer = _fadeBgmInOut(
       startingVolume: FlameAudio.bgm.audioPlayer.volume,
@@ -187,7 +189,7 @@ class RicochlimeGame extends Forge2DGame
     if (!bgMusicInitialized) _initBgMusic();
     if (!bgMusicInitialized) return;
 
-    if (kDebugMode) print('Fading in bg music');
+    log.info('Fading in bg music');
     _bgMusicFadeTimer?.cancel();
     _bgMusicFadeTimer = _fadeBgmInOut(
       startingVolume: FlameAudio.bgm.audioPlayer.volume,
@@ -219,7 +221,7 @@ class RicochlimeGame extends Forge2DGame
           _bgMusicFadeTimer = null;
           FlameAudio.bgm.audioPlayer.setVolume(targetVolume);
           onFinished?.call();
-          if (kDebugMode) print('Finished fading bgm in/out to $targetVolume');
+          log.info('Finished fading bgm in/out to $targetVolume');
         } else {
           FlameAudio.bgm.audioPlayer.setVolume(newVolume);
         }
@@ -396,9 +398,7 @@ class RicochlimeGame extends Forge2DGame
       }
 
       if (elapsedSeconds >= bulletTimeoutSecs) {
-        if (kDebugMode) {
-          print('Bullet timeout reached');
-        }
+        log.info('Bullet timeout reached');
         for (final bullet in bullets) {
           if (bullet.parent != null) {
             bullet.removeFromParent();
@@ -515,7 +515,7 @@ class RicochlimeGame extends Forge2DGame
     final GameOverAction gameOverAction = showGameOverDialog == null
         ? GameOverAction.nothingYet
         : await showGameOverDialog!.call();
-    if (kDebugMode) print('gameOverAction: $gameOverAction');
+    log.info('gameOverAction: $gameOverAction');
 
     switch (gameOverAction) {
       case GameOverAction.nothingYet:
@@ -537,10 +537,8 @@ class RicochlimeGame extends Forge2DGame
               ++numRowsToRemove) {
             final threshold =
                 player.bottomY - numRowsToRemove * Monster.staticHeight;
-            if (kDebugMode) {
-              print('Removing row $numRowsToRemove out of $totalRowsToRemove '
-                  '(monsters with y > $threshold)');
-            }
+            log.info('Removing row $numRowsToRemove out of $totalRowsToRemove '
+                '(monsters with y > $threshold)');
 
             bool removedAnyMonsters = false;
             for (final monster in children.whereType<Monster>()) {

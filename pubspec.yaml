@@ -53,6 +53,8 @@ dependencies:
 
   google_mobile_ads: ^5.0.0
 
+  logging: ^1.2.0
+
   nes_ui: ^0.20.0
 
   shared_preferences: ^2.2.0

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logging/logging.dart';
 import 'package:ricochlime/ads/age_dialog.dart';
 import 'package:ricochlime/ads/banner_ad_widget.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
@@ -21,6 +22,13 @@ Future<void> main({
   void Function(Widget) runApp = runApp,
 }) async {
   initWidgetsBinding();
+
+  Logger.root.level = Level.INFO;
+  Logger.root.onRecord.listen((record) {
+    // ignore: avoid_print
+    print('${record.level.name}: ${record.loggerName}: ${record.message}');
+  });
+
   LocaleSettings.useDeviceLocale();
   unawaited(game.preloadSprites.future);
   Prefs.init();
