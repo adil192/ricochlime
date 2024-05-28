@@ -76,7 +76,6 @@ class RicochlimeGame extends Forge2DGame
   late Background background;
   bool get inputAllowed => state.value == GameState.idle;
   bool inputCancelled = false;
-  final List<Monster> monsters = [];
 
   late var random = Random();
 
@@ -239,7 +238,6 @@ class RicochlimeGame extends Forge2DGame
     bool topGapNeedsAdjusting = false;
     for (final monsterJson in data.monsters) {
       final monster = Monster.fromJson(monsterJson);
-      monsters.add(monster);
       add(monster);
 
       if (monster.killReward == KillReward.bullet) numMonstersThatGiveBullets++;
@@ -249,7 +247,7 @@ class RicochlimeGame extends Forge2DGame
     if (topGapNeedsAdjusting) {
       // the top gap needs adjusting because the monsters were imported from a
       // previous version of the game
-      for (final monster in monsters) {
+      for (final monster in children.whereType<Monster>()) {
         monster.position.y += Monster.topGap;
       }
     }
@@ -270,12 +268,15 @@ class RicochlimeGame extends Forge2DGame
 
   Future saveGame() async {
     assert(
-      monsters.any((monster) => monster.position.y <= Monster.topGap),
+      children
+          .whereType<Monster>()
+          .any((monster) => monster.position.y <= Monster.topGap),
       'The new row of monsters should be spawned before saving the game',
     );
     Prefs.currentGame.value = GameData(
       score: score.value,
-      monsters: monsters.where((monster) => !monster.isDead),
+      monsters:
+          children.whereType<Monster>().where((monster) => !monster.isDead),
     );
     await Prefs.currentGame.waitUntilSaved();
   }
@@ -299,7 +300,6 @@ class RicochlimeGame extends Forge2DGame
     removeWhere((component) => component is Bullet);
     removeWhere((component) => component is Monster);
     removeWhere((component) => component is MonsterAnimation);
-    monsters.clear();
   }
 
   @override
@@ -425,14 +425,11 @@ class RicochlimeGame extends Forge2DGame
     state.value = GameState.monstersMoving;
     unawaited(showRewardedInterstitial());
 
-    // remove monsters that have been killed
-    monsters.removeWhere((monster) => monster.parent == null);
-
     // move monsters down and spawn new ones at the top
     assert(numNewRowsEachRound == getNumNewRowsEachRound(score.value));
     for (int i = 0; i < numNewRowsEachRound; ++i) {
       // move existing monsters down
-      for (final monster in monsters) {
+      for (final monster in children.whereType<Monster>()) {
         monster.moveDown(monsterMoveDuration);
       }
 
@@ -445,10 +442,7 @@ class RicochlimeGame extends Forge2DGame
       for (final monster in row) {
         if (monster == null) continue;
 
-        monsters.add(monster);
         add(monster);
-
-        // trigger the monster's animation
         monster.moveInFromTop(monsterMoveDuration);
       }
 
@@ -477,7 +471,9 @@ class RicochlimeGame extends Forge2DGame
 
   bool isGameOver() {
     final threshold = player.bottomY - Monster.staticHeight * 2;
-    return monsters.any((monster) => monster.position.y >= threshold);
+    return children
+        .whereType<Monster>()
+        .any((monster) => monster.position.y >= threshold);
   }
 
   /// A timer that prevents rewarded interstitial ads from being shown too
@@ -547,13 +543,12 @@ class RicochlimeGame extends Forge2DGame
             }
 
             bool removedAnyMonsters = false;
-            for (final monster in monsters) {
+            for (final monster in children.whereType<Monster>()) {
               if (monster.position.y > threshold) {
                 removedAnyMonsters = true;
                 monster.hp = 0;
               }
             }
-            monsters.removeWhere((monster) => monster.parent == null);
 
             if (removedAnyMonsters && numRowsToRemove < totalRowsToRemove - 1) {
               await ticker.delayed(const Duration(milliseconds: 500));
