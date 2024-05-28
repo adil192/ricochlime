@@ -14,7 +14,27 @@ Ricochlime is free to download and play, and uses Google AdMob to display ads. A
 
 When you first open Ricochlime, you'll be shown a consent prompt asking you to choose between personalized and non-personalized ads. You can change this at any time by going to the settings menu in the game.
 
-Note that ads are only used on the Android and iOS versions of Ricochlime: other platforms (including the web) don't use any ads.
+Note that ads are only used on the Android and iOS versions of Ricochlime:
+other platforms (including the web) don't use any ads.
+The FOSS (free and open-source software) version of Ricochlime for Android
+distributed on F-Droid doesn't use ads either.
+
+#### Ads policy
+
+While Ricochlime is supported by ads, I've tried to make them as unobtrusive as possible.
+
+At the bottom of the gameplay screen, there is a small
+[banner ad](https://support.google.com/admob/answer/9993556).
+To save battery and improve performance,
+this ad isn't shown at all if your device is in a low-power mode.
+
+You will occasionally be shown a fullscreen ad
+(a "[rewarded interstitial ad](https://support.google.com/admob/answer/9884467)")
+during natural breaks in the game.
+You will be shown a prompt before the ad is shown, and you can choose to skip it
+for no penalty or watch it and be rewarded with some in-game coins.
+The ads are always skippable before and during the ad, and
+you will never see more than one fullscreen ad in a 5-minute window.
 
 ## Source code
 
