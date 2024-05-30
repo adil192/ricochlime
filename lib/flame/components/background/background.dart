@@ -11,7 +11,6 @@ import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 /// The background component which contains all the background tiles.
 class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
-  final List<SpriteComponent> tiles = [];
   late final bottomOfIsland =
       gameRef.player.position.y + Player.staticHeight * 0.5 + 8;
 
@@ -49,12 +48,8 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
   }
 
   void _updateChildren() {
-    tiles
-      ..clear()
-      ..addAll(_getTiles());
-    removeWhere((component) =>
-        component is DarkeningSprite || component is FlickeringSprite);
-    addAll(tiles);
+    removeWhere((component) => component is SpriteComponent);
+    addAll(_getTiles());
   }
 
   /// Returns an iterable of all the background tiles.
