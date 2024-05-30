@@ -52,7 +52,8 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
     tiles
       ..clear()
       ..addAll(_getTiles());
-    removeWhere((component) => component is DarkeningSprite);
+    removeWhere((component) =>
+        component is DarkeningSprite || component is FlickeringSprite);
     addAll(tiles);
   }
 
