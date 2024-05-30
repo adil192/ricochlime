@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
+import 'package:ricochlime/utils/random_extension.dart';
 
 class GroundSprite extends SpriteComponent
     with HasGameRef<RicochlimeGame>, DarkeningSprite {
@@ -61,7 +62,8 @@ class GrassSprite extends SpriteComponent
   }
 }
 
-class SkullSprite extends SpriteComponent with HasGameRef<RicochlimeGame> {
+class SkullSprite extends SpriteComponent
+    with HasGameRef<RicochlimeGame>, FlickeringSprite {
   SkullSprite({
     required this.type,
     super.position,
@@ -127,5 +129,41 @@ mixin DarkeningSprite on HasPaint, HasGameRef<RicochlimeGame> {
             BlendMode.modulate,
           )
         : null;
+  }
+}
+
+/// A sprite that flickers like a candle.
+mixin FlickeringSprite on HasPaint, HasGameRef<RicochlimeGame> {
+  final Random _random = Random();
+
+  /// When timeToNextFlicker reaches 0,
+  /// the brightness is set to a random value between 0.5 and 1.
+  double timeToNextFlicker = 0;
+
+  /// The intensity of the flicker tint.
+  double flickerIntensity = 0.2;
+
+  @override
+  void update(double dt) {
+    timeToNextFlicker -= dt;
+    if (timeToNextFlicker <= 0) {
+      timeToNextFlicker = _random.nextBetween(1 / 60, 10 / 60);
+
+      if (RicochlimeGame.reproducibleGoldenMode) {
+        flickerIntensity = 0.25;
+      } else {
+        flickerIntensity =
+            0.3 * flickerIntensity + 0.7 * pow(_random.nextDouble(), 2);
+      }
+
+      getPaint().colorFilter = ColorFilter.mode(
+        Color.lerp(
+          Colors.white,
+          const Color.fromARGB(255, 255, 245, 150),
+          flickerIntensity,
+        )!,
+        BlendMode.modulate,
+      );
+    }
   }
 }
