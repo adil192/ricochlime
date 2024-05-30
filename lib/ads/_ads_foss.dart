@@ -1,67 +1,54 @@
 import 'package:flutter/material.dart';
 
-const _kDummyAdMessage = 'This is a dummy class for when ads are disabled.';
-
 /// Helper class for ads,
 /// with a dummy implementation because ads are disabled.
-@Deprecated(_kDummyAdMessage)
 abstract class AdState {
   /// Whether ads are supported,
   /// which is always false.
-  @Deprecated(_kDummyAdMessage)
   static const adsSupported = false;
 
   /// Whether we can show rewarded interstitial ads,
   /// which is always false.
-  @Deprecated(_kDummyAdMessage)
   static const rewardedInterstitialAdsSupported = false;
 
   /// Whether we should show banner ads.
-  @Deprecated(_kDummyAdMessage)
   static Future<bool> shouldShowBannerAd() async => false;
 
   /// The minimum age required to show personalized ads.
   ///
   /// This is an arbitrarily high number.
-  @Deprecated(_kDummyAdMessage)
   static const int minAgeForPersonalizedAds = 1000;
 
   /// The users age, or null if unknown.
   ///
   /// This is always null.
-  @Deprecated(_kDummyAdMessage)
   static const int? age = null;
 
   /// Initializes ads.
   ///
   /// This is a no-op.
-  @Deprecated(_kDummyAdMessage)
   static void init() {}
 
   /// Shows the consent form.
   ///
   /// This is a no-op.
-  @Deprecated(_kDummyAdMessage)
   static void showConsentForm() {}
 
   /// Updates the ad request configuration.
   ///
   /// This is a no-op.
-  @Deprecated(_kDummyAdMessage)
   static Future<void> updateRequestConfiguration() async {}
 
   /// Shows a rewarded interstitial ad (no-op).
   ///
   /// Returns whether the reward was earned,
   /// which is always false.
-  @Deprecated(_kDummyAdMessage)
   static Future<bool> showRewardedInterstitialAd() async => false;
 }
 
 /// A widget that displays a banner ad.
 ///
 /// This is a dummy widget that does nothing.
-@Deprecated(_kDummyAdMessage)
 class BannerAdWidget extends StatelessWidget {
   // ignore: public_member_api_docs
   const BannerAdWidget({
@@ -70,7 +57,6 @@ class BannerAdWidget extends StatelessWidget {
   });
 
   /// The requested banner ad size.
-  @Deprecated(_kDummyAdMessage)
   final AdSize adSize;
 
   @override
@@ -83,7 +69,6 @@ class BannerAdWidget extends StatelessWidget {
 /// `google_mobile_ads`'s `AdSize` class,
 /// so there are no compilation errors
 /// when the dependency is removed.
-@Deprecated(_kDummyAdMessage)
 class AdSize {
   // ignore: public_member_api_docs
   const AdSize({
@@ -92,14 +77,11 @@ class AdSize {
   });
 
   /// Standard banner ad size.
-  @Deprecated(_kDummyAdMessage)
   static const banner = AdSize(width: 320, height: 50);
 
   /// The requested banner ad width.
-  @Deprecated(_kDummyAdMessage)
   final int width;
 
   /// The requested banner ad height.
-  @Deprecated(_kDummyAdMessage)
   final int height;
 }
