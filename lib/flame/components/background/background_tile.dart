@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,41 @@ class GrassSprite extends SpriteComponent
       srcSize: Vector2(16, 16),
     );
   }
+}
+
+class SkullSprite extends SpriteComponent with HasGameRef<RicochlimeGame> {
+  SkullSprite({
+    required this.type,
+    super.position,
+    super.size,
+  });
+
+  final SkullType type;
+
+  @override
+  void onLoad() {
+    super.onLoad();
+    sprite = Sprite(
+      gameRef.images.fromCache('overworld.png'),
+      srcPosition: Vector2(type.x, type.y),
+      srcSize: Vector2(16, 16),
+    );
+  }
+}
+
+enum SkullType {
+  skullStraight(448, 32),
+  skullAngled(432, 48),
+  boneSmall(448, 48),
+  boneBig(464, 48),
+  boneSmallAndBig(464, 32);
+
+  const SkullType(this.x, this.y);
+
+  final double x, y;
+
+  static SkullType random(Random random) =>
+      values[random.nextInt(values.length)];
 }
 
 /// A sprite that darkens when the game is in dark mode.

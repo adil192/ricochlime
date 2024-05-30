@@ -11,7 +11,7 @@ import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 /// The background component which contains all the background tiles.
 class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
-  final List<DarkeningSprite> tiles = [];
+  final List<SpriteComponent> tiles = [];
   late final bottomOfIsland =
       gameRef.player.position.y + Player.staticHeight * 0.5 + 8;
 
@@ -58,14 +58,15 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
 
   /// Returns an iterable of all the background tiles.
   /// Used in [_updateChildren].
-  Iterable<DarkeningSprite> _getTiles() sync* {
+  Iterable<SpriteComponent> _getTiles() sync* {
     final random = Random(123);
 
     yield* _getGrassTuftTiles(random);
     yield* _getIslandTiles(random);
+    yield* _getSkullTiles(random);
   }
 
-  Iterable<DarkeningSprite> _getGrassTuftTiles(Random random) sync* {
+  Iterable<SpriteComponent> _getGrassTuftTiles(Random random) sync* {
     double left = 0;
     double x, y;
     for (y = 8; y < bottomOfIsland - 8; y += 8) {
@@ -80,7 +81,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
     }
   }
 
-  Iterable<DarkeningSprite> _getIslandTiles(Random random) sync* {
+  Iterable<SpriteComponent> _getIslandTiles(Random random) sync* {
     double x, y;
 
     // top and bottom sides
@@ -134,6 +135,30 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
       size: Vector2(8, 8),
       posOnIsland: Alignment.bottomRight,
     );
+  }
+
+  Iterable<SkullSprite> _getSkullTiles(Random random) sync* {
+    // Decreases (rises) as numNewRowsEachRound increases
+    final minY = gameRef.player.position.y -
+        Player.staticHeight * 0.5 -
+        Monster.moveDownHeight * gameRef.numNewRowsEachRound;
+
+    for (var x = 4.0; x < gameRef.size.x - 4; x += 8) {
+      for (var y = bottomOfIsland - 12; y > minY; y -= 8) {
+        // no skulls near the player
+        if ((y + 4 - gameRef.player.position.y).abs() < 12 &&
+            (x + 4 - gameRef.player.position.x).abs() < 12) continue;
+
+        // randomly spread out the skulls
+        if (random.nextDouble() > 0.3) continue;
+
+        yield SkullSprite(
+          type: SkullType.random(random),
+          position: Vector2(x, y),
+          size: Vector2(8, 8),
+        );
+      }
+    }
   }
 
   /// Preloads all sprite sheets so they can be
