@@ -502,9 +502,9 @@ class RicochlimeGame extends Forge2DGame
 
     final showAd = await showAdWarning?.call() ?? false;
     if (!showAd) {
-      // user cancelled the ad, ask again in > 30 seconds
+      // user cancelled the ad, ask again soon
       tooManyAdsTimer.cancel();
-      tooManyAdsTimer = Timer(const Duration(seconds: 30), () {});
+      tooManyAdsTimer = Timer(const Duration(minutes: 1), () {});
       return;
     }
 
