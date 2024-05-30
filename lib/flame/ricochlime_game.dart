@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:forge2d/src/settings.dart' as physics_settings;
 import 'package:logging/logging.dart';
-import 'package:ricochlime/ads/banner_ad_widget.dart';
+import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
 import 'package:ricochlime/flame/components/background/background_tile.dart';
