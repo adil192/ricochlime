@@ -3,9 +3,9 @@
 import 'package:flame_forge2d/flame_forge2d.dart';
 
 /// Creates the [Wall]s that make up the boundaries of the world.
-List<Wall> createBoundaries(double width, double height) {
-  final topLeft = Vector2.zero();
-  final bottomRight = Vector2(width, height);
+List<Wall> createBoundaries(double width, double height, {double inset = 2}) {
+  final topLeft = Vector2(inset, inset);
+  final bottomRight = Vector2(width - inset, height - inset);
   final topRight = Vector2(bottomRight.x, topLeft.y);
   final bottomLeft = Vector2(topLeft.x, bottomRight.y);
 

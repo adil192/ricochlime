@@ -151,8 +151,8 @@ class _PlayPageState extends State<PlayPage> {
       child: Scaffold(
         body: ColoredBox(
           color: _isDarkMode.value
-              ? RicochlimePalette.grassColorDark
-              : RicochlimePalette.grassColor,
+              ? RicochlimePalette.waterColorDark
+              : RicochlimePalette.waterColor,
           child: SafeArea(
             child: Stack(
               children: [

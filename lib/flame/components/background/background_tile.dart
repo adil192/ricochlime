@@ -4,22 +4,40 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
-class HouseSprite extends SpriteComponent
+class GroundSprite extends SpriteComponent
     with HasGameRef<RicochlimeGame>, DarkeningSprite {
-  HouseSprite({
+  GroundSprite({
+    required this.posOnIsland,
     super.position,
     super.size,
-    super.priority = 10000,
-    super.anchor = Anchor.topCenter,
   });
+
+  final Alignment posOnIsland;
 
   @override
   void onLoad() {
     super.onLoad();
     sprite = Sprite(
       gameRef.images.fromCache('overworld.png'),
-      srcPosition: Vector2(176, 0),
-      srcSize: Vector2(80, 80),
+      srcPosition: switch (posOnIsland) {
+        Alignment.bottomCenter => Vector2(48, 96),
+        Alignment.centerRight => Vector2(32, 112),
+        Alignment.centerLeft => Vector2(64, 112),
+        Alignment.topCenter => Vector2(48, 128),
+
+        // Different sprite for the outer corners
+        Alignment.bottomLeft => Vector2(32, 160),
+        Alignment.bottomRight => Vector2(48, 160),
+        Alignment.topLeft => Vector2(32, 144),
+        Alignment.topRight => Vector2(48, 144),
+
+        // Different sprite for the center land
+        Alignment.center => Vector2(80, 160),
+
+        // Not supported
+        _ => throw 'Invalid alignment: $posOnIsland',
+      },
+      srcSize: Vector2(16, 16),
     );
   }
 }
@@ -38,65 +56,6 @@ class GrassSprite extends SpriteComponent
       gameRef.images.fromCache('overworld.png'),
       srcPosition: Vector2.zero(),
       srcSize: Vector2(16, 16),
-    );
-  }
-}
-
-class BridgeSprite extends SpriteComponent
-    with HasGameRef<RicochlimeGame>, DarkeningSprite {
-  BridgeSprite({
-    super.position,
-    super.size,
-  });
-
-  @override
-  void onLoad() {
-    super.onLoad();
-    sprite = Sprite(
-      gameRef.images.fromCache('overworld.png'),
-      srcPosition: Vector2(91, 104),
-      srcSize: Vector2(26, 33),
-    );
-  }
-}
-
-class WaterSprite extends SpriteAnimationComponent
-    with HasGameRef<RicochlimeGame>, DarkeningSprite {
-  WaterSprite({
-    super.position,
-    super.size,
-  });
-
-  @override
-  Future<void> onLoad() async {
-    await super.onLoad();
-    animation = SpriteAnimation.fromFrameData(
-      gameRef.images.fromCache('overworld.png'),
-      SpriteAnimationData.sequenced(
-        amount: RicochlimeGame.reproducibleGoldenMode ? 1 : 8,
-        stepTime: 4 / 8,
-        textureSize: Vector2(16, 16),
-        amountPerRow: RicochlimeGame.reproducibleGoldenMode ? 1 : 4,
-        texturePosition: Vector2(0, 16),
-      ),
-    );
-  }
-}
-
-class BushSprite extends SpriteComponent
-    with HasGameRef<RicochlimeGame>, DarkeningSprite {
-  BushSprite({
-    super.position,
-    super.size,
-  });
-
-  @override
-  void onLoad() {
-    super.onLoad();
-    sprite = Sprite(
-      gameRef.images.fromCache('overworld.png'),
-      srcPosition: Vector2(1, 225),
-      srcSize: Vector2(15, 31),
     );
   }
 }

@@ -14,7 +14,6 @@ import 'package:logging/logging.dart';
 import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
-import 'package:ricochlime/flame/components/background/background_tile.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/monster.dart';
 import 'package:ricochlime/flame/components/player.dart';
@@ -122,14 +121,6 @@ class RicochlimeGame extends Forge2DGame
 
     aimGuide = AimGuide();
     add(aimGuide);
-
-    // Houses
-    for (final dx in <double>[-94, -32, 32, 94]) {
-      add(HouseSprite(
-        position: player.position + Vector2(dx, -Player.staticHeight * 0.25),
-        size: Vector2(60, 60),
-      ));
-    }
 
     await Prefs.currentGame.waitUntilLoaded();
     await importFromGame(Prefs.currentGame.value);
@@ -306,8 +297,8 @@ class RicochlimeGame extends Forge2DGame
 
   @override
   Color backgroundColor() => isDarkMode.value
-      ? RicochlimePalette.grassColorDark
-      : RicochlimePalette.grassColor;
+      ? RicochlimePalette.waterColorDark
+      : RicochlimePalette.waterColor;
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
