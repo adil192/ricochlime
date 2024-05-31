@@ -43,7 +43,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
   @override
   void update(double dt) {
     super.update(dt);
-    if (body.position.y > (game as RicochlimeGame).player.bottomY) {
+    if (body.position.y > (game as RicochlimeGame).background.bottomOfIsland) {
       removeFromParent();
     }
   }
