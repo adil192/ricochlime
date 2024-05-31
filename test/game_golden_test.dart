@@ -43,18 +43,18 @@ void main() {
     await tester.pumpFrames(widget, const Duration(seconds: 3));
     await expectLater(
       find.byType(PlayPage),
-      matchesGoldenFile('golden/mobile.png'),
+      matchesGoldenFile('../metadata/en-US/images/phoneScreenshots/2_play.png'),
     );
 
     widget = GameEnvironment(
       game: game,
-      screenSize: const Size(1920, 1080),
+      screenSize: const Size(1440, 900),
     );
     await tester.pumpWidget(widget);
     await tester.pumpFrames(widget, const Duration(seconds: 3));
     await expectLater(
       find.byType(PlayPage),
-      matchesGoldenFile('golden/desktop.png'),
+      matchesGoldenFile('../metadata/en-US/images/tenInchScreenshots/game.png'),
     );
   });
 }
