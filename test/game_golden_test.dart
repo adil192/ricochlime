@@ -41,6 +41,7 @@ void main() {
       pixelRatio: 10 / 3,
     );
     await tester.pumpWidget(widget);
+    await _precacheCoinImage(tester);
     await tester.pumpFrames(widget, const Duration(seconds: 3));
     await expectLater(
       find.byType(PlayPage),
@@ -59,6 +60,12 @@ void main() {
       matchesGoldenFile('../metadata/en-US/images/tenInchScreenshots/game.png'),
     );
   });
+}
+
+Future<void> _precacheCoinImage(WidgetTester tester) async {
+  final context = tester.element(find.byType(PlayPage));
+  await tester.runAsync(
+      () => precacheImage(const AssetImage('assets/images/coin.png'), context));
 }
 
 class GameEnvironment extends StatelessWidget {
