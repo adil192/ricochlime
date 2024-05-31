@@ -58,8 +58,8 @@ class Monster extends BodyComponent with ContactCallbacks {
       json['px'] as double,
       json['py'] as double,
     );
-    final hp = json['hp'] as int;
     final maxHp = json['maxHp'] as int;
+    final hp = json['hp'] as int? ?? maxHp;
 
     final KillReward killReward;
     if (json['killReward'] != null) {
@@ -82,9 +82,9 @@ class Monster extends BodyComponent with ContactCallbacks {
   Map<String, dynamic> toJson() => {
         'px': _movement?.targetPosition.x ?? position.x,
         'py': _movement?.targetPosition.y ?? position.y,
-        'hp': hp,
         'maxHp': maxHp,
-        'killReward': killReward.index,
+        if (hp != maxHp) 'hp': hp,
+        if (killReward != KillReward.none) 'killReward': killReward.index,
       };
 
   /// How many monsters there are in each row.
