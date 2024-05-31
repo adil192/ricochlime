@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
@@ -23,7 +24,10 @@ void main() {
     RicochlimeGame.disableBgMusic = true;
     RicochlimeGame.reproducibleGoldenMode = true;
     game.random = Random(123);
-    await tester.runAsync(() => game.preloadSprites.future);
+    await tester.runAsync(() => Future.wait([
+          game.preloadSprites.future,
+          GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
+        ]));
 
     Prefs.coins.value = 166;
     Prefs.currentGame.value = GameData.fromJson(jsonDecode(

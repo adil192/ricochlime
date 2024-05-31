@@ -38,6 +38,7 @@ Future<void> main({
   await Future.wait([
     Prefs.highScore.waitUntilLoaded(),
     Prefs.birthYear.waitUntilLoaded(),
+    GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
   ]);
 
   AdState.init();
