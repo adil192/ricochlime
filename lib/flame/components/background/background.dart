@@ -59,7 +59,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
 
     yield* _getGrassTuftTiles(random);
     yield* _getIslandTiles(random);
-    yield* _getSkullTiles(random);
+    yield* getSkullTiles();
   }
 
   Iterable<SpriteComponent> _getGrassTuftTiles(Random random) sync* {
@@ -133,17 +133,20 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
     );
   }
 
-  Iterable<SkullSprite> _getSkullTiles(Random random) sync* {
+  @visibleForTesting
+  Iterable<SkullSprite> getSkullTiles() sync* {
+    final random = Random(1234);
+
     // Decreases (rises) as numNewRowsEachRound increases
     final minY = gameRef.player.position.y -
         Player.staticHeight * 0.5 -
         Monster.moveDownHeight * gameRef.numNewRowsEachRound;
 
-    for (var x = 4.0; x < gameRef.size.x - 4; x += 8) {
-      for (var y = bottomOfIsland - 12; y > minY; y -= 8) {
+    for (var y = bottomOfIsland.roundToDouble() - 12; y > minY; y -= 8) {
+      for (var x = 4.0; x < gameRef.size.x - 4; x += 8) {
         // no skulls near the player
-        if ((y + 4 - gameRef.player.position.y).abs() < 12 &&
-            (x + 4 - gameRef.player.position.x).abs() < 12) continue;
+        if ((y + 4 - gameRef.player.position.y).abs() < 17 &&
+            (x + 4 - gameRef.player.position.x).abs() < 17) continue;
 
         // randomly spread out the skulls
         if (random.nextDouble() > 0.3) continue;
