@@ -37,7 +37,8 @@ void main() {
 
     var widget = GameEnvironment(
       game: game,
-      screenSize: const Size(1080 * 0.4, 2400 * 0.4),
+      screenSize: const Size(1440, 3120),
+      pixelRatio: 10 / 3,
     );
     await tester.pumpWidget(widget);
     await tester.pumpFrames(widget, const Duration(seconds: 3));
@@ -49,6 +50,7 @@ void main() {
     widget = GameEnvironment(
       game: game,
       screenSize: const Size(1440, 900),
+      pixelRatio: 1,
     );
     await tester.pumpWidget(widget);
     await tester.pumpFrames(widget, const Duration(seconds: 3));
@@ -64,10 +66,12 @@ class GameEnvironment extends StatelessWidget {
     super.key,
     required this.game,
     required this.screenSize,
+    required this.pixelRatio,
   });
 
   final RicochlimeGame game;
   final Size screenSize;
+  final double pixelRatio;
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +84,17 @@ class GameEnvironment extends StatelessWidget {
       ),
       themeAnimationDuration: Duration.zero,
       home: FittedBox(
-        child: SizedBox(
-          width: screenSize.width,
-          height: screenSize.height,
-          child: const RepaintBoundary(
-            child: PlayPage(),
+        child: RepaintBoundary(
+          child: SizedBox(
+            width: screenSize.width,
+            height: screenSize.height,
+            child: FittedBox(
+              child: SizedBox(
+                width: screenSize.width / pixelRatio,
+                height: screenSize.height / pixelRatio,
+                child: const PlayPage(),
+              ),
+            ),
           ),
         ),
       ),
