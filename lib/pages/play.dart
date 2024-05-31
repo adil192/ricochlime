@@ -144,8 +144,8 @@ class _PlayPageState extends State<PlayPage> {
         statusBarBrightness: colorScheme.brightness,
         statusBarIconBrightness: colorScheme.brightness.opposite,
         systemNavigationBarColor: _isDarkMode.value
-            ? RicochlimePalette.grassColorDark
-            : RicochlimePalette.grassColor,
+            ? RicochlimePalette.waterColorDark
+            : RicochlimePalette.waterColor,
         systemNavigationBarIconBrightness: colorScheme.brightness.opposite,
       ),
       child: Scaffold(
