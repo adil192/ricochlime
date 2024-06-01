@@ -264,11 +264,14 @@ class SettingsPage extends StatelessWidget {
                 trailing: ValueListenableBuilder(
                   valueListenable: Prefs.maxFps,
                   builder: (context, maxFps, _) {
-                    return Text(
-                      switch (maxFps) { -1 => '∞', _ => maxFps.toString() },
-                      style: TextStyle(
-                          fontSize: switch (maxFps) { -1 => 30, _ => 20 }),
-                    );
+                    if (maxFps == -1) {
+                      return NesIcon(iconData: NesIcons.infinite);
+                    } else {
+                      return Text(
+                        maxFps.toString(),
+                        style: const TextStyle(fontSize: 20),
+                      );
+                    }
                   },
                 ),
                 onTap: () {
