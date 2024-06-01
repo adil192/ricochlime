@@ -9,10 +9,61 @@ import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
+import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
+import 'package:ricochlime/pages/settings.dart';
+import 'package:ricochlime/pages/tutorial.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+const inProgressGameSave = '''
+{
+  "score":50,
+  "monsters":[
+    {"px":0.0,"py":16.0,"maxHp":50,"killReward":1},
+    {"px":32.0,"py":16.0,"maxHp":50},
+    {"px":64.0,"py":16.0,"maxHp":50,"killReward":2},
+    {"px":80.0,"py":16.0,"maxHp":50},
+    {"px":32.0,"py":32.0,"maxHp":49,"killReward":1},
+    {"px":96.0,"py":32.0,"maxHp":49,"killReward":2},
+    {"px":32.0,"py":48.0,"maxHp":48,"killReward":2},
+    {"px":80.0,"py":48.0,"maxHp":48,"killReward":1},
+    {"px":16.0,"py":64.0,"maxHp":47,"killReward":2},
+    {"px":80.0,"py":64.0,"maxHp":47,"killReward":1},
+    {"px":80.0,"py":80.0,"maxHp":46,"killReward":1},
+    {"px":112.0,"py":80.0,"maxHp":46,"killReward":2},
+    {"px":16.0,"py":96.0,"maxHp":45,"killReward":1},
+    {"px":96.0,"py":96.0,"maxHp":45,"killReward":2},
+    {"px":0.0,"py":112.0,"maxHp":44},
+    {"px":80.0,"py":112.0,"maxHp":44,"killReward":2},
+    {"px":96.0,"py":112.0,"maxHp":44,"killReward":1},
+    {"px":32.0,"py":128.0,"maxHp":43,"killReward":1},
+    {"px":64.0,"py":128.0,"maxHp":43}
+  ]
+}''';
+const gameOverGameSave = '''
+{
+  "score":54,
+  "monsters":[
+    {"px":16.0,"py":16.0,"maxHp":54,"killReward":2},
+    {"px":96.0,"py":16.0,"maxHp":54,"killReward":1},
+    {"px":48.0,"py":32.0,"maxHp":53},
+    {"px":64.0,"py":32.0,"maxHp":53,"killReward":2},
+    {"px":112.0,"py":32.0,"maxHp":53,"killReward":1},
+    {"px":0.0,"py":80.0,"maxHp":50,"hp":18,"killReward":1},
+    {"px":32.0,"py":96.0,"maxHp":49,"hp":19,"killReward":1},
+    {"px":80.0,"py":112.0,"maxHp":48,"hp":12,"killReward":1},
+    {"px":16.0,"py":128.0,"maxHp":47,"hp":12,"killReward":2},
+    {"px":80.0,"py":128.0,"maxHp":47,"hp":14,"killReward":1},
+    {"px":80.0,"py":144.0,"maxHp":46,"hp":10,"killReward":1},
+    {"px":112.0,"py":144.0,"maxHp":46,"hp":21,"killReward":2},
+    {"px":16.0,"py":160.0,"maxHp":45,"hp":20,"killReward":1},
+    {"px":96.0,"py":160.0,"maxHp":45,"hp":2,"killReward":2},
+    {"px":0.0,"py":176.0,"maxHp":44,"hp":36},
+    {"px":64.0,"py":192.0,"maxHp":43,"hp":20}
+  ]
+}''';
 
 void main() {
   group('Goldens', () {
@@ -33,72 +84,99 @@ void main() {
     });
 
     Prefs.coins.value = 166;
-    Prefs.currentGame.value = GameData.fromJson(jsonDecode(
-        // ignore: lines_longer_than_80_chars
-        '{"score":50,"monsters":[{"px":0.0,"py":16.0,"maxHp":50,"killReward":1},{"px":32.0,"py":16.0,"maxHp":50},{"px":64.0,"py":16.0,"maxHp":50,"killReward":2},{"px":80.0,"py":16.0,"maxHp":50},{"px":32.0,"py":32.0,"maxHp":49,"killReward":1},{"px":96.0,"py":32.0,"maxHp":49,"killReward":2},{"px":32.0,"py":48.0,"maxHp":48,"killReward":2},{"px":80.0,"py":48.0,"maxHp":48,"killReward":1},{"px":16.0,"py":64.0,"maxHp":47,"killReward":2},{"px":80.0,"py":64.0,"maxHp":47,"killReward":1},{"px":80.0,"py":80.0,"maxHp":46,"killReward":1},{"px":112.0,"py":80.0,"maxHp":46,"killReward":2},{"px":16.0,"py":96.0,"maxHp":45,"killReward":1},{"px":96.0,"py":96.0,"maxHp":45,"killReward":2},{"px":0.0,"py":112.0,"maxHp":44},{"px":80.0,"py":112.0,"maxHp":44,"killReward":2},{"px":96.0,"py":112.0,"maxHp":44,"killReward":1},{"px":32.0,"py":128.26667199999997,"maxHp":43,"killReward":1},{"px":64.0,"py":128.26667199999997,"maxHp":43}]}'));
     Prefs.highScore.value = 62;
 
     _testGame(
-      screenSize: const Size(1440, 3120),
-      pixelRatio: 10 / 3,
-      goldenFile: '../metadata/en-US/images/phoneScreenshots/2_play.png',
+      goldenFileName: '1_home',
+      child: const HomePage(),
     );
-
     _testGame(
-      screenSize: const Size(1440, 900),
-      pixelRatio: 1,
-      goldenFile: '../metadata/en-US/images/tenInchScreenshots/game.png',
+      gameSave: inProgressGameSave,
+      goldenFileName: '2_play',
+      child: const PlayPage(),
+    );
+    // _testGame(
+    //   gameSave: gameOverGameSave,
+    //   goldenFileName: '3_game_over',
+    //   child: const PlayPage(),
+    // );
+    // _testGame(
+    //   goldenFileName: '4_tutorial',
+    //   child: const TutorialPage(),
+    // );
+    _testGame(
+      goldenFileName: '5_settings',
+      child: const SettingsPage(),
     );
   });
 }
 
 void _testGame({
-  required Size screenSize,
-  required double pixelRatio,
-  required String goldenFile,
+  String? gameSave,
+  required String goldenFileName,
+  required Widget child,
 }) {
-  testWidgets('$screenSize', (tester) async {
-    final widget = GameEnvironment(
-      game: game,
-      screenSize: screenSize,
-      pixelRatio: pixelRatio,
-    );
-    await tester.pumpWidget(widget);
+  for (final isMobile in [true, false]) {
+    final screenSize =
+        isMobile ? const Size(1440, 3120) : const Size(1440, 900);
+    final pixelRatio = isMobile ? 10 / 3 : 1.0;
+    final goldenFile =
+        '../metadata/en-US/images/${isMobile ? 'phoneScreenshots' : 'tenInchScreenshots'}/$goldenFileName.png';
 
-    final context = tester.element(find.byType(PlayPage));
-    await tester.runAsync(() =>
-        precacheImage(const AssetImage('assets/images/coin.png'), context));
+    testWidgets('$goldenFileName: ${isMobile ? 'Mobile' : 'Desktop'}',
+        (tester) async {
+      if (gameSave != null) {
+        Prefs.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
+        if (game.isLoaded) {
+          game
+            ..resetChildren()
+            ..importFromGame(Prefs.currentGame.value);
+        }
+      }
 
-    // Aim towards the middle left of the game area
-    final aspectRatio = screenSize.width / screenSize.height;
-    if (aspectRatio < RicochlimeGame.aspectRatio || true) {
-      game.onPanUpdate(DragUpdateInfo.fromDetails(
-        game,
-        DragUpdateDetails(
-          globalPosition: const Offset(0, RicochlimeGame.expectedHeight * 0.39),
-        ),
-      ));
-    }
+      final widget = _SizedEnvironment(
+        screenSize: screenSize,
+        pixelRatio: pixelRatio,
+        child: child,
+      );
+      await tester.pumpWidget(widget);
 
-    await tester.pumpFrames(widget, const Duration(seconds: 3));
-    await expectLater(
-      find.byType(PlayPage),
-      matchesGoldenFile(goldenFile),
-    );
-  });
+      final context = tester.element(find.byType(_SizedEnvironment));
+      await tester.runAsync(() =>
+          precacheImage(const AssetImage('assets/images/coin.png'), context));
+
+      // Aim towards the middle left of the game area
+      if (child is PlayPage) {
+        game.onPanUpdate(DragUpdateInfo.fromDetails(
+          game,
+          DragUpdateDetails(
+            globalPosition:
+                const Offset(0, RicochlimeGame.expectedHeight * 0.39),
+          ),
+        ));
+      }
+
+      await tester.pumpFrames(widget, const Duration(seconds: 3));
+      await expectLater(
+        find.byWidget(child),
+        matchesGoldenFile(goldenFile),
+      );
+    });
+  }
 }
 
-class GameEnvironment extends StatelessWidget {
-  const GameEnvironment({
+class _SizedEnvironment extends StatelessWidget {
+  const _SizedEnvironment({
+    // ignore: unused_element
     super.key,
-    required this.game,
     required this.screenSize,
     required this.pixelRatio,
+    required this.child,
   });
 
-  final RicochlimeGame game;
   final Size screenSize;
   final double pixelRatio;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +197,7 @@ class GameEnvironment extends StatelessWidget {
               child: SizedBox(
                 width: screenSize.width / pixelRatio,
                 height: screenSize.height / pixelRatio,
-                child: const PlayPage(),
+                child: child,
               ),
             ),
           ),

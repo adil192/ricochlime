@@ -123,7 +123,7 @@ class RicochlimeGame extends Forge2DGame
     add(aimGuide);
 
     await Prefs.currentGame.waitUntilLoaded();
-    await importFromGame(Prefs.currentGame.value);
+    importFromGame(Prefs.currentGame.value);
   }
 
   /// Whether [_initBgMusic] has been run.
@@ -220,10 +220,10 @@ class RicochlimeGame extends Forge2DGame
     );
   }
 
-  Future<void> importFromGame(GameData? data) async {
+  void importFromGame(GameData? data) {
     if (data == null) {
       // new game
-      unawaited(_reset());
+      _reset();
       return;
     }
 
@@ -252,8 +252,12 @@ class RicochlimeGame extends Forge2DGame
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
 
     if (isGameOver()) {
-      // allow the game to render before showing the game over dialog
-      Future.delayed(const Duration(milliseconds: 50), gameOver);
+      if (reproducibleGoldenMode) {
+        gameOver();
+      } else {
+        // allow the game to render before showing the game over dialog
+        Future.delayed(const Duration(milliseconds: 50), gameOver);
+      }
     } else {
       state.value = GameState.idle;
     }
@@ -284,12 +288,13 @@ class RicochlimeGame extends Forge2DGame
     }
     assert(!inputCancelled);
 
-    _resetChildren();
-    await importFromGame(Prefs.currentGame.value);
+    resetChildren();
+    importFromGame(Prefs.currentGame.value);
   }
 
   /// Clears the current bullets and monsters
-  void _resetChildren() {
+  @visibleForTesting
+  void resetChildren() {
     removeWhere((component) => component is Bullet);
     removeWhere((component) => component is Monster);
     removeWhere((component) => component is MonsterAnimation);
@@ -585,7 +590,7 @@ class RicochlimeGame extends Forge2DGame
     score.value = 0;
     numBullets = 1;
     numNewRowsEachRound = 1;
-    _resetChildren();
+    resetChildren();
     try {
       await spawnNewMonsters();
     } finally {
