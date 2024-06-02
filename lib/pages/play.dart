@@ -138,6 +138,9 @@ class _PlayPageState extends State<PlayPage> {
     final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final colorScheme = Theme.of(context).colorScheme;
     final screenSize = MediaQuery.sizeOf(context);
+    final bgColor = _isDarkMode.value
+        ? RicochlimePalette.waterColorDark
+        : RicochlimePalette.waterColor;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -149,93 +152,92 @@ class _PlayPageState extends State<PlayPage> {
         systemNavigationBarIconBrightness: colorScheme.brightness.opposite,
       ),
       child: Scaffold(
-        body: ColoredBox(
-          color: _isDarkMode.value
-              ? RicochlimePalette.waterColorDark
-              : RicochlimePalette.waterColor,
-          child: SafeArea(
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: FittedBox(
-                    child: SizedBox(
-                      width: RicochlimeGame.expectedWidth,
-                      height: RicochlimeGame.expectedHeight,
-                      child: Stack(
-                        children: [
-                          Positioned.fill(
-                            child: GameWidget(game: game),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: FutureBuilder(
-                              future: shouldShowBannerAd,
-                              builder: (context, snapshot) {
-                                return snapshot.data ?? false
-                                    ? const BannerAdWidget(
-                                        adSize: AdSize.banner)
-                                    : const SizedBox.shrink();
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+        backgroundColor: bgColor,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+          leadingWidth: 80,
+          leading: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(width: 16),
+              NesIconButton(
+                onPress: () => Navigator.of(context).pop(),
+                icon: NesIcons.leftArrowIndicator,
+                primaryColor: Colors.white.withOpacity(0.9),
+                secondaryColor:
+                    RicochlimePalette.grassColorDark.withOpacity(0.9),
+                size: const Size.square(20),
+              ),
+              const SizedBox(width: 16),
+              NesTooltip(
+                message: t.restartGameDialog.title,
+                arrowPlacement: switch (textDirection) {
+                  TextDirection.ltr => NesTooltipArrowPlacement.left,
+                  TextDirection.rtl => NesTooltipArrowPlacement.right,
+                },
+                arrowDirection: NesTooltipArrowDirection.bottom,
+                child: NesIconButton(
+                  onPress: () => NesDialog.show(
+                    context: context,
+                    builder: (context) => RestartGameDialog(
+                      restartGame: game.restartGame,
                     ),
                   ),
+                  icon: NesIcons.redo,
+                  primaryColor: Colors.white.withOpacity(0.9),
+                  secondaryColor:
+                      RicochlimePalette.grassColorDark.withOpacity(0.9),
+                  size: const Size.square(20),
                 ),
-                Positioned.directional(
-                  textDirection: textDirection,
-                  top: kToolbarHeight / 4,
-                  start: kToolbarHeight / 4,
-                  child: Row(
-                    children: [
-                      NesIconButton(
-                        onPress: () => Navigator.of(context).pop(),
-                        icon: NesIcons.leftArrowIndicator,
-                        primaryColor: Colors.white.withOpacity(0.9),
-                        secondaryColor:
-                            RicochlimePalette.grassColorDark.withOpacity(0.9),
-                        size: const Size.square(20),
-                      ),
-                      const SizedBox(width: 8),
-                      NesTooltip(
-                        message: t.restartGameDialog.title,
-                        arrowPlacement: switch (textDirection) {
-                          TextDirection.ltr => NesTooltipArrowPlacement.left,
-                          TextDirection.rtl => NesTooltipArrowPlacement.right,
-                        },
-                        arrowDirection: NesTooltipArrowDirection.bottom,
-                        child: NesIconButton(
-                          onPress: () => NesDialog.show(
-                            context: context,
-                            builder: (context) => RestartGameDialog(
-                              restartGame: game.restartGame,
-                            ),
-                          ),
-                          icon: NesIcons.redo,
-                          primaryColor: Colors.white.withOpacity(0.9),
-                          secondaryColor:
-                              RicochlimePalette.grassColorDark.withOpacity(0.9),
-                          size: const Size.square(20),
-                        ),
-                      )
-                    ],
+              ),
+            ],
+          ),
+          centerTitle: true,
+          title: Column(
+            children: [
+              ValueListenableBuilder(
+                valueListenable: Prefs.highScore,
+                builder: (context, highScore, child) => Text(
+                  highScore <= 0 ? '' : t.playPage.highScore(p: highScore),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.9),
+                    fontSize: 12,
+                    height: 1,
                   ),
                 ),
-                Positioned.directional(
-                  textDirection: textDirection,
-                  top: kToolbarHeight / 4,
-                  end: kToolbarHeight / 4,
+              ),
+              const SizedBox(height: 4),
+              ValueListenableBuilder(
+                valueListenable: _score,
+                builder: (context, score, child) => Text(
+                  '$score',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.9),
+                    fontSize: 32,
+                    height: 0.7,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IgnorePointer(
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       ValueListenableBuilder(
                         valueListenable: Prefs.coins,
                         builder: (context, coins, _) {
                           return Text(
-                            coins > 1000
+                            coins >= 1000
                                 ? '${(coins / 1000).toStringAsFixed(1)}K'
                                 : coins.toString(),
                             style: TextStyle(
@@ -247,110 +249,105 @@ class _PlayPageState extends State<PlayPage> {
                         },
                       ),
                       const CoinIcon(size: 24),
+                      const SizedBox(width: 16),
                     ],
-                  ),
-                ),
-                Positioned(
-                  top: -1,
-                  left: 0,
-                  right: 0,
-                  child: IgnorePointer(
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 4),
-                        ValueListenableBuilder(
-                          valueListenable: Prefs.highScore,
-                          builder: (context, highScore, child) => Text(
-                            highScore <= 0
-                                ? ''
-                                : t.playPage.highScore(p: highScore),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
-                              fontSize: 12,
-                              height: 1,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        ValueListenableBuilder(
-                          valueListenable: _score,
-                          builder: (context, score, child) => Text(
-                            '$score',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
-                              fontSize: 32,
-                              height: 0.7,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned.fill(
-                  bottom: screenSize.height - _playerPos(screenSize),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8, right: 8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IgnorePointer(
-                          child: ValueListenableBuilder(
-                            valueListenable: _timeDilation,
-                            builder: (context, timeDilation, _) =>
-                                AnimatedOpacity(
-                              opacity: timeDilation == 1.0 ? 0.0 : 1.0,
-                              duration: const Duration(milliseconds: 200),
-                              child: Text(
-                                '${timeDilation.toStringAsFixed(1)}x',
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
-                                  fontSize: 32,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        if (Prefs.showUndoButton.value)
-                          ValueListenableBuilder(
-                            valueListenable: game.state,
-                            builder: (context, state, child) {
-                              final show = state == GameState.shooting;
-                              return AnimatedOpacity(
-                                opacity: show ? 1 : 0,
-                                duration: const Duration(milliseconds: 200),
-                                child: IgnorePointer(
-                                  ignoring: !show,
-                                  child: child,
-                                ),
-                              );
-                            },
-                            child: NesTooltip(
-                              message: t.playPage.undo,
-                              arrowDirection: NesTooltipArrowDirection.bottom,
-                              child: NesIconButton(
-                                onPress: () {
-                                  game.cancelCurrentTurn();
-                                  Prefs.totalMovesUndone.value++;
-                                },
-                                icon: NesIcons.delete,
-                                primaryColor: Colors.white.withOpacity(0.9),
-                                secondaryColor: RicochlimePalette.grassColorDark
-                                    .withOpacity(0.9),
-                                size: const Size.square(20),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
                   ),
                 ),
               ],
             ),
+          ],
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(height: 2),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: FittedBox(
+                        child: SizedBox(
+                          width: RicochlimeGame.expectedWidth,
+                          height: RicochlimeGame.expectedHeight,
+                          child: GameWidget(game: game),
+                        ),
+                      ),
+                    ),
+                    Positioned.fill(
+                      bottom: screenSize.height - _playerPos(screenSize),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            IgnorePointer(
+                              child: ValueListenableBuilder(
+                                valueListenable: _timeDilation,
+                                builder: (context, timeDilation, _) =>
+                                    AnimatedOpacity(
+                                  opacity: timeDilation == 1.0 ? 0.0 : 1.0,
+                                  duration: const Duration(milliseconds: 200),
+                                  child: Text(
+                                    '${timeDilation.toStringAsFixed(1)}x',
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.9),
+                                      fontSize: 32,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            if (Prefs.showUndoButton.value)
+                              ValueListenableBuilder(
+                                valueListenable: game.state,
+                                builder: (context, state, child) {
+                                  final show = state == GameState.shooting;
+                                  return AnimatedOpacity(
+                                    opacity: show ? 1 : 0,
+                                    duration: const Duration(milliseconds: 200),
+                                    child: IgnorePointer(
+                                      ignoring: !show,
+                                      child: child,
+                                    ),
+                                  );
+                                },
+                                child: NesTooltip(
+                                  message: t.playPage.undo,
+                                  arrowDirection:
+                                      NesTooltipArrowDirection.bottom,
+                                  child: NesIconButton(
+                                    onPress: () {
+                                      game.cancelCurrentTurn();
+                                      Prefs.totalMovesUndone.value++;
+                                    },
+                                    icon: NesIcons.delete,
+                                    primaryColor: Colors.white.withOpacity(0.9),
+                                    secondaryColor: RicochlimePalette
+                                        .grassColorDark
+                                        .withOpacity(0.9),
+                                    size: const Size.square(20),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 2),
+              FutureBuilder(
+                future: shouldShowBannerAd,
+                builder: (context, snapshot) {
+                  return snapshot.data ?? false
+                      ? const BannerAdWidget(adSize: AdSize.banner)
+                      : const SizedBox.shrink();
+                },
+              ),
+            ],
           ),
         ),
       ),
