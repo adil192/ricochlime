@@ -91,11 +91,15 @@ void main() {
     );
     _testGame(
       gameSave: inProgressGameSave,
+      frameColor: RicochlimePalette.waterColor,
+      onFrameColor: const Color(0xFFeaf2f8),
       goldenFileName: '2_play',
       child: const PlayPage(),
     );
     // _testGame(
     //   gameSave: gameOverGameSave,
+    //   frameColor: RicochlimePalette.waterColor,
+    //   onFrameColor: const Color(0xFFeaf2f8),
     //   goldenFileName: '3_game_over',
     //   child: const PlayPage(),
     // );
@@ -112,6 +116,8 @@ void main() {
 
 void _testGame({
   String? gameSave,
+  Color? frameColor,
+  Color? onFrameColor,
   required String goldenFileName,
   required Widget child,
 }) {
@@ -127,15 +133,19 @@ void _testGame({
       }
 
       final widget = _SizedEnvironment(
-        resolution: device.resolution,
-        pixelRatio: device.pixelRatio,
+        device: device,
+        frameColor: frameColor,
+        onFrameColor: onFrameColor,
         child: child,
       );
       await tester.pumpWidget(widget);
 
       final context = tester.element(find.byType(_SizedEnvironment));
-      await tester.runAsync(() =>
-          precacheImage(const AssetImage('assets/images/coin.png'), context));
+      await tester.runAsync(() => Future.wait([
+            precacheImage(const AssetImage('assets/images/coin.png'), context),
+            precacheImage(
+                const AssetImage('assets/tests/android_topbar.png'), context),
+          ]));
 
       // Aim towards the middle left of the game area
       if (child is PlayPage) {
@@ -157,40 +167,112 @@ void _testGame({
   }
 }
 
+typedef FrameBuilder = Widget Function({
+  required Color? frameColor,
+  required Color? onFrameColor,
+  required Widget child,
+});
+
 enum _ScreenshotDevice {
   desktop(
     resolution: Size(1440, 900),
     pixelRatio: 1,
     goldenFolder: '../metadata/en-US/images/tenInchScreenshots/',
+    frameBuilder: _NoFrame.new,
   ),
   android(
     resolution: Size(1440, 3120),
     pixelRatio: 10 / 3,
     goldenFolder: '../metadata/en-US/images/phoneScreenshots/',
+    frameBuilder: _AndroidFrame.new,
   );
 
   const _ScreenshotDevice({
     required this.resolution,
     required this.pixelRatio,
     required this.goldenFolder,
+    required this.frameBuilder,
   }) : assert(pixelRatio > 0);
 
   final Size resolution;
   final double pixelRatio;
   final String goldenFolder;
+  final FrameBuilder frameBuilder;
+}
+
+class _NoFrame extends StatelessWidget {
+  // ignore: unused_element
+  const _NoFrame(
+      {super.key, this.frameColor, this.onFrameColor, required this.child});
+
+  final Color? frameColor, onFrameColor;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return child;
+  }
+}
+
+class _AndroidFrame extends StatelessWidget {
+  const _AndroidFrame({
+    // ignore: unused_element
+    super.key,
+    required this.frameColor,
+    required this.onFrameColor,
+    required this.child,
+  });
+
+  final Color? frameColor, onFrameColor;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final onFrameColor = this.onFrameColor ??
+        Color.lerp(colorScheme.onSurface, colorScheme.surface, 0.3)!;
+    return ColoredBox(
+      color: frameColor ?? colorScheme.surface,
+      child: Column(
+        children: [
+          ColorFiltered(
+            colorFilter: ColorFilter.mode(
+              onFrameColor,
+              BlendMode.modulate,
+            ),
+            child: Image.asset('assets/tests/android_topbar.png'),
+          ),
+          Expanded(child: child),
+          SizedBox(
+            height: 24,
+            child: Center(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: onFrameColor,
+                ),
+                child: const SizedBox(width: 125, height: 4),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _SizedEnvironment extends StatelessWidget {
   const _SizedEnvironment({
     // ignore: unused_element
     super.key,
-    required this.resolution,
-    required this.pixelRatio,
+    required this.device,
+    required this.frameColor,
+    required this.onFrameColor,
     required this.child,
   });
 
-  final Size resolution;
-  final double pixelRatio;
+  final _ScreenshotDevice device;
+  final Color? frameColor, onFrameColor;
   final Widget child;
 
   @override
@@ -206,13 +288,17 @@ class _SizedEnvironment extends StatelessWidget {
       home: FittedBox(
         child: RepaintBoundary(
           child: SizedBox(
-            width: resolution.width,
-            height: resolution.height,
+            width: device.resolution.width,
+            height: device.resolution.height,
             child: FittedBox(
               child: SizedBox(
-                width: resolution.width / pixelRatio,
-                height: resolution.height / pixelRatio,
-                child: child,
+                width: device.resolution.width / device.pixelRatio,
+                height: device.resolution.height / device.pixelRatio,
+                child: device.frameBuilder(
+                  frameColor: frameColor,
+                  onFrameColor: onFrameColor,
+                  child: child,
+                ),
               ),
             ),
           ),
