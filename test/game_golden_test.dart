@@ -65,7 +65,7 @@ const gameOverGameSave = '''
 }''';
 
 void main() {
-  group('Goldens', () {
+  group('Golden screenshot of', () {
     TestWidgetsFlutterBinding.ensureInitialized();
     SharedPreferences.setMockInitialValues({});
     Prefs.testingMode = true;
@@ -121,53 +121,55 @@ void _testGame({
   required String goldenFileName,
   required Widget child,
 }) {
-  for (final device in _ScreenshotDevice.values) {
-    testWidgets('$goldenFileName: ${device.name}', (tester) async {
-      if (gameSave != null) {
-        Prefs.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
-        if (game.isLoaded) {
-          game
-            ..resetChildren()
-            ..importFromGame(Prefs.currentGame.value);
+  group(goldenFileName, () {
+    for (final device in _ScreenshotDevice.values) {
+      testWidgets('for ${device.name}', (tester) async {
+        if (gameSave != null) {
+          Prefs.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
+          if (game.isLoaded) {
+            game
+              ..resetChildren()
+              ..importFromGame(Prefs.currentGame.value);
+          }
         }
-      }
 
-      final widget = _SizedEnvironment(
-        device: device,
-        frameColor: frameColor,
-        onFrameColor: onFrameColor,
-        child: child,
-      );
-      await tester.pumpWidget(widget);
+        final widget = _SizedEnvironment(
+          device: device,
+          frameColor: frameColor,
+          onFrameColor: onFrameColor,
+          child: child,
+        );
+        await tester.pumpWidget(widget);
 
-      final context = tester.element(find.byType(_SizedEnvironment));
-      await tester.runAsync(() => Future.wait(const [
-            AssetImage('assets/images/coin.png'),
-            AssetImage('assets/tests/android_topbar.png'),
-            AssetImage('assets/tests/newer_iphone_topbar.png'),
-            AssetImage('assets/tests/newer_ipad_topbar.png'),
-            AssetImage('assets/tests/older_iphone_topbar.png'),
-            AssetImage('assets/tests/older_ipad_topbar.png'),
-          ].map((image) => precacheImage(image, context))));
+        final context = tester.element(find.byType(_SizedEnvironment));
+        await tester.runAsync(() => Future.wait(const [
+              AssetImage('assets/images/coin.png'),
+              AssetImage('assets/tests/android_topbar.png'),
+              AssetImage('assets/tests/newer_iphone_topbar.png'),
+              AssetImage('assets/tests/newer_ipad_topbar.png'),
+              AssetImage('assets/tests/older_iphone_topbar.png'),
+              AssetImage('assets/tests/older_ipad_topbar.png'),
+            ].map((image) => precacheImage(image, context))));
 
-      // Aim towards the middle left of the game area
-      if (child is PlayPage) {
-        game.onPanUpdate(DragUpdateInfo.fromDetails(
-          game,
-          DragUpdateDetails(
-            globalPosition:
-                const Offset(0, RicochlimeGame.expectedHeight * 0.39),
-          ),
-        ));
-      }
+        // Aim towards the middle left of the game area
+        if (child is PlayPage) {
+          game.onPanUpdate(DragUpdateInfo.fromDetails(
+            game,
+            DragUpdateDetails(
+              globalPosition:
+                  const Offset(0, RicochlimeGame.expectedHeight * 0.39),
+            ),
+          ));
+        }
 
-      await tester.pumpFrames(widget, const Duration(seconds: 3));
-      await expectLater(
-        find.byWidget(child),
-        matchesGoldenFile('${device.goldenFolder}$goldenFileName.png'),
-      );
-    });
-  }
+        await tester.pumpFrames(widget, const Duration(seconds: 3));
+        await expectLater(
+          find.byWidget(child),
+          matchesGoldenFile('${device.goldenFolder}$goldenFileName.png'),
+        );
+      });
+    }
+  });
 }
 
 typedef _FrameBuilder = Widget Function({
@@ -178,10 +180,10 @@ typedef _FrameBuilder = Widget Function({
 });
 
 enum _ScreenshotDevice {
-  desktop(
+  flathub(
     platform: TargetPlatform.linux,
-    resolution: Size(1440, 900),
-    pixelRatio: 1,
+    resolution: Size(2000, 1400),
+    pixelRatio: 2,
     goldenFolder: '../metadata/en-US/images/tenInchScreenshots/',
     frameBuilder: _NoFrame.new,
   ),
