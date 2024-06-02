@@ -187,6 +187,13 @@ enum _ScreenshotDevice {
     goldenFolder: '../metadata/en-US/images/tenInchScreenshots/',
     frameBuilder: _NoFrame.new,
   ),
+  macbook(
+    platform: TargetPlatform.macOS,
+    resolution: Size(2880, 1800),
+    pixelRatio: 2,
+    goldenFolder: '../metadata/en-US/images/macbookScreenshots/',
+    frameBuilder: _NoFrame.new,
+  ),
   android(
     platform: TargetPlatform.android,
     resolution: Size(1440, 3120),
