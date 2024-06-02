@@ -367,7 +367,6 @@ class _BannerAdWidgetState extends State<BannerAdWidget>
     const nesPadding = EdgeInsets.all(3);
 
     return FittedBox(
-      fit: BoxFit.fitWidth,
       child: Padding(
         padding: const EdgeInsets.all(3),
         child: Stack(

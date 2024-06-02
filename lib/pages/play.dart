@@ -257,98 +257,99 @@ class _PlayPageState extends State<PlayPage> {
             ),
           ],
         ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(height: 2),
-              Expanded(
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: FittedBox(
-                        child: SizedBox(
-                          width: RicochlimeGame.expectedWidth,
-                          height: RicochlimeGame.expectedHeight,
-                          child: GameWidget(game: game),
-                        ),
+        body: Column(
+          children: [
+            const SizedBox(height: 2),
+            Expanded(
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: FittedBox(
+                      child: SizedBox(
+                        width: RicochlimeGame.expectedWidth,
+                        height: RicochlimeGame.expectedHeight,
+                        child: GameWidget(game: game),
                       ),
                     ),
-                    Positioned.fill(
-                      bottom: screenSize.height - _playerPos(screenSize),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IgnorePointer(
-                              child: ValueListenableBuilder(
-                                valueListenable: _timeDilation,
-                                builder: (context, timeDilation, _) =>
-                                    AnimatedOpacity(
-                                  opacity: timeDilation == 1.0 ? 0.0 : 1.0,
-                                  duration: const Duration(milliseconds: 200),
-                                  child: Text(
-                                    '${timeDilation.toStringAsFixed(1)}x',
-                                    style: TextStyle(
-                                      color: Colors.white.withOpacity(0.9),
-                                      fontSize: 32,
-                                    ),
+                  ),
+                  Positioned.fill(
+                    bottom: screenSize.height - _playerPos(screenSize),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IgnorePointer(
+                            child: ValueListenableBuilder(
+                              valueListenable: _timeDilation,
+                              builder: (context, timeDilation, _) =>
+                                  AnimatedOpacity(
+                                opacity: timeDilation == 1.0 ? 0.0 : 1.0,
+                                duration: const Duration(milliseconds: 200),
+                                child: Text(
+                                  '${timeDilation.toStringAsFixed(1)}x',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.9),
+                                    fontSize: 32,
                                   ),
                                 ),
                               ),
                             ),
-                            if (Prefs.showUndoButton.value)
-                              ValueListenableBuilder(
-                                valueListenable: game.state,
-                                builder: (context, state, child) {
-                                  final show = state == GameState.shooting;
-                                  return AnimatedOpacity(
-                                    opacity: show ? 1 : 0,
-                                    duration: const Duration(milliseconds: 200),
-                                    child: IgnorePointer(
-                                      ignoring: !show,
-                                      child: child,
-                                    ),
-                                  );
-                                },
-                                child: NesTooltip(
-                                  message: t.playPage.undo,
-                                  arrowDirection:
-                                      NesTooltipArrowDirection.bottom,
-                                  child: NesIconButton(
-                                    onPress: () {
-                                      game.cancelCurrentTurn();
-                                      Prefs.totalMovesUndone.value++;
-                                    },
-                                    icon: NesIcons.delete,
-                                    primaryColor: Colors.white.withOpacity(0.9),
-                                    secondaryColor: RicochlimePalette
-                                        .grassColorDark
-                                        .withOpacity(0.9),
-                                    size: const Size.square(20),
+                          ),
+                          if (Prefs.showUndoButton.value)
+                            ValueListenableBuilder(
+                              valueListenable: game.state,
+                              builder: (context, state, child) {
+                                final show = state == GameState.shooting;
+                                return AnimatedOpacity(
+                                  opacity: show ? 1 : 0,
+                                  duration: const Duration(milliseconds: 200),
+                                  child: IgnorePointer(
+                                    ignoring: !show,
+                                    child: child,
                                   ),
+                                );
+                              },
+                              child: NesTooltip(
+                                message: t.playPage.undo,
+                                arrowDirection: NesTooltipArrowDirection.bottom,
+                                child: NesIconButton(
+                                  onPress: () {
+                                    game.cancelCurrentTurn();
+                                    Prefs.totalMovesUndone.value++;
+                                  },
+                                  icon: NesIcons.delete,
+                                  primaryColor: Colors.white.withOpacity(0.9),
+                                  secondaryColor: RicochlimePalette
+                                      .grassColorDark
+                                      .withOpacity(0.9),
+                                  size: const Size.square(20),
                                 ),
                               ),
-                          ],
-                        ),
+                            ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 2),
-              FutureBuilder(
-                future: shouldShowBannerAd,
-                builder: (context, snapshot) {
-                  return snapshot.data ?? false
+            ),
+            const SizedBox(height: 2),
+            FutureBuilder(
+              future: shouldShowBannerAd,
+              builder: (context, snapshot) {
+                final showAd = snapshot.data ?? false;
+                return SizedBox(
+                  width: double.infinity,
+                  child: showAd
                       ? const BannerAdWidget(adSize: AdSize.banner)
-                      : const SizedBox.shrink();
-                },
-              ),
-            ],
-          ),
+                      : null,
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
