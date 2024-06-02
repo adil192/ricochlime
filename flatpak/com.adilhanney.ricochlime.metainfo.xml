@@ -71,6 +71,14 @@
     </branding>
 
     <releases>
+        <release version="1.6.0" date="2024-06-02">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.6.0</url>
+            <description>
+                <ul>
+                    <li>Redesigned the map</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.5.2" type="development" date="2024-05-28">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.5.2</url>
             <description>

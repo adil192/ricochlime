@@ -144,7 +144,7 @@ else
   echo " - (*) Adding <release> tag to $FLATPAK_FILE"
   # shellcheck disable=SC1078,SC1079
   RELEASE_TAG="""\
-        <release version=\"$BUILD_NAME\" type=\"development\" date=\"$DATE\">
+        <release version=\"$BUILD_NAME\" date=\"$DATE\">
             <url type=\"details\">https://github.com/adil192/ricochlime/releases/tag/v$BUILD_NAME</url>
             <description>
                 <ul>
@@ -153,7 +153,7 @@ else
             </description>
         </release>\
 """
-  awk -v release="$RELEASE_TAG" 'NR==71{print release}1' "$FLATPAK_FILE" > "${FLATPAK_FILE}.tmp"
+  awk -v release="$RELEASE_TAG" 'NR==74{print release}1' "$FLATPAK_FILE" > "${FLATPAK_FILE}.tmp"
   mv "${FLATPAK_FILE}.tmp" "$FLATPAK_FILE"
 fi
 
