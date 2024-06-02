@@ -12,7 +12,6 @@ import 'package:ricochlime/nes/nes_theme.dart';
 import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
-import 'package:ricochlime/pages/tutorial.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -116,15 +115,8 @@ void _testGame({
   required String goldenFileName,
   required Widget child,
 }) {
-  for (final isMobile in [true, false]) {
-    final screenSize =
-        isMobile ? const Size(1440, 3120) : const Size(1440, 900);
-    final pixelRatio = isMobile ? 10 / 3 : 1.0;
-    final goldenFile =
-        '../metadata/en-US/images/${isMobile ? 'phoneScreenshots' : 'tenInchScreenshots'}/$goldenFileName.png';
-
-    testWidgets('$goldenFileName: ${isMobile ? 'Mobile' : 'Desktop'}',
-        (tester) async {
+  for (final device in _ScreenshotDevice.values) {
+    testWidgets('$goldenFileName: ${device.name}', (tester) async {
       if (gameSave != null) {
         Prefs.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
         if (game.isLoaded) {
@@ -135,8 +127,8 @@ void _testGame({
       }
 
       final widget = _SizedEnvironment(
-        screenSize: screenSize,
-        pixelRatio: pixelRatio,
+        resolution: device.resolution,
+        pixelRatio: device.pixelRatio,
         child: child,
       );
       await tester.pumpWidget(widget);
@@ -159,22 +151,45 @@ void _testGame({
       await tester.pumpFrames(widget, const Duration(seconds: 3));
       await expectLater(
         find.byWidget(child),
-        matchesGoldenFile(goldenFile),
+        matchesGoldenFile('${device.goldenFolder}$goldenFileName.png'),
       );
     });
   }
+}
+
+enum _ScreenshotDevice {
+  desktop(
+    resolution: Size(1440, 900),
+    pixelRatio: 1,
+    goldenFolder: '../metadata/en-US/images/tenInchScreenshots/',
+  ),
+  android(
+    resolution: Size(1440, 3120),
+    pixelRatio: 10 / 3,
+    goldenFolder: '../metadata/en-US/images/phoneScreenshots/',
+  );
+
+  const _ScreenshotDevice({
+    required this.resolution,
+    required this.pixelRatio,
+    required this.goldenFolder,
+  }) : assert(pixelRatio > 0);
+
+  final Size resolution;
+  final double pixelRatio;
+  final String goldenFolder;
 }
 
 class _SizedEnvironment extends StatelessWidget {
   const _SizedEnvironment({
     // ignore: unused_element
     super.key,
-    required this.screenSize,
+    required this.resolution,
     required this.pixelRatio,
     required this.child,
   });
 
-  final Size screenSize;
+  final Size resolution;
   final double pixelRatio;
   final Widget child;
 
@@ -191,12 +206,12 @@ class _SizedEnvironment extends StatelessWidget {
       home: FittedBox(
         child: RepaintBoundary(
           child: SizedBox(
-            width: screenSize.width,
-            height: screenSize.height,
+            width: resolution.width,
+            height: resolution.height,
             child: FittedBox(
               child: SizedBox(
-                width: screenSize.width / pixelRatio,
-                height: screenSize.height / pixelRatio,
+                width: resolution.width / pixelRatio,
+                height: resolution.height / pixelRatio,
                 child: child,
               ),
             ),
