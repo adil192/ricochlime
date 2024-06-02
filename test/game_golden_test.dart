@@ -141,11 +141,14 @@ void _testGame({
       await tester.pumpWidget(widget);
 
       final context = tester.element(find.byType(_SizedEnvironment));
-      await tester.runAsync(() => Future.wait([
-            precacheImage(const AssetImage('assets/images/coin.png'), context),
-            precacheImage(
-                const AssetImage('assets/tests/android_topbar.png'), context),
-          ]));
+      await tester.runAsync(() => Future.wait(const [
+            AssetImage('assets/images/coin.png'),
+            AssetImage('assets/tests/android_topbar.png'),
+            AssetImage('assets/tests/newer_iphone_topbar.png'),
+            AssetImage('assets/tests/newer_ipad_topbar.png'),
+            AssetImage('assets/tests/older_iphone_topbar.png'),
+            AssetImage('assets/tests/older_ipad_topbar.png'),
+          ].map((image) => precacheImage(image, context))));
 
       // Aim towards the middle left of the game area
       if (child is PlayPage) {
@@ -167,7 +170,8 @@ void _testGame({
   }
 }
 
-typedef FrameBuilder = Widget Function({
+typedef _FrameBuilder = Widget Function({
+  required _ScreenshotDevice device,
   required Color? frameColor,
   required Color? onFrameColor,
   required Widget child,
@@ -175,36 +179,73 @@ typedef FrameBuilder = Widget Function({
 
 enum _ScreenshotDevice {
   desktop(
+    platform: TargetPlatform.linux,
     resolution: Size(1440, 900),
     pixelRatio: 1,
     goldenFolder: '../metadata/en-US/images/tenInchScreenshots/',
     frameBuilder: _NoFrame.new,
   ),
   android(
+    platform: TargetPlatform.android,
     resolution: Size(1440, 3120),
     pixelRatio: 10 / 3,
     goldenFolder: '../metadata/en-US/images/phoneScreenshots/',
-    frameBuilder: _AndroidFrame.new,
+    frameBuilder: _GenericFrame.android,
+  ),
+  olderIphone(
+    platform: TargetPlatform.iOS,
+    resolution: Size(1242, 2208),
+    pixelRatio: 3,
+    goldenFolder: '../metadata/en-US/images/olderIphoneScreenshots/',
+    frameBuilder: _GenericFrame.olderIphone,
+  ),
+  newerIphone(
+    platform: TargetPlatform.iOS,
+    resolution: Size(1284, 2778),
+    pixelRatio: 3,
+    goldenFolder: '../metadata/en-US/images/newerIphoneScreenshots/',
+    frameBuilder: _GenericFrame.newerIphone,
+  ),
+  olderIpad(
+    platform: TargetPlatform.iOS,
+    resolution: Size(2048, 2732),
+    pixelRatio: 2,
+    goldenFolder: '../metadata/en-US/images/olderIpadScreenshots/',
+    frameBuilder: _GenericFrame.olderIpad,
+  ),
+  newerIpad(
+    platform: TargetPlatform.iOS,
+    resolution: Size(2064, 2752),
+    pixelRatio: 2,
+    goldenFolder: '../metadata/en-US/images/newerIpadScreenshots/',
+    frameBuilder: _GenericFrame.newerIpad,
   );
 
   const _ScreenshotDevice({
+    required this.platform,
     required this.resolution,
     required this.pixelRatio,
     required this.goldenFolder,
     required this.frameBuilder,
   }) : assert(pixelRatio > 0);
 
+  final TargetPlatform platform;
   final Size resolution;
   final double pixelRatio;
   final String goldenFolder;
-  final FrameBuilder frameBuilder;
+  final _FrameBuilder frameBuilder;
 }
 
 class _NoFrame extends StatelessWidget {
   // ignore: unused_element
   const _NoFrame(
-      {super.key, this.frameColor, this.onFrameColor, required this.child});
+      {super.key,
+      this.device,
+      this.frameColor,
+      this.onFrameColor,
+      required this.child});
 
+  final _ScreenshotDevice? device;
   final Color? frameColor, onFrameColor;
   final Widget child;
 
@@ -214,47 +255,92 @@ class _NoFrame extends StatelessWidget {
   }
 }
 
-class _AndroidFrame extends StatelessWidget {
-  const _AndroidFrame({
+class _GenericFrame extends StatelessWidget {
+  const _GenericFrame.android({
     // ignore: unused_element
     super.key,
+    required this.device,
     required this.frameColor,
     required this.onFrameColor,
     required this.child,
-  });
+  })  : topBarImage = const AssetImage('assets/tests/android_topbar.png'),
+        bottomBar = const SizedBox(width: 125, height: 4);
 
+  const _GenericFrame.olderIphone({
+    // ignore: unused_element
+    super.key,
+    required this.device,
+    required this.frameColor,
+    required this.onFrameColor,
+    required this.child,
+  })  : topBarImage = const AssetImage('assets/tests/older_iphone_topbar.png'),
+        bottomBar = null;
+
+  const _GenericFrame.newerIphone({
+    // ignore: unused_element
+    super.key,
+    required this.device,
+    required this.frameColor,
+    required this.onFrameColor,
+    required this.child,
+  })  : topBarImage = const AssetImage('assets/tests/newer_iphone_topbar.png'),
+        bottomBar = const SizedBox(width: 150, height: 5);
+
+  const _GenericFrame.olderIpad({
+    // ignore: unused_element
+    super.key,
+    required this.device,
+    required this.frameColor,
+    required this.onFrameColor,
+    required this.child,
+  })  : topBarImage = const AssetImage('assets/tests/older_ipad_topbar.png'),
+        bottomBar = null;
+
+  const _GenericFrame.newerIpad({
+    // ignore: unused_element
+    super.key,
+    required this.device,
+    required this.frameColor,
+    required this.onFrameColor,
+    required this.child,
+  })  : topBarImage = const AssetImage('assets/tests/newer_ipad_topbar.png'),
+        bottomBar = const SizedBox(width: 320, height: 6);
+
+  final _ScreenshotDevice device;
   final Color? frameColor, onFrameColor;
+  final ImageProvider topBarImage;
+  final SizedBox? bottomBar;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final onFrameColor = this.onFrameColor ??
-        Color.lerp(colorScheme.onSurface, colorScheme.surface, 0.3)!;
+        (device.platform == TargetPlatform.android
+            ? Color.lerp(colorScheme.onSurface, colorScheme.surface, 0.3)!
+            : colorScheme.onSurface);
     return ColoredBox(
       color: frameColor ?? colorScheme.surface,
       child: Column(
         children: [
           ColorFiltered(
-            colorFilter: ColorFilter.mode(
-              onFrameColor,
-              BlendMode.modulate,
-            ),
-            child: Image.asset('assets/tests/android_topbar.png'),
+            colorFilter: ColorFilter.mode(onFrameColor, BlendMode.modulate),
+            child: Image(image: topBarImage),
           ),
           Expanded(child: child),
-          SizedBox(
-            height: 24,
-            child: Center(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: onFrameColor,
+          if (bottomBar != null)
+            SizedBox(
+              height: 24,
+              child: Center(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: onFrameColor,
+                  ),
+                  child: bottomBar,
                 ),
-                child: const SizedBox(width: 125, height: 4),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -295,6 +381,7 @@ class _SizedEnvironment extends StatelessWidget {
                 width: device.resolution.width / device.pixelRatio,
                 height: device.resolution.height / device.pixelRatio,
                 child: device.frameBuilder(
+                  device: device,
                   frameColor: frameColor,
                   onFrameColor: onFrameColor,
                   child: child,
