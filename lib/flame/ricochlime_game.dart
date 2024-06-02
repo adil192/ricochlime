@@ -58,7 +58,7 @@ class RicochlimeGame extends Forge2DGame
   static final log = Logger('RicochlimeGame');
 
   /// Width to height aspect ratio
-  static const aspectRatio = 1 / 2;
+  static const aspectRatio = 0.6;
 
   static const expectedWidth = 128.0;
   static const expectedHeight = expectedWidth / aspectRatio;
@@ -114,7 +114,11 @@ class RicochlimeGame extends Forge2DGame
     background = Background();
     add(background);
 
-    createBoundaries(expectedWidth, expectedHeight).forEach(add);
+    createBoundaries(
+      expectedWidth,
+      expectedHeight,
+      includeBottom: false,
+    ).forEach(add);
 
     player = Player();
     add(player);

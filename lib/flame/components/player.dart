@@ -16,7 +16,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         ) {
     position = Vector2(
       RicochlimeGame.expectedWidth * 0.5,
-      RicochlimeGame.expectedHeight * 0.75 + staticHeight * 0.5,
+      RicochlimeGame.expectedHeight - staticHeight,
     );
   }
 

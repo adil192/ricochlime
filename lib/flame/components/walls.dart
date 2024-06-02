@@ -3,17 +3,25 @@
 import 'package:flame_forge2d/flame_forge2d.dart';
 
 /// Creates the [Wall]s that make up the boundaries of the world.
-List<Wall> createBoundaries(double width, double height, {double inset = 2}) {
-  final topLeft = Vector2(inset, inset);
-  final bottomRight = Vector2(width - inset, height - inset);
-  final topRight = Vector2(bottomRight.x, topLeft.y);
-  final bottomLeft = Vector2(topLeft.x, bottomRight.y);
+List<Wall> createBoundaries(
+  double width,
+  double height, {
+  double inset = 2,
+  bool includeTop = true,
+  bool includeBottom = true,
+  bool includeLeft = true,
+  bool includeRight = true,
+}) {
+  late final topLeft = Vector2(inset, inset);
+  late final bottomRight = Vector2(width - inset, height - inset);
+  late final topRight = Vector2(bottomRight.x, topLeft.y);
+  late final bottomLeft = Vector2(topLeft.x, bottomRight.y);
 
   return [
-    Wall(topLeft, topRight),
-    Wall(topRight, bottomRight),
-    Wall(bottomRight, bottomLeft),
-    Wall(bottomLeft, topLeft),
+    if (includeTop) Wall(topLeft, topRight),
+    if (includeRight) Wall(topRight, bottomRight),
+    if (includeBottom) Wall(bottomRight, bottomLeft),
+    if (includeLeft) Wall(bottomLeft, topLeft),
   ];
 }
 
