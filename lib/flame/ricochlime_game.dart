@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flame/events.dart';
@@ -32,7 +33,7 @@ enum GameState {
 }
 
 class RicochlimeGame extends Forge2DGame
-    with PanDetector, TapDetector, SingleGameInstance {
+    with PanDetector, TapDetector, MouseMovementDetector, SingleGameInstance {
   RicochlimeGame({
     required this.score,
     required this.isDarkMode,
@@ -309,22 +310,6 @@ class RicochlimeGame extends Forge2DGame
       ? RicochlimePalette.waterColorDark
       : RicochlimePalette.waterColor;
 
-  @override
-  void onPanUpdate(DragUpdateInfo info) {
-    if (!inputAllowed) {
-      return;
-    }
-    aimGuide.aim(info.eventPosition.widget);
-  }
-
-  @override
-  void onPanEnd(DragEndInfo info) {
-    if (!inputAllowed) {
-      return;
-    }
-    _spawnBullets();
-  }
-
   /// If the user wants to limit the frame rate to e.g. 30fps,
   /// this is used to sum up the dt values
   /// and only update the game when the sum is greater than 1/30.
@@ -354,13 +339,40 @@ class RicochlimeGame extends Forge2DGame
   }
 
   @override
-  void onTap() {
+  void onPanUpdate(DragUpdateInfo info) {
+    if (!inputAllowed) return;
+    aimGuide.aim(info.eventPosition.widget);
+  }
+
+  @override
+  void onPanEnd(DragEndInfo info) {
+    if (!inputAllowed) return;
+    _spawnBullets();
+  }
+
+  @override
+  void onTapUp(TapUpInfo info) {
     if (state.value == GameState.shooting) {
       timeDilation.value += 0.5;
-    } else {
-      assert(timeDilation.value == 1.0);
+    } else if (inputAllowed && pointAndClickEnabled) {
+      _spawnBullets();
     }
   }
+
+  @override
+  void onMouseMove(PointerHoverInfo info) {
+    if (!inputAllowed) return;
+    if (!pointAndClickEnabled) return;
+    aimGuide.aim(info.eventPosition.widget);
+  }
+
+  /// Whether to allow point-and-click input in addition to
+  /// the drag-and-release input.
+  ///
+  /// This is disabled on mobile as it would be too easy to accidentally
+  /// tap and trigger a move.
+  bool get pointAndClickEnabled =>
+      kIsWeb || Platform.isLinux || Platform.isWindows || Platform.isMacOS;
 
   Future<void> _spawnBullets() async {
     final aimDir = aimGuide.finishAim();
