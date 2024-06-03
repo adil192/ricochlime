@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nes_ui/nes_ui.dart';
+import 'package:ricochlime/ads/ads.dart';
+import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/main.dart';
 import 'package:ricochlime/pages/play.dart';
@@ -88,7 +90,6 @@ class HomePage extends StatelessWidget {
                     icon: NesIcons.play,
                     text: t.homePage.playButton,
                     openBuilder: (_, __, ___) => const PlayPage(),
-                    ready: game.preloadSprites,
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
@@ -119,48 +120,38 @@ class _HomePageButton<T> extends StatefulWidget {
     required this.icon,
     required this.text,
     required this.openBuilder,
-    this.ready,
   });
 
   final NesButtonType type;
   final NesIconData icon;
   final String text;
   final RoutePageBuilder openBuilder;
-  final Completer? ready;
 
   @override
   State<_HomePageButton<T>> createState() => _HomePageButtonState<T>();
 }
 
 class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
-  /// If the user presses the button while [widget.ready] is not completed,
-  /// [loading] will be set to true and the button will be replaced
-  /// with a loading indicator. Then when [widget.ready] is completed,
-  /// [loading] will be set to false and [onPressed] will be
-  /// called automatically.
-  ///
-  /// Note that [ready] is only expected to take a few milliseconds
-  /// to complete, so the user won't have to wait long.
-  bool loading = false;
+  /// For the first 2s, buttons are replaced with a loading icon
+  /// to prevent users trying to click them and getting frustrated
+  /// when nothing happens. This is because google_mobile_ads seems to block
+  /// user input while loading for some reason.
+  late final loadingTimer =
+      (AdState.adsSupported && !RicochlimeGame.reproducibleGoldenMode)
+          ? Timer(const Duration(seconds: 2), () {
+              if (mounted) setState(() {});
+            })
+          : null;
+
+  bool get loading => loadingTimer?.isActive ?? false;
+
+  @override
+  void dispose() {
+    loadingTimer?.cancel();
+    super.dispose();
+  }
 
   void onPressed() {
-    assert(!loading, 'onPressed should be set to null when loading');
-    if (loading) return;
-
-    if (widget.ready != null && !widget.ready!.isCompleted) {
-      setState(() {
-        loading = true;
-      });
-      widget.ready!.future.then((_) {
-        if (!mounted) return;
-        setState(() {
-          loading = false;
-        });
-        onPressed();
-      });
-      return;
-    }
-
     final route = MediaQuery.disableAnimationsOf(context)
         ? PageRouteBuilder(
             pageBuilder: widget.openBuilder,
