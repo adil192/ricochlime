@@ -165,6 +165,12 @@ class RicochlimeGame extends Forge2DGame
     bgMusicInitialized = true;
   }
 
+  Future<void> preloadBgMusic() async {
+    if (disableBgMusic) return;
+    if (Prefs.bgmVolume.value < 0.01) return;
+    await FlameAudio.audioCache.load('bgm/Ludum_Dare_32_Track_4.ogg');
+  }
+
   void pauseBgMusic() {
     if (disableBgMusic) return;
     if (Prefs.bgmVolume.value < 0.01) return;

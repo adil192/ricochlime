@@ -30,8 +30,9 @@ Future<void> main({
   });
 
   LocaleSettings.useDeviceLocale();
-  unawaited(game.preloadSprites.future);
   Prefs.init();
+  unawaited(game.preloadSprites.future);
+  unawaited(Prefs.bgmVolume.waitUntilLoaded().then((_) => game.preloadBgMusic));
   _addLicenses();
   GoogleFonts.config.allowRuntimeFetching = false;
 
