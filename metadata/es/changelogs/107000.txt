@@ -1,0 +1,4 @@
+• Se detuvo la superposición de la puntuación y el recuento de monedas con el tablero de juego.
+• Los usuarios de escritorio ahora pueden hacer clic para disparar, en lugar de tener que arrastrar y soltar
+• Capacidad de respuesta de entrada mejorada
+• Retraso reducido de la música de fondo

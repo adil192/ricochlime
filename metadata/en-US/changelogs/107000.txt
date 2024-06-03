@@ -1,0 +1,4 @@
+• Stopped the score and coin count overlapping with the game board
+• Desktop users can now click to shoot, instead of having to drag and release
+• Improved input responsiveness
+• Reduced background music delay

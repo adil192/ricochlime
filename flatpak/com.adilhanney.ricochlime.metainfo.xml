@@ -71,6 +71,17 @@
     </branding>
 
     <releases>
+        <release version="1.7.0" date="2024-06-03">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.7.0</url>
+            <description>
+                <ul>
+                    <li>Stopped the score and coin count overlapping with the game board</li>
+                    <li>Desktop users can now click to shoot, instead of having to drag and release</li>
+                    <li>Improved input responsiveness</li>
+                    <li>Reduced background music delay</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.6.0" date="2024-06-02">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.6.0</url>
             <description>
