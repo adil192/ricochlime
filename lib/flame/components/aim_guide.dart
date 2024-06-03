@@ -56,8 +56,11 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
 
     for (var dot = 0; dot < _maxDots * aimDetails.aimLength; dot++) {
       final distFromCenter = _dotInterval * (dot + 1 + t);
-      final pos = aimDetails.unitDir * distFromCenter;
-      canvas.drawCircle(pos.toOffset(), Bullet.radius, _paint);
+      final dotPosition = aimDetails.unitDir * distFromCenter;
+      canvas.drawCircle(dotPosition.toOffset(), Bullet.radius, _paint);
+
+      final globalX = dotPosition.x + position.x;
+      if (globalX < 0 || globalX > gameRef.size.x) break;
     }
   }
 
