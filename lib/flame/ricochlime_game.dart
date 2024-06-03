@@ -340,12 +340,14 @@ class RicochlimeGame extends Forge2DGame
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
+    aimGuide.lastMousePosition = info.eventPosition.widget;
     if (!inputAllowed) return;
     aimGuide.aim(info.eventPosition.widget);
   }
 
   @override
   void onPanEnd(DragEndInfo info) {
+    aimGuide.lastMousePosition = null;
     if (!inputAllowed) return;
     _spawnBullets();
   }
@@ -361,6 +363,7 @@ class RicochlimeGame extends Forge2DGame
 
   @override
   void onMouseMove(PointerHoverInfo info) {
+    aimGuide.lastMousePosition = info.eventPosition.widget;
     if (!inputAllowed) return;
     if (!pointAndClickEnabled) return;
     aimGuide.aim(info.eventPosition.widget);
@@ -478,6 +481,11 @@ class RicochlimeGame extends Forge2DGame
     }
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
     state.value = GameState.idle;
+
+    if (aimGuide.lastMousePosition != null) {
+      // Show aim guide again if the user started an input while !inputEnabled
+      aimGuide.aim(aimGuide.lastMousePosition!);
+    }
 
     await saveGame();
   }

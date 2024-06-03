@@ -16,6 +16,8 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   @visibleForTesting
   AimDetails? aimDetails;
 
+  Vector2? lastMousePosition;
+
   /// Dots will be drawn in the direction we're aiming
   /// every [_dotInterval] units.
   static const _dotInterval = 10;
