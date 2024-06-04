@@ -56,8 +56,12 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
       return;
     }
 
-    const gameRect = Rect.fromLTWH(
-        0, 0, RicochlimeGame.expectedWidth, RicochlimeGame.expectedHeight);
+    const gameRect = Rect.fromLTRB(
+      Bullet.radius,
+      Bullet.radius,
+      RicochlimeGame.expectedWidth - Bullet.radius,
+      RicochlimeGame.expectedHeight - Bullet.radius,
+    );
 
     /// The offset between two consecutive dots.
     final dotDeltaPosition = aimDetails.unitDir.toOffset() * _dotInterval;
