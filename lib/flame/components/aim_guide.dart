@@ -20,7 +20,7 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
 
   /// Dots will be drawn in the direction we're aiming
   /// every [_dotInterval] units.
-  static const _dotInterval = 10;
+  static const double _dotInterval = 10;
 
   /// The maximum number of dots to be drawn.
   static const _maxDots = 20;
@@ -41,7 +41,9 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
 
   @override
   void update(double dt) {
-    t = RicochlimeGame.reduceMotion ? 0 : (t + dt) % 1;
+    t = (RicochlimeGame.reduceMotion || RicochlimeGame.reproducibleGoldenMode)
+        ? 0.5
+        : (t + dt) % 1;
     super.update(dt);
   }
 
@@ -54,13 +56,25 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
       return;
     }
 
-    for (var dot = 0; dot < _maxDots * aimDetails.aimLength; dot++) {
-      final distFromCenter = _dotInterval * (dot + 1 + t);
-      final dotPosition = aimDetails.unitDir * distFromCenter;
-      canvas.drawCircle(dotPosition.toOffset(), Bullet.radius, _paint);
+    const gameRect = Rect.fromLTWH(
+        0, 0, RicochlimeGame.expectedWidth, RicochlimeGame.expectedHeight);
 
-      final globalX = dotPosition.x + position.x;
-      if (globalX < 0 || globalX > gameRef.size.x) break;
+    /// The offset between two consecutive dots.
+    final dotDeltaPosition = aimDetails.unitDir.toOffset() * _dotInterval;
+
+    /// The dot's position relative to the player.
+    var dotLocalPosition = dotDeltaPosition * t;
+
+    /// The dot's position in game coordinates.
+    var dotGlobalPosition = position.toOffset() + dotLocalPosition;
+
+    for (var dot = 0; dot < _maxDots * aimDetails.aimLength; dot++) {
+      dotLocalPosition += dotDeltaPosition;
+      dotGlobalPosition += dotDeltaPosition;
+
+      canvas.drawCircle(dotLocalPosition, Bullet.radius, _paint);
+
+      if (!gameRect.contains(dotGlobalPosition)) break;
     }
   }
 
