@@ -1,0 +1,3 @@
+• Los puntos de guía de puntería ya no se extienden más allá del borde del juego.
+• Se corrigió que la guía de puntería reapareciera aleatoriamente en dispositivos móviles.
+• Se hizo más fácil apuntar desde debajo del jugador.

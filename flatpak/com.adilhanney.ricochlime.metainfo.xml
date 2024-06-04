@@ -71,6 +71,16 @@
     </branding>
 
     <releases>
+        <release version="1.7.1" date="2024-06-04">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.7.1</url>
+            <description>
+                <ul>
+                    <li>The aim guide dots no longer extend past the edge of the game</li>
+                    <li>Fixed the aim guide re-appearing randomly on mobile</li>
+                    <li>Made it easier to aim from below the player</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.7.0" date="2024-06-03">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.7.0</url>
             <description>
