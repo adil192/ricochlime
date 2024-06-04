@@ -369,9 +369,9 @@ class RicochlimeGame extends Forge2DGame
 
   @override
   void onMouseMove(PointerHoverInfo info) {
+    if (!pointAndClickEnabled) return;
     aimGuide.lastMousePosition = info.eventPosition.widget;
     if (!inputAllowed) return;
-    if (!pointAndClickEnabled) return;
     aimGuide.aim(info.eventPosition.widget);
   }
 
