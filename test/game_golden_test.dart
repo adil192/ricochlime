@@ -84,13 +84,13 @@ void main() {
       ]);
     });
 
-    Prefs.coins.value = 166;
+    Prefs.coins.value = 493;
     Prefs.highScore.value = 62;
 
     ShopItems.bullets[1].purchase(noCost: true);
     ShopItems.bullets[2].purchase(noCost: true);
     ShopItems.bullets[7].purchase(noCost: true);
-    ShopItems.bullets[14].purchase(noCost: true);
+    ShopItems.bullets[9].purchase(noCost: true);
 
     _testGame(
       goldenFileName: '1_home',

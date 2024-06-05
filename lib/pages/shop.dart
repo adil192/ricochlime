@@ -33,8 +33,8 @@ class ShopPage extends StatelessWidget {
                     : coins.toString(),
                 style: TextStyle(
                   color: colorScheme.onSurface,
-                  fontSize: 28,
-                  height: 24 / 28,
+                  fontSize: 32,
+                  height: 0.65,
                 ),
               );
             },
