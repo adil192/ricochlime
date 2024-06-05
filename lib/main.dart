@@ -123,6 +123,8 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         colorScheme: ColorScheme.fromSeed(
           seedColor: RicochlimePalette.grassColor,
+          primary: RicochlimePalette.grassColor,
+          secondary: RicochlimePalette.waterColorDark,
         ),
       ),
       darkTheme: nesThemeFrom(
@@ -130,6 +132,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: RicochlimePalette.grassColorDark,
           primary: RicochlimePalette.grassColor.brighten(0.1),
+          secondary: RicochlimePalette.waterColorDark.brighten(0.1),
           brightness: Brightness.dark,
         ),
       ),
@@ -137,12 +140,14 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         colorScheme: ColorScheme.highContrastLight(
           primary: RicochlimePalette.grassColor.darken(0.5),
+          secondary: RicochlimePalette.waterColorDark.darken(0.5),
         ),
       ),
       highContrastDarkTheme: nesThemeFrom(
         brightness: Brightness.dark,
         colorScheme: ColorScheme.highContrastDark(
           primary: RicochlimePalette.grassColorDark.darken(0.5),
+          secondary: RicochlimePalette.waterColorDark.darken(0.5),
         ),
       ),
       home: const HomePage(),

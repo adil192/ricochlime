@@ -142,7 +142,7 @@ class _UnpurchasedItem extends StatelessWidget {
             CoinIcon(size: 32),
             Text(
               '1000',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, color: Colors.white),
             ),
           ],
         ),
