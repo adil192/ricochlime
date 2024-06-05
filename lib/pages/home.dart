@@ -7,6 +7,7 @@ import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/main.dart';
+import 'package:ricochlime/nes/bouncing_icon.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
 import 'package:ricochlime/pages/shop.dart';
@@ -195,7 +196,7 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
             if (loading)
               const NesHourglassLoadingIndicator()
             else if (widget.shouldAnimateIcon?.call() ?? false)
-              NesJumpingIconsLoadingIndicator(icons: [widget.icon])
+              BouncingIcon(icon: NesIcon(iconData: widget.icon))
             else
               NesIcon(iconData: widget.icon),
             const SizedBox(width: 16),
