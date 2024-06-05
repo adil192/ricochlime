@@ -19,16 +19,18 @@ abstract class ShopItems {
     ),
   ]);
 
-  static T? getItem<T extends ShopItem>(String id) =>
-      ShopItem._allItems[id] as T?;
+  static final Map<String, ShopItem> allItems = {};
+
+  static T? getItem<T extends ShopItem>(String id) => allItems[id] as T?;
 }
 
 sealed class ShopItem {
   ShopItem({
     required this.id,
     bool alwaysPurchased = false,
-  }) : assert(!_allItems.containsKey(id), 'Duplicate shop item ID: $id') {
-    _allItems[id] = this;
+  }) : assert(!ShopItems.allItems.containsKey(id),
+            'Duplicate shop item ID: $id') {
+    ShopItems.allItems[id] = this;
 
     _loadState(alwaysPurchased);
   }
@@ -64,8 +66,6 @@ sealed class ShopItem {
     state.value = ShopItemState.purchased;
     if (!noCost) Prefs.coins.value -= price;
   }
-
-  static final Map<String, ShopItem> _allItems = {};
 }
 
 class BulletShopItem extends ShopItem {

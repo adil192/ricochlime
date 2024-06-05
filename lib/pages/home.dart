@@ -13,6 +13,7 @@ import 'package:ricochlime/pages/shop.dart';
 import 'package:ricochlime/pages/tutorial.dart';
 import 'package:ricochlime/utils/brightness_extension.dart';
 import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/shop_items.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -95,6 +96,10 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 32),
                   _HomePageButton(
                     icon: NesIcons.market,
+                    shouldAnimateIcon: () => ShopItems.allItems.values.any(
+                        (item) =>
+                            item.state.value == ShopItemState.unpurchased &&
+                            item.price <= Prefs.coins.value),
                     text: t.homePage.shopButton,
                     openBuilder: (_, __, ___) => const ShopPage(),
                   ),
@@ -125,12 +130,14 @@ class _HomePageButton<T> extends StatefulWidget {
     super.key,
     this.type = NesButtonType.normal,
     required this.icon,
+    this.shouldAnimateIcon,
     required this.text,
     required this.openBuilder,
   });
 
   final NesButtonType type;
   final NesIconData icon;
+  final bool Function()? shouldAnimateIcon;
   final String text;
   final RoutePageBuilder openBuilder;
 
@@ -169,7 +176,12 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
                 ? const Duration(milliseconds: 450)
                 : const Duration(milliseconds: 750),
           );
-    Navigator.of(context).push(route);
+    Navigator.of(context).push(route).then((_) {
+      // Recalculate the shouldAnimateIcon value
+      if (widget.shouldAnimateIcon == null) return;
+      if (!mounted) return;
+      setState(() {});
+    });
   }
 
   @override
@@ -182,6 +194,8 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
           children: [
             if (loading)
               const NesHourglassLoadingIndicator()
+            else if (widget.shouldAnimateIcon?.call() ?? false)
+              NesJumpingIconsLoadingIndicator(icons: [widget.icon])
             else
               NesIcon(iconData: widget.icon),
             const SizedBox(width: 16),
