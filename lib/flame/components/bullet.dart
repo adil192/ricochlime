@@ -1,12 +1,16 @@
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
+import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/shop_items.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
   Bullet({
     required this.initialPosition,
     required this.direction,
-  }) : assert(direction.y < 0);
+  })  : assert(direction.y < 0),
+        super(renderBody: false);
 
   /// Radius of the bullet.
   static const radius = 2.0;
@@ -46,6 +50,38 @@ class Bullet extends BodyComponent with ContactCallbacks {
     if (body.position.y > (game as RicochlimeGame).background.bottomOfIsland) {
       removeFromParent();
     }
+  }
+
+  @override
+  void render(Canvas canvas) {
+    drawBullet(canvas, Offset.zero, Paint());
+  }
+
+  static void drawBullet(
+    Canvas canvas,
+    Offset position,
+    Paint paint, {
+    double opacity = 1,
+  }) {
+    final selectedBullet =
+        ShopItems.getItem<BulletShopItem>(Prefs.selectedBullet.value);
+    canvas
+      ..drawCircle(
+        position,
+        radius,
+        paint
+          ..style = PaintingStyle.stroke
+          ..color = Colors.black
+          ..strokeWidth = 0.1,
+      )
+      ..drawCircle(
+        position,
+        radius,
+        paint
+          ..style = PaintingStyle.fill
+          ..color =
+              (selectedBullet?.color ?? Colors.white).withOpacity(opacity),
+      );
   }
 
   /// The number of collisions in a row that

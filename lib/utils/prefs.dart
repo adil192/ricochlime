@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:ricochlime/flame/game_data.dart';
+import 'package:ricochlime/utils/shop_items.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class Prefs {
@@ -37,6 +38,7 @@ abstract class Prefs {
   static late final PlainPref<bool> fasterPageTransitions;
 
   static late final PlainPref<int> coins;
+  static late final PlainPref<String> selectedBullet;
 
   static late final PlainPref<int> maxFps;
 
@@ -80,6 +82,7 @@ abstract class Prefs {
     fasterPageTransitions = PlainPref('fasterPageTransitions', false);
 
     coins = PlainPref('coins', 0);
+    selectedBullet = PlainPref('selectedBullet', ShopItems.bullets.first.id);
 
     maxFps = PlainPref('maxFps', -1);
 

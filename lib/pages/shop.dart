@@ -69,11 +69,7 @@ class ShopPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     if (index >= ShopItems.bullets.length) return null;
 
-                    final item = ShopItems.bullets[index];
-                    return _ShopItemTile(
-                      selected: index == 0,
-                      item: item,
-                    );
+                    return _ShopItemTile(item: ShopItems.bullets[index]);
                   },
                 ),
               ],
@@ -89,51 +85,59 @@ class _ShopItemTile extends StatelessWidget {
   const _ShopItemTile({
     // ignore: unused_element
     super.key,
-    required this.selected,
     required this.item,
   });
 
-  final bool selected;
   final ShopItem item;
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: item.state,
-        builder: (context, state, _) {
-          return NesButton(
-            onPressed: switch (state) {
-              ShopItemState.loading => null,
-              ShopItemState.purchased => () {},
-              ShopItemState.unpurchased => item.purchase,
-            },
-            type: switch (state) {
-              ShopItemState.loading => NesButtonType.normal,
-              ShopItemState.purchased =>
-                selected ? NesButtonType.primary : NesButtonType.normal,
-              ShopItemState.unpurchased => NesButtonType.warning,
-            },
-            child: state == ShopItemState.purchased
-                ? Center(
-                    child: SizedBox.square(
-                      dimension: 20,
-                      child: item.build(context),
-                    ),
-                  )
-                : const FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CoinIcon(size: 32),
-                        Text(
-                          '1000',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+        valueListenable: Prefs.selectedBullet,
+        builder: (context, _, __) {
+          // This needs to be extended for non-bullet items later.
+          final selected = Prefs.selectedBullet.value == item.id;
+
+          return ValueListenableBuilder(
+            valueListenable: item.state,
+            builder: (context, state, _) {
+              return NesButton(
+                onPressed: switch (state) {
+                  ShopItemState.loading => null,
+                  ShopItemState.purchased => () =>
+                      Prefs.selectedBullet.value = item.id,
+                  ShopItemState.unpurchased => item.purchase,
+                },
+                type: switch (state) {
+                  ShopItemState.loading => NesButtonType.normal,
+                  ShopItemState.purchased =>
+                    selected ? NesButtonType.primary : NesButtonType.normal,
+                  ShopItemState.unpurchased => NesButtonType.warning,
+                },
+                child: state == ShopItemState.purchased
+                    ? Center(
+                        child: SizedBox.square(
+                          dimension: 20,
+                          child: item.build(context),
                         ),
-                      ],
-                    ),
-                  ),
+                      )
+                    : const FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CoinIcon(size: 32),
+                            Text(
+                              '1000',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+              );
+            },
           );
         });
   }
