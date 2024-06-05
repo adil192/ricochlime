@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final _sharedPreferences = SharedPreferences.getInstance();
 
 abstract class ShopItems {
   static List<ShopItem> bullets = List.unmodifiable([
-    BulletShopItem(
-      color: Colors.white,
-      alwaysPurchased: true,
-    ),
-    for (final color in Colors.primaries)
-      BulletShopItem(
-        color: color,
-      ),
-    BulletShopItem(
-      color: Colors.black,
-    ),
+    BulletShopItem(color: Colors.white, alwaysPurchased: true),
+    for (final color in [
+      Colors.pink,
+      RicochlimePalette.waterColor,
+      Colors.lime,
+      Colors.deepPurple,
+      Colors.yellow,
+      Colors.purple,
+      Colors.amber,
+      Colors.brown,
+      Colors.indigo,
+      Colors.red,
+      Colors.black,
+    ])
+      BulletShopItem(color: color),
   ]);
 
   static final Map<String, ShopItem> allItems = {};
