@@ -85,7 +85,7 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   /// Updates the aim guide based on the given mouse position.
   void aim(Vector2 mousePosition) {
     var relativePosition = position - mousePosition;
-    final mouseBelowPlayer = relativePosition.y > 0;
+    final mouseBelowPlayer = relativePosition.y < 0;
 
     if (aimDetails == null) {
       // The user just started aiming.
@@ -101,11 +101,11 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
       return;
     }
 
-    if (mouseBelowPlayer) {
+    if (!mouseBelowPlayer) {
       relativePosition = -relativePosition; // point up
     }
 
-    final aimLengthMultiplier = mouseBelowPlayer ? 5 : 2;
+    final aimLengthMultiplier = mouseBelowPlayer ? 8 : 2;
     aimDetails!.aimLength = min(
       1,
       relativePosition.length / _dotInterval / _maxDots * aimLengthMultiplier,
