@@ -1,6 +1,7 @@
 appName: Рикошырыш
 homePage:
   playButton: Ойнау
+  shopButton(OUTDATED): дүкен
   settingsButton: Баптау
   tutorialButton: Нұсқаулық
 playPage:
@@ -11,11 +12,11 @@ settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау
   hyperlegibleFont: Atkinson Hyperlegible қарпін қолдану
-  maxFps(OUTDATED): Максималды FPS
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
+  maxFps(OUTDATED): Максималды FPS
   fasterPageTransitions(OUTDATED): Беттерді жылдамырақ ауыстыру
   showUndoButton(OUTDATED): Қозғалысты қайтаруға рұқсат беріңіз
   bgmVolume(OUTDATED): Фондық музыканың дыбыс деңгейі
@@ -55,6 +56,8 @@ tutorialPage:
   tapSpeedUp: Оқ қозғалысын тездету үшін экранды түртіңіз.
   dangerZone: "Қауіпті аймаққа кірген шырышты жеңбесеңіз, келесі жүрісте ұтыласыз."
   moreMonsters(OUTDATED): "Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды."
+shopPage:
+  title(OUTDATED): дүкен
 common:
   cancel: Болдырмау
   ok: ОК

@@ -4,6 +4,7 @@
 es:
   homePage:
     playButton(OUTDATED): Play
+    shopButton(OUTDATED): Shop
     settingsButton(OUTDATED): Settings
     tutorialButton(OUTDATED): Tutorial
   playPage:
@@ -58,10 +59,14 @@ es:
     tapSpeedUp(OUTDATED): Tap the screen to speed up your shots.
     dangerZone(OUTDATED): "If a monster reaches the danger zone, you'll lose on your next turn if you don't defeat it."
     moreMonsters(OUTDATED): "More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger."
+  shopPage:
+    title(OUTDATED): Shop
   common:
     cancel(OUTDATED): Cancel
     ok(OUTDATED): Okay
 kk:
+  homePage:
+    shopButton(OUTDATED): Shop
   playPage:
     undo(OUTDATED): Undo move
     coins(OUTDATED): Coins
@@ -87,3 +92,5 @@ kk:
     yesImSure(OUTDATED): "Yes I'm sure!"
   tutorialPage:
     moreMonsters(OUTDATED): "More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger."
+  shopPage:
+    title(OUTDATED): Shop

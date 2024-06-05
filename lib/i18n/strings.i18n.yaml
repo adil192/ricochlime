@@ -1,6 +1,7 @@
 appName: Ricochlime
 homePage:
   playButton: Play
+  shopButton: Shop
   settingsButton: Settings
   tutorialButton: Tutorial
 playPage:
@@ -55,6 +56,8 @@ tutorialPage:
   tapSpeedUp: Tap the screen to speed up your shots.
   dangerZone: If a monster reaches the danger zone, you'll lose on your next turn if you don't defeat it.
   moreMonsters: More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger.
+shopPage:
+  title: Shop
 common:
   cancel: Cancel
   ok: Okay

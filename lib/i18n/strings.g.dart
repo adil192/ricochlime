@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 145 (48 per locale)
+/// Strings: 153 (51 per locale)
 ///
-/// Built on 2024-05-27 at 21:38 UTC
+/// Built on 2024-06-05 at 11:37 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -151,6 +151,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsAdWarningEn adWarning = _StringsAdWarningEn._(_root);
 	late final _StringsRestartGameDialogEn restartGameDialog = _StringsRestartGameDialogEn._(_root);
 	late final _StringsTutorialPageEn tutorialPage = _StringsTutorialPageEn._(_root);
+	late final _StringsShopPageEn shopPage = _StringsShopPageEn._(_root);
 	late final _StringsCommonEn common = _StringsCommonEn._(_root);
 }
 
@@ -162,6 +163,7 @@ class _StringsHomePageEn {
 
 	// Translations
 	String get playButton => 'Play';
+	String get shopButton => 'Shop';
 	String get settingsButton => 'Settings';
 	String get tutorialButton => 'Tutorial';
 }
@@ -284,6 +286,16 @@ class _StringsTutorialPageEn {
 	String get moreMonsters => 'More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger.';
 }
 
+// Path: shopPage
+class _StringsShopPageEn {
+	_StringsShopPageEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Shop';
+}
+
 // Path: common
 class _StringsCommonEn {
 	_StringsCommonEn._(this._root);
@@ -324,6 +336,7 @@ class _StringsEs extends Translations {
 	@override late final _StringsAdWarningEs adWarning = _StringsAdWarningEs._(_root);
 	@override late final _StringsRestartGameDialogEs restartGameDialog = _StringsRestartGameDialogEs._(_root);
 	@override late final _StringsTutorialPageEs tutorialPage = _StringsTutorialPageEs._(_root);
+	@override late final _StringsShopPageEs shopPage = _StringsShopPageEs._(_root);
 	@override late final _StringsCommonEs common = _StringsCommonEs._(_root);
 }
 
@@ -334,6 +347,7 @@ class _StringsHomePageEs extends _StringsHomePageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get shopButton => 'Comercio';
 	@override String get tutorialButton => 'tutorial';
 	@override String get playButton => 'Jugar';
 	@override String get settingsButton => 'Ajustes';
@@ -358,6 +372,7 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get maxFps => 'FPS máx.';
 	@override String get fasterPageTransitions => 'Transiciones de página más rápidas';
 	@override String get showUndoButton => 'Permitir deshacer movimientos';
 	@override String get title => 'Ajustes';
@@ -456,6 +471,16 @@ class _StringsTutorialPageEs extends _StringsTutorialPageEn {
 	@override String get moreMonsters => 'Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande.';
 }
 
+// Path: shopPage
+class _StringsShopPageEs extends _StringsShopPageEn {
+	_StringsShopPageEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Comercio';
+}
+
 // Path: common
 class _StringsCommonEs extends _StringsCommonEn {
 	_StringsCommonEs._(_StringsEs root) : this._root = root, super._(root);
@@ -496,6 +521,7 @@ class _StringsKk extends Translations {
 	@override late final _StringsAdWarningKk adWarning = _StringsAdWarningKk._(_root);
 	@override late final _StringsRestartGameDialogKk restartGameDialog = _StringsRestartGameDialogKk._(_root);
 	@override late final _StringsTutorialPageKk tutorialPage = _StringsTutorialPageKk._(_root);
+	@override late final _StringsShopPageKk shopPage = _StringsShopPageKk._(_root);
 	@override late final _StringsCommonKk common = _StringsCommonKk._(_root);
 }
 
@@ -507,6 +533,7 @@ class _StringsHomePageKk extends _StringsHomePageEn {
 
 	// Translations
 	@override String get playButton => 'Ойнау';
+	@override String get shopButton => 'дүкен';
 	@override String get settingsButton => 'Баптау';
 	@override String get tutorialButton => 'Нұсқаулық';
 }
@@ -535,6 +562,7 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible қарпін қолдану';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get maxFps => 'Максималды FPS';
 	@override String get fasterPageTransitions => 'Беттерді жылдамырақ ауыстыру';
 	@override String get showUndoButton => 'Қозғалысты қайтаруға рұқсат беріңіз';
 	@override String get bgmVolume => 'Фондық музыканың дыбыс деңгейі';
@@ -579,9 +607,9 @@ class _StringsGameOverPageKk extends _StringsGameOverPageEn {
 		pNew,
 		const TextSpan(text: ' ұпай!'),
 	]);
-	@override String get continueWithCoins => 'Жалғастыру үшін 100';
 	@override String get restartGameButton => 'Жаңадан бастау';
 	@override String get homeButton => 'Мәзір';
+	@override String get continueWithCoins => 'Жалғастыру үшін 100';
 }
 
 // Path: adWarning
@@ -626,6 +654,16 @@ class _StringsTutorialPageKk extends _StringsTutorialPageEn {
 	@override String get tapSpeedUp => 'Оқ қозғалысын тездету үшін экранды түртіңіз.';
 	@override String get dangerZone => 'Қауіпті аймаққа кірген шырышты жеңбесеңіз, келесі жүрісте ұтыласыз.';
 	@override String get moreMonsters => 'Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды.';
+}
+
+// Path: shopPage
+class _StringsShopPageKk extends _StringsShopPageEn {
+	_StringsShopPageKk._(_StringsKk root) : this._root = root, super._(root);
+
+	@override final _StringsKk _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'дүкен';
 }
 
 // Path: common

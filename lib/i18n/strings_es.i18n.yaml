@@ -1,5 +1,6 @@
 appName: Ricochlime
 homePage:
+  shopButton(OUTDATED): Comercio
   tutorialButton(OUTDATED): tutorial
   playButton(OUTDATED): Jugar
   settingsButton(OUTDATED): Ajustes
@@ -55,6 +56,8 @@ tutorialPage:
   tapSpeedUp(OUTDATED): Toca la pantalla para acelerar tus disparos.
   dangerZone(OUTDATED): "Si un monstruo llega a la zona de peligro, perderás en tu próximo turno si no lo derrotas."
   moreMonsters(OUTDATED): "Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande."
+shopPage:
+  title(OUTDATED): Comercio
 common:
   cancel(OUTDATED): Cancelar
   ok(OUTDATED): Bueno

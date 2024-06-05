@@ -9,6 +9,7 @@ import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/main.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
+import 'package:ricochlime/pages/shop.dart';
 import 'package:ricochlime/pages/tutorial.dart';
 import 'package:ricochlime/utils/brightness_extension.dart';
 import 'package:ricochlime/utils/prefs.dart';
@@ -90,6 +91,12 @@ class HomePage extends StatelessWidget {
                     icon: NesIcons.play,
                     text: t.homePage.playButton,
                     openBuilder: (_, __, ___) => const PlayPage(),
+                  ),
+                  const SizedBox(height: 32),
+                  _HomePageButton(
+                    icon: NesIcons.market,
+                    text: t.homePage.shopButton,
+                    openBuilder: (_, __, ___) => const ShopPage(),
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
