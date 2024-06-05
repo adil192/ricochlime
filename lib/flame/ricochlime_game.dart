@@ -372,7 +372,8 @@ class RicochlimeGame extends Forge2DGame
     if (!pointAndClickEnabled) return;
     aimGuide.lastMousePosition = info.eventPosition.widget;
     if (!inputAllowed) return;
-    aimGuide.aim(info.eventPosition.widget);
+    aimGuide.aim(info.eventPosition.widget,
+        ignoreWhetherMouseIsBelowPlayer: true);
   }
 
   /// Whether to allow point-and-click input in addition to

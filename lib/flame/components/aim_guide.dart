@@ -83,7 +83,10 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   }
 
   /// Updates the aim guide based on the given mouse position.
-  void aim(Vector2 mousePosition) {
+  void aim(
+    Vector2 mousePosition, {
+    bool ignoreWhetherMouseIsBelowPlayer = false,
+  }) {
     var relativePosition = position - mousePosition;
     final mouseBelowPlayer = relativePosition.y < 0;
 
@@ -94,11 +97,14 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
         aimLength: 0,
         mouseBelowPlayer: mouseBelowPlayer,
       );
-    } else if (aimDetails!.mouseBelowPlayer != mouseBelowPlayer) {
+    } else if (!ignoreWhetherMouseIsBelowPlayer &&
+        aimDetails!.mouseBelowPlayer != mouseBelowPlayer) {
       // The user moved the mouse to the other side of the player.
       // This means they want to cancel the aim.
       aimDetails!.unitDir.setZero();
       return;
+    } else {
+      aimDetails!.mouseBelowPlayer = mouseBelowPlayer;
     }
 
     if (!mouseBelowPlayer) {
