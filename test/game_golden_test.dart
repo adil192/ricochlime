@@ -12,8 +12,10 @@ import 'package:ricochlime/nes/nes_theme.dart';
 import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
+import 'package:ricochlime/pages/shop.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
+import 'package:ricochlime/utils/shop_items.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const inProgressGameSave = '''
@@ -85,6 +87,11 @@ void main() {
     Prefs.coins.value = 166;
     Prefs.highScore.value = 62;
 
+    ShopItems.bullets[1].purchase(noCost: true);
+    ShopItems.bullets[2].purchase(noCost: true);
+    ShopItems.bullets[7].purchase(noCost: true);
+    ShopItems.bullets[14].purchase(noCost: true);
+
     _testGame(
       goldenFileName: '1_home',
       child: const HomePage(),
@@ -103,12 +110,16 @@ void main() {
     //   goldenFileName: '3_game_over',
     //   child: const PlayPage(),
     // );
+    _testGame(
+      goldenFileName: '4_shop',
+      child: const ShopPage(),
+    );
     // _testGame(
-    //   goldenFileName: '4_tutorial',
+    //   goldenFileName: '5_tutorial',
     //   child: const TutorialPage(),
     // );
     _testGame(
-      goldenFileName: '5_settings',
+      goldenFileName: '6_settings',
       child: const SettingsPage(),
     );
   });

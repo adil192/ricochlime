@@ -53,14 +53,16 @@ sealed class ShopItem {
         purchased ? ShopItemState.purchased : ShopItemState.unpurchased;
   }
 
-  Future<void> purchase() async {
+  Future<void> purchase({
+    bool noCost = false,
+  }) async {
     if (state.value == ShopItemState.purchased) return;
-    if (Prefs.coins.value < price) return;
+    if (!noCost && Prefs.coins.value < price) return;
 
     final prefs = await _sharedPreferences;
     await prefs.setBool(prefsKey, true);
     state.value = ShopItemState.purchased;
-    Prefs.coins.value -= price;
+    if (!noCost) Prefs.coins.value -= price;
   }
 
   static final Map<String, ShopItem> _allItems = {};

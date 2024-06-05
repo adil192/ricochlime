@@ -4,8 +4,6 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
-import 'package:ricochlime/utils/prefs.dart';
-import 'package:ricochlime/utils/shop_items.dart';
 
 /// A component that draws a dotted line
 /// to show the user where they're aiming.

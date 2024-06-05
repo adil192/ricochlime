@@ -1,5 +1,4 @@
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/prefs.dart';
