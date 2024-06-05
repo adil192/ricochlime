@@ -1,32 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:ricochlime/utils/prefs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+final _sharedPreferences = SharedPreferences.getInstance();
 
 abstract class ShopItems {
-  static List<ShopItem> bullets = [
+  static List<ShopItem> bullets = List.unmodifiable([
     BulletShopItem(
-      id: 'bulletDefault',
       color: Colors.white,
+      alwaysPurchased: true,
     ),
     for (final color in Colors.primaries)
       BulletShopItem(
-        id: 'bullet${color.value.toRadixString(36)}',
         color: color,
       ),
-  ];
+    BulletShopItem(
+      color: Colors.black,
+    ),
+  ]);
 }
 
 sealed class ShopItem {
-  const ShopItem({required this.id});
+  ShopItem({
+    required this.id,
+    bool alwaysPurchased = false,
+  }) {
+    _loadState(alwaysPurchased);
+  }
 
   final String id;
+  final int price = 1000;
+  final state = ValueNotifier(ShopItemState.loading);
+
+  String get prefsKey => 'shopItemPurchased:$id';
 
   Widget build(BuildContext context);
+
+  Future<void> _loadState(bool alwaysPurchased) async {
+    if (alwaysPurchased) {
+      state.value = ShopItemState.purchased;
+      return;
+    }
+
+    final prefs = await _sharedPreferences;
+    final purchased = prefs.getBool(prefsKey) ?? false;
+    state.value =
+        purchased ? ShopItemState.purchased : ShopItemState.unpurchased;
+  }
+
+  Future<void> purchase() async {
+    if (state.value == ShopItemState.purchased) return;
+    if (Prefs.coins.value < price) return;
+
+    final prefs = await _sharedPreferences;
+    await prefs.setBool(prefsKey, true);
+    state.value = ShopItemState.purchased;
+    Prefs.coins.value -= price;
+  }
 }
 
 class BulletShopItem extends ShopItem {
   BulletShopItem({
-    required super.id,
     required this.color,
-  });
+    super.alwaysPurchased,
+  }) : super(
+          id: 'bullet${color.value.toRadixString(16)}',
+        );
 
   final Color color;
 
@@ -46,4 +85,10 @@ class BulletShopItem extends ShopItem {
       ),
     );
   }
+}
+
+enum ShopItemState {
+  loading,
+  purchased,
+  unpurchased,
 }

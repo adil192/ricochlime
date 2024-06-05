@@ -3,7 +3,6 @@ import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/coin.dart';
 import 'package:ricochlime/utils/prefs.dart';
-import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:ricochlime/utils/shop_items.dart';
 
 class ShopPage extends StatelessWidget {
@@ -68,20 +67,13 @@ class ShopPage extends StatelessWidget {
                     childAspectRatio: 1,
                   ),
                   itemBuilder: (context, index) {
-                    // TODO(adil192): Implement purchase logic
-                    final purchased = index % 3 != 1;
-
                     if (index >= ShopItems.bullets.length) return null;
 
                     final item = ShopItems.bullets[index];
-                    return purchased
-                        ? _PurchasedItem(
-                            selected: index == 0,
-                            item: item,
-                          )
-                        : _UnpurchasedItem(
-                            item: item,
-                          );
+                    return _ShopItemTile(
+                      selected: index == 0,
+                      item: item,
+                    );
                   },
                 ),
               ],
@@ -93,8 +85,8 @@ class ShopPage extends StatelessWidget {
   }
 }
 
-class _PurchasedItem extends StatelessWidget {
-  const _PurchasedItem({
+class _ShopItemTile extends StatelessWidget {
+  const _ShopItemTile({
     // ignore: unused_element
     super.key,
     required this.selected,
@@ -106,47 +98,43 @@ class _PurchasedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NesButton(
-      onPressed: () {},
-      type: selected ? NesButtonType.primary : NesButtonType.normal,
-      child: Center(
-        child: SizedBox.square(
-          dimension: 20,
-          child: item.build(context),
-        ),
-      ),
-    );
-  }
-}
-
-class _UnpurchasedItem extends StatelessWidget {
-  const _UnpurchasedItem({
-    // ignore: unused_element
-    super.key,
-    required this.item,
-  });
-
-  final ShopItem item;
-
-  @override
-  Widget build(BuildContext context) {
-    return NesButton(
-      onPressed: () {},
-      type: NesButtonType.warning,
-      child: const FittedBox(
-        fit: BoxFit.scaleDown,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CoinIcon(size: 32),
-            Text(
-              '1000',
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-          ],
-        ),
-      ),
-    );
+    return ValueListenableBuilder(
+        valueListenable: item.state,
+        builder: (context, state, _) {
+          return NesButton(
+            onPressed: switch (state) {
+              ShopItemState.loading => null,
+              ShopItemState.purchased => () {},
+              ShopItemState.unpurchased => item.purchase,
+            },
+            type: switch (state) {
+              ShopItemState.loading => NesButtonType.normal,
+              ShopItemState.purchased =>
+                selected ? NesButtonType.primary : NesButtonType.normal,
+              ShopItemState.unpurchased => NesButtonType.warning,
+            },
+            child: state == ShopItemState.purchased
+                ? Center(
+                    child: SizedBox.square(
+                      dimension: 20,
+                      child: item.build(context),
+                    ),
+                  )
+                : const FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CoinIcon(size: 32),
+                        Text(
+                          '1000',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+          );
+        });
   }
 }
