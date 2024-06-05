@@ -7,7 +7,7 @@ final _sharedPreferences = SharedPreferences.getInstance();
 
 abstract class ShopItems {
   static List<ShopItem> bullets = List.unmodifiable([
-    BulletShopItem(color: Colors.white, alwaysPurchased: true),
+    BulletShopItem(color: Colors.white, price: -1),
     for (final color in [
       Colors.pink,
       RicochlimePalette.waterColor,
@@ -21,7 +21,7 @@ abstract class ShopItems {
       Colors.red,
       Colors.black,
     ])
-      BulletShopItem(color: color),
+      BulletShopItem(color: color, price: 500),
   ]);
 
   static final Map<String, ShopItem> allItems = {};
@@ -32,24 +32,27 @@ abstract class ShopItems {
 sealed class ShopItem {
   ShopItem({
     required this.id,
-    bool alwaysPurchased = false,
+    required this.price,
   }) : assert(!ShopItems.allItems.containsKey(id),
             'Duplicate shop item ID: $id') {
     ShopItems.allItems[id] = this;
 
-    _loadState(alwaysPurchased);
+    _loadState();
   }
 
   final String id;
-  final int price = 1000;
+
+  /// Price of the item in coins.
+  /// Negative price means the item is always purchased by default.
+  final int price;
   final state = ValueNotifier(ShopItemState.loading);
 
   String get prefsKey => 'shopItemPurchased:$id';
 
   Widget build(BuildContext context);
 
-  Future<void> _loadState(bool alwaysPurchased) async {
-    if (alwaysPurchased) {
+  Future<void> _loadState() async {
+    if (price < 0) {
       state.value = ShopItemState.purchased;
       return;
     }
@@ -76,7 +79,7 @@ sealed class ShopItem {
 class BulletShopItem extends ShopItem {
   BulletShopItem({
     required this.color,
-    super.alwaysPurchased,
+    required super.price,
   }) : super(
           id: 'bullet${color.value.toRadixString(16)}',
         );

@@ -121,17 +121,17 @@ class _ShopItemTile extends StatelessWidget {
                           child: item.build(context),
                         ),
                       )
-                    : const FittedBox(
+                    : FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            CoinIcon(size: 32),
+                            const CoinIcon(size: 32),
                             Text(
-                              '1000',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              item.price.toString(),
+                              style: const TextStyle(
+                                  fontSize: 20, color: Colors.white),
                             ),
                           ],
                         ),
