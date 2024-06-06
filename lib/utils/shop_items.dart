@@ -50,6 +50,24 @@ abstract class ShopItems {
           srcPosition: Vector2(32, 0), srcSize: Vector2(16, 16)),
       price: 1000,
     ),
+    BulletShapeShopItem(
+      id: 'bulletShapeDonut',
+      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(0, 16), srcSize: Vector2(16, 16)),
+      price: 1000,
+    ),
+    BulletShapeShopItem(
+      id: 'bulletShapeIntricate',
+      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(16, 16), srcSize: Vector2(16, 16)),
+      price: 1000,
+    ),
+    BulletShapeShopItem(
+      id: 'bulletShapeDiamond',
+      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(32, 16), srcSize: Vector2(16, 16)),
+      price: 1000,
+    ),
   ]);
 
   static Future<void> preloadSprites({
