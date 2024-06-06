@@ -57,6 +57,7 @@ tutorialPage:
   dangerZone: "Қауіпті аймаққа кірген шырышты жеңбесеңіз, келесі жүрісте ұтыласыз."
   moreMonsters(OUTDATED): "Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды."
 shopPage:
+  bulletShapes(OUTDATED): Оқ пішіндері
   bulletColors(OUTDATED): Оқ түсті
   title(OUTDATED): дүкен
 common:

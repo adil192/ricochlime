@@ -62,6 +62,7 @@ es:
   shopPage:
     title(OUTDATED): Shop
     bulletColors(OUTDATED): Bullet colors
+    bulletShapes(OUTDATED): Bullet shapes
   common:
     cancel(OUTDATED): Cancel
     ok(OUTDATED): Okay
@@ -96,3 +97,4 @@ kk:
   shopPage:
     title(OUTDATED): Shop
     bulletColors(OUTDATED): Bullet colors
+    bulletShapes(OUTDATED): Bullet shapes

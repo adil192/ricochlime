@@ -24,6 +24,7 @@ import 'package:ricochlime/flame/ticker.dart';
 import 'package:ricochlime/pages/game_over.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
+import 'package:ricochlime/utils/shop_items.dart';
 
 enum GameState {
   idle,
@@ -99,6 +100,7 @@ class RicochlimeGame extends Forge2DGame
       Background.preloadSprites(gameRef: this),
       MonsterAnimation.preloadSprites(gameRef: this),
       Player.preloadSprites(gameRef: this),
+      ShopItems.preloadSprites(gameRef: this),
     ]).then((_) => completer.complete(true));
     return completer;
   }();

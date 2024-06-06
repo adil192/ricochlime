@@ -59,6 +59,7 @@ tutorialPage:
 shopPage:
   title: Shop
   bulletColors: Bullet colors
+  bulletShapes: Bullet shapes
 common:
   cancel: Cancel
   ok: Okay

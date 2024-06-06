@@ -195,7 +195,8 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
           children: [
             if (loading)
               const NesHourglassLoadingIndicator()
-            else if (widget.shouldAnimateIcon?.call() ?? false)
+            else if (!RicochlimeGame.reproducibleGoldenMode &&
+                (widget.shouldAnimateIcon?.call() ?? false))
               BouncingIcon(icon: NesIcon(iconData: widget.icon))
             else
               NesIcon(iconData: widget.icon),

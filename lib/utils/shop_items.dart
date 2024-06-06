@@ -1,4 +1,8 @@
+import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:ricochlime/flame/ricochlime_game.dart';
+import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,11 +25,37 @@ abstract class ShopItems {
       Colors.red,
       Colors.black,
     ])
-      BulletColorShopItem(color: color, price: 500),
+      BulletColorShopItem(color: color, price: 200),
   ]);
 
-  static final Map<String, ShopItem> allItems = {};
+  static final bulletShapes = List<BulletShapeShopItem>.unmodifiable([
+    BulletShapeShopItem(
+      id: 'bulletShapeCircle',
+      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(0, 0), srcSize: Vector2(16, 16)),
+      price: -1,
+    ),
+    BulletShapeShopItem(
+      id: 'bulletShapeArrow',
+      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(16, 0), srcSize: Vector2(16, 16)),
+      price: 1000,
+    ),
+    BulletShapeShopItem(
+      id: 'bulletShapeShuriken',
+      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(32, 0), srcSize: Vector2(16, 16)),
+      price: 1000,
+    ),
+  ]);
 
+  static Future<void> preloadSprites({
+    required RicochlimeGame gameRef,
+  }) {
+    return gameRef.images.load('bullet_shapes.png');
+  }
+
+  static final Map<String, ShopItem> allItems = {};
   static T? getItem<T extends ShopItem>(String id) => allItems[id] as T?;
 }
 
@@ -99,6 +129,37 @@ class BulletColorShopItem extends ShopItem {
       ),
     );
   }
+}
+
+class BulletShapeShopItem extends ShopItem {
+  BulletShapeShopItem({
+    required super.id,
+    required this.sprite,
+    required super.price,
+  });
+
+  final Sprite sprite;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: _SpritePainter(sprite),
+    );
+  }
+}
+
+class _SpritePainter extends CustomPainter {
+  _SpritePainter(this.sprite);
+
+  final Sprite sprite;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    sprite.render(canvas, size: size.toVector2());
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
 enum ShopItemState {

@@ -81,6 +81,35 @@ class ShopPage extends StatelessWidget {
                     );
                   },
                 ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Text(t.shopPage.bulletShapes,
+                        style: const TextStyle(fontSize: 24)),
+                  ),
+                ),
+                SliverGrid.builder(
+                  itemCount: ShopItems.bulletShapes.length,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 120,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: 1,
+                  ),
+                  itemBuilder: (context, index) {
+                    if (index >= ShopItems.bulletShapes.length) return null;
+                    final item = ShopItems.bulletShapes[index];
+
+                    return ValueListenableBuilder(
+                      valueListenable: Prefs.bulletShape,
+                      builder: (context, _, __) => _ShopItemTile(
+                        selected: Prefs.bulletShape.value == item.id,
+                        select: () => Prefs.bulletShape.value = item.id,
+                        item: item,
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -90,7 +119,7 @@ class ShopPage extends StatelessWidget {
   }
 }
 
-class _ShopItemTile<T> extends StatelessWidget {
+class _ShopItemTile extends StatelessWidget {
   const _ShopItemTile({
     // ignore: unused_element
     super.key,

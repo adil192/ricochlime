@@ -57,6 +57,7 @@ tutorialPage:
   dangerZone(OUTDATED): "Si un monstruo llega a la zona de peligro, perderás en tu próximo turno si no lo derrotas."
   moreMonsters(OUTDATED): "Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande."
 shopPage:
+  bulletShapes(OUTDATED): Formas de bala
   bulletColors(OUTDATED): Colores de bala
   title(OUTDATED): Comercio
 common:

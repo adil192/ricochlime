@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 156 (52 per locale)
+/// Strings: 159 (53 per locale)
 ///
-/// Built on 2024-06-06 at 13:51 UTC
+/// Built on 2024-06-06 at 14:07 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -295,6 +295,7 @@ class _StringsShopPageEn {
 	// Translations
 	String get title => 'Shop';
 	String get bulletColors => 'Bullet colors';
+	String get bulletShapes => 'Bullet shapes';
 }
 
 // Path: common
@@ -479,6 +480,7 @@ class _StringsShopPageEs extends _StringsShopPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get bulletShapes => 'Formas de bala';
 	@override String get bulletColors => 'Colores de bala';
 	@override String get title => 'Comercio';
 }
@@ -665,6 +667,7 @@ class _StringsShopPageKk extends _StringsShopPageEn {
 	@override final _StringsKk _root; // ignore: unused_field
 
 	// Translations
+	@override String get bulletShapes => 'Оқ пішіндері';
 	@override String get bulletColors => 'Оқ түсті';
 	@override String get title => 'дүкен';
 }
