@@ -52,14 +52,15 @@ class ShopPage extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: CustomScrollView(
               slivers: [
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
-                    child: Text('Bullets', style: TextStyle(fontSize: 24)),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Text(t.shopPage.bulletColors,
+                        style: const TextStyle(fontSize: 24)),
                   ),
                 ),
                 SliverGrid.builder(
-                  itemCount: ShopItems.bullets.length,
+                  itemCount: ShopItems.bulletColors.length,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 120,
                     mainAxisSpacing: 8,
@@ -67,9 +68,17 @@ class ShopPage extends StatelessWidget {
                     childAspectRatio: 1,
                   ),
                   itemBuilder: (context, index) {
-                    if (index >= ShopItems.bullets.length) return null;
+                    if (index >= ShopItems.bulletColors.length) return null;
+                    final item = ShopItems.bulletColors[index];
 
-                    return _ShopItemTile(item: ShopItems.bullets[index]);
+                    return ValueListenableBuilder(
+                      valueListenable: Prefs.bulletColor,
+                      builder: (context, _, __) => _ShopItemTile(
+                        selected: Prefs.bulletColor.value == item.color,
+                        select: () => Prefs.bulletColor.value = item.color,
+                        item: item,
+                      ),
+                    );
                   },
                 ),
               ],
@@ -81,64 +90,60 @@ class ShopPage extends StatelessWidget {
   }
 }
 
-class _ShopItemTile extends StatelessWidget {
+class _ShopItemTile<T> extends StatelessWidget {
   const _ShopItemTile({
     // ignore: unused_element
     super.key,
+    required this.selected,
+    required this.select,
     required this.item,
   });
 
+  final bool selected;
+  final VoidCallback select;
   final ShopItem item;
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: Prefs.selectedBullet,
-        builder: (context, _, __) {
-          // This needs to be extended for non-bullet items later.
-          final selected = Prefs.selectedBullet.value == item.id;
-
-          return ValueListenableBuilder(
-            valueListenable: item.state,
-            builder: (context, state, _) {
-              return NesButton(
-                onPressed: switch (state) {
-                  ShopItemState.loading => null,
-                  ShopItemState.purchased => () =>
-                      Prefs.selectedBullet.value = item.id,
-                  ShopItemState.unpurchased => item.purchase,
-                },
-                type: switch (state) {
-                  ShopItemState.loading => NesButtonType.normal,
-                  ShopItemState.purchased =>
-                    selected ? NesButtonType.primary : NesButtonType.normal,
-                  ShopItemState.unpurchased => NesButtonType.warning,
-                },
-                child: state == ShopItemState.purchased
-                    ? Center(
-                        child: SizedBox.square(
-                          dimension: 20,
-                          child: item.build(context),
-                        ),
-                      )
-                    : FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const CoinIcon(size: 32),
-                            Text(
-                              item.price.toString(),
-                              style: const TextStyle(
-                                  fontSize: 20, color: Colors.white),
-                            ),
-                          ],
-                        ),
+      valueListenable: item.state,
+      builder: (context, state, _) {
+        return NesButton(
+          onPressed: switch (state) {
+            ShopItemState.loading => null,
+            ShopItemState.purchased => select,
+            ShopItemState.unpurchased => item.purchase,
+          },
+          type: switch (state) {
+            ShopItemState.loading => NesButtonType.normal,
+            ShopItemState.purchased =>
+              selected ? NesButtonType.primary : NesButtonType.normal,
+            ShopItemState.unpurchased => NesButtonType.warning,
+          },
+          child: state == ShopItemState.purchased
+              ? Center(
+                  child: SizedBox.square(
+                    dimension: 20,
+                    child: item.build(context),
+                  ),
+                )
+              : FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CoinIcon(size: 32),
+                      Text(
+                        item.price.toString(),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
                       ),
-              );
-            },
-          );
-        });
+                    ],
+                  ),
+                ),
+        );
+      },
+    );
   }
 }

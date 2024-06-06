@@ -2,7 +2,6 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/prefs.dart';
-import 'package:ricochlime/utils/shop_items.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
   Bullet({
@@ -62,8 +61,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
     Paint paint, {
     double opacity = 1,
   }) {
-    final selectedBullet =
-        ShopItems.getItem<BulletShopItem>(Prefs.selectedBullet.value);
+    final bulletColor = Prefs.bulletColor.value;
     canvas
       ..drawCircle(
         position,
@@ -78,8 +76,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
         radius,
         paint
           ..style = PaintingStyle.fill
-          ..color =
-              (selectedBullet?.color ?? Colors.white).withOpacity(opacity),
+          ..color = bulletColor.withOpacity(opacity),
       );
   }
 

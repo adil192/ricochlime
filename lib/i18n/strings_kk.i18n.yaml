@@ -1,9 +1,9 @@
 appName: Рикошырыш
 homePage:
   playButton: Ойнау
-  shopButton(OUTDATED): дүкен
   settingsButton: Баптау
   tutorialButton: Нұсқаулық
+  shopButton(OUTDATED): дүкен
 playPage:
   highScore: "Үздік: $p"
   coins(OUTDATED): Монеталар
@@ -57,6 +57,7 @@ tutorialPage:
   dangerZone: "Қауіпті аймаққа кірген шырышты жеңбесеңіз, келесі жүрісте ұтыласыз."
   moreMonsters(OUTDATED): "Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды."
 shopPage:
+  bulletColors(OUTDATED): Оқ түсті
   title(OUTDATED): дүкен
 common:
   cancel: Болдырмау

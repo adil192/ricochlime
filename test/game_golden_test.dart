@@ -87,10 +87,10 @@ void main() {
     Prefs.coins.value = 493;
     Prefs.highScore.value = 62;
 
-    ShopItems.bullets[1].purchase(noCost: true);
-    ShopItems.bullets[2].purchase(noCost: true);
-    ShopItems.bullets[7].purchase(noCost: true);
-    ShopItems.bullets[9].purchase(noCost: true);
+    ShopItems.bulletColors[1].purchase(noCost: true);
+    ShopItems.bulletColors[2].purchase(noCost: true);
+    ShopItems.bulletColors[7].purchase(noCost: true);
+    ShopItems.bulletColors[9].purchase(noCost: true);
 
     _testGame(
       goldenFileName: '1_home',

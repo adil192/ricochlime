@@ -61,6 +61,7 @@ es:
     moreMonsters(OUTDATED): "More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger."
   shopPage:
     title(OUTDATED): Shop
+    bulletColors(OUTDATED): Bullet colors
   common:
     cancel(OUTDATED): Cancel
     ok(OUTDATED): Okay
@@ -94,3 +95,4 @@ kk:
     moreMonsters(OUTDATED): "More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger."
   shopPage:
     title(OUTDATED): Shop
+    bulletColors(OUTDATED): Bullet colors

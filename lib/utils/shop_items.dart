@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 final _sharedPreferences = SharedPreferences.getInstance();
 
 abstract class ShopItems {
-  static List<ShopItem> bullets = List.unmodifiable([
-    BulletShopItem(color: Colors.white, price: -1),
+  static final bulletColors = List<BulletColorShopItem>.unmodifiable([
+    BulletColorShopItem(color: Colors.white, price: -1),
     for (final color in [
       Colors.pink,
       RicochlimePalette.waterColor,
@@ -21,7 +21,7 @@ abstract class ShopItems {
       Colors.red,
       Colors.black,
     ])
-      BulletShopItem(color: color, price: 500),
+      BulletColorShopItem(color: color, price: 500),
   ]);
 
   static final Map<String, ShopItem> allItems = {};
@@ -76,8 +76,8 @@ sealed class ShopItem {
   }
 }
 
-class BulletShopItem extends ShopItem {
-  BulletShopItem({
+class BulletColorShopItem extends ShopItem {
+  BulletColorShopItem({
     required this.color,
     required super.price,
   }) : super(
@@ -85,9 +85,6 @@ class BulletShopItem extends ShopItem {
         );
 
   final Color color;
-
-  // TODO(adil192): Also add non-color bullets
-  // final Sprite? sprite;
 
   @override
   Widget build(BuildContext context) {

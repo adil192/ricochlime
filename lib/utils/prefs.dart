@@ -38,7 +38,7 @@ abstract class Prefs {
   static late final PlainPref<bool> fasterPageTransitions;
 
   static late final PlainPref<int> coins;
-  static late final PlainPref<String> selectedBullet;
+  static late final PlainPref<Color> bulletColor;
 
   static late final PlainPref<int> maxFps;
 
@@ -82,7 +82,7 @@ abstract class Prefs {
     fasterPageTransitions = PlainPref('fasterPageTransitions', false);
 
     coins = PlainPref('coins', 0);
-    selectedBullet = PlainPref('selectedBullet', ShopItems.bullets.first.id);
+    bulletColor = PlainPref('bulletColor', ShopItems.bulletColors.first.color);
 
     maxFps = PlainPref('maxFps', -1);
 
@@ -201,6 +201,7 @@ class PlainPref<T> extends IPref<T> {
               T == AxisDirection ||
               T == ThemeMode ||
               T == TargetPlatform ||
+              T == Color ||
               T == typeOf<GameData?>(),
         );
 
@@ -271,6 +272,8 @@ class PlainPref<T> extends IPref<T> {
         return _prefs!.setInt(key, (value as ThemeMode).index);
       } else if (T == TargetPlatform) {
         return _prefs!.setInt(key, (value as TargetPlatform).index);
+      } else if (T == Color) {
+        return _prefs!.setInt(key, (value as Color).value);
       } else if (T == typeOf<GameData?>()) {
         final json = jsonEncode(value);
         return _prefs!.setString(key, json);
@@ -309,6 +312,9 @@ class PlainPref<T> extends IPref<T> {
         if (index == null) return null;
         if (index == -1) return defaultTargetPlatform as T?;
         return TargetPlatform.values[index] as T?;
+      } else if (T == Color) {
+        final value = _prefs!.getInt(key);
+        return value != null ? Color(value) as T : null;
       } else if (T == typeOf<GameData?>()) {
         final json = _prefs!.getString(key);
         if (json == null) return null;

@@ -58,6 +58,7 @@ tutorialPage:
   moreMonsters: More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger.
 shopPage:
   title: Shop
+  bulletColors: Bullet colors
 common:
   cancel: Cancel
   ok: Okay
