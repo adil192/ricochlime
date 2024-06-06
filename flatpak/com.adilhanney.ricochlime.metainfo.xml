@@ -71,6 +71,15 @@
     </branding>
 
     <releases>
+        <release version="1.8.0" date="2024-06-06">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.8.0</url>
+            <description>
+                <ul>
+                    <li>Added a shop where you can unlock new bullet colors and shapes!</li>
+                    <li>Aiming bug fixes for desktop users</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.7.1" date="2024-06-04">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.7.1</url>
             <description>
