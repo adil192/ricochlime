@@ -1,7 +1,9 @@
+import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/shop_items.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
   Bullet({
@@ -52,31 +54,42 @@ class Bullet extends BodyComponent with ContactCallbacks {
 
   @override
   void render(Canvas canvas) {
-    drawBullet(canvas, Offset.zero, Paint());
+    drawBullet(canvas, Vector2.zero());
   }
 
   static void drawBullet(
     Canvas canvas,
-    Offset position,
-    Paint paint, {
+    Vector2 position, {
     double opacity = 1,
+    double radius = radius,
+    Color? bulletColor,
+    Sprite? bulletShape,
   }) {
-    final bulletColor = Prefs.bulletColor.value;
-    canvas
-      ..drawCircle(
-        position,
-        radius,
-        paint
-          ..style = PaintingStyle.stroke
-          ..color = Colors.black
-          ..strokeWidth = 0.1,
+    bulletColor ??= Prefs.bulletColor.value;
+    bulletShape ??= (ShopItems.getBulletShape(Prefs.bulletShape.value) ??
+            ShopItems.defaultBulletShape)
+        .sprite;
+
+    final size = Vector2.all(radius * 2);
+    final shadowSize = size * 1.2;
+
+    bulletShape
+      ..render(
+        canvas,
+        position: position,
+        anchor: Anchor.center,
+        size: shadowSize,
+        overridePaint: Paint()
+          ..colorFilter =
+              const ColorFilter.mode(Colors.black, BlendMode.modulate),
       )
-      ..drawCircle(
-        position,
-        radius,
-        paint
-          ..style = PaintingStyle.fill
-          ..color = bulletColor.withOpacity(opacity),
+      ..render(
+        canvas,
+        position: position,
+        anchor: Anchor.center,
+        size: size,
+        overridePaint: Paint()
+          ..colorFilter = ColorFilter.mode(bulletColor, BlendMode.modulate),
       );
   }
 

@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/utils/prefs.dart';
@@ -55,18 +58,22 @@ abstract class ShopItems {
     return gameRef.images.load('bullet_shapes.png');
   }
 
-  static final Map<String, ShopItem> allItems = {};
-  static T? getItem<T extends ShopItem>(String id) => allItems[id] as T?;
+  static final allItems = [
+    ...bulletColors,
+    ...bulletShapes,
+  ];
+
+  static BulletShapeShopItem? getBulletShape(String id) =>
+      bulletShapes.where((item) => item.id == id).firstOrNull;
+
+  static BulletShapeShopItem get defaultBulletShape => bulletShapes.first;
 }
 
 sealed class ShopItem {
   ShopItem({
     required this.id,
     required this.price,
-  }) : assert(!ShopItems.allItems.containsKey(id),
-            'Duplicate shop item ID: $id') {
-    ShopItems.allItems[id] = this;
-
+  }) {
     _loadState();
   }
 
@@ -118,15 +125,8 @@ class BulletColorShopItem extends ShopItem {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Colors.black,
-          width: 1,
-        ),
-      ),
+    return CustomPaint(
+      painter: _SpritePainter(color, ShopItems.defaultBulletShape.sprite),
     );
   }
 }
@@ -143,19 +143,29 @@ class BulletShapeShopItem extends ShopItem {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _SpritePainter(sprite),
+      painter: _SpritePainter(Colors.white, sprite),
     );
   }
 }
 
 class _SpritePainter extends CustomPainter {
-  _SpritePainter(this.sprite);
+  _SpritePainter(
+    this.color,
+    this.sprite,
+  );
 
+  final Color color;
   final Sprite sprite;
 
   @override
   void paint(Canvas canvas, Size size) {
-    sprite.render(canvas, size: size.toVector2());
+    Bullet.drawBullet(
+      canvas,
+      Vector2(size.width / 2, size.height / 2),
+      radius: min(size.width, size.height) / 2,
+      bulletColor: color,
+      bulletShape: sprite,
+    );
   }
 
   @override

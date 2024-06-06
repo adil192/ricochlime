@@ -97,10 +97,9 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 32),
                   _HomePageButton(
                     icon: NesIcons.market,
-                    shouldAnimateIcon: () => ShopItems.allItems.values.any(
-                        (item) =>
-                            item.state.value == ShopItemState.unpurchased &&
-                            item.price <= Prefs.coins.value),
+                    shouldAnimateIcon: () => ShopItems.allItems.any((item) =>
+                        item.state.value == ShopItemState.unpurchased &&
+                        item.price <= Prefs.coins.value),
                     text: t.homePage.shopButton,
                     openBuilder: (_, __, ___) => const ShopPage(),
                   ),

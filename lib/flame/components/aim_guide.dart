@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
@@ -8,8 +9,6 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 /// A component that draws a dotted line
 /// to show the user where they're aiming.
 class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
-  final Paint _paint = Paint()..color = Colors.white.withOpacity(0.9);
-
   /// Information about the current aim.
   ///
   /// This is null if the user is not aiming.
@@ -76,7 +75,7 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
       dotLocalPosition += dotDeltaPosition;
       dotGlobalPosition += dotDeltaPosition;
 
-      Bullet.drawBullet(canvas, dotLocalPosition, _paint, opacity: 0.9);
+      Bullet.drawBullet(canvas, dotLocalPosition.toVector2(), opacity: 0.9);
 
       if (!gameRect.contains(dotGlobalPosition)) break;
     }
