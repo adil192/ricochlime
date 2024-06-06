@@ -110,7 +110,7 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
       relativePosition = -relativePosition; // point up
     }
 
-    final aimLengthMultiplier = mouseBelowPlayer ? 8 : 2;
+    final aimLengthMultiplier = mouseBelowPlayer ? 8 : 4;
     aimDetails!.aimLength = min(
       1,
       relativePosition.length / _dotInterval / _maxDots * aimLengthMultiplier,
