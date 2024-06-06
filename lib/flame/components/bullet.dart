@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +39,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
     final bodyDef = BodyDef(
       position: initialPosition.clone(),
       linearVelocity: velocity,
+      angularVelocity: 2 * pi,
       type: BodyType.dynamic,
     );
 
