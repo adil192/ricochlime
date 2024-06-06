@@ -38,7 +38,6 @@ class Bullet extends BodyComponent with ContactCallbacks {
       position: initialPosition.clone(),
       linearVelocity: velocity,
       type: BodyType.dynamic,
-      fixedRotation: true,
     );
 
     return world.createBody(bodyDef)..createFixture(fixtureDef);
