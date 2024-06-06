@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
@@ -72,7 +73,11 @@ class Bullet extends BodyComponent with ContactCallbacks {
             ShopItems.defaultBulletShape)
         .sprite;
 
-    final size = Vector2.all(radius * 2);
+    final size = applyBoxFit(
+      BoxFit.contain,
+      Size(bulletShape.src.width, bulletShape.src.height),
+      Size.square(radius * 2),
+    ).destination.toVector2();
     final shadowSize = size * 1.2;
 
     bulletShape

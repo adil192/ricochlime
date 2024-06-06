@@ -41,7 +41,7 @@ abstract class ShopItems {
     BulletShapeShopItem(
       id: 'bulletShapeArrow',
       sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(16, 0), srcSize: Vector2(16, 16)),
+          srcPosition: Vector2(18, 0), srcSize: Vector2(12, 16)),
       price: 1000,
     ),
     BulletShapeShopItem(
