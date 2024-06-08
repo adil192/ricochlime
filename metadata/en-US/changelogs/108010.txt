@@ -1,0 +1,5 @@
+• Added an accessibility option to display bigger bullets
+• Reorganised the settings page
+• Fixed a graphical issue with one of the new bullet shapes
+• When buying an item, it will now be automatically selected
+• Reduced the initial loading time

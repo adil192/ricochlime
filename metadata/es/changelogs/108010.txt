@@ -1,0 +1,5 @@
+• Se agregó una opción de accesibilidad para mostrar viñetas más grandes.
+• Reorganizó la página de configuración.
+• Se solucionó un problema gráfico con una de las nuevas formas de viñeta.
+• Al comprar un artículo, ahora se seleccionará automáticamente
+• Reducción del tiempo de carga inicial.
