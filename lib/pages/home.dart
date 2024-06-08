@@ -152,7 +152,7 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
   /// user input while loading for some reason.
   late final loadingTimer =
       (AdState.adsSupported && !RicochlimeGame.reproducibleGoldenMode)
-          ? Timer(const Duration(seconds: 2), () {
+          ? Timer(const Duration(seconds: 1), () {
               if (mounted) setState(() {});
             })
           : null;
