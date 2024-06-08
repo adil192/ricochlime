@@ -13,7 +13,7 @@ settingsPage:
   gameplay: Gameplay
   accessibility: Accessibility
   adConsent: Change ad consent
-  hyperlegibleFont: Use the Atkinson Hyperlegible font
+  hyperlegibleFont: Easy-to-read font
   bgmVolume: Bg music volume
   showUndoButton: Allow undoing moves
   fasterPageTransitions: Faster page transitions

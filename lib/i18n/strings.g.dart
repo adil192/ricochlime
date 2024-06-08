@@ -6,7 +6,7 @@
 /// Locales: 3
 /// Strings: 168 (56 per locale)
 ///
-/// Built on 2024-06-08 at 16:11 UTC
+/// Built on 2024-06-08 at 22:44 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -191,7 +191,7 @@ class _StringsSettingsPageEn {
 	String get gameplay => 'Gameplay';
 	String get accessibility => 'Accessibility';
 	String get adConsent => 'Change ad consent';
-	String get hyperlegibleFont => 'Use the Atkinson Hyperlegible font';
+	String get hyperlegibleFont => 'Easy-to-read font';
 	String get bgmVolume => 'Bg music volume';
 	String get showUndoButton => 'Allow undoing moves';
 	String get fasterPageTransitions => 'Faster page transitions';
@@ -377,6 +377,7 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get hyperlegibleFont => 'Fuente fácil de leer';
 	@override String get biggerBullets => 'balas mas grandes';
 	@override String get gameplay => 'Como se Juega';
 	@override String get accessibility => 'Accesibilidad';
@@ -385,7 +386,6 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override String get showUndoButton => 'Permitir deshacer movimientos';
 	@override String get title => 'Ajustes';
 	@override String get adConsent => 'Cambiar el consentimiento de los anuncios';
-	@override String get hyperlegibleFont => 'Utilice la fuente Atkinson Hyperlegible';
 	@override String get bgmVolume => 'Volumen de la música de fondo';
 	@override String get appInfo => 'Informacion de la applicacion';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nEste programa no tiene ninguna garantía. Este es un software gratuito y puede redistribuirlo bajo ciertas condiciones.\n';
@@ -569,10 +569,10 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	// Translations
 	@override String get title => 'Баптау';
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
-	@override String get hyperlegibleFont => 'Atkinson Hyperlegible қарпін қолдану';
-	@override String get biggerBullets => 'Үлкенірек оқтар';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get hyperlegibleFont => 'Оқуға оңай шрифт';
+	@override String get biggerBullets => 'Үлкенірек оқтар';
 	@override String get gameplay => 'Ойын барысы';
 	@override String get accessibility => 'Қол жетімділік';
 	@override String get maxFps => 'Максималды FPS';

@@ -16,7 +16,7 @@ es:
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
     adConsent(OUTDATED): Change ad consent
-    hyperlegibleFont(OUTDATED): Use the Atkinson Hyperlegible font
+    hyperlegibleFont(OUTDATED): Easy-to-read font
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     fasterPageTransitions(OUTDATED): Faster page transitions
@@ -78,6 +78,7 @@ kk:
   settingsPage:
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
+    hyperlegibleFont(OUTDATED): Easy-to-read font
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     fasterPageTransitions(OUTDATED): Faster page transitions

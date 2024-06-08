@@ -9,6 +9,7 @@ playPage:
   undo(OUTDATED): Deshacer movimiento
   highScore(OUTDATED): "Mejor: $p"
 settingsPage:
+  hyperlegibleFont(OUTDATED): Fuente fácil de leer
   biggerBullets(OUTDATED): balas mas grandes
   gameplay(OUTDATED): Como se Juega
   accessibility(OUTDATED): Accesibilidad
@@ -17,7 +18,6 @@ settingsPage:
   showUndoButton(OUTDATED): Permitir deshacer movimientos
   title(OUTDATED): Ajustes
   adConsent(OUTDATED): Cambiar el consentimiento de los anuncios
-  hyperlegibleFont(OUTDATED): Utilice la fuente Atkinson Hyperlegible
   bgmVolume(OUTDATED): Volumen de la música de fondo
   appInfo(OUTDATED): Informacion de la applicacion
   licenseNotice(OUTDATED): |
