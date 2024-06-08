@@ -308,6 +308,39 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
+          // Bigger bullets
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ValueListenableBuilder(
+                valueListenable: Prefs.biggerBullets,
+                builder: (context, _, child) {
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: NesIcon(
+                        iconData: NesIcons.zoomIn,
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.biggerBullets.value,
+                        onChange: (value) {
+                          Prefs.biggerBullets.value = value;
+                        },
+                      ),
+                      onTap: () => Prefs.biggerBullets.value =
+                          !Prefs.biggerBullets.value,
+                    ),
+                  );
+                },
+                child: Text(t.settingsPage.biggerBullets),
+              ),
+            ),
+          ),
+
           Padding(
             padding: subtitlePadding,
             child: Text(

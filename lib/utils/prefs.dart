@@ -28,14 +28,14 @@ abstract class Prefs {
   static late final PlainPref<int> highScore;
 
   static late final PlainPref<bool> hyperlegibleFont;
+  static late final PlainPref<bool> fasterPageTransitions;
+  static late final PlainPref<bool> biggerBullets;
 
   static late final PlainPref<int?> birthYear;
 
   static late final PlainPref<double> bgmVolume;
 
   static late final PlainPref<bool> showUndoButton;
-
-  static late final PlainPref<bool> fasterPageTransitions;
 
   static late final PlainPref<int> coins;
   static late final PlainPref<Color> bulletColor;
@@ -73,14 +73,14 @@ abstract class Prefs {
     highScore = PlainPref('highScore', 0);
 
     hyperlegibleFont = PlainPref('hyperlegibleFont', false);
+    fasterPageTransitions = PlainPref('fasterPageTransitions', false);
+    biggerBullets = PlainPref('biggerBullets', false);
 
     birthYear = PlainPref('birthYear', null);
 
     bgmVolume = PlainPref('bgmVolume', 0);
 
     showUndoButton = PlainPref('showUndoButton', true);
-
-    fasterPageTransitions = PlainPref('fasterPageTransitions', false);
 
     coins = PlainPref('coins', 0);
     bulletColor = PlainPref('bulletColor', ShopItems.bulletColors.first.color);

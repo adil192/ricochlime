@@ -73,6 +73,8 @@ class Bullet extends BodyComponent with ContactCallbacks {
             ShopItems.defaultBulletShape)
         .sprite;
 
+    if (Prefs.biggerBullets.value) radius *= 2;
+
     final size = applyBoxFit(
       BoxFit.contain,
       Size(bulletShape.src.width, bulletShape.src.height),

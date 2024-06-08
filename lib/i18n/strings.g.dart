@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 161 (53 per locale)
+/// Strings: 168 (56 per locale)
 ///
-/// Built on 2024-06-08 at 16:03 UTC
+/// Built on 2024-06-08 at 16:11 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -195,6 +195,7 @@ class _StringsSettingsPageEn {
 	String get bgmVolume => 'Bg music volume';
 	String get showUndoButton => 'Allow undoing moves';
 	String get fasterPageTransitions => 'Faster page transitions';
+	String get biggerBullets => 'Bigger bullets';
 	String get maxFps => 'Max FPS';
 	String get appInfo => 'App info';
 	String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
@@ -376,6 +377,9 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get biggerBullets => 'balas mas grandes';
+	@override String get gameplay => 'Como se Juega';
+	@override String get accessibility => 'Accesibilidad';
 	@override String get maxFps => 'FPS máx.';
 	@override String get fasterPageTransitions => 'Transiciones de página más rápidas';
 	@override String get showUndoButton => 'Permitir deshacer movimientos';
@@ -566,8 +570,11 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	@override String get title => 'Баптау';
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible қарпін қолдану';
+	@override String get biggerBullets => 'Үлкенірек оқтар';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get gameplay => 'Ойын барысы';
+	@override String get accessibility => 'Қол жетімділік';
 	@override String get maxFps => 'Максималды FPS';
 	@override String get fasterPageTransitions => 'Беттерді жылдамырақ ауыстыру';
 	@override String get showUndoButton => 'Қозғалысты қайтаруға рұқсат беріңіз';

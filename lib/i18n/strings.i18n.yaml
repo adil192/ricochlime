@@ -17,6 +17,7 @@ settingsPage:
   bgmVolume: Bg music volume
   showUndoButton: Allow undoing moves
   fasterPageTransitions: Faster page transitions
+  biggerBullets: Bigger bullets
   maxFps: Max FPS
   appInfo: App info
   licenseNotice: |-
