@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 159 (53 per locale)
+/// Strings: 161 (53 per locale)
 ///
-/// Built on 2024-06-06 at 14:07 UTC
+/// Built on 2024-06-08 at 16:03 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -188,6 +188,8 @@ class _StringsSettingsPageEn {
 
 	// Translations
 	String get title => 'Settings';
+	String get gameplay => 'Gameplay';
+	String get accessibility => 'Accessibility';
 	String get adConsent => 'Change ad consent';
 	String get hyperlegibleFont => 'Use the Atkinson Hyperlegible font';
 	String get bgmVolume => 'Bg music volume';

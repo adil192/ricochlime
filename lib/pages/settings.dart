@@ -21,6 +21,12 @@ class SettingsPage extends StatelessWidget {
       horizontal: 16,
       vertical: 4,
     );
+    const subtitlePadding = EdgeInsets.only(
+      left: 16,
+      right: 16,
+      top: 16,
+      bottom: 4,
+    );
     const listTileContentPadding = EdgeInsets.symmetric(
       horizontal: 16,
       vertical: 16,
@@ -120,36 +126,11 @@ class SettingsPage extends StatelessWidget {
             ),
           ],
 
-          // Hyperlegible font
           Padding(
-            padding: listTilePadding,
-            child: NesContainer(
-              padding: EdgeInsets.zero,
-              child: ValueListenableBuilder(
-                valueListenable: Prefs.hyperlegibleFont,
-                builder: (context, _, child) {
-                  return MergeSemantics(
-                    child: ListTile(
-                      title: child,
-                      leading: NesIcon(
-                        iconData: NesIcons.openEye,
-                      ),
-                      tileColor: listTileColor,
-                      shape: listTileShape,
-                      contentPadding: listTileContentPadding,
-                      trailing: NesCheckBox(
-                        value: Prefs.hyperlegibleFont.value,
-                        onChange: (value) {
-                          Prefs.hyperlegibleFont.value = value;
-                        },
-                      ),
-                      onTap: () => Prefs.hyperlegibleFont.value =
-                          !Prefs.hyperlegibleFont.value,
-                    ),
-                  );
-                },
-                child: Text(t.settingsPage.hyperlegibleFont),
-              ),
+            padding: subtitlePadding,
+            child: Text(
+              t.settingsPage.gameplay,
+              style: const TextStyle(fontSize: 20),
             ),
           ),
 
@@ -215,39 +196,6 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
-          // Speed up page transitions
-          Padding(
-            padding: listTilePadding,
-            child: NesContainer(
-              padding: EdgeInsets.zero,
-              child: ValueListenableBuilder(
-                valueListenable: Prefs.fasterPageTransitions,
-                builder: (context, _, child) {
-                  return MergeSemantics(
-                    child: ListTile(
-                      title: child,
-                      leading: NesIcon(
-                        iconData: NesIcons.energy,
-                      ),
-                      tileColor: listTileColor,
-                      shape: listTileShape,
-                      contentPadding: listTileContentPadding,
-                      trailing: NesCheckBox(
-                        value: Prefs.fasterPageTransitions.value,
-                        onChange: (value) {
-                          Prefs.fasterPageTransitions.value = value;
-                        },
-                      ),
-                      onTap: () => Prefs.fasterPageTransitions.value =
-                          !Prefs.fasterPageTransitions.value,
-                    ),
-                  );
-                },
-                child: Text(t.settingsPage.fasterPageTransitions),
-              ),
-            ),
-          ),
-
           // Max FPS
           Padding(
             padding: listTilePadding,
@@ -283,6 +231,88 @@ class SettingsPage extends StatelessWidget {
                   };
                 },
               ),
+            ),
+          ),
+
+          Padding(
+            padding: subtitlePadding,
+            child: Text(
+              t.settingsPage.accessibility,
+              style: const TextStyle(fontSize: 20),
+            ),
+          ),
+
+          // Hyperlegible font
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ValueListenableBuilder(
+                valueListenable: Prefs.hyperlegibleFont,
+                builder: (context, _, child) {
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: NesIcon(
+                        iconData: NesIcons.openEye,
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.hyperlegibleFont.value,
+                        onChange: (value) {
+                          Prefs.hyperlegibleFont.value = value;
+                        },
+                      ),
+                      onTap: () => Prefs.hyperlegibleFont.value =
+                          !Prefs.hyperlegibleFont.value,
+                    ),
+                  );
+                },
+                child: Text(t.settingsPage.hyperlegibleFont),
+              ),
+            ),
+          ),
+
+          // Speed up page transitions
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ValueListenableBuilder(
+                valueListenable: Prefs.fasterPageTransitions,
+                builder: (context, _, child) {
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: NesIcon(
+                        iconData: NesIcons.energy,
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.fasterPageTransitions.value,
+                        onChange: (value) {
+                          Prefs.fasterPageTransitions.value = value;
+                        },
+                      ),
+                      onTap: () => Prefs.fasterPageTransitions.value =
+                          !Prefs.fasterPageTransitions.value,
+                    ),
+                  );
+                },
+                child: Text(t.settingsPage.fasterPageTransitions),
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: subtitlePadding,
+            child: Text(
+              t.settingsPage.appInfo,
+              style: const TextStyle(fontSize: 20),
             ),
           ),
 

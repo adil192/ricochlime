@@ -10,6 +10,8 @@ playPage:
   coins: Coins
 settingsPage:
   title: Settings
+  gameplay: Gameplay
+  accessibility: Accessibility
   adConsent: Change ad consent
   hyperlegibleFont: Use the Atkinson Hyperlegible font
   bgmVolume: Bg music volume

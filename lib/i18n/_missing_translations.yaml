@@ -13,6 +13,8 @@ es:
     coins(OUTDATED): Coins
   settingsPage:
     title(OUTDATED): Settings
+    gameplay: Gameplay
+    accessibility: Accessibility
     adConsent(OUTDATED): Change ad consent
     hyperlegibleFont(OUTDATED): Use the Atkinson Hyperlegible font
     bgmVolume(OUTDATED): Bg music volume
@@ -73,6 +75,8 @@ kk:
     undo(OUTDATED): Undo move
     coins(OUTDATED): Coins
   settingsPage:
+    gameplay: Gameplay
+    accessibility: Accessibility
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     fasterPageTransitions(OUTDATED): Faster page transitions

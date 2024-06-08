@@ -10,6 +10,8 @@ playPage:
   undo(OUTDATED): Қозғалысты болдырмау
 settingsPage:
   title: Баптау
+  gameplay(OUTDATED): Ойын барысы
+  accessibility(OUTDATED): Қол жетімділік
   adConsent: Жарнамаға келісімді баптау
   hyperlegibleFont: Atkinson Hyperlegible қарпін қолдану
   appInfo: Қолданба ақпары
