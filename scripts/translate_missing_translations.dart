@@ -1,3 +1,4 @@
+#!/usr/bin/env dart
 // Run `dart scripts/translate_app.dart` to generate the changelogs.
 
 // ignore_for_file: avoid_print
@@ -100,14 +101,8 @@ Future<void> translateList(
     if (translated == null || translated == value) continue;
 
     try {
-      await Process.run('dart', [
-        'run',
-        'slang',
-        'add',
-        languageCode,
-        pathToKey,
-        translated,
-      ]);
+      await Process.run(
+          'dart', ['run', 'slang', 'add', languageCode, pathToKey, translated]);
     } catch (e) {
       print('    Adding translation failed: $e');
       errorOccurredInTranslatingTree = true;
@@ -186,8 +181,10 @@ void main() async {
   );
 
   errorOccurredInTranslatingTree = true;
-  while (errorOccurredInTranslatingTree) {
+  int attempts = 0;
+  while (errorOccurredInTranslatingTree && attempts < 5) {
     errorOccurredInTranslatingTree = false;
+    attempts++;
 
     final useLibreEngine = random.nextBool();
     print(

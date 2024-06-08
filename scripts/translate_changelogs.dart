@@ -1,3 +1,4 @@
+#!/usr/bin/env dart
 // Run `dart scripts/translate_changelogs.dart` to generate the changelogs.
 
 // ignore_for_file: avoid_print
@@ -113,6 +114,16 @@ void main() async {
 
     // Response might be something like
     // "Invalid request: request (276) exceeds text limit (250)"
+    const failurePrefixes = [
+      'Invalid request: request (',
+      'None is not supported',
+    ];
+    if (failurePrefixes.any(translatedChangelog.startsWith)) {
+      print('${' ' * stepPrefix.length}  ! Translation invalid, skipping...');
+      someTranslationsFailed = true;
+      continue;
+    }
+
     const bullet = '•';
     if (englishChangelog.contains(bullet) &&
         !translatedChangelog.contains(bullet)) {
