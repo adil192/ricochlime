@@ -79,6 +79,15 @@ abstract class ShopItems {
           srcSize: Vector2(16, 16)),
       price: 1000,
     ),
+    BulletShapeShopItem(
+      id: 'bulletShapeSmiley',
+      spriteBuilder: () => Sprite(
+        RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+        srcPosition: Vector2(0, 32),
+        srcSize: Vector2(16, 16),
+      ),
+      price: 1000,
+    ),
   ]);
 
   static Future<void> preloadSprites({
