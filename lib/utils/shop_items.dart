@@ -34,37 +34,37 @@ abstract class ShopItems {
   static final bulletShapes = List<BulletShapeShopItem>.unmodifiable([
     BulletShapeShopItem(
       id: 'bulletShapeCircle',
-      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
           srcPosition: Vector2(0, 0), srcSize: Vector2(16, 16)),
       price: -1,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeArrow',
-      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
           srcPosition: Vector2(18, 0), srcSize: Vector2(12, 16)),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeShuriken',
-      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
           srcPosition: Vector2(32, 0), srcSize: Vector2(16, 16)),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeDonut',
-      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
           srcPosition: Vector2(0, 16), srcSize: Vector2(16, 16)),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeIntricate',
-      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
           srcPosition: Vector2(16, 16), srcSize: Vector2(16, 16)),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeDiamond',
-      sprite: Sprite(game.images.fromCache('bullet_shapes.png'),
+      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
           srcPosition: Vector2(32, 16), srcSize: Vector2(16, 16)),
       price: 1000,
     ),
@@ -152,11 +152,12 @@ class BulletColorShopItem extends ShopItem {
 class BulletShapeShopItem extends ShopItem {
   BulletShapeShopItem({
     required super.id,
-    required this.sprite,
+    required this.spriteBuilder,
     required super.price,
   });
 
-  final Sprite sprite;
+  final Sprite Function() spriteBuilder;
+  late final Sprite sprite = spriteBuilder();
 
   @override
   Widget build(BuildContext context) {
