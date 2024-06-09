@@ -84,7 +84,7 @@ abstract class Prefs {
 
     coins = PlainPref('coins', 0);
     bulletColor = PlainPref('bulletColor', ShopItems.bulletColors.first.color);
-    bulletShape = PlainPref('bulletShape', 'bulletShapeCircle');
+    bulletShape = PlainPref('bulletShape', ShopItems.bulletShapes.first.id);
 
     maxFps = PlainPref('maxFps', -1);
 
