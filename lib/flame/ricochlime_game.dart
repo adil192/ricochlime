@@ -35,28 +35,18 @@ enum GameState {
 
 class RicochlimeGame extends Forge2DGame
     with PanDetector, TapDetector, MouseMovementDetector, SingleGameInstance {
-  RicochlimeGame({
-    required this.score,
-    required this.isDarkMode,
-    required this.timeDilation,
-  }) : super(
+  RicochlimeGame._()
+      : super(
           gravity: Vector2.zero(),
           zoom: 1,
         ) {
-    if (_instance != null) {
-      // If we were to create and dispose a game instance,
-      // we'd need to dispose the ticker as well.
-      throw StateError('Only one instance of RicochlimeGame can be created');
-    }
-    _instance = this;
-
     /// Sets the maximum movement per time step to [Bullet.speed].
     /// This effectively sets the max time step to 1s,
     /// rather than the default value which is much lower.
     physics_settings.maxTranslation = Bullet.speed;
   }
 
-  static RicochlimeGame? _instance;
+  static final instance = RicochlimeGame._();
   static final log = Logger('RicochlimeGame');
 
   /// Width to height aspect ratio
@@ -82,13 +72,13 @@ class RicochlimeGame extends Forge2DGame
 
   late var random = Random();
 
-  final ValueNotifier<int> score;
-  final ValueNotifier<bool> isDarkMode;
+  static final score = ValueNotifier(0);
+  static final isDarkMode = ValueNotifier(false);
   int numBullets = 1;
   int numNewRowsEachRound = 1;
 
   final Ticker ticker = Ticker();
-  final ValueNotifier<double> timeDilation;
+  static final timeDilation = ValueNotifier<double>(1);
 
   Future<bool> Function()? showAdWarning;
   Future<GameOverAction> Function()? showGameOverDialog;

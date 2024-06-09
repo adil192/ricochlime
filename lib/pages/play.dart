@@ -15,15 +15,6 @@ import 'package:ricochlime/utils/brightness_extension.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-final ValueNotifier<int> _score = ValueNotifier(0);
-final ValueNotifier<bool> _isDarkMode = ValueNotifier(false);
-final ValueNotifier<double> _timeDilation = ValueNotifier(1);
-final game = RicochlimeGame(
-  score: _score,
-  isDarkMode: _isDarkMode,
-  timeDilation: _timeDilation,
-);
-
 class PlayPage extends StatefulWidget {
   const PlayPage({super.key});
 
@@ -35,13 +26,13 @@ class _PlayPageState extends State<PlayPage> {
   @override
   void initState() {
     super.initState();
-    game
+    RicochlimeGame.instance
       ..showAdWarning = showAdWarning
       ..showGameOverDialog = showGameOverDialog
       ..resumeBgMusic();
-    if (game.state.value == GameState.gameOver) {
+    if (RicochlimeGame.instance.state.value == GameState.gameOver) {
       WidgetsBinding.instance.addPostFrameCallback(
-        (_) => game.gameOver(),
+        (_) => RicochlimeGame.instance.gameOver(),
       );
     }
   }
@@ -50,12 +41,13 @@ class _PlayPageState extends State<PlayPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     RicochlimeGame.reduceMotion = MediaQuery.disableAnimationsOf(context);
-    _isDarkMode.value = Theme.of(context).brightness == Brightness.dark;
+    RicochlimeGame.isDarkMode.value =
+        Theme.of(context).brightness == Brightness.dark;
   }
 
   @override
   void dispose() {
-    game
+    RicochlimeGame.instance
       ..showAdWarning = null
       ..showGameOverDialog = null
       ..cancelCurrentTurn()
@@ -77,8 +69,8 @@ class _PlayPageState extends State<PlayPage> {
       return await NesDialog.show<GameOverAction>(
             context: context,
             builder: (context) => GameOverDialog(
-              score: _score.value,
-              game: game,
+              score: RicochlimeGame.score.value,
+              game: RicochlimeGame.instance,
             ),
           ) ??
           GameOverAction.nothingYet;
@@ -138,7 +130,7 @@ class _PlayPageState extends State<PlayPage> {
     final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final colorScheme = Theme.of(context).colorScheme;
     final screenSize = MediaQuery.sizeOf(context);
-    final bgColor = _isDarkMode.value
+    final bgColor = RicochlimeGame.isDarkMode.value
         ? RicochlimePalette.waterColorDark
         : RicochlimePalette.waterColor;
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -146,7 +138,7 @@ class _PlayPageState extends State<PlayPage> {
         statusBarColor: Colors.transparent,
         statusBarBrightness: colorScheme.brightness,
         statusBarIconBrightness: colorScheme.brightness.opposite,
-        systemNavigationBarColor: _isDarkMode.value
+        systemNavigationBarColor: RicochlimeGame.isDarkMode.value
             ? RicochlimePalette.waterColorDark
             : RicochlimePalette.waterColor,
         systemNavigationBarIconBrightness: colorScheme.brightness.opposite,
@@ -182,7 +174,7 @@ class _PlayPageState extends State<PlayPage> {
                   onPress: () => NesDialog.show(
                     context: context,
                     builder: (context) => RestartGameDialog(
-                      restartGame: game.restartGame,
+                      restartGame: RicochlimeGame.instance.restartGame,
                     ),
                   ),
                   icon: NesIcons.redo,
@@ -211,7 +203,7 @@ class _PlayPageState extends State<PlayPage> {
               ),
               const SizedBox(height: 4),
               ValueListenableBuilder(
-                valueListenable: _score,
+                valueListenable: RicochlimeGame.score,
                 builder: (context, score, child) => Text(
                   '$score',
                   textAlign: TextAlign.center,
@@ -268,7 +260,7 @@ class _PlayPageState extends State<PlayPage> {
                       child: SizedBox(
                         width: RicochlimeGame.expectedWidth,
                         height: RicochlimeGame.expectedHeight,
-                        child: GameWidget(game: game),
+                        child: GameWidget(game: RicochlimeGame.instance),
                       ),
                     ),
                   ),
@@ -283,7 +275,7 @@ class _PlayPageState extends State<PlayPage> {
                         children: [
                           IgnorePointer(
                             child: ValueListenableBuilder(
-                              valueListenable: _timeDilation,
+                              valueListenable: RicochlimeGame.timeDilation,
                               builder: (context, timeDilation, _) =>
                                   AnimatedOpacity(
                                 opacity: timeDilation == 1.0 ? 0.0 : 1.0,
@@ -300,7 +292,7 @@ class _PlayPageState extends State<PlayPage> {
                           ),
                           if (Prefs.showUndoButton.value)
                             ValueListenableBuilder(
-                              valueListenable: game.state,
+                              valueListenable: RicochlimeGame.instance.state,
                               builder: (context, state, child) {
                                 final show = state == GameState.shooting;
                                 return AnimatedOpacity(
@@ -317,7 +309,7 @@ class _PlayPageState extends State<PlayPage> {
                                 arrowDirection: NesTooltipArrowDirection.bottom,
                                 child: NesIconButton(
                                   onPress: () {
-                                    game.cancelCurrentTurn();
+                                    RicochlimeGame.instance.cancelCurrentTurn();
                                     Prefs.totalMovesUndone.value++;
                                   },
                                   icon: NesIcons.delete,

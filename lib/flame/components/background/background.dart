@@ -38,7 +38,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
   @override
   void render(Canvas canvas) {
     // Draw the grass color
-    final grassColor = gameRef.isDarkMode.value
+    final grassColor = RicochlimeGame.isDarkMode.value
         ? RicochlimePalette.grassColorDark
         : RicochlimePalette.grassColor;
     canvas.drawRect(

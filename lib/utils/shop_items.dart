@@ -5,7 +5,6 @@ import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
-import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,38 +33,50 @@ abstract class ShopItems {
   static final bulletShapes = List<BulletShapeShopItem>.unmodifiable([
     BulletShapeShopItem(
       id: 'bulletShapeCircle',
-      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(0, 0), srcSize: Vector2(16, 16)),
+      spriteBuilder: () => Sprite(
+          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(0, 0),
+          srcSize: Vector2(16, 16)),
       price: -1,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeArrow',
-      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(18, 0), srcSize: Vector2(12, 16)),
+      spriteBuilder: () => Sprite(
+          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(18, 0),
+          srcSize: Vector2(12, 16)),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeShuriken',
-      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(32, 0), srcSize: Vector2(16, 16)),
+      spriteBuilder: () => Sprite(
+          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(32, 0),
+          srcSize: Vector2(16, 16)),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeDonut',
-      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(0, 16), srcSize: Vector2(16, 16)),
+      spriteBuilder: () => Sprite(
+          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(0, 16),
+          srcSize: Vector2(16, 16)),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeIntricate',
-      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(16, 16), srcSize: Vector2(16, 16)),
+      spriteBuilder: () => Sprite(
+          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(16, 16),
+          srcSize: Vector2(16, 16)),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeDiamond',
-      spriteBuilder: () => Sprite(game.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(32, 16), srcSize: Vector2(16, 16)),
+      spriteBuilder: () => Sprite(
+          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+          srcPosition: Vector2(32, 16),
+          srcSize: Vector2(16, 16)),
       price: 1000,
     ),
   ]);

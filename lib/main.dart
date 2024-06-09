@@ -9,10 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logging/logging.dart';
 import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/ads/age_dialog.dart';
+import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
 import 'package:ricochlime/pages/home.dart';
-import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
@@ -31,7 +31,9 @@ Future<void> main({
 
   LocaleSettings.useDeviceLocale();
   Prefs.init();
-  unawaited(Prefs.bgmVolume.waitUntilLoaded().then((_) => game.preloadBgMusic));
+  unawaited(Prefs.bgmVolume
+      .waitUntilLoaded()
+      .then((_) => RicochlimeGame.instance.preloadBgMusic));
   _addLicenses();
   GoogleFonts.config.allowRuntimeFetching = false;
 
@@ -39,7 +41,7 @@ Future<void> main({
     Prefs.highScore.waitUntilLoaded(),
     Prefs.birthYear.waitUntilLoaded(),
     GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
-    game.preloadSprites.future,
+    RicochlimeGame.instance.preloadSprites.future,
   ]);
 
   AdState.init();

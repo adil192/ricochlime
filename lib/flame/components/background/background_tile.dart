@@ -99,7 +99,7 @@ enum SkullType {
 }
 
 /// A sprite that darkens when the game is in dark mode.
-mixin DarkeningSprite on HasPaint, HasGameRef<RicochlimeGame> {
+mixin DarkeningSprite on HasPaint {
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
@@ -109,21 +109,21 @@ mixin DarkeningSprite on HasPaint, HasGameRef<RicochlimeGame> {
   @override
   void onMount() {
     super.onMount();
-    gameRef.isDarkMode.addListener(_onBrightnessChange);
+    RicochlimeGame.isDarkMode.addListener(_onBrightnessChange);
     _onBrightnessChange();
   }
 
   @override
   void onRemove() {
     super.onRemove();
-    gameRef.isDarkMode.removeListener(_onBrightnessChange);
+    RicochlimeGame.isDarkMode.removeListener(_onBrightnessChange);
   }
 
   bool _isDarkened = false;
   void _onBrightnessChange() {
-    if (gameRef.isDarkMode.value == _isDarkened) return;
-    _isDarkened = gameRef.isDarkMode.value;
-    getPaint().colorFilter = gameRef.isDarkMode.value
+    if (RicochlimeGame.isDarkMode.value == _isDarkened) return;
+    _isDarkened = RicochlimeGame.isDarkMode.value;
+    getPaint().colorFilter = RicochlimeGame.isDarkMode.value
         ? const ColorFilter.mode(
             Color.fromARGB(255, 175, 175, 175),
             BlendMode.modulate,
@@ -133,7 +133,7 @@ mixin DarkeningSprite on HasPaint, HasGameRef<RicochlimeGame> {
 }
 
 /// A sprite that flickers like a candle.
-mixin FlickeringSprite on HasPaint, HasGameRef<RicochlimeGame> {
+mixin FlickeringSprite on HasPaint {
   final Random _random = Random();
 
   /// When timeToNextFlicker reaches 0,

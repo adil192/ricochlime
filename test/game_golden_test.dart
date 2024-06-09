@@ -77,9 +77,9 @@ void main() {
     RicochlimeGame.disableBgMusic = true;
     RicochlimeGame.reproducibleGoldenMode = true;
     setUp(() async {
-      game.random = Random(123);
+      RicochlimeGame.instance.random = Random(123);
       await Future.wait([
-        game.preloadSprites.future,
+        RicochlimeGame.instance.preloadSprites.future,
         GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
       ]);
     });
@@ -137,8 +137,8 @@ void _testGame({
       testWidgets('for ${device.name}', (tester) async {
         if (gameSave != null) {
           Prefs.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
-          if (game.isLoaded) {
-            game
+          if (RicochlimeGame.instance.isLoaded) {
+            RicochlimeGame.instance
               ..resetChildren()
               ..importFromGame(Prefs.currentGame.value);
           }
@@ -164,8 +164,8 @@ void _testGame({
 
         // Aim towards the middle left of the game area
         if (child is PlayPage) {
-          game.onPanUpdate(DragUpdateInfo.fromDetails(
-            game,
+          RicochlimeGame.instance.onPanUpdate(DragUpdateInfo.fromDetails(
+            RicochlimeGame.instance,
             DragUpdateDetails(
               globalPosition:
                   const Offset(0, RicochlimeGame.expectedHeight * 0.39),
