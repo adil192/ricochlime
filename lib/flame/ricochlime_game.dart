@@ -332,18 +332,15 @@ class RicochlimeGame extends Forge2DGame
       return;
     }
 
-    final dilatedDt = min(dt * timeDilation.value, maxDt);
-    groupedUpdateDt += dilatedDt;
-
+    groupedUpdateDt += dt;
     final minDt = 1 / Prefs.maxFps.value;
     if (groupedUpdateDt < minDt) return;
 
-    try {
-      ticker.tick(groupedUpdateDt);
-      super.update(groupedUpdateDt);
-    } finally {
-      groupedUpdateDt = 0;
-    }
+    dt = min(groupedUpdateDt * timeDilation.value, maxDt);
+    groupedUpdateDt = 0;
+
+    ticker.tick(dt);
+    super.update(dt);
   }
 
   @override
