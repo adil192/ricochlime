@@ -1,0 +1,2 @@
+• Se corrigió que el límite de FPS no funcionara al tocar para acelerar
+• Se corrigió que algunos usuarios encontraran una pantalla en blanco.

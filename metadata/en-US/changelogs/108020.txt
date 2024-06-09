@@ -1,0 +1,2 @@
+• Fixed the FPS limit not working when tapping to speed up
+• Fixed some users encountering a blank screen
