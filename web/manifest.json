@@ -31,5 +31,56 @@
             "type": "image/png",
             "purpose": "maskable"
         }
+    ],
+    "screenshots": [
+        {
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/phoneScreenshots/1_home.png",
+            "type": "image/png",
+            "sizes": "1440x3120",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/phoneScreenshots/2_play.png",
+            "type": "image/jpeg",
+            "sizes": "1440x3120",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/phoneScreenshots/4_shop.png",
+            "type": "image/jpeg",
+            "sizes": "1440x3120",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/phoneScreenshots/6_settings.png",
+            "type": "image/jpeg",
+            "sizes": "1440x3120",
+            "form_factor": "narrow"
+        },
+
+        {
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/1_home.png",
+            "type": "image/png",
+            "sizes": "2000x1400",
+            "form_factor": "wide"
+        },
+        {
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/2_play.png",
+            "type": "image/jpeg",
+            "sizes": "2000x1400",
+            "form_factor": "wide"
+        },
+        {
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/4_shop.png",
+            "type": "image/jpeg",
+            "sizes": "2000x1400",
+            "form_factor": "wide"
+        },
+        {
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/6_settings.png",
+            "type": "image/jpeg",
+            "sizes": "2000x1400",
+            "form_factor": "wide"
+        }
     ]
 }
