@@ -31,7 +31,6 @@ Future<void> main({
 
   LocaleSettings.useDeviceLocale();
   Prefs.init();
-  unawaited(game.preloadSprites.future);
   unawaited(Prefs.bgmVolume.waitUntilLoaded().then((_) => game.preloadBgMusic));
   _addLicenses();
   GoogleFonts.config.allowRuntimeFetching = false;
@@ -40,6 +39,7 @@ Future<void> main({
     Prefs.highScore.waitUntilLoaded(),
     Prefs.birthYear.waitUntilLoaded(),
     GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
+    game.preloadSprites.future,
   ]);
 
   AdState.init();
