@@ -129,16 +129,18 @@ sealed class ShopItem {
         purchased ? ShopItemState.purchased : ShopItemState.unpurchased;
   }
 
-  Future<void> purchase({
+  /// Returns `true` if the item has been purchased.
+  Future<bool> purchase({
     bool noCost = false,
   }) async {
-    if (state.value == ShopItemState.purchased) return;
-    if (!noCost && Prefs.coins.value < price) return;
+    if (state.value == ShopItemState.purchased) return true;
+    if (!noCost && Prefs.coins.value < price) return false;
 
     final prefs = await _sharedPreferences;
     await prefs.setBool(prefsKey, true);
     state.value = ShopItemState.purchased;
     if (!noCost) Prefs.coins.value -= price;
+    return true;
   }
 }
 

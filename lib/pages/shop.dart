@@ -141,8 +141,10 @@ class _ShopItemTile extends StatelessWidget {
           onPressed: switch (state) {
             ShopItemState.loading => null,
             ShopItemState.purchased => select,
-            ShopItemState.unpurchased => () =>
-                item.purchase().then((_) => select()),
+            ShopItemState.unpurchased => () async {
+                final purchased = await item.purchase();
+                if (purchased) select();
+              },
           },
           type: switch (state) {
             ShopItemState.loading => NesButtonType.normal,
