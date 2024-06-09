@@ -1,4 +1,0 @@
-• Se corrigió un error que causaba monstruos duplicados.
-• Se agregó una configuración para ocultar el nuevo botón deshacer
-• Se agregó una configuración para acelerar las transiciones de página.
-• La versión mínima de Android ahora es 5.0

@@ -1,3 +1,0 @@
-• Added an option to use the hyperlegible font
-• Added an app info and licenses section
-• The danger zone is now shown as a soil patch; try to defeat the slimes before they get to it!

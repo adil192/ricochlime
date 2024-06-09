@@ -1,2 +1,0 @@
-• The game will now get harder with more rows of slimes being spawned as you progress
-• Ads are now displayed for Android and iOS users

@@ -1,2 +1,0 @@
-• Visual improvements to the settings page, game over dialog, and ads.
-• Fixed a rare bug where some slimes are frozen in place.

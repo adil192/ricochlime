@@ -1,4 +1,0 @@
-• Fixed slimes sometimes being shifted down when loaded from a save
-• Use a new pixel font
-• Fixed game over sometimes not triggering despite slimes being beyond reach
-• Fixed the top of the play page not responding to touch

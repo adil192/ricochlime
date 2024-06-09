@@ -1,4 +1,0 @@
-• You can now continue a game after you lose by watching an ad
-• Fixed banner ad not being tappable
-• UI improvements
-• Bug fixes and performance improvements

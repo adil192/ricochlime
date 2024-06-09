@@ -1,3 +1,0 @@
-• La guía de objetivos ahora está animada.
-• Se corrigió el error momentáneo cuando un monstruo muere donde su posición parpadea
-• Muchas mejoras de accesibilidad

@@ -1,1 +1,0 @@
-Se corrigió un error que impedía que nuevos usuarios jugaran el juego.

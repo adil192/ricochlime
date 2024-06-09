@@ -1,3 +1,0 @@
-• Rediseñado el mapa
-• Se redujo la frecuencia con la que se le pide que vea un anuncio.
-• Pequeñas optimizaciones y correcciones de errores.

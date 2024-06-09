@@ -1,4 +1,0 @@
-• Tap the screen to speed up bullets
-• Added an app icon
-• Improved the home page
-• New slimes are now animated onto the screen

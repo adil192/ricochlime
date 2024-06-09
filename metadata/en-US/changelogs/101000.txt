@@ -1,2 +1,0 @@
-• Major visual refresh of the game, plus a new icon
-• Your highscore is saved even if you use the restart button

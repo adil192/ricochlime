@@ -1,2 +1,0 @@
-Golden monsters now give you a coin when killed, and you can use 100 coins to continue after dying.
-You can also earn 100 coins by watching a rewarded interstitial ad.

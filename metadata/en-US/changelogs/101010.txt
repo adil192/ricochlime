@@ -1,3 +1,0 @@
-• Improved the scale of bushes (on landscape screens)
-• Monsters that give you an extra bullet are now better distinguishable
-• Fixed the ad ID being transmitted too early

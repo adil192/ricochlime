@@ -1,2 +1,0 @@
-• Al continuar un juego con 100 monedas, los monstruos ahora se eliminarán fila por fila con una animación.
-• Ahora recibirás una notificación cuando estés a punto de ver un anuncio y tendrás la opción de omitirlo.

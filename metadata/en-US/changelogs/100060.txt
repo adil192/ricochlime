@@ -1,3 +1,0 @@
-• Added a restart button
-• Fixed a bug with dark mode
-• Improved the quality of the tutorial images

@@ -1,3 +1,0 @@
-• Redesigned the map
-• Reduced how often you're asked to watch an ad
-• Small optimizations and bug fixes

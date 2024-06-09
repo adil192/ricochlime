@@ -1,1 +1,0 @@
-Added a setting to show the colliders of the monsters, and cleaned up the collision polygon.

@@ -1,3 +1,0 @@
-• The aim guide dots no longer extend past the edge of the game
-• Fixed the aim guide re-appearing randomly on mobile
-• Made it easier to aim from below the player

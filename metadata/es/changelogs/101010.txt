@@ -1,3 +1,0 @@
-• Se mejoró la escala de los arbustos (en pantallas de paisaje)
-• Los monstruos que te dan una bala extra ahora se distinguen mejor
-• Se corrigió que el ID del anuncio se transmitiera demasiado pronto.

@@ -1,1 +1,0 @@
-• Fixed a save bug if you watch an ad and then go back before making your next move

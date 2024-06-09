@@ -1,4 +1,0 @@
-• Fixed a bug that caused duplicated monsters
-• Added a setting to hide the new undo button
-• Added a setting to speed up page transitions
-• Minimum Android version is now 5.0

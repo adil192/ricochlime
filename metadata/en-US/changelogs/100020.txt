@@ -1,1 +1,0 @@
-• Fixed a bug where the game couldn't display properly

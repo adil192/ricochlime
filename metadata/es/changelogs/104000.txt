@@ -1,2 +1,0 @@
-• Simplificó los sprites de monstruos para que sean rectángulos perfectos.
-• Se corrigió un error por el cual la música bloqueaba otros sonidos incluso cuando estaba silenciada.

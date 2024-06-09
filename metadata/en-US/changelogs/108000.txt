@@ -1,2 +1,0 @@
-• Added a shop where you can unlock new bullet colors and shapes!
-• Aiming bug fixes for desktop users

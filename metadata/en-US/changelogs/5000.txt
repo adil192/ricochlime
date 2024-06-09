@@ -1,4 +1,0 @@
-• Your high score is now recorded!
-• Fixed the stutter when you tap to speed up the bullets
-• Fixed the soil patch glitching at level 49
-• Improved the home page appearance

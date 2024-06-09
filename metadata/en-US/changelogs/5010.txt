@@ -1,3 +1,0 @@
-• Fixed the slimes sometimes getting past the player without triggering game over
-• Added a basic tutorial
-• The app no longer needs access to the internet for fonts

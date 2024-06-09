@@ -1,5 +1,0 @@
-• Improved the UI throughout the app
-• Added page transitions
-• Ads aren't displayed when you have battery saver enabled
-• Fixed the monster having unsatisfying collisions on its right side
-• Small bug fixes and performance improvements
