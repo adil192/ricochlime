@@ -10,6 +10,7 @@ playPage:
   coins: Coins
 settingsPage:
   title: Settings
+  ads: Ads
   gameplay: Gameplay
   accessibility: Accessibility
   adConsent: Change ad consent

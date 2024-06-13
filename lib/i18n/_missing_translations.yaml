@@ -13,6 +13,7 @@ es:
     coins(OUTDATED): Coins
   settingsPage:
     title(OUTDATED): Settings
+    ads(OUTDATED): Ads
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
     adConsent(OUTDATED): Change ad consent
@@ -76,6 +77,7 @@ kk:
     undo(OUTDATED): Undo move
     coins(OUTDATED): Coins
   settingsPage:
+    ads(OUTDATED): Ads
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
     hyperlegibleFont(OUTDATED): Easy-to-read font

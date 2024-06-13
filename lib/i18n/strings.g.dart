@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 168 (56 per locale)
+/// Strings: 171 (57 per locale)
 ///
-/// Built on 2024-06-08 at 22:44 UTC
+/// Built on 2024-06-13 at 23:03 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -188,6 +188,7 @@ class _StringsSettingsPageEn {
 
 	// Translations
 	String get title => 'Settings';
+	String get ads => 'Ads';
 	String get gameplay => 'Gameplay';
 	String get accessibility => 'Accessibility';
 	String get adConsent => 'Change ad consent';
@@ -377,6 +378,7 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get ads => 'Anuncios';
 	@override String get hyperlegibleFont => 'Fuente fácil de leer';
 	@override String get biggerBullets => 'balas mas grandes';
 	@override String get gameplay => 'Como se Juega';
@@ -571,6 +573,7 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get ads => 'Жарнамалар';
 	@override String get hyperlegibleFont => 'Оқуға оңай шрифт';
 	@override String get biggerBullets => 'Үлкенірек оқтар';
 	@override String get gameplay => 'Ойын барысы';

@@ -56,6 +56,13 @@ class SettingsPage extends StatelessWidget {
           // ad consent
           if (AdState.adsSupported) ...[
             Padding(
+              padding: subtitlePadding,
+              child: Text(
+                t.settingsPage.ads,
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+            Padding(
               padding: listTilePadding,
               child: NesContainer(
                 padding: EdgeInsets.zero,

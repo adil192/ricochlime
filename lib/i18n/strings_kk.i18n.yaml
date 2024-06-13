@@ -15,6 +15,7 @@ settingsPage:
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
+  ads(OUTDATED): Жарнамалар
   hyperlegibleFont(OUTDATED): Оқуға оңай шрифт
   biggerBullets(OUTDATED): Үлкенірек оқтар
   gameplay(OUTDATED): Ойын барысы
