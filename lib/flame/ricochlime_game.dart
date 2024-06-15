@@ -223,7 +223,11 @@ class RicochlimeGame extends Forge2DGame
     );
   }
 
-  void importFromGame(GameData? data) {
+  /// Imports the game state from [data], or resets the game if [data] is null.
+  ///
+  /// If [showGameOverDialog] is true, the game over dialog will be shown
+  /// if [isGameOver] returns true.
+  void importFromGame(GameData? data, {bool showGameOverDialog = true}) {
     if (data == null) {
       // new game
       _reset();
@@ -254,7 +258,7 @@ class RicochlimeGame extends Forge2DGame
     assert(numBullets <= score.value);
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
 
-    if (isGameOver()) {
+    if (showGameOverDialog && isGameOver()) {
       if (reproducibleGoldenMode) {
         gameOver();
       } else {
@@ -561,9 +565,7 @@ class RicochlimeGame extends Forge2DGame
         break;
       case GameOverAction.continueGame:
         state.value = GameState.monstersMoving;
-        children
-            .whereType<Monster>()
-            .forEach((monster) => monster.endRagdoll());
+        importFromGame(Prefs.currentGame.value, showGameOverDialog: false);
 
         final totalRowsToRemove = max(
           // clears 3 rounds worth of monsters
