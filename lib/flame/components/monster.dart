@@ -85,8 +85,8 @@ class Monster extends BodyComponent with ContactCallbacks {
 
   /// Converts the monster's data to a JSON map.
   Map<String, dynamic> toJson() => {
-        'px': _movement?.targetPosition.x ?? position.x,
-        'py': _movement?.targetPosition.y ?? position.y,
+        'px': (_movement?.targetPosition.x ?? position.x).roundTo1Dp(),
+        'py': (_movement?.targetPosition.y ?? position.y).roundTo1Dp(),
         'maxHp': maxHp,
         if (hp != maxHp) 'hp': hp,
         if (killReward != KillReward.none) 'killReward': killReward.index,
@@ -484,4 +484,9 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
       ),
     };
   }
+}
+
+extension on double {
+  /// Rounds the number to 1 decimal place.
+  double roundTo1Dp() => (this * 10).roundToDouble() / 10;
 }
