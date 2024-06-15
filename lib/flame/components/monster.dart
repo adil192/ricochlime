@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui' show lerpDouble;
 
 import 'package:flame/components.dart';
@@ -7,6 +8,7 @@ import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/health_bar.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/random_extension.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 /// The animation state of the monster.
@@ -16,6 +18,9 @@ enum MonsterState {
 
   /// The monster is walking.
   walk,
+
+  /// The monster is jumping/ragdolling.
+  jump,
 
   /// The monster is dead.
   dead,
@@ -141,6 +146,7 @@ class Monster extends BodyComponent with ContactCallbacks {
     }
   }
 
+  bool get isRagdolling => _animation.current == MonsterState.jump;
   bool get isDead => hp <= 0;
   bool killRewardGiven = false;
 
@@ -257,6 +263,29 @@ class Monster extends BodyComponent with ContactCallbacks {
     body
       ..setType(BodyType.kinematic)
       ..linearVelocity = movement.velocity;
+  }
+
+  void ragdoll() {
+    remove(_healthBar);
+    _animation.current = MonsterState.jump;
+
+    body
+      ..setType(BodyType.dynamic)
+      ..linearVelocity.setValues(
+        (game as RicochlimeGame)
+            .random
+            .plusOrMinus(RicochlimeGame.expectedHeight * 0.03),
+        RicochlimeGame.expectedHeight * 0.05,
+      )
+      ..angularVelocity =
+          (game as RicochlimeGame).random.nextDouble() * pi / 2 - pi / 4
+      ..gravityOverride = Vector2(
+        0,
+        body.position.y > RicochlimeGame.expectedHeight * 0.8
+            ? 0
+            : RicochlimeGame.expectedHeight - body.position.y,
+      )
+      ..setFixedRotation(false);
   }
 
   @override
@@ -403,6 +432,16 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
           stepTime: 1 / 4,
           textureSize: Vector2(24, 24),
           texturePosition: Vector2(0, 1 * 24),
+        ),
+      ),
+      MonsterState.jump: SpriteAnimation.fromFrameData(
+        monsterImage,
+        SpriteAnimationData.sequenced(
+          amount: 1,
+          stepTime: 1,
+          textureSize: Vector2(24, 24),
+          texturePosition: Vector2(3 * 24, 0),
+          loop: false,
         ),
       ),
       MonsterState.dead: SpriteAnimation.fromFrameData(

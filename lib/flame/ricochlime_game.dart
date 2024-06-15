@@ -259,7 +259,7 @@ class RicochlimeGame extends Forge2DGame
         gameOver();
       } else {
         // allow the game to render before showing the game over dialog
-        Future.delayed(const Duration(milliseconds: 50), gameOver);
+        Future.delayed(const Duration(milliseconds: 200), gameOver);
       }
     } else {
       state.value = GameState.idle;
@@ -267,16 +267,19 @@ class RicochlimeGame extends Forge2DGame
   }
 
   Future saveGame() async {
+    final monsters = children.whereType<Monster>().toList();
     assert(
-      children
-          .whereType<Monster>()
-          .any((monster) => monster.position.y <= Monster.topGap),
+      monsters.any((monster) => monster.position.y <= Monster.topGap),
       'The new row of monsters should be spawned before saving the game',
     );
+    if (monsters.any((monster) => monster.isRagdolling)) {
+      log.warning('Not saving game because the monsters are ragdolling');
+      return;
+    }
+
     Prefs.currentGame.value = GameData(
       score: score.value,
-      monsters:
-          children.whereType<Monster>().where((monster) => !monster.isDead),
+      monsters: monsters.where((monster) => !monster.isDead),
     );
     await Prefs.currentGame.waitUntilSaved();
   }
@@ -538,10 +541,16 @@ class RicochlimeGame extends Forge2DGame
     state.value = GameState.gameOver;
     assert(!inputAllowed);
 
-    // TODO(adil192): Animate the monsters jumping into the water
-    // await ticker.delayed(const Duration(milliseconds: 500));
+    // all monsters drop down
+    bool startedRagdolling = false;
+    for (final monster in children.whereType<Monster>()) {
+      if (monster.isRagdolling) continue;
+      startedRagdolling = true;
+      monster.ragdoll();
+    }
+    if (startedRagdolling) await ticker.delayed(const Duration(seconds: 2));
 
-    final GameOverAction gameOverAction = showGameOverDialog == null
+    final gameOverAction = showGameOverDialog == null
         ? GameOverAction.nothingYet
         : await showGameOverDialog!.call();
     log.info('gameOverAction: $gameOverAction');
