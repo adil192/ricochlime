@@ -1,0 +1,3 @@
+• Se corrigió un error por el cual podías usar artículos no comprados en la tienda.
+• Se agregaron 2 formas de bala más
+• Se agregó una nueva y brillante animación de finalización del juego.

@@ -74,6 +74,16 @@
     </branding>
 
     <releases>
+        <release version="1.9.0" date="2024-06-15">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.9.0</url>
+            <description>
+                <ul>
+                    <li>Fixed a bug where you could use unpurchased items from the shop</li>
+                    <li>Added 2 more bullet shapes</li>
+                    <li>Added a shiny new game-over animation</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.8.2" date="2024-06-09">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.8.2</url>
             <description>
