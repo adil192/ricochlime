@@ -86,8 +86,9 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
     Vector2 mousePosition, {
     bool ignoreWhetherMouseIsBelowPlayer = false,
   }) {
-    var relativePosition = position - mousePosition;
-    final mouseBelowPlayer = relativePosition.y < 0;
+    final displacement = position - mousePosition;
+    final distance = displacement.length;
+    final mouseBelowPlayer = displacement.y < 0;
 
     if (aimDetails == null) {
       // The user just started aiming.
@@ -106,16 +107,31 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
       aimDetails!.mouseBelowPlayer = mouseBelowPlayer;
     }
 
+    // Don't allow extremely horizontal aims.
+    final relX = (displacement.x / distance).abs();
+    const maxRelX = 0.999;
+    late final minRelY = sqrt(1 - maxRelX * maxRelX);
+    if (relX > maxRelX) {
+      // Reconstruct displacement as if relX was equal to maxRelX.
+      displacement
+        ..x = distance * maxRelX * displacement.x.sign
+        ..y = distance * minRelY * displacement.y.sign;
+    }
+
     if (!mouseBelowPlayer) {
-      relativePosition = -relativePosition; // point up
+      displacement
+        ..x = -displacement.x
+        ..y = -displacement.y;
     }
 
     final aimLengthMultiplier = mouseBelowPlayer ? 8 : 4;
     aimDetails!.aimLength = min(
       1,
-      relativePosition.length / _dotInterval / _maxDots * aimLengthMultiplier,
+      distance / _dotInterval / _maxDots * aimLengthMultiplier,
     );
-    aimDetails!.unitDir.setFrom(relativePosition.normalized());
+    aimDetails!.unitDir
+      ..x = displacement.x / distance
+      ..y = displacement.y / distance;
   }
 
   /// Resets the aim guide, and returns the current aim direction.
