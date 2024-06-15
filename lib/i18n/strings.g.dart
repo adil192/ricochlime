@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 172 (57 per locale)
+/// Strings: 186 (62 per locale)
 ///
-/// Built on 2024-06-15 at 05:17 UTC
+/// Built on 2024-06-15 at 22:16 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -478,6 +478,13 @@ class _StringsTutorialPageEs extends _StringsTutorialPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get dragAndRelease => 'Derrota a los monstruos arrastrándolos para apuntar y soltándolos para disparar.';
+	@override String get pointAndClick => 'Derrota a los monstruos moviendo el mouse para apuntar y haciendo clic para disparar.';
+	@override String get goldMonsters => 'Después de derrotar a un monstruo dorado, obtendrás una moneda.';
+	@override String get greenMonsters => 'Después de derrotar a un monstruo verde, recibirás una bala extra.';
+	@override String get skullLine => 'Un monstruo que llega a la línea del cráneo significa que el juego se acaba si no lo derrotas en el siguiente turno.';
+	@override String get useCoinsInShop => 'Ahorra monedas para desbloquear nuevos artículos en la tienda...';
+	@override String get orUseCoinsToContinue => '...o úsalos para continuar después de que termine el juego.';
 	@override String get tutorial => 'tutorial';
 	@override String get bounceOffWalls => 'Rebota tus tiros en las paredes para golpear a la mayor cantidad de monstruos.';
 	@override String get tapSpeedUp => 'Toca la pantalla para acelerar tus disparos.';
@@ -668,8 +675,15 @@ class _StringsTutorialPageKk extends _StringsTutorialPageEn {
 
 	// Translations
 	@override String get tutorial => 'Нұсқаулық';
+	@override String get dragAndRelease => 'Мақсатқа апару және ату үшін босату арқылы құбыжықтарды жеңіңіз.';
+	@override String get pointAndClick => 'Тінтуірді мақсатқа жылжыту және ату үшін басу арқылы құбыжықтарды жеңіңіз.';
+	@override String get goldMonsters => 'Алтын құбыжықты жеңгеннен кейін сіз тиын аласыз.';
+	@override String get greenMonsters => 'Жасыл құбыжықты жеңгеннен кейін сіз қосымша оқ аласыз.';
 	@override String get bounceOffWalls => 'Қабырғадан ыршыған оқ көбірек шырышқа тие алады.';
 	@override String get tapSpeedUp => 'Оқ қозғалысын тездету үшін экранды түртіңіз.';
+	@override String get skullLine => 'Бас сүйегінің сызығына жеткен құбыжық келесі кезекте оны жеңбесеңіз, ойын аяқталды дегенді білдіреді.';
+	@override String get useCoinsInShop => 'Дүкенде жаңа заттардың құлпын ашу үшін тиындарды сақтаңыз...';
+	@override String get orUseCoinsToContinue => '...немесе оларды ойын аяқталғаннан кейін жалғастыру үшін пайдаланыңыз.';
 	@override String get moreMonsters => 'Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды.';
 }
 

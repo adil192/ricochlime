@@ -54,6 +54,13 @@ restartGameDialog:
   waitCancel(OUTDATED): "¡Espera, cancela!"
   yesImSure(OUTDATED): "¡Sí estoy seguro!"
 tutorialPage:
+  dragAndRelease(OUTDATED): Derrota a los monstruos arrastrándolos para apuntar y soltándolos para disparar.
+  pointAndClick(OUTDATED): Derrota a los monstruos moviendo el mouse para apuntar y haciendo clic para disparar.
+  goldMonsters(OUTDATED): "Después de derrotar a un monstruo dorado, obtendrás una moneda."
+  greenMonsters(OUTDATED): "Después de derrotar a un monstruo verde, recibirás una bala extra."
+  skullLine(OUTDATED): Un monstruo que llega a la línea del cráneo significa que el juego se acaba si no lo derrotas en el siguiente turno.
+  useCoinsInShop(OUTDATED): Ahorra monedas para desbloquear nuevos artículos en la tienda...
+  orUseCoinsToContinue(OUTDATED): ...o úsalos para continuar después de que termine el juego.
   tutorial(OUTDATED): tutorial
   bounceOffWalls(OUTDATED): Rebota tus tiros en las paredes para golpear a la mayor cantidad de monstruos.
   tapSpeedUp(OUTDATED): Toca la pantalla para acelerar tus disparos.

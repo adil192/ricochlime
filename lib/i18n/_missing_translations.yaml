@@ -58,16 +58,16 @@ es:
     yesImSure(OUTDATED): "Yes I'm sure!"
   tutorialPage:
     tutorial(OUTDATED): Tutorial
-    dragAndRelease: Defeat the monsters by dragging to aim and releasing to shoot.
-    pointAndClick: Defeat the monsters by moving your mouse to aim and clicking to shoot.
-    goldMonsters: "After defeating a gold monster, you'll get a coin."
-    greenMonsters: "After defeating a green monster, you'll get an extra bullet."
+    dragAndRelease(OUTDATED): Defeat the monsters by dragging to aim and releasing to shoot.
+    pointAndClick(OUTDATED): Defeat the monsters by moving your mouse to aim and clicking to shoot.
+    goldMonsters(OUTDATED): "After defeating a gold monster, you'll get a coin."
+    greenMonsters(OUTDATED): "After defeating a green monster, you'll get an extra bullet."
     bounceOffWalls(OUTDATED): Bounce your shots off the walls to hit the most monsters.
     tapSpeedUp(OUTDATED): Tap the screen to speed up your shots.
-    skullLine: A monster that reaches the skull line means game over if you don't defeat it in the next turn.
+    skullLine(OUTDATED): A monster that reaches the skull line means game over if you don't defeat it in the next turn.
     moreMonsters(OUTDATED): "More rows of monsters will spawn each turn as you progress, so the skull line will move up."
-    useCoinsInShop: Save up coins to unlock new items in the shop...
-    orUseCoinsToContinue: ...or use them to continue after a game over.
+    useCoinsInShop(OUTDATED): Save up coins to unlock new items in the shop...
+    orUseCoinsToContinue(OUTDATED): ...or use them to continue after a game over.
   shopPage:
     title(OUTDATED): Shop
     bulletColors(OUTDATED): Bullet colors
@@ -107,14 +107,14 @@ kk:
     waitCancel(OUTDATED): "Wait, cancel!"
     yesImSure(OUTDATED): "Yes I'm sure!"
   tutorialPage:
-    dragAndRelease: Defeat the monsters by dragging to aim and releasing to shoot.
-    pointAndClick: Defeat the monsters by moving your mouse to aim and clicking to shoot.
-    goldMonsters: "After defeating a gold monster, you'll get a coin."
-    greenMonsters: "After defeating a green monster, you'll get an extra bullet."
-    skullLine: A monster that reaches the skull line means game over if you don't defeat it in the next turn.
+    dragAndRelease(OUTDATED): Defeat the monsters by dragging to aim and releasing to shoot.
+    pointAndClick(OUTDATED): Defeat the monsters by moving your mouse to aim and clicking to shoot.
+    goldMonsters(OUTDATED): "After defeating a gold monster, you'll get a coin."
+    greenMonsters(OUTDATED): "After defeating a green monster, you'll get an extra bullet."
+    skullLine(OUTDATED): A monster that reaches the skull line means game over if you don't defeat it in the next turn.
     moreMonsters(OUTDATED): "More rows of monsters will spawn each turn as you progress, so the skull line will move up."
-    useCoinsInShop: Save up coins to unlock new items in the shop...
-    orUseCoinsToContinue: ...or use them to continue after a game over.
+    useCoinsInShop(OUTDATED): Save up coins to unlock new items in the shop...
+    orUseCoinsToContinue(OUTDATED): ...or use them to continue after a game over.
   shopPage:
     title(OUTDATED): Shop
     bulletColors(OUTDATED): Bullet colors
