@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 171 (57 per locale)
+/// Strings: 172 (57 per locale)
 ///
-/// Built on 2024-06-13 at 23:03 UTC
+/// Built on 2024-06-15 at 05:17 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -283,11 +283,16 @@ class _StringsTutorialPageEn {
 
 	// Translations
 	String get tutorial => 'Tutorial';
-	String get aimAtMonsters => 'Drag your finger to aim and release to shoot. Defeat a monster by emptying its health bar.';
+	String get dragAndRelease => 'Defeat the monsters by dragging to aim and releasing to shoot.';
+	String get pointAndClick => 'Defeat the monsters by moving your mouse to aim and clicking to shoot.';
+	String get goldMonsters => 'After defeating a gold monster, you\'ll get a coin.';
+	String get greenMonsters => 'After defeating a green monster, you\'ll get an extra bullet.';
 	String get bounceOffWalls => 'Bounce your shots off the walls to hit the most monsters.';
 	String get tapSpeedUp => 'Tap the screen to speed up your shots.';
-	String get dangerZone => 'If a monster reaches the danger zone, you\'ll lose on your next turn if you don\'t defeat it.';
-	String get moreMonsters => 'More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger.';
+	String get skullLine => 'A monster that reaches the skull line means game over if you don\'t defeat it in the next turn.';
+	String get moreMonsters => 'More rows of monsters will spawn each turn as you progress, so the skull line will move up.';
+	String get useCoinsInShop => 'Save up coins to unlock new items in the shop...';
+	String get orUseCoinsToContinue => '...or use them to continue after a game over.';
 }
 
 // Path: shopPage
@@ -474,10 +479,8 @@ class _StringsTutorialPageEs extends _StringsTutorialPageEn {
 
 	// Translations
 	@override String get tutorial => 'tutorial';
-	@override String get aimAtMonsters => 'Arrastra el dedo para apuntar y suelta para disparar. Derrota a un monstruo vaciando su barra de salud.';
 	@override String get bounceOffWalls => 'Rebota tus tiros en las paredes para golpear a la mayor cantidad de monstruos.';
 	@override String get tapSpeedUp => 'Toca la pantalla para acelerar tus disparos.';
-	@override String get dangerZone => 'Si un monstruo llega a la zona de peligro, perderás en tu próximo turno si no lo derrotas.';
 	@override String get moreMonsters => 'Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande.';
 }
 
@@ -665,10 +668,8 @@ class _StringsTutorialPageKk extends _StringsTutorialPageEn {
 
 	// Translations
 	@override String get tutorial => 'Нұсқаулық';
-	@override String get aimAtMonsters => 'Көздеу үшін саусағыңызды жылжытыңыз, ату үшін босатып жіберіңіз. Шырышты жеңу үшін оның денсаулық жолағын нөлге дейін жеткізіңіз.';
 	@override String get bounceOffWalls => 'Қабырғадан ыршыған оқ көбірек шырышқа тие алады.';
 	@override String get tapSpeedUp => 'Оқ қозғалысын тездету үшін экранды түртіңіз.';
-	@override String get dangerZone => 'Қауіпті аймаққа кірген шырышты жеңбесеңіз, келесі жүрісте ұтыласыз.';
 	@override String get moreMonsters => 'Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды.';
 }
 

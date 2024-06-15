@@ -55,11 +55,16 @@ restartGameDialog:
   yesImSure: Yes I'm sure!
 tutorialPage:
   tutorial: Tutorial
-  aimAtMonsters: Drag your finger to aim and release to shoot. Defeat a monster by emptying its health bar.
+  dragAndRelease: Defeat the monsters by dragging to aim and releasing to shoot.
+  pointAndClick: Defeat the monsters by moving your mouse to aim and clicking to shoot.
+  goldMonsters: After defeating a gold monster, you'll get a coin.
+  greenMonsters: After defeating a green monster, you'll get an extra bullet.
   bounceOffWalls: Bounce your shots off the walls to hit the most monsters.
   tapSpeedUp: Tap the screen to speed up your shots.
-  dangerZone: If a monster reaches the danger zone, you'll lose on your next turn if you don't defeat it.
-  moreMonsters: More rows of monsters will spawn each turn as you progress, so the danger zone will also get bigger.
+  skullLine: A monster that reaches the skull line means game over if you don't defeat it in the next turn.
+  moreMonsters: More rows of monsters will spawn each turn as you progress, so the skull line will move up.
+  useCoinsInShop: Save up coins to unlock new items in the shop...
+  orUseCoinsToContinue: ...or use them to continue after a game over.
 shopPage:
   title: Shop
   bulletColors: Bullet colors

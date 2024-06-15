@@ -55,10 +55,8 @@ restartGameDialog:
   yesImSure(OUTDATED): "¡Sí estoy seguro!"
 tutorialPage:
   tutorial(OUTDATED): tutorial
-  aimAtMonsters(OUTDATED): Arrastra el dedo para apuntar y suelta para disparar. Derrota a un monstruo vaciando su barra de salud.
   bounceOffWalls(OUTDATED): Rebota tus tiros en las paredes para golpear a la mayor cantidad de monstruos.
   tapSpeedUp(OUTDATED): Toca la pantalla para acelerar tus disparos.
-  dangerZone(OUTDATED): "Si un monstruo llega a la zona de peligro, perderás en tu próximo turno si no lo derrotas."
   moreMonsters(OUTDATED): "Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande."
 shopPage:
   bulletShapes(OUTDATED): Formas de bala

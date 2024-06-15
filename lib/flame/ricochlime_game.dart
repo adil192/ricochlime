@@ -377,7 +377,7 @@ class RicochlimeGame extends Forge2DGame
   ///
   /// This is disabled on mobile as it would be too easy to accidentally
   /// tap and trigger a move.
-  bool get pointAndClickEnabled =>
+  late final pointAndClickEnabled =
       kIsWeb || Platform.isLinux || Platform.isWindows || Platform.isMacOS;
 
   Future<void> _spawnBullets() async {

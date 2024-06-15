@@ -175,7 +175,7 @@ class BulletColorShopItem extends ShopItem {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _SpritePainter(color, ShopItems.defaultBulletShape.sprite),
+      painter: BulletPainter(color, ShopItems.defaultBulletShape.sprite),
     );
   }
 }
@@ -193,13 +193,13 @@ class BulletShapeShopItem extends ShopItem {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _SpritePainter(Colors.white, sprite),
+      painter: BulletPainter(Colors.white, sprite),
     );
   }
 }
 
-class _SpritePainter extends CustomPainter {
-  _SpritePainter(
+class BulletPainter extends CustomPainter {
+  const BulletPainter(
     this.color,
     this.sprite,
   );
@@ -219,7 +219,8 @@ class _SpritePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant BulletPainter oldDelegate) =>
+      oldDelegate.color != color || oldDelegate.sprite != sprite;
 }
 
 enum ShopItemState {
