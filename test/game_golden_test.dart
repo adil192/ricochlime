@@ -13,6 +13,7 @@ import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
 import 'package:ricochlime/pages/shop.dart';
+import 'package:ricochlime/pages/tutorial.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:ricochlime/utils/shop_items.dart';
@@ -114,10 +115,10 @@ void main() {
       goldenFileName: '4_shop',
       child: const ShopPage(),
     );
-    // _testGame(
-    //   goldenFileName: '5_tutorial',
-    //   child: const TutorialPage(),
-    // );
+    _testGame(
+      goldenFileName: '5_tutorial',
+      child: const TutorialPage(),
+    );
     _testGame(
       goldenFileName: '6_settings',
       child: const SettingsPage(),

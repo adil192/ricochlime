@@ -31,7 +31,7 @@ class TutorialPage extends StatelessWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: maxWidth),
           child: Padding(
-            padding: const EdgeInsets.all(4),
+            padding: const EdgeInsets.all(8),
             child: DefaultTextStyle.merge(
               style: const TextStyle(fontSize: 18),
               child: ListView(
