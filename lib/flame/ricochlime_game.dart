@@ -546,7 +546,7 @@ class RicochlimeGame extends Forge2DGame
     for (final monster in children.whereType<Monster>()) {
       if (monster.isRagdolling) continue;
       startedRagdolling = true;
-      monster.ragdoll();
+      monster.startRagdoll();
     }
     if (startedRagdolling) await ticker.delayed(const Duration(seconds: 2));
 
@@ -561,6 +561,9 @@ class RicochlimeGame extends Forge2DGame
         break;
       case GameOverAction.continueGame:
         state.value = GameState.monstersMoving;
+        children
+            .whereType<Monster>()
+            .forEach((monster) => monster.endRagdoll());
 
         final totalRowsToRemove = max(
           // clears 3 rounds worth of monsters

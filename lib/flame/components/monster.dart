@@ -146,7 +146,9 @@ class Monster extends BodyComponent with ContactCallbacks {
     }
   }
 
-  bool get isRagdolling => _animation.current == MonsterState.jump;
+  bool get isRagdolling => _preRagdollPosition != null;
+  Vector2? _preRagdollPosition;
+
   bool get isDead => hp <= 0;
   bool killRewardGiven = false;
 
@@ -265,7 +267,12 @@ class Monster extends BodyComponent with ContactCallbacks {
       ..linearVelocity = movement.velocity;
   }
 
-  void ragdoll() {
+  void startRagdoll() {
+    if (isDead) return;
+    if (isRagdolling) return;
+
+    _preRagdollPosition = body.position.clone();
+
     remove(_healthBar);
     _animation.current = MonsterState.jump;
 
@@ -286,6 +293,23 @@ class Monster extends BodyComponent with ContactCallbacks {
             : RicochlimeGame.expectedHeight - body.position.y,
       )
       ..setFixedRotation(false);
+  }
+
+  void endRagdoll() {
+    if (!isRagdolling) return;
+
+    body
+      ..setType(BodyType.static)
+      ..linearVelocity.setAll(0)
+      ..angularVelocity = 0
+      ..gravityOverride = null
+      ..setFixedRotation(true);
+
+    body.position.setFrom(_preRagdollPosition!);
+    _preRagdollPosition = null;
+
+    add(_healthBar);
+    _animation.current = MonsterState.idle;
   }
 
   @override
