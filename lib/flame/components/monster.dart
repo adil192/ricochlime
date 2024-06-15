@@ -146,8 +146,10 @@ class Monster extends BodyComponent with ContactCallbacks {
     }
   }
 
-  bool get isRagdolling => _preRagdollPosition != null;
   Vector2? _preRagdollPosition;
+  Sweep? _preRagdollSweep;
+  bool get isRagdolling =>
+      _preRagdollPosition != null && _preRagdollSweep != null;
 
   bool get isDead => hp <= 0;
   bool killRewardGiven = false;
@@ -272,6 +274,7 @@ class Monster extends BodyComponent with ContactCallbacks {
     if (isRagdolling) return;
 
     _preRagdollPosition = body.position.clone();
+    _preRagdollSweep = Sweep()..setFrom(body.sweep);
 
     remove(_healthBar);
     _animation.current = MonsterState.jump;
@@ -303,10 +306,11 @@ class Monster extends BodyComponent with ContactCallbacks {
       ..linearVelocity.setAll(0)
       ..angularVelocity = 0
       ..gravityOverride = null
-      ..setFixedRotation(true);
-
-    body.position.setFrom(_preRagdollPosition!);
+      ..setFixedRotation(true)
+      ..sweep.setFrom(_preRagdollSweep!)
+      ..position.setFrom(_preRagdollPosition!);
     _preRagdollPosition = null;
+    _preRagdollSweep = null;
 
     add(_healthBar);
     _animation.current = MonsterState.idle;
