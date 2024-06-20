@@ -43,6 +43,8 @@ abstract class Prefs {
 
   static late final PlainPref<int> maxFps;
 
+  static late final PlainPref<bool> removeAdsForever;
+
   static late final PlainPref<int> totalCoinsGained,
       totalBulletsGained,
       totalMonstersKilled,
@@ -87,6 +89,8 @@ abstract class Prefs {
     bulletShape = PlainPref('bulletShape', ShopItems.bulletShapes.first.id);
 
     maxFps = PlainPref('maxFps', -1);
+
+    removeAdsForever = PlainPref('removeAdsForever', false);
 
     totalCoinsGained = PlainPref('totalCoinsGained', 0);
     totalBulletsGained = PlainPref('totalBulletsGained', 0);

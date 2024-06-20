@@ -32,6 +32,8 @@ abstract class AdState {
   /// This is true if ads are supported and the user is old enough.
   static bool get rewardedInterstitialAdsSupported {
     if (!adsSupported) return false;
+    if (Prefs.removeAdsForever.value) return false;
+
     final age = AdState.age;
     return age != null && age >= minAgeForPersonalizedAds;
   }
@@ -42,6 +44,7 @@ abstract class AdState {
   /// banner ad.
   static Future<bool> shouldShowBannerAd() async {
     if (!adsSupported) return false;
+    if (Prefs.removeAdsForever.value) return false;
 
     if (await Battery().isInBatterySaveMode) return false;
 
@@ -242,6 +245,9 @@ abstract class AdState {
   static Future<BannerAd?> _createBannerAd(AdSize adSize) async {
     if (!adsSupported) {
       log.warning('Banner ad unit ID is empty.');
+      return null;
+    } else if (Prefs.removeAdsForever.value) {
+      log.severe('Banner ad should not be created with removeAdsForever.');
       return null;
     } else if (!_initializeStarted) {
       log.warning('Ad initialization has not started.');

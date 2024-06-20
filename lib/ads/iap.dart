@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:ricochlime/utils/prefs.dart';
 
 abstract final class RicochlimeIAP {
   static StreamSubscription<List<PurchaseDetails>>? _subscription;
@@ -19,12 +20,11 @@ abstract final class RicochlimeIAP {
           break;
         case PurchaseStatus.error:
         case PurchaseStatus.canceled:
-          // show "purchase not completed" UI
+          // TODO(adil192): show "purchase not completed" UI
           break;
         case PurchaseStatus.purchased:
         case PurchaseStatus.restored:
-          // TODO(adil192): deliver product
-          break;
+          _deliverProduct(purchaseDetails);
       }
       if (purchaseDetails.pendingCompletePurchase) {
         await InAppPurchase.instance.completePurchase(purchaseDetails);
@@ -38,5 +38,15 @@ abstract final class RicochlimeIAP {
 
   static void dispose() {
     _subscription?.cancel();
+  }
+
+  static void _deliverProduct(PurchaseDetails purchaseDetails) {
+    assert(purchaseDetails.status == PurchaseStatus.purchased ||
+        purchaseDetails.status == PurchaseStatus.restored);
+
+    switch (purchaseDetails.productID) {
+      case 'remove_ads_forever':
+        Prefs.removeAdsForever.value = true;
+    }
   }
 }
