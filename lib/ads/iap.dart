@@ -1,15 +1,52 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:logging/logging.dart';
 import 'package:ricochlime/utils/prefs.dart';
+
+enum RicochlimeProduct {
+  removeAdsForever('remove_ads_forever');
+
+  const RicochlimeProduct(this.id);
+
+  final String id;
+
+  static final allIds = values.map((product) => product.id).toSet();
+
+  static RicochlimeProduct? fromId(String id) {
+    for (final product in values) {
+      if (product.id == id) return product;
+    }
+    return null;
+  }
+
+  static Map<RicochlimeProduct, ProductDetails> details = {};
+}
 
 abstract final class RicochlimeIAP {
   static StreamSubscription<List<PurchaseDetails>>? _subscription;
+  static final _log = Logger('RicochlimeIAP');
 
-  static void listen() {
-    _subscription?.cancel();
+  static final inAppPurchasesSupported =
+      Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
+
+  static Future<void> init() async {
+    if (!inAppPurchasesSupported) return;
+
+    unawaited(_subscription?.cancel());
     _subscription =
         InAppPurchase.instance.purchaseStream.listen(_onData, onDone: _onDone);
+
+    final response = await InAppPurchase.instance
+        .queryProductDetails(RicochlimeProduct.allIds);
+    if (response.notFoundIDs.isNotEmpty) {
+      _log.warning('Some IAPs not found: ${response.notFoundIDs}');
+    }
+    RicochlimeProduct.details = {
+      for (final product in response.productDetails)
+        RicochlimeProduct.fromId(product.id)!: product,
+    };
   }
 
   static Future<void> _onData(List<PurchaseDetails> purchaseDetailsList) async {
@@ -44,8 +81,11 @@ abstract final class RicochlimeIAP {
     assert(purchaseDetails.status == PurchaseStatus.purchased ||
         purchaseDetails.status == PurchaseStatus.restored);
 
-    switch (purchaseDetails.productID) {
-      case 'remove_ads_forever':
+    switch (RicochlimeProduct.fromId(purchaseDetails.productID)) {
+      case null:
+        _log.severe('Unknown product to deliver: ${purchaseDetails.productID}');
+
+      case RicochlimeProduct.removeAdsForever:
         Prefs.removeAdsForever.value = true;
     }
   }
