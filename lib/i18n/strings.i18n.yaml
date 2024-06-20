@@ -69,6 +69,8 @@ shopPage:
   title: Shop
   bulletColors: Bullet colors
   bulletShapes: Bullet shapes
+  premium: Premium
+  removeAdsForever: Remove ads forever
 common:
   cancel: Cancel
   ok: Okay

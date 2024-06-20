@@ -72,6 +72,8 @@ es:
     title(OUTDATED): Shop
     bulletColors(OUTDATED): Bullet colors
     bulletShapes(OUTDATED): Bullet shapes
+    premium(OUTDATED): Premium
+    removeAdsForever(OUTDATED): Remove ads forever
   common:
     cancel(OUTDATED): Cancel
     ok(OUTDATED): Okay
@@ -119,3 +121,5 @@ kk:
     title(OUTDATED): Shop
     bulletColors(OUTDATED): Bullet colors
     bulletShapes(OUTDATED): Bullet shapes
+    premium(OUTDATED): Premium
+    removeAdsForever(OUTDATED): Remove ads forever

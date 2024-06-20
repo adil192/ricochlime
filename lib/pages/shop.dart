@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
+import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/coin.dart';
 import 'package:ricochlime/utils/prefs.dart';
@@ -110,6 +111,47 @@ class ShopPage extends StatelessWidget {
                     );
                   },
                 ),
+                if (RicochlimeIAP.inAppPurchasesSupported) ...[
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Text(t.shopPage.premium,
+                          style: const TextStyle(fontSize: 24)),
+                    ),
+                  ),
+                  SliverList.list(
+                    children: [
+                      ValueListenableBuilder(
+                        valueListenable: Prefs.removeAdsForever,
+                        builder: (context, _, __) {
+                          return NesButton(
+                            type: Prefs.removeAdsForever.value
+                                ? NesButtonType.primary
+                                : NesButtonType.warning,
+                            onPressed: () => RicochlimeIAP.buyNonConsumable(
+                                RicochlimeProduct.removeAdsForever),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    t.shopPage.removeAdsForever,
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                                Text(
+                                  RicochlimeIAP.priceOf(
+                                          RicochlimeProduct.removeAdsForever) ??
+                                      '?',
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ],
             ),
           ),

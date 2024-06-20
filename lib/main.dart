@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logging/logging.dart';
 import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/ads/age_dialog.dart';
+import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
@@ -46,6 +47,7 @@ Future<void> main({
   ]);
 
   AdState.init();
+  unawaited(RicochlimeIAP.init());
 
   runApp(TranslationProvider(child: const MyApp()));
 }

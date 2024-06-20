@@ -21,7 +21,7 @@ enum RicochlimeProduct {
     return null;
   }
 
-  static Map<RicochlimeProduct, ProductDetails> details = {};
+  static Map<RicochlimeProduct, ProductDetails> _details = {};
 }
 
 abstract final class RicochlimeIAP {
@@ -43,10 +43,11 @@ abstract final class RicochlimeIAP {
     if (response.notFoundIDs.isNotEmpty) {
       _log.warning('Some IAPs not found: ${response.notFoundIDs}');
     }
-    RicochlimeProduct.details = {
+    RicochlimeProduct._details = {
       for (final product in response.productDetails)
         RicochlimeProduct.fromId(product.id)!: product,
     };
+    _log.info('IAPs loaded: ${RicochlimeProduct._details}');
   }
 
   static Future<void> _onData(List<PurchaseDetails> purchaseDetailsList) async {
@@ -68,6 +69,15 @@ abstract final class RicochlimeIAP {
       }
     }
   }
+
+  static Future<bool> buyNonConsumable(RicochlimeProduct product) =>
+      InAppPurchase.instance.buyNonConsumable(
+          purchaseParam: PurchaseParam(
+        productDetails: RicochlimeProduct._details[product]!,
+      ));
+
+  static String? priceOf(RicochlimeProduct product) =>
+      RicochlimeProduct._details[product]?.price;
 
   static void _onDone() {
     _subscription?.cancel();

@@ -66,6 +66,8 @@ tutorialPage:
   tapSpeedUp(OUTDATED): Toca la pantalla para acelerar tus disparos.
   moreMonsters(OUTDATED): "Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande."
 shopPage:
+  premium(OUTDATED): De primera calidad
+  removeAdsForever(OUTDATED): Eliminar anuncios para siempre
   bulletShapes(OUTDATED): Formas de bala
   bulletColors(OUTDATED): Colores de bala
   title(OUTDATED): Comercio

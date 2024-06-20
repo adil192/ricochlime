@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 186 (62 per locale)
+/// Strings: 192 (64 per locale)
 ///
-/// Built on 2024-06-15 at 22:16 UTC
+/// Built on 2024-06-20 at 12:43 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -305,6 +305,8 @@ class _StringsShopPageEn {
 	String get title => 'Shop';
 	String get bulletColors => 'Bullet colors';
 	String get bulletShapes => 'Bullet shapes';
+	String get premium => 'Premium';
+	String get removeAdsForever => 'Remove ads forever';
 }
 
 // Path: common
@@ -498,6 +500,8 @@ class _StringsShopPageEs extends _StringsShopPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get premium => 'De primera calidad';
+	@override String get removeAdsForever => 'Eliminar anuncios para siempre';
 	@override String get bulletShapes => 'Formas de bala';
 	@override String get bulletColors => 'Colores de bala';
 	@override String get title => 'Comercio';
@@ -675,12 +679,12 @@ class _StringsTutorialPageKk extends _StringsTutorialPageEn {
 
 	// Translations
 	@override String get tutorial => 'Нұсқаулық';
+	@override String get bounceOffWalls => 'Қабырғадан ыршыған оқ көбірек шырышқа тие алады.';
+	@override String get tapSpeedUp => 'Оқ қозғалысын тездету үшін экранды түртіңіз.';
 	@override String get dragAndRelease => 'Мақсатқа апару және ату үшін босату арқылы құбыжықтарды жеңіңіз.';
 	@override String get pointAndClick => 'Тінтуірді мақсатқа жылжыту және ату үшін басу арқылы құбыжықтарды жеңіңіз.';
 	@override String get goldMonsters => 'Алтын құбыжықты жеңгеннен кейін сіз тиын аласыз.';
 	@override String get greenMonsters => 'Жасыл құбыжықты жеңгеннен кейін сіз қосымша оқ аласыз.';
-	@override String get bounceOffWalls => 'Қабырғадан ыршыған оқ көбірек шырышқа тие алады.';
-	@override String get tapSpeedUp => 'Оқ қозғалысын тездету үшін экранды түртіңіз.';
 	@override String get skullLine => 'Бас сүйегінің сызығына жеткен құбыжық келесі кезекте оны жеңбесеңіз, ойын аяқталды дегенді білдіреді.';
 	@override String get useCoinsInShop => 'Дүкенде жаңа заттардың құлпын ашу үшін тиындарды сақтаңыз...';
 	@override String get orUseCoinsToContinue => '...немесе оларды ойын аяқталғаннан кейін жалғастыру үшін пайдаланыңыз.';
@@ -694,6 +698,8 @@ class _StringsShopPageKk extends _StringsShopPageEn {
 	@override final _StringsKk _root; // ignore: unused_field
 
 	// Translations
+	@override String get premium => 'Премиум';
+	@override String get removeAdsForever => 'Жарнамаларды біржола алып тастаңыз';
 	@override String get bulletShapes => 'Оқ пішіндері';
 	@override String get bulletColors => 'Оқ түсті';
 	@override String get title => 'дүкен';
