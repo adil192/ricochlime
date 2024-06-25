@@ -333,11 +333,15 @@ class _PlayPageState extends State<PlayPage> {
               future: shouldShowBannerAd,
               builder: (context, snapshot) {
                 final showAd = snapshot.data ?? false;
-                return SizedBox(
-                  width: double.infinity,
-                  child: showAd
-                      ? const BannerAdWidget(adSize: AdSize.banner)
-                      : null,
+                if (!showAd) return const SizedBox.shrink();
+
+                final screenSize = MediaQuery.sizeOf(context);
+                return ConstrainedBox(
+                  constraints: BoxConstraints.tight(Size(
+                    screenSize.width,
+                    (screenSize.height - kToolbarHeight) * 0.1,
+                  )),
+                  child: const BannerAdWidget(adSize: AdSize.banner),
                 );
               },
             ),
