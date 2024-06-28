@@ -1,0 +1,4 @@
+• Fixed ads being huge on tablets and iPads
+• Restricted aim angles to not be completely horizontal
+• Updated the tutorial page
+• If you'd like to support the development of Ricochlime, you can now purchase the "Remove ads forever" in-app purchase in the Shop

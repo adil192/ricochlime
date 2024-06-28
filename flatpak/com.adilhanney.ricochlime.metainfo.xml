@@ -74,6 +74,15 @@
     </branding>
 
     <releases>
+        <release version="1.10.0" date="2024-06-28">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.10.0</url>
+            <description>
+                <ul>
+                    <li>Restricted aim angles to not be completely horizontal</li>
+                    <li>Updated the tutorial page</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.9.0" date="2024-06-15">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.9.0</url>
             <description>

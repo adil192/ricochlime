@@ -1,0 +1,4 @@
+• Se corrigió que los anuncios fueran enormes en tabletas y iPads.
+• Ángulos de puntería restringidos para no ser completamente horizontales
+• Se actualizó la página del tutorial.
+• Si desea apoyar el desarrollo de Ricochlime, ahora puede adquirir la compra dentro de la aplicación "Eliminar anuncios para siempre" en la Tienda.
