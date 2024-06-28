@@ -146,6 +146,8 @@ class ShopPage extends StatelessWidget {
                             },
                             child: Row(
                               children: [
+                                NesIcon(iconData: NesIcons.eraser),
+                                const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
                                     t.shopPage.removeAdsForever,
