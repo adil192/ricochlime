@@ -122,14 +122,28 @@ class ShopPage extends StatelessWidget {
                   SliverList.list(
                     children: [
                       ValueListenableBuilder(
-                        valueListenable: Prefs.removeAdsForever,
-                        builder: (context, _, __) {
+                        valueListenable:
+                            RicochlimeProduct.removeAdsForever.state,
+                        builder: (context, state, _) {
                           return NesButton(
-                            type: Prefs.removeAdsForever.value
-                                ? NesButtonType.primary
-                                : NesButtonType.warning,
-                            onPressed: () => RicochlimeIAP.buyNonConsumable(
-                                RicochlimeProduct.removeAdsForever),
+                            type: switch (state) {
+                              IAPState.unpurchased => NesButtonType.warning,
+                              IAPState.purchasedAndEnabled =>
+                                NesButtonType.primary,
+                              IAPState.purchasedAndDisabled =>
+                                NesButtonType.normal,
+                            },
+                            onPressed: switch (state) {
+                              IAPState.unpurchased => () =>
+                                  RicochlimeIAP.buyNonConsumable(
+                                      RicochlimeProduct.removeAdsForever),
+                              IAPState.purchasedAndEnabled => () =>
+                                  RicochlimeProduct.removeAdsForever.state
+                                      .value = IAPState.purchasedAndDisabled,
+                              IAPState.purchasedAndDisabled => () =>
+                                  RicochlimeProduct.removeAdsForever.state
+                                      .value = IAPState.purchasedAndEnabled,
+                            },
                             child: Row(
                               children: [
                                 Expanded(
@@ -139,8 +153,7 @@ class ShopPage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  RicochlimeIAP.priceOf(
-                                          RicochlimeProduct.removeAdsForever) ??
+                                  RicochlimeProduct.removeAdsForever.price ??
                                       '?',
                                   style: const TextStyle(fontSize: 20),
                                 ),

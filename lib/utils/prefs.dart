@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/utils/shop_items.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,8 +43,6 @@ abstract class Prefs {
   static late final PlainPref<String> bulletShape;
 
   static late final PlainPref<int> maxFps;
-
-  static late final PlainPref<bool> removeAdsForever;
 
   static late final PlainPref<int> totalCoinsGained,
       totalBulletsGained,
@@ -89,8 +88,6 @@ abstract class Prefs {
     bulletShape = PlainPref('bulletShape', ShopItems.bulletShapes.first.id);
 
     maxFps = PlainPref('maxFps', -1);
-
-    removeAdsForever = PlainPref('removeAdsForever', false);
 
     totalCoinsGained = PlainPref('totalCoinsGained', 0);
     totalBulletsGained = PlainPref('totalBulletsGained', 0);
@@ -208,7 +205,8 @@ class PlainPref<T> extends IPref<T> {
               T == ThemeMode ||
               T == TargetPlatform ||
               T == Color ||
-              T == typeOf<GameData?>(),
+              T == typeOf<GameData?>() ||
+              T == IAPState,
         );
 
   SharedPreferences? _prefs;
@@ -283,6 +281,8 @@ class PlainPref<T> extends IPref<T> {
       } else if (T == typeOf<GameData?>()) {
         final json = jsonEncode(value);
         return _prefs!.setString(key, json);
+      } else if (T == IAPState) {
+        return _prefs!.setInt(key, (value as IAPState).index);
       } else {
         return _prefs!.setString(key, value as String);
       }
@@ -327,6 +327,9 @@ class PlainPref<T> extends IPref<T> {
         final decoded = jsonDecode(json) as Map<String, dynamic>?;
         if (decoded == null) return null;
         return GameData.fromJson(decoded) as T;
+      } else if (T == IAPState) {
+        final index = _prefs!.getInt(key);
+        return index != null ? IAPState.values[index] as T : null;
       } else {
         return _prefs!.get(key) as T?;
       }

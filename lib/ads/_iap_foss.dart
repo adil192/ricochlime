@@ -1,3 +1,5 @@
+import 'package:ricochlime/utils/prefs.dart';
+
 enum RicochlimeProduct {
   removeAdsForever('remove_ads_forever');
 
@@ -13,6 +15,15 @@ enum RicochlimeProduct {
     }
     return null;
   }
+
+  String? get price => '?';
+
+  PlainPref<IAPState> get state => _states[this]!;
+  static late final Map<RicochlimeProduct, PlainPref<IAPState>> _states;
+  static void init() => _states = {
+        for (final product in values)
+          product: PlainPref('iap_${product.id}_state', IAPState.unpurchased),
+      };
 }
 
 abstract final class RicochlimeIAP {
@@ -20,5 +31,6 @@ abstract final class RicochlimeIAP {
   static void listen() {}
   static void dispose() {}
   static Future<bool> buyNonConsumable(_) async => false;
-  static String? priceOf(_) => '?';
 }
+
+enum IAPState { unpurchased, purchasedAndEnabled, purchasedAndDisabled }

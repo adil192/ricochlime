@@ -41,13 +41,12 @@ Future<void> main({
   await Future.wait([
     Prefs.highScore.waitUntilLoaded(),
     Prefs.birthYear.waitUntilLoaded(),
-    Prefs.removeAdsForever.waitUntilLoaded(),
     GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
     RicochlimeGame.instance.preloadSprites.future,
   ]);
 
-  AdState.init();
   unawaited(RicochlimeIAP.init());
+  AdState.init();
 
   runApp(TranslationProvider(child: const MyApp()));
 }

@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logging/logging.dart';
 import 'package:nes_ui/nes_ui.dart';
+import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
@@ -32,7 +33,8 @@ abstract class AdState {
   /// This is true if ads are supported and the user is old enough.
   static bool get rewardedInterstitialAdsSupported {
     if (!adsSupported) return false;
-    if (Prefs.removeAdsForever.value) return false;
+    if (RicochlimeProduct.removeAdsForever.state.value ==
+        IAPState.purchasedAndEnabled) return false;
 
     final age = AdState.age;
     return age != null && age >= minAgeForPersonalizedAds;
@@ -44,7 +46,8 @@ abstract class AdState {
   /// banner ad.
   static Future<bool> shouldShowBannerAd() async {
     if (!adsSupported) return false;
-    if (Prefs.removeAdsForever.value) return false;
+    if (RicochlimeProduct.removeAdsForever.state.value ==
+        IAPState.purchasedAndEnabled) return false;
 
     if (await Battery().isInBatterySaveMode) return false;
 
@@ -246,7 +249,8 @@ abstract class AdState {
     if (!adsSupported) {
       log.warning('Banner ad unit ID is empty.');
       return null;
-    } else if (Prefs.removeAdsForever.value) {
+    } else if (RicochlimeProduct.removeAdsForever.state.value ==
+        IAPState.purchasedAndEnabled) {
       log.severe('Banner ad should not be created with removeAdsForever.');
       return null;
     } else if (!_initializeStarted) {

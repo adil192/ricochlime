@@ -21,7 +21,15 @@ enum RicochlimeProduct {
     return null;
   }
 
+  String? get price => _details[this]?.price;
   static Map<RicochlimeProduct, ProductDetails> _details = {};
+
+  PlainPref<IAPState> get state => _states[this]!;
+  static late final Map<RicochlimeProduct, PlainPref<IAPState>> _states;
+  static void _init() => _states = {
+        for (final product in values)
+          product: PlainPref('iap_${product.id}_state', IAPState.unpurchased),
+      };
 }
 
 abstract final class RicochlimeIAP {
@@ -32,6 +40,8 @@ abstract final class RicochlimeIAP {
       Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
 
   static Future<void> init() async {
+    RicochlimeProduct._init();
+
     if (!inAppPurchasesSupported) return;
 
     unawaited(_subscription?.cancel());
@@ -76,9 +86,6 @@ abstract final class RicochlimeIAP {
         productDetails: RicochlimeProduct._details[product]!,
       ));
 
-  static String? priceOf(RicochlimeProduct product) =>
-      RicochlimeProduct._details[product]?.price;
-
   static void _onDone() {
     _subscription?.cancel();
   }
@@ -96,7 +103,25 @@ abstract final class RicochlimeIAP {
         _log.severe('Unknown product to deliver: ${purchaseDetails.productID}');
 
       case RicochlimeProduct.removeAdsForever:
-        Prefs.removeAdsForever.value = true;
+        final state = RicochlimeProduct.removeAdsForever.state;
+
+        if (state.value != IAPState.unpurchased) {
+          _log.warning(
+              'Product already delivered: ${purchaseDetails.productID}');
+        }
+
+        state.value = IAPState.purchasedAndEnabled;
     }
   }
+}
+
+enum IAPState {
+  /// The item has not been purchased yet.
+  unpurchased,
+
+  /// The item has been purchased and is enabled.
+  purchasedAndEnabled,
+
+  /// The item has been purchased but is disabled.
+  purchasedAndDisabled,
 }
