@@ -80,11 +80,17 @@ abstract final class RicochlimeIAP {
     }
   }
 
-  static Future<bool> buyNonConsumable(RicochlimeProduct product) =>
-      InAppPurchase.instance.buyNonConsumable(
-          purchaseParam: PurchaseParam(
-        productDetails: RicochlimeProduct._details[product]!,
-      ));
+  static Future<bool> buyNonConsumable(RicochlimeProduct product) async {
+    final details = RicochlimeProduct._details[product];
+    if (details == null) {
+      _log.severe('Product details not found: $product');
+      return false;
+    }
+
+    return InAppPurchase.instance.buyNonConsumable(
+      purchaseParam: PurchaseParam(productDetails: details),
+    );
+  }
 
   static void _onDone() {
     _subscription?.cancel();
