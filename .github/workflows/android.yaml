@@ -23,6 +23,9 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-ricochlime-ubuntu-
 
+      - name: Remove simulator dependency
+        run: ./patches/remove_simulator_dependency.sh
+
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -87,6 +90,9 @@ jobs:
       - name: FOSS patches
         run: |
           ./patches/foss.sh
+
+      - name: Remove simulator dependency
+        run: ./patches/remove_simulator_dependency.sh
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2

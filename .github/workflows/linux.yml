@@ -54,6 +54,9 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-ricochlime-ubuntu-
 
+      - name: Remove simulator dependency
+        run: ./patches/remove_simulator_dependency.sh
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -151,6 +154,9 @@ jobs:
             useradd -m nonroot
             chown -R nonroot /opt/flutter
             chown -R nonroot .
+
+            echo Removing simulator dependency
+            ./patches/remove_simulator_dependency.sh
 
             echo Building
             sudo -u nonroot /opt/flutter/bin/flutter build linux --target-platform linux-arm64
