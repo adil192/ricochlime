@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:logging/logging.dart';
 import 'package:ricochlime/utils/prefs.dart';
@@ -37,7 +38,7 @@ abstract final class RicochlimeIAP {
   static final _log = Logger('RicochlimeIAP');
 
   static final inAppPurchasesSupported =
-      Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
+      !kIsWeb && (Platform.isAndroid || Platform.isIOS || Platform.isMacOS);
 
   static Future<void> init() async {
     RicochlimeProduct._init();
