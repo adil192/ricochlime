@@ -153,8 +153,15 @@ class ShopPage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  RicochlimeProduct.removeAdsForever.price ??
-                                      '?',
+                                  switch (state) {
+                                    IAPState.unpurchased => RicochlimeProduct
+                                            .removeAdsForever.price ??
+                                        '?',
+                                    IAPState.purchasedAndEnabled =>
+                                      t.shopPage.purchasedAndEnabled,
+                                    IAPState.purchasedAndDisabled =>
+                                      t.shopPage.purchasedAndDisabled,
+                                  },
                                   style: const TextStyle(fontSize: 20),
                                 ),
                               ],

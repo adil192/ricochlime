@@ -74,6 +74,8 @@ es:
     bulletShapes(OUTDATED): Bullet shapes
     premium(OUTDATED): Premium
     removeAdsForever(OUTDATED): Remove ads forever
+    purchasedAndEnabled(OUTDATED): ON
+    purchasedAndDisabled(OUTDATED): OFF
   common:
     cancel(OUTDATED): Cancel
     ok(OUTDATED): Okay
@@ -123,3 +125,5 @@ kk:
     bulletShapes(OUTDATED): Bullet shapes
     premium(OUTDATED): Premium
     removeAdsForever(OUTDATED): Remove ads forever
+    purchasedAndEnabled(OUTDATED): ON
+    purchasedAndDisabled(OUTDATED): OFF

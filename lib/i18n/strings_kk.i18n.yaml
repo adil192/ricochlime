@@ -66,6 +66,8 @@ tutorialPage:
   orUseCoinsToContinue(OUTDATED): ...немесе оларды ойын аяқталғаннан кейін жалғастыру үшін пайдаланыңыз.
   moreMonsters(OUTDATED): "Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды."
 shopPage:
+  purchasedAndEnabled(OUTDATED): қосылды
+  purchasedAndDisabled(OUTDATED): ажыратылған
   premium(OUTDATED): Премиум
   removeAdsForever(OUTDATED): Жарнамаларды біржола алып тастаңыз
   bulletShapes(OUTDATED): Оқ пішіндері
