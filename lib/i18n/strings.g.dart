@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 198 (66 per locale)
+/// Strings: 192 (64 per locale)
 ///
-/// Built on 2024-06-28 at 21:48 UTC
+/// Built on 2024-06-28 at 21:50 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -307,8 +307,6 @@ class _StringsShopPageEn {
 	String get bulletShapes => 'Bullet shapes';
 	String get premium => 'Premium';
 	String get removeAdsForever => 'Remove ads forever';
-	String get purchasedAndEnabled => 'ON';
-	String get purchasedAndDisabled => 'OFF';
 }
 
 // Path: common
@@ -502,8 +500,6 @@ class _StringsShopPageEs extends _StringsShopPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get purchasedAndEnabled => 'en';
-	@override String get purchasedAndDisabled => 'de';
 	@override String get premium => 'De primera calidad';
 	@override String get removeAdsForever => 'Eliminar anuncios para siempre';
 	@override String get bulletShapes => 'Formas de bala';
@@ -702,8 +698,6 @@ class _StringsShopPageKk extends _StringsShopPageEn {
 	@override final _StringsKk _root; // ignore: unused_field
 
 	// Translations
-	@override String get purchasedAndEnabled => 'қосылды';
-	@override String get purchasedAndDisabled => 'ажыратылған';
 	@override String get premium => 'Премиум';
 	@override String get removeAdsForever => 'Жарнамаларды біржола алып тастаңыз';
 	@override String get bulletShapes => 'Оқ пішіндері';

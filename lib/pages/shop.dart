@@ -152,18 +152,23 @@ class ShopPage extends StatelessWidget {
                                     style: const TextStyle(fontSize: 20),
                                   ),
                                 ),
-                                Text(
-                                  switch (state) {
-                                    IAPState.unpurchased => RicochlimeProduct
-                                            .removeAdsForever.price ??
-                                        '?',
-                                    IAPState.purchasedAndEnabled =>
-                                      t.shopPage.purchasedAndEnabled,
-                                    IAPState.purchasedAndDisabled =>
-                                      t.shopPage.purchasedAndDisabled,
-                                  },
-                                  style: const TextStyle(fontSize: 20),
-                                ),
+                                const SizedBox(width: 8),
+                                switch (state) {
+                                  IAPState.unpurchased => Text(
+                                      RicochlimeProduct
+                                              .removeAdsForever.price ??
+                                          '?',
+                                      style: const TextStyle(fontSize: 20),
+                                    ),
+                                  IAPState.purchasedAndEnabled => NesCheckBox(
+                                      value: true,
+                                      onChange: (_) {},
+                                    ),
+                                  IAPState.purchasedAndDisabled => NesCheckBox(
+                                      value: false,
+                                      onChange: (_) {},
+                                    ),
+                                },
                               ],
                             ),
                           );

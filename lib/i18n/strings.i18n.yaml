@@ -71,8 +71,6 @@ shopPage:
   bulletShapes: Bullet shapes
   premium: Premium
   removeAdsForever: Remove ads forever
-  purchasedAndEnabled: ON
-  purchasedAndDisabled: OFF
 common:
   cancel: Cancel
   ok: Okay
