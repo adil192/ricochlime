@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:forge2d/src/settings.dart' as physics_settings;
 import 'package:logging/logging.dart';
+import 'package:ricochlime/ads/ad_schedule.dart';
 import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
@@ -324,8 +325,8 @@ class RicochlimeGame extends Forge2DGame
   void update(double dt) {
     const maxDt = 0.5;
     if (dt > maxDt) {
-      // physics engine can't handle such a big dt
-      // e.g. when the app is resumed from background
+      onResume(dt);
+      // physics engine can't handle such a big dt, so just skip this frame
       return;
     }
 
@@ -442,7 +443,7 @@ class RicochlimeGame extends Forge2DGame
 
     state.value = GameState.monstersMoving;
 
-    if (!notEnoughAdsTimer.isActive) unawaited(showRewardedInterstitial());
+    unawaited(showRewardedInterstitial(inopportune: true));
 
     // move monsters down and spawn new ones at the top
     assert(numNewRowsEachRound == getNumNewRowsEachRound(score.value));
@@ -478,7 +479,6 @@ class RicochlimeGame extends Forge2DGame
         Prefs.totalGameOvers.value++;
         unawaited(saveGame());
         unawaited(gameOver());
-        unawaited(showRewardedInterstitial());
         return;
       }
     }
@@ -500,39 +500,22 @@ class RicochlimeGame extends Forge2DGame
         .any((monster) => monster.position.y >= threshold);
   }
 
-  /// A timer that prevents rewarded interstitial ads from being shown too
-  /// often.
-  ///
-  /// There are no rewarded interstitials in the first 2 minutes of the game,
-  /// and no more than one every 5 minutes.
-  ///
-  /// If this timer is active, don't show any interstitial ads.
-  Timer tooManyAdsTimer =
-      Timer(kDebugMode ? Duration.zero : const Duration(minutes: 2), () {});
+  void onResume(double dt) {
+    AdSchedule.onResume(dt);
+  }
 
-  /// A timer that shows an ad after the user plays a turn,
-  /// if no ads have been shown in a while.
-  ///
-  /// If this timer is active, don't show an ad in between turns.
-  Timer notEnoughAdsTimer =
-      Timer(kDebugMode ? Duration.zero : const Duration(minutes: 5), () {});
-
-  Future<void> showRewardedInterstitial() async {
+  Future<void> showRewardedInterstitial({bool inopportune = false}) async {
     if (!AdState.rewardedInterstitialAdsSupported) return;
 
-    if (tooManyAdsTimer.isActive) return;
-    tooManyAdsTimer = Timer(const Duration(minutes: 5), () {});
+    if (!AdSchedule.enoughTimeSinceLastAd(inopportune: inopportune)) return;
 
     final showAd = await showAdWarning?.call() ?? false;
     if (!showAd) {
-      // user cancelled the ad, ask again soon
-      tooManyAdsTimer.cancel();
-      tooManyAdsTimer = Timer(const Duration(minutes: 1), () {});
+      AdSchedule.markAdCancelled();
       return;
+    } else {
+      AdSchedule.markAdShown();
     }
-
-    notEnoughAdsTimer.cancel();
-    notEnoughAdsTimer = Timer(const Duration(minutes: 5), () {});
 
     final rewardGranted = await AdState.showRewardedInterstitialAd();
     if (!rewardGranted) return;
