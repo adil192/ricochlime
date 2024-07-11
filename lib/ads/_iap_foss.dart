@@ -32,6 +32,7 @@ abstract final class RicochlimeIAP {
   static void listen() {}
   static void dispose() {}
   static Future<bool> buyNonConsumable(_) async => false;
+  static Future<void> restorePurchases() async {}
 }
 
 enum IAPState { unpurchased, purchasedAndEnabled, purchasedAndDisabled }

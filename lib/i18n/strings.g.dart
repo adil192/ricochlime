@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 192 (64 per locale)
+/// Strings: 193 (64 per locale)
 ///
-/// Built on 2024-06-28 at 21:50 UTC
+/// Built on 2024-07-11 at 17:16 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -307,6 +307,7 @@ class _StringsShopPageEn {
 	String get bulletShapes => 'Bullet shapes';
 	String get premium => 'Premium';
 	String get removeAdsForever => 'Remove ads forever';
+	String get restorePurchases => 'Restore purchases';
 }
 
 // Path: common

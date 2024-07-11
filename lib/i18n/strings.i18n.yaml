@@ -71,6 +71,7 @@ shopPage:
   bulletShapes: Bullet shapes
   premium: Premium
   removeAdsForever: Remove ads forever
+  restorePurchases: Restore purchases
 common:
   cancel: Cancel
   ok: Okay

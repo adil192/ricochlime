@@ -176,6 +176,22 @@ class ShopPage extends StatelessWidget {
                           );
                         },
                       ),
+                      NesButton(
+                        type: NesButtonType.normal,
+                        onPressed: RicochlimeIAP.restorePurchases,
+                        child: Row(
+                          children: [
+                            NesIcon(iconData: NesIcons.download),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                t.shopPage.restorePurchases,
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ],

@@ -93,6 +93,9 @@ abstract final class RicochlimeIAP {
     );
   }
 
+  static Future<void> restorePurchases() =>
+      InAppPurchase.instance.restorePurchases();
+
   static void _onDone() {
     _subscription?.cancel();
   }
