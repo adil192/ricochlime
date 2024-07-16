@@ -59,10 +59,15 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
     final reflectionDist = reflectionPoint.length;
 
     final numDotsTotal = (aimDetails.aimLength * _maxDots).ceil();
-    final numDotsBeforeReflection = (reflectionDist / _dotInterval).floor();
+    final numDotsBeforeReflection = min(
+      numDotsTotal,
+      (reflectionDist / _dotInterval).floor(),
+    );
     final numDotsAfterReflection = numDotsTotal - numDotsBeforeReflection;
 
-    final adjustedDotInterval = reflectionDist / numDotsBeforeReflection;
+    final adjustedDotInterval = numDotsBeforeReflection >= numDotsTotal
+        ? _dotInterval
+        : reflectionDist / numDotsBeforeReflection;
     final dotDelta = aimDetails.unitDir * adjustedDotInterval;
     for (double dot = 0; dot < numDotsBeforeReflection; dot++) {
       final dotPosition = dotDelta * dot;
@@ -169,7 +174,7 @@ class AimDetails {
   /// where the aim guide hits the left or right wall,
   /// beginning from the player's position and in the direction of [unitDir].
   Vector2 reflectionPoint(Vector2 playerPos, Rect gameRect) {
-    if (unitDir.x == 0) return Vector2(0, double.infinity);
+    if (unitDir.x == 0) return Vector2(0, gameRect.top - playerPos.y);
 
     final y = unitDir.y / unitDir.x.abs() * gameRect.width / 2;
     final x = unitDir.x > 0 ? gameRect.right : gameRect.left;
