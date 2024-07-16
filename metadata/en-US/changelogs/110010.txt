@@ -1,0 +1,3 @@
+• The aim guide now shows where the bullets will bounce off the wall.
+• When you return to the game from another app, the grace period for ads is reset.
+• Added a "Restore purchases" button in the shop.

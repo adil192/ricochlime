@@ -1,0 +1,3 @@
+• La guía de puntería ahora muestra dónde rebotarán las balas en la pared.
+• Cuando regresas al juego desde otra aplicación, el período de gracia para los anuncios se restablece.
+• Se agregó un botón "Restaurar compras" en la tienda.
