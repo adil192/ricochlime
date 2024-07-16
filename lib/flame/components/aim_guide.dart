@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
+import 'package:ricochlime/flame/components/walls.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
 /// A component that draws a dotted line
@@ -24,9 +25,6 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   /// The maximum number of dots to be drawn.
   static const _maxDots = 20;
 
-  /// A time value between 0 and 1 used to animate the aim guide.
-  double t = 0;
-
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -39,14 +37,6 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   }
 
   @override
-  void update(double dt) {
-    t = (RicochlimeGame.reduceMotion || RicochlimeGame.reproducibleGoldenMode)
-        ? 0.5
-        : (t + dt) % 1;
-    super.update(dt);
-  }
-
-  @override
   void render(Canvas canvas) {
     super.render(canvas);
 
@@ -55,29 +45,34 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
       return;
     }
 
+    const gameInset = Bullet.radius + wallInset;
     const gameRect = Rect.fromLTRB(
-      Bullet.radius,
-      Bullet.radius,
-      RicochlimeGame.expectedWidth - Bullet.radius,
-      RicochlimeGame.expectedHeight - Bullet.radius,
+      gameInset,
+      gameInset,
+      RicochlimeGame.expectedWidth - gameInset,
+      RicochlimeGame.expectedHeight - gameInset,
     );
 
-    /// The offset between two consecutive dots.
-    final dotDeltaPosition = aimDetails.unitDir.toOffset() * _dotInterval;
+    /// The position where the aim guide hits the left or right wall,
+    /// relative to the player.
+    final reflectionPoint = aimDetails.reflectionPoint(position, gameRect);
+    final reflectionDist = reflectionPoint.length;
 
-    /// The dot's position relative to the player.
-    var dotLocalPosition = dotDeltaPosition * t;
+    final numDotsTotal = (aimDetails.aimLength * _maxDots).ceil();
+    final numDotsBeforeReflection = (reflectionDist / _dotInterval).floor();
+    final numDotsAfterReflection = numDotsTotal - numDotsBeforeReflection;
 
-    /// The dot's position in game coordinates.
-    var dotGlobalPosition = position.toOffset() + dotLocalPosition;
+    final adjustedDotInterval = reflectionDist / numDotsBeforeReflection;
+    final dotDelta = aimDetails.unitDir * adjustedDotInterval;
+    for (double dot = 0; dot < numDotsBeforeReflection; dot++) {
+      final dotPosition = dotDelta * dot;
+      Bullet.drawBullet(canvas, dotPosition, opacity: 1);
+    }
 
-    for (var dot = 0; dot < _maxDots * aimDetails.aimLength; dot++) {
-      dotLocalPosition += dotDeltaPosition;
-      dotGlobalPosition += dotDeltaPosition;
-
-      Bullet.drawBullet(canvas, dotLocalPosition.toVector2(), opacity: 0.9);
-
-      if (!gameRect.contains(dotGlobalPosition)) break;
+    dotDelta.x *= -1; // reflect
+    for (double dot = 0; dot < numDotsAfterReflection; dot++) {
+      final dotPosition = reflectionPoint + dotDelta * dot;
+      Bullet.drawBullet(canvas, dotPosition, opacity: 0.8);
     }
   }
 
@@ -169,4 +164,15 @@ class AimDetails {
   /// This is used to let the player cancel the aim
   /// by moving the mouse to the other side of the player.
   bool mouseBelowPlayer;
+
+  /// Returns the point (relative to the player)
+  /// where the aim guide hits the left or right wall,
+  /// beginning from the player's position and in the direction of [unitDir].
+  Vector2 reflectionPoint(Vector2 playerPos, Rect gameRect) {
+    if (unitDir.x == 0) return Vector2(0, double.infinity);
+
+    final y = unitDir.y / unitDir.x.abs() * gameRect.width / 2;
+    final x = unitDir.x > 0 ? gameRect.right : gameRect.left;
+    return Vector2(x - playerPos.x, y);
+  }
 }
