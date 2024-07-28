@@ -6,6 +6,7 @@ import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/ads/age_dialog.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
+import 'package:ricochlime/nes/ricochlime_icons.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/version.dart';
 
@@ -199,6 +200,40 @@ class SettingsPage extends StatelessWidget {
                   );
                 },
                 child: Text(t.settingsPage.showUndoButton),
+              ),
+            ),
+          ),
+
+          // Whether to show reflection in the aim guide
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ValueListenableBuilder(
+                valueListenable: Prefs.showReflectionInAimGuide,
+                builder: (context, _, child) {
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: NesIcon(
+                        iconData: Prefs.showReflectionInAimGuide.value
+                            ? RicochlimeIcons.aimGuideWithReflection
+                            : RicochlimeIcons.aimGuideWithoutReflection,
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.showReflectionInAimGuide.value,
+                        onChange: (value) =>
+                            Prefs.showReflectionInAimGuide.value = value,
+                      ),
+                      onTap: () => Prefs.showReflectionInAimGuide.value =
+                          !Prefs.showReflectionInAimGuide.value,
+                    ),
+                  );
+                },
+                child: Text(t.settingsPage.showReflectionInAimGuide),
               ),
             ),
           ),

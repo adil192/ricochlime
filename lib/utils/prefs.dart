@@ -36,7 +36,7 @@ abstract class Prefs {
 
   static late final PlainPref<double> bgmVolume;
 
-  static late final PlainPref<bool> showUndoButton;
+  static late final PlainPref<bool> showUndoButton, showReflectionInAimGuide;
 
   static late final PlainPref<int> coins;
   static late final PlainPref<Color> bulletColor;
@@ -82,6 +82,7 @@ abstract class Prefs {
     bgmVolume = PlainPref('bgmVolume', 0);
 
     showUndoButton = PlainPref('showUndoButton', true);
+    showReflectionInAimGuide = PlainPref('showReflectionInAimGuide', true);
 
     coins = PlainPref('coins', 0);
     bulletColor = PlainPref('bulletColor', ShopItems.bulletColors.first.color);

@@ -9,6 +9,7 @@ playPage:
   undo(OUTDATED): Deshacer movimiento
   highScore(OUTDATED): "Mejor: $p"
 settingsPage:
+  showReflectionInAimGuide(OUTDATED): Mostrar reflejo en la guía de objetivos.
   ads(OUTDATED): Anuncios
   hyperlegibleFont(OUTDATED): Fuente fácil de leer
   biggerBullets(OUTDATED): balas mas grandes

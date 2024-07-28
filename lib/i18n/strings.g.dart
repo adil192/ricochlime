@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 193 (64 per locale)
+/// Strings: 196 (65 per locale)
 ///
-/// Built on 2024-07-11 at 17:16 UTC
+/// Built on 2024-07-28 at 11:47 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -195,6 +195,7 @@ class _StringsSettingsPageEn {
 	String get hyperlegibleFont => 'Easy-to-read font';
 	String get bgmVolume => 'Bg music volume';
 	String get showUndoButton => 'Allow undoing moves';
+	String get showReflectionInAimGuide => 'Show reflection in aim guide';
 	String get fasterPageTransitions => 'Faster page transitions';
 	String get biggerBullets => 'Bigger bullets';
 	String get maxFps => 'Max FPS';
@@ -501,6 +502,7 @@ class _StringsShopPageEs extends _StringsShopPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get restorePurchases => 'Restaurar las compras';
 	@override String get premium => 'De primera calidad';
 	@override String get removeAdsForever => 'Eliminar anuncios para siempre';
 	@override String get bulletShapes => 'Formas de bala';
@@ -699,6 +701,7 @@ class _StringsShopPageKk extends _StringsShopPageEn {
 	@override final _StringsKk _root; // ignore: unused_field
 
 	// Translations
+	@override String get restorePurchases => 'Сатып алуларды қалпына келтіріңіз';
 	@override String get premium => 'Премиум';
 	@override String get removeAdsForever => 'Жарнамаларды біржола алып тастаңыз';
 	@override String get bulletShapes => 'Оқ пішіндері';
