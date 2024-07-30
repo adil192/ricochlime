@@ -1,0 +1,78 @@
+appName: Рикошлим
+homePage:
+  playButton: Играть
+  shopButton: Купить
+  settingsButton: Настройки
+  tutorialButton: Как играть
+playPage:
+  highScore: "Лучший: $p"
+  undo: Отменить бросок
+  coins: Монетки
+settingsPage:
+  title: Настройки
+  ads: Реклама
+  gameplay: Игра
+  accessibility: Доступность
+  adConsent: Изменить согласие с рекламой
+  hyperlegibleFont: Большой шрифт
+  bgmVolume: Громкость фоновой музыки
+  showUndoButton: Разрешить отмену бросков
+  showReflectionInAimGuide: Показывать отскок в прицельной траектории
+  fasterPageTransitions: Faster page transitions
+  biggerBullets: Большие мячики
+  maxFps: Максимальный FPS
+  appInfo: О программе
+  licenseNotice: |-
+    Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
+    This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
+ageDialog:
+  yourAge: Ваш возраст
+  letMeGuessYourAge: Давайте-ка угадаю ваш возраст
+  unknown: Неизвестно
+  reason: Нам нужно знать ваш возраст чтобы знать какую рекламу показывать. Это не влияет на саму игру.
+  guessNumber: Угадайте число \#$n
+  areYou: Вам $age лет?
+  younger: Не, я моложе
+  older: Нет, я старше
+  yesMyAgeIs: Да, мне $age лет
+  reset: Сбросить
+  howOldAreYou: Сколько вам лет?
+  invalidAge: Пожалуйста введите ваш возраст
+  useMinigame: Поиграть в угадайку
+  useSimpleInput: Ввести вручную
+gameOverPage:
+  title: Игра окончена!
+  highScoreNotBeaten: Вы заработали $p очков!
+  highScoreBeaten(rich): Ваше наилучшее достижение теперь $pOld $pNew очков!
+  continueWithCoins: Продолжить за 100
+  restartGameButton: Перезапустить игру
+  homeButton: На главную
+adWarning:
+  getCoins(rich): Получить $c 100 после этой рекламы ($t)
+restartGameDialog:
+  title: Перезапустить игру?
+  areYouSure: Вы уверену что хотите начать снова? Вы не сможете вернуться
+  waitCancel: Подождите, я передумал!
+  yesImSure: Ну конечно!
+tutorialPage:
+  tutorial: Как играть
+  dragAndRelease: Defeat the monsters by dragging to aim and releasing to shoot.
+  pointAndClick: Defeat the monsters by moving your mouse to aim and clicking to shoot.
+  goldMonsters: Убив золотого монстра получаете монетку.
+  greenMonsters: Убив зелёного монстра получаете дополнительный мячик.
+  bounceOffWalls: Bounce your shots off the walls to hit the most monsters.
+  tapSpeedUp: Прикоснитесь к экрану чтобы ускорить ваш выстрел.
+  skullLine: A monster that reaches the skull line means game over if you don't defeat it in the next turn.
+  moreMonsters: More rows of monsters will spawn each turn as you progress, so the skull line will move up.
+  useCoinsInShop: Save up coins to unlock new items in the shop...
+  orUseCoinsToContinue: ...or use them to continue after a game over.
+shopPage:
+  title: Магазин
+  bulletColors: Цвета мячика
+  bulletShapes: Формы мячика
+  premium: Премиум
+  removeAdsForever: Удалить рекламу навсегда
+  restorePurchases: Востановить покупки
+common:
+  cancel: Отмена
+  ok: Окей
