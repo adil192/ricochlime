@@ -156,9 +156,7 @@ class ShopPage extends StatelessWidget {
                                 const SizedBox(width: 8),
                                 switch (state) {
                                   IAPState.unpurchased => Text(
-                                      RicochlimeProduct
-                                              .removeAdsForever.price ??
-                                          '?',
+                                      RicochlimeProduct.removeAdsForever.price,
                                       style: const TextStyle(fontSize: 20),
                                     ),
                                   IAPState.purchasedAndEnabled => NesCheckBox(

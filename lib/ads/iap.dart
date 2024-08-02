@@ -23,7 +23,9 @@ enum RicochlimeProduct {
     return null;
   }
 
-  String? get price => _details[this]?.price;
+  /// The price of the product, formatted with currency symbol ("$0.99").
+  /// If the product details are not loaded yet, returns "?".
+  String get price => _details[this]?.price ?? '?';
   static Map<RicochlimeProduct, ProductDetails> _details = {};
 
   PlainPref<IAPState> get state => _states[this]!;

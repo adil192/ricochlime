@@ -17,7 +17,7 @@ enum RicochlimeProduct {
     return null;
   }
 
-  String? get price => '?';
+  String get price => '?';
 
   PlainPref<IAPState> get state => _states[this]!;
   static late final Map<RicochlimeProduct, PlainPref<IAPState>> _states;
