@@ -134,9 +134,8 @@ class ShopPage extends StatelessWidget {
                                 NesButtonType.normal,
                             },
                             onPressed: switch (state) {
-                              IAPState.unpurchased => () =>
-                                  RicochlimeIAP.buyNonConsumable(
-                                      RicochlimeProduct.removeAdsForever),
+                              IAPState.unpurchased => () => RicochlimeIAP.buy(
+                                  RicochlimeProduct.removeAdsForever),
                               IAPState.purchasedAndEnabled => () =>
                                   RicochlimeProduct.removeAdsForever.state
                                       .value = IAPState.purchasedAndDisabled,

@@ -1,11 +1,12 @@
 import 'package:ricochlime/utils/prefs.dart';
 
 enum RicochlimeProduct {
-  removeAdsForever('remove_ads_forever');
+  removeAdsForever('remove_ads_forever', consumable: false);
 
-  const RicochlimeProduct(this.id);
+  const RicochlimeProduct(this.id, {required this.consumable});
 
   final String id;
+  final bool consumable;
 
   static final allIds = values.map((product) => product.id).toSet();
 
@@ -31,7 +32,7 @@ abstract final class RicochlimeIAP {
   static Future<void> init() async => RicochlimeProduct._init();
   static void listen() {}
   static void dispose() {}
-  static Future<bool> buyNonConsumable(_) async => false;
+  static Future<bool> buy(_) async => false;
   static Future<void> restorePurchases() async {}
 }
 
