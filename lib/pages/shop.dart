@@ -176,6 +176,52 @@ class ShopPage extends StatelessWidget {
                       const SizedBox(height: 8),
                       NesButton(
                         type: NesButtonType.normal,
+                        onPressed: () =>
+                            RicochlimeIAP.buy(RicochlimeProduct.buy1000Coins),
+                        child: Row(
+                          children: [
+                            const CoinIcon(size: 32),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                t.shopPage.buy1000Coins,
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              RicochlimeProduct.buy1000Coins.price,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      NesButton(
+                        type: NesButtonType.normal,
+                        onPressed: () =>
+                            RicochlimeIAP.buy(RicochlimeProduct.buy5000Coins),
+                        child: Row(
+                          children: [
+                            const CoinIcon(size: 32),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                t.shopPage.buy5000Coins,
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              RicochlimeProduct.buy5000Coins.price,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      NesButton(
+                        type: NesButtonType.normal,
                         onPressed: RicochlimeIAP.restorePurchases,
                         child: Row(
                           children: [

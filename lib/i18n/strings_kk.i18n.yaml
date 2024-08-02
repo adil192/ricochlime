@@ -11,11 +11,11 @@ playPage:
 settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау
-  showReflectionInAimGuide(OUTDATED): Мақсат нұсқаулығында рефлексияны көрсетіңіз
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
+  showReflectionInAimGuide(OUTDATED): Мақсат нұсқаулығында рефлексияны көрсетіңіз
   ads(OUTDATED): Жарнамалар
   hyperlegibleFont(OUTDATED): Оқуға оңай шрифт
   biggerBullets(OUTDATED): Үлкенірек оқтар
@@ -67,6 +67,8 @@ tutorialPage:
   orUseCoinsToContinue(OUTDATED): ...немесе оларды ойын аяқталғаннан кейін жалғастыру үшін пайдаланыңыз.
   moreMonsters(OUTDATED): "Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды."
 shopPage:
+  buy5000Coins(OUTDATED): 5000 тиын сатып алыңыз
+  buy1000Coins(OUTDATED): 1000 тиын сатып алыңыз
   restorePurchases(OUTDATED): Сатып алуларды қалпына келтіріңіз
   premium(OUTDATED): Премиум
   removeAdsForever(OUTDATED): Жарнамаларды біржола алып тастаңыз

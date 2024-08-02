@@ -76,6 +76,8 @@ es:
     premium(OUTDATED): Premium
     removeAdsForever(OUTDATED): Remove ads forever
     restorePurchases(OUTDATED): Restore purchases
+    buy1000Coins(OUTDATED): Buy 1000 coins
+    buy5000Coins(OUTDATED): Buy 5000 coins
   common:
     cancel(OUTDATED): Cancel
     ok(OUTDATED): Okay
@@ -127,4 +129,9 @@ kk:
     premium(OUTDATED): Premium
     removeAdsForever(OUTDATED): Remove ads forever
     restorePurchases(OUTDATED): Restore purchases
+    buy1000Coins(OUTDATED): Buy 1000 coins
+    buy5000Coins(OUTDATED): Buy 5000 coins
 ru:
+  shopPage:
+    buy1000Coins(OUTDATED): Buy 1000 coins
+    buy5000Coins(OUTDATED): Buy 5000 coins

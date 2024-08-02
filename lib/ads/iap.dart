@@ -7,7 +7,10 @@ import 'package:logging/logging.dart';
 import 'package:ricochlime/utils/prefs.dart';
 
 enum RicochlimeProduct {
-  removeAdsForever('remove_ads_forever', consumable: false);
+  removeAdsForever('remove_ads_forever', consumable: false),
+  buy1000Coins('buy_1000_coins', consumable: true),
+  buy5000Coins('buy_5000_coins', consumable: true),
+  ;
 
   const RicochlimeProduct(this.id, {required this.consumable});
 
@@ -139,6 +142,12 @@ abstract final class RicochlimeIAP {
         }
 
         state.value = IAPState.purchasedAndEnabled;
+
+      case RicochlimeProduct.buy1000Coins:
+        Prefs.addCoins(1000, allowOverMax: true);
+
+      case RicochlimeProduct.buy5000Coins:
+        Prefs.addCoins(5000, allowOverMax: true);
     }
   }
 }

@@ -73,6 +73,8 @@ shopPage:
   premium: Premium
   removeAdsForever: Remove ads forever
   restorePurchases: Restore purchases
+  buy1000Coins: Buy 1000 coins
+  buy5000Coins: Buy 5000 coins
 common:
   cancel: Cancel
   ok: Okay

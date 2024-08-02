@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 4
-/// Strings: 264 (66 per locale)
+/// Strings: 272 (68 per locale)
 ///
-/// Built on 2024-08-02 at 02:47 UTC
+/// Built on 2024-08-02 at 03:04 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -310,6 +310,8 @@ class _StringsShopPageEn {
 	String get premium => 'Premium';
 	String get removeAdsForever => 'Remove ads forever';
 	String get restorePurchases => 'Restore purchases';
+	String get buy1000Coins => 'Buy 1000 coins';
+	String get buy5000Coins => 'Buy 5000 coins';
 }
 
 // Path: common
@@ -504,6 +506,8 @@ class _StringsShopPageEs extends _StringsShopPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get buy1000Coins => 'Comprar 1000 monedas';
+	@override String get buy5000Coins => 'Comprar 5000 monedas';
 	@override String get restorePurchases => 'Restaurar las compras';
 	@override String get premium => 'De primera calidad';
 	@override String get removeAdsForever => 'Eliminar anuncios para siempre';
@@ -590,9 +594,9 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	// Translations
 	@override String get title => 'Баптау';
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
-	@override String get showReflectionInAimGuide => 'Мақсат нұсқаулығында рефлексияны көрсетіңіз';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get showReflectionInAimGuide => 'Мақсат нұсқаулығында рефлексияны көрсетіңіз';
 	@override String get ads => 'Жарнамалар';
 	@override String get hyperlegibleFont => 'Оқуға оңай шрифт';
 	@override String get biggerBullets => 'Үлкенірек оқтар';
@@ -704,6 +708,8 @@ class _StringsShopPageKk extends _StringsShopPageEn {
 	@override final _StringsKk _root; // ignore: unused_field
 
 	// Translations
+	@override String get buy5000Coins => '5000 тиын сатып алыңыз';
+	@override String get buy1000Coins => '1000 тиын сатып алыңыз';
 	@override String get restorePurchases => 'Сатып алуларды қалпына келтіріңіз';
 	@override String get premium => 'Премиум';
 	@override String get removeAdsForever => 'Жарнамаларды біржола алып тастаңыз';
@@ -910,6 +916,8 @@ class _StringsShopPageRu extends _StringsShopPageEn {
 	@override String get premium => 'Премиум';
 	@override String get removeAdsForever => 'Удалить рекламу навсегда';
 	@override String get restorePurchases => 'Востановить покупки';
+	@override String get buy1000Coins => 'Купить 1000 монет';
+	@override String get buy5000Coins => 'Купить 5000 монет';
 }
 
 // Path: common

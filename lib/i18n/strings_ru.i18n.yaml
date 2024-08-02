@@ -73,6 +73,8 @@ shopPage:
   premium: Премиум
   removeAdsForever: Удалить рекламу навсегда
   restorePurchases: Востановить покупки
+  buy1000Coins(OUTDATED): Купить 1000 монет
+  buy5000Coins(OUTDATED): Купить 5000 монет
 common:
   cancel: Отмена
   ok: Окей
