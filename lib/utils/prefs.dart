@@ -53,7 +53,7 @@ abstract class Prefs {
       totalMovesUndone;
 
   static void addCoins(int toAdd, {bool allowOverMax = false}) {
-    const maxCoins = 10 * 1000;
+    const maxCoins = 100 * 1000;
     late final sum = coins.value + toAdd;
     if (allowOverMax) {
       Prefs.totalCoinsGained.value += toAdd;
