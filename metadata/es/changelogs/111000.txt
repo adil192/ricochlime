@@ -1,0 +1,3 @@
+• Se agregó una configuración para ocultar la pista de reflexión en la guía de puntería
+• Se agregaron algunas opciones para comprar monedas en la tienda
+• Nueva traducción al ruso, gracias a @yurtpage en GitHub

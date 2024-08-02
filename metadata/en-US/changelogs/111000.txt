@@ -1,0 +1,3 @@
+• Added a setting to hide the reflection hint in the aim guide
+• Added some options to buy coins in the shop
+• New Russian translation, thanks to @yurtpage on GitHub

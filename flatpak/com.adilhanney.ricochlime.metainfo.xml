@@ -74,6 +74,15 @@
     </branding>
 
     <releases>
+        <release version="1.11.0" date="2024-08-02">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.0</url>
+            <description>
+                <ul>
+                    <li>Added a setting to hide the reflection hint in the aim guide</li>
+                    <li>New Russian translation, thanks to @yurtpage on GitHub</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.10.1" date="2024-07-16">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.10.1</url>
             <description>
