@@ -115,10 +115,21 @@ abstract final class RicochlimeIAP {
     assert(purchaseDetails.status == PurchaseStatus.purchased ||
         purchaseDetails.status == PurchaseStatus.restored);
 
-    switch (RicochlimeProduct.fromId(purchaseDetails.productID)) {
-      case null:
-        _log.severe('Unknown product to deliver: ${purchaseDetails.productID}');
+    final product = RicochlimeProduct.fromId(purchaseDetails.productID);
+    if (product == null) {
+      _log.severe('Unknown product to deliver: ${purchaseDetails.productID}');
+      return;
+    }
 
+    if (product.consumable &&
+        purchaseDetails.status == PurchaseStatus.restored) {
+      // Don't restore consumable purchases (they've already been consumed)
+      _log.warning('Attempted to restore consumable purchase: '
+          '${purchaseDetails.productID}');
+      return;
+    }
+
+    switch (product) {
       case RicochlimeProduct.removeAdsForever:
         final state = RicochlimeProduct.removeAdsForever.state;
 
