@@ -95,10 +95,11 @@ void main() async {
       print('${' ' * stepPrefix.length}  - Selected $nearestLocaleCode');
     }
 
-    List<String> translations;
+    String translatedChangelog;
     try {
-      translations = await translator
-          .translateLingva(englishChangelog, 'en', nearestLocaleCode)
+      translatedChangelog = await translator
+          .translateSimply(englishChangelog, from: 'en', to: nearestLocaleCode)
+          .then((translation) => translation.translations.text)
           .timeout(const Duration(seconds: 5));
     } catch (e) {
       print('${' ' * stepPrefix.length}  ! Translation failed, skipping...');
@@ -106,7 +107,6 @@ void main() async {
       continue;
     }
 
-    var translatedChangelog = translations.first;
     if (!translatedChangelog.endsWith('\n')) {
       // translations sometimes don't end with a newline
       translatedChangelog += '\n';

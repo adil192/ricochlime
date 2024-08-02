@@ -133,10 +133,13 @@ Future<String?> translateString(
     '  Translating into $languageCode: '
     '${english.length > 20 ? '${english.substring(0, 20)}...' : english}',
   );
-  List<String> translations;
+
+  String translatedText;
   try {
-    translations = await translator
-        .translateLingva(english, 'en', _nearestLocaleCode(languageCode))
+    translatedText = await translator
+        .translateSimply(english,
+            from: 'en', to: _nearestLocaleCode(languageCode))
+        .then((translation) => translation.translations.text)
         .timeout(const Duration(seconds: 10));
   } catch (e) {
     print('    Translation failed: $e');
@@ -144,7 +147,6 @@ Future<String?> translateString(
     return null;
   }
 
-  final translatedText = translations.first;
   final errorTexts = [
     'Invalid request',
     'None is not supported',
@@ -153,7 +155,7 @@ Future<String?> translateString(
   if (errorTexts.any((error) => translatedText.contains(error))) {
     print('    Translation failed: $translatedText');
     errorOccurredInTranslatingTree = true;
-    return english;
+    return null;
   }
 
   return translatedText;
