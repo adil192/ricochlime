@@ -20,7 +20,7 @@ es:
     hyperlegibleFont(OUTDATED): Easy-to-read font
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
-    showReflectionInAimGuide: Show reflection in aim guide
+    showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
     fasterPageTransitions(OUTDATED): Faster page transitions
     biggerBullets(OUTDATED): Bigger bullets
     maxFps(OUTDATED): Max FPS
@@ -92,7 +92,7 @@ kk:
     hyperlegibleFont(OUTDATED): Easy-to-read font
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
-    showReflectionInAimGuide: Show reflection in aim guide
+    showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
     fasterPageTransitions(OUTDATED): Faster page transitions
     biggerBullets(OUTDATED): Bigger bullets
     maxFps(OUTDATED): Max FPS
@@ -127,3 +127,4 @@ kk:
     premium(OUTDATED): Premium
     removeAdsForever(OUTDATED): Remove ads forever
     restorePurchases(OUTDATED): Restore purchases
+ru:
