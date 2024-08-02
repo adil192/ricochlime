@@ -8,4 +8,5 @@ final Map<String, String> localeNames = {
   'en': 'English',
   'es': 'español',
   'kk': 'қазақ тілі',
+  'ru': 'русский',
 };
