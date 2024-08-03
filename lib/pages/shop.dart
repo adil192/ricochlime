@@ -10,6 +10,9 @@ import 'package:ricochlime/utils/shop_items.dart';
 class ShopPage extends StatelessWidget {
   const ShopPage({super.key});
 
+  /// User can pay 10k coins instead of real money to remove ads forever.
+  static const removeAdsForeverCoinPrice = 10 * 1000;
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
@@ -136,8 +139,19 @@ class ShopPage extends StatelessWidget {
                                   NesButtonType.normal,
                               },
                               onPressed: switch (state) {
-                                IAPState.unpurchased => () => RicochlimeIAP.buy(
-                                    RicochlimeProduct.removeAdsForever),
+                                IAPState.unpurchased => () {
+                                    if (Prefs.coins.value >=
+                                        removeAdsForeverCoinPrice) {
+                                      Prefs.coins.value -=
+                                          removeAdsForeverCoinPrice;
+                                      RicochlimeProduct.removeAdsForever.state
+                                          .value = IAPState.purchasedAndEnabled;
+                                    } else if (RicochlimeIAP
+                                        .inAppPurchasesSupported) {
+                                      RicochlimeIAP.buy(
+                                          RicochlimeProduct.removeAdsForever);
+                                    }
+                                  },
                                 IAPState.purchasedAndEnabled => () =>
                                     RicochlimeProduct.removeAdsForever.state
                                         .value = IAPState.purchasedAndDisabled,
@@ -157,10 +171,39 @@ class ShopPage extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 8),
                                   switch (state) {
-                                    IAPState.unpurchased => Text(
-                                        RicochlimeProduct
-                                            .removeAdsForever.price,
-                                        style: const TextStyle(fontSize: 20),
+                                    IAPState.unpurchased =>
+                                      ValueListenableBuilder(
+                                        valueListenable: Prefs.coins,
+                                        builder: (context, coins, _) {
+                                          if (coins >=
+                                                  removeAdsForeverCoinPrice ||
+                                              !RicochlimeIAP
+                                                  .inAppPurchasesSupported) {
+                                            return Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const CoinIcon(size: 20),
+                                                Text(
+                                                  // ignore: prefer_interpolation_to_compose_strings
+                                                  (removeAdsForeverCoinPrice /
+                                                              1000)
+                                                          .toStringAsFixed(1) +
+                                                      'k',
+                                                  style: const TextStyle(
+                                                      fontSize: 20),
+                                                ),
+                                              ],
+                                            );
+                                          } else {
+                                            return Text(
+                                              RicochlimeProduct
+                                                  .removeAdsForever.price,
+                                              style:
+                                                  const TextStyle(fontSize: 20),
+                                            );
+                                          }
+                                        },
                                       ),
                                     IAPState.purchasedAndEnabled => NesCheckBox(
                                         value: true,
