@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 4
-/// Strings: 272 (68 per locale)
+/// Strings: 276 (69 per locale)
 ///
-/// Built on 2024-08-02 at 03:04 UTC
+/// Built on 2024-08-03 at 15:19 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -193,6 +193,7 @@ class _StringsSettingsPageEn {
 	String get gameplay => 'Gameplay';
 	String get accessibility => 'Accessibility';
 	String get adConsent => 'Change ad consent';
+	String get removeAdsInShop => 'Want to remove ads? Check out the options in the shop!';
 	String get hyperlegibleFont => 'Easy-to-read font';
 	String get bgmVolume => 'Bg music volume';
 	String get showUndoButton => 'Allow undoing moves';
@@ -390,6 +391,7 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get removeAdsInShop => '¿Quieres eliminar los anuncios? ¡Consulta las opciones en la tienda!';
 	@override String get showReflectionInAimGuide => 'Mostrar reflejo en la guía de objetivos.';
 	@override String get ads => 'Anuncios';
 	@override String get hyperlegibleFont => 'Fuente fácil de leer';
@@ -594,6 +596,7 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	// Translations
 	@override String get title => 'Баптау';
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
+	@override String get removeAdsInShop => 'Жарнамаларды өшіргіңіз келе ме? Дүкенде опцияларды тексеріңіз!';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
 	@override String get showReflectionInAimGuide => 'Мақсат нұсқаулығында рефлексияны көрсетіңіз';
@@ -799,6 +802,7 @@ class _StringsSettingsPageRu extends _StringsSettingsPageEn {
 	@override String get gameplay => 'Игра';
 	@override String get accessibility => 'Доступность';
 	@override String get adConsent => 'Изменить согласие с рекламой';
+	@override String get removeAdsInShop => 'Хотите удалить рекламу? Посмотрите варианты в магазине!';
 	@override String get hyperlegibleFont => 'Большой шрифт';
 	@override String get bgmVolume => 'Громкость фоновой музыки';
 	@override String get showUndoButton => 'Разрешить отмену бросков';

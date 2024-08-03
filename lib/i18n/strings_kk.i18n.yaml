@@ -11,6 +11,7 @@ playPage:
 settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау
+  removeAdsInShop(OUTDATED): "Жарнамаларды өшіргіңіз келе ме? Дүкенде опцияларды тексеріңіз!"
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney

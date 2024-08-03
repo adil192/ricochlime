@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/ads/age_dialog.dart';
+import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/ricochlime_icons.dart';
 import 'package:ricochlime/utils/prefs.dart';
@@ -27,6 +28,11 @@ class SettingsPage extends StatelessWidget {
       right: 16,
       top: 16,
       bottom: 4,
+    );
+    const paragraphPadding = EdgeInsets.only(
+      left: 16,
+      right: 16,
+      top: 8,
     );
     const listTileContentPadding = EdgeInsets.symmetric(
       horizontal: 16,
@@ -132,6 +138,18 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
             ),
+            if (switch (RicochlimeProduct.removeAdsForever.state.value) {
+              IAPState.unpurchased => true,
+              IAPState.purchasedAndDisabled => true,
+              IAPState.purchasedAndEnabled => false,
+            })
+              Padding(
+                padding: paragraphPadding,
+                child: Text(
+                  t.settingsPage.removeAdsInShop,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
           ],
 
           Padding(

@@ -17,6 +17,7 @@ es:
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
     adConsent(OUTDATED): Change ad consent
+    removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
     hyperlegibleFont(OUTDATED): Easy-to-read font
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
@@ -91,6 +92,7 @@ kk:
     ads(OUTDATED): Ads
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
+    removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
     hyperlegibleFont(OUTDATED): Easy-to-read font
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
@@ -132,6 +134,8 @@ kk:
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins
 ru:
+  settingsPage:
+    removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
   shopPage:
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins
