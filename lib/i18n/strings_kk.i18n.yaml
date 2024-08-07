@@ -11,11 +11,12 @@ playPage:
 settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау
-  removeAdsInShop(OUTDATED): "Жарнамаларды өшіргіңіз келе ме? Дүкенде опцияларды тексеріңіз!"
+  stylizedPageTransitions(OUTDATED): Стильденген беттердің ауысуы
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
+  removeAdsInShop(OUTDATED): "Жарнамаларды өшіргіңіз келе ме? Дүкенде опцияларды тексеріңіз!"
   showReflectionInAimGuide(OUTDATED): Мақсат нұсқаулығында рефлексияны көрсетіңіз
   ads(OUTDATED): Жарнамалар
   hyperlegibleFont(OUTDATED): Оқуға оңай шрифт

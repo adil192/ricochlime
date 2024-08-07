@@ -14,8 +14,8 @@ settingsPage:
   gameplay: Игра
   accessibility: Доступность
   adConsent: Изменить согласие с рекламой
-  removeAdsInShop(OUTDATED): "Хотите удалить рекламу? Посмотрите варианты в магазине!"
   hyperlegibleFont: Большой шрифт
+  stylizedPageTransitions(OUTDATED): Стилизованные переходы страниц
   bgmVolume: Громкость фоновой музыки
   showUndoButton: Разрешить отмену бросков
   showReflectionInAimGuide: Показывать отскок в прицельной траектории
@@ -25,6 +25,7 @@ settingsPage:
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
+  removeAdsInShop(OUTDATED): "Хотите удалить рекламу? Посмотрите варианты в магазине!"
 ageDialog:
   yourAge: Ваш возраст
   letMeGuessYourAge: Давайте-ка угадаю ваш возраст

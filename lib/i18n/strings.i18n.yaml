@@ -16,6 +16,7 @@ settingsPage:
   adConsent: Change ad consent
   removeAdsInShop: "Want to remove ads? Check out the options in the shop!"
   hyperlegibleFont: Easy-to-read font
+  stylizedPageTransitions: Stylized page transitions
   bgmVolume: Bg music volume
   showUndoButton: Allow undoing moves
   showReflectionInAimGuide: Show reflection in aim guide

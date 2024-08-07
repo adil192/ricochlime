@@ -19,6 +19,7 @@ es:
     adConsent(OUTDATED): Change ad consent
     removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
     hyperlegibleFont(OUTDATED): Easy-to-read font
+    stylizedPageTransitions(OUTDATED): Stylized page transitions
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
@@ -93,6 +94,7 @@ kk:
     accessibility(OUTDATED): Accessibility
     removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
     hyperlegibleFont(OUTDATED): Easy-to-read font
+    stylizedPageTransitions(OUTDATED): Stylized page transitions
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
@@ -134,6 +136,7 @@ kk:
 ru:
   settingsPage:
     removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
+    stylizedPageTransitions(OUTDATED): Stylized page transitions
   shopPage:
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins

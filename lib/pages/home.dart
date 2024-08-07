@@ -166,7 +166,8 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
   }
 
   void onPressed() {
-    final route = MediaQuery.disableAnimationsOf(context)
+    final route = (!Prefs.stylizedPageTransitions.value ||
+            MediaQuery.disableAnimationsOf(context))
         ? PageRouteBuilder(
             pageBuilder: widget.openBuilder,
           )

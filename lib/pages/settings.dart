@@ -335,6 +335,39 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
+          // Stylized page transitions
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ValueListenableBuilder(
+                valueListenable: Prefs.stylizedPageTransitions,
+                builder: (context, _, child) {
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: NesIcon(
+                        iconData: NesIcons.energy,
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.stylizedPageTransitions.value,
+                        onChange: (value) {
+                          Prefs.stylizedPageTransitions.value = value;
+                        },
+                      ),
+                      onTap: () => Prefs.stylizedPageTransitions.value =
+                          !Prefs.stylizedPageTransitions.value,
+                    ),
+                  );
+                },
+                child: Text(t.settingsPage.stylizedPageTransitions),
+              ),
+            ),
+          ),
+
           // Bigger bullets
           Padding(
             padding: listTilePadding,

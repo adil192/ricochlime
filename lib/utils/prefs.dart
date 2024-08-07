@@ -29,6 +29,7 @@ abstract class Prefs {
   static late final PlainPref<int> highScore;
 
   static late final PlainPref<bool> hyperlegibleFont;
+  static late final PlainPref<bool> stylizedPageTransitions;
   static late final PlainPref<bool> biggerBullets;
 
   static late final PlainPref<int?> birthYear;
@@ -73,6 +74,7 @@ abstract class Prefs {
     highScore = PlainPref('highScore', 0);
 
     hyperlegibleFont = PlainPref('hyperlegibleFont', false);
+    stylizedPageTransitions = PlainPref('stylizedPageTransitions', true);
     biggerBullets = PlainPref('biggerBullets', false);
 
     birthYear = PlainPref('birthYear', null);
