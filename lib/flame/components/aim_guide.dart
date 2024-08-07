@@ -18,6 +18,7 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   AimDetails? aimDetails;
 
   Vector2? lastMousePosition;
+  int lastNumDotsBeforeReflection = 0;
 
   /// Dots will be drawn in the direction we're aiming
   /// every [_dotInterval] units.
@@ -58,12 +59,19 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
     /// relative to the player.
     final reflectionPoint = aimDetails.reflectionPoint(position, gameRect);
     final reflectionDist = reflectionPoint.length;
-
     final numDotsTotal = (aimDetails.aimLength * _maxDots).ceil();
-    final numDotsBeforeReflection = min(
-      numDotsTotal,
-      (reflectionDist / _dotInterval).floor(),
-    );
+
+    final int numDotsBeforeReflection;
+    final numDotsBeforeReflectionUnrounded =
+        min(numDotsTotal, reflectionDist / _dotInterval);
+    if ((numDotsBeforeReflectionUnrounded - lastNumDotsBeforeReflection).abs() <
+        0.5) {
+      numDotsBeforeReflection = lastNumDotsBeforeReflection;
+    } else {
+      numDotsBeforeReflection = numDotsBeforeReflectionUnrounded.floor();
+      lastNumDotsBeforeReflection = numDotsBeforeReflection;
+    }
+
     final numDotsAfterReflection = min(
       numDotsTotal - numDotsBeforeReflection,
       Prefs.showReflectionInAimGuide.value ? numDotsTotal : 1,
