@@ -19,7 +19,6 @@ settingsPage:
   bgmVolume: Bg music volume
   showUndoButton: Allow undoing moves
   showReflectionInAimGuide: Show reflection in aim guide
-  fasterPageTransitions: Faster page transitions
   biggerBullets: Bigger bullets
   maxFps: Max FPS
   appInfo: App info
@@ -32,39 +31,39 @@ ageDialog:
   unknown: Unknown
   reason: We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.
   guessNumber: Guess \#$n
-  areYou: Are you $age?
-  younger: No, I'm younger
-  older: No, I'm older
-  yesMyAgeIs: Yes, I'm $age
+  areYou: "Are you $age?"
+  younger: "No, I'm younger"
+  older: "No, I'm older"
+  yesMyAgeIs: "Yes, I'm $age"
   reset: Reset
-  howOldAreYou: How old are you?
+  howOldAreYou: "How old are you?"
   invalidAge: Please enter a valid age
   useMinigame: Play the age guessing minigame
   useSimpleInput: I want to enter my age manually
 gameOverPage:
-  title: Game over!
-  highScoreNotBeaten: You scored $p points!
-  highScoreBeaten(rich): Your high score is now $pOld $pNew points!
+  title: "Game over!"
+  highScoreNotBeaten: "You scored $p points!"
+  highScoreBeaten(rich): "Your high score is now $pOld $pNew points!"
   continueWithCoins: 100 to continue
   restartGameButton: Restart game
   homeButton: Home
 adWarning:
   getCoins(rich): Get $c 100 after this ad ($t)
 restartGameDialog:
-  title: Restart game?
-  areYouSure: Are you sure you want to restart? You can't undo this
-  waitCancel: Wait, cancel!
-  yesImSure: Yes I'm sure!
+  title: "Restart game?"
+  areYouSure: "Are you sure you want to restart? You can't undo this"
+  waitCancel: "Wait, cancel!"
+  yesImSure: "Yes I'm sure!"
 tutorialPage:
   tutorial: Tutorial
   dragAndRelease: Defeat the monsters by dragging to aim and releasing to shoot.
   pointAndClick: Defeat the monsters by moving your mouse to aim and clicking to shoot.
-  goldMonsters: After defeating a gold monster, you'll get a coin.
-  greenMonsters: After defeating a green monster, you'll get an extra bullet.
+  goldMonsters: "After defeating a gold monster, you'll get a coin."
+  greenMonsters: "After defeating a green monster, you'll get an extra bullet."
   bounceOffWalls: Bounce your shots off the walls to hit the most monsters.
   tapSpeedUp: Tap the screen to speed up your shots.
   skullLine: A monster that reaches the skull line means game over if you don't defeat it in the next turn.
-  moreMonsters: More rows of monsters will spawn each turn as you progress, so the skull line will move up.
+  moreMonsters: "More rows of monsters will spawn each turn as you progress, so the skull line will move up."
   useCoinsInShop: Save up coins to unlock new items in the shop...
   orUseCoinsToContinue: ...or use them to continue after a game over.
 shopPage:

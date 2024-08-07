@@ -22,7 +22,6 @@ es:
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
-    fasterPageTransitions(OUTDATED): Faster page transitions
     biggerBullets(OUTDATED): Bigger bullets
     maxFps(OUTDATED): Max FPS
     appInfo(OUTDATED): App info
@@ -97,7 +96,6 @@ kk:
     bgmVolume(OUTDATED): Bg music volume
     showUndoButton(OUTDATED): Allow undoing moves
     showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
-    fasterPageTransitions(OUTDATED): Faster page transitions
     biggerBullets(OUTDATED): Bigger bullets
     maxFps(OUTDATED): Max FPS
   ageDialog:

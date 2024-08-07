@@ -172,9 +172,7 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
           )
         : NesVerticalCloseTransition.route<void>(
             pageBuilder: widget.openBuilder,
-            duration: Prefs.fasterPageTransitions.value
-                ? const Duration(milliseconds: 450)
-                : const Duration(milliseconds: 750),
+            duration: const Duration(milliseconds: 500),
           );
     Navigator.of(context).push(route).then((_) {
       // Recalculate the shouldAnimateIcon value

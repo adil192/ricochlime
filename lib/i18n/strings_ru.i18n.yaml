@@ -19,7 +19,6 @@ settingsPage:
   bgmVolume: Громкость фоновой музыки
   showUndoButton: Разрешить отмену бросков
   showReflectionInAimGuide: Показывать отскок в прицельной траектории
-  fasterPageTransitions: Faster page transitions
   biggerBullets: Большие мячики
   maxFps: Максимальный FPS
   appInfo: О программе

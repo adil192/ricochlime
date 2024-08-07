@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 4
-/// Strings: 276 (69 per locale)
+/// Strings: 272 (68 per locale)
 ///
-/// Built on 2024-08-03 at 15:19 UTC
+/// Built on 2024-08-07 at 22:17 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -198,7 +198,6 @@ class _StringsSettingsPageEn {
 	String get bgmVolume => 'Bg music volume';
 	String get showUndoButton => 'Allow undoing moves';
 	String get showReflectionInAimGuide => 'Show reflection in aim guide';
-	String get fasterPageTransitions => 'Faster page transitions';
 	String get biggerBullets => 'Bigger bullets';
 	String get maxFps => 'Max FPS';
 	String get appInfo => 'App info';
@@ -399,7 +398,6 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override String get gameplay => 'Como se Juega';
 	@override String get accessibility => 'Accesibilidad';
 	@override String get maxFps => 'FPS máx.';
-	@override String get fasterPageTransitions => 'Transiciones de página más rápidas';
 	@override String get showUndoButton => 'Permitir deshacer movimientos';
 	@override String get title => 'Ajustes';
 	@override String get adConsent => 'Cambiar el consentimiento de los anuncios';
@@ -606,7 +604,6 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	@override String get gameplay => 'Ойын барысы';
 	@override String get accessibility => 'Қол жетімділік';
 	@override String get maxFps => 'Максималды FPS';
-	@override String get fasterPageTransitions => 'Беттерді жылдамырақ ауыстыру';
 	@override String get showUndoButton => 'Қозғалысты қайтаруға рұқсат беріңіз';
 	@override String get bgmVolume => 'Фондық музыканың дыбыс деңгейі';
 }
@@ -807,7 +804,6 @@ class _StringsSettingsPageRu extends _StringsSettingsPageEn {
 	@override String get bgmVolume => 'Громкость фоновой музыки';
 	@override String get showUndoButton => 'Разрешить отмену бросков';
 	@override String get showReflectionInAimGuide => 'Показывать отскок в прицельной траектории';
-	@override String get fasterPageTransitions => 'Faster page transitions';
 	@override String get biggerBullets => 'Большие мячики';
 	@override String get maxFps => 'Максимальный FPS';
 	@override String get appInfo => 'О программе';

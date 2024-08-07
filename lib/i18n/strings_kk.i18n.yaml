@@ -23,7 +23,6 @@ settingsPage:
   gameplay(OUTDATED): Ойын барысы
   accessibility(OUTDATED): Қол жетімділік
   maxFps(OUTDATED): Максималды FPS
-  fasterPageTransitions(OUTDATED): Беттерді жылдамырақ ауыстыру
   showUndoButton(OUTDATED): Қозғалысты қайтаруға рұқсат беріңіз
   bgmVolume(OUTDATED): Фондық музыканың дыбыс деңгейі
 ageDialog:
