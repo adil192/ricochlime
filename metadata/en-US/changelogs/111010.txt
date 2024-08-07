@@ -1,0 +1,5 @@
+• Page transitions are faster by default and the old "faster page transitions" setting has been removed
+• Disable the new "stylized page transitions" setting to use the system default
+• Improved handling of the aim guide so the number of dots changes less often
+• Allows the remove ads in-app-purchase to be bought for 10k coins instead of real money
+• Added a message in settings about the remove ads in-app-purchase

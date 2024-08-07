@@ -74,6 +74,16 @@
     </branding>
 
     <releases>
+        <release version="1.11.1" date="2024-08-07">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.1</url>
+            <description>
+                <ul>
+                    <li>Page transitions are faster by default and the old "faster page transitions" setting has been removed</li>
+                    <li>Disable the new "stylized page transitions" setting to use the system default</li>
+                    <li>Improved handling of the aim guide so the number of dots changes less often</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.11.0" date="2024-08-02">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.0</url>
             <description>

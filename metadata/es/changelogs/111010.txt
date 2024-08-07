@@ -1,0 +1,4 @@
+• Las transiciones de página son más rápidas de forma predeterminada y se ha eliminado la antigua configuración de "transiciones de página más rápidas"
+• Desactiva la nueva configuración de "transiciones de página estilizadas" para utilizar la configuración predeterminada del sistema
+• Se ha mejorado el manejo de la guía de puntería para que la cantidad de puntos cambie con menos frecuencia
+...
