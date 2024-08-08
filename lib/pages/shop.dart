@@ -125,7 +125,7 @@ class ShopPage extends StatelessWidget {
                   ),
                   SliverList.list(
                     children: [
-                      if (AdState.adsSupported)
+                      if (AdState.adsSupported) ...[
                         ValueListenableBuilder(
                           valueListenable:
                               RicochlimeProduct.removeAdsForever.state,
@@ -220,7 +220,8 @@ class ShopPage extends StatelessWidget {
                             );
                           },
                         ),
-                      const SizedBox(height: 8),
+                        const SizedBox(height: 8),
+                      ],
                       NesButton(
                         type: NesButtonType.normal,
                         onPressed: () =>
