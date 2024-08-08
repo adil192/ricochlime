@@ -28,13 +28,14 @@ enum RicochlimeProduct {
 
   /// The price of the product, formatted with currency symbol ("$0.99").
   /// If the product details are not loaded yet, returns "?".
-  String get price => _details[this]?.price ?? '?';
+  String get price => _details[this]?.price ?? '\$\$';
   bool get isPriceLoaded => _details.containsKey(this);
   static Map<RicochlimeProduct, ProductDetails> _details = {};
 
-  PlainPref<IAPState> get state => _states[this]!;
-  static late final Map<RicochlimeProduct, PlainPref<IAPState>> _states;
-  static void _init() => _states = {
+  PlainPref<IAPState> get state => _states![this]!;
+  static Map<RicochlimeProduct, PlainPref<IAPState>>? _states;
+  @visibleForTesting
+  static void init() => _states ??= {
         for (final product in values)
           product: PlainPref('iap_${product.id}_state', IAPState.unpurchased),
       };
@@ -44,11 +45,15 @@ abstract final class RicochlimeIAP {
   static StreamSubscription<List<PurchaseDetails>>? _subscription;
   static final _log = Logger('RicochlimeIAP');
 
-  static final inAppPurchasesSupported =
+  static final _inAppPurchasesSupported =
       !kIsWeb && (Platform.isAndroid || Platform.isIOS || Platform.isMacOS);
+  @visibleForTesting
+  static bool? forceInAppPurchasesSupported;
+  static bool get inAppPurchasesSupported =>
+      forceInAppPurchasesSupported ?? _inAppPurchasesSupported;
 
   static Future<void> init() async {
-    RicochlimeProduct._init();
+    RicochlimeProduct.init();
 
     if (!inAppPurchasesSupported) return;
 

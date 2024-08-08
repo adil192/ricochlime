@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/ads/ads.dart';
+import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
@@ -85,6 +86,7 @@ void main() {
       ]);
     });
 
+    Prefs.birthYear.value = 2000;
     Prefs.coins.value = 493;
     Prefs.highScore.value = 62;
 
@@ -136,6 +138,10 @@ void _testGame({
   group(goldenFileName, () {
     for (final device in _ScreenshotDevice.values) {
       testWidgets('for ${device.name}', (tester) async {
+        RicochlimeIAP.forceInAppPurchasesSupported = device.enableIAPs;
+        RicochlimeProduct.init();
+        AdState.forceAdsSupported = device.enableAds;
+
         if (gameSave != null) {
           Prefs.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
           if (RicochlimeGame.instance.isLoaded) {
@@ -205,6 +211,7 @@ enum _ScreenshotDevice {
     pixelRatio: 2,
     goldenFolder: '../metadata/en-US/images/macbookScreenshots/',
     frameBuilder: _NoFrame.new,
+    enableIAPs: true,
   ),
   android(
     platform: TargetPlatform.android,
@@ -219,6 +226,8 @@ enum _ScreenshotDevice {
     pixelRatio: 3,
     goldenFolder: '../metadata/en-US/images/olderIphoneScreenshots/',
     frameBuilder: _GenericFrame.olderIphone,
+    enableIAPs: true,
+    enableAds: true,
   ),
   newerIphone(
     platform: TargetPlatform.iOS,
@@ -226,6 +235,8 @@ enum _ScreenshotDevice {
     pixelRatio: 3,
     goldenFolder: '../metadata/en-US/images/newerIphoneScreenshots/',
     frameBuilder: _GenericFrame.newerIphone,
+    enableIAPs: true,
+    enableAds: true,
   ),
   olderIpad(
     platform: TargetPlatform.iOS,
@@ -233,6 +244,8 @@ enum _ScreenshotDevice {
     pixelRatio: 2,
     goldenFolder: '../metadata/en-US/images/olderIpadScreenshots/',
     frameBuilder: _GenericFrame.olderIpad,
+    enableIAPs: true,
+    enableAds: true,
   ),
   newerIpad(
     platform: TargetPlatform.iOS,
@@ -240,6 +253,8 @@ enum _ScreenshotDevice {
     pixelRatio: 2,
     goldenFolder: '../metadata/en-US/images/newerIpadScreenshots/',
     frameBuilder: _GenericFrame.newerIpad,
+    enableIAPs: true,
+    enableAds: true,
   );
 
   const _ScreenshotDevice({
@@ -248,6 +263,8 @@ enum _ScreenshotDevice {
     required this.pixelRatio,
     required this.goldenFolder,
     required this.frameBuilder,
+    this.enableIAPs = false,
+    this.enableAds = false,
   }) : assert(pixelRatio > 0);
 
   final TargetPlatform platform;
@@ -255,6 +272,8 @@ enum _ScreenshotDevice {
   final double pixelRatio;
   final String goldenFolder;
   final _FrameBuilder frameBuilder;
+
+  final bool enableIAPs, enableAds;
 }
 
 class _NoFrame extends StatelessWidget {

@@ -26,8 +26,12 @@ abstract class AdState {
   static late final String _rewardedInterstitialAdUnitId;
   static RewardedInterstitialAd? _rewardedInterstitialAd;
 
+  @visibleForTesting
+  static bool? forceAdsSupported;
+
   /// Whether ads are supported on this platform.
-  static bool get adsSupported => _bannerAdUnitId.isNotEmpty;
+  static bool get adsSupported =>
+      forceAdsSupported ?? _bannerAdUnitId.isNotEmpty;
 
   /// Whether we can show rewarded interstitial ads.
   /// This is true if ads are supported and the user is old enough.
