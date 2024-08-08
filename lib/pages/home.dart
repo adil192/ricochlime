@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
                     type: NesButtonType.primary,
                     icon: NesIcons.play,
                     text: t.homePage.playButton,
-                    openBuilder: (_, __, ___) => const PlayPage(),
+                    openBuilder: (_) => const PlayPage(),
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
@@ -101,19 +101,19 @@ class HomePage extends StatelessWidget {
                         item.state.value == ShopItemState.unpurchased &&
                         item.price <= Prefs.coins.value),
                     text: t.homePage.shopButton,
-                    openBuilder: (_, __, ___) => const ShopPage(),
+                    openBuilder: (_) => const ShopPage(),
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
                     icon: NesIcons.questionMarkBlock,
                     text: t.homePage.tutorialButton,
-                    openBuilder: (_, __, ___) => const TutorialPage(),
+                    openBuilder: (_) => const TutorialPage(),
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
                     icon: NesIcons.gamepad,
                     text: t.homePage.settingsButton,
-                    openBuilder: (_, __, ___) => const SettingsPage(),
+                    openBuilder: (_) => const SettingsPage(),
                   ),
                 ],
               ),
@@ -139,7 +139,7 @@ class _HomePageButton<T> extends StatefulWidget {
   final NesIconData icon;
   final bool Function()? shouldAnimateIcon;
   final String text;
-  final RoutePageBuilder openBuilder;
+  final WidgetBuilder openBuilder;
 
   @override
   State<_HomePageButton<T>> createState() => _HomePageButtonState<T>();
@@ -168,11 +168,11 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
   void onPressed() {
     final route = (!Prefs.stylizedPageTransitions.value ||
             MediaQuery.disableAnimationsOf(context))
-        ? PageRouteBuilder(
-            pageBuilder: widget.openBuilder,
+        ? MaterialPageRoute<void>(
+            builder: widget.openBuilder,
           )
         : NesVerticalCloseTransition.route<void>(
-            pageBuilder: widget.openBuilder,
+            pageBuilder: (context, _, __) => widget.openBuilder(context),
             duration: const Duration(milliseconds: 500),
           );
     Navigator.of(context).push(route).then((_) {
