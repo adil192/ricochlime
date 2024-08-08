@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:ricochlime/utils/prefs.dart';
 
 /// Helper class for ads,
 /// with a dummy implementation because ads are disabled.
 abstract class AdState {
-  /// Whether ads are supported,
-  /// which is always false.
-  static const adsSupported = false;
+  @visibleForTesting
+  static bool? forceAdsSupported;
+
+  /// Whether ads are supported on this platform.
+  static bool get adsSupported => forceAdsSupported ?? false;
 
   /// Whether we can show rewarded interstitial ads,
   /// which is always false.
@@ -15,14 +18,19 @@ abstract class AdState {
   static Future<bool> shouldShowBannerAd() async => false;
 
   /// The minimum age required to show personalized ads.
-  ///
-  /// This is an arbitrarily high number.
-  static const int minAgeForPersonalizedAds = 1000;
+  static const int minAgeForPersonalizedAds = 13;
 
   /// The users age, or null if unknown.
-  ///
-  /// This is always null.
-  static const int? age = null;
+  static int? get age {
+    assert(Prefs.birthYear.loaded);
+
+    final birthYear = Prefs.birthYear.value;
+    if (birthYear == null) return null;
+
+    // Subtract 1 because the user might not have
+    // had their birthday yet this year.
+    return DateTime.now().year - birthYear - 1;
+  }
 
   /// Initializes ads.
   ///

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:ricochlime/utils/prefs.dart';
 
 enum RicochlimeProduct {
@@ -22,17 +23,22 @@ enum RicochlimeProduct {
 
   String get price => '\$\$';
 
-  PlainPref<IAPState> get state => _states[this]!;
-  static late final Map<RicochlimeProduct, PlainPref<IAPState>> _states;
-  static void _init() => _states = {
+  PlainPref<IAPState> get state => _states![this]!;
+  static Map<RicochlimeProduct, PlainPref<IAPState>>? _states;
+  @visibleForTesting
+  static void init() => _states ??= {
         for (final product in values)
           product: PlainPref('iap_${product.id}_state', IAPState.unpurchased),
       };
 }
 
 abstract final class RicochlimeIAP {
-  static const inAppPurchasesSupported = false;
-  static Future<void> init() async => RicochlimeProduct._init();
+  @visibleForTesting
+  static bool? forceInAppPurchasesSupported;
+  static bool get inAppPurchasesSupported =>
+      forceInAppPurchasesSupported ?? false;
+
+  static Future<void> init() async => RicochlimeProduct.init();
   static void listen() {}
   static void dispose() {}
   static Future<bool> buy(_) async => false;
