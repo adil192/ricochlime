@@ -4,5 +4,15 @@
     ],
     "files.exclude": {
         "submodules": true
+    },
+    "workbench.colorCustomizations": {
+        "[Gnome Dark (GitHub)]": {
+            "titleBar.activeBackground": "#192e1a",
+            "activityBar.background": "#192e1a"
+        },
+        "[Gnome Light (GitHub)]": {
+            "titleBar.activeBackground": "#cbe6cd",
+            "activityBar.background": "#cbe6cd"
+        }
     }
 }
