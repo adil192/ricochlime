@@ -293,6 +293,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.1"
+  golden_screenshot:
+    dependency: "direct dev"
+    description:
+      name: golden_screenshot
+      sha256: "5a6d67834034464c903ceefb4d4dbde950fcf494a01a217cd5ff72d8f7ca031c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  golden_toolkit:
+    dependency: transitive
+    description:
+      name: golden_toolkit
+      sha256: "8f74adab33154fe7b731395782797021f97d2edc52f7bfb85ff4f1b5c4a215f0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.0"
   google_fonts:
     dependency: "direct main"
     description:

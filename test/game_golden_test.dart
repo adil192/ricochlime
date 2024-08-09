@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/ads/iap.dart';
@@ -101,8 +102,12 @@ void main() {
     );
     _testGame(
       gameSave: inProgressGameSave,
-      frameColor: RicochlimePalette.waterColor,
-      onFrameColor: const Color(0xFFeaf2f8),
+      frameColors: const ScreenshotFrameColors(
+        topBar: RicochlimePalette.waterColor,
+        onTopBar: Color(0xFFeaf2f8),
+        bottomBar: RicochlimePalette.waterColor,
+        onBottomBar: Color(0xFFeaf2f8),
+      ),
       goldenFileName: '2_play',
       child: const PlayPage(),
     );
@@ -130,13 +135,12 @@ void main() {
 
 void _testGame({
   String? gameSave,
-  Color? frameColor,
-  Color? onFrameColor,
+  ScreenshotFrameColors? frameColors,
   required String goldenFileName,
   required Widget child,
 }) {
   group(goldenFileName, () {
-    for (final device in _ScreenshotDevice.values) {
+    for (final device in ScreenshotDevice.values) {
       testWidgets('for ${device.name}', (tester) async {
         RicochlimeIAP.forceInAppPurchasesSupported = device.enableIAPs;
         RicochlimeProduct.init();
@@ -151,23 +155,23 @@ void _testGame({
           }
         }
 
-        final widget = _SizedEnvironment(
+        final widget = ScreenshotApp(
+          theme: nesThemeFrom(
+            brightness: Brightness.light,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: RicochlimePalette.grassColor,
+            ),
+          ),
           device: device,
-          frameColor: frameColor,
-          onFrameColor: onFrameColor,
+          frameColors: frameColors,
           child: child,
         );
         await tester.pumpWidget(widget);
 
-        final context = tester.element(find.byType(_SizedEnvironment));
-        await tester.runAsync(() => Future.wait(const [
-              AssetImage('assets/images/coin.png'),
-              AssetImage('assets/tests/android_topbar.png'),
-              AssetImage('assets/tests/newer_iphone_topbar.png'),
-              AssetImage('assets/tests/newer_ipad_topbar.png'),
-              AssetImage('assets/tests/older_iphone_topbar.png'),
-              AssetImage('assets/tests/older_ipad_topbar.png'),
-            ].map((image) => precacheImage(image, context))));
+        await tester.precacheImages(const [
+          AssetImage('assets/images/coin.png'),
+        ]);
+        await tester.precacheTopbarImages();
 
         // Aim towards the middle left of the game area
         if (child is PlayPage) {
@@ -190,247 +194,20 @@ void _testGame({
   });
 }
 
-typedef _FrameBuilder = Widget Function({
-  required _ScreenshotDevice device,
-  required Color? frameColor,
-  required Color? onFrameColor,
-  required Widget child,
-});
-
-enum _ScreenshotDevice {
-  flathub(
-    platform: TargetPlatform.linux,
-    resolution: Size(2000, 1400),
-    pixelRatio: 2,
-    goldenFolder: '../metadata/en-US/images/tenInchScreenshots/',
-    frameBuilder: _NoFrame.new,
-  ),
-  macbook(
-    platform: TargetPlatform.macOS,
-    resolution: Size(2880, 1800),
-    pixelRatio: 2,
-    goldenFolder: '../metadata/en-US/images/macbookScreenshots/',
-    frameBuilder: _NoFrame.new,
-    enableIAPs: true,
-  ),
-  android(
-    platform: TargetPlatform.android,
-    resolution: Size(1440, 3120),
-    pixelRatio: 10 / 3,
-    goldenFolder: '../metadata/en-US/images/phoneScreenshots/',
-    frameBuilder: _GenericFrame.android,
-  ),
-  olderIphone(
-    platform: TargetPlatform.iOS,
-    resolution: Size(1242, 2208),
-    pixelRatio: 3,
-    goldenFolder: '../metadata/en-US/images/olderIphoneScreenshots/',
-    frameBuilder: _GenericFrame.olderIphone,
-    enableIAPs: true,
-    enableAds: true,
-  ),
-  newerIphone(
-    platform: TargetPlatform.iOS,
-    resolution: Size(1284, 2778),
-    pixelRatio: 3,
-    goldenFolder: '../metadata/en-US/images/newerIphoneScreenshots/',
-    frameBuilder: _GenericFrame.newerIphone,
-    enableIAPs: true,
-    enableAds: true,
-  ),
-  olderIpad(
-    platform: TargetPlatform.iOS,
-    resolution: Size(2048, 2732),
-    pixelRatio: 2,
-    goldenFolder: '../metadata/en-US/images/olderIpadScreenshots/',
-    frameBuilder: _GenericFrame.olderIpad,
-    enableIAPs: true,
-    enableAds: true,
-  ),
-  newerIpad(
-    platform: TargetPlatform.iOS,
-    resolution: Size(2064, 2752),
-    pixelRatio: 2,
-    goldenFolder: '../metadata/en-US/images/newerIpadScreenshots/',
-    frameBuilder: _GenericFrame.newerIpad,
-    enableIAPs: true,
-    enableAds: true,
-  );
-
-  const _ScreenshotDevice({
-    required this.platform,
-    required this.resolution,
-    required this.pixelRatio,
-    required this.goldenFolder,
-    required this.frameBuilder,
-    this.enableIAPs = false,
-    this.enableAds = false,
-  }) : assert(pixelRatio > 0);
-
-  final TargetPlatform platform;
-  final Size resolution;
-  final double pixelRatio;
-  final String goldenFolder;
-  final _FrameBuilder frameBuilder;
-
-  final bool enableIAPs, enableAds;
-}
-
-class _NoFrame extends StatelessWidget {
-  // ignore: unused_element
-  const _NoFrame(
-      {super.key,
-      this.device,
-      this.frameColor,
-      this.onFrameColor,
-      required this.child});
-
-  final _ScreenshotDevice? device;
-  final Color? frameColor, onFrameColor;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return child;
-  }
-}
-
-class _GenericFrame extends StatelessWidget {
-  const _GenericFrame.android({
-    // ignore: unused_element
-    super.key,
-    required this.device,
-    required this.frameColor,
-    required this.onFrameColor,
-    required this.child,
-  })  : topBarImage = const AssetImage('assets/tests/android_topbar.png'),
-        bottomBar = const SizedBox(width: 125, height: 4);
-
-  const _GenericFrame.olderIphone({
-    // ignore: unused_element
-    super.key,
-    required this.device,
-    required this.frameColor,
-    required this.onFrameColor,
-    required this.child,
-  })  : topBarImage = const AssetImage('assets/tests/older_iphone_topbar.png'),
-        bottomBar = null;
-
-  const _GenericFrame.newerIphone({
-    // ignore: unused_element
-    super.key,
-    required this.device,
-    required this.frameColor,
-    required this.onFrameColor,
-    required this.child,
-  })  : topBarImage = const AssetImage('assets/tests/newer_iphone_topbar.png'),
-        bottomBar = const SizedBox(width: 150, height: 5);
-
-  const _GenericFrame.olderIpad({
-    // ignore: unused_element
-    super.key,
-    required this.device,
-    required this.frameColor,
-    required this.onFrameColor,
-    required this.child,
-  })  : topBarImage = const AssetImage('assets/tests/older_ipad_topbar.png'),
-        bottomBar = null;
-
-  const _GenericFrame.newerIpad({
-    // ignore: unused_element
-    super.key,
-    required this.device,
-    required this.frameColor,
-    required this.onFrameColor,
-    required this.child,
-  })  : topBarImage = const AssetImage('assets/tests/newer_ipad_topbar.png'),
-        bottomBar = const SizedBox(width: 320, height: 6);
-
-  final _ScreenshotDevice device;
-  final Color? frameColor, onFrameColor;
-  final ImageProvider topBarImage;
-  final SizedBox? bottomBar;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final onFrameColor = this.onFrameColor ??
-        (device.platform == TargetPlatform.android
-            ? Color.lerp(colorScheme.onSurface, colorScheme.surface, 0.3)!
-            : colorScheme.onSurface);
-    return ColoredBox(
-      color: frameColor ?? colorScheme.surface,
-      child: Column(
-        children: [
-          ColorFiltered(
-            colorFilter: ColorFilter.mode(onFrameColor, BlendMode.modulate),
-            child: Image(image: topBarImage),
-          ),
-          Expanded(child: child),
-          if (bottomBar != null)
-            SizedBox(
-              height: 24,
-              child: Center(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: onFrameColor,
-                  ),
-                  child: bottomBar,
-                ),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SizedEnvironment extends StatelessWidget {
-  const _SizedEnvironment({
-    // ignore: unused_element
-    super.key,
-    required this.device,
-    required this.frameColor,
-    required this.onFrameColor,
-    required this.child,
-  });
-
-  final _ScreenshotDevice device;
-  final Color? frameColor, onFrameColor;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: nesThemeFrom(
-        brightness: Brightness.light,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: RicochlimePalette.grassColor,
-        ),
-      ),
-      themeAnimationDuration: Duration.zero,
-      home: FittedBox(
-        child: RepaintBoundary(
-          child: SizedBox(
-            width: device.resolution.width,
-            height: device.resolution.height,
-            child: FittedBox(
-              child: SizedBox(
-                width: device.resolution.width / device.pixelRatio,
-                height: device.resolution.height / device.pixelRatio,
-                child: device.frameBuilder(
-                  device: device,
-                  frameColor: frameColor,
-                  onFrameColor: onFrameColor,
-                  child: child,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+extension _ScreenshotDevice on ScreenshotDevice {
+  bool get enableIAPs => switch (this) {
+        ScreenshotDevice.macbook => true,
+        ScreenshotDevice.olderIphone => true,
+        ScreenshotDevice.newerIphone => true,
+        ScreenshotDevice.olderIpad => true,
+        ScreenshotDevice.newerIpad => true,
+        _ => false,
+      };
+  bool get enableAds => switch (this) {
+        ScreenshotDevice.olderIphone => true,
+        ScreenshotDevice.newerIphone => true,
+        ScreenshotDevice.olderIpad => true,
+        ScreenshotDevice.newerIpad => true,
+        _ => false,
+      };
 }
