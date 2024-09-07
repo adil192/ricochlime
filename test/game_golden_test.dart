@@ -140,11 +140,12 @@ void _testGame({
   required Widget child,
 }) {
   group(goldenFileName, () {
-    for (final device in ScreenshotDevice.values) {
-      testWidgets('for ${device.name}', (tester) async {
-        RicochlimeIAP.forceInAppPurchasesSupported = device.enableIAPs;
+    for (final goldenDevice in GoldenScreenshotDevices.values) {
+      testWidgets('for ${goldenDevice.name}', (tester) async {
+        final device = goldenDevice.device;
+        RicochlimeIAP.forceInAppPurchasesSupported = goldenDevice.enableIAPs;
         RicochlimeProduct.init();
-        AdState.forceAdsSupported = device.enableAds;
+        AdState.forceAdsSupported = goldenDevice.enableAds;
 
         if (gameSave != null) {
           Prefs.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
@@ -185,29 +186,26 @@ void _testGame({
         }
 
         await tester.pumpFrames(widget, const Duration(seconds: 3));
-        await expectLater(
-          find.byWidget(child),
-          matchesGoldenFile('${device.goldenFolder}$goldenFileName.png'),
-        );
+        await tester.expectScreenshot(device, goldenFileName);
       });
     }
   });
 }
 
-extension _ScreenshotDevice on ScreenshotDevice {
+extension _GoldenScreenshotDevices on GoldenScreenshotDevices {
   bool get enableIAPs => switch (this) {
-        ScreenshotDevice.macbook => true,
-        ScreenshotDevice.olderIphone => true,
-        ScreenshotDevice.newerIphone => true,
-        ScreenshotDevice.olderIpad => true,
-        ScreenshotDevice.newerIpad => true,
+        GoldenScreenshotDevices.macbook => true,
+        GoldenScreenshotDevices.olderIphone => true,
+        GoldenScreenshotDevices.newerIphone => true,
+        GoldenScreenshotDevices.olderIpad => true,
+        GoldenScreenshotDevices.newerIpad => true,
         _ => false,
       };
   bool get enableAds => switch (this) {
-        ScreenshotDevice.olderIphone => true,
-        ScreenshotDevice.newerIphone => true,
-        ScreenshotDevice.olderIpad => true,
-        ScreenshotDevice.newerIpad => true,
+        GoldenScreenshotDevices.olderIphone => true,
+        GoldenScreenshotDevices.newerIphone => true,
+        GoldenScreenshotDevices.olderIpad => true,
+        GoldenScreenshotDevices.newerIpad => true,
         _ => false,
       };
 }
