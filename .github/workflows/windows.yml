@@ -82,7 +82,7 @@ jobs:
           mv installers/RicochlimeInstaller.exe installers/$installerName
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Ricochlime-Windows
           path: installers/${{ steps.rename.outputs.installerName }}

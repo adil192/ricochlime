@@ -94,7 +94,7 @@ jobs:
           tar -C AppDir -cvf $archiveName .
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Ricochlime-Archive-x86_64
           path: ${{ steps.compress.outputs.archiveName }}
@@ -185,7 +185,7 @@ jobs:
           tar -C AppDir -cvf $archiveName .
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Ricochlime-Archive-arm64
           path: ${{ steps.compress.outputs.archiveName }}
@@ -211,7 +211,7 @@ jobs:
           sudo apt install libfuse2
 
       - name: Download app archive
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Ricochlime-Archive-x86_64
 
@@ -248,7 +248,7 @@ jobs:
           ./appimage-builder-x86_64.AppImage --skip-test
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: AppImage artifact
           path: appimage/Ricochlime-*-x86_64.AppImage*

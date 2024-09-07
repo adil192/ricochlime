@@ -68,7 +68,7 @@ jobs:
           echo "apkName=$apkName" >> $GITHUB_OUTPUT
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Ricochlime-Android
           path: output/${{ steps.rename_apk.outputs.apkName }}
@@ -140,7 +140,7 @@ jobs:
           echo "apkName=$apkName" >> $GITHUB_OUTPUT
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Ricochlime-Android-FOSS
           path: output/${{ steps.rename_apk.outputs.apkName }}
