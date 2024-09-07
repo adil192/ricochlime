@@ -443,8 +443,6 @@ class RicochlimeGame extends Forge2DGame
 
     state.value = GameState.monstersMoving;
 
-    unawaited(showRewardedInterstitial(inopportune: true));
-
     // move monsters down and spawn new ones at the top
     assert(numNewRowsEachRound == getNumNewRowsEachRound(score.value));
     for (int i = 0; i < numNewRowsEachRound; ++i) {
@@ -504,10 +502,10 @@ class RicochlimeGame extends Forge2DGame
     AdSchedule.onResume(dt);
   }
 
-  Future<void> showRewardedInterstitial({bool inopportune = false}) async {
+  Future<void> showRewardedInterstitial() async {
     if (!AdState.rewardedInterstitialAdsSupported) return;
 
-    if (!AdSchedule.enoughTimeSinceLastAd(inopportune: inopportune)) return;
+    if (!AdSchedule.enoughTimeSinceLastAd()) return;
 
     final showAd = await showAdWarning?.call() ?? false;
     if (!showAd) {
