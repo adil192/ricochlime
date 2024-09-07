@@ -54,8 +54,8 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-ricochlime-macos-
 
-      - name: Remove simulator dependency
-        run: ./patches/remove_simulator_dependency.sh
+      - name: Remove dev dependencies
+        run: ./patches/remove_dev_dependencies.sh
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
