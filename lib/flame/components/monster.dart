@@ -353,7 +353,9 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
           removeOnFinish: {
             MonsterState.dead: true,
           },
-        );
+        ) {
+    animations = getAnimations(monsterImagePath: monsterImagePath);
+  }
 
   static const staticWidth = 20.0;
   static const staticHeight = staticWidth;
@@ -377,7 +379,6 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
 
   @override
   Future<void> onLoad() async {
-    animations = getAnimations();
     current = MonsterState.idle;
     walking = _walking;
     await super.onLoad();
@@ -408,7 +409,9 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
     final animations = this.animations;
     if (animations == null) return;
 
-    final monsterImage = gameRef.images.fromCache(monsterImagePath);
+    // Swap the sprite in existing animations
+    final monsterImage =
+        RicochlimeGame.instance.images.fromCache(monsterImagePath);
     for (final animation in animations.values) {
       for (final frame in animation.frames) {
         frame.sprite.image = monsterImage;
@@ -417,8 +420,11 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
   }
 
   /// The list of animations for the monster.
-  Map<MonsterState, SpriteAnimation> getAnimations() {
-    final monsterImage = gameRef.images.fromCache(monsterImagePath);
+  static Map<MonsterState, SpriteAnimation> getAnimations({
+    required String monsterImagePath,
+  }) {
+    final monsterImage =
+        RicochlimeGame.instance.images.fromCache(monsterImagePath);
     return {
       MonsterState.idle: SpriteAnimation.fromFrameData(
         monsterImage,

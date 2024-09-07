@@ -10,10 +10,12 @@ void main() {
   group('New row generation', () {
     test(
         'At least ${RicochlimeGame.minMonstersInRow} and '
-        'at most ${Monster.monstersPerRow} monsters are generated', () {
+        'at most ${Monster.monstersPerRow} monsters are generated', () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
       SharedPreferences.setMockInitialValues({});
       Prefs.testingMode = true;
       Prefs.init();
+      await RicochlimeGame.instance.preloadSprites.future;
 
       final random = Random(12);
       expect(RicochlimeGame.minMonstersInRow, lessThan(Monster.monstersPerRow));
