@@ -49,7 +49,7 @@ gameOverPage:
   restartGameButton(OUTDATED): Reinicia el juego
   homeButton(OUTDATED): Hogar
 adWarning:
-  getCoins(rich, OUTDATED): Obtenga $c 100 después de este anuncio ($t)
+  getCoins(rich, OUTDATED): Mire un anuncio opcional para obtener $c 100 ($t)
 restartGameDialog:
   title(OUTDATED): "¿Reinicia el juego?"
   areYouSure(OUTDATED): "¿Estás seguro de que quieres reiniciar? No puedes deshacer esto"

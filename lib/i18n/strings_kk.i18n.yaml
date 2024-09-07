@@ -11,11 +11,11 @@ playPage:
 settingsPage:
   title: Баптау
   adConsent: Жарнамаға келісімді баптау
-  stylizedPageTransitions(OUTDATED): Стильденген беттердің ауысуы
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
+  stylizedPageTransitions(OUTDATED): Стильденген беттердің ауысуы
   removeAdsInShop(OUTDATED): "Жарнамаларды өшіргіңіз келе ме? Дүкенде опцияларды тексеріңіз!"
   showReflectionInAimGuide(OUTDATED): Мақсат нұсқаулығында рефлексияны көрсетіңіз
   ads(OUTDATED): Жарнамалар
@@ -49,7 +49,7 @@ gameOverPage:
   homeButton: Мәзір
   continueWithCoins(OUTDATED): Жалғастыру үшін 100
 adWarning:
-  getCoins(rich, OUTDATED): Осы жарнамадан кейін $c 100 алыңыз ($t)
+  getCoins(rich, OUTDATED): $c 100 ($t) алу үшін қосымша жарнаманы қараңыз
 restartGameDialog:
   title(OUTDATED): "Ойынды қайта бастау керек пе?"
   areYouSure(OUTDATED): "Қайта іске қосқыңыз келетініне сенімдісіз бе? Мұны қайтара алмайсыз"

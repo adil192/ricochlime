@@ -52,7 +52,7 @@ es:
     restartGameButton(OUTDATED): Restart game
     homeButton(OUTDATED): Home
   adWarning:
-    getCoins(rich)(OUTDATED): Get $c 100 after this ad ($t)
+    getCoins(rich)(OUTDATED): Watch an optional ad to get $c 100 ($t)
   restartGameDialog:
     title(OUTDATED): "Restart game?"
     areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
@@ -109,7 +109,7 @@ kk:
   gameOverPage:
     continueWithCoins(OUTDATED): 100 to continue
   adWarning:
-    getCoins(rich)(OUTDATED): Get $c 100 after this ad ($t)
+    getCoins(rich)(OUTDATED): Watch an optional ad to get $c 100 ($t)
   restartGameDialog:
     title(OUTDATED): "Restart game?"
     areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
@@ -137,6 +137,8 @@ ru:
   settingsPage:
     removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
     stylizedPageTransitions(OUTDATED): Stylized page transitions
+  adWarning:
+    getCoins(rich)(OUTDATED): Watch an optional ad to get $c 100 ($t)
   shopPage:
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins

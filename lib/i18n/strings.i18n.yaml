@@ -49,7 +49,7 @@ gameOverPage:
   restartGameButton: Restart game
   homeButton: Home
 adWarning:
-  getCoins(rich): Get $c 100 after this ad ($t)
+  getCoins(rich): Watch an optional ad to get $c 100 ($t)
 restartGameDialog:
   title: "Restart game?"
   areYouSure: "Are you sure you want to restart? You can't undo this"

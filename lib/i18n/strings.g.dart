@@ -6,7 +6,7 @@
 /// Locales: 4
 /// Strings: 276 (69 per locale)
 ///
-/// Built on 2024-08-07 at 22:25 UTC
+/// Built on 2024-09-07 at 01:44 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -257,9 +257,9 @@ class _StringsAdWarningEn {
 
 	// Translations
 	TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
-		const TextSpan(text: 'Get '),
+		const TextSpan(text: 'Watch an optional ad to get '),
 		c,
-		const TextSpan(text: ' 100 after this ad ('),
+		const TextSpan(text: ' 100 ('),
 		t,
 		const TextSpan(text: ')'),
 	]);
@@ -460,9 +460,9 @@ class _StringsAdWarningEs extends _StringsAdWarningEn {
 
 	// Translations
 	@override TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
-		const TextSpan(text: 'Obtenga '),
+		const TextSpan(text: 'Mire un anuncio opcional para obtener '),
 		c,
-		const TextSpan(text: ' 100 después de este anuncio ('),
+		const TextSpan(text: ' 100 ('),
 		t,
 		const TextSpan(text: ')'),
 	]);
@@ -596,9 +596,9 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	// Translations
 	@override String get title => 'Баптау';
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
-	@override String get stylizedPageTransitions => 'Стильденген беттердің ауысуы';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get stylizedPageTransitions => 'Стильденген беттердің ауысуы';
 	@override String get removeAdsInShop => 'Жарнамаларды өшіргіңіз келе ме? Дүкенде опцияларды тексеріңіз!';
 	@override String get showReflectionInAimGuide => 'Мақсат нұсқаулығында рефлексияны көрсетіңіз';
 	@override String get ads => 'Жарнамалар';
@@ -663,11 +663,10 @@ class _StringsAdWarningKk extends _StringsAdWarningEn {
 
 	// Translations
 	@override TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
-		const TextSpan(text: 'Осы жарнамадан кейін '),
 		c,
-		const TextSpan(text: ' 100 алыңыз ('),
+		const TextSpan(text: ' 100 ('),
 		t,
-		const TextSpan(text: ')'),
+		const TextSpan(text: ') алу үшін қосымша жарнаманы қараңыз'),
 	]);
 }
 
@@ -803,7 +802,6 @@ class _StringsSettingsPageRu extends _StringsSettingsPageEn {
 	@override String get accessibility => 'Доступность';
 	@override String get adConsent => 'Изменить согласие с рекламой';
 	@override String get hyperlegibleFont => 'Большой шрифт';
-	@override String get stylizedPageTransitions => 'Стилизованные переходы страниц';
 	@override String get bgmVolume => 'Громкость фоновой музыки';
 	@override String get showUndoButton => 'Разрешить отмену бросков';
 	@override String get showReflectionInAimGuide => 'Показывать отскок в прицельной траектории';
@@ -811,6 +809,7 @@ class _StringsSettingsPageRu extends _StringsSettingsPageEn {
 	@override String get maxFps => 'Максимальный FPS';
 	@override String get appInfo => 'О программе';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
+	@override String get stylizedPageTransitions => 'Стилизованные переходы страниц';
 	@override String get removeAdsInShop => 'Хотите удалить рекламу? Посмотрите варианты в магазине!';
 }
 
@@ -866,9 +865,9 @@ class _StringsAdWarningRu extends _StringsAdWarningEn {
 
 	// Translations
 	@override TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
-		const TextSpan(text: 'Получить '),
+		const TextSpan(text: 'Посмотрите дополнительную рекламу, чтобы получить 100 '),
 		c,
-		const TextSpan(text: ' 100 после этой рекламы ('),
+		const TextSpan(text: ' ('),
 		t,
 		const TextSpan(text: ')'),
 	]);

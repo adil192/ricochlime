@@ -15,7 +15,6 @@ settingsPage:
   accessibility: Доступность
   adConsent: Изменить согласие с рекламой
   hyperlegibleFont: Большой шрифт
-  stylizedPageTransitions(OUTDATED): Стилизованные переходы страниц
   bgmVolume: Громкость фоновой музыки
   showUndoButton: Разрешить отмену бросков
   showReflectionInAimGuide: Показывать отскок в прицельной траектории
@@ -25,6 +24,7 @@ settingsPage:
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
+  stylizedPageTransitions(OUTDATED): Стилизованные переходы страниц
   removeAdsInShop(OUTDATED): "Хотите удалить рекламу? Посмотрите варианты в магазине!"
 ageDialog:
   yourAge: Ваш возраст
@@ -49,7 +49,7 @@ gameOverPage:
   restartGameButton: Перезапустить игру
   homeButton: На главную
 adWarning:
-  getCoins(rich): Получить $c 100 после этой рекламы ($t)
+  getCoins(rich, OUTDATED): "Посмотрите дополнительную рекламу, чтобы получить 100 $c ($t)"
 restartGameDialog:
   title: "Перезапустить игру?"
   areYouSure: "Вы уверену что хотите начать снова? Вы не сможете вернуться"
