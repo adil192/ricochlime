@@ -1,0 +1,2 @@
+• Removed ads that showed up between turns, so now fullscreen ads are only shown after a game over.
+• Fixed there being no page transitions when stylized page transitions were turned off.

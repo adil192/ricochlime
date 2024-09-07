@@ -74,6 +74,15 @@
     </branding>
 
     <releases>
+        <release version="1.11.2" date="2024-09-07">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.2</url>
+            <description>
+                <ul>
+                    <li>Removed ads that showed up between turns, so now fullscreen ads are only shown after a game over.</li>
+                    <li>Fixed there being no page transitions when stylized page transitions were turned off.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.11.1" date="2024-08-07">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.1</url>
             <description>

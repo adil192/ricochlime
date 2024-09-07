@@ -1,0 +1,2 @@
+• Se eliminaron los anuncios que aparecían entre turnos, por lo que ahora los anuncios en pantalla completa solo se muestran después de que termina el juego.
+• Se solucionó el problema de que no había transiciones de página cuando las transiciones de página estilizadas estaban desactivadas.
