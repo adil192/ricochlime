@@ -28,13 +28,10 @@ At the bottom of the gameplay screen, there is a small
 To save battery and improve performance,
 this ad isn't shown at all if your device is in a low-power mode.
 
-You will occasionally be shown a fullscreen ad
-(a "[rewarded interstitial ad](https://support.google.com/admob/answer/9884467)")
-during natural breaks in the game.
+After every game-over, you will be shown a fullscreen ad
+(a "[rewarded interstitial ad](https://support.google.com/admob/answer/9884467)").
 You will be shown a prompt before the ad is shown, and you can choose to skip it
 for no penalty or watch it and be rewarded with some in-game coins.
-The ads are always skippable before and during the ad, and
-you will never see more than one fullscreen ad in a 5-minute window.
 
 ## Source code
 
