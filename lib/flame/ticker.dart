@@ -23,16 +23,38 @@ class Ticker {
   /// The actual time may be slightly longer than the given
   /// [duration] since it is rounded to the next tick.
   ///
-  /// Returns the elapsed time in seconds.
-  Future<double> delayed(Duration duration) async {
+  /// If [onTick] is provided, it will be called for each tick,
+  /// including the final tick when the duration is reached/passed.
+  /// Return [TickerDelayedInstruction.stopEarly] in [onTick] to stop the
+  /// ticker early.
+  ///
+  /// Returns the actual elapsed time in seconds.
+  Future<double> delayed(
+    Duration duration, {
+    TickerDelayedInstruction? Function()? onTick,
+  }) async {
     final durationInSeconds = duration.inMilliseconds / 1000;
     var elapsed = 0.0;
-    await for (final dt in onTick) {
+    await for (final dt in this.onTick) {
       elapsed += dt;
+
+      switch (onTick?.call()) {
+        case TickerDelayedInstruction.stopEarly:
+          return elapsed;
+        default:
+          break;
+      }
+
       if (elapsed >= durationInSeconds) return elapsed;
     }
     throw StateError(
       'Ticker.delayed: Game was disposed before the duration passed',
     );
   }
+}
+
+enum TickerDelayedInstruction {
+  /// Return this value in [Ticker.delayed]'s `onTick`
+  /// to stop the ticker early.
+  stopEarly,
 }

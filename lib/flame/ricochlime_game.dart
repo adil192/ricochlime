@@ -438,8 +438,7 @@ class RicochlimeGame extends Forge2DGame
 
   /// Moves the existing monsters down and spawns new ones at the top
   Future<void> spawnNewMonsters() async {
-    const monsterMoveSeconds = 1;
-    const monsterMoveDuration = Duration(seconds: monsterMoveSeconds);
+    const monsterMoveDuration = Duration(seconds: 1);
 
     state.value = GameState.monstersMoving;
 
@@ -465,12 +464,12 @@ class RicochlimeGame extends Forge2DGame
       }
 
       // wait for the monsters to move
-      var elapsedSeconds = 0.0;
-      await for (final tick in ticker.onTick) {
-        if (inputCancelled) return;
-        elapsedSeconds += tick;
-        if (elapsedSeconds >= monsterMoveSeconds) break;
-      }
+      await ticker.delayed(
+        monsterMoveDuration,
+        onTick: () =>
+            inputCancelled ? TickerDelayedInstruction.stopEarly : null,
+      );
+      if (inputCancelled) return;
 
       // check if the player has lost
       if (isGameOver()) {
