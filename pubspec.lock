@@ -297,10 +297,10 @@ packages:
     dependency: "direct dev"
     description:
       name: golden_screenshot
-      sha256: "35c286f73cc53c27f1b86272122607cf71dc9fbcd3c8d6840fbaff546194111a"
+      sha256: a294eaad3ed06b647d4578d0f300c396305581c74f63803339b3a17a825a8287
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.1.0"
   golden_toolkit:
     dependency: transitive
     description:
@@ -506,10 +506,10 @@ packages:
     dependency: transitive
     description:
       name: ordered_set
-      sha256: "984658d0c28c69516ed22f780db7511932a223339463a16c0cc48b3055e926c4"
+      sha256: "3129515e563a14817adebbdeee2acbb845fc69b6fc99a94349b641d1c829d5cd"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.1"
+    version: "6.1.0"
   path:
     dependency: transitive
     description:
