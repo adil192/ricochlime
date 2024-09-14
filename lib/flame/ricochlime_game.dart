@@ -321,7 +321,7 @@ class RicochlimeGame extends Forge2DGame
   /// and only update the game when the sum is greater than 1/30.
   double groupedUpdateDt = 0;
   static const maxDt = 0.5;
-  static final lastDt = ValueNotifier(maxDt);
+  static final fps = ValueNotifier<int>(30);
 
   @override
   // ignore: must_call_super (super.update is called in [updateNow])
@@ -329,6 +329,7 @@ class RicochlimeGame extends Forge2DGame
     if (dt > maxDt) {
       onResume(dt);
       groupedUpdateDt = 0;
+      fps.value = 0;
       // physics engine can't handle such a big dt, so just skip this frame
       return;
     }
@@ -346,11 +347,11 @@ class RicochlimeGame extends Forge2DGame
     if (groupedUpdateDt < targetDt * 0.9) return;
     updateNow(groupedUpdateDt, timeDilation.value);
     // may go below 0 to compensate for rounding errors
-    groupedUpdateDt -= targetDt;
+    groupedUpdateDt = min(groupedUpdateDt - targetDt, 0);
   }
 
   void updateNow(double dt, double timeDilation) {
-    if (Prefs.showFpsCounter.value) lastDt.value = dt;
+    if (Prefs.showFpsCounter.value) fps.value = (1 / dt).round();
     dt = min(dt * timeDilation, maxDt);
     ticker.tick(dt);
     super.update(dt);

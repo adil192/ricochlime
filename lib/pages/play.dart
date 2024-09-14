@@ -359,16 +359,11 @@ class _PlayPageState extends State<PlayPage> {
 class FpsCounter extends StatelessWidget {
   const FpsCounter({super.key});
 
-  static double _lastLastDt = 1 / 30;
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: RicochlimeGame.lastDt,
-      builder: (context, dt, _) {
-        dt = (dt + _lastLastDt) / 2;
-        _lastLastDt = dt;
-        final fps = (1 / dt).round();
+      valueListenable: RicochlimeGame.fps,
+      builder: (context, fps, _) {
         return Text(
           fps.toString(),
           style: const TextStyle(fontSize: 24),
