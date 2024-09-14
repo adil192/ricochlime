@@ -24,6 +24,7 @@ settingsPage:
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
+  showFpsCounter(OUTDATED): Показать счетчик FPS
   stylizedPageTransitions(OUTDATED): Стилизованные переходы страниц
   removeAdsInShop(OUTDATED): "Хотите удалить рекламу? Посмотрите варианты в магазине!"
 ageDialog:

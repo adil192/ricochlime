@@ -277,7 +277,7 @@ class SettingsPage extends StatelessWidget {
                     } else {
                       return Text(
                         maxFps.toString(),
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 24),
                       );
                     }
                   },
@@ -290,6 +290,43 @@ class SettingsPage extends StatelessWidget {
                     _ => 60,
                   };
                 },
+              ),
+            ),
+          ),
+
+          // Show FPS counter
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ValueListenableBuilder(
+                valueListenable: Prefs.showFpsCounter,
+                builder: (context, _, child) {
+                  final fps = Prefs.maxFps.value < 0 ? 60 : Prefs.maxFps.value;
+                  return MergeSemantics(
+                    child: ListTile(
+                      title: child,
+                      leading: BlockSemantics(
+                        child: Text(
+                          fps.toString(),
+                          style: const TextStyle(fontSize: 24),
+                        ),
+                      ),
+                      tileColor: listTileColor,
+                      shape: listTileShape,
+                      contentPadding: listTileContentPadding,
+                      trailing: NesCheckBox(
+                        value: Prefs.showFpsCounter.value,
+                        onChange: (value) {
+                          Prefs.showFpsCounter.value = value;
+                        },
+                      ),
+                      onTap: () => Prefs.showFpsCounter.value =
+                          !Prefs.showFpsCounter.value,
+                    ),
+                  );
+                },
+                child: Text(t.settingsPage.showFpsCounter),
               ),
             ),
           ),

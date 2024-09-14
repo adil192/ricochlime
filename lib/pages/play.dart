@@ -149,7 +149,7 @@ class _PlayPageState extends State<PlayPage> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle.light,
-          leadingWidth: 80,
+          leadingWidth: Prefs.showFpsCounter.value ? 136 : 80,
           leading: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -184,6 +184,10 @@ class _PlayPageState extends State<PlayPage> {
                   size: const Size.square(20),
                 ),
               ),
+              if (Prefs.showFpsCounter.value) ...[
+                const SizedBox(width: 16),
+                const FpsCounter(),
+              ],
             ],
           ),
           centerTitle: true,
@@ -348,6 +352,28 @@ class _PlayPageState extends State<PlayPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class FpsCounter extends StatelessWidget {
+  const FpsCounter({super.key});
+
+  static double _lastLastDt = 1 / 30;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: RicochlimeGame.lastDt,
+      builder: (context, dt, _) {
+        dt = (dt + _lastLastDt) / 2;
+        _lastLastDt = dt;
+        final fps = (1 / dt).round();
+        return Text(
+          fps.toString(),
+          style: const TextStyle(fontSize: 24),
+        );
+      },
     );
   }
 }

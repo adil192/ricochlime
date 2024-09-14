@@ -43,6 +43,7 @@ abstract class Prefs {
   static late final PlainPref<String> bulletShape;
 
   static late final PlainPref<int> maxFps;
+  static late final PlainPref<bool> showFpsCounter;
 
   static late final PlainPref<int> totalCoinsGained,
       totalBulletsGained,
@@ -89,6 +90,7 @@ abstract class Prefs {
     bulletShape = PlainPref('bulletShape', ShopItems.bulletShapes.first.id);
 
     maxFps = PlainPref('maxFps', -1);
+    showFpsCounter = PlainPref('showFpsCounter', false);
 
     totalCoinsGained = PlainPref('totalCoinsGained', 0);
     totalBulletsGained = PlainPref('totalBulletsGained', 0);

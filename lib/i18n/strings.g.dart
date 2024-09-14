@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 4
-/// Strings: 276 (69 per locale)
+/// Strings: 280 (70 per locale)
 ///
-/// Built on 2024-09-07 at 01:44 UTC
+/// Built on 2024-09-14 at 03:52 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -201,6 +201,7 @@ class _StringsSettingsPageEn {
 	String get showReflectionInAimGuide => 'Show reflection in aim guide';
 	String get biggerBullets => 'Bigger bullets';
 	String get maxFps => 'Max FPS';
+	String get showFpsCounter => 'Show FPS counter';
 	String get appInfo => 'App info';
 	String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
 }
@@ -391,6 +392,7 @@ class _StringsSettingsPageEs extends _StringsSettingsPageEn {
 	@override final _StringsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get showFpsCounter => 'Mostrar contador de FPS';
 	@override String get stylizedPageTransitions => 'Transiciones de página estilizadas';
 	@override String get removeAdsInShop => '¿Quieres eliminar los anuncios? ¡Consulta las opciones en la tienda!';
 	@override String get showReflectionInAimGuide => 'Mostrar reflejo en la guía de objetivos.';
@@ -596,6 +598,7 @@ class _StringsSettingsPageKk extends _StringsSettingsPageEn {
 	// Translations
 	@override String get title => 'Баптау';
 	@override String get adConsent => 'Жарнамаға келісімді баптау';
+	@override String get showFpsCounter => 'FPS есептегішін көрсету';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
 	@override String get stylizedPageTransitions => 'Стильденген беттердің ауысуы';
@@ -807,6 +810,7 @@ class _StringsSettingsPageRu extends _StringsSettingsPageEn {
 	@override String get showReflectionInAimGuide => 'Показывать отскок в прицельной траектории';
 	@override String get biggerBullets => 'Большие мячики';
 	@override String get maxFps => 'Максимальный FPS';
+	@override String get showFpsCounter => 'Показать счетчик FPS';
 	@override String get appInfo => 'О программе';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
 	@override String get stylizedPageTransitions => 'Стилизованные переходы страниц';

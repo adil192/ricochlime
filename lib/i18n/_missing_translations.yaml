@@ -25,6 +25,7 @@ es:
     showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
     biggerBullets(OUTDATED): Bigger bullets
     maxFps(OUTDATED): Max FPS
+    showFpsCounter(OUTDATED): Show FPS counter
     appInfo(OUTDATED): App info
     licenseNotice(OUTDATED): |-
       Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
@@ -100,6 +101,7 @@ kk:
     showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
     biggerBullets(OUTDATED): Bigger bullets
     maxFps(OUTDATED): Max FPS
+    showFpsCounter(OUTDATED): Show FPS counter
   ageDialog:
     guessNumber(OUTDATED): Guess \#$n
     howOldAreYou(OUTDATED): "How old are you?"
@@ -137,6 +139,7 @@ ru:
   settingsPage:
     removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
     stylizedPageTransitions(OUTDATED): Stylized page transitions
+    showFpsCounter(OUTDATED): Show FPS counter
   adWarning:
     getCoins(rich)(OUTDATED): Watch an optional ad to get $c 100 ($t)
   shopPage:

@@ -22,6 +22,7 @@ settingsPage:
   showReflectionInAimGuide: Show reflection in aim guide
   biggerBullets: Bigger bullets
   maxFps: Max FPS
+  showFpsCounter: Show FPS counter
   appInfo: App info
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney

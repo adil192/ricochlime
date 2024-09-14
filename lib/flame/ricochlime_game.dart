@@ -321,6 +321,7 @@ class RicochlimeGame extends Forge2DGame
   /// and only update the game when the sum is greater than 1/30.
   double groupedUpdateDt = 0;
   static const maxDt = 0.5;
+  static final lastDt = ValueNotifier(maxDt);
 
   @override
   // ignore: must_call_super (super.update is called in [updateNow])
@@ -349,6 +350,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   void updateNow(double dt, double timeDilation) {
+    if (Prefs.showFpsCounter.value) lastDt.value = dt;
     dt = min(dt * timeDilation, maxDt);
     ticker.tick(dt);
     super.update(dt);

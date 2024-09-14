@@ -9,6 +9,7 @@ playPage:
   undo(OUTDATED): Deshacer movimiento
   highScore(OUTDATED): "Mejor: $p"
 settingsPage:
+  showFpsCounter(OUTDATED): Mostrar contador de FPS
   stylizedPageTransitions(OUTDATED): Transiciones de página estilizadas
   removeAdsInShop(OUTDATED): "¿Quieres eliminar los anuncios? ¡Consulta las opciones en la tienda!"
   showReflectionInAimGuide(OUTDATED): Mostrar reflejo en la guía de objetivos.
