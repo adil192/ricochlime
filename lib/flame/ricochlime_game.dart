@@ -351,7 +351,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   void updateNow(double dt, double timeDilation) {
-    if (Prefs.showFpsCounter.value) fps.value = (1 / dt).round();
+    if (Prefs.showFpsCounter.value) fps.value = (1 / max(dt, 1 / 999)).round();
     dt = min(dt * timeDilation, maxDt);
     ticker.tick(dt);
     super.update(dt);
