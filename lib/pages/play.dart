@@ -366,7 +366,10 @@ class FpsCounter extends StatelessWidget {
       builder: (context, fps, _) {
         return Text(
           fps.toString(),
-          style: const TextStyle(fontSize: 24),
+          style: TextStyle(
+            fontSize: 24,
+            color: Colors.white.withOpacity(0.9),
+          ),
         );
       },
     );
