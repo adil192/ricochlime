@@ -1,0 +1,2 @@
+• Velocidades de cuadros estabilizadas cuando se limitan en la configuración
+• Se agregó un contador de velocidad de cuadros (FPS) que se puede habilitar en la configuración

@@ -74,6 +74,15 @@
     </branding>
 
     <releases>
+        <release version="1.11.3" date="2024-09-17">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.3</url>
+            <description>
+                <ul>
+                    <li>Stabilized frame rates when capped in settings</li>
+                    <li>Added a frame rate (FPS) counter that can be enabled in settings</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.11.2" date="2024-09-07">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.2</url>
             <description>

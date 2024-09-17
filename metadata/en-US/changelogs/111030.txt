@@ -1,0 +1,2 @@
+• Stabilized frame rates when capped in settings
+• Added a frame rate (FPS) counter that can be enabled in settings
