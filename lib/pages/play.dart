@@ -233,9 +233,7 @@ class _PlayPageState extends State<PlayPage> {
                         valueListenable: Prefs.coins,
                         builder: (context, coins, _) {
                           return Text(
-                            coins >= 1000
-                                ? '${(coins / 1000).toStringAsFixed(1)}K'
-                                : coins.toString(),
+                            coins.toString(),
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.9),
                               fontSize: 32,

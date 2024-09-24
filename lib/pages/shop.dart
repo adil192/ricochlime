@@ -33,9 +33,7 @@ class ShopPage extends StatelessWidget {
             builder: (context, coins, _) {
               final colorScheme = Theme.of(context).colorScheme;
               return Text(
-                coins >= 1000
-                    ? '${(coins / 1000).toStringAsFixed(1)}K'
-                    : coins.toString(),
+                coins.toString(),
                 style: TextStyle(
                   color: colorScheme.onSurface,
                   fontSize: 32,
