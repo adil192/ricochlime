@@ -5,7 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   audioplayers_windows
   battery_plus
-  screen_retriever
+  screen_retriever_windows
   url_launcher_windows
   window_manager
 )

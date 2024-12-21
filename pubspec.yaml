@@ -64,13 +64,13 @@ dependencies:
 
   simulator: ^0.3.0
 
-  slang: ^3.22.0
+  slang: ^4.4.0
   slang_flutter: any
 
 dev_dependencies:
   args: ^2.5.0
 
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
   flutter_test:
     sdk: flutter
