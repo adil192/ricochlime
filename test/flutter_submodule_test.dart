@@ -22,10 +22,7 @@ void main() {
         .then((value) => value.stdout as String);
     expect(localFlutterVersion.length, greaterThan(10));
 
-    printOnFailure('Flutter submodule commit: $submoduleCommit');
-    printOnFailure('Local Flutter version: $localFlutterVersion');
-
-    expect(localFlutterVersion.contains(submoduleCommit), true,
+    expect(localFlutterVersion, contains(submoduleCommit),
         reason:
             'Flutter submodule does not match local version. Please run `./scripts/update_flutter_submodule.sh` to update the submodule.');
   });
