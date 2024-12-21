@@ -1,0 +1,2 @@
+• Coin counts are no longer rounded (e.g. 3.4K -> 3398)
+• General performance improvements

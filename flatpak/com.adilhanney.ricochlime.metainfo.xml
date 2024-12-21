@@ -74,6 +74,15 @@
     </branding>
 
     <releases>
+        <release version="1.11.4" date="2024-12-21">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.4</url>
+            <description>
+                <ul>
+                    <li>Coin counts are no longer rounded (e.g. 3.4K → 3398)</li>
+                    <li>General performance improvements</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.11.3" date="2024-09-17">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.3</url>
             <description>
