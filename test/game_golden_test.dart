@@ -96,45 +96,36 @@ void main() {
     ShopItems.bulletColors[7].purchase(noCost: true);
     ShopItems.bulletColors[9].purchase(noCost: true);
 
-    const darkFrameIcons = ScreenshotFrameColors(
-      topBarIconBrightness: Brightness.dark,
-      gestureHintBrightness: Brightness.dark,
-    );
-    const lightFrameIcons = ScreenshotFrameColors(
-      topBarIconBrightness: Brightness.light,
-      gestureHintBrightness: Brightness.light,
-    );
-
     _testGame(
-      frameColors: darkFrameIcons,
+      frameColors: ScreenshotFrameColors.dark,
       goldenFileName: '1_home',
       child: const HomePage(),
     );
     _testGame(
       gameSave: inProgressGameSave,
-      frameColors: lightFrameIcons,
+      frameColors: ScreenshotFrameColors.light,
       goldenFileName: '2_play',
       child: const PlayPage(),
     );
     // _testGame(
     //   gameSave: gameOverGameSave,
-    //   frameColors: darkFrameIcons,
+    //   frameColors: ScreenshotFrameColors.dark,
     //   goldenFileName: '3_game_over',
     //   child: const PlayPage(),
     // );
     _testGame(
       goldenFileName: '4_shop',
-      frameColors: darkFrameIcons,
+      frameColors: ScreenshotFrameColors.dark,
       child: const ShopPage(),
     );
     _testGame(
       goldenFileName: '5_tutorial',
-      frameColors: darkFrameIcons,
+      frameColors: ScreenshotFrameColors.dark,
       child: const TutorialPage(),
     );
     _testGame(
       goldenFileName: '6_settings',
-      frameColors: darkFrameIcons,
+      frameColors: ScreenshotFrameColors.dark,
       child: const SettingsPage(),
     );
   });
