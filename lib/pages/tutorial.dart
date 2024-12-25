@@ -196,7 +196,7 @@ class _BounceOffWallsGraphicPainter extends CustomPainter {
         i.isEven ? size.width : 0,
         size.height * (1 - progress * 0.7),
       );
-      paint.color = color.withOpacity(progress);
+      paint.color = color.withValues(alpha: progress);
 
       canvas.drawLine(lastPoint, nextPoint, paint);
       lastPoint = nextPoint;

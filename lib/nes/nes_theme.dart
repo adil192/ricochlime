@@ -38,7 +38,7 @@ ThemeData nesThemeFrom({
             )
           : NesIconTheme(
               primary: colorScheme.onSurface,
-              secondary: colorScheme.surface.withOpacity(0.5),
+              secondary: colorScheme.surface.withValues(alpha: 0.5),
               accent: colorScheme.secondary,
               shadow: Colors.grey,
             ),
@@ -51,7 +51,7 @@ ThemeData nesThemeFrom({
             )
           : NesIconTheme(
               primary: colorScheme.onPrimary,
-              secondary: colorScheme.primary.withOpacity(0.5),
+              secondary: colorScheme.primary.withValues(alpha: 0.5),
               accent: colorScheme.secondary,
               shadow: Colors.grey,
             ),

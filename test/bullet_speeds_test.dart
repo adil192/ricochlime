@@ -14,7 +14,7 @@ void main() {
       const maxHorizontalAngle = 3 * pi / 180;
       final unitDir = Vector2(cos(maxHorizontalAngle), sin(maxHorizontalAngle));
       final ratio = unitDir.y / unitDir.x;
-      expect(ratio, lessThan(1), 
+      expect(ratio, lessThan(1),
           reason: 'Expect this velocity to be mostly horizontal');
       expect(ratio,
           moreOrLessEquals(Bullet.horizontalVelocityRatio, epsilon: 0.0001));

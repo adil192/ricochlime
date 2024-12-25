@@ -38,7 +38,9 @@ abstract class AdState {
   static bool get rewardedInterstitialAdsSupported {
     if (!adsSupported) return false;
     if (RicochlimeProduct.removeAdsForever.state.value ==
-        IAPState.purchasedAndEnabled) return false;
+        IAPState.purchasedAndEnabled) {
+      return false;
+    }
 
     final age = AdState.age;
     return age != null && age >= minAgeForPersonalizedAds;
@@ -51,7 +53,9 @@ abstract class AdState {
   static Future<bool> shouldShowBannerAd() async {
     if (!adsSupported) return false;
     if (RicochlimeProduct.removeAdsForever.state.value ==
-        IAPState.purchasedAndEnabled) return false;
+        IAPState.purchasedAndEnabled) {
+      return false;
+    }
 
     if (await Battery().isInBatterySaveMode) return false;
 
@@ -401,7 +405,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget>
                   ? Center(
                       child: FaIcon(
                         FontAwesomeIcons.rectangleAd,
-                        color: colorScheme.onSurface.withOpacity(0.5),
+                        color: colorScheme.onSurface.withValues(alpha: 0.5),
                       ),
                     )
                   : ClipRRect(

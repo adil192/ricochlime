@@ -157,9 +157,9 @@ class _PlayPageState extends State<PlayPage> {
               NesIconButton(
                 onPress: () => Navigator.of(context).pop(),
                 icon: NesIcons.leftArrowIndicator,
-                primaryColor: Colors.white.withOpacity(0.9),
+                primaryColor: Colors.white.withValues(alpha: 0.9),
                 secondaryColor:
-                    RicochlimePalette.grassColorDark.withOpacity(0.9),
+                    RicochlimePalette.grassColorDark.withValues(alpha: 0.9),
                 size: const Size.square(20),
               ),
               const SizedBox(width: 16),
@@ -178,9 +178,9 @@ class _PlayPageState extends State<PlayPage> {
                     ),
                   ),
                   icon: NesIcons.redo,
-                  primaryColor: Colors.white.withOpacity(0.9),
+                  primaryColor: Colors.white.withValues(alpha: 0.9),
                   secondaryColor:
-                      RicochlimePalette.grassColorDark.withOpacity(0.9),
+                      RicochlimePalette.grassColorDark.withValues(alpha: 0.9),
                   size: const Size.square(20),
                 ),
               ),
@@ -199,7 +199,7 @@ class _PlayPageState extends State<PlayPage> {
                   highScore <= 0 ? '' : t.playPage.highScore(p: highScore),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                     fontSize: 12,
                     height: 1,
                   ),
@@ -212,7 +212,7 @@ class _PlayPageState extends State<PlayPage> {
                   '$score',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                     fontSize: 32,
                     height: 0.7,
                   ),
@@ -235,7 +235,7 @@ class _PlayPageState extends State<PlayPage> {
                           return Text(
                             coins.toString(),
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha: 0.9),
                               fontSize: 32,
                               height: 0.65,
                             ),
@@ -285,7 +285,7 @@ class _PlayPageState extends State<PlayPage> {
                                 child: Text(
                                   '${timeDilation.toStringAsFixed(1)}x',
                                   style: TextStyle(
-                                    color: Colors.white.withOpacity(0.9),
+                                    color: Colors.white.withValues(alpha: 0.9),
                                     fontSize: 32,
                                   ),
                                 ),
@@ -315,10 +315,11 @@ class _PlayPageState extends State<PlayPage> {
                                     Prefs.totalMovesUndone.value++;
                                   },
                                   icon: NesIcons.delete,
-                                  primaryColor: Colors.white.withOpacity(0.9),
+                                  primaryColor:
+                                      Colors.white.withValues(alpha: 0.9),
                                   secondaryColor: RicochlimePalette
                                       .grassColorDark
-                                      .withOpacity(0.9),
+                                      .withValues(alpha: 0.9),
                                   size: const Size.square(20),
                                 ),
                               ),
@@ -366,7 +367,7 @@ class FpsCounter extends StatelessWidget {
           fps.toString(),
           style: TextStyle(
             fontSize: 24,
-            color: Colors.white.withOpacity(0.9),
+            color: Colors.white.withValues(alpha: 0.9),
           ),
         );
       },

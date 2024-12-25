@@ -89,7 +89,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
         anchor: Anchor.center,
         size: shadowSize,
         overridePaint: Paint()
-          ..color = Colors.black.withOpacity(opacity)
+          ..color = Colors.black.withValues(alpha: opacity)
           ..colorFilter =
               const ColorFilter.mode(Colors.black, BlendMode.modulate),
       )
@@ -99,7 +99,7 @@ class Bullet extends BodyComponent with ContactCallbacks {
         anchor: Anchor.center,
         size: size,
         overridePaint: Paint()
-          ..color = Colors.white.withOpacity(opacity)
+          ..color = Colors.white.withValues(alpha: opacity)
           ..colorFilter = ColorFilter.mode(bulletColor, BlendMode.modulate),
       );
   }

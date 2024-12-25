@@ -146,7 +146,9 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
       for (var x = 4.0; x < gameRef.size.x - 4; x += 8) {
         // no skulls near the player
         if ((y + 4 - gameRef.player.position.y).abs() < 17 &&
-            (x + 4 - gameRef.player.position.x).abs() < 17) continue;
+            (x + 4 - gameRef.player.position.x).abs() < 17) {
+          continue;
+        }
 
         // randomly spread out the skulls
         if (random.nextDouble() > 0.3) continue;

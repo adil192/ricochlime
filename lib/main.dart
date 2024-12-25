@@ -30,7 +30,6 @@ Future<void> main({
     print('${record.level.name}: ${record.loggerName}: ${record.message}');
   });
 
-  LocaleSettings.useDeviceLocale();
   Prefs.init();
   unawaited(Prefs.bgmVolume
       .waitUntilLoaded()
@@ -39,6 +38,7 @@ Future<void> main({
   GoogleFonts.config.allowRuntimeFetching = false;
 
   await Future.wait([
+    LocaleSettings.useDeviceLocale(),
     Prefs.highScore.waitUntilLoaded(),
     Prefs.birthYear.waitUntilLoaded(),
     GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
