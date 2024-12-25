@@ -96,38 +96,45 @@ void main() {
     ShopItems.bulletColors[7].purchase(noCost: true);
     ShopItems.bulletColors[9].purchase(noCost: true);
 
+    const darkFrameIcons = ScreenshotFrameColors(
+      topBarIconBrightness: Brightness.dark,
+      gestureHintBrightness: Brightness.dark,
+    );
+    const lightFrameIcons = ScreenshotFrameColors(
+      topBarIconBrightness: Brightness.light,
+      gestureHintBrightness: Brightness.light,
+    );
+
     _testGame(
+      frameColors: darkFrameIcons,
       goldenFileName: '1_home',
       child: const HomePage(),
     );
     _testGame(
       gameSave: inProgressGameSave,
-      frameColors: const ScreenshotFrameColors(
-        topBar: RicochlimePalette.waterColor,
-        onTopBar: Color(0xFFeaf2f8),
-        bottomBar: RicochlimePalette.waterColor,
-        onBottomBar: Color(0xFFeaf2f8),
-      ),
+      frameColors: lightFrameIcons,
       goldenFileName: '2_play',
       child: const PlayPage(),
     );
     // _testGame(
     //   gameSave: gameOverGameSave,
-    //   frameColor: RicochlimePalette.waterColor,
-    //   onFrameColor: const Color(0xFFeaf2f8),
+    //   frameColors: darkFrameIcons,
     //   goldenFileName: '3_game_over',
     //   child: const PlayPage(),
     // );
     _testGame(
       goldenFileName: '4_shop',
+      frameColors: darkFrameIcons,
       child: const ShopPage(),
     );
     _testGame(
       goldenFileName: '5_tutorial',
+      frameColors: darkFrameIcons,
       child: const TutorialPage(),
     );
     _testGame(
       goldenFileName: '6_settings',
+      frameColors: darkFrameIcons,
       child: const SettingsPage(),
     );
   });

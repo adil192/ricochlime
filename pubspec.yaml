@@ -75,7 +75,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  golden_screenshot: ^2.0.1
+  golden_screenshot: ^3.0.0
 
   icons_launcher: ^3.0.0
 
