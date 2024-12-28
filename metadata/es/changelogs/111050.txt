@@ -1,0 +1,2 @@
+• Se deshabilitó el nuevo motor de renderización en Android debido a la inestabilidad
+• Pequeñas correcciones para el contador de fps

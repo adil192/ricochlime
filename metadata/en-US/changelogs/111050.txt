@@ -1,0 +1,2 @@
+• Disabled the new renderer engine on Android due to instability
+• Small fixes for the fps counter
