@@ -149,7 +149,7 @@ class _PlayPageState extends State<PlayPage> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle.light,
-          leadingWidth: Prefs.showFpsCounter.value ? 136 : 80,
+          leadingWidth: 80 + (Prefs.showFpsCounter.value ? (16 + 24 * 3) : 0),
           leading: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
