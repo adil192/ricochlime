@@ -328,6 +328,7 @@ class RicochlimeGame extends Forge2DGame
   static int get fps => _fps;
   static int _fps = 0;
   static set fps(int fps) {
+    if (fps == _fps) return;
     _fps = fps;
     if (_fpsStreamController.hasListener) _fpsStreamController.add(fps);
   }
