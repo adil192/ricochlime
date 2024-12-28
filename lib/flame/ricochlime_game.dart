@@ -321,7 +321,16 @@ class RicochlimeGame extends Forge2DGame
   /// and only update the game when the sum is greater than 1/30.
   double groupedUpdateDt = 0;
   static const maxDt = 0.5;
-  static final fps = ValueNotifier<int>(30);
+
+  static final _fpsStreamController = StreamController<int>.broadcast();
+  static final fpsStream = _fpsStreamController.stream;
+
+  static int get fps => _fps;
+  static int _fps = 0;
+  static set fps(int fps) {
+    _fps = fps;
+    if (_fpsStreamController.hasListener) _fpsStreamController.add(fps);
+  }
 
   @override
   // ignore: must_call_super (super.update is called in [updateNow])
@@ -329,7 +338,7 @@ class RicochlimeGame extends Forge2DGame
     if (dt > maxDt) {
       onResume(dt);
       groupedUpdateDt = 0;
-      fps.value = 0;
+      fps = 0;
       // physics engine can't handle such a big dt, so just skip this frame
       return;
     }
@@ -351,7 +360,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   void updateNow(double dt, double timeDilation) {
-    if (Prefs.showFpsCounter.value) fps.value = (1 / max(dt, 1 / 999)).round();
+    if (Prefs.showFpsCounter.value) fps = (1 / max(dt, 1 / 999)).round();
     dt = min(dt * timeDilation, maxDt);
     ticker.tick(dt);
     super.update(dt);
@@ -690,5 +699,10 @@ class RicochlimeGame extends Forge2DGame
     // [minMonstersInRow] to avoid an infinite loop.
 
     return row;
+  }
+
+  @Deprecated('RicochlimeGame is never expected to be disposed')
+  void dispose() {
+    _fpsStreamController.close();
   }
 }

@@ -360,9 +360,10 @@ class FpsCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: RicochlimeGame.fps,
-      builder: (context, fps, _) {
+    return StreamBuilder(
+      stream: RicochlimeGame.fpsStream,
+      builder: (context, fpsSnapshot) {
+        final int fps = fpsSnapshot.data ?? RicochlimeGame.fps;
         return Text(
           fps.toString(),
           style: TextStyle(
