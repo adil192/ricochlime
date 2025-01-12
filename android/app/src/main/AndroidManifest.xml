@@ -1,7 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
     <uses-feature android:name="android.hardware.touchscreen" android:required="true" />
 
@@ -44,14 +43,6 @@
                 android:name="autoStoreLocales"
                 android:value="true" />
         </service>
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-1312561055261176~7250622527"/>
-        <!-- Delay app measurement until MobileAds.initialize() is called. -->
-        <meta-data
-            android:name="com.google.android.gms.ads.DELAY_APP_MEASUREMENT_INIT"
-            android:value="true"/>
 
         <!-- Disable impeller due to https://github.com/flutter/flutter/issues/160941 -->
         <meta-data
