@@ -28,12 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  app_tracking_transparency: ^2.0.4
-
-  battery_plus: ^6.0.1
-
-  collapsible: ^1.0.0
-
   cupertino_icons: ^1.0.2
 
   flame: ^1.8.1
@@ -50,8 +44,6 @@ dependencies:
   forge2d: any
 
   google_fonts: ^6.1.0
-
-  google_mobile_ads: ^5.0.0
 
   in_app_purchase: ^3.2.0
   logging: ^1.2.0

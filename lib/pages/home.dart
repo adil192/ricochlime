@@ -1,12 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nes_ui/nes_ui.dart';
-import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
-import 'package:ricochlime/main.dart';
 import 'package:ricochlime/nes/bouncing_icon.dart';
 import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
@@ -19,21 +15,12 @@ import 'package:ricochlime/utils/shop_items.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static bool handledConsent = false;
-
   /// The last known value of the bgm volume,
   /// excluding when the volume is 0.
   static double lastKnownOnVolume = 0.7;
 
   @override
   Widget build(BuildContext context) {
-    if (!handledConsent) {
-      handledConsent = true;
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        handleCurrentConsentStage(context);
-      });
-    }
-
     final colorScheme = Theme.of(context).colorScheme;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
@@ -146,25 +133,6 @@ class _HomePageButton<T> extends StatefulWidget {
 }
 
 class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
-  /// For the first 2s, buttons are replaced with a loading icon
-  /// to prevent users trying to click them and getting frustrated
-  /// when nothing happens. This is because google_mobile_ads seems to block
-  /// user input while loading for some reason.
-  late final loadingTimer =
-      (AdState.adsSupported && !RicochlimeGame.reproducibleGoldenMode)
-          ? Timer(const Duration(seconds: 2), () {
-              if (mounted) setState(() {});
-            })
-          : null;
-
-  bool get loading => loadingTimer?.isActive ?? false;
-
-  @override
-  void dispose() {
-    loadingTimer?.cancel();
-    super.dispose();
-  }
-
   void onPressed() {
     final route = (!Prefs.stylizedPageTransitions.value ||
             MediaQuery.disableAnimationsOf(context))
@@ -187,13 +155,11 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
   Widget build(BuildContext context) {
     return Center(
       child: NesButton(
-        onPressed: loading ? null : onPressed,
+        onPressed: onPressed,
         type: widget.type,
         child: Row(
           children: [
-            if (loading)
-              const NesHourglassLoadingIndicator()
-            else if (!RicochlimeGame.reproducibleGoldenMode &&
+            if (!RicochlimeGame.reproducibleGoldenMode &&
                 (widget.shouldAnimateIcon?.call() ?? false))
               BouncingIcon(icon: NesIcon(iconData: widget.icon))
             else

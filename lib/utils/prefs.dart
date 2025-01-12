@@ -32,8 +32,6 @@ abstract class Prefs {
   static late final PlainPref<bool> stylizedPageTransitions;
   static late final PlainPref<bool> biggerBullets;
 
-  static late final PlainPref<int?> birthYear;
-
   static late final PlainPref<double> bgmVolume;
 
   static late final PlainPref<bool> showUndoButton, showReflectionInAimGuide;
@@ -77,8 +75,6 @@ abstract class Prefs {
     hyperlegibleFont = PlainPref('hyperlegibleFont', false);
     stylizedPageTransitions = PlainPref('stylizedPageTransitions', true);
     biggerBullets = PlainPref('biggerBullets', false);
-
-    birthYear = PlainPref('birthYear', null);
 
     bgmVolume = PlainPref('bgmVolume', 0);
 

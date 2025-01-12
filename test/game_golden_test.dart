@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
@@ -75,7 +74,6 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     Prefs.testingMode = true;
     Prefs.init();
-    AdState.init();
 
     RicochlimeGame.disableBgMusic = true;
     RicochlimeGame.reproducibleGoldenMode = true;
@@ -87,7 +85,6 @@ void main() {
       ]);
     });
 
-    Prefs.birthYear.value = 2000;
     Prefs.coins.value = 493;
     Prefs.highScore.value = 62;
 
@@ -143,7 +140,6 @@ void _testGame({
         final device = goldenDevice.device;
         RicochlimeIAP.forceInAppPurchasesSupported = goldenDevice.enableIAPs;
         RicochlimeProduct.init();
-        AdState.forceAdsSupported = goldenDevice.enableAds;
 
         if (gameSave != null) {
           Prefs.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
@@ -193,13 +189,6 @@ void _testGame({
 extension _GoldenScreenshotDevices on GoldenScreenshotDevices {
   bool get enableIAPs => switch (this) {
         GoldenScreenshotDevices.macbook => true,
-        GoldenScreenshotDevices.olderIphone => true,
-        GoldenScreenshotDevices.newerIphone => true,
-        GoldenScreenshotDevices.olderIpad => true,
-        GoldenScreenshotDevices.newerIpad => true,
-        _ => false,
-      };
-  bool get enableAds => switch (this) {
         GoldenScreenshotDevices.olderIphone => true,
         GoldenScreenshotDevices.newerIphone => true,
         GoldenScreenshotDevices.olderIpad => true,

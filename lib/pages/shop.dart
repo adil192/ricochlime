@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
-import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/coin.dart';
@@ -123,103 +122,6 @@ class ShopPage extends StatelessWidget {
                   ),
                   SliverList.list(
                     children: [
-                      if (AdState.adsSupported) ...[
-                        ValueListenableBuilder(
-                          valueListenable:
-                              RicochlimeProduct.removeAdsForever.state,
-                          builder: (context, state, _) {
-                            return NesButton(
-                              type: switch (state) {
-                                IAPState.unpurchased => NesButtonType.warning,
-                                IAPState.purchasedAndEnabled =>
-                                  NesButtonType.primary,
-                                IAPState.purchasedAndDisabled =>
-                                  NesButtonType.normal,
-                              },
-                              onPressed: switch (state) {
-                                IAPState.unpurchased => () {
-                                    if (Prefs.coins.value >=
-                                        removeAdsForeverCoinPrice) {
-                                      Prefs.coins.value -=
-                                          removeAdsForeverCoinPrice;
-                                      RicochlimeProduct.removeAdsForever.state
-                                          .value = IAPState.purchasedAndEnabled;
-                                    } else if (RicochlimeIAP
-                                        .inAppPurchasesSupported) {
-                                      RicochlimeIAP.buy(
-                                          RicochlimeProduct.removeAdsForever);
-                                    }
-                                  },
-                                IAPState.purchasedAndEnabled => () =>
-                                    RicochlimeProduct.removeAdsForever.state
-                                        .value = IAPState.purchasedAndDisabled,
-                                IAPState.purchasedAndDisabled => () =>
-                                    RicochlimeProduct.removeAdsForever.state
-                                        .value = IAPState.purchasedAndEnabled,
-                              },
-                              child: Row(
-                                children: [
-                                  NesIcon(iconData: NesIcons.eraser),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: Text(
-                                      t.shopPage.removeAdsForever,
-                                      style: const TextStyle(fontSize: 20),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  switch (state) {
-                                    IAPState.unpurchased =>
-                                      ValueListenableBuilder(
-                                        valueListenable: Prefs.coins,
-                                        builder: (context, coins, _) {
-                                          if (coins >=
-                                                  removeAdsForeverCoinPrice ||
-                                              !RicochlimeIAP
-                                                  .inAppPurchasesSupported) {
-                                            return Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                const CoinIcon(size: 20),
-                                                Text(
-                                                  // ignore: prefer_interpolation_to_compose_strings
-                                                  (removeAdsForeverCoinPrice /
-                                                              1000)
-                                                          .toStringAsFixed(1) +
-                                                      'k',
-                                                  style: const TextStyle(
-                                                      fontSize: 20),
-                                                ),
-                                              ],
-                                            );
-                                          } else {
-                                            return Text(
-                                              RicochlimeProduct
-                                                  .removeAdsForever.price,
-                                              style:
-                                                  const TextStyle(fontSize: 20),
-                                            );
-                                          }
-                                        },
-                                      ),
-                                    IAPState.purchasedAndEnabled => NesCheckBox(
-                                        value: true,
-                                        onChange: (_) {},
-                                      ),
-                                    IAPState.purchasedAndDisabled =>
-                                      NesCheckBox(
-                                        value: false,
-                                        onChange: (_) {},
-                                      ),
-                                  },
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 8),
-                      ],
                       NesButton(
                         type: NesButtonType.normal,
                         onPressed: () =>

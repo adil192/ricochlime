@@ -7,8 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logging/logging.dart';
-import 'package:ricochlime/ads/ads.dart';
-import 'package:ricochlime/ads/age_dialog.dart';
 import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
@@ -40,13 +38,11 @@ Future<void> main({
   await Future.wait([
     LocaleSettings.useDeviceLocale(),
     Prefs.highScore.waitUntilLoaded(),
-    Prefs.birthYear.waitUntilLoaded(),
     GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
     RicochlimeGame.instance.preloadSprites.future,
   ]);
 
   unawaited(RicochlimeIAP.init());
-  AdState.init();
 
   runApp(TranslationProvider(child: const MyApp()));
 }
@@ -71,24 +67,6 @@ void _addLicenses() {
       await rootBundle.loadString('assets/google_fonts/Silkscreen/OFL.txt'),
     );
   });
-}
-
-Future<void> handleCurrentConsentStage(BuildContext context) async {
-  if (kIsWeb) return;
-  if (!AdState.adsSupported) return;
-
-  if (Prefs.birthYear.value == null) {
-    await showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const AgeDialog(
-        dismissible: false,
-      ),
-    );
-    assert(Prefs.birthYear.value != null);
-  } else {
-    AdState.showConsentForm();
-  }
 }
 
 class MyApp extends StatefulWidget {

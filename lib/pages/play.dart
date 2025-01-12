@@ -4,11 +4,9 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nes_ui/nes_ui.dart';
-import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/coin.dart';
-import 'package:ricochlime/pages/ad_warning.dart';
 import 'package:ricochlime/pages/game_over.dart';
 import 'package:ricochlime/pages/restart_game.dart';
 import 'package:ricochlime/utils/brightness_extension.dart';
@@ -27,7 +25,6 @@ class _PlayPageState extends State<PlayPage> {
   void initState() {
     super.initState();
     RicochlimeGame.instance
-      ..showAdWarning = showAdWarning
       ..showGameOverDialog = showGameOverDialog
       ..resumeBgMusic();
     if (RicochlimeGame.instance.state.value == GameState.gameOver) {
@@ -48,7 +45,6 @@ class _PlayPageState extends State<PlayPage> {
   @override
   void dispose() {
     RicochlimeGame.instance
-      ..showAdWarning = null
       ..showGameOverDialog = null
       ..cancelCurrentTurn()
       ..pauseBgMusic();
@@ -78,42 +74,6 @@ class _PlayPageState extends State<PlayPage> {
       showingGameOverDialog = false;
     }
   }
-
-  /// Shows a warning dialog before showing a rewarded interstitial ad.
-  /// Returns false if the user cancels the ad, true otherwise.
-  Future<bool> showAdWarning() {
-    final completer = Completer<bool>();
-
-    final secondsLeft = ValueNotifier(3);
-    final timer = Timer.periodic(
-      const Duration(seconds: 1),
-      (timer) {
-        secondsLeft.value--;
-        if (secondsLeft.value <= 0) {
-          timer.cancel();
-          if (!completer.isCompleted) completer.complete(true);
-          Navigator.of(context).pop();
-        }
-      },
-    );
-
-    unawaited(NesBottomSheet.show<void>(
-      context: context,
-      maxHeight: .2,
-      builder: (_) => AdWarning(
-        secondsLeft: secondsLeft,
-        cancelAd: () {
-          timer.cancel();
-          if (!completer.isCompleted) completer.complete(false);
-          Navigator.of(context).pop();
-        },
-      ),
-    ));
-
-    return completer.future;
-  }
-
-  final Future<bool> shouldShowBannerAd = AdState.shouldShowBannerAd();
 
   double _playerPos(Size screenSize) {
     final fitted = applyBoxFit(
@@ -330,23 +290,6 @@ class _PlayPageState extends State<PlayPage> {
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 2),
-            FutureBuilder(
-              future: shouldShowBannerAd,
-              builder: (context, snapshot) {
-                final showAd = snapshot.data ?? false;
-                if (!showAd) return const SizedBox.shrink();
-
-                final screenSize = MediaQuery.sizeOf(context);
-                return ConstrainedBox(
-                  constraints: BoxConstraints.tight(Size(
-                    screenSize.width,
-                    (screenSize.height - kToolbarHeight) * 0.1,
-                  )),
-                  child: const BannerAdWidget(adSize: AdSize.banner),
-                );
-              },
             ),
           ],
         ),

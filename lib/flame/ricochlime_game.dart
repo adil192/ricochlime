@@ -12,8 +12,6 @@ import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:forge2d/src/settings.dart' as physics_settings;
 import 'package:logging/logging.dart';
-import 'package:ricochlime/ads/ad_schedule.dart';
-import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/components/aim_guide.dart';
 import 'package:ricochlime/flame/components/background/background.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
@@ -81,7 +79,6 @@ class RicochlimeGame extends Forge2DGame
   final Ticker ticker = Ticker();
   static final timeDilation = ValueNotifier<double>(1);
 
-  Future<bool> Function()? showAdWarning;
   Future<GameOverAction> Function()? showGameOverDialog;
 
   /// A completer that completes when all the sprites are loaded.
@@ -337,7 +334,6 @@ class RicochlimeGame extends Forge2DGame
   // ignore: must_call_super (super.update is called in [updateNow])
   void update(double dt) {
     if (dt > maxDt) {
-      onResume(dt);
       groupedUpdateDt = 0;
       fps = 0;
       // physics engine can't handle such a big dt, so just skip this frame
@@ -523,30 +519,6 @@ class RicochlimeGame extends Forge2DGame
         .any((monster) => monster.position.y >= threshold);
   }
 
-  void onResume(double dt) {
-    AdSchedule.onResume(dt);
-  }
-
-  Future<void> showRewardedInterstitial() async {
-    if (!AdState.rewardedInterstitialAdsSupported) return;
-
-    if (!AdSchedule.enoughTimeSinceLastAd()) return;
-
-    final showAd = await showAdWarning?.call() ?? false;
-    if (!showAd) {
-      AdSchedule.markAdCancelled();
-      return;
-    } else {
-      AdSchedule.markAdShown();
-    }
-
-    final rewardGranted = await AdState.showRewardedInterstitialAd();
-    if (!rewardGranted) return;
-
-    Prefs.totalAdsWatched.value++;
-    Prefs.addCoins(100, allowOverMax: true);
-  }
-
   Future<void> gameOver() async {
     state.value = GameState.gameOver;
     assert(!inputAllowed);
@@ -615,7 +587,6 @@ class RicochlimeGame extends Forge2DGame
   /// Saves the high score,
   /// and clears the current game.
   void restartGame() {
-    Future.delayed(const Duration(milliseconds: 100), showRewardedInterstitial);
     Prefs.highScore.value = max(Prefs.highScore.value, score.value);
     Prefs.currentGame.value = null;
     _reset();

@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ricochlime/ads/ads.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +12,6 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     Prefs.testingMode = true;
     Prefs.init();
-    AdState.init();
     RicochlimeGame.disableBgMusic = true;
     RicochlimeGame.reproducibleGoldenMode = true;
     RicochlimeGame.instance.random = Random(123);

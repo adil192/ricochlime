@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ricochlime/utils/prefs.dart';
 
 enum RicochlimeProduct {
-  removeAdsForever('remove_ads_forever', consumable: false),
   buy1000Coins('buy_1000_coins', consumable: true),
   buy5000Coins('buy_5000_coins', consumable: true),
   ;

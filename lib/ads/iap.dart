@@ -7,7 +7,6 @@ import 'package:logging/logging.dart';
 import 'package:ricochlime/utils/prefs.dart';
 
 enum RicochlimeProduct {
-  removeAdsForever('remove_ads_forever', consumable: false),
   buy1000Coins('buy_1000_coins', consumable: true),
   buy5000Coins('buy_5000_coins', consumable: true),
   ;
@@ -139,16 +138,6 @@ abstract final class RicochlimeIAP {
     }
 
     switch (product) {
-      case RicochlimeProduct.removeAdsForever:
-        final state = RicochlimeProduct.removeAdsForever.state;
-
-        if (state.value != IAPState.unpurchased) {
-          _log.warning(
-              'Product already delivered: ${purchaseDetails.productID}');
-        }
-
-        state.value = IAPState.purchasedAndEnabled;
-
       case RicochlimeProduct.buy1000Coins:
         Prefs.addCoins(1000, allowOverMax: true);
 
