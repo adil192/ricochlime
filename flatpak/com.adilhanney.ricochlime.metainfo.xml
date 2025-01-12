@@ -74,6 +74,14 @@
     </branding>
 
     <releases>
+        <release version="1.11.6" date="2025-01-12">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.6</url>
+            <description>
+                <ul>
+                    <li>Removed ads for mobile users</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.11.5" date="2024-12-28">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.5</url>
             <description>
