@@ -4,14 +4,14 @@ Ricochlime is a monster shooting game developed by Adil Hanney.
 
 ## First party data collection
 
-Ricochlime does not collect any data about you (besides the data collected by third parties, see below). All progress is stored locally on your device, including your score and monster locations on the screen.
+Ricochlime does not collect any data about you besides the data collected by third parties (see below). All progress is stored locally on your device, including your score and monster locations on the screen.
 
 ## Third party data collection
 
 ### Google Ads
 
 Ricochlime is free to download and play, and used Google AdMob to display ads in versions v1.11.5 and older on some platforms.
-Newer versions of the app do not contain ads.
+Newer versions of the app (v1.11.6 and newer) do not contain ads and do not share information with Google AdMob.
 
 AdMob may collect data about you, including your device's advertising ID, IP address, and location. You can read more about [how Google uses data from apps that use their services](https://policies.google.com/technologies/partner-sites).
 
