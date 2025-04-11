@@ -380,7 +380,7 @@ class RicochlimeGame extends Forge2DGame
   @override
   void onTapUp(TapUpInfo info) {
     if (state.value == GameState.shooting) {
-      timeDilation.value += 0.5;
+      timeDilation.value += Prefs.speedIncrement.value;
     } else if (inputAllowed && pointAndClickEnabled) {
       _spawnBullets();
     }
@@ -413,6 +413,7 @@ class RicochlimeGame extends Forge2DGame
     state.value = GameState.shooting;
     assert(!inputAllowed);
     inputCancelled = false;
+    timeDilation.value = Prefs.speed.value;
     player.attack();
 
     try {
