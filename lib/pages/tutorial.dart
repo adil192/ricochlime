@@ -136,8 +136,6 @@ class TutorialPage extends StatelessWidget {
 
 class _TutorialGraphic extends StatelessWidget {
   const _TutorialGraphic({
-    // ignore: unused_element
-    super.key,
     required this.child,
   });
 
@@ -159,8 +157,7 @@ class _TutorialGraphic extends StatelessWidget {
 }
 
 class _BounceOffWallsGraphic extends StatelessWidget {
-  // ignore: unused_element
-  const _BounceOffWallsGraphic({super.key});
+  const _BounceOffWallsGraphic();
 
   @override
   Widget build(BuildContext context) {
@@ -215,8 +212,7 @@ class _BounceOffWallsGraphicPainter extends CustomPainter {
 }
 
 class _SkullsGraphic extends StatelessWidget {
-  // ignore: unused_element
-  const _SkullsGraphic({super.key, required this.crossAxisCount});
+  const _SkullsGraphic({required this.crossAxisCount});
 
   final int crossAxisCount;
 

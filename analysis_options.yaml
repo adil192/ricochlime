@@ -98,7 +98,6 @@ linter:
 
     noop_primitive_operations: true
 
-    package_api_docs: true
     # public_member_api_docs: true
 
     prefer_asserts_in_initializer_lists: true

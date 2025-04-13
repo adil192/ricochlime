@@ -198,8 +198,6 @@ class ShopPage extends StatelessWidget {
 
 class _ShopItemTile extends StatelessWidget {
   const _ShopItemTile({
-    // ignore: unused_element
-    super.key,
     required this.selected,
     required this.select,
     required this.item,
