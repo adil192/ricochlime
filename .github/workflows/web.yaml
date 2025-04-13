@@ -40,7 +40,7 @@ jobs:
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:'
 
       - name: Build web
-        run: flutter build web --release --web-renderer=canvaskit
+        run: flutter build web --release
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
