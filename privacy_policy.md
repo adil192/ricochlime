@@ -1,4 +1,4 @@
-# Privacy policy - Ricochlime
+# Ricochlime's Privacy Policy
 
 Ricochlime is a monster shooting game developed by Adil Hanney.
 
@@ -25,4 +25,4 @@ The source code for Ricochlime is available on [GitHub](https://github.com/adil1
 
 ## Contact
 
-Ricochlime is developed by Adil Hanney. You can contact me at adilhanney@disroot.org for any enquiries, or preferably [open an issue](https://github.com/adil192/ricochlime/issues/new) on this repo (requires a GitHub account).
+Ricochlime is developed by Adil Hanney. You can contact me at adilhanney@disroot.org for any enquiries, or preferably [open an issue](https://github.com/adil192/ricochlime/issues/new) on the GitHub repo (requires a GitHub account).

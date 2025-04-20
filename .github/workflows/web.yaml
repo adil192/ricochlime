@@ -28,6 +28,9 @@ jobs:
           key: ${{ runner.OS }}-ricochlime-ubuntu-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
             ${{ runner.OS }}-ricochlime-ubuntu-
+
+      - name: Install Pandoc
+        run: sudo apt-get install -y pandoc
       
       - name: Remove dev dependencies
         run: ./patches/remove_dev_dependencies.sh
@@ -41,6 +44,11 @@ jobs:
 
       - name: Build web
         run: flutter build web --release
+
+      - name: Build privacy_policy.html
+        run:
+          pandoc -f markdown privacy_policy.md > /tmp/privacy_policy_content.html
+          sed -i 's|<privacy_policy_goes_here/>|'"$(cat /tmp/privacy_policy_content.html)"'|g' build/web/privacy_policy.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
