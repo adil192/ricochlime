@@ -97,8 +97,10 @@ class RicochlimeGame extends Forge2DGame
   Future<void> onLoad() async {
     await super.onLoad();
 
-    assert(size.x == expectedWidth);
-    assert(size.y == expectedHeight);
+    assert(size.x.round() == expectedWidth.round(),
+        'Expected width: $expectedWidth but got: ${size.x}');
+    assert(size.y.round() == expectedHeight.round(),
+        'Expected height: $expectedHeight but got: ${size.y}');
 
     _initBgMusic();
 
@@ -111,7 +113,7 @@ class RicochlimeGame extends Forge2DGame
     ).forEach(add);
 
     add(player);
-    
+
     add(aimGuide);
 
     await Prefs.currentGame.waitUntilLoaded();

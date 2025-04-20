@@ -226,7 +226,7 @@ class Monster extends BodyComponent with ContactCallbacks {
     const maxPriority = 0;
     final yRelative = position.y / RicochlimeGame.expectedHeight;
     assert(yRelative >= 0 && yRelative <= 1);
-    return lerpDouble(minPriority, maxPriority, yRelative)!.floor();
+    return lerpDouble(minPriority, maxPriority, yRelative)!.round();
   }
 
   /// The minimum priority,
