@@ -10,7 +10,7 @@ import 'package:ricochlime/utils/prefs.dart';
 
 /// A component that draws a dotted line
 /// to show the user where they're aiming.
-class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
+class AimGuide extends PositionComponent with HasGameReference<RicochlimeGame> {
   /// Information about the current aim.
   ///
   /// This is null if the user is not aiming.
@@ -31,7 +31,7 @@ class AimGuide extends PositionComponent with HasGameRef<RicochlimeGame> {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    position = gameRef.player.position;
+    position = game.player.position;
     width = 0;
     height = 0;
     anchor = Anchor.center;

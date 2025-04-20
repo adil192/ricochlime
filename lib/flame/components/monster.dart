@@ -346,7 +346,7 @@ class _MonsterMovement {
 /// It should not be used directly,
 /// but only for type checking.
 class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
-    with HasGameRef<RicochlimeGame> {
+    with HasGameReference<RicochlimeGame> {
   MonsterAnimation._()
       : super(
           position: _relativePosition.clone(),
@@ -389,12 +389,12 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
 
   /// Preloads the sprites for the monster.
   static Future<void> preloadSprites({
-    required RicochlimeGame gameRef,
+    required RicochlimeGame game,
   }) {
     return Future.wait([
-      gameRef.images.load('log_normal.png'),
-      gameRef.images.load('log_green.png'),
-      gameRef.images.load('log_gold.png'),
+      game.images.load('log_normal.png'),
+      game.images.load('log_green.png'),
+      game.images.load('log_gold.png'),
     ]);
   }
 

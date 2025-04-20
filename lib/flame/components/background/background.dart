@@ -10,15 +10,16 @@ import 'package:ricochlime/utils/random_extension.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 /// The background component which contains all the background tiles.
-class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
+class Background extends PositionComponent
+    with HasGameReference<RicochlimeGame> {
   late final bottomOfIsland =
-      gameRef.player.position.y + Player.staticHeight * 0.5 + 8;
+      game.player.position.y + Player.staticHeight * 0.5 + 8;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
     position = Vector2.zero();
-    size = gameRef.size;
+    size = game.size;
     priority = Monster.minPriority - 1;
   }
 
@@ -28,8 +29,8 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
 
   @override
   void update(double dt) {
-    if (_lastNumNewRowsEachRound != gameRef.numNewRowsEachRound) {
-      _lastNumNewRowsEachRound = gameRef.numNewRowsEachRound;
+    if (_lastNumNewRowsEachRound != game.numNewRowsEachRound) {
+      _lastNumNewRowsEachRound = game.numNewRowsEachRound;
       _updateChildren();
     }
     super.update(dt);
@@ -67,7 +68,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
     double x, y;
     for (y = 8; y < bottomOfIsland - 8; y += 8) {
       left = 0.8 * left + 0.2 * random.plusOrMinus(4);
-      for (x = left + 8; x < gameRef.size.x - 8; x += 8) {
+      for (x = left + 8; x < game.size.x - 8; x += 8) {
         if (random.nextBool()) continue;
         yield GrassSprite(
           position: Vector2(x, y),
@@ -81,7 +82,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
     double x, y;
 
     // top and bottom sides
-    for (x = 8; x < gameRef.size.x - 8; x += 8) {
+    for (x = 8; x < game.size.x - 8; x += 8) {
       yield GroundSprite(
         position: Vector2(x, 0),
         size: Vector2(8, 8),
@@ -102,7 +103,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
         posOnIsland: Alignment.centerLeft,
       );
       yield GroundSprite(
-        position: Vector2(gameRef.size.x - 8, y),
+        position: Vector2(game.size.x - 8, y),
         size: Vector2(8, 8),
         posOnIsland: Alignment.centerRight,
       );
@@ -115,7 +116,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
       posOnIsland: Alignment.topLeft,
     );
     yield GroundSprite(
-      position: Vector2(gameRef.size.x - 8, 0),
+      position: Vector2(game.size.x - 8, 0),
       size: Vector2(8, 8),
       posOnIsland: Alignment.topRight,
     );
@@ -127,7 +128,7 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
       posOnIsland: Alignment.bottomLeft,
     );
     yield GroundSprite(
-      position: Vector2(gameRef.size.x - 8, bottomOfIsland - 8),
+      position: Vector2(game.size.x - 8, bottomOfIsland - 8),
       size: Vector2(8, 8),
       posOnIsland: Alignment.bottomRight,
     );
@@ -138,15 +139,15 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
     final random = Random(1234);
 
     // Decreases (rises) as numNewRowsEachRound increases
-    final minY = gameRef.player.position.y -
+    final minY = game.player.position.y -
         Player.staticHeight * 0.5 -
-        Monster.moveDownHeight * gameRef.numNewRowsEachRound;
+        Monster.moveDownHeight * game.numNewRowsEachRound;
 
     for (var y = bottomOfIsland.roundToDouble() - 12; y > minY; y -= 8) {
-      for (var x = 4.0; x < gameRef.size.x - 4; x += 8) {
+      for (var x = 4.0; x < game.size.x - 4; x += 8) {
         // no skulls near the player
-        if ((y + 4 - gameRef.player.position.y).abs() < 17 &&
-            (x + 4 - gameRef.player.position.x).abs() < 17) {
+        if ((y + 4 - game.player.position.y).abs() < 17 &&
+            (x + 4 - game.player.position.x).abs() < 17) {
           continue;
         }
 
@@ -165,8 +166,8 @@ class Background extends PositionComponent with HasGameRef<RicochlimeGame> {
   /// Preloads all sprite sheets so they can be
   /// accessed synchronously later.
   static Future<void> preloadSprites({
-    required RicochlimeGame gameRef,
+    required RicochlimeGame game,
   }) {
-    return gameRef.images.load('overworld.png');
+    return game.images.load('overworld.png');
   }
 }

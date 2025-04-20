@@ -7,7 +7,7 @@ enum PlayerState {
 }
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
-    with HasGameRef<RicochlimeGame> {
+    with HasGameReference<RicochlimeGame> {
   Player()
       : super(
           size: Vector2(staticWidth, staticHeight),
@@ -42,13 +42,13 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   static Future<void> preloadSprites({
-    required RicochlimeGame gameRef,
+    required RicochlimeGame game,
   }) {
-    return gameRef.images.load('character_subset.png');
+    return game.images.load('character_subset.png');
   }
 
   Map<PlayerState, SpriteAnimation> getAnimations() {
-    final playerImage = gameRef.images.fromCache('character_subset.png');
+    final playerImage = game.images.fromCache('character_subset.png');
     return {
       PlayerState.idle: SpriteAnimation.fromFrameData(
         playerImage,

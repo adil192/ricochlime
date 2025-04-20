@@ -7,7 +7,7 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/random_extension.dart';
 
 class GroundSprite extends SpriteComponent
-    with HasGameRef<RicochlimeGame>, DarkeningSprite {
+    with HasGameReference<RicochlimeGame>, DarkeningSprite {
   GroundSprite({
     required this.posOnIsland,
     super.position,
@@ -20,7 +20,7 @@ class GroundSprite extends SpriteComponent
   void onLoad() {
     super.onLoad();
     sprite = Sprite(
-      gameRef.images.fromCache('overworld.png'),
+      game.images.fromCache('overworld.png'),
       srcPosition: switch (posOnIsland) {
         Alignment.bottomCenter => Vector2(48, 96),
         Alignment.centerRight => Vector2(32, 112),
@@ -45,7 +45,7 @@ class GroundSprite extends SpriteComponent
 }
 
 class GrassSprite extends SpriteComponent
-    with HasGameRef<RicochlimeGame>, DarkeningSprite {
+    with HasGameReference<RicochlimeGame>, DarkeningSprite {
   GrassSprite({
     super.position,
     super.size,
@@ -55,7 +55,7 @@ class GrassSprite extends SpriteComponent
   void onLoad() {
     super.onLoad();
     sprite = Sprite(
-      gameRef.images.fromCache('overworld.png'),
+      game.images.fromCache('overworld.png'),
       srcPosition: Vector2.zero(),
       srcSize: Vector2(16, 16),
     );
@@ -63,7 +63,7 @@ class GrassSprite extends SpriteComponent
 }
 
 class SkullSprite extends SpriteComponent
-    with HasGameRef<RicochlimeGame>, FlickeringSprite {
+    with HasGameReference<RicochlimeGame>, FlickeringSprite {
   SkullSprite({
     required this.type,
     super.position,
@@ -76,7 +76,7 @@ class SkullSprite extends SpriteComponent
   void onLoad() {
     super.onLoad();
     sprite = Sprite(
-      gameRef.images.fromCache('overworld.png'),
+      game.images.fromCache('overworld.png'),
       srcPosition: Vector2(type.x, type.y),
       srcSize: Vector2(16, 16),
     );

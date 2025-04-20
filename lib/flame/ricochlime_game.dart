@@ -85,10 +85,10 @@ class RicochlimeGame extends Forge2DGame
   late final preloadSprites = () {
     final completer = Completer<bool>();
     Future.wait([
-      Background.preloadSprites(gameRef: this),
-      MonsterAnimation.preloadSprites(gameRef: this),
-      Player.preloadSprites(gameRef: this),
-      ShopItems.preloadSprites(gameRef: this),
+      Background.preloadSprites(game: this),
+      MonsterAnimation.preloadSprites(game: this),
+      Player.preloadSprites(game: this),
+      ShopItems.preloadSprites(game: this),
     ]).then((_) => completer.complete(true));
     return completer;
   }();

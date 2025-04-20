@@ -100,9 +100,9 @@ abstract class ShopItems {
   ]);
 
   static Future<void> preloadSprites({
-    required RicochlimeGame gameRef,
+    required RicochlimeGame game,
   }) {
-    return gameRef.images.load('bullet_shapes.png');
+    return game.images.load('bullet_shapes.png');
   }
 
   static final allItems = [
