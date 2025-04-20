@@ -10,10 +10,8 @@ playPage:
   coins: Монетки
 settingsPage:
   title: Настройки
-  ads: Реклама
   gameplay: Игра
   accessibility: Доступность
-  adConsent: Изменить согласие с рекламой
   hyperlegibleFont: Большой шрифт
   bgmVolume: Громкость фоновой музыки
   showUndoButton: Разрешить отмену бросков
@@ -26,22 +24,6 @@ settingsPage:
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
   showFpsCounter(OUTDATED): Показать счетчик FPS
   stylizedPageTransitions(OUTDATED): Стилизованные переходы страниц
-  removeAdsInShop(OUTDATED): "Хотите удалить рекламу? Посмотрите варианты в магазине!"
-ageDialog:
-  yourAge: Ваш возраст
-  letMeGuessYourAge: Давайте-ка угадаю ваш возраст
-  unknown: Неизвестно
-  reason: Нам нужно знать ваш возраст чтобы знать какую рекламу показывать. Это не влияет на саму игру.
-  guessNumber: Угадайте число \#$n
-  areYou: "Вам $age лет?"
-  younger: "Не, я моложе"
-  older: "Нет, я старше"
-  yesMyAgeIs: "Да, мне $age лет"
-  reset: Сбросить
-  howOldAreYou: "Сколько вам лет?"
-  invalidAge: Пожалуйста введите ваш возраст
-  useMinigame: Поиграть в угадайку
-  useSimpleInput: Ввести вручную
 gameOverPage:
   title: "Игра окончена!"
   highScoreNotBeaten: "Вы заработали $p очков!"
@@ -49,8 +31,6 @@ gameOverPage:
   continueWithCoins: Продолжить за 100
   restartGameButton: Перезапустить игру
   homeButton: На главную
-adWarning:
-  getCoins(rich, OUTDATED): "Посмотрите дополнительную рекламу, чтобы получить 100 $c ($t)"
 restartGameDialog:
   title: "Перезапустить игру?"
   areYouSure: "Вы уверену что хотите начать снова? Вы не сможете вернуться"
@@ -73,10 +53,6 @@ shopPage:
   bulletColors: Цвета мячика
   bulletShapes: Формы мячика
   premium: Премиум
-  removeAdsForever: Удалить рекламу навсегда
   restorePurchases: Востановить покупки
   buy1000Coins(OUTDATED): Купить 1000 монет
   buy5000Coins(OUTDATED): Купить 5000 монет
-common:
-  cancel: Отмена
-  ok: Окей

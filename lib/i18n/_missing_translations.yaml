@@ -13,11 +13,8 @@ es:
     coins(OUTDATED): Coins
   settingsPage:
     title(OUTDATED): Settings
-    ads(OUTDATED): Ads
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
-    adConsent(OUTDATED): Change ad consent
-    removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
     hyperlegibleFont(OUTDATED): Easy-to-read font
     stylizedPageTransitions(OUTDATED): Stylized page transitions
     bgmVolume(OUTDATED): Bg music volume
@@ -30,21 +27,6 @@ es:
     licenseNotice(OUTDATED): |-
       Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
       This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
-  ageDialog:
-    yourAge(OUTDATED): Your age
-    letMeGuessYourAge(OUTDATED): Let me guess your age
-    unknown(OUTDATED): Unknown
-    reason(OUTDATED): We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.
-    guessNumber(OUTDATED): Guess \#$n
-    areYou(OUTDATED): "Are you $age?"
-    younger(OUTDATED): "No, I'm younger"
-    older(OUTDATED): "No, I'm older"
-    yesMyAgeIs(OUTDATED): "Yes, I'm $age"
-    reset(OUTDATED): Reset
-    howOldAreYou(OUTDATED): "How old are you?"
-    invalidAge(OUTDATED): Please enter a valid age
-    useMinigame(OUTDATED): Play the age guessing minigame
-    useSimpleInput(OUTDATED): I want to enter my age manually
   gameOverPage:
     title(OUTDATED): "Game over!"
     highScoreNotBeaten(OUTDATED): "You scored $p points!"
@@ -52,8 +34,6 @@ es:
     continueWithCoins(OUTDATED): 100 to continue
     restartGameButton(OUTDATED): Restart game
     homeButton(OUTDATED): Home
-  adWarning:
-    getCoins(rich)(OUTDATED): Watch an optional ad to get $c 100 ($t)
   restartGameDialog:
     title(OUTDATED): "Restart game?"
     areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
@@ -76,13 +56,9 @@ es:
     bulletColors(OUTDATED): Bullet colors
     bulletShapes(OUTDATED): Bullet shapes
     premium(OUTDATED): Premium
-    removeAdsForever(OUTDATED): Remove ads forever
     restorePurchases(OUTDATED): Restore purchases
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins
-  common:
-    cancel(OUTDATED): Cancel
-    ok(OUTDATED): Okay
 kk:
   homePage:
     shopButton(OUTDATED): Shop
@@ -90,10 +66,8 @@ kk:
     undo(OUTDATED): Undo move
     coins(OUTDATED): Coins
   settingsPage:
-    ads(OUTDATED): Ads
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
-    removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
     hyperlegibleFont(OUTDATED): Easy-to-read font
     stylizedPageTransitions(OUTDATED): Stylized page transitions
     bgmVolume(OUTDATED): Bg music volume
@@ -102,16 +76,8 @@ kk:
     biggerBullets(OUTDATED): Bigger bullets
     maxFps(OUTDATED): Max FPS
     showFpsCounter(OUTDATED): Show FPS counter
-  ageDialog:
-    guessNumber(OUTDATED): Guess \#$n
-    howOldAreYou(OUTDATED): "How old are you?"
-    invalidAge(OUTDATED): Please enter a valid age
-    useMinigame(OUTDATED): Play the age guessing minigame
-    useSimpleInput(OUTDATED): I want to enter my age manually
   gameOverPage:
     continueWithCoins(OUTDATED): 100 to continue
-  adWarning:
-    getCoins(rich)(OUTDATED): Watch an optional ad to get $c 100 ($t)
   restartGameDialog:
     title(OUTDATED): "Restart game?"
     areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
@@ -131,17 +97,13 @@ kk:
     bulletColors(OUTDATED): Bullet colors
     bulletShapes(OUTDATED): Bullet shapes
     premium(OUTDATED): Premium
-    removeAdsForever(OUTDATED): Remove ads forever
     restorePurchases(OUTDATED): Restore purchases
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins
 ru:
   settingsPage:
-    removeAdsInShop(OUTDATED): "Want to remove ads? Check out the options in the shop!"
     stylizedPageTransitions(OUTDATED): Stylized page transitions
     showFpsCounter(OUTDATED): Show FPS counter
-  adWarning:
-    getCoins(rich)(OUTDATED): Watch an optional ad to get $c 100 ($t)
   shopPage:
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins

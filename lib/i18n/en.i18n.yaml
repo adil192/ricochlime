@@ -10,11 +10,8 @@ playPage:
   coins: Coins
 settingsPage:
   title: Settings
-  ads: Ads
   gameplay: Gameplay
   accessibility: Accessibility
-  adConsent: Change ad consent
-  removeAdsInShop: "Want to remove ads? Check out the options in the shop!"
   hyperlegibleFont: Easy-to-read font
   stylizedPageTransitions: Stylized page transitions
   bgmVolume: Bg music volume
@@ -27,21 +24,6 @@ settingsPage:
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
-ageDialog:
-  yourAge: Your age
-  letMeGuessYourAge: Let me guess your age
-  unknown: Unknown
-  reason: We need to know your age to make sure the ads you see are appropriate for you. This will not affect gameplay.
-  guessNumber: Guess \#$n
-  areYou: "Are you $age?"
-  younger: "No, I'm younger"
-  older: "No, I'm older"
-  yesMyAgeIs: "Yes, I'm $age"
-  reset: Reset
-  howOldAreYou: "How old are you?"
-  invalidAge: Please enter a valid age
-  useMinigame: Play the age guessing minigame
-  useSimpleInput: I want to enter my age manually
 gameOverPage:
   title: "Game over!"
   highScoreNotBeaten: "You scored $p points!"
@@ -49,8 +31,6 @@ gameOverPage:
   continueWithCoins: 100 to continue
   restartGameButton: Restart game
   homeButton: Home
-adWarning:
-  getCoins(rich): Watch an optional ad to get $c 100 ($t)
 restartGameDialog:
   title: "Restart game?"
   areYouSure: "Are you sure you want to restart? You can't undo this"
@@ -73,10 +53,6 @@ shopPage:
   bulletColors: Bullet colors
   bulletShapes: Bullet shapes
   premium: Premium
-  removeAdsForever: Remove ads forever
   restorePurchases: Restore purchases
   buy1000Coins: Buy 1000 coins
   buy5000Coins: Buy 5000 coins
-common:
-  cancel: Cancel
-  ok: Okay

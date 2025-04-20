@@ -13,9 +13,9 @@ import 'strings.g.dart';
 class TranslationsKk extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	TranslationsKk({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
+	TranslationsKk({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = TranslationMetadata(
+		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.kk,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
@@ -28,18 +28,18 @@ class TranslationsKk extends Translations {
 
 	late final TranslationsKk _root = this; // ignore: unused_field
 
+	@override 
+	TranslationsKk $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsKk(meta: meta ?? this.$meta);
+
 	// Translations
 	@override String get appName => 'Рикошырыш';
 	@override late final _TranslationsHomePageKk homePage = _TranslationsHomePageKk._(_root);
 	@override late final _TranslationsPlayPageKk playPage = _TranslationsPlayPageKk._(_root);
 	@override late final _TranslationsSettingsPageKk settingsPage = _TranslationsSettingsPageKk._(_root);
-	@override late final _TranslationsAgeDialogKk ageDialog = _TranslationsAgeDialogKk._(_root);
 	@override late final _TranslationsGameOverPageKk gameOverPage = _TranslationsGameOverPageKk._(_root);
-	@override late final _TranslationsAdWarningKk adWarning = _TranslationsAdWarningKk._(_root);
 	@override late final _TranslationsRestartGameDialogKk restartGameDialog = _TranslationsRestartGameDialogKk._(_root);
 	@override late final _TranslationsTutorialPageKk tutorialPage = _TranslationsTutorialPageKk._(_root);
 	@override late final _TranslationsShopPageKk shopPage = _TranslationsShopPageKk._(_root);
-	@override late final _TranslationsCommonKk common = _TranslationsCommonKk._(_root);
 }
 
 // Path: homePage
@@ -75,14 +75,11 @@ class _TranslationsSettingsPageKk extends TranslationsSettingsPageEn {
 
 	// Translations
 	@override String get title => 'Баптау';
-	@override String get adConsent => 'Жарнамаға келісімді баптау';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
 	@override String get showFpsCounter => 'FPS есептегішін көрсету';
 	@override String get stylizedPageTransitions => 'Стильденген беттердің ауысуы';
-	@override String get removeAdsInShop => 'Жарнамаларды өшіргіңіз келе ме? Дүкенде опцияларды тексеріңіз!';
 	@override String get showReflectionInAimGuide => 'Мақсат нұсқаулығында рефлексияны көрсетіңіз';
-	@override String get ads => 'Жарнамалар';
 	@override String get hyperlegibleFont => 'Оқуға оңай шрифт';
 	@override String get biggerBullets => 'Үлкенірек оқтар';
 	@override String get gameplay => 'Ойын барысы';
@@ -90,29 +87,6 @@ class _TranslationsSettingsPageKk extends TranslationsSettingsPageEn {
 	@override String get maxFps => 'Максималды FPS';
 	@override String get showUndoButton => 'Қозғалысты қайтаруға рұқсат беріңіз';
 	@override String get bgmVolume => 'Фондық музыканың дыбыс деңгейі';
-}
-
-// Path: ageDialog
-class _TranslationsAgeDialogKk extends TranslationsAgeDialogEn {
-	_TranslationsAgeDialogKk._(TranslationsKk root) : this._root = root, super.internal(root);
-
-	final TranslationsKk _root; // ignore: unused_field
-
-	// Translations
-	@override String get yourAge => 'Жасыңыз';
-	@override String get letMeGuessYourAge => 'Жасыңызды болжау';
-	@override String get unknown => 'Белгісіз';
-	@override String get reason => 'Сіз көретін жарнама сізге қолайлы болатынына көз жеткізу үшін жасыңызды білуіміз керек. Ойынның өзіне бұл әсер етпейді.';
-	@override String areYou({required Object age}) => 'Жасыңыз ${age}?';
-	@override String get younger => 'Жоқ, жасым кішірек';
-	@override String get older => 'Жоқ, жасым үлкенірек';
-	@override String yesMyAgeIs({required Object age}) => 'Иә, жасым ${age}';
-	@override String get reset => 'Арылту';
-	@override String get howOldAreYou => 'Сен қанша жастасың?';
-	@override String get invalidAge => 'Жарамды жасты енгізіңіз';
-	@override String get useMinigame => 'Жасты болжайтын шағын ойынды ойнаңыз';
-	@override String get useSimpleInput => 'Мен жасымды қолмен енгізгім келеді';
-	@override String guessNumber({required Object n}) => 'Ойланыңыз \#${n}';
 }
 
 // Path: gameOverPage
@@ -134,21 +108,6 @@ class _TranslationsGameOverPageKk extends TranslationsGameOverPageEn {
 	@override String get restartGameButton => 'Жаңадан бастау';
 	@override String get homeButton => 'Мәзір';
 	@override String get continueWithCoins => 'Жалғастыру үшін 100';
-}
-
-// Path: adWarning
-class _TranslationsAdWarningKk extends TranslationsAdWarningEn {
-	_TranslationsAdWarningKk._(TranslationsKk root) : this._root = root, super.internal(root);
-
-	final TranslationsKk _root; // ignore: unused_field
-
-	// Translations
-	@override TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
-		c,
-		const TextSpan(text: ' 100 ('),
-		t,
-		const TextSpan(text: ') алу үшін қосымша жарнаманы қараңыз'),
-	]);
 }
 
 // Path: restartGameDialog
@@ -195,19 +154,7 @@ class _TranslationsShopPageKk extends TranslationsShopPageEn {
 	@override String get buy1000Coins => '1000 тиын сатып алыңыз';
 	@override String get restorePurchases => 'Сатып алуларды қалпына келтіріңіз';
 	@override String get premium => 'Премиум';
-	@override String get removeAdsForever => 'Жарнамаларды біржола алып тастаңыз';
 	@override String get bulletShapes => 'Оқ пішіндері';
 	@override String get bulletColors => 'Оқ түсті';
 	@override String get title => 'дүкен';
-}
-
-// Path: common
-class _TranslationsCommonKk extends TranslationsCommonEn {
-	_TranslationsCommonKk._(TranslationsKk root) : this._root = root, super.internal(root);
-
-	final TranslationsKk _root; // ignore: unused_field
-
-	// Translations
-	@override String get cancel => 'Болдырмау';
-	@override String get ok => 'ОК';
 }

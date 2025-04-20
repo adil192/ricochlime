@@ -13,9 +13,9 @@ import 'strings.g.dart';
 class TranslationsEs extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	TranslationsEs({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
+	TranslationsEs({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = TranslationMetadata(
+		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.es,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
@@ -28,18 +28,18 @@ class TranslationsEs extends Translations {
 
 	late final TranslationsEs _root = this; // ignore: unused_field
 
+	@override 
+	TranslationsEs $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsEs(meta: meta ?? this.$meta);
+
 	// Translations
 	@override String get appName => 'Ricochlime';
 	@override late final _TranslationsHomePageEs homePage = _TranslationsHomePageEs._(_root);
 	@override late final _TranslationsPlayPageEs playPage = _TranslationsPlayPageEs._(_root);
 	@override late final _TranslationsSettingsPageEs settingsPage = _TranslationsSettingsPageEs._(_root);
-	@override late final _TranslationsAgeDialogEs ageDialog = _TranslationsAgeDialogEs._(_root);
 	@override late final _TranslationsGameOverPageEs gameOverPage = _TranslationsGameOverPageEs._(_root);
-	@override late final _TranslationsAdWarningEs adWarning = _TranslationsAdWarningEs._(_root);
 	@override late final _TranslationsRestartGameDialogEs restartGameDialog = _TranslationsRestartGameDialogEs._(_root);
 	@override late final _TranslationsTutorialPageEs tutorialPage = _TranslationsTutorialPageEs._(_root);
 	@override late final _TranslationsShopPageEs shopPage = _TranslationsShopPageEs._(_root);
-	@override late final _TranslationsCommonEs common = _TranslationsCommonEs._(_root);
 }
 
 // Path: homePage
@@ -76,9 +76,7 @@ class _TranslationsSettingsPageEs extends TranslationsSettingsPageEn {
 	// Translations
 	@override String get showFpsCounter => 'Mostrar contador de FPS';
 	@override String get stylizedPageTransitions => 'Transiciones de página estilizadas';
-	@override String get removeAdsInShop => '¿Quieres eliminar los anuncios? ¡Consulta las opciones en la tienda!';
 	@override String get showReflectionInAimGuide => 'Mostrar reflejo en la guía de objetivos.';
-	@override String get ads => 'Anuncios';
 	@override String get hyperlegibleFont => 'Fuente fácil de leer';
 	@override String get biggerBullets => 'balas mas grandes';
 	@override String get gameplay => 'Como se Juega';
@@ -86,33 +84,9 @@ class _TranslationsSettingsPageEs extends TranslationsSettingsPageEn {
 	@override String get maxFps => 'FPS máx.';
 	@override String get showUndoButton => 'Permitir deshacer movimientos';
 	@override String get title => 'Ajustes';
-	@override String get adConsent => 'Cambiar el consentimiento de los anuncios';
 	@override String get bgmVolume => 'Volumen de la música de fondo';
 	@override String get appInfo => 'Informacion de la applicacion';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nEste programa no tiene ninguna garantía. Este es un software gratuito y puede redistribuirlo bajo ciertas condiciones.\n';
-}
-
-// Path: ageDialog
-class _TranslationsAgeDialogEs extends TranslationsAgeDialogEn {
-	_TranslationsAgeDialogEs._(TranslationsEs root) : this._root = root, super.internal(root);
-
-	final TranslationsEs _root; // ignore: unused_field
-
-	// Translations
-	@override String get yourAge => 'Tu edad';
-	@override String get letMeGuessYourAge => 'Déjame adivinar tu edad';
-	@override String get unknown => 'Desconocida';
-	@override String get reason => 'Necesitamos saber su edad para asegurarnos de que los anuncios que ve sean apropiados para usted. Esto no afectará el juego.';
-	@override String guessNumber({required Object n}) => 'Adivina \#${n}';
-	@override String areYou({required Object age}) => '¿Tienes ${age} años?';
-	@override String get younger => 'No, soy más joven';
-	@override String get older => 'No, soy mayor';
-	@override String yesMyAgeIs({required Object age}) => 'Sí, soy ${age}';
-	@override String get reset => 'Reiniciar';
-	@override String get howOldAreYou => '¿Cuántos años tiene?';
-	@override String get invalidAge => 'Por favor ingresa una edad válida';
-	@override String get useMinigame => 'Juega al minijuego de adivinar la edad';
-	@override String get useSimpleInput => 'Quiero ingresar mi edad manualmente';
 }
 
 // Path: gameOverPage
@@ -134,22 +108,6 @@ class _TranslationsGameOverPageEs extends TranslationsGameOverPageEn {
 	]);
 	@override String get restartGameButton => 'Reinicia el juego';
 	@override String get homeButton => 'Hogar';
-}
-
-// Path: adWarning
-class _TranslationsAdWarningEs extends TranslationsAdWarningEn {
-	_TranslationsAdWarningEs._(TranslationsEs root) : this._root = root, super.internal(root);
-
-	final TranslationsEs _root; // ignore: unused_field
-
-	// Translations
-	@override TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
-		const TextSpan(text: 'Mire un anuncio opcional para obtener '),
-		c,
-		const TextSpan(text: ' 100 ('),
-		t,
-		const TextSpan(text: ')'),
-	]);
 }
 
 // Path: restartGameDialog
@@ -196,19 +154,7 @@ class _TranslationsShopPageEs extends TranslationsShopPageEn {
 	@override String get buy5000Coins => 'Comprar 5000 monedas';
 	@override String get restorePurchases => 'Restaurar las compras';
 	@override String get premium => 'De primera calidad';
-	@override String get removeAdsForever => 'Eliminar anuncios para siempre';
 	@override String get bulletShapes => 'Formas de bala';
 	@override String get bulletColors => 'Colores de bala';
 	@override String get title => 'Comercio';
-}
-
-// Path: common
-class _TranslationsCommonEs extends TranslationsCommonEn {
-	_TranslationsCommonEs._(TranslationsEs root) : this._root = root, super.internal(root);
-
-	final TranslationsEs _root; // ignore: unused_field
-
-	// Translations
-	@override String get cancel => 'Cancelar';
-	@override String get ok => 'Bueno';
 }

@@ -11,9 +11,7 @@ playPage:
 settingsPage:
   showFpsCounter(OUTDATED): Mostrar contador de FPS
   stylizedPageTransitions(OUTDATED): Transiciones de página estilizadas
-  removeAdsInShop(OUTDATED): "¿Quieres eliminar los anuncios? ¡Consulta las opciones en la tienda!"
   showReflectionInAimGuide(OUTDATED): Mostrar reflejo en la guía de objetivos.
-  ads(OUTDATED): Anuncios
   hyperlegibleFont(OUTDATED): Fuente fácil de leer
   biggerBullets(OUTDATED): balas mas grandes
   gameplay(OUTDATED): Como se Juega
@@ -21,27 +19,11 @@ settingsPage:
   maxFps(OUTDATED): FPS máx.
   showUndoButton(OUTDATED): Permitir deshacer movimientos
   title(OUTDATED): Ajustes
-  adConsent(OUTDATED): Cambiar el consentimiento de los anuncios
   bgmVolume(OUTDATED): Volumen de la música de fondo
   appInfo(OUTDATED): Informacion de la applicacion
   licenseNotice(OUTDATED): |
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Este programa no tiene ninguna garantía. Este es un software gratuito y puede redistribuirlo bajo ciertas condiciones.
-ageDialog:
-  yourAge(OUTDATED): Tu edad
-  letMeGuessYourAge(OUTDATED): Déjame adivinar tu edad
-  unknown(OUTDATED): Desconocida
-  reason(OUTDATED): Necesitamos saber su edad para asegurarnos de que los anuncios que ve sean apropiados para usted. Esto no afectará el juego.
-  guessNumber(OUTDATED): Adivina \#$n
-  areYou(OUTDATED): "¿Tienes $age años?"
-  younger(OUTDATED): "No, soy más joven"
-  older(OUTDATED): "No, soy mayor"
-  yesMyAgeIs(OUTDATED): "Sí, soy $age"
-  reset(OUTDATED): Reiniciar
-  howOldAreYou(OUTDATED): "¿Cuántos años tiene?"
-  invalidAge(OUTDATED): Por favor ingresa una edad válida
-  useMinigame(OUTDATED): Juega al minijuego de adivinar la edad
-  useSimpleInput(OUTDATED): Quiero ingresar mi edad manualmente
 gameOverPage:
   continueWithCoins(OUTDATED): 100 para continuar
   title(OUTDATED): "¡Juego terminado!"
@@ -49,8 +31,6 @@ gameOverPage:
   highScoreBeaten(rich, OUTDATED): "¡Tu puntuación más alta ahora es $pOld antiguos $pNew!"
   restartGameButton(OUTDATED): Reinicia el juego
   homeButton(OUTDATED): Hogar
-adWarning:
-  getCoins(rich, OUTDATED): Mire un anuncio opcional para obtener $c 100 ($t)
 restartGameDialog:
   title(OUTDATED): "¿Reinicia el juego?"
   areYouSure(OUTDATED): "¿Estás seguro de que quieres reiniciar? No puedes deshacer esto"
@@ -73,10 +53,6 @@ shopPage:
   buy5000Coins(OUTDATED): Comprar 5000 monedas
   restorePurchases(OUTDATED): Restaurar las compras
   premium(OUTDATED): De primera calidad
-  removeAdsForever(OUTDATED): Eliminar anuncios para siempre
   bulletShapes(OUTDATED): Formas de bala
   bulletColors(OUTDATED): Colores de bala
   title(OUTDATED): Comercio
-common:
-  cancel(OUTDATED): Cancelar
-  ok(OUTDATED): Bueno

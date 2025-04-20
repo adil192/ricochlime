@@ -10,16 +10,13 @@ playPage:
   undo(OUTDATED): Қозғалысты болдырмау
 settingsPage:
   title: Баптау
-  adConsent: Жарнамаға келісімді баптау
   appInfo: Қолданба ақпары
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
   showFpsCounter(OUTDATED): FPS есептегішін көрсету
   stylizedPageTransitions(OUTDATED): Стильденген беттердің ауысуы
-  removeAdsInShop(OUTDATED): "Жарнамаларды өшіргіңіз келе ме? Дүкенде опцияларды тексеріңіз!"
   showReflectionInAimGuide(OUTDATED): Мақсат нұсқаулығында рефлексияны көрсетіңіз
-  ads(OUTDATED): Жарнамалар
   hyperlegibleFont(OUTDATED): Оқуға оңай шрифт
   biggerBullets(OUTDATED): Үлкенірек оқтар
   gameplay(OUTDATED): Ойын барысы
@@ -27,21 +24,6 @@ settingsPage:
   maxFps(OUTDATED): Максималды FPS
   showUndoButton(OUTDATED): Қозғалысты қайтаруға рұқсат беріңіз
   bgmVolume(OUTDATED): Фондық музыканың дыбыс деңгейі
-ageDialog:
-  yourAge: Жасыңыз
-  letMeGuessYourAge: Жасыңызды болжау
-  unknown: Белгісіз
-  reason: Сіз көретін жарнама сізге қолайлы болатынына көз жеткізу үшін жасыңызды білуіміз керек. Ойынның өзіне бұл әсер етпейді.
-  areYou: "Жасыңыз $age?"
-  younger: "Жоқ, жасым кішірек"
-  older: "Жоқ, жасым үлкенірек"
-  yesMyAgeIs: "Иә, жасым $age"
-  reset: Арылту
-  howOldAreYou(OUTDATED): "Сен қанша жастасың?"
-  invalidAge(OUTDATED): Жарамды жасты енгізіңіз
-  useMinigame(OUTDATED): Жасты болжайтын шағын ойынды ойнаңыз
-  useSimpleInput(OUTDATED): Мен жасымды қолмен енгізгім келеді
-  guessNumber(OUTDATED): Ойланыңыз \#$n
 gameOverPage:
   title: "Ойын бітті!"
   highScoreNotBeaten: "$p ұпай жинадыңыз!"
@@ -49,8 +31,6 @@ gameOverPage:
   restartGameButton: Жаңадан бастау
   homeButton: Мәзір
   continueWithCoins(OUTDATED): Жалғастыру үшін 100
-adWarning:
-  getCoins(rich, OUTDATED): $c 100 ($t) алу үшін қосымша жарнаманы қараңыз
 restartGameDialog:
   title(OUTDATED): "Ойынды қайта бастау керек пе?"
   areYouSure(OUTDATED): "Қайта іске қосқыңыз келетініне сенімдісіз бе? Мұны қайтара алмайсыз"
@@ -73,10 +53,6 @@ shopPage:
   buy1000Coins(OUTDATED): 1000 тиын сатып алыңыз
   restorePurchases(OUTDATED): Сатып алуларды қалпына келтіріңіз
   premium(OUTDATED): Премиум
-  removeAdsForever(OUTDATED): Жарнамаларды біржола алып тастаңыз
   bulletShapes(OUTDATED): Оқ пішіндері
   bulletColors(OUTDATED): Оқ түсті
   title(OUTDATED): дүкен
-common:
-  cancel: Болдырмау
-  ok: ОК

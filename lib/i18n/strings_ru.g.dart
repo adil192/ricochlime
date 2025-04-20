@@ -13,9 +13,9 @@ import 'strings.g.dart';
 class TranslationsRu extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	TranslationsRu({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
+	TranslationsRu({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = TranslationMetadata(
+		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.ru,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
@@ -28,18 +28,18 @@ class TranslationsRu extends Translations {
 
 	late final TranslationsRu _root = this; // ignore: unused_field
 
+	@override 
+	TranslationsRu $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsRu(meta: meta ?? this.$meta);
+
 	// Translations
 	@override String get appName => 'Рикошлим';
 	@override late final _TranslationsHomePageRu homePage = _TranslationsHomePageRu._(_root);
 	@override late final _TranslationsPlayPageRu playPage = _TranslationsPlayPageRu._(_root);
 	@override late final _TranslationsSettingsPageRu settingsPage = _TranslationsSettingsPageRu._(_root);
-	@override late final _TranslationsAgeDialogRu ageDialog = _TranslationsAgeDialogRu._(_root);
 	@override late final _TranslationsGameOverPageRu gameOverPage = _TranslationsGameOverPageRu._(_root);
-	@override late final _TranslationsAdWarningRu adWarning = _TranslationsAdWarningRu._(_root);
 	@override late final _TranslationsRestartGameDialogRu restartGameDialog = _TranslationsRestartGameDialogRu._(_root);
 	@override late final _TranslationsTutorialPageRu tutorialPage = _TranslationsTutorialPageRu._(_root);
 	@override late final _TranslationsShopPageRu shopPage = _TranslationsShopPageRu._(_root);
-	@override late final _TranslationsCommonRu common = _TranslationsCommonRu._(_root);
 }
 
 // Path: homePage
@@ -75,10 +75,8 @@ class _TranslationsSettingsPageRu extends TranslationsSettingsPageEn {
 
 	// Translations
 	@override String get title => 'Настройки';
-	@override String get ads => 'Реклама';
 	@override String get gameplay => 'Игра';
 	@override String get accessibility => 'Доступность';
-	@override String get adConsent => 'Изменить согласие с рекламой';
 	@override String get hyperlegibleFont => 'Большой шрифт';
 	@override String get bgmVolume => 'Громкость фоновой музыки';
 	@override String get showUndoButton => 'Разрешить отмену бросков';
@@ -89,30 +87,6 @@ class _TranslationsSettingsPageRu extends TranslationsSettingsPageEn {
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nThis program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.';
 	@override String get showFpsCounter => 'Показать счетчик FPS';
 	@override String get stylizedPageTransitions => 'Стилизованные переходы страниц';
-	@override String get removeAdsInShop => 'Хотите удалить рекламу? Посмотрите варианты в магазине!';
-}
-
-// Path: ageDialog
-class _TranslationsAgeDialogRu extends TranslationsAgeDialogEn {
-	_TranslationsAgeDialogRu._(TranslationsRu root) : this._root = root, super.internal(root);
-
-	final TranslationsRu _root; // ignore: unused_field
-
-	// Translations
-	@override String get yourAge => 'Ваш возраст';
-	@override String get letMeGuessYourAge => 'Давайте-ка угадаю ваш возраст';
-	@override String get unknown => 'Неизвестно';
-	@override String get reason => 'Нам нужно знать ваш возраст чтобы знать какую рекламу показывать. Это не влияет на саму игру.';
-	@override String guessNumber({required Object n}) => 'Угадайте число \#${n}';
-	@override String areYou({required Object age}) => 'Вам ${age} лет?';
-	@override String get younger => 'Не, я моложе';
-	@override String get older => 'Нет, я старше';
-	@override String yesMyAgeIs({required Object age}) => 'Да, мне ${age} лет';
-	@override String get reset => 'Сбросить';
-	@override String get howOldAreYou => 'Сколько вам лет?';
-	@override String get invalidAge => 'Пожалуйста введите ваш возраст';
-	@override String get useMinigame => 'Поиграть в угадайку';
-	@override String get useSimpleInput => 'Ввести вручную';
 }
 
 // Path: gameOverPage
@@ -134,22 +108,6 @@ class _TranslationsGameOverPageRu extends TranslationsGameOverPageEn {
 	@override String get continueWithCoins => 'Продолжить за 100';
 	@override String get restartGameButton => 'Перезапустить игру';
 	@override String get homeButton => 'На главную';
-}
-
-// Path: adWarning
-class _TranslationsAdWarningRu extends TranslationsAdWarningEn {
-	_TranslationsAdWarningRu._(TranslationsRu root) : this._root = root, super.internal(root);
-
-	final TranslationsRu _root; // ignore: unused_field
-
-	// Translations
-	@override TextSpan getCoins({required InlineSpan c, required InlineSpan t}) => TextSpan(children: [
-		const TextSpan(text: 'Посмотрите дополнительную рекламу, чтобы получить 100 '),
-		c,
-		const TextSpan(text: ' ('),
-		t,
-		const TextSpan(text: ')'),
-	]);
 }
 
 // Path: restartGameDialog
@@ -196,19 +154,7 @@ class _TranslationsShopPageRu extends TranslationsShopPageEn {
 	@override String get bulletColors => 'Цвета мячика';
 	@override String get bulletShapes => 'Формы мячика';
 	@override String get premium => 'Премиум';
-	@override String get removeAdsForever => 'Удалить рекламу навсегда';
 	@override String get restorePurchases => 'Востановить покупки';
 	@override String get buy1000Coins => 'Купить 1000 монет';
 	@override String get buy5000Coins => 'Купить 5000 монет';
-}
-
-// Path: common
-class _TranslationsCommonRu extends TranslationsCommonEn {
-	_TranslationsCommonRu._(TranslationsRu root) : this._root = root, super.internal(root);
-
-	final TranslationsRu _root; // ignore: unused_field
-
-	// Translations
-	@override String get cancel => 'Отмена';
-	@override String get ok => 'Окей';
 }
