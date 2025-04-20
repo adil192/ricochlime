@@ -1,0 +1,1 @@
+Bajo rendimiento fijo en algunos dispositivos
