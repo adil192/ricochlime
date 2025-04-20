@@ -32,7 +32,7 @@ dependencies:
 
   flame: ^1.8.1
   flame_audio: ^2.1.6
-  flame_forge2d: ^0.18.0
+  flame_forge2d: ^0.19.0
 
   flutter:
     sdk: flutter

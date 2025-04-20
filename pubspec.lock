@@ -189,10 +189,10 @@ packages:
     dependency: "direct main"
     description:
       name: flame
-      sha256: "7a39044eeea6906d8acc5d8292941fa081a4f2a37fd76dc5a2dbee8a29e28256"
+      sha256: "0335f60d3fe81f1332c0ed424e8ac126dce3e94e56ceb105b734365f0d102b2a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.27.0"
+    version: "1.28.0"
   flame_audio:
     dependency: "direct main"
     description:
@@ -205,10 +205,10 @@ packages:
     dependency: "direct main"
     description:
       name: flame_forge2d
-      sha256: "4ed66a493146f7ec6bd8458527a6fdd7010e36142db3b66f55e7fce6e9186cb2"
+      sha256: d9d6ddfb12d676ffb0821e66739099ccb56c769f230efdaff372790955c07a3e
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.3+1"
+    version: "0.19.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -265,10 +265,10 @@ packages:
     dependency: "direct main"
     description:
       name: forge2d
-      sha256: "6aac85f1cb9f7e3720bff5d6884ff2e1bcb74402e6fe271599b7b1f65574f5e2"
+      sha256: c7d0f84bb75d16af41ab5168676d6df80f32a9890ccaf76857d90fe80bb6e7ff
       url: "https://pub.dev"
     source: hosted
-    version: "0.13.1"
+    version: "0.14.0"
   golden_screenshot:
     dependency: "direct dev"
     description:
@@ -474,10 +474,10 @@ packages:
     dependency: transitive
     description:
       name: ordered_set
-      sha256: fc861bb51fc863cd3e0718e21768af9586e0d5022b91a0fd4437636456cdb7d0
+      sha256: dc68b8f1abc7115b81cf890bf7d2ece4ed1d95e0f3e486ab4b64ab3d16d2ea42
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.1"
+    version: "7.0.0"
   path:
     dependency: transitive
     description:
