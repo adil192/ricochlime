@@ -48,6 +48,7 @@ jobs:
       - name: Build privacy_policy.html
         run:
           pandoc -f markdown privacy_policy.md > /tmp/privacy_policy_content.html
+          cat /tmp/privacy_policy_content.html
           sed -i 's|<privacy_policy_goes_here/>|'"$(cat /tmp/privacy_policy_content.html)"'|g' build/web/privacy_policy.html
 
       - name: Upload Pages artifact
