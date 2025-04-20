@@ -15,9 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Remove signingConfig
-        run: ./patches/remove_signing_android.sh
-
       - name: Setup cache
         uses: actions/cache@v3
         with:
@@ -33,6 +30,14 @@ jobs:
 
       - name: Remove dev dependencies
         run: ./patches/remove_dev_dependencies.sh
+
+      - name: Setup keystore
+        run: |
+          echo "${{ secrets.SIGNING_KEY }}" | base64 -d > android/android.keystore
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ALIAS }}" >> android/key.properties
+          echo "storeFile=../android.keystore" >> android/key.properties
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -53,23 +58,10 @@ jobs:
         run: |
           flutter build appbundle
 
-      - name: Move unsigned apk
+      - name: Rename aab
         run: |
           mkdir -p output
           mv build/app/outputs/bundle/release/app-release.aab output/Ricochlime.aab
-
-      - name: Sign aab
-        uses: ilharp/sign-android-release@v1
-        id: sign_app
-        with:
-          releaseDir: output
-          signingKey: ${{ secrets.SIGNING_KEY }}
-          keyAlias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-
-      - name: Rename signed apk
-        run: mv ${{ steps.sign_app.outputs.signedFile }} output/Ricochlime.aab
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

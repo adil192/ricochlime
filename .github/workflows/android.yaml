@@ -30,6 +30,14 @@ jobs:
       - name: Remove dev dependencies
         run: ./patches/remove_dev_dependencies.sh
 
+      - name: Setup keystore
+        run: |
+          echo "${{ secrets.SIGNING_KEY }}" | base64 -d > android/android.keystore
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ALIAS }}" >> android/key.properties
+          echo "storeFile=../android.keystore" >> android/key.properties
+
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -47,29 +55,16 @@ jobs:
 
       - name: Build apk
         run: flutter build apk
-      
-      - name: Move unsigned apk
-        run: |
-          mkdir -p output
-          mv build/app/outputs/flutter-apk/app-release.apk output/
 
-      - name: Sign apk
-        uses: ilharp/sign-android-release@v1
-        id: sign_app
-        with:
-          releaseDir: output
-          signingKey: ${{ secrets.SIGNING_KEY }}
-          keyAlias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-
-      - name: Rename signed apk
+      - name: Rename apk
         id: rename_apk
         run: |
           buildName=$(grep "version: " pubspec.yaml | sed 's/version: //g' | sed 's/+.*//g')
           apkName="Ricochlime_v${buildName}.apk"
-          mv ${{ steps.sign_app.outputs.signedFile }} output/$apkName
           echo "apkName=$apkName" >> $GITHUB_OUTPUT
+
+          mkdir -p output
+          mv build/app/outputs/flutter-apk/app-release.apk output/$apkName
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -98,6 +93,14 @@ jobs:
       - name: Remove dev dependencies
         run: ./patches/remove_dev_dependencies.sh
 
+      - name: Setup keystore
+        run: |
+          echo "${{ secrets.SIGNING_KEY }}" | base64 -d > android/android.keystore
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ALIAS }}" >> android/key.properties
+          echo "storeFile=../android.keystore" >> android/key.properties
+
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -120,28 +123,15 @@ jobs:
       - name: Build apk
         run: flutter build apk
 
-      - name: Move unsigned apk
-        run: |
-          mkdir -p output
-          mv build/app/outputs/flutter-apk/app-release.apk output/
-
-      - name: Sign apk
-        uses: ilharp/sign-android-release@v1
-        id: sign_app
-        with:
-          releaseDir: output
-          signingKey: ${{ secrets.SIGNING_KEY }}
-          keyAlias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-
-      - name: Rename signed apk
+      - name: Rename apk
         id: rename_apk
         run: |
           buildName=$(grep "version: " pubspec.yaml | sed 's/version: //g' | sed 's/+.*//g')
-          apkName="Ricochlime_v${buildName}.apk"
-          mv ${{ steps.sign_app.outputs.signedFile }} output/$apkName
+          apkName="Ricochlime_FOSS_v${buildName}.apk"
           echo "apkName=$apkName" >> $GITHUB_OUTPUT
+
+          mkdir -p output
+          mv build/app/outputs/flutter-apk/app-release.apk output/$apkName
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
