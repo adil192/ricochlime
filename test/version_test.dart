@@ -9,7 +9,7 @@ void main() {
   test('Does apply_version.dart find changes needed?', () async {
     final result = await Process.run('./scripts/apply_version.dart', [
       '--custom',
-      buildName,
+      buildNumber.toString(),
       '--fail-on-changes',
       '--quiet',
     ]);
