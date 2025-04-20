@@ -23,7 +23,11 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: |
-            build
+            .dart_tool/
+            build/
+            .flutter-plugins
+            .flutter-plugins-dependencies
+            pubspec.lock
           key: ${{ runner.OS }}-ricochlime-ubuntu-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
             ${{ runner.OS }}-ricochlime-ubuntu-
@@ -33,7 +37,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            build
+            .dart_tool/
+            build/
+            .flutter-plugins
+            .flutter-plugins-dependencies
+            pubspec.lock
           key: ${{ runner.OS }}-ricochlime-ubuntu-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
             ${{ runner.OS }}-ricochlime-ubuntu-
