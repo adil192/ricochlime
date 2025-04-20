@@ -74,6 +74,14 @@
     </branding>
 
     <releases>
+        <release version="1.11.8" date="2025-04-20">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.8</url>
+            <description>
+                <ul>
+                    <li>Fixed low performance on some devices</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.11.7" date="2025-04-13">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.7</url>
             <description>

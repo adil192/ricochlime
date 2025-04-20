@@ -42,5 +42,5 @@ Ricochlime is a game where you attack the advancing monsters with your ricocheti
 [app_store]: https://apps.apple.com/app/ricochlime/id6459539993
 [web_app]: https://ricochlime.adil.hanney.org
 [flathub]: https://flathub.org/apps/com.adilhanney.ricochlime
-[download_windows]: https://github.com/adil192/ricochlime/releases/download/v1.11.7/RicochlimeInstaller_v1.11.7.exe
-[download_appimage]: https://github.com/adil192/ricochlime/releases/download/v1.11.7/Ricochlime-1.11.7-x86_64.AppImage
+[download_windows]: https://github.com/adil192/ricochlime/releases/download/v1.11.8/RicochlimeInstaller_v1.11.8.exe
+[download_appimage]: https://github.com/adil192/ricochlime/releases/download/v1.11.8/Ricochlime-1.11.8-x86_64.AppImage

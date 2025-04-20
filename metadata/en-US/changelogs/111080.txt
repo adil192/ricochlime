@@ -1,0 +1,1 @@
+Fixed low performance on some devices
