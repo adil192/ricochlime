@@ -63,9 +63,9 @@ class RicochlimeGame extends Forge2DGame
       }
     });
 
-  late Player player;
-  late AimGuide aimGuide;
-  late Background background;
+  late final player = Player();
+  late final aimGuide = AimGuide();
+  late final background = Background();
   bool get inputAllowed => state.value == GameState.idle;
   bool inputCancelled = false;
 
@@ -102,7 +102,6 @@ class RicochlimeGame extends Forge2DGame
 
     _initBgMusic();
 
-    background = Background();
     add(background);
 
     createBoundaries(
@@ -111,10 +110,8 @@ class RicochlimeGame extends Forge2DGame
       includeBottom: false,
     ).forEach(add);
 
-    player = Player();
     add(player);
-
-    aimGuide = AimGuide();
+    
     add(aimGuide);
 
     await Prefs.currentGame.waitUntilLoaded();
