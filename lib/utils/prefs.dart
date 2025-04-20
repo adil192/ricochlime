@@ -276,7 +276,7 @@ class PlainPref<T> extends IPref<T> {
       } else if (T == TargetPlatform) {
         return _prefs!.setInt(key, (value as TargetPlatform).index);
       } else if (T == Color) {
-        return _prefs!.setInt(key, (value as Color).value);
+        return _prefs!.setInt(key, (value as Color).toARGB32());
       } else if (T == typeOf<GameData?>()) {
         final json = jsonEncode(value);
         return _prefs!.setString(key, json);

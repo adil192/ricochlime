@@ -167,7 +167,7 @@ class BulletColorShopItem extends ShopItem {
     required this.color,
     required super.price,
   }) : super(
-          id: 'bullet${color.value.toRadixString(16)}',
+          id: 'bullet${color.toARGB32().toRadixString(16)}',
         );
 
   final Color color;
