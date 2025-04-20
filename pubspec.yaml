@@ -54,8 +54,6 @@ dependencies:
 
   shared_preferences: ^2.2.0
 
-  simulator: ^0.3.0
-
   slang: ^4.4.0
   slang_flutter: any
 

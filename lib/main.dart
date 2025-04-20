@@ -15,12 +15,8 @@ import 'package:ricochlime/pages/home.dart';
 import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
-Future<void> main({
-  WidgetsBinding? Function() initWidgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized,
-  void Function(Widget) runApp = runApp,
-}) async {
-  initWidgetsBinding();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
   Logger.root.level = Level.INFO;
   Logger.root.onRecord.listen((record) {
