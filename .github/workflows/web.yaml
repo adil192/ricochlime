@@ -46,13 +46,7 @@ jobs:
         run: flutter build web --release
 
       - name: Build privacy_policy.html
-        run:
-          echo "Converting markdown to html"
-          pandoc -f markdown privacy_policy.md > privacy_policy_content.html
-          echo "Output:"
-          cat privacy_policy_content.html
-          echo "Inserting content into privacy_policy.html"
-          sed -i 's|<privacy_policy_goes_here/>|'"$(cat privacy_policy_content.html)"'|g' build/web/privacy_policy.html
+        run: ./scripts/build_privacy_policy_html.sh
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
