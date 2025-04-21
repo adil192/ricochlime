@@ -10,7 +10,7 @@
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="ricochlime">
+  <meta name="apple-mobile-web-app-title" content="Ricochlime">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <link rel="icon" type="image/png" href="icons/Icon-192.png"/>
@@ -19,16 +19,19 @@
   <link rel="manifest" href="manifest.json">
 
   <style>
+    html {
+      color-scheme: light dark;
+      image-rendering: pixelated;
+    }
     html, #loading {
-      background-color: #fcfdf7;
+      background: #f7fbf1;
+      color: #1d1b20;
     }
     @media (prefers-color-scheme: dark) {
       html, #loading {
-        background-color: #191c19;
+        background: #10140f;
+        color: #e6e0e9;
       }
-    }
-    html {
-      image-rendering: pixelated;
     }
     #loading {
       height: 100vh;
