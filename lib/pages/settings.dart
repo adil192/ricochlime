@@ -155,6 +155,81 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
+          // Speed
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ListTile(
+                tileColor: listTileColor,
+                shape: listTileShape,
+                contentPadding: listTileContentPadding,
+                title: Text(t.settingsPage.speed),
+                leading: NesIcon(
+                  iconData: NesIcons.camera,
+                ),
+                trailing: ValueListenableBuilder(
+                  valueListenable: Prefs.speed,
+                  builder: (context, speed, _) {
+                    return Text(
+                      speed.toString(),
+                      style: const TextStyle(fontSize: 24),
+                    );
+                  },
+                ),
+                onTap: () {
+                  Prefs.speed.value = switch (Prefs.speed.value) {
+                    0.0 => 1.0,
+                    1.0 => 2.0,
+                    2.0 => 3.0,
+                    3.0 => 5.0,
+                    5.0 => 10.0,
+                    10.0 => 1.0,
+                    _ => 1.0,
+                  };
+                },
+              ),
+            ),
+          ),
+
+          // Speed increment
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ListTile(
+                tileColor: listTileColor,
+                shape: listTileShape,
+                contentPadding: listTileContentPadding,
+                title: Text(t.settingsPage.speedIncrement),
+                leading: NesIcon(
+                  iconData: NesIcons.camera,
+                ),
+                trailing: ValueListenableBuilder(
+                  valueListenable: Prefs.speedIncrement,
+                  builder: (context, speedIncrement, _) {
+                    return Text(
+                      speedIncrement.toString(),
+                      style: const TextStyle(fontSize: 24),
+                    );
+                  },
+                ),
+                onTap: () {
+                  Prefs.speedIncrement.value = switch (Prefs.speedIncrement.value) {
+                    0.0 => 0.5,
+                    0.5 => 1.0,
+                    1.0 => 1.5,
+                    1.5 => 2.0,
+                    2.0 => 2.5,
+                    2.5 => 3.0,
+                    3.0 => 0.5,
+                    _ => 0.5,
+                  };
+                },
+              ),
+            ),
+          ),
+
           // Max FPS
           Padding(
             padding: listTilePadding,
