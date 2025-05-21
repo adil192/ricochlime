@@ -1,14 +1,14 @@
 appName: Рикошырыш
-homePage:
+homePage: 
   playButton: Ойнау
   settingsButton: Баптау
   tutorialButton: Нұсқаулық
   shopButton(OUTDATED): дүкен
-playPage:
+playPage: 
   highScore: "Үздік: $p"
   coins(OUTDATED): Монеталар
   undo(OUTDATED): Қозғалысты болдырмау
-settingsPage:
+settingsPage: 
   title: Баптау
   appInfo: Қолданба ақпары
   licenseNotice: |-
@@ -24,19 +24,19 @@ settingsPage:
   maxFps(OUTDATED): Максималды FPS
   showUndoButton(OUTDATED): Қозғалысты қайтаруға рұқсат беріңіз
   bgmVolume(OUTDATED): Фондық музыканың дыбыс деңгейі
-gameOverPage:
-  title: "Ойын бітті!"
-  highScoreNotBeaten: "$p ұпай жинадыңыз!"
-  highScoreBeaten(rich): "Енді үздік нәтижеңіз $pOld $pNew ұпай!"
+gameOverPage: 
+  title: Ойын бітті!
+  highScoreNotBeaten: $p ұпай жинадыңыз!
+  highScoreBeaten(rich): Енді үздік нәтижеңіз $pOld $pNew ұпай!
   restartGameButton: Жаңадан бастау
   homeButton: Мәзір
   continueWithCoins(OUTDATED): Жалғастыру үшін 100
-restartGameDialog:
-  title(OUTDATED): "Ойынды қайта бастау керек пе?"
-  areYouSure(OUTDATED): "Қайта іске қосқыңыз келетініне сенімдісіз бе? Мұны қайтара алмайсыз"
-  waitCancel(OUTDATED): "Күте тұрыңыз, бас тартыңыз!"
-  yesImSure(OUTDATED): "Иә мен сенімдімін!"
-tutorialPage:
+restartGameDialog: 
+  title(OUTDATED): Ойынды қайта бастау керек пе?
+  areYouSure(OUTDATED): Қайта іске қосқыңыз келетініне сенімдісіз бе? Мұны қайтара алмайсыз
+  waitCancel(OUTDATED): Күте тұрыңыз, бас тартыңыз!
+  yesImSure(OUTDATED): Иә мен сенімдімін!
+tutorialPage: 
   tutorial: Нұсқаулық
   bounceOffWalls: Қабырғадан ыршыған оқ көбірек шырышқа тие алады.
   tapSpeedUp: Оқ қозғалысын тездету үшін экранды түртіңіз.
@@ -44,11 +44,11 @@ tutorialPage:
   pointAndClick(OUTDATED): Тінтуірді мақсатқа жылжыту және ату үшін басу арқылы құбыжықтарды жеңіңіз.
   goldMonsters(OUTDATED): Алтын құбыжықты жеңгеннен кейін сіз тиын аласыз.
   greenMonsters(OUTDATED): Жасыл құбыжықты жеңгеннен кейін сіз қосымша оқ аласыз.
-  skullLine(OUTDATED): "Бас сүйегінің сызығына жеткен құбыжық келесі кезекте оны жеңбесеңіз, ойын аяқталды дегенді білдіреді."
+  skullLine(OUTDATED): Бас сүйегінің сызығына жеткен құбыжық келесі кезекте оны жеңбесеңіз, ойын аяқталды дегенді білдіреді.
   useCoinsInShop(OUTDATED): Дүкенде жаңа заттардың құлпын ашу үшін тиындарды сақтаңыз...
-  orUseCoinsToContinue(OUTDATED): ...немесе оларды ойын аяқталғаннан кейін жалғастыру үшін пайдаланыңыз.
-  moreMonsters(OUTDATED): "Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды."
-shopPage:
+  orUseCoinsToContinue(OUTDATED): "...немесе оларды ойын аяқталғаннан кейін жалғастыру үшін пайдаланыңыз."
+  moreMonsters(OUTDATED): Сіз ілгерілеген сайын құбыжықтардың көбірек қатарлары пайда болады, сондықтан қауіпті аймақ ұлғаяды.
+shopPage: 
   buy5000Coins(OUTDATED): 5000 тиын сатып алыңыз
   buy1000Coins(OUTDATED): 1000 тиын сатып алыңыз
   restorePurchases(OUTDATED): Сатып алуларды қалпына келтіріңіз

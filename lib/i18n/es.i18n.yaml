@@ -1,14 +1,14 @@
 appName: Ricochlime
-homePage:
+homePage: 
   shopButton(OUTDATED): Comercio
   tutorialButton(OUTDATED): tutorial
   playButton(OUTDATED): Jugar
   settingsButton(OUTDATED): Ajustes
-playPage:
+playPage: 
   coins(OUTDATED): monedas
   undo(OUTDATED): Deshacer movimiento
   highScore(OUTDATED): "Mejor: $p"
-settingsPage:
+settingsPage: 
   showFpsCounter(OUTDATED): Mostrar contador de FPS
   stylizedPageTransitions(OUTDATED): Transiciones de página estilizadas
   showReflectionInAimGuide(OUTDATED): Mostrar reflejo en la guía de objetivos.
@@ -24,31 +24,31 @@ settingsPage:
   licenseNotice(OUTDATED): |
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Este programa no tiene ninguna garantía. Este es un software gratuito y puede redistribuirlo bajo ciertas condiciones.
-gameOverPage:
+gameOverPage: 
   continueWithCoins(OUTDATED): 100 para continuar
-  title(OUTDATED): "¡Juego terminado!"
-  highScoreNotBeaten(OUTDATED): "¡Obtuviste $p puntos!"
-  highScoreBeaten(rich, OUTDATED): "¡Tu puntuación más alta ahora es $pOld antiguos $pNew!"
+  title(OUTDATED): ¡Juego terminado!
+  highScoreNotBeaten(OUTDATED): ¡Obtuviste $p puntos!
+  highScoreBeaten(rich, OUTDATED): ¡Tu puntuación más alta ahora es $pOld antiguos $pNew!
   restartGameButton(OUTDATED): Reinicia el juego
   homeButton(OUTDATED): Hogar
-restartGameDialog:
-  title(OUTDATED): "¿Reinicia el juego?"
-  areYouSure(OUTDATED): "¿Estás seguro de que quieres reiniciar? No puedes deshacer esto"
-  waitCancel(OUTDATED): "¡Espera, cancela!"
-  yesImSure(OUTDATED): "¡Sí estoy seguro!"
-tutorialPage:
+restartGameDialog: 
+  title(OUTDATED): ¿Reinicia el juego?
+  areYouSure(OUTDATED): ¿Estás seguro de que quieres reiniciar? No puedes deshacer esto
+  waitCancel(OUTDATED): ¡Espera, cancela!
+  yesImSure(OUTDATED): ¡Sí estoy seguro!
+tutorialPage: 
   dragAndRelease(OUTDATED): Derrota a los monstruos arrastrándolos para apuntar y soltándolos para disparar.
   pointAndClick(OUTDATED): Derrota a los monstruos moviendo el mouse para apuntar y haciendo clic para disparar.
-  goldMonsters(OUTDATED): "Después de derrotar a un monstruo dorado, obtendrás una moneda."
-  greenMonsters(OUTDATED): "Después de derrotar a un monstruo verde, recibirás una bala extra."
+  goldMonsters(OUTDATED): Después de derrotar a un monstruo dorado, obtendrás una moneda.
+  greenMonsters(OUTDATED): Después de derrotar a un monstruo verde, recibirás una bala extra.
   skullLine(OUTDATED): Un monstruo que llega a la línea del cráneo significa que el juego se acaba si no lo derrotas en el siguiente turno.
   useCoinsInShop(OUTDATED): Ahorra monedas para desbloquear nuevos artículos en la tienda...
-  orUseCoinsToContinue(OUTDATED): ...o úsalos para continuar después de que termine el juego.
+  orUseCoinsToContinue(OUTDATED): "...o úsalos para continuar después de que termine el juego."
   tutorial(OUTDATED): tutorial
   bounceOffWalls(OUTDATED): Rebota tus tiros en las paredes para golpear a la mayor cantidad de monstruos.
   tapSpeedUp(OUTDATED): Toca la pantalla para acelerar tus disparos.
-  moreMonsters(OUTDATED): "Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande."
-shopPage:
+  moreMonsters(OUTDATED): Aparecerán más filas de monstruos en cada turno a medida que avances, por lo que la zona de peligro también se hará más grande.
+shopPage: 
   buy1000Coins(OUTDATED): Comprar 1000 monedas
   buy5000Coins(OUTDATED): Comprar 5000 monedas
   restorePurchases(OUTDATED): Restaurar las compras

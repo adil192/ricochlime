@@ -75,11 +75,12 @@ dev_dependencies:
   yaml: ^3.1.2
 
 dependency_overrides:
-  # https://github.com/alexei-sintotski/json2yaml/pull/30
-  json2yaml:
+  # https://github.com/slang-i18n/slang/pull/299
+  slang:
     git:
-      url: https://github.com/adil192/json2yaml
-      ref: fix-string-ends-with-colon
+      url: https://github.com/adil192/slang
+      ref: fix/multiline-strings-in-yaml
+      path: slang
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

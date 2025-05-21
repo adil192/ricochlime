@@ -1,17 +1,17 @@
-"@@info":
-  - "Here are translations that exist in <en> but not in secondary locales."
-  - "After editing this file, you can run 'dart run slang apply --locale=<locale>' to quickly apply the newly added translations."
-es:
-  homePage:
+"@@info": 
+  - Here are translations that exist in <en> but not in secondary locales.
+  - After editing this file, you can run 'dart run slang apply --locale=<locale>' to quickly apply the newly added translations.
+es: 
+  homePage: 
     playButton(OUTDATED): Play
     shopButton(OUTDATED): Shop
     settingsButton(OUTDATED): Settings
     tutorialButton(OUTDATED): Tutorial
-  playPage:
+  playPage: 
     highScore(OUTDATED): "Best: $p"
     undo(OUTDATED): Undo move
     coins(OUTDATED): Coins
-  settingsPage:
+  settingsPage: 
     title(OUTDATED): Settings
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
@@ -27,31 +27,31 @@ es:
     licenseNotice(OUTDATED): |-
       Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
       This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
-  gameOverPage:
-    title(OUTDATED): "Game over!"
-    highScoreNotBeaten(OUTDATED): "You scored $p points!"
-    highScoreBeaten(rich)(OUTDATED): "Your high score is now $pOld $pNew points!"
+  gameOverPage: 
+    title(OUTDATED): Game over!
+    highScoreNotBeaten(OUTDATED): You scored $p points!
+    highScoreBeaten(rich)(OUTDATED): Your high score is now $pOld $pNew points!
     continueWithCoins(OUTDATED): 100 to continue
     restartGameButton(OUTDATED): Restart game
     homeButton(OUTDATED): Home
-  restartGameDialog:
-    title(OUTDATED): "Restart game?"
-    areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
-    waitCancel(OUTDATED): "Wait, cancel!"
-    yesImSure(OUTDATED): "Yes I'm sure!"
-  tutorialPage:
+  restartGameDialog: 
+    title(OUTDATED): Restart game?
+    areYouSure(OUTDATED): Are you sure you want to restart? You can't undo this
+    waitCancel(OUTDATED): Wait, cancel!
+    yesImSure(OUTDATED): Yes I'm sure!
+  tutorialPage: 
     tutorial(OUTDATED): Tutorial
     dragAndRelease(OUTDATED): Defeat the monsters by dragging to aim and releasing to shoot.
     pointAndClick(OUTDATED): Defeat the monsters by moving your mouse to aim and clicking to shoot.
-    goldMonsters(OUTDATED): "After defeating a gold monster, you'll get a coin."
-    greenMonsters(OUTDATED): "After defeating a green monster, you'll get an extra bullet."
+    goldMonsters(OUTDATED): After defeating a gold monster, you'll get a coin.
+    greenMonsters(OUTDATED): After defeating a green monster, you'll get an extra bullet.
     bounceOffWalls(OUTDATED): Bounce your shots off the walls to hit the most monsters.
     tapSpeedUp(OUTDATED): Tap the screen to speed up your shots.
     skullLine(OUTDATED): A monster that reaches the skull line means game over if you don't defeat it in the next turn.
-    moreMonsters(OUTDATED): "More rows of monsters will spawn each turn as you progress, so the skull line will move up."
+    moreMonsters(OUTDATED): More rows of monsters will spawn each turn as you progress, so the skull line will move up.
     useCoinsInShop(OUTDATED): Save up coins to unlock new items in the shop...
-    orUseCoinsToContinue(OUTDATED): ...or use them to continue after a game over.
-  shopPage:
+    orUseCoinsToContinue(OUTDATED): "...or use them to continue after a game over."
+  shopPage: 
     title(OUTDATED): Shop
     bulletColors(OUTDATED): Bullet colors
     bulletShapes(OUTDATED): Bullet shapes
@@ -59,13 +59,13 @@ es:
     restorePurchases(OUTDATED): Restore purchases
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins
-kk:
-  homePage:
+kk: 
+  homePage: 
     shopButton(OUTDATED): Shop
-  playPage:
+  playPage: 
     undo(OUTDATED): Undo move
     coins(OUTDATED): Coins
-  settingsPage:
+  settingsPage: 
     gameplay(OUTDATED): Gameplay
     accessibility(OUTDATED): Accessibility
     hyperlegibleFont(OUTDATED): Easy-to-read font
@@ -76,23 +76,23 @@ kk:
     biggerBullets(OUTDATED): Bigger bullets
     maxFps(OUTDATED): Max FPS
     showFpsCounter(OUTDATED): Show FPS counter
-  gameOverPage:
+  gameOverPage: 
     continueWithCoins(OUTDATED): 100 to continue
-  restartGameDialog:
-    title(OUTDATED): "Restart game?"
-    areYouSure(OUTDATED): "Are you sure you want to restart? You can't undo this"
-    waitCancel(OUTDATED): "Wait, cancel!"
-    yesImSure(OUTDATED): "Yes I'm sure!"
-  tutorialPage:
+  restartGameDialog: 
+    title(OUTDATED): Restart game?
+    areYouSure(OUTDATED): Are you sure you want to restart? You can't undo this
+    waitCancel(OUTDATED): Wait, cancel!
+    yesImSure(OUTDATED): Yes I'm sure!
+  tutorialPage: 
     dragAndRelease(OUTDATED): Defeat the monsters by dragging to aim and releasing to shoot.
     pointAndClick(OUTDATED): Defeat the monsters by moving your mouse to aim and clicking to shoot.
-    goldMonsters(OUTDATED): "After defeating a gold monster, you'll get a coin."
-    greenMonsters(OUTDATED): "After defeating a green monster, you'll get an extra bullet."
+    goldMonsters(OUTDATED): After defeating a gold monster, you'll get a coin.
+    greenMonsters(OUTDATED): After defeating a green monster, you'll get an extra bullet.
     skullLine(OUTDATED): A monster that reaches the skull line means game over if you don't defeat it in the next turn.
-    moreMonsters(OUTDATED): "More rows of monsters will spawn each turn as you progress, so the skull line will move up."
+    moreMonsters(OUTDATED): More rows of monsters will spawn each turn as you progress, so the skull line will move up.
     useCoinsInShop(OUTDATED): Save up coins to unlock new items in the shop...
-    orUseCoinsToContinue(OUTDATED): ...or use them to continue after a game over.
-  shopPage:
+    orUseCoinsToContinue(OUTDATED): "...or use them to continue after a game over."
+  shopPage: 
     title(OUTDATED): Shop
     bulletColors(OUTDATED): Bullet colors
     bulletShapes(OUTDATED): Bullet shapes
@@ -100,10 +100,10 @@ kk:
     restorePurchases(OUTDATED): Restore purchases
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins
-ru:
-  settingsPage:
+ru: 
+  settingsPage: 
     stylizedPageTransitions(OUTDATED): Stylized page transitions
     showFpsCounter(OUTDATED): Show FPS counter
-  shopPage:
+  shopPage: 
     buy1000Coins(OUTDATED): Buy 1000 coins
     buy5000Coins(OUTDATED): Buy 5000 coins
