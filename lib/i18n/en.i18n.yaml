@@ -18,6 +18,8 @@ settingsPage:
   showUndoButton: Allow undoing moves
   showReflectionInAimGuide: Show reflection in aim guide
   biggerBullets: Bigger bullets
+  speed: Speed
+  speedIncrement: Speed increment
   maxFps: Max FPS
   showFpsCounter: Show FPS counter
   appInfo: App info

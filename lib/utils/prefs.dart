@@ -40,6 +40,9 @@ abstract class Prefs {
   static late final PlainPref<Color> bulletColor;
   static late final PlainPref<String> bulletShape;
 
+  static late final PlainPref<double> speed;
+  static late final PlainPref<double> speedIncrement;
+
   static late final PlainPref<int> maxFps;
   static late final PlainPref<bool> showFpsCounter;
 
@@ -84,6 +87,9 @@ abstract class Prefs {
     coins = PlainPref('coins', 0);
     bulletColor = PlainPref('bulletColor', ShopItems.bulletColors.first.color);
     bulletShape = PlainPref('bulletShape', ShopItems.bulletShapes.first.id);
+
+    speed = PlainPref('speed', 1);
+    speedIncrement = PlainPref('speedIncrement', 0.5);
 
     maxFps = PlainPref('maxFps', -1);
     showFpsCounter = PlainPref('showFpsCounter', false);
