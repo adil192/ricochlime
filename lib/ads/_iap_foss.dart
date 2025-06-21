@@ -40,7 +40,7 @@ abstract final class RicochlimeIAP {
   static Future<void> init() async => RicochlimeProduct.init();
   static void listen() {}
   static void dispose() {}
-  static Future<bool> buy(_) async => false;
+  static Future<bool> buy(RicochlimeProduct product) async => false;
   static Future<void> restorePurchases() async {}
 }
 

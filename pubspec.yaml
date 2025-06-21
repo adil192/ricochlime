@@ -50,7 +50,7 @@ dependencies:
 
   mini_sprite: ^0.1.0
 
-  nes_ui: ^0.24.0
+  nes_ui: ^0.25.0
 
   shared_preferences: ^2.2.0
 
@@ -60,7 +60,7 @@ dependencies:
 dev_dependencies:
   args: ^2.5.0
 
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
   flutter_test:
     sdk: flutter
@@ -73,14 +73,6 @@ dev_dependencies:
 
   simplytranslate: ^2.0.1
   yaml: ^3.1.2
-
-dependency_overrides:
-  # https://github.com/slang-i18n/slang/pull/299
-  slang:
-    git:
-      url: https://github.com/adil192/slang
-      ref: fix/multiline-strings-in-yaml
-      path: slang
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
