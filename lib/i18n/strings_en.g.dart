@@ -85,6 +85,8 @@ class TranslationsSettingsPageEn {
 	String get showUndoButton => 'Allow undoing moves';
 	String get showReflectionInAimGuide => 'Show reflection in aim guide';
 	String get biggerBullets => 'Bigger bullets';
+	String get speed => 'Speed';
+	String get speedIncrement => 'Speed increment';
 	String get maxFps => 'Max FPS';
 	String get showFpsCounter => 'Show FPS counter';
 	String get appInfo => 'App info';
