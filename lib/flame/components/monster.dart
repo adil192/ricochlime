@@ -7,9 +7,9 @@ import 'package:flutter/material.dart' hide Image;
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/health_bar.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/random_extension.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 /// The animation state of the monster.
 enum MonsterState {
@@ -131,15 +131,15 @@ class Monster extends BodyComponent with ContactCallbacks {
       _healthBar.removeFromParent();
 
       if (!killRewardGiven) {
-        Prefs.totalMonstersKilled.value += 1;
+        stows.totalMonstersKilled.value += 1;
         switch (killReward) {
           case KillReward.none:
             break;
           case KillReward.bullet:
             (game as RicochlimeGame).numBullets += 1;
-            Prefs.totalBulletsGained.value += 1;
+            stows.totalBulletsGained.value += 1;
           case KillReward.coin:
-            Prefs.addCoins(1);
+            stows.addCoins(1);
         }
         killRewardGiven = true;
       }

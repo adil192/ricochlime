@@ -5,8 +5,8 @@ import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
+import 'package:ricochlime/utils/stows.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final _sharedPreferences = SharedPreferences.getInstance();
@@ -152,12 +152,12 @@ sealed class ShopItem {
     bool noCost = false,
   }) async {
     if (state.value == ShopItemState.purchased) return true;
-    if (!noCost && Prefs.coins.value < price) return false;
+    if (!noCost && stows.coins.value < price) return false;
 
     final prefs = await _sharedPreferences;
     await prefs.setBool(prefsKey, true);
     state.value = ShopItemState.purchased;
-    if (!noCost) Prefs.coins.value -= price;
+    if (!noCost) stows.coins.value -= price;
     return true;
   }
 }

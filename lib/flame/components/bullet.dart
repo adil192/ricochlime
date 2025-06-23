@@ -5,8 +5,8 @@ import 'package:flame/extensions.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/shop_items.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
   Bullet({
@@ -68,12 +68,12 @@ class Bullet extends BodyComponent with ContactCallbacks {
     Color? bulletColor,
     Sprite? bulletShape,
   }) {
-    bulletColor ??= Prefs.bulletColor.value;
-    bulletShape ??= (ShopItems.getBulletShape(Prefs.bulletShape.value) ??
+    bulletColor ??= stows.bulletColor.value;
+    bulletShape ??= (ShopItems.getBulletShape(stows.bulletShape.value) ??
             ShopItems.defaultBulletShape)
         .sprite;
 
-    if (Prefs.biggerBullets.value) radius *= 2;
+    if (stows.biggerBullets.value) radius *= 2;
 
     final size = applyBoxFit(
       BoxFit.contain,

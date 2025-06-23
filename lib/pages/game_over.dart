@@ -4,7 +4,7 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/coin.dart';
 import 'package:ricochlime/nes/dialog_button.dart';
-import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 class GameOverDialog extends StatelessWidget {
   const GameOverDialog({
@@ -43,8 +43,8 @@ class GameOverDialog extends StatelessWidget {
                       color: colorScheme.onSurface,
                     ),
                     children: [
-                      if (score > Prefs.highScore.value &&
-                          Prefs.highScore.value > 0)
+                      if (score > stows.highScore.value &&
+                          stows.highScore.value > 0)
                         t.gameOverPage.highScoreBeaten(
                           pOld: TextSpan(
                             style: TextStyle(
@@ -53,7 +53,7 @@ class GameOverDialog extends StatelessWidget {
                               decorationColor:
                                   colorScheme.onSurface.withValues(alpha: 0.6),
                             ),
-                            text: ' ${Prefs.highScore.value} ',
+                            text: ' ${stows.highScore.value} ',
                           ),
                           pNew: TextSpan(
                             style: const TextStyle(
@@ -75,15 +75,15 @@ class GameOverDialog extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               ValueListenableBuilder(
-                valueListenable: Prefs.coins,
+                valueListenable: stows.coins,
                 builder: (context, _, icon) {
                   return DialogButton(
-                    onPressed: Prefs.coins.value < 100
+                    onPressed: stows.coins.value < 100
                         ? null
                         : () async {
-                            if (Prefs.coins.value < 100) return;
-                            Prefs.coins.value -= 100;
-                            Prefs.totalGamesContinued.value++;
+                            if (stows.coins.value < 100) return;
+                            stows.coins.value -= 100;
+                            stows.totalGamesContinued.value++;
                             Navigator.of(context).pop<GameOverAction>(
                               GameOverAction.continueGame,
                             );

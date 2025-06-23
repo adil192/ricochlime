@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:logging/logging.dart';
-import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/ads/iap_state.dart';
+import 'package:ricochlime/utils/stows.dart';
+import 'package:stow_plain/stow_plain.dart';
 
 enum RicochlimeProduct {
   buy1000Coins('buy_1000_coins', consumable: true),
@@ -31,12 +33,16 @@ enum RicochlimeProduct {
   bool get isPriceLoaded => _details.containsKey(this);
   static Map<RicochlimeProduct, ProductDetails> _details = {};
 
-  PlainPref<IAPState> get state => _states![this]!;
-  static Map<RicochlimeProduct, PlainPref<IAPState>>? _states;
+  PlainStow<IAPState> get state => _states![this]!;
+  static Map<RicochlimeProduct, PlainStow<IAPState>>? _states;
   @visibleForTesting
   static void init() => _states ??= {
         for (final product in values)
-          product: PlainPref('iap_${product.id}_state', IAPState.unpurchased),
+          product: PlainStow(
+            'iap_${product.id}_state',
+            IAPState.unpurchased,
+            IAPState.codec,
+          ),
       };
 }
 
@@ -139,21 +145,10 @@ abstract final class RicochlimeIAP {
 
     switch (product) {
       case RicochlimeProduct.buy1000Coins:
-        Prefs.addCoins(1000, allowOverMax: true);
+        stows.addCoins(1000, allowOverMax: true);
 
       case RicochlimeProduct.buy5000Coins:
-        Prefs.addCoins(5000, allowOverMax: true);
+        stows.addCoins(5000, allowOverMax: true);
     }
   }
-}
-
-enum IAPState {
-  /// The item has not been purchased yet.
-  unpurchased,
-
-  /// The item has been purchased and is enabled.
-  purchasedAndEnabled,
-
-  /// The item has been purchased but is disabled.
-  purchasedAndDisabled,
 }

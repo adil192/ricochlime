@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:ricochlime/flame/components/bullet.dart';
 import 'package:ricochlime/flame/components/walls.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
-import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 /// A component that draws a dotted line
 /// to show the user where they're aiming.
@@ -74,7 +74,7 @@ class AimGuide extends PositionComponent with HasGameReference<RicochlimeGame> {
 
     final numDotsAfterReflection = min(
       numDotsTotal - numDotsBeforeReflection,
-      Prefs.showReflectionInAimGuide.value ? numDotsTotal : 1,
+      stows.showReflectionInAimGuide.value ? numDotsTotal : 1,
     );
 
     final adjustedDotInterval = numDotsBeforeReflection >= numDotsTotal

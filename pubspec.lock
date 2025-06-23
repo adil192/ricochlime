@@ -421,6 +421,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.0"
+  mutex:
+    dependency: transitive
+    description:
+      name: mutex
+      sha256: "8827da25de792088eb33e572115a5eb0d61d61a3c01acbc8bcbe76ed78f1a1f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   nes_ui:
     dependency: "direct main"
     description:
@@ -642,6 +650,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.1"
+  stow:
+    dependency: "direct main"
+    description:
+      name: stow
+      sha256: "520b66cd2e57c3963a1489072be17043424231d507fab8040f9aacc2d0bc6a87"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
+  stow_codecs:
+    dependency: "direct main"
+    description:
+      name: stow_codecs
+      sha256: "163858fa3832c3d5c8772d7c528b8071bbdb660059085e411f5a55772688df93"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  stow_plain:
+    dependency: "direct main"
+    description:
+      name: stow_plain
+      sha256: "87a80f4ff3c7832e0d6f335d475f2f58a41e5d6497c075cdfb4916b138f4cc2e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   stream_channel:
     dependency: transitive
     description:

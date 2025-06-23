@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ricochlime/flame/components/monster.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -13,8 +12,6 @@ void main() {
         'at most ${Monster.monstersPerRow} monsters are generated', () async {
       TestWidgetsFlutterBinding.ensureInitialized();
       SharedPreferences.setMockInitialValues({});
-      Prefs.testingMode = true;
-      Prefs.init();
       await RicochlimeGame.instance.preloadSprites.future;
 
       final random = Random(12);

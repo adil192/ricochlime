@@ -53,8 +53,6 @@ linter:
 
     prefer_if_elements_to_conditional_expressions: true
 
-    prefer_int_literals: true
-
     unnecessary_breaks: true
 
     unnecessary_to_list_in_spreads: true

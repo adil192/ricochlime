@@ -10,8 +10,8 @@ import 'package:ricochlime/nes/coin.dart';
 import 'package:ricochlime/pages/game_over.dart';
 import 'package:ricochlime/pages/restart_game.dart';
 import 'package:ricochlime/utils/brightness_extension.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({super.key});
@@ -109,7 +109,7 @@ class _PlayPageState extends State<PlayPage> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle.light,
-          leadingWidth: 80 + (Prefs.showFpsCounter.value ? (16 + 24 * 3) : 0),
+          leadingWidth: 80 + (stows.showFpsCounter.value ? (16 + 24 * 3) : 0),
           leading: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -144,7 +144,7 @@ class _PlayPageState extends State<PlayPage> {
                   size: const Size.square(20),
                 ),
               ),
-              if (Prefs.showFpsCounter.value) ...[
+              if (stows.showFpsCounter.value) ...[
                 const SizedBox(width: 16),
                 const FpsCounter(),
               ],
@@ -154,7 +154,7 @@ class _PlayPageState extends State<PlayPage> {
           title: Column(
             children: [
               ValueListenableBuilder(
-                valueListenable: Prefs.highScore,
+                valueListenable: stows.highScore,
                 builder: (context, highScore, child) => Text(
                   highScore <= 0 ? '' : t.playPage.highScore(p: highScore),
                   textAlign: TextAlign.center,
@@ -190,7 +190,7 @@ class _PlayPageState extends State<PlayPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ValueListenableBuilder(
-                        valueListenable: Prefs.coins,
+                        valueListenable: stows.coins,
                         builder: (context, coins, _) {
                           return Text(
                             coins.toString(),
@@ -252,7 +252,7 @@ class _PlayPageState extends State<PlayPage> {
                               ),
                             ),
                           ),
-                          if (Prefs.showUndoButton.value)
+                          if (stows.showUndoButton.value)
                             ValueListenableBuilder(
                               valueListenable: RicochlimeGame.instance.state,
                               builder: (context, state, child) {
@@ -272,7 +272,7 @@ class _PlayPageState extends State<PlayPage> {
                                 child: NesIconButton(
                                   onPress: () {
                                     RicochlimeGame.instance.cancelCurrentTurn();
-                                    Prefs.totalMovesUndone.value++;
+                                    stows.totalMovesUndone.value++;
                                   },
                                   icon: NesIcons.delete,
                                   primaryColor:

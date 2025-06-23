@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/ads/iap_state.dart';
+import 'package:stow_plain/stow_plain.dart';
 
 enum RicochlimeProduct {
   buy1000Coins('buy_1000_coins', consumable: true),
@@ -22,12 +23,16 @@ enum RicochlimeProduct {
 
   String get price => '\$\$';
 
-  PlainPref<IAPState> get state => _states![this]!;
-  static Map<RicochlimeProduct, PlainPref<IAPState>>? _states;
+  PlainStow<IAPState> get state => _states![this]!;
+  static Map<RicochlimeProduct, PlainStow<IAPState>>? _states;
   @visibleForTesting
   static void init() => _states ??= {
         for (final product in values)
-          product: PlainPref('iap_${product.id}_state', IAPState.unpurchased),
+          product: PlainStow(
+            'iap_${product.id}_state',
+            IAPState.unpurchased,
+            IAPState.codec,
+          ),
       };
 }
 
@@ -43,5 +48,3 @@ abstract final class RicochlimeIAP {
   static Future<bool> buy(RicochlimeProduct product) async => false;
   static Future<void> restorePurchases() async {}
 }
-
-enum IAPState { unpurchased, purchasedAndEnabled, purchasedAndDisabled }

@@ -3,8 +3,8 @@ import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/coin.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/shop_items.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 class ShopPage extends StatelessWidget {
   const ShopPage({super.key});
@@ -28,7 +28,7 @@ class ShopPage extends StatelessWidget {
         ),
         actions: [
           ValueListenableBuilder(
-            valueListenable: Prefs.coins,
+            valueListenable: stows.coins,
             builder: (context, coins, _) {
               final colorScheme = Theme.of(context).colorScheme;
               return Text(
@@ -74,10 +74,10 @@ class ShopPage extends StatelessWidget {
                     final item = ShopItems.bulletColors[index];
 
                     return ValueListenableBuilder(
-                      valueListenable: Prefs.bulletColor,
+                      valueListenable: stows.bulletColor,
                       builder: (context, _, __) => _ShopItemTile(
-                        selected: Prefs.bulletColor.value == item.color,
-                        select: () => Prefs.bulletColor.value = item.color,
+                        selected: stows.bulletColor.value == item.color,
+                        select: () => stows.bulletColor.value = item.color,
                         item: item,
                       ),
                     );
@@ -103,10 +103,10 @@ class ShopPage extends StatelessWidget {
                     final item = ShopItems.bulletShapes[index];
 
                     return ValueListenableBuilder(
-                      valueListenable: Prefs.bulletShape,
+                      valueListenable: stows.bulletShape,
                       builder: (context, _, __) => _ShopItemTile(
-                        selected: Prefs.bulletShape.value == item.id,
-                        select: () => Prefs.bulletShape.value = item.id,
+                        selected: stows.bulletShape.value == item.id,
+                        select: () => stows.bulletShape.value = item.id,
                         item: item,
                       ),
                     );

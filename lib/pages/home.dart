@@ -9,8 +9,8 @@ import 'package:ricochlime/pages/settings.dart';
 import 'package:ricochlime/pages/shop.dart';
 import 'package:ricochlime/pages/tutorial.dart';
 import 'package:ricochlime/utils/brightness_extension.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/shop_items.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -47,24 +47,24 @@ class HomePage extends StatelessWidget {
                   Row(
                     children: [
                       ListenableBuilder(
-                        listenable: Prefs.bgmVolume,
+                        listenable: stows.bgmVolume,
                         builder: (context, child) {
-                          if (Prefs.bgmVolume.value > 0.05) {
-                            lastKnownOnVolume = Prefs.bgmVolume.value;
+                          if (stows.bgmVolume.value > 0.05) {
+                            lastKnownOnVolume = stows.bgmVolume.value;
                           }
                           return NesTooltip(
                             message: '${t.settingsPage.bgmVolume}: '
-                                '${Prefs.bgmVolume.value * 100 ~/ 1}%',
+                                '${stows.bgmVolume.value * 100 ~/ 1}%',
                             child: Opacity(
-                              opacity: Prefs.bgmVolume.value <= 0.05 ? 0.25 : 1,
+                              opacity: stows.bgmVolume.value <= 0.05 ? 0.25 : 1,
                               child: child!,
                             ),
                           );
                         },
                         child: NesIconButton(
                           onPress: () {
-                            Prefs.bgmVolume.value =
-                                Prefs.bgmVolume.value <= 0.05
+                            stows.bgmVolume.value =
+                                stows.bgmVolume.value <= 0.05
                                     ? lastKnownOnVolume
                                     : 0;
                           },
@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
                     icon: NesIcons.market,
                     shouldAnimateIcon: () => ShopItems.allItems.any((item) =>
                         item.state.value == ShopItemState.unpurchased &&
-                        item.price <= Prefs.coins.value),
+                        item.price <= stows.coins.value),
                     text: t.homePage.shopButton,
                     openBuilder: (_) => const ShopPage(),
                   ),
@@ -134,7 +134,7 @@ class _HomePageButton<T> extends StatefulWidget {
 
 class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
   void onPressed() {
-    final route = (!Prefs.stylizedPageTransitions.value ||
+    final route = (!stows.stylizedPageTransitions.value ||
             MediaQuery.disableAnimationsOf(context))
         ? MaterialPageRoute<void>(
             builder: widget.openBuilder,

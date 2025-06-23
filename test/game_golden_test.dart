@@ -15,9 +15,9 @@ import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
 import 'package:ricochlime/pages/shop.dart';
 import 'package:ricochlime/pages/tutorial.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:ricochlime/utils/shop_items.dart';
+import 'package:ricochlime/utils/stows.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const inProgressGameSave = '''
@@ -72,8 +72,6 @@ void main() {
   group('Golden screenshot of', () {
     TestWidgetsFlutterBinding.ensureInitialized();
     SharedPreferences.setMockInitialValues({});
-    Prefs.testingMode = true;
-    Prefs.init();
 
     RicochlimeGame.disableBgMusic = true;
     RicochlimeGame.reproducibleGoldenMode = true;
@@ -85,8 +83,8 @@ void main() {
       ]);
     });
 
-    Prefs.coins.value = 493;
-    Prefs.highScore.value = 62;
+    stows.coins.value = 493;
+    stows.highScore.value = 62;
 
     ShopItems.bulletColors[1].purchase(noCost: true);
     ShopItems.bulletColors[2].purchase(noCost: true);
@@ -142,11 +140,11 @@ void _testGame({
         RicochlimeProduct.init();
 
         if (gameSave != null) {
-          Prefs.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
+          stows.currentGame.value = GameData.fromJson(jsonDecode(gameSave));
           if (RicochlimeGame.instance.isLoaded) {
             RicochlimeGame.instance
               ..resetChildren()
-              ..importFromGame(Prefs.currentGame.value);
+              ..importFromGame(stows.currentGame.value);
           }
         }
 

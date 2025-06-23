@@ -21,9 +21,9 @@ import 'package:ricochlime/flame/components/walls.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/flame/ticker.dart';
 import 'package:ricochlime/pages/game_over.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:ricochlime/utils/shop_items.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 enum GameState {
   idle,
@@ -116,8 +116,8 @@ class RicochlimeGame extends Forge2DGame
 
     add(aimGuide);
 
-    await Prefs.currentGame.waitUntilLoaded();
-    importFromGame(Prefs.currentGame.value);
+    await stows.currentGame.waitUntilRead();
+    importFromGame(stows.currentGame.value);
   }
 
   /// Whether [_initBgMusic] has been run.
@@ -142,27 +142,27 @@ class RicochlimeGame extends Forge2DGame
   /// and starts playing it.
   void _initBgMusic() {
     if (disableBgMusic) return;
-    if (Prefs.bgmVolume.value < 0.01) return;
+    if (stows.bgmVolume.value < 0.01) return;
     if (bgMusicInitialized) return;
 
     log.info('Initializing bg music');
     FlameAudio.bgm.initialize();
     FlameAudio.bgm.play(
       'bgm/Ludum_Dare_32_Track_4.ogg',
-      volume: Prefs.bgmVolume.value,
+      volume: stows.bgmVolume.value,
     );
     bgMusicInitialized = true;
   }
 
   Future<void> preloadBgMusic() async {
     if (disableBgMusic) return;
-    if (Prefs.bgmVolume.value < 0.01) return;
+    if (stows.bgmVolume.value < 0.01) return;
     await FlameAudio.audioCache.load('bgm/Ludum_Dare_32_Track_4.ogg');
   }
 
   void pauseBgMusic() {
     if (disableBgMusic) return;
-    if (Prefs.bgmVolume.value < 0.01) return;
+    if (stows.bgmVolume.value < 0.01) return;
     if (!bgMusicInitialized) return;
 
     log.info('Fading out bg music');
@@ -176,7 +176,7 @@ class RicochlimeGame extends Forge2DGame
 
   void resumeBgMusic() {
     if (disableBgMusic) return;
-    if (Prefs.bgmVolume.value < 0.01) return;
+    if (stows.bgmVolume.value < 0.01) return;
     if (!bgMusicInitialized) _initBgMusic();
     if (!bgMusicInitialized) return;
 
@@ -184,7 +184,7 @@ class RicochlimeGame extends Forge2DGame
     _bgMusicFadeTimer?.cancel();
     _bgMusicFadeTimer = _fadeBgmInOut(
       startingVolume: FlameAudio.bgm.audioPlayer.volume,
-      targetVolume: Prefs.bgmVolume.value,
+      targetVolume: stows.bgmVolume.value,
       onFinished: null,
     );
   }
@@ -278,11 +278,11 @@ class RicochlimeGame extends Forge2DGame
       return;
     }
 
-    Prefs.currentGame.value = GameData(
+    stows.currentGame.value = GameData(
       score: score.value,
       monsters: monsters.where((monster) => !monster.isDead),
     );
-    await Prefs.currentGame.waitUntilSaved();
+    await stows.currentGame.waitUntilWritten();
   }
 
   Future<void> cancelCurrentTurn() async {
@@ -296,7 +296,7 @@ class RicochlimeGame extends Forge2DGame
     assert(!inputCancelled);
 
     resetChildren();
-    importFromGame(Prefs.currentGame.value);
+    importFromGame(stows.currentGame.value);
   }
 
   /// Clears the current bullets and monsters
@@ -339,13 +339,13 @@ class RicochlimeGame extends Forge2DGame
       return;
     }
 
-    if (Prefs.maxFps.value <= 0) {
+    if (stows.maxFps.value <= 0) {
       // unlimited fps, don't group updates
       updateNow(dt, timeDilation.value);
       return;
     }
 
-    final targetDt = 1 / Prefs.maxFps.value;
+    final targetDt = 1 / stows.maxFps.value;
 
     groupedUpdateDt += dt;
     // *0.9 so e.g. 16ms is treated like 16.6666...ms
@@ -356,7 +356,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   void updateNow(double dt, double timeDilation) {
-    if (Prefs.showFpsCounter.value) fps = (1 / max(dt, 1 / 999)).round();
+    if (stows.showFpsCounter.value) fps = (1 / max(dt, 1 / 999)).round();
     dt = min(dt * timeDilation, maxDt);
     ticker.tick(dt);
     super.update(dt);
@@ -494,7 +494,7 @@ class RicochlimeGame extends Forge2DGame
 
       // check if the player has lost
       if (isGameOver()) {
-        Prefs.totalGameOvers.value++;
+        stows.totalGameOvers.value++;
         unawaited(saveGame());
         unawaited(gameOver());
         return;
@@ -542,7 +542,7 @@ class RicochlimeGame extends Forge2DGame
         break;
       case GameOverAction.continueGame:
         state.value = GameState.monstersMoving;
-        importFromGame(Prefs.currentGame.value, showGameOverDialog: false);
+        importFromGame(stows.currentGame.value, showGameOverDialog: false);
 
         final totalRowsToRemove = max(
           // clears 3 rounds worth of monsters
@@ -586,8 +586,8 @@ class RicochlimeGame extends Forge2DGame
   /// Saves the high score,
   /// and clears the current game.
   void restartGame() {
-    Prefs.highScore.value = max(Prefs.highScore.value, score.value);
-    Prefs.currentGame.value = null;
+    stows.highScore.value = max(stows.highScore.value, score.value);
+    stows.currentGame.value = null;
     _reset();
   }
 

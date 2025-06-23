@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/ricochlime_icons.dart';
-import 'package:ricochlime/utils/prefs.dart';
+import 'package:ricochlime/utils/stows.dart';
 import 'package:ricochlime/utils/version.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -75,12 +75,12 @@ class SettingsPage extends StatelessWidget {
                 trailing: SizedBox(
                   width: 200,
                   child: ListenableBuilder(
-                    listenable: Prefs.bgmVolume,
+                    listenable: stows.bgmVolume,
                     builder: (context, _) {
                       return Slider.adaptive(
-                        value: Prefs.bgmVolume.value,
+                        value: stows.bgmVolume.value,
                         onChanged: (value) {
-                          Prefs.bgmVolume.value = value;
+                          stows.bgmVolume.value = value;
                         },
                       );
                     },
@@ -96,7 +96,7 @@ class SettingsPage extends StatelessWidget {
             child: NesContainer(
               padding: EdgeInsets.zero,
               child: ValueListenableBuilder(
-                valueListenable: Prefs.showUndoButton,
+                valueListenable: stows.showUndoButton,
                 builder: (context, _, child) {
                   return MergeSemantics(
                     child: ListTile(
@@ -108,11 +108,11 @@ class SettingsPage extends StatelessWidget {
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
                       trailing: NesCheckBox(
-                        value: Prefs.showUndoButton.value,
-                        onChange: (value) => Prefs.showUndoButton.value = value,
+                        value: stows.showUndoButton.value,
+                        onChange: (value) => stows.showUndoButton.value = value,
                       ),
-                      onTap: () => Prefs.showUndoButton.value =
-                          !Prefs.showUndoButton.value,
+                      onTap: () => stows.showUndoButton.value =
+                          !stows.showUndoButton.value,
                     ),
                   );
                 },
@@ -127,13 +127,13 @@ class SettingsPage extends StatelessWidget {
             child: NesContainer(
               padding: EdgeInsets.zero,
               child: ValueListenableBuilder(
-                valueListenable: Prefs.showReflectionInAimGuide,
+                valueListenable: stows.showReflectionInAimGuide,
                 builder: (context, _, child) {
                   return MergeSemantics(
                     child: ListTile(
                       title: child,
                       leading: NesIcon(
-                        iconData: Prefs.showReflectionInAimGuide.value
+                        iconData: stows.showReflectionInAimGuide.value
                             ? RicochlimeIcons.aimGuideWithReflection
                             : RicochlimeIcons.aimGuideWithoutReflection,
                       ),
@@ -141,12 +141,12 @@ class SettingsPage extends StatelessWidget {
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
                       trailing: NesCheckBox(
-                        value: Prefs.showReflectionInAimGuide.value,
+                        value: stows.showReflectionInAimGuide.value,
                         onChange: (value) =>
-                            Prefs.showReflectionInAimGuide.value = value,
+                            stows.showReflectionInAimGuide.value = value,
                       ),
-                      onTap: () => Prefs.showReflectionInAimGuide.value =
-                          !Prefs.showReflectionInAimGuide.value,
+                      onTap: () => stows.showReflectionInAimGuide.value =
+                          !stows.showReflectionInAimGuide.value,
                     ),
                   );
                 },
@@ -169,7 +169,7 @@ class SettingsPage extends StatelessWidget {
                   iconData: NesIcons.camera,
                 ),
                 trailing: ValueListenableBuilder(
-                  valueListenable: Prefs.maxFps,
+                  valueListenable: stows.maxFps,
                   builder: (context, maxFps, _) {
                     if (maxFps == -1) {
                       return NesIcon(iconData: NesIcons.infinite);
@@ -182,7 +182,7 @@ class SettingsPage extends StatelessWidget {
                   },
                 ),
                 onTap: () {
-                  Prefs.maxFps.value = switch (Prefs.maxFps.value) {
+                  stows.maxFps.value = switch (stows.maxFps.value) {
                     -1 => 60,
                     60 => 30,
                     30 => -1,
@@ -199,9 +199,9 @@ class SettingsPage extends StatelessWidget {
             child: NesContainer(
               padding: EdgeInsets.zero,
               child: ValueListenableBuilder(
-                valueListenable: Prefs.showFpsCounter,
+                valueListenable: stows.showFpsCounter,
                 builder: (context, _, child) {
-                  final fps = Prefs.maxFps.value < 0 ? 60 : Prefs.maxFps.value;
+                  final fps = stows.maxFps.value < 0 ? 60 : stows.maxFps.value;
                   return MergeSemantics(
                     child: ListTile(
                       title: child,
@@ -215,13 +215,13 @@ class SettingsPage extends StatelessWidget {
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
                       trailing: NesCheckBox(
-                        value: Prefs.showFpsCounter.value,
+                        value: stows.showFpsCounter.value,
                         onChange: (value) {
-                          Prefs.showFpsCounter.value = value;
+                          stows.showFpsCounter.value = value;
                         },
                       ),
-                      onTap: () => Prefs.showFpsCounter.value =
-                          !Prefs.showFpsCounter.value,
+                      onTap: () => stows.showFpsCounter.value =
+                          !stows.showFpsCounter.value,
                     ),
                   );
                 },
@@ -244,7 +244,7 @@ class SettingsPage extends StatelessWidget {
             child: NesContainer(
               padding: EdgeInsets.zero,
               child: ValueListenableBuilder(
-                valueListenable: Prefs.hyperlegibleFont,
+                valueListenable: stows.hyperlegibleFont,
                 builder: (context, _, child) {
                   return MergeSemantics(
                     child: ListTile(
@@ -256,13 +256,13 @@ class SettingsPage extends StatelessWidget {
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
                       trailing: NesCheckBox(
-                        value: Prefs.hyperlegibleFont.value,
+                        value: stows.hyperlegibleFont.value,
                         onChange: (value) {
-                          Prefs.hyperlegibleFont.value = value;
+                          stows.hyperlegibleFont.value = value;
                         },
                       ),
-                      onTap: () => Prefs.hyperlegibleFont.value =
-                          !Prefs.hyperlegibleFont.value,
+                      onTap: () => stows.hyperlegibleFont.value =
+                          !stows.hyperlegibleFont.value,
                     ),
                   );
                 },
@@ -277,7 +277,7 @@ class SettingsPage extends StatelessWidget {
             child: NesContainer(
               padding: EdgeInsets.zero,
               child: ValueListenableBuilder(
-                valueListenable: Prefs.stylizedPageTransitions,
+                valueListenable: stows.stylizedPageTransitions,
                 builder: (context, _, child) {
                   return MergeSemantics(
                     child: ListTile(
@@ -289,13 +289,13 @@ class SettingsPage extends StatelessWidget {
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
                       trailing: NesCheckBox(
-                        value: Prefs.stylizedPageTransitions.value,
+                        value: stows.stylizedPageTransitions.value,
                         onChange: (value) {
-                          Prefs.stylizedPageTransitions.value = value;
+                          stows.stylizedPageTransitions.value = value;
                         },
                       ),
-                      onTap: () => Prefs.stylizedPageTransitions.value =
-                          !Prefs.stylizedPageTransitions.value,
+                      onTap: () => stows.stylizedPageTransitions.value =
+                          !stows.stylizedPageTransitions.value,
                     ),
                   );
                 },
@@ -310,7 +310,7 @@ class SettingsPage extends StatelessWidget {
             child: NesContainer(
               padding: EdgeInsets.zero,
               child: ValueListenableBuilder(
-                valueListenable: Prefs.biggerBullets,
+                valueListenable: stows.biggerBullets,
                 builder: (context, _, child) {
                   return MergeSemantics(
                     child: ListTile(
@@ -322,13 +322,13 @@ class SettingsPage extends StatelessWidget {
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
                       trailing: NesCheckBox(
-                        value: Prefs.biggerBullets.value,
+                        value: stows.biggerBullets.value,
                         onChange: (value) {
-                          Prefs.biggerBullets.value = value;
+                          stows.biggerBullets.value = value;
                         },
                       ),
-                      onTap: () => Prefs.biggerBullets.value =
-                          !Prefs.biggerBullets.value,
+                      onTap: () => stows.biggerBullets.value =
+                          !stows.biggerBullets.value,
                     ),
                   );
                 },

@@ -12,8 +12,8 @@ import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
 import 'package:ricochlime/pages/home.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,16 +24,15 @@ Future<void> main() async {
     print('${record.level.name}: ${record.loggerName}: ${record.message}');
   });
 
-  Prefs.init();
-  unawaited(Prefs.bgmVolume
-      .waitUntilLoaded()
+  unawaited(stows.bgmVolume
+      .waitUntilRead()
       .then((_) => RicochlimeGame.instance.preloadBgMusic));
   _addLicenses();
   GoogleFonts.config.allowRuntimeFetching = false;
 
   await Future.wait([
     LocaleSettings.useDeviceLocale(),
-    Prefs.highScore.waitUntilLoaded(),
+    stows.highScore.waitUntilRead(),
     GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
     RicochlimeGame.instance.preloadSprites.future,
   ]);
@@ -76,12 +75,12 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    Prefs.hyperlegibleFont.addListener(_prefListener);
+    stows.hyperlegibleFont.addListener(_prefListener);
   }
 
   @override
   void dispose() {
-    Prefs.hyperlegibleFont.removeListener(_prefListener);
+    stows.hyperlegibleFont.removeListener(_prefListener);
     super.dispose();
   }
 

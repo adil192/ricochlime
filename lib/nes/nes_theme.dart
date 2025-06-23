@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nes_ui/nes_ui.dart';
-import 'package:ricochlime/utils/prefs.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
+import 'package:ricochlime/utils/stows.dart';
 
 ThemeData nesThemeFrom({
   required Brightness brightness,
@@ -81,7 +81,7 @@ ThemeData nesThemeFrom({
 
 TextTheme _getTextTheme(Brightness brightness) {
   final baseTheme = ThemeData(brightness: brightness);
-  if (Prefs.hyperlegibleFont.value) {
+  if (stows.hyperlegibleFont.value) {
     return GoogleFonts.atkinsonHyperlegibleTextTheme(baseTheme.textTheme);
   } else {
     return GoogleFonts.silkscreenTextTheme(baseTheme.textTheme);
