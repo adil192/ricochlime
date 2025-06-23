@@ -57,7 +57,6 @@ dependencies:
   slang: ^4.4.0
   slang_flutter: any
 
-  stow: ^0.1.0
   stow_codecs: ^1.0.0
   stow_plain: ^0.1.0
 

@@ -651,7 +651,7 @@ packages:
     source: hosted
     version: "1.12.1"
   stow:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: stow
       sha256: "520b66cd2e57c3963a1489072be17043424231d507fab8040f9aacc2d0bc6a87"
