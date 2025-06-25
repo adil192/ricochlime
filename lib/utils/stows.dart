@@ -11,35 +11,33 @@ final stows = Stows();
 class Stows {
   final currentGame = PlainStow.json('currentGame', null as GameData?,
       fromJson: (json) => GameData.fromJson(json as Map<String, dynamic>));
-  final highScore = PlainStow.simple('highScore', 0);
+  final highScore = PlainStow('highScore', 0);
 
-  final hyperlegibleFont = PlainStow.simple('hyperlegibleFont', false);
-  final stylizedPageTransitions =
-      PlainStow.simple('stylizedPageTransitions', true);
-  final biggerBullets = PlainStow.simple('biggerBullets', false);
+  final hyperlegibleFont = PlainStow('hyperlegibleFont', false);
+  final stylizedPageTransitions = PlainStow('stylizedPageTransitions', true);
+  final biggerBullets = PlainStow('biggerBullets', false);
 
-  final bgmVolume = PlainStow.simple('bgmVolume', 0.0);
+  final bgmVolume = PlainStow('bgmVolume', 0.0);
 
-  final showUndoButton = PlainStow.simple('showUndoButton', true);
-  final showReflectionInAimGuide =
-      PlainStow.simple('showReflectionInAimGuide', true);
+  final showUndoButton = PlainStow('showUndoButton', true);
+  final showReflectionInAimGuide = PlainStow('showReflectionInAimGuide', true);
 
-  final coins = PlainStow.simple('coins', 0);
+  final coins = PlainStow('coins', 0);
   final bulletColor = PlainStow(
-      'bulletColor', ShopItems.bulletColors.first.color, const ColorCodec());
-  final bulletShape =
-      PlainStow.simple('bulletShape', ShopItems.bulletShapes.first.id);
+      'bulletColor', ShopItems.bulletColors.first.color,
+      codec: ColorCodec());
+  final bulletShape = PlainStow('bulletShape', ShopItems.bulletShapes.first.id);
 
-  final maxFps = PlainStow.simple('maxFps', -1);
-  final showFpsCounter = PlainStow.simple('showFpsCounter', false);
+  final maxFps = PlainStow('maxFps', -1);
+  final showFpsCounter = PlainStow('showFpsCounter', false);
 
-  final totalCoinsGained = PlainStow.simple('totalCoinsGained', 0);
-  final totalBulletsGained = PlainStow.simple('totalBulletsGained', 0);
-  final totalMonstersKilled = PlainStow.simple('totalMonstersKilled', 0);
-  final totalGameOvers = PlainStow.simple('totalGameOvers', 0);
-  final totalAdsWatched = PlainStow.simple('totalAdsWatched', 0);
-  final totalGamesContinued = PlainStow.simple('totalTimesContinued', 0);
-  final totalMovesUndone = PlainStow.simple('totalTimesUndone', 0);
+  final totalCoinsGained = PlainStow('totalCoinsGained', 0);
+  final totalBulletsGained = PlainStow('totalBulletsGained', 0);
+  final totalMonstersKilled = PlainStow('totalMonstersKilled', 0);
+  final totalGameOvers = PlainStow('totalGameOvers', 0);
+  final totalAdsWatched = PlainStow('totalAdsWatched', 0);
+  final totalGamesContinued = PlainStow('totalTimesContinued', 0);
+  final totalMovesUndone = PlainStow('totalTimesUndone', 0);
 
   void addCoins(int toAdd, {bool allowOverMax = false}) {
     const maxCoins = 100 * 1000;
