@@ -81,10 +81,9 @@ void main() {
         RicochlimeGame.instance.preloadSprites.future,
         GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
       ]);
+      stows.coins.value = 493;
+      stows.highScore.value = 62;
     });
-
-    stows.coins.value = 493;
-    stows.highScore.value = 62;
 
     ShopItems.bulletColors[1].purchase(noCost: true);
     ShopItems.bulletColors[2].purchase(noCost: true);
