@@ -19,7 +19,7 @@ jobs:
       buildNumber: ${{ steps.get_version.outputs.buildNumber }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Get version
         id: get_version
@@ -44,7 +44,7 @@ jobs:
       APP_STORE_CERTIFICATE_KEY: ${{secrets.APP_STORE_CERTIFICATE_KEY}}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Setup Xcode
         run: |
@@ -60,19 +60,6 @@ jobs:
           echo "Downloading iOS platform files..."
           xcodebuild -downloadPlatform iOS -version 18.0
           echo
-
-      - name: Setup cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            .dart_tool/
-            build/
-            .flutter-plugins
-            .flutter-plugins-dependencies
-            pubspec.lock
-          key: ${{ runner.OS }}-ricochlime-macos-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
-          restore-keys: |
-            ${{ runner.OS }}-ricochlime-macos-
 
       - name: Remove dev dependencies
         run: ./patches/remove_dev_dependencies.sh

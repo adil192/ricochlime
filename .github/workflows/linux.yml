@@ -16,7 +16,7 @@ jobs:
       buildNumber: ${{ steps.get_version.outputs.buildNumber }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Get version
         id: get_version
@@ -36,7 +36,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Install apt dependencies
         uses: awalsh128/cache-apt-pkgs-action@latest
@@ -46,7 +46,7 @@ jobs:
           execute_install_scripts: true
 
       - name: Setup cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v4
         with:
           path: |
             .dart_tool/
@@ -117,10 +117,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Setup cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             .dart_tool/
@@ -132,6 +132,7 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-ricochlime-armlinux-
 
+      # TODO(adil192): Use native arm64 runner
       - name: Build Linux (arm64)
         uses: uraimo/run-on-arch-action@v2
         with:
@@ -211,7 +212,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Install AppImage dependencies
         run: |
