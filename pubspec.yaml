@@ -82,13 +82,13 @@ flutter:
     - assets/google_fonts/Silkscreen/
     - assets/audio/bgm/
 
-# dart run icons_launcher:create
+# ./scripts/generate_icons.sh
 icons_launcher:
   image_path: "assets/icon/icon.png"
   platforms:
     android:
       enable: true
-      adaptive_background_color: "#519965"
+      adaptive_background_color: "#3abe41"
       adaptive_foreground_image: "assets/icon/icon_adaptive.png"
       adaptive_monochrome_image: "assets/icon/icon_monochrome.png"
     ios:
