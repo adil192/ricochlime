@@ -1,8 +1,16 @@
 [Desktop Entry]
-Name=Flutter Linux App
-Comment=Flutter Linux launcher icon
+Version=1.0
+Type=Application
+
+Name=Ricochlime
+Name[kk]=Рикошырыш
+Name[ru]=Рикоширыш
+Comment=Satisfying monster shooter
+Comment[kk]=Қанағаттанарлық құбыжық атқыш
+Comment[ru]=Залипательная стрельба по монстрам
+Categories=Game;Shooter;
+
 Exec=app_icon
 Icon=app_icon.png
 Terminal=false
-Type=Application
-Categories=Entertainment;
+StartupWMClass=ricochlime
