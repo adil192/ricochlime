@@ -34,6 +34,7 @@ jobs:
 
   build-ios:
     name: Build for iOS
+    # TODO(adil192): Change to macos-latest after 30 August 2025 (https://github.com/actions/runner-images/issues/12520)
     runs-on: macos-15
     needs: get-version
     env:
@@ -44,6 +45,21 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Setup Xcode
+        run: |
+          echo "Selecting Xcode 16.4..."
+          sudo xcode-select -s /Applications/Xcode_16.4.app
+          xcode-select -p
+          echo
+
+          echo "Running Xcode first launch..."
+          xcodebuild -runFirstLaunch
+          echo
+
+          echo "Downloading iOS platform files..."
+          xcodebuild -downloadPlatform iOS -version 18.0
+          echo
 
       - name: Setup cache
         uses: actions/cache@v3
