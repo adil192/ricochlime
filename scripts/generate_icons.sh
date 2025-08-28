@@ -80,7 +80,8 @@ announce rsvg-convert -w 256 -h 256 -o snap/gui/app_icon.png assets/icon/icon.sv
 announce rsvg-convert -w 32 -h 32 -o web/favicon.png assets/icon/icon.svg
 announce rsvg-convert -w 192 -h 192 -o web/icons/Icon-192.png assets/icon/icon.svg
 announce rsvg-convert -w 512 -h 512 -o web/icons/Icon-512.png assets/icon/icon.svg
-announce rsvg-convert -w 256 -h 256 -o windows/runner/resources/app_icon.ico assets/icon/icon.svg
+# rsvg-convert doesn't output the 3.00 .ico format for Windows, so just keep icons_launcher's output.
+# announce rsvg-convert -w 256 -h 256 -o windows/runner/resources/app_icon.ico assets/icon/icon.svg
 echo
 
 echo "All done!"
