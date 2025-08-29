@@ -8,7 +8,14 @@ Ricochlime does not collect any data about you besides the data collected by thi
 
 ## Third party data collection
 
-### Google Ads
+### Google AdMob
+
+Older versions of Ricochlime (released before January 2025) contained ads.
+
+Newer versions do not contain ads and do not share information with Google AdMob.
+
+<details>
+<summary>Privacy information for older app versions</summary>
 
 Ricochlime is free to download and play, and used Google AdMob to display ads in versions v1.11.5 and older on some platforms.
 Newer versions of the app (v1.11.6 and newer) do not contain ads and do not share information with Google AdMob.
@@ -18,6 +25,7 @@ AdMob may collect data about you, including your device's advertising ID, IP add
 When you first open Ricochlime, you'll be shown a consent prompt asking you to choose between personalized and non-personalized ads. You can change this at any time by going to the settings menu in the game.
 
 Users are recommended to update their app to the latest version for an ad-free experience.
+</details>
 
 ## Source code
 
