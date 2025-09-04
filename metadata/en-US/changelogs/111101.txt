@@ -1,0 +1,2 @@
+• Tweaked some variations of the app icon
+• Refactored and updated technical parts of the app

@@ -1,0 +1,2 @@
+• Tocó algunas variaciones del icono de la aplicación
+• Partes técnicas refactoradas y actualizadas de la aplicación

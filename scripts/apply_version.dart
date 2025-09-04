@@ -123,11 +123,11 @@ Future<void> updateAllFiles() async {
   // update windows runner
   await File('windows/runner/Runner.rc').replace({
     // e.g. #define VERSION_AS_NUMBER 0,5,5,0
-    RegExp(r'#define VERSION_AS_NUMBER .+'):
-        '#define VERSION_AS_NUMBER ${newVersion.buildNameWithCommas},0',
+    RegExp(r'#define VERSION_AS_NUMBER .+'): '#define VERSION_AS_NUMBER '
+        '${newVersion.buildNameWithCommas},${newVersion.revision}',
     // e.g. #define VERSION_AS_STRING "0.5.5.0"
-    RegExp(r'#define VERSION_AS_STRING .+'):
-        '#define VERSION_AS_STRING "${newVersion.buildName}.0"',
+    RegExp(r'#define VERSION_AS_STRING .+'): '#define VERSION_AS_STRING '
+        '"${newVersion.buildName}.${newVersion.revision}"',
   });
 
   // update version file
