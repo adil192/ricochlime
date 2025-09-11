@@ -8,6 +8,10 @@ Ricochlime does not collect any data about you besides the data collected by thi
 
 ## Third party data collection
 
+### In-app purchases
+
+Ricochlime may offer optional in-app purchases that are processed by Google Play on Android devices or the Apple App Store on iOS/macOS devices. These providers may collect and process personal information necessary to complete the transaction. Ricochlime does not store or access your payment information.
+
 ### Google AdMob
 
 Older versions of Ricochlime (released before January 2025) contained ads.
