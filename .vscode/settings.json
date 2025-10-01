@@ -3,7 +3,11 @@
         "submodules"
     ],
     "files.exclude": {
-        "submodules": true
+        "submodules": true,
+        "**/.dart_tool/": true,
+        "**/.idea/": true,
+        "**/.flutter-plugins-dependencies": true,
+        "**/ricochlime.iml": true,
     },
     "workbench.colorCustomizations": {
         "[Gnome Dark (GitHub)]": {
