@@ -50,8 +50,19 @@ class Monster extends BodyComponent with ContactCallbacks {
           paint: Paint()..color = RicochlimePalette.monsterColor,
           priority: getPriorityFromPosition(initialPosition),
           renderBody: false,
+          bodyDef: BodyDef(
+            position: initialPosition,
+            fixedRotation: true,
+          ),
         ) {
     if (killReward != null) this.killReward = killReward;
+
+    fixtureDefs = [
+      FixtureDef(
+        PolygonShape()..setAsBox(5, 7, Vector2(7.5, 5), 0),
+        userData: this,
+      ),
+    ];
 
     add(_animation);
     add(_healthBar);
@@ -295,19 +306,11 @@ class Monster extends BodyComponent with ContactCallbacks {
   @override
   Body createBody() {
     if (bodyCreated) return body;
-    bodyCreated = true;
-
-    final shape = PolygonShape()..setAsBox(5, 7, Vector2(7.5, 5), 0);
-    final fixtureDef = FixtureDef(
-      shape,
-      userData: this,
-    );
-
-    final bodyDef = BodyDef(
-      position: initialPosition,
-      fixedRotation: true,
-    );
-    return world.createBody(bodyDef)..createFixture(fixtureDef);
+    try {
+      return super.createBody();
+    } finally {
+      bodyCreated = true;
+    }
   }
 
   @override
@@ -379,10 +382,9 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
 
   @override
   Future<void> onLoad() async {
+    await super.onLoad();
     current = MonsterState.idle;
     walking = _walking;
-    await super.onLoad();
-
     width = staticWidth;
     height = staticHeight;
   }
