@@ -34,7 +34,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  font_awesome_flutter: ^10.5.0
+  font_awesome_flutter: 10.9.0
 
   forge2d: any
 
@@ -63,7 +63,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  golden_screenshot: ^3.0.1
+  golden_screenshot: ^4.0.1
 
   icons_launcher: ^3.0.0
 

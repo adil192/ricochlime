@@ -156,7 +156,7 @@ void _testGame({
           ),
           device: device,
           frameColors: frameColors,
-          child: child,
+          home: child,
         );
         await tester.pumpWidget(widget);
 
