@@ -477,10 +477,14 @@ class RicochlimeGame extends Forge2DGame
         random: random,
         monsterHp: score.value,
       );
-      for (final monster in row) {
-        if (monster == null) continue;
+      row.nonNulls.forEach(add);
 
-        add(monster);
+      // wait until all monsters are loaded
+      await Future.wait(row.nonNulls.map((monster) => monster.loaded));
+      if (inputCancelled) return;
+
+      // move the new monsters in from the top
+      for (final monster in row.nonNulls) {
         monster.moveInFromTop(monsterMoveDuration);
       }
 
@@ -675,5 +679,6 @@ class RicochlimeGame extends Forge2DGame
   @Deprecated('RicochlimeGame is never expected to be disposed')
   void dispose() {
     _fpsStreamController.close();
+    inputCancelled = true;
   }
 }
