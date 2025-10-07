@@ -1,4 +1,4 @@
-# <img src="assets/icon/icon.png" width="30" height="30" alt="Logo"> Ricochlime
+# <img src="assets/icon/icon.png" width="30" height="30" alt="" aria-hidden="true"> Ricochlime
 
 Ricochlime is a casual game for every platform where you defend yourself against waves of monsters with your ricocheting projectiles.
 
@@ -83,3 +83,7 @@ RICOCHLIME
 ├── scripts          Development scripts (e.g. for generating icons or updating versions)
 └── test             Unit and widget tests
 ```
+
+### Build
+
+To build this project yourself, see [BUILD.md](BUILD.md).
