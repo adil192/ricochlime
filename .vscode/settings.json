@@ -3,11 +3,14 @@
         "submodules"
     ],
     "files.exclude": {
-        "submodules": true,
+        "android/.gradle/": true,
+        "android/.kotlin/": true,
+        "linux/flutter/ephemeral/": true,
+        "ricochlime.iml": true,
+        "submodules/*/*": true,
         "**/.dart_tool/": true,
         "**/.idea/": true,
         "**/.flutter-plugins-dependencies": true,
-        "**/ricochlime.iml": true,
     },
     "workbench.colorCustomizations": {
         "[Gnome Dark (GitHub)]": {
