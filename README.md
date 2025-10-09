@@ -6,12 +6,16 @@ I originally built this game as something to do with my hands while I focused on
 
 You can play it online:
 
+Web:
+&nbsp;
 [<img src='assets_raw/pwa-badge.png'
     alt='Launch as web app'
     height=50>][web_app]
 
 Or download it for your device:
 
+Android:
+&nbsp;
 [<img src='assets_raw/google-play-badge.png'
     alt='Get it on Google Play'
     height=50>][google_play]
@@ -23,14 +27,20 @@ Or download it for your device:
 [<img src='https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png'
     alt='Available at Amazon Appstore'
     height=50>][amazon_appstore]
+
+iOS/macOS:
 &nbsp;
 [<img src='assets_raw/app-store-badge.svg'
     alt='Get it on the App Store'
     height=50>][app_store]
 &nbsp;
+Windows:
+&nbsp;
 [<img src="assets_raw/windows-badge.png"
     alt="Download for Windows"
     height=50>][download_windows]
+&nbsp;
+Linux:
 &nbsp;
 [<img src="assets_raw/flathub-badge.svg"
     alt="Download on Flathub"
