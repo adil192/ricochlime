@@ -5,7 +5,7 @@
 
    i. Manually, by following the official instructions at https://flutter.dev/docs/get-started/install, or;
 
-   ii. Automatically on Linux, using my script:
+   ii. Automatically on Linux, using my script ([source](https://github.com/adil192/adil192-linux/blob/main/bootstrap/install_flutter.sh)):
 
       ```bash
       curl -s https://raw.githubusercontent.com/adil192/adil192-linux/main/bootstrap/install_flutter.sh | bash
