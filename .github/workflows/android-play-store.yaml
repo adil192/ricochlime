@@ -21,7 +21,9 @@ jobs:
           path: |
             .dart_tool/
             build/
-            .flutter-plugins
+            linux/flutter/ephemeral/
+            macos/Flutter/ephemeral/
+            windows/flutter/ephemeral/
             .flutter-plugins-dependencies
             pubspec.lock
           key: ${{ runner.OS }}-ricochlime-ubuntu-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
@@ -40,11 +42,9 @@ jobs:
           echo "storeFile=../android.keystore" >> android/key.properties
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: adil192/setup-flutter-submodule@v1
         with:
-          channel: stable
-          cache: true
-          cache-key: 'flutter-:os:-:channel:-:version:-:arch:'
+          flutter-path: submodules/flutter
 
       - name: Setup Java
         uses: actions/setup-java@v5

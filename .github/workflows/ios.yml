@@ -64,13 +64,10 @@ jobs:
       - name: Remove dev dependencies
         run: ./patches/remove_dev_dependencies.sh
 
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: adil192/setup-flutter-submodule@v1
         with:
-          channel: stable
-          architecture: x64
-          cache: true
-          cache-key: 'flutter-:os:-:channel:-:version:-:arch:'
+          flutter-path: submodules/flutter
 
       - name: Install Codemagic CLI Tools
         run: pipx install codemagic-cli-tools
