@@ -186,10 +186,8 @@ void _testGame({
 extension _GoldenScreenshotDevices on GoldenScreenshotDevices {
   bool get enableIAPs => switch (this) {
         GoldenScreenshotDevices.macbook => true,
-        GoldenScreenshotDevices.olderIphone => true,
-        GoldenScreenshotDevices.newerIphone => true,
-        GoldenScreenshotDevices.olderIpad => true,
-        GoldenScreenshotDevices.newerIpad => true,
+        GoldenScreenshotDevices.iphone => true,
+        GoldenScreenshotDevices.ipad => true,
         _ => false,
       };
 }

@@ -33,7 +33,7 @@ enum GameState {
 }
 
 class RicochlimeGame extends Forge2DGame
-    with PanDetector, TapDetector, MouseMovementDetector, SingleGameInstance {
+    with PanDetector, TapCallbacks, MouseMovementDetector, SingleGameInstance {
   RicochlimeGame._()
       : super(
           gravity: Vector2.zero(),
@@ -377,7 +377,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   @override
-  void onTapUp(TapUpInfo info) {
+  void onTapUp(TapUpEvent event) {
     if (state.value == GameState.shooting) {
       timeDilation.value += 0.5;
     } else if (inputAllowed && pointAndClickEnabled) {
