@@ -5,7 +5,6 @@ import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
@@ -79,7 +78,6 @@ void main() {
       RicochlimeGame.instance.random = Random(123);
       await Future.wait([
         RicochlimeGame.instance.preloadSprites.future,
-        GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
       ]);
       stows.coins.value = 493;
       stows.highScore.value = 62;
@@ -133,7 +131,7 @@ void _testGame({
 }) {
   group(goldenFileName, () {
     for (final goldenDevice in GoldenScreenshotDevices.values) {
-      testWidgets('for ${goldenDevice.name}', (tester) async {
+      testGoldens('for ${goldenDevice.name}', (tester) async {
         final device = goldenDevice.device;
         RicochlimeIAP.forceInAppPurchasesSupported = goldenDevice.enableIAPs;
         RicochlimeProduct.init();
@@ -147,23 +145,22 @@ void _testGame({
           }
         }
 
-        final widget = ScreenshotApp(
+        final widget = ScreenshotApp.withConditionalTitlebar(
           theme: nesThemeFrom(
             brightness: Brightness.light,
             colorScheme: ColorScheme.fromSeed(
               seedColor: RicochlimePalette.grassColor,
             ),
           ),
+          title: 'Ricochlime',
           device: device,
           frameColors: frameColors,
           home: child,
         );
         await tester.pumpWidget(widget);
 
-        await tester.precacheImages(const [
-          AssetImage('assets/images/coin.png'),
-        ]);
-        await tester.precacheTopbarImages();
+        await tester.precacheImagesInWidgetTree();
+        await tester.loadFonts();
 
         // Aim towards the middle left of the game area
         if (child is PlayPage) {

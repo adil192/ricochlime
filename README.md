@@ -50,7 +50,7 @@ Linux:
     alt="Get it as an AppImage"
     height=50>][download_appimage]
 
-<img src='metadata/en-US/images/tenInchScreenshots/2_play.png' alt='Game screen with a player at the bottom facing multiple monsters' />
+<img src='metadata/en-US/images/flathubScreenshots/2_play.png' alt='Game screen with a player at the bottom facing multiple monsters' />
 
 [google_play]: https://play.google.com/store/apps/details?id=com.adilhanney.ricochlime
 [f_droid]: https://f-droid.org/packages/com.adilhanney.ricochlime/

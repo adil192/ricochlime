@@ -59,25 +59,25 @@
         },
 
         {
-            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/1_home.png",
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/1_home.png",
             "type": "image/png",
             "sizes": "2000x1400",
             "form_factor": "wide"
         },
         {
-            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/2_play.png",
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/2_play.png",
             "type": "image/jpeg",
             "sizes": "2000x1400",
             "form_factor": "wide"
         },
         {
-            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/4_shop.png",
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/4_shop.png",
             "type": "image/jpeg",
             "sizes": "2000x1400",
             "form_factor": "wide"
         },
         {
-            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/tenInchScreenshots/6_settings.png",
+            "src": "https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/6_settings.png",
             "type": "image/jpeg",
             "sizes": "2000x1400",
             "form_factor": "wide"
