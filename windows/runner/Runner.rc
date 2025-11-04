@@ -61,15 +61,15 @@ IDI_APP_ICON            ICON                    "resources\\app_icon.ico"
 //
 
 #if defined(FLUTTER_VERSION_MAJOR) && defined(FLUTTER_VERSION_MINOR) && defined(FLUTTER_VERSION_PATCH) && defined(FLUTTER_VERSION_BUILD)
-#define VERSION_AS_NUMBER 1,11,10,1
+#define  VERSION_AS_NUMBER FLUTTER_BUILD_NUMBER
 #else
-#define VERSION_AS_NUMBER 1,11,10,1
+#define VERSION_AS_NUMBER 1,11,11,0
 #endif
 
 #if defined(FLUTTER_VERSION)
-#define VERSION_AS_STRING "1.11.10.1"
+#define  VERSION_AS_STRING #FLUTTER_BUILD_NAME
 #else
-#define VERSION_AS_STRING "1.11.10.1"
+#define VERSION_AS_STRING "1.11.11.0"
 #endif
 
 VS_VERSION_INFO VERSIONINFO

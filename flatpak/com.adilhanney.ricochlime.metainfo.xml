@@ -74,6 +74,15 @@
     </branding>
 
     <releases>
+        <release version="1.11.11" date="2025-11-04">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.11</url>
+            <description>
+                <ul>
+                    <li>Minor upstream improvements</li>
+                    <li>Reduced the titlebar size by always using server-side decorations</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.11.10" date="2025-08-28">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.10</url>
             <description>
