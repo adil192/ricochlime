@@ -60,6 +60,10 @@ jobs:
         run: |
           keychain initialize
 
+          # Remove the template projects to prevent crash
+          rm -rf submodules/flutter/packages/flutter_tools/templates/app/ios.tmpl/Runner.xcodeproj
+          rm -rf submodules/flutter/packages/flutter_tools/templates/app/macos.tmpl/Runner.xcodeproj
+
           app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
             --platform MAC_OS \
             --type MAC_APP_STORE \
