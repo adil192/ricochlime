@@ -61,13 +61,13 @@ IDI_APP_ICON            ICON                    "resources\\app_icon.ico"
 //
 
 #if defined(FLUTTER_VERSION_MAJOR) && defined(FLUTTER_VERSION_MINOR) && defined(FLUTTER_VERSION_PATCH) && defined(FLUTTER_VERSION_BUILD)
-#define  VERSION_AS_NUMBER FLUTTER_BUILD_NUMBER
+#define  VERSION_AS_NUMBER FLUTTER_VERSION_MAJOR,FLUTTER_VERSION_MINOR,FLUTTER_VERSION_PATCH,FLUTTER_VERSION_BUILD
 #else
 #define VERSION_AS_NUMBER 1,11,11,0
 #endif
 
 #if defined(FLUTTER_VERSION)
-#define  VERSION_AS_STRING #FLUTTER_BUILD_NAME
+#define  VERSION_AS_STRING FLUTTER_VERSION
 #else
 #define VERSION_AS_STRING "1.11.11.0"
 #endif
@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "Ricochlime" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "ricochlime" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 Adil Hanney. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 Adil Hanney. All rights reserved." "\0"
             VALUE "OriginalFilename", "ricochlime.exe" "\0"
             VALUE "ProductName", "Ricochlime" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
