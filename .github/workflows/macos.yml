@@ -80,7 +80,6 @@ jobs:
           xcode-project use-profiles
 
       - run: flutter pub get
-      - run: find . -name "Podfile" -execdir pod install \;
 
       - name: Build for macOS
         run: |

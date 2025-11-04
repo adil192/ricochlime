@@ -34,8 +34,7 @@ jobs:
 
   build-ios:
     name: Build for iOS
-    # TODO(adil192): Change to macos-latest after 30 August 2025 (https://github.com/actions/runner-images/issues/12520)
-    runs-on: macos-15
+    runs-on: macos-latest
     needs: get-version
     env:
       APP_STORE_CONNECT_ISSUER_ID: ${{secrets.APP_STORE_CONNECT_ISSUER_ID}}
@@ -91,7 +90,6 @@ jobs:
           xcode-project use-profiles
 
       - run: flutter pub get
-      - run: find . -name "Podfile" -execdir pod install \;
 
       - name: Build for iOS
         id: build
