@@ -75,10 +75,6 @@ jobs:
         run: |
           keychain initialize
 
-          # Remove the template projects to prevent crash
-          rm -rf submodules/flutter/packages/flutter_tools/templates/app/ios.tmpl/Runner.xcodeproj
-          rm -rf submodules/flutter/packages/flutter_tools/templates/app/macos.tmpl/Runner.xcodeproj
-
           app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
             --platform IOS \
             --type IOS_APP_STORE \
@@ -87,7 +83,7 @@ jobs:
 
           keychain add-certificates
 
-          xcode-project use-profiles
+          xcode-project use-profiles --project ios/*.xcodeproj
 
       - run: flutter pub get
 
