@@ -289,10 +289,10 @@ packages:
     dependency: "direct dev"
     description:
       name: golden_screenshot
-      sha256: b06b9dc1d31295ab4582d56599536649a541577ddcee4cc1c856cc23f8c998e6
+      sha256: d6a9b64de0979c33be24cd1a1581555953fcb10d17c1d008d888db22ea9f0059
       url: "https://pub.dev"
     source: hosted
-    version: "7.1.0+1"
+    version: "8.1.0"
   google_fonts:
     dependency: "direct main"
     description:
@@ -321,10 +321,10 @@ packages:
     dependency: transitive
     description:
       name: http
-      sha256: bb2ce4590bc2667c96f318d68cac1b5a7987ec819351d32b1c987239a815e007
+      sha256: "87721a4a50b19c7f1d49001e51409bddc46303966ce89a65af4f4e6004896412"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   http_parser:
     dependency: transitive
     description:
@@ -377,10 +377,10 @@ packages:
     dependency: transitive
     description:
       name: in_app_purchase_storekit
-      sha256: dab4feef532af88ddec22200e4b3809c02c9bd0da3d0864f3e8e0f7b02f95867
+      sha256: bfdb8d1859b6d19a55aba1046e3a860c631b6e96d36275a358e1caf8b62cfbde
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.6"
+    version: "0.4.6+1"
   intl:
     dependency: "direct dev"
     description:
@@ -726,18 +726,18 @@ packages:
     dependency: "direct main"
     description:
       name: slang
-      sha256: bb92f1777d086483251dd1a359d86d174d2ea3f8000eb7f55ad7ef9a1323c9e7
+      sha256: b3df6779280e53d67d081417c62aa46cfb3121a5f9205ab019e5c701b3e3a41a
       url: "https://pub.dev"
     source: hosted
-    version: "4.9.2"
+    version: "4.10.0"
   slang_flutter:
     dependency: "direct main"
     description:
       name: slang_flutter
-      sha256: "5ecf841d6252c05ea335920ec299bb7edbb860eb793eebb4b40f68b9d148a571"
+      sha256: "7eff3f37dc3fcdc0f76d461540915b6431408f15df5b5d78d137c8ffc90bc60e"
       url: "https://pub.dev"
     source: hosted
-    version: "4.9.0"
+    version: "4.10.0"
   source_span:
     dependency: transitive
     description:

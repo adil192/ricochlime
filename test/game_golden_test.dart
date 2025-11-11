@@ -159,8 +159,7 @@ void _testGame({
         );
         await tester.pumpWidget(widget);
 
-        await tester.precacheImagesInWidgetTree();
-        await tester.loadFonts();
+        await tester.loadAssets();
 
         // Aim towards the middle left of the game area
         if (child is PlayPage) {
