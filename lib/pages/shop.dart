@@ -47,9 +47,7 @@ class ShopPage extends StatelessWidget {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: screenSize.height,
-          ),
+          constraints: BoxConstraints(maxWidth: screenSize.height),
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: CustomScrollView(
@@ -57,8 +55,10 @@ class ShopPage extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Text(t.shopPage.bulletColors,
-                        style: const TextStyle(fontSize: 24)),
+                    child: Text(
+                      t.shopPage.bulletColors,
+                      style: const TextStyle(fontSize: 24),
+                    ),
                   ),
                 ),
                 SliverGrid.builder(
@@ -75,7 +75,7 @@ class ShopPage extends StatelessWidget {
 
                     return ValueListenableBuilder(
                       valueListenable: stows.bulletColor,
-                      builder: (context, _, __) => _ShopItemTile(
+                      builder: (context, _, _) => _ShopItemTile(
                         selected: stows.bulletColor.value == item.color,
                         select: () => stows.bulletColor.value = item.color,
                         item: item,
@@ -86,8 +86,10 @@ class ShopPage extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Text(t.shopPage.bulletShapes,
-                        style: const TextStyle(fontSize: 24)),
+                    child: Text(
+                      t.shopPage.bulletShapes,
+                      style: const TextStyle(fontSize: 24),
+                    ),
                   ),
                 ),
                 SliverGrid.builder(
@@ -104,7 +106,7 @@ class ShopPage extends StatelessWidget {
 
                     return ValueListenableBuilder(
                       valueListenable: stows.bulletShape,
-                      builder: (context, _, __) => _ShopItemTile(
+                      builder: (context, _, _) => _ShopItemTile(
                         selected: stows.bulletShape.value == item.id,
                         select: () => stows.bulletShape.value = item.id,
                         item: item,
@@ -116,8 +118,10 @@ class ShopPage extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Text(t.shopPage.premium,
-                          style: const TextStyle(fontSize: 24)),
+                      child: Text(
+                        t.shopPage.premium,
+                        style: const TextStyle(fontSize: 24),
+                      ),
                     ),
                   ),
                   SliverList.list(
@@ -217,9 +221,9 @@ class _ShopItemTile extends StatelessWidget {
             ShopItemState.loading => null,
             ShopItemState.purchased => select,
             ShopItemState.unpurchased => () async {
-                final purchased = await item.purchase();
-                if (purchased) select();
-              },
+              final purchased = await item.purchase();
+              if (purchased) select();
+            },
           },
           type: switch (state) {
             ShopItemState.loading => NesButtonType.normal,
@@ -243,8 +247,10 @@ class _ShopItemTile extends StatelessWidget {
                       const CoinIcon(size: 32),
                       Text(
                         item.price.toString(),
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),

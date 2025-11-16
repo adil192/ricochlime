@@ -34,49 +34,55 @@ abstract class ShopItems {
     BulletShapeShopItem(
       id: 'bulletShapeCircle',
       spriteBuilder: () => Sprite(
-          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(0, 0),
-          srcSize: Vector2(16, 16)),
+        RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+        srcPosition: Vector2(0, 0),
+        srcSize: Vector2(16, 16),
+      ),
       price: -1,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeArrow',
       spriteBuilder: () => Sprite(
-          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(18, 0),
-          srcSize: Vector2(12, 16)),
+        RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+        srcPosition: Vector2(18, 0),
+        srcSize: Vector2(12, 16),
+      ),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeShuriken',
       spriteBuilder: () => Sprite(
-          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(32, 0),
-          srcSize: Vector2(16, 16)),
+        RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+        srcPosition: Vector2(32, 0),
+        srcSize: Vector2(16, 16),
+      ),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeDonut',
       spriteBuilder: () => Sprite(
-          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(0, 16),
-          srcSize: Vector2(16, 16)),
+        RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+        srcPosition: Vector2(0, 16),
+        srcSize: Vector2(16, 16),
+      ),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeIntricate',
       spriteBuilder: () => Sprite(
-          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(16, 16),
-          srcSize: Vector2(16, 16)),
+        RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+        srcPosition: Vector2(16, 16),
+        srcSize: Vector2(16, 16),
+      ),
       price: 1000,
     ),
     BulletShapeShopItem(
       id: 'bulletShapeDiamond',
       spriteBuilder: () => Sprite(
-          RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
-          srcPosition: Vector2(32, 16),
-          srcSize: Vector2(16, 16)),
+        RicochlimeGame.instance.images.fromCache('bullet_shapes.png'),
+        srcPosition: Vector2(32, 16),
+        srcSize: Vector2(16, 16),
+      ),
       price: 1000,
     ),
     BulletShapeShopItem(
@@ -99,16 +105,11 @@ abstract class ShopItems {
     ),
   ]);
 
-  static Future<void> preloadSprites({
-    required RicochlimeGame game,
-  }) {
+  static Future<void> preloadSprites({required RicochlimeGame game}) {
     return game.images.load('bullet_shapes.png');
   }
 
-  static final allItems = [
-    ...bulletColors,
-    ...bulletShapes,
-  ];
+  static final allItems = [...bulletColors, ...bulletShapes];
 
   static BulletShapeShopItem? getBulletShape(String id) =>
       bulletShapes.where((item) => item.id == id).firstOrNull;
@@ -117,10 +118,7 @@ abstract class ShopItems {
 }
 
 sealed class ShopItem {
-  ShopItem({
-    required this.id,
-    required this.price,
-  }) {
+  ShopItem({required this.id, required this.price}) {
     _loadState();
   }
 
@@ -143,14 +141,13 @@ sealed class ShopItem {
 
     final prefs = await _sharedPreferences;
     final purchased = prefs.getBool(prefsKey) ?? false;
-    state.value =
-        purchased ? ShopItemState.purchased : ShopItemState.unpurchased;
+    state.value = purchased
+        ? ShopItemState.purchased
+        : ShopItemState.unpurchased;
   }
 
   /// Returns `true` if the item has been purchased.
-  Future<bool> purchase({
-    bool noCost = false,
-  }) async {
+  Future<bool> purchase({bool noCost = false}) async {
     if (state.value == ShopItemState.purchased) return true;
     if (!noCost && stows.coins.value < price) return false;
 
@@ -163,12 +160,8 @@ sealed class ShopItem {
 }
 
 class BulletColorShopItem extends ShopItem {
-  BulletColorShopItem({
-    required this.color,
-    required super.price,
-  }) : super(
-          id: 'bullet${color.toARGB32().toRadixString(16)}',
-        );
+  BulletColorShopItem({required this.color, required super.price})
+    : super(id: 'bullet${color.toARGB32().toRadixString(16)}');
 
   final Color color;
 
@@ -192,17 +185,12 @@ class BulletShapeShopItem extends ShopItem {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: BulletPainter(Colors.white, sprite),
-    );
+    return CustomPaint(painter: BulletPainter(Colors.white, sprite));
   }
 }
 
 class BulletPainter extends CustomPainter {
-  const BulletPainter(
-    this.color,
-    this.sprite,
-  );
+  const BulletPainter(this.color, this.sprite);
 
   final Color color;
   final Sprite sprite;
@@ -223,8 +211,4 @@ class BulletPainter extends CustomPainter {
       oldDelegate.color != color || oldDelegate.sprite != sprite;
 }
 
-enum ShopItemState {
-  loading,
-  purchased,
-  unpurchased,
-}
+enum ShopItemState { loading, purchased, unpurchased }

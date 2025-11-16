@@ -9,8 +9,11 @@ final stows = Stows();
 
 @visibleForTesting
 class Stows {
-  final currentGame = PlainStow.json('currentGame', null as GameData?,
-      fromJson: (json) => GameData.fromJson(json as Map<String, dynamic>));
+  final currentGame = PlainStow.json(
+    'currentGame',
+    null as GameData?,
+    fromJson: (json) => GameData.fromJson(json as Map<String, dynamic>),
+  );
   final highScore = PlainStow('highScore', 0);
 
   final hyperlegibleFont = PlainStow('hyperlegibleFont', false);
@@ -24,8 +27,10 @@ class Stows {
 
   final coins = PlainStow('coins', 0);
   final bulletColor = PlainStow(
-      'bulletColor', ShopItems.bulletColors.first.color,
-      codec: ColorCodec());
+    'bulletColor',
+    ShopItems.bulletColors.first.color,
+    codec: ColorCodec(),
+  );
   final bulletShape = PlainStow('bulletShape', ShopItems.bulletShapes.first.id);
 
   final maxFps = PlainStow('maxFps', -1);

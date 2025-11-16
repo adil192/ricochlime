@@ -10,8 +10,7 @@ import 'package:stow_plain/stow_plain.dart';
 
 enum RicochlimeProduct {
   buy1000Coins('buy_1000_coins', consumable: true),
-  buy5000Coins('buy_5000_coins', consumable: true),
-  ;
+  buy5000Coins('buy_5000_coins', consumable: true);
 
   const RicochlimeProduct(this.id, {required this.consumable});
 
@@ -37,13 +36,13 @@ enum RicochlimeProduct {
   static Map<RicochlimeProduct, PlainStow<IAPState>>? _states;
   @visibleForTesting
   static void init() => _states ??= {
-        for (final product in values)
-          product: PlainStow(
-            'iap_${product.id}_state',
-            IAPState.unpurchased,
-            codec: IAPState.codec,
-          ),
-      };
+    for (final product in values)
+      product: PlainStow(
+        'iap_${product.id}_state',
+        IAPState.unpurchased,
+        codec: IAPState.codec,
+      ),
+  };
 }
 
 abstract final class RicochlimeIAP {
@@ -63,11 +62,14 @@ abstract final class RicochlimeIAP {
     if (!inAppPurchasesSupported) return;
 
     unawaited(_subscription?.cancel());
-    _subscription =
-        InAppPurchase.instance.purchaseStream.listen(_onData, onDone: _onDone);
+    _subscription = InAppPurchase.instance.purchaseStream.listen(
+      _onData,
+      onDone: _onDone,
+    );
 
-    final response = await InAppPurchase.instance
-        .queryProductDetails(RicochlimeProduct.allIds);
+    final response = await InAppPurchase.instance.queryProductDetails(
+      RicochlimeProduct.allIds,
+    );
     if (response.notFoundIDs.isNotEmpty) {
       _log.warning('Some IAPs not found: ${response.notFoundIDs}');
     }
@@ -126,8 +128,10 @@ abstract final class RicochlimeIAP {
   }
 
   static void _deliverProduct(PurchaseDetails purchaseDetails) {
-    assert(purchaseDetails.status == PurchaseStatus.purchased ||
-        purchaseDetails.status == PurchaseStatus.restored);
+    assert(
+      purchaseDetails.status == PurchaseStatus.purchased ||
+          purchaseDetails.status == PurchaseStatus.restored,
+    );
 
     final product = RicochlimeProduct.fromId(purchaseDetails.productID);
     if (product == null) {
@@ -138,8 +142,10 @@ abstract final class RicochlimeIAP {
     if (product.consumable &&
         purchaseDetails.status == PurchaseStatus.restored) {
       // Don't restore consumable purchases (they've already been consumed)
-      _log.warning('Attempted to restore consumable purchase: '
-          '${purchaseDetails.productID}');
+      _log.warning(
+        'Attempted to restore consumable purchase: '
+        '${purchaseDetails.productID}',
+      );
       return;
     }
 

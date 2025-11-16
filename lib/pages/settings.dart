@@ -8,17 +8,12 @@ import 'package:ricochlime/utils/stows.dart';
 import 'package:ricochlime/utils/version.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({
-    super.key,
-  });
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    const listTilePadding = EdgeInsets.symmetric(
-      horizontal: 16,
-      vertical: 4,
-    );
+    const listTilePadding = EdgeInsets.symmetric(horizontal: 16, vertical: 4);
     const subtitlePadding = EdgeInsets.only(
       left: 16,
       right: 16,
@@ -69,9 +64,7 @@ class SettingsPage extends StatelessWidget {
                 shape: listTileShape,
                 contentPadding: listTileContentPadding,
                 title: Text(t.settingsPage.bgmVolume),
-                leading: NesIcon(
-                  iconData: NesIcons.musicNote,
-                ),
+                leading: NesIcon(iconData: NesIcons.musicNote),
                 trailing: SizedBox(
                   width: 200,
                   child: ListenableBuilder(
@@ -101,9 +94,7 @@ class SettingsPage extends StatelessWidget {
                   return MergeSemantics(
                     child: ListTile(
                       title: child,
-                      leading: NesIcon(
-                        iconData: NesIcons.delete,
-                      ),
+                      leading: NesIcon(iconData: NesIcons.delete),
                       tileColor: listTileColor,
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
@@ -165,9 +156,7 @@ class SettingsPage extends StatelessWidget {
                 shape: listTileShape,
                 contentPadding: listTileContentPadding,
                 title: Text(t.settingsPage.maxFps),
-                leading: NesIcon(
-                  iconData: NesIcons.camera,
-                ),
+                leading: NesIcon(iconData: NesIcons.camera),
                 trailing: ValueListenableBuilder(
                   valueListenable: stows.maxFps,
                   builder: (context, maxFps, _) {
@@ -249,9 +238,7 @@ class SettingsPage extends StatelessWidget {
                   return MergeSemantics(
                     child: ListTile(
                       title: child,
-                      leading: NesIcon(
-                        iconData: NesIcons.openEye,
-                      ),
+                      leading: NesIcon(iconData: NesIcons.openEye),
                       tileColor: listTileColor,
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
@@ -282,9 +269,7 @@ class SettingsPage extends StatelessWidget {
                   return MergeSemantics(
                     child: ListTile(
                       title: child,
-                      leading: NesIcon(
-                        iconData: NesIcons.energy,
-                      ),
+                      leading: NesIcon(iconData: NesIcons.energy),
                       tileColor: listTileColor,
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
@@ -315,9 +300,7 @@ class SettingsPage extends StatelessWidget {
                   return MergeSemantics(
                     child: ListTile(
                       title: child,
-                      leading: NesIcon(
-                        iconData: NesIcons.zoomIn,
-                      ),
+                      leading: NesIcon(iconData: NesIcons.zoomIn),
                       tileColor: listTileColor,
                       shape: listTileShape,
                       contentPadding: listTileContentPadding,
@@ -372,9 +355,7 @@ class SettingsPage extends StatelessWidget {
                 shape: listTileShape,
                 contentPadding: listTileContentPadding,
                 title: Text(t.settingsPage.appInfo),
-                leading: NesIcon(
-                  iconData: NesIcons.zoomIn,
-                ),
+                leading: NesIcon(iconData: NesIcons.zoomIn),
               ),
             ),
           ),

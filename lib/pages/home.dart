@@ -40,9 +40,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Text(
                     t.appName,
-                    style: const TextStyle(
-                      fontSize: kToolbarHeight,
-                    ),
+                    style: const TextStyle(fontSize: kToolbarHeight),
                   ),
                   Row(
                     children: [
@@ -53,7 +51,8 @@ class HomePage extends StatelessWidget {
                             lastKnownOnVolume = stows.bgmVolume.value;
                           }
                           return NesTooltip(
-                            message: '${t.settingsPage.bgmVolume}: '
+                            message:
+                                '${t.settingsPage.bgmVolume}: '
                                 '${stows.bgmVolume.value * 100 ~/ 1}%',
                             child: Opacity(
                               opacity: stows.bgmVolume.value <= 0.05 ? 0.25 : 1,
@@ -65,8 +64,8 @@ class HomePage extends StatelessWidget {
                           onPress: () {
                             stows.bgmVolume.value =
                                 stows.bgmVolume.value <= 0.05
-                                    ? lastKnownOnVolume
-                                    : 0;
+                                ? lastKnownOnVolume
+                                : 0;
                           },
                           size: const Size.square(32),
                           icon: NesIcons.musicNote,
@@ -84,9 +83,11 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 32),
                   _HomePageButton(
                     icon: NesIcons.market,
-                    shouldAnimateIcon: () => ShopItems.allItems.any((item) =>
-                        item.state.value == ShopItemState.unpurchased &&
-                        item.price <= stows.coins.value),
+                    shouldAnimateIcon: () => ShopItems.allItems.any(
+                      (item) =>
+                          item.state.value == ShopItemState.unpurchased &&
+                          item.price <= stows.coins.value,
+                    ),
                     text: t.homePage.shopButton,
                     openBuilder: (_) => const ShopPage(),
                   ),
@@ -134,13 +135,12 @@ class _HomePageButton<T> extends StatefulWidget {
 
 class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
   void onPressed() {
-    final route = (!stows.stylizedPageTransitions.value ||
+    final route =
+        (!stows.stylizedPageTransitions.value ||
             MediaQuery.disableAnimationsOf(context))
-        ? MaterialPageRoute<void>(
-            builder: widget.openBuilder,
-          )
+        ? MaterialPageRoute<void>(builder: widget.openBuilder)
         : NesVerticalCloseTransition.route<void>(
-            pageBuilder: (context, _, __) => widget.openBuilder(context),
+            pageBuilder: (context, _, _) => widget.openBuilder(context),
             duration: const Duration(milliseconds: 500),
           );
     Navigator.of(context).push(route).then((_) {
@@ -165,12 +165,7 @@ class _HomePageButtonState<T> extends State<_HomePageButton<T>> {
             else
               NesIcon(iconData: widget.icon),
             const SizedBox(width: 16),
-            Text(
-              widget.text,
-              style: const TextStyle(
-                fontSize: 32,
-              ),
-            ),
+            Text(widget.text, style: const TextStyle(fontSize: 32)),
           ],
         ),
       ),

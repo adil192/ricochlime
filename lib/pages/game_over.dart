@@ -7,11 +7,7 @@ import 'package:ricochlime/nes/dialog_button.dart';
 import 'package:ricochlime/utils/stows.dart';
 
 class GameOverDialog extends StatelessWidget {
-  const GameOverDialog({
-    super.key,
-    required this.score,
-    required this.game,
-  });
+  const GameOverDialog({super.key, required this.score, required this.game});
 
   final int score;
   final RicochlimeGame game;
@@ -28,9 +24,7 @@ class GameOverDialog extends StatelessWidget {
             children: [
               Text(
                 t.gameOverPage.title,
-                style: const TextStyle(
-                  fontSize: kToolbarHeight,
-                ),
+                style: const TextStyle(fontSize: kToolbarHeight),
               ),
               const SizedBox(height: 32),
               SizedBox(
@@ -50,8 +44,9 @@ class GameOverDialog extends StatelessWidget {
                             style: TextStyle(
                               decoration: TextDecoration.lineThrough,
                               decorationThickness: kToolbarHeight / 20,
-                              decorationColor:
-                                  colorScheme.onSurface.withValues(alpha: 0.6),
+                              decorationColor: colorScheme.onSurface.withValues(
+                                alpha: 0.6,
+                              ),
                             ),
                             text: ' ${stows.highScore.value} ',
                           ),
@@ -65,10 +60,8 @@ class GameOverDialog extends StatelessWidget {
                         )
                       else
                         TextSpan(
-                          text: t.gameOverPage.highScoreNotBeaten(
-                            p: score,
-                          ),
-                        )
+                          text: t.gameOverPage.highScoreNotBeaten(p: score),
+                        ),
                     ],
                   ),
                 ),
@@ -84,9 +77,9 @@ class GameOverDialog extends StatelessWidget {
                             if (stows.coins.value < 100) return;
                             stows.coins.value -= 100;
                             stows.totalGamesContinued.value++;
-                            Navigator.of(context).pop<GameOverAction>(
-                              GameOverAction.continueGame,
-                            );
+                            Navigator.of(
+                              context,
+                            ).pop<GameOverAction>(GameOverAction.continueGame);
                           },
                     type: NesButtonType.primary,
                     icon: icon,
@@ -99,9 +92,9 @@ class GameOverDialog extends StatelessWidget {
               const SizedBox(height: 32),
               DialogButton(
                 onPressed: () {
-                  Navigator.of(context).pop<GameOverAction>(
-                    GameOverAction.restartGame,
-                  );
+                  Navigator.of(
+                    context,
+                  ).pop<GameOverAction>(GameOverAction.restartGame);
                 },
                 type: NesButtonType.primary,
                 icon: NesIcon(iconData: NesIcons.redo),
@@ -127,8 +120,4 @@ class GameOverDialog extends StatelessWidget {
   }
 }
 
-enum GameOverAction {
-  continueGame,
-  restartGame,
-  nothingYet,
-}
+enum GameOverAction { continueGame, restartGame, nothingYet }

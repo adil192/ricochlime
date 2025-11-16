@@ -62,8 +62,10 @@ class AimGuide extends PositionComponent with HasGameReference<RicochlimeGame> {
     final numDotsTotal = (aimDetails.aimLength * _maxDots).ceil();
 
     final int numDotsBeforeReflection;
-    final numDotsBeforeReflectionUnrounded =
-        min(numDotsTotal, reflectionDist / _dotInterval);
+    final numDotsBeforeReflectionUnrounded = min(
+      numDotsTotal,
+      reflectionDist / _dotInterval,
+    );
     if ((numDotsBeforeReflectionUnrounded - lastNumDotsBeforeReflection).abs() <
         0.5) {
       numDotsBeforeReflection = lastNumDotsBeforeReflection;

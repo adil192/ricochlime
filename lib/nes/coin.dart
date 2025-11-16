@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 
 class CoinIcon extends StatelessWidget {
-  const CoinIcon({
-    super.key,
-    required this.size,
-  });
+  const CoinIcon({super.key, required this.size});
 
   final double size;
 

@@ -7,8 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   group('New row generation', () {
-    test(
-        'At least ${RicochlimeGame.minMonstersInRow} and '
+    test('At least ${RicochlimeGame.minMonstersInRow} and '
         'at most ${Monster.monstersPerRow} monsters are generated', () async {
       TestWidgetsFlutterBinding.ensureInitialized();
       SharedPreferences.setMockInitialValues({});
@@ -18,13 +17,12 @@ void main() {
       expect(RicochlimeGame.minMonstersInRow, lessThan(Monster.monstersPerRow));
 
       for (var t = 0; t < 100; ++t) {
-        final row = RicochlimeGame.createNewRow(
-          random: random,
-          monsterHp: 1,
-        );
+        final row = RicochlimeGame.createNewRow(random: random, monsterHp: 1);
         final monsters = row.whereType<Monster>();
-        expect(monsters.length,
-            greaterThanOrEqualTo(RicochlimeGame.minMonstersInRow));
+        expect(
+          monsters.length,
+          greaterThanOrEqualTo(RicochlimeGame.minMonstersInRow),
+        );
         expect(monsters.length, lessThanOrEqualTo(Monster.monstersPerRow));
       }
     });

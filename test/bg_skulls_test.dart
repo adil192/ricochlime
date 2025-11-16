@@ -16,7 +16,8 @@ void main() {
 
     if (!RicochlimeGame.instance.isLoaded) {
       RicochlimeGame.instance.onGameResize(
-          Vector2(RicochlimeGame.expectedWidth, RicochlimeGame.expectedHeight));
+        Vector2(RicochlimeGame.expectedWidth, RicochlimeGame.expectedHeight),
+      );
       // ignore: invalid_use_of_internal_member
       await RicochlimeGame.instance.load();
     }

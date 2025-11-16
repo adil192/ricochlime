@@ -118,8 +118,9 @@ class _PlayPageState extends State<PlayPage> {
                 onPress: () => Navigator.of(context).pop(),
                 icon: NesIcons.leftArrowIndicator,
                 primaryColor: Colors.white.withValues(alpha: 0.9),
-                secondaryColor:
-                    RicochlimePalette.grassColorDark.withValues(alpha: 0.9),
+                secondaryColor: RicochlimePalette.grassColorDark.withValues(
+                  alpha: 0.9,
+                ),
                 size: const Size.square(20),
               ),
               const SizedBox(width: 16),
@@ -139,8 +140,9 @@ class _PlayPageState extends State<PlayPage> {
                   ),
                   icon: NesIcons.redo,
                   primaryColor: Colors.white.withValues(alpha: 0.9),
-                  secondaryColor:
-                      RicochlimePalette.grassColorDark.withValues(alpha: 0.9),
+                  secondaryColor: RicochlimePalette.grassColorDark.withValues(
+                    alpha: 0.9,
+                  ),
                   size: const Size.square(20),
                 ),
               ),
@@ -240,16 +242,18 @@ class _PlayPageState extends State<PlayPage> {
                               valueListenable: RicochlimeGame.timeDilation,
                               builder: (context, timeDilation, _) =>
                                   AnimatedOpacity(
-                                opacity: timeDilation == 1.0 ? 0.0 : 1.0,
-                                duration: const Duration(milliseconds: 200),
-                                child: Text(
-                                  '${timeDilation.toStringAsFixed(1)}x',
-                                  style: TextStyle(
-                                    color: Colors.white.withValues(alpha: 0.9),
-                                    fontSize: 32,
+                                    opacity: timeDilation == 1.0 ? 0.0 : 1.0,
+                                    duration: const Duration(milliseconds: 200),
+                                    child: Text(
+                                      '${timeDilation.toStringAsFixed(1)}x',
+                                      style: TextStyle(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.9,
+                                        ),
+                                        fontSize: 32,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
                             ),
                           ),
                           if (stows.showUndoButton.value)
@@ -275,8 +279,9 @@ class _PlayPageState extends State<PlayPage> {
                                     stows.totalMovesUndone.value++;
                                   },
                                   icon: NesIcons.delete,
-                                  primaryColor:
-                                      Colors.white.withValues(alpha: 0.9),
+                                  primaryColor: Colors.white.withValues(
+                                    alpha: 0.9,
+                                  ),
                                   secondaryColor: RicochlimePalette
                                       .grassColorDark
                                       .withValues(alpha: 0.9),

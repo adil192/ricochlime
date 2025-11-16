@@ -76,9 +76,7 @@ void main() {
     RicochlimeGame.reproducibleGoldenMode = true;
     setUp(() async {
       RicochlimeGame.instance.random = Random(123);
-      await Future.wait([
-        RicochlimeGame.instance.preloadSprites.future,
-      ]);
+      await Future.wait([RicochlimeGame.instance.preloadSprites.future]);
       stows.coins.value = 493;
       stows.highScore.value = 62;
     });
@@ -163,13 +161,17 @@ void _testGame({
 
         // Aim towards the middle left of the game area
         if (child is PlayPage) {
-          RicochlimeGame.instance.onPanUpdate(DragUpdateInfo.fromDetails(
-            RicochlimeGame.instance,
-            DragUpdateDetails(
-              globalPosition:
-                  const Offset(0, RicochlimeGame.expectedHeight * 0.39),
+          RicochlimeGame.instance.onPanUpdate(
+            DragUpdateInfo.fromDetails(
+              RicochlimeGame.instance,
+              DragUpdateDetails(
+                globalPosition: const Offset(
+                  0,
+                  RicochlimeGame.expectedHeight * 0.39,
+                ),
+              ),
             ),
-          ));
+          );
         }
 
         await tester.pumpFrames(widget, const Duration(seconds: 3));
@@ -181,9 +183,9 @@ void _testGame({
 
 extension _GoldenScreenshotDevices on GoldenScreenshotDevices {
   bool get enableIAPs => switch (this) {
-        GoldenScreenshotDevices.macbook => true,
-        GoldenScreenshotDevices.iphone => true,
-        GoldenScreenshotDevices.ipad => true,
-        _ => false,
-      };
+    GoldenScreenshotDevices.macbook => true,
+    GoldenScreenshotDevices.iphone => true,
+    GoldenScreenshotDevices.ipad => true,
+    _ => false,
+  };
 }

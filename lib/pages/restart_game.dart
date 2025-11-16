@@ -4,10 +4,7 @@ import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/dialog_button.dart';
 
 class RestartGameDialog extends StatelessWidget {
-  const RestartGameDialog({
-    super.key,
-    required this.restartGame,
-  });
+  const RestartGameDialog({super.key, required this.restartGame});
 
   final VoidCallback restartGame;
 
@@ -21,9 +18,7 @@ class RestartGameDialog extends StatelessWidget {
         children: [
           Text(
             t.restartGameDialog.title,
-            style: const TextStyle(
-              fontSize: kToolbarHeight,
-            ),
+            style: const TextStyle(fontSize: kToolbarHeight),
           ),
           const SizedBox(height: 8),
           SizedBox(

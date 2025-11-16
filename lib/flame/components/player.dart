@@ -1,19 +1,16 @@
 import 'package:flame/components.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
-enum PlayerState {
-  idle,
-  attack,
-}
+enum PlayerState { idle, attack }
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameReference<RicochlimeGame> {
   Player()
-      : super(
-          size: Vector2(staticWidth, staticHeight),
-          anchor: Anchor.center,
-          priority: 3,
-        ) {
+    : super(
+        size: Vector2(staticWidth, staticHeight),
+        anchor: Anchor.center,
+        priority: 3,
+      ) {
     position = Vector2(
       RicochlimeGame.expectedWidth * 0.5,
       RicochlimeGame.expectedHeight - staticHeight,
@@ -41,9 +38,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     animationTickers![PlayerState.attack]!.reset();
   }
 
-  static Future<void> preloadSprites({
-    required RicochlimeGame game,
-  }) {
+  static Future<void> preloadSprites({required RicochlimeGame game}) {
     return game.images.load('character_subset.png');
   }
 

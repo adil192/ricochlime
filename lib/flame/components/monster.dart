@@ -45,16 +45,13 @@ class Monster extends BodyComponent with ContactCallbacks {
     required this.maxHp,
     int? hp,
     KillReward? killReward,
-  })  : _hp = hp ?? maxHp,
-        super(
-          paint: Paint()..color = RicochlimePalette.monsterColor,
-          priority: getPriorityFromPosition(initialPosition),
-          renderBody: false,
-          bodyDef: BodyDef(
-            position: initialPosition,
-            fixedRotation: true,
-          ),
-        ) {
+  }) : _hp = hp ?? maxHp,
+       super(
+         paint: Paint()..color = RicochlimePalette.monsterColor,
+         priority: getPriorityFromPosition(initialPosition),
+         renderBody: false,
+         bodyDef: BodyDef(position: initialPosition, fixedRotation: true),
+       ) {
     if (killReward != null) this.killReward = killReward;
 
     fixtureDefs = [
@@ -70,10 +67,7 @@ class Monster extends BodyComponent with ContactCallbacks {
 
   /// Creates a Monster from JSON data.
   factory Monster.fromJson(Map<String, dynamic> json) {
-    final initialPosition = Vector2(
-      json['px'] as double,
-      json['py'] as double,
-    );
+    final initialPosition = Vector2(json['px'] as double, json['py'] as double);
     final maxHp = json['maxHp'] as int;
     final hp = json['hp'] as int? ?? maxHp;
 
@@ -96,12 +90,12 @@ class Monster extends BodyComponent with ContactCallbacks {
 
   /// Converts the monster's data to a JSON map.
   Map<String, dynamic> toJson() => {
-        'px': (_movement?.targetPosition.x ?? position.x).roundTo1Dp(),
-        'py': (_movement?.targetPosition.y ?? position.y).roundTo1Dp(),
-        'maxHp': maxHp,
-        if (hp != maxHp) 'hp': hp,
-        if (killReward != KillReward.none) 'killReward': killReward.index,
-      };
+    'px': (_movement?.targetPosition.x ?? position.x).roundTo1Dp(),
+    'py': (_movement?.targetPosition.y ?? position.y).roundTo1Dp(),
+    'maxHp': maxHp,
+    if (hp != maxHp) 'hp': hp,
+    if (killReward != KillReward.none) 'killReward': killReward.index,
+  };
 
   /// How many monsters there are in each row.
   static const monstersPerRow = 8;
@@ -247,20 +241,24 @@ class Monster extends BodyComponent with ContactCallbacks {
   /// Moves a new monster in from the top of the screen
   void moveInFromTop(Duration duration) {
     assert(position.y <= topGap, 'Monster must be at the top of the screen');
-    _startMovement(_MonsterMovement(
-      startingPosition: position.clone()..y -= moveDownHeight,
-      targetPosition: position.clone(),
-      totalSeconds: duration.inMilliseconds / 1000,
-    ));
+    _startMovement(
+      _MonsterMovement(
+        startingPosition: position.clone()..y -= moveDownHeight,
+        targetPosition: position.clone(),
+        totalSeconds: duration.inMilliseconds / 1000,
+      ),
+    );
   }
 
   /// Moves the monster down to the next row
   void moveDown(Duration duration) {
-    _startMovement(_MonsterMovement(
-      startingPosition: body.position.clone(),
-      targetPosition: body.position + Vector2(0, moveDownHeight),
-      totalSeconds: duration.inMilliseconds / 1000,
-    ));
+    _startMovement(
+      _MonsterMovement(
+        startingPosition: body.position.clone(),
+        targetPosition: body.position + Vector2(0, moveDownHeight),
+        totalSeconds: duration.inMilliseconds / 1000,
+      ),
+    );
   }
 
   void _startMovement(_MonsterMovement movement) {
@@ -287,9 +285,9 @@ class Monster extends BodyComponent with ContactCallbacks {
     body
       ..setType(BodyType.dynamic)
       ..linearVelocity.setValues(
-        (game as RicochlimeGame)
-            .random
-            .plusOrMinus(RicochlimeGame.expectedHeight * 0.03),
+        (game as RicochlimeGame).random.plusOrMinus(
+          RicochlimeGame.expectedHeight * 0.03,
+        ),
         RicochlimeGame.expectedHeight * 0.05,
       )
       ..angularVelocity =
@@ -351,12 +349,10 @@ class _MonsterMovement {
 class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
     with HasGameReference<RicochlimeGame> {
   MonsterAnimation._()
-      : super(
-          position: _relativePosition.clone(),
-          removeOnFinish: {
-            MonsterState.dead: true,
-          },
-        ) {
+    : super(
+        position: _relativePosition.clone(),
+        removeOnFinish: {MonsterState.dead: true},
+      ) {
     animations = getAnimations(monsterImagePath: monsterImagePath);
   }
 
@@ -390,9 +386,7 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
   }
 
   /// Preloads the sprites for the monster.
-  static Future<void> preloadSprites({
-    required RicochlimeGame game,
-  }) {
+  static Future<void> preloadSprites({required RicochlimeGame game}) {
     return Future.wait([
       game.images.load('log_normal.png'),
       game.images.load('log_green.png'),
@@ -412,8 +406,9 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
     if (animations == null) return;
 
     // Swap the sprite in existing animations
-    final monsterImage =
-        RicochlimeGame.instance.images.fromCache(monsterImagePath);
+    final monsterImage = RicochlimeGame.instance.images.fromCache(
+      monsterImagePath,
+    );
     for (final animation in animations.values) {
       for (final frame in animation.frames) {
         frame.sprite.image = monsterImage;
@@ -425,8 +420,9 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
   static Map<MonsterState, SpriteAnimation> getAnimations({
     required String monsterImagePath,
   }) {
-    final monsterImage =
-        RicochlimeGame.instance.images.fromCache(monsterImagePath);
+    final monsterImage = RicochlimeGame.instance.images.fromCache(
+      monsterImagePath,
+    );
     return {
       MonsterState.idle: SpriteAnimation.fromFrameData(
         monsterImage,

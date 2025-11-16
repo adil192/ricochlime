@@ -13,8 +13,6 @@ abstract class RicochlimeIcons {
 
   /// An icon representing the aim guide with reflection disabled.
   static final aimGuideWithoutReflection = NesIconData(
-    MiniSprite.fromDataString(
-      '8,8;32,-1;1,1;9,-1;1,0;9,-1;1,0;9,-1;1,0;1,-1',
-    ),
+    MiniSprite.fromDataString('8,8;32,-1;1,1;9,-1;1,0;9,-1;1,0;9,-1;1,0;1,-1'),
   );
 }

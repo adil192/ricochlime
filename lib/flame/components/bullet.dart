@@ -9,11 +9,9 @@ import 'package:ricochlime/utils/shop_items.dart';
 import 'package:ricochlime/utils/stows.dart';
 
 class Bullet extends BodyComponent with ContactCallbacks {
-  Bullet({
-    required this.initialPosition,
-    required this.direction,
-  })  : assert(direction.y < 0),
-        super(renderBody: false);
+  Bullet({required this.initialPosition, required this.direction})
+    : assert(direction.y < 0),
+      super(renderBody: false);
 
   /// Radius of the bullet.
   static const radius = 2.0;
@@ -31,9 +29,10 @@ class Bullet extends BodyComponent with ContactCallbacks {
       shape,
       userData: this,
       restitution: 1,
-      filter: Filter() // don't collide with other bullets
-        ..categoryBits = 1 << 2
-        ..maskBits = 0xFFFF & ~(1 << 2),
+      filter:
+          Filter() // don't collide with other bullets
+            ..categoryBits = 1 << 2
+            ..maskBits = 0xFFFF & ~(1 << 2),
     );
 
     final velocity = direction * speed;
@@ -69,9 +68,10 @@ class Bullet extends BodyComponent with ContactCallbacks {
     Sprite? bulletShape,
   }) {
     bulletColor ??= stows.bulletColor.value;
-    bulletShape ??= (ShopItems.getBulletShape(stows.bulletShape.value) ??
-            ShopItems.defaultBulletShape)
-        .sprite;
+    bulletShape ??=
+        (ShopItems.getBulletShape(stows.bulletShape.value) ??
+                ShopItems.defaultBulletShape)
+            .sprite;
 
     if (stows.biggerBullets.value) radius *= 2;
 
@@ -90,8 +90,10 @@ class Bullet extends BodyComponent with ContactCallbacks {
         size: shadowSize,
         overridePaint: Paint()
           ..color = Colors.black.withValues(alpha: opacity)
-          ..colorFilter =
-              const ColorFilter.mode(Colors.black, BlendMode.modulate),
+          ..colorFilter = const ColorFilter.mode(
+            Colors.black,
+            BlendMode.modulate,
+          ),
       )
       ..render(
         canvas,

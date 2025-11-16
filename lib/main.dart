@@ -24,9 +24,11 @@ Future<void> main() async {
     print('${record.level.name}: ${record.loggerName}: ${record.message}');
   });
 
-  unawaited(stows.bgmVolume
-      .waitUntilRead()
-      .then((_) => RicochlimeGame.instance.preloadBgMusic));
+  unawaited(
+    stows.bgmVolume.waitUntilRead().then(
+      (_) => RicochlimeGame.instance.preloadBgMusic,
+    ),
+  );
   _addLicenses();
   GoogleFonts.config.allowRuntimeFetching = false;
 
@@ -44,23 +46,21 @@ Future<void> main() async {
 
 void _addLicenses() {
   LicenseRegistry.addLicense(() async* {
-    yield LicenseEntryWithLineBreaks(
-      ['_gfx'],
-      await rootBundle.loadString('assets/images/LICENSE.md'),
-    );
-    yield LicenseEntryWithLineBreaks(
-      ['_ludum_dare_32_track_4'],
-      await rootBundle.loadString('assets/audio/bgm/LICENSE.txt'),
-    );
+    yield LicenseEntryWithLineBreaks([
+      '_gfx',
+    ], await rootBundle.loadString('assets/images/LICENSE.md'));
+    yield LicenseEntryWithLineBreaks([
+      '_ludum_dare_32_track_4',
+    ], await rootBundle.loadString('assets/audio/bgm/LICENSE.txt'));
     yield LicenseEntryWithLineBreaks(
       ['google_fonts'],
-      await rootBundle
-          .loadString('assets/google_fonts/Atkinson_Hyperlegible/OFL.txt'),
+      await rootBundle.loadString(
+        'assets/google_fonts/Atkinson_Hyperlegible/OFL.txt',
+      ),
     );
-    yield LicenseEntryWithLineBreaks(
-      ['google_fonts'],
-      await rootBundle.loadString('assets/google_fonts/Silkscreen/OFL.txt'),
-    );
+    yield LicenseEntryWithLineBreaks([
+      'google_fonts',
+    ], await rootBundle.loadString('assets/google_fonts/Silkscreen/OFL.txt'));
   });
 }
 

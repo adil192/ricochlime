@@ -37,7 +37,10 @@ String _nearestLocaleCode(String localeCode) {
 /// Translate the given tree of strings in place.
 /// Note that the tree can contain lists, maps, and strings.
 Future<void> translateTree(
-    String languageCode, YamlMap tree, List<String> pathOfKeys) async {
+  String languageCode,
+  YamlMap tree,
+  List<String> pathOfKeys,
+) async {
   // first translate all direct descendants that are strings
   for (final key in tree.keys) {
     if (key is! String) continue;
@@ -55,8 +58,14 @@ Future<void> translateTree(
     if (translated == null || translated == value) continue;
 
     try {
-      await Process.run(
-          'dart', ['run', 'slang', 'add', languageCode, pathToKey, translated]);
+      await Process.run('dart', [
+        'run',
+        'slang',
+        'add',
+        languageCode,
+        pathToKey,
+        translated,
+      ]);
     } catch (e) {
       print('    Adding translation failed: $e');
       errorOccurredInTranslatingTree = true;
@@ -86,7 +95,10 @@ Future<void> translateTree(
 /// Translates the given list of strings in place.
 /// Note that the list can contain lists, maps, and strings.
 Future<void> translateList(
-    String languageCode, YamlList list, List<String> pathOfKeys) async {
+  String languageCode,
+  YamlList list,
+  List<String> pathOfKeys,
+) async {
   // first translate all direct descendants that are strings
   for (int i = 0; i < list.length; ++i) {
     final pathToKey = [...pathOfKeys, i].join('.');
@@ -101,8 +113,14 @@ Future<void> translateList(
     if (translated == null || translated == value) continue;
 
     try {
-      await Process.run(
-          'dart', ['run', 'slang', 'add', languageCode, pathToKey, translated]);
+      await Process.run('dart', [
+        'run',
+        'slang',
+        'add',
+        languageCode,
+        pathToKey,
+        translated,
+      ]);
     } catch (e) {
       print('    Adding translation failed: $e');
       errorOccurredInTranslatingTree = true;
@@ -128,7 +146,10 @@ Future<void> translateList(
 }
 
 Future<String?> translateString(
-    SimplyTranslator translator, String languageCode, String english) async {
+  SimplyTranslator translator,
+  String languageCode,
+  String english,
+) async {
   print(
     '  Translating into $languageCode: '
     '${english.length > 20 ? '${english.substring(0, 20)}...' : english}',
@@ -137,8 +158,11 @@ Future<String?> translateString(
   String translatedText;
   try {
     translatedText = await translator
-        .translateSimply(english,
-            from: 'en', to: _nearestLocaleCode(languageCode))
+        .translateSimply(
+          english,
+          from: 'en',
+          to: _nearestLocaleCode(languageCode),
+        )
         .then((translation) => translation.translations.text)
         .timeout(const Duration(seconds: 10));
   } catch (e) {
@@ -190,9 +214,11 @@ void main() async {
 
     final useLibreEngine = random.nextBool();
     print(
-        'Using ${useLibreEngine ? 'Libre' : 'Google'} translation engine...\n');
-    translator =
-        SimplyTranslator(useLibreEngine ? EngineType.libre : EngineType.google);
+      'Using ${useLibreEngine ? 'Libre' : 'Google'} translation engine...\n',
+    );
+    translator = SimplyTranslator(
+      useLibreEngine ? EngineType.libre : EngineType.google,
+    );
 
     for (final languageCode in missingLanguageCodes) {
       print('Translating $languageCode...');
@@ -208,8 +234,9 @@ void main() async {
 
   // mark all newly translated paths as outdated
   // for a human to review
-  final pathsWithoutLanguageCode =
-      newlyTranslatedPaths.map((e) => e.substring(e.indexOf('/') + 1)).toSet();
+  final pathsWithoutLanguageCode = newlyTranslatedPaths
+      .map((e) => e.substring(e.indexOf('/') + 1))
+      .toSet();
   for (final path in pathsWithoutLanguageCode) {
     print('Marking $path as outdated...');
     await Process.run('dart', ['run', 'slang', 'outdated', path]);

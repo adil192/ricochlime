@@ -25,20 +25,11 @@ import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:ricochlime/utils/shop_items.dart';
 import 'package:ricochlime/utils/stows.dart';
 
-enum GameState {
-  idle,
-  shooting,
-  monstersMoving,
-  gameOver,
-}
+enum GameState { idle, shooting, monstersMoving, gameOver }
 
 class RicochlimeGame extends Forge2DGame
     with PanDetector, TapCallbacks, MouseMovementDetector, SingleGameInstance {
-  RicochlimeGame._()
-      : super(
-          gravity: Vector2.zero(),
-          zoom: 1,
-        ) {
+  RicochlimeGame._() : super(gravity: Vector2.zero(), zoom: 1) {
     /// Sets the maximum movement per time step to [Bullet.speed].
     /// This effectively sets the max time step to 1s,
     /// rather than the default value which is much lower.
@@ -97,10 +88,14 @@ class RicochlimeGame extends Forge2DGame
   Future<void> onLoad() async {
     await super.onLoad();
 
-    assert(size.x.round() == expectedWidth.round(),
-        'Expected width: $expectedWidth but got: ${size.x}');
-    assert(size.y.round() == expectedHeight.round(),
-        'Expected height: $expectedHeight but got: ${size.y}');
+    assert(
+      size.x.round() == expectedWidth.round(),
+      'Expected width: $expectedWidth but got: ${size.x}',
+    );
+    assert(
+      size.y.round() == expectedHeight.round(),
+      'Expected height: $expectedHeight but got: ${size.y}',
+    );
 
     _initBgMusic();
 
@@ -199,25 +194,23 @@ class RicochlimeGame extends Forge2DGame
     if (!FlameAudio.bgm.isPlaying) {
       FlameAudio.bgm.resume();
     }
-    return Timer.periodic(
-      Duration(milliseconds: totalMs ~/ steps),
-      (_) {
-        final newVolume = FlameAudio.bgm.audioPlayer.volume +
-            (targetVolume - startingVolume) / steps;
-        final finished = targetVolume > startingVolume
-            ? newVolume >= targetVolume
-            : newVolume <= targetVolume;
-        if (finished) {
-          _bgMusicFadeTimer?.cancel();
-          _bgMusicFadeTimer = null;
-          FlameAudio.bgm.audioPlayer.setVolume(targetVolume);
-          onFinished?.call();
-          log.info('Finished fading bgm in/out to $targetVolume');
-        } else {
-          FlameAudio.bgm.audioPlayer.setVolume(newVolume);
-        }
-      },
-    );
+    return Timer.periodic(Duration(milliseconds: totalMs ~/ steps), (_) {
+      final newVolume =
+          FlameAudio.bgm.audioPlayer.volume +
+          (targetVolume - startingVolume) / steps;
+      final finished = targetVolume > startingVolume
+          ? newVolume >= targetVolume
+          : newVolume <= targetVolume;
+      if (finished) {
+        _bgMusicFadeTimer?.cancel();
+        _bgMusicFadeTimer = null;
+        FlameAudio.bgm.audioPlayer.setVolume(targetVolume);
+        onFinished?.call();
+        log.info('Finished fading bgm in/out to $targetVolume');
+      } else {
+        FlameAudio.bgm.audioPlayer.setVolume(newVolume);
+      }
+    });
   }
 
   /// Imports the game state from [data], or resets the game if [data] is null.
@@ -390,8 +383,10 @@ class RicochlimeGame extends Forge2DGame
     if (!pointAndClickEnabled) return;
     aimGuide.lastMousePosition = info.eventPosition.widget;
     if (!inputAllowed) return;
-    aimGuide.aim(info.eventPosition.widget,
-        ignoreWhetherMouseIsBelowPlayer: true);
+    aimGuide.aim(
+      info.eventPosition.widget,
+      ignoreWhetherMouseIsBelowPlayer: true,
+    );
   }
 
   /// Whether to allow point-and-click input in addition to
@@ -473,10 +468,7 @@ class RicochlimeGame extends Forge2DGame
 
       // spawn new monsters at the top
       score.value++;
-      final row = createNewRow(
-        random: random,
-        monsterHp: score.value,
-      );
+      final row = createNewRow(random: random, monsterHp: score.value);
       row.nonNulls.forEach(add);
 
       // wait until all monsters are loaded
@@ -517,9 +509,9 @@ class RicochlimeGame extends Forge2DGame
 
   bool isGameOver() {
     final threshold = player.bottomY - Monster.staticHeight * 2;
-    return children
-        .whereType<Monster>()
-        .any((monster) => monster.position.y >= threshold);
+    return children.whereType<Monster>().any(
+      (monster) => monster.position.y >= threshold,
+    );
   }
 
   Future<void> gameOver() async {
@@ -556,13 +548,17 @@ class RicochlimeGame extends Forge2DGame
           5,
         );
         try {
-          for (int numRowsToRemove = 0;
-              numRowsToRemove < totalRowsToRemove;
-              ++numRowsToRemove) {
+          for (
+            int numRowsToRemove = 0;
+            numRowsToRemove < totalRowsToRemove;
+            ++numRowsToRemove
+          ) {
             final threshold =
                 player.bottomY - numRowsToRemove * Monster.staticHeight;
-            log.info('Removing row $numRowsToRemove out of $totalRowsToRemove '
-                '(monsters with y > $threshold)');
+            log.info(
+              'Removing row $numRowsToRemove out of $totalRowsToRemove '
+              '(monsters with y > $threshold)',
+            );
 
             bool removedAnyMonsters = false;
             for (final monster in children.whereType<Monster>()) {

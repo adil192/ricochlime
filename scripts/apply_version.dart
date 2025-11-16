@@ -83,8 +83,10 @@ void parseArgs(List<String> args) {
     exit(ErrorCodes.noVersionSpecified.code);
   }
 
-  print('Bumping version from ${oldVersion.buildName} '
-      'to ${newVersion.buildName}');
+  print(
+    'Bumping version from ${oldVersion.buildName} '
+    'to ${newVersion.buildName}',
+  );
 }
 
 Future<void> findEditor() async {
@@ -123,10 +125,12 @@ Future<void> updateAllFiles() async {
   // update windows runner
   await File('windows/runner/Runner.rc').replace({
     // e.g. #define VERSION_AS_NUMBER 0,5,5,0
-    RegExp(r'#define VERSION_AS_NUMBER .+'): '#define VERSION_AS_NUMBER '
+    RegExp(r'#define VERSION_AS_NUMBER .+'):
+        '#define VERSION_AS_NUMBER '
         '${newVersion.buildNameWithCommas},${newVersion.revision}',
     // e.g. #define VERSION_AS_STRING "0.5.5.0"
-    RegExp(r'#define VERSION_AS_STRING .+'): '#define VERSION_AS_STRING '
+    RegExp(r'#define VERSION_AS_STRING .+'):
+        '#define VERSION_AS_STRING '
         '"${newVersion.buildName}.${newVersion.revision}"',
   });
 
@@ -150,16 +154,19 @@ Future<void> updateAllFiles() async {
   // update download link in README
   await File('README.md').replace({
     // e.g. [download_windows]: https://github.com/adil192/ricochlime/releases/download/v0.11.0/RicochlimeInstaller_v0.11.0.exe
-    RegExp(r'\[download_windows\]: .+'):
-        '[download_windows]: https://github.com/adil192/ricochlime/releases/download/v${newVersion.buildName}/RicochlimeInstaller_v${newVersion.buildName}.exe',
+    RegExp(
+      r'\[download_windows\]: .+',
+    ): '[download_windows]: https://github.com/adil192/ricochlime/releases/download/v${newVersion.buildName}/RicochlimeInstaller_v${newVersion.buildName}.exe',
     // e.g. [download_appimage]: https://github.com/adil192/ricochlime/releases/download/v0.11.0/Ricochlime-0.11.0-x86_64.AppImage
-    RegExp(r'\[download_appimage\]: .+'):
-        '[download_appimage]: https://github.com/adil192/ricochlime/releases/download/v${newVersion.buildName}/Ricochlime-${newVersion.buildName}-x86_64.AppImage',
+    RegExp(
+      r'\[download_appimage\]: .+',
+    ): '[download_appimage]: https://github.com/adil192/ricochlime/releases/download/v${newVersion.buildName}/Ricochlime-${newVersion.buildName}-x86_64.AppImage',
   });
 
   // create metadata changelog
-  final changelogFile =
-      File('metadata/en-US/changelogs/${newVersion.buildNumber}.txt');
+  final changelogFile = File(
+    'metadata/en-US/changelogs/${newVersion.buildNumber}.txt',
+  );
   if (changelogFile.existsSync()) {
     print('Changelog file already exists');
   } else {
@@ -182,7 +189,8 @@ Future<void> updateAllFiles() async {
     }
     print('Adding a new <release> tag to flatpak file');
     final date = DateFormat('yyyy-MM-dd').format(DateTime.now().toUtc());
-    final releaseTag = '''
+    final releaseTag =
+        '''
         <release version="${newVersion.buildName}" date="$date">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v${newVersion.buildName}</url>
             <description>
@@ -207,9 +215,11 @@ Future<void> updateAllFiles() async {
   print('  - dart scripts/translate_changelogs.dart');
   print('Next steps:');
   print(
-      ' - Publish to the App Store: https://appstoreconnect.apple.com/apps/6459539993/appstore');
+    ' - Publish to the App Store: https://appstoreconnect.apple.com/apps/6459539993/appstore',
+  );
   print(
-      ' - Publish to the Amazon Appstore: https://developer.amazon.com/apps-and-games/console/app/list');
+    ' - Publish to the Amazon Appstore: https://developer.amazon.com/apps-and-games/console/app/list',
+  );
 
   // open changelog files in editor
   if (!quiet) {
@@ -220,16 +230,19 @@ Future<void> updateAllFiles() async {
 
 class _AppVersion {
   _AppVersion(this.major, this.minor, this.patch, [this.revision = 0])
-      : assert(major >= 0 && major < 100),
-        assert(minor >= 0 && minor < 100),
-        assert(patch >= 0 && patch < 100),
-        assert(revision >= 0 && revision < 10);
+    : assert(major >= 0 && major < 100),
+      assert(minor >= 0 && minor < 100),
+      assert(patch >= 0 && patch < 100),
+      assert(revision >= 0 && revision < 10);
 
   factory _AppVersion.fromName(String name) {
     final parts = name.split('.');
     assert(parts.length == 3);
     return _AppVersion(
-        int.parse(parts[0]), int.parse(parts[1]), int.parse(parts[2]));
+      int.parse(parts[0]),
+      int.parse(parts[1]),
+      int.parse(parts[2]),
+    );
   }
 
   factory _AppVersion.fromNumber(int number) {
@@ -257,8 +270,12 @@ class _AppVersion {
   _AppVersion bumpPatch() => _AppVersion(major, minor, patch + 1);
 
   _AppVersion copyWith({int? major, int? minor, int? patch, int? revision}) =>
-      _AppVersion(major ?? this.major, minor ?? this.minor, patch ?? this.patch,
-          revision ?? this.revision);
+      _AppVersion(
+        major ?? this.major,
+        minor ?? this.minor,
+        patch ?? this.patch,
+        revision ?? this.revision,
+      );
 
   @override
   String toString() => buildName;
@@ -302,8 +319,10 @@ extension on File {
     if (matches >= replacements.length) {
       print('Updated $path with all $matches replacements');
     } else {
-      print('Updated $path with $matches out of ${replacements.length} '
-          'replacements (${replacements.length - matches} missed)');
+      print(
+        'Updated $path with $matches out of ${replacements.length} '
+        'replacements (${replacements.length - matches} missed)',
+      );
     }
   }
 }

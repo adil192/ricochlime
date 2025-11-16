@@ -35,9 +35,7 @@ class DialogButton extends StatelessWidget {
             Text(
               text,
               softWrap: false,
-              style: const TextStyle(
-                fontSize: buttonSize,
-              ),
+              style: const TextStyle(fontSize: buttonSize),
             ),
           ],
         ),

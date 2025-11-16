@@ -70,10 +70,7 @@ class Background extends PositionComponent
       left = 0.8 * left + 0.2 * random.plusOrMinus(4);
       for (x = left + 8; x < game.size.x - 8; x += 8) {
         if (random.nextBool()) continue;
-        yield GrassSprite(
-          position: Vector2(x, y),
-          size: Vector2(8, 8),
-        );
+        yield GrassSprite(position: Vector2(x, y), size: Vector2(8, 8));
       }
     }
   }
@@ -139,7 +136,8 @@ class Background extends PositionComponent
     final random = Random(1234);
 
     // Decreases (rises) as numNewRowsEachRound increases
-    final minY = game.player.position.y -
+    final minY =
+        game.player.position.y -
         Player.staticHeight * 0.5 -
         Monster.moveDownHeight * game.numNewRowsEachRound;
 
@@ -165,9 +163,7 @@ class Background extends PositionComponent
 
   /// Preloads all sprite sheets so they can be
   /// accessed synchronously later.
-  static Future<void> preloadSprites({
-    required RicochlimeGame game,
-  }) {
+  static Future<void> preloadSprites({required RicochlimeGame game}) {
     return game.images.load('overworld.png');
   }
 }

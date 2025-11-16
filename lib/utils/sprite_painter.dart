@@ -5,10 +5,7 @@ import 'package:ricochlime/flame/components/background/background_tile.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 
 class SpritePainter extends CustomPainter {
-  const SpritePainter({
-    required this.sprite,
-    this.fit = BoxFit.contain,
-  });
+  const SpritePainter({required this.sprite, this.fit = BoxFit.contain});
 
   final Sprite sprite;
   final BoxFit fit;
@@ -35,10 +32,7 @@ class SpritePainter extends CustomPainter {
 }
 
 class MonsterWidget extends StatelessWidget {
-  const MonsterWidget({
-    super.key,
-    required this.spritePath,
-  });
+  const MonsterWidget({super.key, required this.spritePath});
 
   final String spritePath;
 
@@ -58,9 +52,7 @@ class MonsterWidget extends StatelessWidget {
 }
 
 class PlayerWidget extends StatelessWidget {
-  const PlayerWidget({
-    super.key,
-  });
+  const PlayerWidget({super.key});
 
   static const spritePath = 'character_subset.png';
 
@@ -80,10 +72,7 @@ class PlayerWidget extends StatelessWidget {
 }
 
 class SkullsWidget extends StatelessWidget {
-  const SkullsWidget({
-    super.key,
-    required this.type,
-  });
+  const SkullsWidget({super.key, required this.type});
 
   final SkullType type;
 

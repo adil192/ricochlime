@@ -13,11 +13,8 @@ ThemeData nesThemeFrom({
     brightness: brightness,
     primaryColor: colorScheme.primary,
     nesButtonTheme: NesButtonTheme(
-      normal: Color.lerp(
-            colorScheme.surface,
-            colorScheme.primary,
-            0.3,
-          ) ??
+      normal:
+          Color.lerp(colorScheme.surface, colorScheme.primary, 0.3) ??
           colorScheme.primary,
       primary: colorScheme.primary,
       success: colorScheme.tertiary,
@@ -73,10 +70,7 @@ ThemeData nesThemeFrom({
     nesOverlayTransitionTheme: NesOverlayTransitionTheme(
       color: brightness == Brightness.light ? Colors.white : Colors.black,
     ),
-  ).copyWith(
-    colorScheme: colorScheme,
-    textTheme: textTheme,
-  );
+  ).copyWith(colorScheme: colorScheme, textTheme: textTheme);
 }
 
 TextTheme _getTextTheme(Brightness brightness) {

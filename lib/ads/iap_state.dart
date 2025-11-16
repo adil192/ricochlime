@@ -8,8 +8,7 @@ enum IAPState {
   purchasedAndEnabled,
 
   /// The item has been purchased but is disabled.
-  purchasedAndDisabled,
-  ;
+  purchasedAndDisabled;
 
   static final codec = EnumCodec(values);
 }

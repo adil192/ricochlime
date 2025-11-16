@@ -8,11 +8,7 @@ import 'package:ricochlime/utils/random_extension.dart';
 
 class GroundSprite extends SpriteComponent
     with HasGameReference<RicochlimeGame>, DarkeningSprite {
-  GroundSprite({
-    required this.posOnIsland,
-    super.position,
-    super.size,
-  });
+  GroundSprite({required this.posOnIsland, super.position, super.size});
 
   final Alignment posOnIsland;
 
@@ -46,10 +42,7 @@ class GroundSprite extends SpriteComponent
 
 class GrassSprite extends SpriteComponent
     with HasGameReference<RicochlimeGame>, DarkeningSprite {
-  GrassSprite({
-    super.position,
-    super.size,
-  });
+  GrassSprite({super.position, super.size});
 
   @override
   void onLoad() {
@@ -64,11 +57,7 @@ class GrassSprite extends SpriteComponent
 
 class SkullSprite extends SpriteComponent
     with HasGameReference<RicochlimeGame>, FlickeringSprite {
-  SkullSprite({
-    required this.type,
-    super.position,
-    super.size,
-  });
+  SkullSprite({required this.type, super.position, super.size});
 
   final SkullType type;
 

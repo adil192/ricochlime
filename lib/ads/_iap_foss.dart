@@ -4,8 +4,7 @@ import 'package:stow_plain/stow_plain.dart';
 
 enum RicochlimeProduct {
   buy1000Coins('buy_1000_coins', consumable: true),
-  buy5000Coins('buy_5000_coins', consumable: true),
-  ;
+  buy5000Coins('buy_5000_coins', consumable: true);
 
   const RicochlimeProduct(this.id, {required this.consumable});
 
@@ -27,13 +26,13 @@ enum RicochlimeProduct {
   static Map<RicochlimeProduct, PlainStow<IAPState>>? _states;
   @visibleForTesting
   static void init() => _states ??= {
-        for (final product in values)
-          product: PlainStow(
-            'iap_${product.id}_state',
-            IAPState.unpurchased,
-            codec: IAPState.codec,
-          ),
-      };
+    for (final product in values)
+      product: PlainStow(
+        'iap_${product.id}_state',
+        IAPState.unpurchased,
+        codec: IAPState.codec,
+      ),
+  };
 }
 
 abstract final class RicochlimeIAP {

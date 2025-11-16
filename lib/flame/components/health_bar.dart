@@ -5,16 +5,13 @@ import 'package:ricochlime/flame/components/monster.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 
 class HealthBar extends PositionComponent {
-  HealthBar({
-    required this.maxHp,
-    required this.hp,
-    required this.paint,
-  }) : super(
-          anchor: Anchor.topLeft,
-          position: Vector2((Monster.staticWidth - staticWidth) / 2, 0),
-          size: Vector2(staticWidth, staticHeight),
-          priority: 1,
-        );
+  HealthBar({required this.maxHp, required this.hp, required this.paint})
+    : super(
+        anchor: Anchor.topLeft,
+        position: Vector2((Monster.staticWidth - staticWidth) / 2, 0),
+        size: Vector2(staticWidth, staticHeight),
+        priority: 1,
+      );
 
   static const double staticWidth = 12;
   static const double staticHeight = 2;

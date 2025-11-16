@@ -40,9 +40,11 @@ class TutorialPage extends StatelessWidget {
                     children: [
                       const MonsterWidget(spritePath: 'log_normal.png'),
                       Expanded(
-                        child: Text(RicochlimeGame.instance.pointAndClickEnabled
-                            ? t.tutorialPage.pointAndClick
-                            : t.tutorialPage.dragAndRelease),
+                        child: Text(
+                          RicochlimeGame.instance.pointAndClickEnabled
+                              ? t.tutorialPage.pointAndClick
+                              : t.tutorialPage.dragAndRelease,
+                        ),
                       ),
                     ],
                   ),
@@ -77,8 +79,10 @@ class TutorialPage extends StatelessWidget {
                         child: FittedBox(
                           child: Padding(
                             padding: EdgeInsets.all(4),
-                            child: Text('5.0x',
-                                style: TextStyle(color: Colors.white)),
+                            child: Text(
+                              '5.0x',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
@@ -118,7 +122,8 @@ class TutorialPage extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                          child: Text(t.tutorialPage.orUseCoinsToContinue)),
+                        child: Text(t.tutorialPage.orUseCoinsToContinue),
+                      ),
                       const SizedBox(width: 8),
                       const PlayerWidget(),
                     ],
@@ -135,9 +140,7 @@ class TutorialPage extends StatelessWidget {
 }
 
 class _TutorialGraphic extends StatelessWidget {
-  const _TutorialGraphic({
-    required this.child,
-  });
+  const _TutorialGraphic({required this.child});
 
   final Widget child;
 
@@ -220,7 +223,9 @@ class _SkullsGraphic extends StatelessWidget {
   Widget build(BuildContext context) {
     final random = Random(123);
     final skullTypes = List.generate(
-        crossAxisCount * crossAxisCount, (index) => SkullType.random(random));
+      crossAxisCount * crossAxisCount,
+      (index) => SkullType.random(random),
+    );
     return SizedBox.square(
       dimension: 100,
       child: GridView.builder(
