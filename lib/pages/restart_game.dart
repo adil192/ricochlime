@@ -37,14 +37,14 @@ class RestartGameDialog extends StatelessWidget {
               restartGame();
               Navigator.of(context).pop(true);
             },
-            type: NesButtonType.error,
+            type: .error,
             icon: NesIcon(iconData: NesIcons.redo),
             text: t.restartGameDialog.yesImSure,
           ),
           const SizedBox(height: 32),
           DialogButton(
             onPressed: () => Navigator.of(context).pop(false),
-            type: NesButtonType.normal,
+            type: .normal,
             icon: NesIcon(iconData: NesIcons.leftArrowIndicator),
             text: t.restartGameDialog.waitCancel,
           ),

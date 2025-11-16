@@ -73,11 +73,11 @@ class Monster extends BodyComponent with ContactCallbacks {
 
     final KillReward killReward;
     if (json['killReward'] != null) {
-      killReward = KillReward.values[json['killReward'] as int];
+      killReward = .values[json['killReward'] as int];
     } else if (json['givesPlayerABullet'] as bool? ?? false) {
-      killReward = KillReward.bullet;
+      killReward = .bullet;
     } else {
-      killReward = KillReward.none;
+      killReward = .none;
     }
 
     return Monster(
@@ -94,7 +94,7 @@ class Monster extends BodyComponent with ContactCallbacks {
     'py': (_movement?.targetPosition.y ?? position.y).roundTo1Dp(),
     'maxHp': maxHp,
     if (hp != maxHp) 'hp': hp,
-    if (killReward != KillReward.none) 'killReward': killReward.index,
+    if (killReward != .none) 'killReward': killReward.index,
   };
 
   /// How many monsters there are in each row.
@@ -132,18 +132,18 @@ class Monster extends BodyComponent with ContactCallbacks {
     _healthBar.hp = value;
 
     if (isDead) {
-      _animation.current = MonsterState.dead;
+      _animation.current = .dead;
       _healthBar.removeFromParent();
 
       if (!killRewardGiven) {
         stows.totalMonstersKilled.value += 1;
         switch (killReward) {
-          case KillReward.none:
+          case .none:
             break;
-          case KillReward.bullet:
+          case .bullet:
             (game as RicochlimeGame).numBullets += 1;
             stows.totalBulletsGained.value += 1;
-          case KillReward.coin:
+          case .coin:
             stows.addCoins(1);
         }
         killRewardGiven = true;
@@ -151,7 +151,7 @@ class Monster extends BodyComponent with ContactCallbacks {
     }
   }
 
-  bool get isRagdolling => _animation.current == MonsterState.jump;
+  bool get isRagdolling => _animation.current == .jump;
 
   bool get isDead => hp <= 0;
   bool killRewardGiven = false;
@@ -180,7 +180,7 @@ class Monster extends BodyComponent with ContactCallbacks {
 
   /// The reward for killing this monster
   KillReward get killReward => _killReward;
-  KillReward _killReward = KillReward.none;
+  KillReward _killReward = .none;
   set killReward(KillReward killReward) {
     _killReward = killReward;
     _animation.setSpriteFromKillReward(killReward);
@@ -280,7 +280,7 @@ class Monster extends BodyComponent with ContactCallbacks {
     if (isRagdolling) return;
 
     remove(_healthBar);
-    _animation.current = MonsterState.jump;
+    _animation.current = .jump;
 
     body
       ..setType(BodyType.dynamic)
@@ -351,7 +351,7 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
   MonsterAnimation._()
     : super(
         position: _relativePosition.clone(),
-        removeOnFinish: {MonsterState.dead: true},
+        removeOnFinish: {.dead: true},
       ) {
     animations = getAnimations(monsterImagePath: monsterImagePath);
   }
@@ -370,16 +370,16 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
   set walking(bool value) {
     _walking = value;
     if (value) {
-      current = MonsterState.walk;
+      current = .walk;
     } else {
-      current = MonsterState.idle;
+      current = .idle;
     }
   }
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    current = MonsterState.idle;
+    current = .idle;
     walking = _walking;
     width = staticWidth;
     height = staticHeight;
@@ -397,9 +397,9 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
   String monsterImagePath = 'log_normal.png';
   void setSpriteFromKillReward(KillReward killReward) {
     monsterImagePath = switch (killReward) {
-      KillReward.none => 'log_normal.png',
-      KillReward.bullet => 'log_green.png',
-      KillReward.coin => 'log_gold.png',
+      .none => 'log_normal.png',
+      .bullet => 'log_green.png',
+      .coin => 'log_gold.png',
     };
 
     final animations = this.animations;
@@ -424,7 +424,7 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
       monsterImagePath,
     );
     return {
-      MonsterState.idle: SpriteAnimation.fromFrameData(
+      .idle: SpriteAnimation.fromFrameData(
         monsterImage,
         SpriteAnimationData.sequenced(
           amount: RicochlimeGame.reproducibleGoldenMode ? 1 : 2,
@@ -433,7 +433,7 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
           texturePosition: Vector2(0, 0),
         ),
       ),
-      MonsterState.walk: SpriteAnimation.fromFrameData(
+      .walk: SpriteAnimation.fromFrameData(
         monsterImage,
         SpriteAnimationData.sequenced(
           amount: RicochlimeGame.reproducibleGoldenMode ? 1 : 4,
@@ -442,7 +442,7 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
           texturePosition: Vector2(0, 1 * 24),
         ),
       ),
-      MonsterState.jump: SpriteAnimation.fromFrameData(
+      .jump: SpriteAnimation.fromFrameData(
         monsterImage,
         SpriteAnimationData.sequenced(
           amount: 1,
@@ -452,7 +452,7 @@ class MonsterAnimation extends SpriteAnimationGroupComponent<MonsterState>
           loop: false,
         ),
       ),
-      MonsterState.dead: SpriteAnimation.fromFrameData(
+      .dead: SpriteAnimation.fromFrameData(
         monsterImage,
         SpriteAnimationData.sequenced(
           amount: RicochlimeGame.reproducibleGoldenMode ? 1 : 3,

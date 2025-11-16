@@ -27,7 +27,7 @@ class _PlayPageState extends State<PlayPage> {
     RicochlimeGame.instance
       ..showGameOverDialog = showGameOverDialog
       ..resumeBgMusic();
-    if (RicochlimeGame.instance.state.value == GameState.gameOver) {
+    if (RicochlimeGame.instance.state.value == .gameOver) {
       WidgetsBinding.instance.addPostFrameCallback(
         (_) => RicochlimeGame.instance.gameOver(),
       );
@@ -57,9 +57,9 @@ class _PlayPageState extends State<PlayPage> {
 
   Future<GameOverAction> showGameOverDialog() async {
     assert(mounted);
-    if (!mounted) return GameOverAction.nothingYet;
+    if (!mounted) return .nothingYet;
 
-    if (showingGameOverDialog) return GameOverAction.nothingYet;
+    if (showingGameOverDialog) return .nothingYet;
     showingGameOverDialog = true;
     try {
       return await NesDialog.show<GameOverAction>(
@@ -69,7 +69,7 @@ class _PlayPageState extends State<PlayPage> {
               game: RicochlimeGame.instance,
             ),
           ) ??
-          GameOverAction.nothingYet;
+          .nothingYet;
     } finally {
       showingGameOverDialog = false;
     }
@@ -184,8 +184,8 @@ class _PlayPageState extends State<PlayPage> {
           ),
           actions: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: .start,
+              mainAxisAlignment: .spaceBetween,
               children: [
                 IgnorePointer(
                   child: Row(
@@ -233,9 +233,9 @@ class _PlayPageState extends State<PlayPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: .end,
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: .center,
                         children: [
                           IgnorePointer(
                             child: ValueListenableBuilder(
@@ -260,7 +260,7 @@ class _PlayPageState extends State<PlayPage> {
                             ValueListenableBuilder(
                               valueListenable: RicochlimeGame.instance.state,
                               builder: (context, state, child) {
-                                final show = state == GameState.shooting;
+                                final show = state == .shooting;
                                 return AnimatedOpacity(
                                   opacity: show ? 1 : 0,
                                   duration: const Duration(milliseconds: 200),

@@ -153,7 +153,7 @@ class Background extends PositionComponent
         if (random.nextDouble() > 0.3) continue;
 
         yield SkullSprite(
-          type: SkullType.random(random),
+          type: .random(random),
           position: Vector2(x, y),
           size: Vector2(8, 8),
         );

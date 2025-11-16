@@ -47,9 +47,9 @@ class RicochlimeGame extends Forge2DGame
 
   static const bulletTimeoutSecs = 60; // 1 minute
 
-  late final ValueNotifier<GameState> state = ValueNotifier(GameState.idle)
+  late final ValueNotifier<GameState> state = ValueNotifier(.idle)
     ..addListener(() {
-      if (state.value != GameState.shooting) {
+      if (state.value != .shooting) {
         timeDilation.value = 1.0;
       }
     });
@@ -57,7 +57,7 @@ class RicochlimeGame extends Forge2DGame
   late final player = Player();
   late final aimGuide = AimGuide();
   late final background = Background();
-  bool get inputAllowed => state.value == GameState.idle;
+  bool get inputAllowed => state.value == .idle;
   bool inputCancelled = false;
 
   late var random = Random();
@@ -230,7 +230,7 @@ class RicochlimeGame extends Forge2DGame
       final monster = Monster.fromJson(monsterJson);
       add(monster);
 
-      if (monster.killReward == KillReward.bullet) numMonstersThatGiveBullets++;
+      if (monster.killReward == .bullet) numMonstersThatGiveBullets++;
       if (monster.position.y <= 0) topGapNeedsAdjusting = true;
     }
 
@@ -256,7 +256,7 @@ class RicochlimeGame extends Forge2DGame
         Future.delayed(const Duration(milliseconds: 200), gameOver);
       }
     } else {
-      state.value = GameState.idle;
+      state.value = .idle;
     }
   }
 
@@ -371,7 +371,7 @@ class RicochlimeGame extends Forge2DGame
 
   @override
   void onTapUp(TapUpEvent event) {
-    if (state.value == GameState.shooting) {
+    if (state.value == .shooting) {
       timeDilation.value += 0.5;
     } else if (inputAllowed && pointAndClickEnabled) {
       _spawnBullets();
@@ -404,7 +404,7 @@ class RicochlimeGame extends Forge2DGame
     }
 
     assert(inputAllowed);
-    state.value = GameState.shooting;
+    state.value = .shooting;
     assert(!inputAllowed);
     inputCancelled = false;
     player.attack();
@@ -445,8 +445,8 @@ class RicochlimeGame extends Forge2DGame
       await spawnNewMonsters();
       if (inputCancelled) return;
     } finally {
-      if (state.value != GameState.gameOver) {
-        state.value = GameState.idle;
+      if (state.value != .gameOver) {
+        state.value = .idle;
       }
       inputCancelled = false;
     }
@@ -456,7 +456,7 @@ class RicochlimeGame extends Forge2DGame
   Future<void> spawnNewMonsters() async {
     const monsterMoveDuration = Duration(seconds: 1);
 
-    state.value = GameState.monstersMoving;
+    state.value = .monstersMoving;
 
     // move monsters down and spawn new ones at the top
     assert(numNewRowsEachRound == getNumNewRowsEachRound(score.value));
@@ -483,8 +483,7 @@ class RicochlimeGame extends Forge2DGame
       // wait for the monsters to move
       await ticker.delayed(
         monsterMoveDuration,
-        onTick: () =>
-            inputCancelled ? TickerDelayedInstruction.stopEarly : null,
+        onTick: () => inputCancelled ? .stopEarly : null,
       );
       if (inputCancelled) return;
 
@@ -497,7 +496,7 @@ class RicochlimeGame extends Forge2DGame
       }
     }
     numNewRowsEachRound = getNumNewRowsEachRound(score.value);
-    state.value = GameState.idle;
+    state.value = .idle;
 
     if (aimGuide.lastMousePosition != null) {
       // Show aim guide again if the user started an input while !inputEnabled
@@ -515,7 +514,7 @@ class RicochlimeGame extends Forge2DGame
   }
 
   Future<void> gameOver() async {
-    state.value = GameState.gameOver;
+    state.value = .gameOver;
     assert(!inputAllowed);
 
     // all monsters drop down
@@ -533,11 +532,11 @@ class RicochlimeGame extends Forge2DGame
     log.info('gameOverAction: $gameOverAction');
 
     switch (gameOverAction) {
-      case GameOverAction.nothingYet:
+      case .nothingYet:
         // do nothing
         break;
-      case GameOverAction.continueGame:
-        state.value = GameState.monstersMoving;
+      case .continueGame:
+        state.value = .monstersMoving;
         importFromGame(stows.currentGame.value, showGameOverDialog: false);
 
         final totalRowsToRemove = max(
@@ -575,9 +574,9 @@ class RicochlimeGame extends Forge2DGame
 
           await saveGame();
         } finally {
-          state.value = GameState.idle;
+          state.value = .idle;
         }
-      case GameOverAction.restartGame:
+      case .restartGame:
         restartGame();
     }
   }
@@ -595,7 +594,7 @@ class RicochlimeGame extends Forge2DGame
   /// sets the score to zero,
   /// and spawns a single row of monsters.
   Future<void> _reset() async {
-    state.value = GameState.idle;
+    state.value = .idle;
     inputCancelled = false;
     score.value = 0;
     numBullets = 1;
@@ -605,7 +604,7 @@ class RicochlimeGame extends Forge2DGame
       await spawnNewMonsters();
     } finally {
       inputCancelled = false;
-      state.value = GameState.idle;
+      state.value = .idle;
     }
   }
 
@@ -653,18 +652,18 @@ class RicochlimeGame extends Forge2DGame
     // one of the monsters should give the user a bullet
     int bulletRewardIndex = random.nextInt(row.length);
     while (row[bulletRewardIndex] == null ||
-        row[bulletRewardIndex]!.killReward != KillReward.none) {
+        row[bulletRewardIndex]!.killReward != .none) {
       bulletRewardIndex = random.nextInt(row.length);
     }
-    row[bulletRewardIndex]!.killReward = KillReward.bullet;
+    row[bulletRewardIndex]!.killReward = .bullet;
 
     // one of the monsters should give the user a coin
     int coinRewardIndex = random.nextInt(row.length);
     while (row[coinRewardIndex] == null ||
-        row[coinRewardIndex]!.killReward != KillReward.none) {
+        row[coinRewardIndex]!.killReward != .none) {
       coinRewardIndex = random.nextInt(row.length);
     }
-    row[coinRewardIndex]!.killReward = KillReward.coin;
+    row[coinRewardIndex]!.killReward = .coin;
 
     // Note: If you're adding new rewards, make sure to update
     // [minMonstersInRow] to avoid an infinite loop.

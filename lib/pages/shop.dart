@@ -127,9 +127,8 @@ class ShopPage extends StatelessWidget {
                   SliverList.list(
                     children: [
                       NesButton(
-                        type: NesButtonType.normal,
-                        onPressed: () =>
-                            RicochlimeIAP.buy(RicochlimeProduct.buy1000Coins),
+                        type: .normal,
+                        onPressed: () => RicochlimeIAP.buy(.buy1000Coins),
                         child: Row(
                           children: [
                             const CoinIcon(size: 32),
@@ -150,7 +149,7 @@ class ShopPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       NesButton(
-                        type: NesButtonType.normal,
+                        type: .normal,
                         onPressed: () =>
                             RicochlimeIAP.buy(RicochlimeProduct.buy5000Coins),
                         child: Row(
@@ -173,7 +172,7 @@ class ShopPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       NesButton(
-                        type: NesButtonType.normal,
+                        type: .normal,
                         onPressed: RicochlimeIAP.restorePurchases,
                         child: Row(
                           children: [
@@ -226,10 +225,9 @@ class _ShopItemTile extends StatelessWidget {
             },
           },
           type: switch (state) {
-            ShopItemState.loading => NesButtonType.normal,
-            ShopItemState.purchased =>
-              selected ? NesButtonType.primary : NesButtonType.normal,
-            ShopItemState.unpurchased => NesButtonType.warning,
+            ShopItemState.loading => .normal,
+            ShopItemState.purchased => selected ? .primary : .normal,
+            ShopItemState.unpurchased => .warning,
           },
           child: state == ShopItemState.purchased
               ? Center(
@@ -241,8 +239,8 @@ class _ShopItemTile extends StatelessWidget {
               : FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: .center,
+                    crossAxisAlignment: .center,
                     children: [
                       const CoinIcon(size: 32),
                       Text(

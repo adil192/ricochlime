@@ -6,9 +6,9 @@ class DialogButton extends StatelessWidget {
     // ignore: unused_element
     super.key,
     required this.onPressed,
-    this.type = NesButtonType.normal,
+    this.type = .normal,
     this.icon,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.crossAxisAlignment = .center,
     required this.text,
   });
 

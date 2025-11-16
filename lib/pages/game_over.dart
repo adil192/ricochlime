@@ -79,11 +79,11 @@ class GameOverDialog extends StatelessWidget {
                             stows.totalGamesContinued.value++;
                             Navigator.of(
                               context,
-                            ).pop<GameOverAction>(GameOverAction.continueGame);
+                            ).pop<GameOverAction>(.continueGame);
                           },
-                    type: NesButtonType.primary,
+                    type: .primary,
                     icon: icon,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: .end,
                     text: t.gameOverPage.continueWithCoins,
                   );
                 },
@@ -92,11 +92,9 @@ class GameOverDialog extends StatelessWidget {
               const SizedBox(height: 32),
               DialogButton(
                 onPressed: () {
-                  Navigator.of(
-                    context,
-                  ).pop<GameOverAction>(GameOverAction.restartGame);
+                  Navigator.of(context).pop<GameOverAction>(.restartGame);
                 },
-                type: NesButtonType.primary,
+                type: .primary,
                 icon: NesIcon(iconData: NesIcons.redo),
                 text: t.gameOverPage.restartGameButton,
               ),
@@ -105,7 +103,7 @@ class GameOverDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context)
                     // pop dialog
-                    ..pop<GameOverAction>(GameOverAction.nothingYet)
+                    ..pop<GameOverAction>(.nothingYet)
                     // pop play page
                     ..pop();
                 },

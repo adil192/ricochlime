@@ -39,7 +39,7 @@ class Ticker {
       elapsed += dt;
 
       switch (onTick?.call()) {
-        case TickerDelayedInstruction.stopEarly:
+        case .stopEarly:
           return elapsed;
         default:
           break;

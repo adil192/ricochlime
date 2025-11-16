@@ -39,7 +39,7 @@ enum RicochlimeProduct {
     for (final product in values)
       product: PlainStow(
         'iap_${product.id}_state',
-        IAPState.unpurchased,
+        .unpurchased,
         codec: IAPState.codec,
       ),
   };
@@ -75,7 +75,7 @@ abstract final class RicochlimeIAP {
     }
     RicochlimeProduct._details = {
       for (final product in response.productDetails)
-        RicochlimeProduct.fromId(product.id)!: product,
+        .fromId(product.id)!: product,
     };
     _log.info('IAPs loaded: ${RicochlimeProduct._details}');
   }
@@ -83,15 +83,15 @@ abstract final class RicochlimeIAP {
   static Future<void> _onData(List<PurchaseDetails> purchaseDetailsList) async {
     for (final purchaseDetails in purchaseDetailsList) {
       switch (purchaseDetails.status) {
-        case PurchaseStatus.pending:
+        case .pending:
           // TODO(adil192): show pending UI
           break;
-        case PurchaseStatus.error:
-        case PurchaseStatus.canceled:
+        case .error:
+        case .canceled:
           // TODO(adil192): show "purchase not completed" UI
           break;
-        case PurchaseStatus.purchased:
-        case PurchaseStatus.restored:
+        case .purchased:
+        case .restored:
           _deliverProduct(purchaseDetails);
       }
       if (purchaseDetails.pendingCompletePurchase) {
@@ -129,8 +129,8 @@ abstract final class RicochlimeIAP {
 
   static void _deliverProduct(PurchaseDetails purchaseDetails) {
     assert(
-      purchaseDetails.status == PurchaseStatus.purchased ||
-          purchaseDetails.status == PurchaseStatus.restored,
+      purchaseDetails.status == .purchased ||
+          purchaseDetails.status == .restored,
     );
 
     final product = RicochlimeProduct.fromId(purchaseDetails.productID);
@@ -139,8 +139,7 @@ abstract final class RicochlimeIAP {
       return;
     }
 
-    if (product.consumable &&
-        purchaseDetails.status == PurchaseStatus.restored) {
+    if (product.consumable && purchaseDetails.status == .restored) {
       // Don't restore consumable purchases (they've already been consumed)
       _log.warning(
         'Attempted to restore consumable purchase: '
@@ -150,10 +149,9 @@ abstract final class RicochlimeIAP {
     }
 
     switch (product) {
-      case RicochlimeProduct.buy1000Coins:
+      case .buy1000Coins:
         stows.addCoins(1000, allowOverMax: true);
-
-      case RicochlimeProduct.buy5000Coins:
+      case .buy5000Coins:
         stows.addCoins(5000, allowOverMax: true);
     }
   }

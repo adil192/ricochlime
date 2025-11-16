@@ -29,7 +29,7 @@ enum RicochlimeProduct {
     for (final product in values)
       product: PlainStow(
         'iap_${product.id}_state',
-        IAPState.unpurchased,
+        .unpurchased,
         codec: IAPState.codec,
       ),
   };

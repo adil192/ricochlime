@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   _HomePageButton(
-                    type: NesButtonType.primary,
+                    type: .primary,
                     icon: NesIcons.play,
                     text: t.homePage.playButton,
                     openBuilder: (_) => const PlayPage(),
@@ -116,7 +116,7 @@ class HomePage extends StatelessWidget {
 class _HomePageButton<T> extends StatefulWidget {
   const _HomePageButton({
     super.key,
-    this.type = NesButtonType.normal,
+    this.type = .normal,
     required this.icon,
     this.shouldAnimateIcon,
     required this.text,

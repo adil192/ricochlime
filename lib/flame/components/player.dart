@@ -25,16 +25,16 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   @override
   Future<void> onLoad() async {
     animations = getAnimations();
-    current = PlayerState.idle;
+    current = .idle;
     await super.onLoad();
 
     animationTickers![PlayerState.attack]!.onComplete = () {
-      current = PlayerState.idle;
+      current = .idle;
     };
   }
 
   void attack() {
-    current = PlayerState.attack;
+    current = .attack;
     animationTickers![PlayerState.attack]!.reset();
   }
 
@@ -45,7 +45,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   Map<PlayerState, SpriteAnimation> getAnimations() {
     final playerImage = game.images.fromCache('character_subset.png');
     return {
-      PlayerState.idle: SpriteAnimation.fromFrameData(
+      .idle: SpriteAnimation.fromFrameData(
         playerImage,
         SpriteAnimationData.sequenced(
           amount: RicochlimeGame.reproducibleGoldenMode ? 1 : 2,
@@ -54,7 +54,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
           texturePosition: Vector2(0, 0),
         ),
       ),
-      PlayerState.attack: SpriteAnimation.fromFrameData(
+      .attack: SpriteAnimation.fromFrameData(
         playerImage,
         SpriteAnimationData.sequenced(
           amount: RicochlimeGame.reproducibleGoldenMode ? 1 : 4,
