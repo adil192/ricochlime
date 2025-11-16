@@ -55,6 +55,9 @@ jobs:
       - name: Remove dev dependencies
         shell: bash
         run: ./patches/remove_dev_dependencies.sh
+      - name: Remove proprietary dependencies
+        shell: bash
+        run: ./patches/foss.sh
 
       - name: Setup Flutter
         uses: adil192/setup-flutter-submodule@v1
