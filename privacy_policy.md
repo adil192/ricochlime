@@ -2,34 +2,35 @@
 
 Ricochlime is a monster shooting game developed by Adil Hanney.
 
-## First party data collection
+## Data collected
 
-Ricochlime does not collect any data about you besides the data collected by third parties (see below). All progress is stored locally on your device, including your score and monster locations on the screen.
+**First party data collection**
 
-## Third party data collection
+Ricochlime does not directly collect, store, or share any personal or sensitive data.
 
-### In-app purchases
+**Third party data collection**
 
-Ricochlime may offer optional in-app purchases that are processed by Google Play on Android devices or the Apple App Store on iOS/macOS devices. These providers may collect and process personal information necessary to complete the transaction. Ricochlime does not store or access your payment information.
+However, on supported platforms, Ricochlime offers in-app purchases using a third-party service. This third-party service may collect and process personal information necessary to complete the transaction.
 
-### Google AdMob
+- On iOS and macOS, in-app purchases are processed by Apple through the Apple App Store.
 
-Older versions of Ricochlime (released before January 2025) contained ads.
+  Consult the Apple Customer Privacy Policy for more information: [https://www.apple.com/legal/privacy/](https://www.apple.com/legal/privacy/)
 
-Newer versions do not contain ads and do not share information with Google AdMob.
+- On Android*, in-app purchases are processed by Google through the Google Play Store.
 
-<details>
-<summary>Privacy information for older app versions</summary>
+  Consult the Google Privacy Policy for more information: [https://policies.google.com/privacy](https://policies.google.com/privacy)
 
-Ricochlime is free to download and play, and used Google AdMob to display ads in versions v1.11.5 and older on some platforms.
-Newer versions of the app (v1.11.6 and newer) do not contain ads and do not share information with Google AdMob.
+  *The F-Droid app store for Android offers a modified version of Ricochlime which does not support in-app purchases. If you installed Ricochlime from F-Droid, disregard the information above regarding Google Play.
 
-AdMob may collect data about you, including your device's advertising ID, IP address, and location. You can read more about [how Google uses data from apps that use their services](https://policies.google.com/technologies/partner-sites).
+- On other platforms (Windows, Linux, web app), in-app purchases are not supported.
 
-When you first open Ricochlime, you'll be shown a consent prompt asking you to choose between personalized and non-personalized ads. You can change this at any time by going to the settings menu in the game.
+Ricochlime does not access your payment information or any personal data collected by these services. Please consult the relevant privacy policies below for more information.
 
-Users are recommended to update their app to the latest version for an ad-free experience.
-</details>
+## Deletion
+
+All progress is stored locally on your device, including your score and monster locations on the screen. To delete this data, you can uninstall the app from your device.
+
+If you wish to delete any information collected by Google or Apple, please refer to their respective privacy policies for instructions (links above).
 
 ## Source code
 
