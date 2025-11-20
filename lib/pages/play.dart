@@ -88,7 +88,8 @@ class _PlayPageState extends State<PlayPage> {
   @override
   Widget build(BuildContext context) {
     final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final screenSize = MediaQuery.sizeOf(context);
     final bgColor = RicochlimeGame.isDarkMode.value
         ? RicochlimePalette.waterColorDark
@@ -220,11 +221,17 @@ class _PlayPageState extends State<PlayPage> {
               child: Stack(
                 children: [
                   Positioned.fill(
-                    child: FittedBox(
-                      child: SizedBox(
-                        width: RicochlimeGame.expectedWidth,
-                        height: RicochlimeGame.expectedHeight,
-                        child: GameWidget(game: RicochlimeGame.instance),
+                    child: Padding(
+                      padding: theme.platform == TargetPlatform.android
+                          // Some space to avoid back gestures on Android
+                          ? const EdgeInsets.symmetric(horizontal: 8)
+                          : EdgeInsets.zero,
+                      child: FittedBox(
+                        child: SizedBox(
+                          width: RicochlimeGame.expectedWidth,
+                          height: RicochlimeGame.expectedHeight,
+                          child: GameWidget(game: RicochlimeGame.instance),
+                        ),
                       ),
                     ),
                   ),
