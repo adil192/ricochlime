@@ -27,22 +27,33 @@ class ShopPage extends StatelessWidget {
           ),
         ),
         actions: [
-          ValueListenableBuilder(
-            valueListenable: stows.coins,
-            builder: (context, coins, _) {
-              final colorScheme = Theme.of(context).colorScheme;
-              return Text(
-                coins.toString(),
-                style: TextStyle(
-                  color: colorScheme.onSurface,
-                  fontSize: 32,
-                  height: 0.65,
+          IgnorePointer(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: stows.coins,
+                  builder: (context, coins, _) {
+                    final colorScheme = Theme.of(context).colorScheme;
+                    return Text(
+                      coins.toString(),
+                      style: TextStyle(
+                        color: colorScheme.onSurface,
+                        fontSize: 32,
+                        height: 0.6,
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
+                const SizedBox(width: 4),
+                const CoinIcon(size: 24),
+                const SizedBox(width: 16),
+              ],
+            ),
           ),
-          const CoinIcon(size: 24),
-          const SizedBox(width: 16),
         ],
       ),
       body: Center(

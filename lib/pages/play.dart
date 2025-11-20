@@ -113,8 +113,9 @@ class _PlayPageState extends State<PlayPage> {
           leadingWidth: 80 + (stows.showFpsCounter.value ? (16 + 24 * 3) : 0),
           leading: Row(
             mainAxisSize: MainAxisSize.min,
+            spacing: 16,
             children: [
-              const SizedBox(width: 16),
+              const SizedBox(), // To add `spacing` before the back button
               NesIconButton(
                 onPress: () => Navigator.of(context).pop(),
                 icon: NesIcons.leftArrowIndicator,
@@ -124,7 +125,6 @@ class _PlayPageState extends State<PlayPage> {
                 ),
                 size: const Size.square(20),
               ),
-              const SizedBox(width: 16),
               NesTooltip(
                 message: t.restartGameDialog.title,
                 arrowPlacement: switch (textDirection) {
@@ -147,14 +147,12 @@ class _PlayPageState extends State<PlayPage> {
                   size: const Size.square(20),
                 ),
               ),
-              if (stows.showFpsCounter.value) ...[
-                const SizedBox(width: 16),
-                const FpsCounter(),
-              ],
+              if (stows.showFpsCounter.value) const FpsCounter(),
             ],
           ),
           centerTitle: true,
           title: Column(
+            spacing: 4,
             children: [
               ValueListenableBuilder(
                 valueListenable: stows.highScore,
@@ -168,7 +166,6 @@ class _PlayPageState extends State<PlayPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 4),
               ValueListenableBuilder(
                 valueListenable: RicochlimeGame.score,
                 builder: (context, score, child) => Text(
@@ -184,33 +181,31 @@ class _PlayPageState extends State<PlayPage> {
             ],
           ),
           actions: [
-            Row(
-              crossAxisAlignment: .start,
-              mainAxisAlignment: .spaceBetween,
-              children: [
-                IgnorePointer(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ValueListenableBuilder(
-                        valueListenable: stows.coins,
-                        builder: (context, coins, _) {
-                          return Text(
-                            coins.toString(),
-                            style: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.9),
-                              fontSize: 32,
-                              height: 0.65,
-                            ),
-                          );
-                        },
-                      ),
-                      const CoinIcon(size: 24),
-                      const SizedBox(width: 16),
-                    ],
+            IgnorePointer(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  ValueListenableBuilder(
+                    valueListenable: stows.coins,
+                    builder: (context, coins, _) {
+                      return Text(
+                        coins.toString(),
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.9),
+                          fontSize: 32,
+                          height: 0.6,
+                        ),
+                      );
+                    },
                   ),
-                ),
-              ],
+                  const SizedBox(width: 4),
+                  const CoinIcon(size: 24),
+                  const SizedBox(width: 16),
+                ],
+              ),
             ),
           ],
         ),
