@@ -11,8 +11,8 @@ on:
       - .github/workflows/android.yaml
 
 jobs:
-  build-apk:
-    name: Build APK (${{ matrix.foss && 'FOSS' || 'Regular' }})
+  build-android:
+    name: Build for Android (${{ matrix.foss && 'FOSS' || 'Regular' }})
     strategy:
       fail-fast: false
       matrix:
@@ -103,3 +103,67 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: output/${{ steps.rename_apk.outputs.apkName }}
+
+      - name: Build aab
+        if: ${{ matrix.foss == false }}
+        run: flutter build appbundle
+
+      - name: Rename aab
+        if: ${{ matrix.foss == false }}
+        run: |
+          mkdir -p output
+          mv build/app/outputs/bundle/release/app-release.aab output/Ricochlime.aab
+
+      - name: Upload aab artifact
+        if: ${{ matrix.foss == false }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ricochlime-Android-PlayStore
+          path: output/Ricochlime.aab
+
+  upload-to-play-store:
+    name: Upload to Play Store
+    runs-on: ubuntu-latest
+    needs: build-android
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Ricochlime-Android-PlayStore
+          path: output
+
+      - name: Prepare whatsnew directory from metadata/*/changelogs
+        working-directory: ${{ github.workspace }}
+        run: |
+          # display changelogs for debugging
+          find metadata -name '*.txt'
+
+          mkdir -p whatsnew
+
+          # get current version code from pubspec.yaml (the part after the +)
+          VERSION_CODE=$(grep -oP '(?<=version: ).*' pubspec.yaml | grep -oP '(?<=\+).*$')
+
+          # copy changelogs of each language to whatsnew
+          for dir in metadata/*/changelogs; do
+              # get language code from directory name
+              # e.g. metadata/en-US/changelogs -> en-US
+              lang=${dir#metadata/}
+              lang=${lang%/changelogs}
+
+              # copy changelog file to whatsnew
+              cp "$dir/$VERSION_CODE.txt" "whatsnew/whatsnew-${lang}"
+          done
+
+      - name: Upload to Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_STORE_JSON }}
+          packageName: com.adilhanney.ricochlime
+          releaseFiles: output/Ricochlime.aab
+          track: production
+          status: completed
+          whatsNewDirectory: whatsnew
