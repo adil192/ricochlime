@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
-import 'package:ricochlime/nes/coin.dart';
+import 'package:ricochlime/nes/coin_count.dart';
 import 'package:ricochlime/pages/game_over.dart';
 import 'package:ricochlime/pages/restart_game.dart';
 import 'package:ricochlime/utils/brightness_extension.dart';
@@ -180,33 +180,8 @@ class _PlayPageState extends State<PlayPage> {
               ),
             ],
           ),
-          actions: [
-            IgnorePointer(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  ValueListenableBuilder(
-                    valueListenable: stows.coins,
-                    builder: (context, coins, _) {
-                      return Text(
-                        coins.toString(),
-                        style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.9),
-                          fontSize: 32,
-                          height: 0.6,
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(width: 4),
-                  const CoinIcon(size: 24),
-                  const SizedBox(width: 16),
-                ],
-              ),
-            ),
+          actions: const [
+            Padding(padding: .directional(end: 16), child: CoinCount()),
           ],
         ),
         body: Column(

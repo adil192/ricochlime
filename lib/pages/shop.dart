@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
-import 'package:ricochlime/nes/coin.dart';
+import 'package:ricochlime/nes/coin_icon.dart';
+import 'package:ricochlime/nes/coin_count.dart';
 import 'package:ricochlime/utils/shop_items.dart';
 import 'package:ricochlime/utils/stows.dart';
 
@@ -26,34 +27,8 @@ class ShopPage extends StatelessWidget {
             icon: NesIcons.leftArrowIndicator,
           ),
         ),
-        actions: [
-          IgnorePointer(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
-              children: [
-                ValueListenableBuilder(
-                  valueListenable: stows.coins,
-                  builder: (context, coins, _) {
-                    final colorScheme = Theme.of(context).colorScheme;
-                    return Text(
-                      coins.toString(),
-                      style: TextStyle(
-                        color: colorScheme.onSurface,
-                        fontSize: 32,
-                        height: 0.6,
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(width: 4),
-                const CoinIcon(size: 24),
-                const SizedBox(width: 16),
-              ],
-            ),
-          ),
+        actions: const [
+          Padding(padding: .directional(end: 16), child: CoinCount()),
         ],
       ),
       body: Center(

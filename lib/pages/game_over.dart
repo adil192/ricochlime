@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
-import 'package:ricochlime/nes/coin.dart';
+import 'package:ricochlime/nes/coin_icon.dart';
 import 'package:ricochlime/nes/dialog_button.dart';
 import 'package:ricochlime/utils/stows.dart';
 
