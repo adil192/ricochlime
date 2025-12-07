@@ -289,18 +289,18 @@ packages:
     dependency: "direct dev"
     description:
       name: golden_screenshot
-      sha256: "4e56399d43000fad8db1992c0482cc192aa88a2bad76d4a16f09f1e0086781dd"
+      sha256: "289f418e4d8b2df018b30f7b5a7311098096b35095c503e97cf9bf5df70517f2"
       url: "https://pub.dev"
     source: hosted
-    version: "8.1.1"
+    version: "9.0.0"
   google_fonts:
     dependency: "direct main"
     description:
       name: google_fonts
-      sha256: "517b20870220c48752eafa0ba1a797a092fb22df0d89535fd9991e86ee2cdd9c"
+      sha256: ba03d03bcaa2f6cb7bd920e3b5027181db75ab524f8891c8bc3aa603885b8055
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.2"
+    version: "6.3.3"
   gsettings:
     dependency: transitive
     description:
@@ -665,10 +665,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "46a46fd64659eff15f4638bbe19de43f9483f0e0bf024a9fb6b3582064bacc7b"
+      sha256: "83af5c682796c0f7719c2bbf74792d113e40ae97981b8f266fa84574573556bc"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.17"
+    version: "2.4.18"
   shared_preferences_foundation:
     dependency: transitive
     description:
@@ -726,10 +726,10 @@ packages:
     dependency: "direct main"
     description:
       name: slang
-      sha256: "8f5ae507de811e245b7a3187d3191e9eefe7d8f2c22f150663f15bb0f1559367"
+      sha256: "263159a93864a13a0f2486326e200cb38214a8e82a3c83a48c20ac24a8eed329"
       url: "https://pub.dev"
     source: hosted
-    version: "4.11.0"
+    version: "4.11.1"
   slang_flutter:
     dependency: "direct main"
     description:
