@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:ricochlime/ads/iap.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
-import 'package:ricochlime/nes/coin_icon.dart';
 import 'package:ricochlime/nes/coin_count.dart';
+import 'package:ricochlime/nes/coin_icon.dart';
 import 'package:ricochlime/utils/shop_items.dart';
 import 'package:ricochlime/utils/stows.dart';
 

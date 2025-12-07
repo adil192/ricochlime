@@ -180,8 +180,11 @@ class _PlayPageState extends State<PlayPage> {
               ),
             ],
           ),
-          actions: const [
-            Padding(padding: .directional(end: 16), child: CoinCount()),
+          actions: [
+            Padding(
+              padding: const .directional(end: 16),
+              child: CoinCount(textColor: Colors.white.withValues(alpha: 0.9)),
+            ),
           ],
         ),
         body: Column(

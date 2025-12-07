@@ -3,7 +3,9 @@ import 'package:ricochlime/nes/coin_icon.dart';
 import 'package:ricochlime/utils/stows.dart';
 
 class CoinCount extends StatelessWidget {
-  const CoinCount({super.key});
+  const CoinCount({super.key, this.textColor});
+
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +21,7 @@ class CoinCount extends StatelessWidget {
             builder: (context, coins, _) {
               return Text(
                 coins.toString(),
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.9),
-                  fontSize: 32,
-                  height: 0.6,
-                ),
+                style: TextStyle(color: textColor, fontSize: 32, height: 0.6),
               );
             },
           ),
