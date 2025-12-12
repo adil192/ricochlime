@@ -1,0 +1,2 @@
+• Se agregaron algunos márgenes para permitir el gesto de retroceso de Android
+• Se corrigió la alineación del texto del conteo de monedas.

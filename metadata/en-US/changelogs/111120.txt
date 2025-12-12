@@ -1,0 +1,2 @@
+• Added some margins to allow for the Android back gesture
+• Fixed alignment of the coin count text

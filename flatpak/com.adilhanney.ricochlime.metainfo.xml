@@ -74,6 +74,14 @@
     </branding>
 
     <releases>
+        <release version="1.11.12" date="2025-12-12">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.12</url>
+            <description>
+                <ul>
+                    <li>Fixed alignment of the coin count text</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.11.11" date="2025-11-04">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.11</url>
             <description>
