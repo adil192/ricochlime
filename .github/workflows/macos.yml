@@ -60,7 +60,7 @@ jobs:
         run: |
           keychain initialize
 
-          app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
+          app-store-connect fetch-signing-files com.adilhanney.ricochlime \
             --platform MAC_OS \
             --type MAC_APP_STORE \
             --certificate-key=@env:APP_STORE_CERTIFICATE_KEY \
