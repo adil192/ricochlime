@@ -58,8 +58,8 @@ Linux:
 [app_store]: https://apps.apple.com/app/ricochlime/id6459539993
 [web_app]: https://ricochlime.adil.hanney.org
 [flathub]: https://flathub.org/apps/com.adilhanney.ricochlime
-[download_windows]: https://github.com/adil192/ricochlime/releases/download/v1.11.12/RicochlimeInstaller_v1.11.12.exe
-[download_appimage]: https://github.com/adil192/ricochlime/releases/download/v1.11.12/Ricochlime-1.11.12-x86_64.AppImage
+[download_windows]: https://github.com/adil192/ricochlime/releases/download/v1.11.13/RicochlimeInstaller_v1.11.13.exe
+[download_appimage]: https://github.com/adil192/ricochlime/releases/download/v1.11.13/Ricochlime-1.11.13-x86_64.AppImage
 
 ## Technical
 
