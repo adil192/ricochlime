@@ -14,13 +14,14 @@ AppDir:
     - amd64
     allow_unauthenticated: true
     sources:
-    - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
-    - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
-    - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
-    - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security main restricted universe multiverse
+    - sourceline: deb http://archive.ubuntu.com/ubuntu/ noble main restricted universe multiverse
+    - sourceline: deb http://archive.ubuntu.com/ubuntu/ noble-updates main restricted universe multiverse
+    - sourceline: deb http://archive.ubuntu.com/ubuntu/ noble-backports main restricted universe multiverse
+    - sourceline: deb http://security.ubuntu.com/ubuntu noble-security main restricted universe multiverse
     include:
     - libgtk-3-0
     - zenity
+    - libjsoncpp25
   files:
     include: []
     exclude:
@@ -50,4 +51,5 @@ AppDir:
       command: ./AppRun
 AppImage:
   arch: x86_64
+  comp: zstd
   update-information: gh-releases-zsync|adil192|ricochlime|latest|Ricochlime-*-x86_64.AppImage.zsync
