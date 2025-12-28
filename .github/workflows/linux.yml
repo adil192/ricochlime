@@ -23,11 +23,13 @@ jobs:
             target-platform: linux-x64
             flutter-output-folder: build/linux/x64/release/bundle
             archive-suffix: x86_64
+            linuxdeploy-exe: linuxdeploy-x86_64.AppImage
           - runs-on: ubuntu-24.04-arm
             cache-name: ricochlimearm64
             target-platform: linux-arm64
             flutter-output-folder: build/linux/arm64/release/bundle
             archive-suffix: arm64
+            linuxdeploy-exe: linuxdeploy-aarch64.AppImage
     runs-on: ${{ matrix.arch.runs-on }}
     permissions:
       contents: write
@@ -91,12 +93,7 @@ jobs:
           chmod +x AppDir/ricochlime
 
           install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/share/metainfo/
-          install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/usr/share/metainfo/
-
-          mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
           install -Dm644 assets/icon/resized/icon-512x512.png AppDir/share/icons/hicolor/512x512/apps/com.adilhanney.ricochlime.png
-          install -Dm644 assets/icon/resized/icon-512x512.png AppDir/usr/share/icons/hicolor/512x512/apps/com.adilhanney.ricochlime.png
-
           install -Dm644 flatpak/com.adilhanney.ricochlime.desktop -t AppDir/share/applications/
 
           tar -C AppDir -czvf $archiveName .
@@ -114,102 +111,47 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.compress.outputs.archiveName }}
 
-  build-appimage:
-    name: Build AppImage
-    needs: build-linux
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    timeout-minutes: 10
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
+      # Now build AppImage
 
-      - name: Install AppImage dependencies
+      - name: Install FUSE
         run: |
           sudo add-apt-repository universe
-          sudo apt install libfuse2
-
-      - name: Download app archive
-        uses: actions/download-artifact@v6
-        with:
-          name: Ricochlime-Archive-x86_64
-
-      - name: Rename app archive
+          sudo apt-get install libfuse2t64
+      
+      - name: Prepare AppDir for AppImage
         run: |
-          mv Ricochlime_*.tar.gz Ricochlime-Linux-Portable.tar.gz
-
-      - name: Install appimage-builder
+          rm -rf linux/AppImage/AppDir/
+          mkdir -p linux/AppImage/AppDir/usr/bin/
+          cp -R AppDir/* linux/AppImage/AppDir/usr/bin/
+          mv linux/AppImage/AppDir/usr/bin/share linux/AppImage/AppDir/usr/
+          echo "LD_LIBRARY_PATH=$(pwd)/linux/AppImage/AppDir/usr/bin/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+          echo 'UPDATE_INFORMATION=gh-releases-zsync|adil192|ricochlime|latest|Ricochlime-*-${{ matrix.arch.archive-suffix }}.AppImage.zsync' >> $GITHUB_ENV
+      - name: Install linuxdeploy
+        working-directory: linux/AppImage
         run: |
-          sudo pip3 install --ignore-installed git+https://github.com/AppImageCrafters/appimage-builder.git
-
-      - name: Prepare build files
-        working-directory: appimage
-        run: |
-          mkdir AppDir
-          tar -xzvf ../Ricochlime-Linux-Portable.tar.gz -C AppDir
-
-      - name: Set AppImage version
-        working-directory: appimage
-        run: |
-          # replace line with "version: latest" with "version: $buildName"
-          buildName=$(grep -oP '(?<=version: ).*(?=\+)' ../pubspec.yaml)
-          sed -i "s/version: latest/version: ${buildName}/" AppImageBuilder.yml
-
+          wget https://github.com/linuxdeploy/linuxdeploy/releases/latest/download/${{ matrix.arch.linuxdeploy-exe }}
+          chmod +x ${{ matrix.arch.linuxdeploy-exe }}
       - name: Build AppImage
-        working-directory: appimage
-        run: |
-          appimage-builder --skip-test
+        working-directory: linux/AppImage
+        run: ./${{ matrix.arch.linuxdeploy-exe }} --appdir AppDir --output appimage
 
+      - run: tree linux/AppImage -L 3
+
+      - name: Rename AppImage
+        run: |
+          buildName=$(grep -oP '(?<=version: ).*(?=\+)' pubspec.yaml)
+          mv linux/AppImage/Ricochlime-*.AppImage       linux/AppImage/Ricochlime-${buildName}-${{ matrix.arch.archive-suffix }}.AppImage
+          mv linux/AppImage/Ricochlime-*.AppImage.zsync linux/AppImage/Ricochlime-${buildName}-${{ matrix.arch.archive-suffix }}.AppImage.zsync
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
-          name: AppImage artifact
-          path: appimage/Ricochlime-*-x86_64.AppImage*
+          name: AppImage artifact (${{ matrix.arch.target-platform }})
+          path: linux/AppImage/Ricochlime-*.AppImage*
 
       - name: Upload to GitHub release
         uses: svenstaro/upload-release-action@v2
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: appimage/Ricochlime-*-x86_64.AppImage*
+          file: linux/AppImage/Ricochlime-*.AppImage*
           file_glob: true
-
-  build-flatpak:
-    name: Build Flatpak
-    needs: build-linux
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
-      options: --privileged
-    steps:
-      - name: Checkout flathub repo
-        uses: actions/checkout@v5
-        with:
-          repository: flathub/com.adilhanney.ricochlime
-          submodules: recursive
-
-      - name: Download app archive
-        uses: actions/download-artifact@v6
-        with:
-          name: Ricochlime-Archive-x86_64
-
-      - name: Rename app archive
-        run: |
-          mv Ricochlime_*.tar.gz Ricochlime_snapshot.tar.gz
-
-      - name: Patch manifest to use local archive
-        run: |
-          # Add --no-same-owner to tar in build-commands
-          jq '.modules? |= map(if type=="object" and .name=="ricochlime" then .["build-commands"] |= map(if type=="string" then sub("tar -xf "; "tar --no-same-owner -xf ") else . end) else . end)' com.adilhanney.ricochlime.json > tmp.json && mv tmp.json com.adilhanney.ricochlime.json
-
-          # Replace sources with local archive
-          jq '.modules[]? |= if type=="object" and .name=="ricochlime" then .sources = [ {"type":"file","path":"./Ricochlime_snapshot.tar.gz"} ] else . end' com.adilhanney.ricochlime.json > tmp.json && mv tmp.json com.adilhanney.ricochlime.json
-
-      - name: Build Flatpak
-        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
-        with:
-          bundle: Ricochlime_snapshot.flatpak
-          manifest-path: com.adilhanney.ricochlime.json
-          upload-artifact: true
