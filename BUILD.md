@@ -12,6 +12,16 @@
       ```
 
       (Always use caution when running scripts from the internet including this one. This script should be fairly easy to understand if you're familiar with linux, but if you're unsure, follow the official instructions instead.)
+2. For Linux, you'll also need these dependencies:
+
+   Ubuntu:
+   ```bash
+   sudo apt install libasound2-dev
+   ```
+   Fedora:
+   ```bash
+   sudo dnf install alsa-lib-devel
+   ```
 
 ### Patches
 

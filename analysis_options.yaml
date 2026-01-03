@@ -111,7 +111,6 @@ linter:
 
     unawaited_futures: true
     unnecessary_await_in_return: true
-    avoid_void_async: true
 
     use_setters_to_change_properties: true
 

@@ -14,6 +14,7 @@ import 'package:ricochlime/pages/play.dart';
 import 'package:ricochlime/pages/settings.dart';
 import 'package:ricochlime/pages/shop.dart';
 import 'package:ricochlime/pages/tutorial.dart';
+import 'package:ricochlime/utils/ricochlime_audio.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:ricochlime/utils/shop_items.dart';
 import 'package:ricochlime/utils/stows.dart';
@@ -72,7 +73,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     SharedPreferences.setMockInitialValues({});
 
-    RicochlimeGame.disableBgMusic = true;
+    RicochlimeAudio.disableAudio = true;
     RicochlimeGame.reproducibleGoldenMode = true;
     setUp(() async {
       RicochlimeGame.instance.random = Random(123);

@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get -qq install -y \
         curl git unzip xz-utils zip libglu1-mesa clang cmake ninja-build mesa-utils libgtk-3-dev \
-        libsecret-1-dev libjsoncpp-dev webkit2gtk-4.1-dev && \
+        libjsoncpp-dev libasound2-dev && \
     apt-get clean
 
 # Create `nonroot` user

@@ -5,7 +5,6 @@ import 'dart:math';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +20,7 @@ import 'package:ricochlime/flame/components/walls.dart';
 import 'package:ricochlime/flame/game_data.dart';
 import 'package:ricochlime/flame/ticker.dart';
 import 'package:ricochlime/pages/game_over.dart';
+import 'package:ricochlime/utils/ricochlime_audio.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:ricochlime/utils/shop_items.dart';
 import 'package:ricochlime/utils/stows.dart';
@@ -57,6 +57,7 @@ class RicochlimeGame extends Forge2DGame
   late final player = Player();
   late final aimGuide = AimGuide();
   late final background = Background();
+  late final audio = RicochlimeAudio();
   bool get inputAllowed => state.value == .idle;
   bool inputCancelled = false;
 
@@ -97,8 +98,6 @@ class RicochlimeGame extends Forge2DGame
       'Expected height: $expectedHeight but got: ${size.y}',
     );
 
-    _initBgMusic();
-
     add(background);
 
     createBoundaries(
@@ -115,15 +114,6 @@ class RicochlimeGame extends Forge2DGame
     importFromGame(stows.currentGame.value);
   }
 
-  /// Whether [_initBgMusic] has been run.
-  bool bgMusicInitialized = false;
-
-  /// Handles fading in/out the background music.
-  Timer? _bgMusicFadeTimer;
-
-  @visibleForTesting
-  static bool disableBgMusic = false;
-
   /// Reduces sprite animations to make golden tests more predictable.
   /// If true, certain animations will just show the first frame.
   static bool reproducibleGoldenMode = false;
@@ -132,86 +122,6 @@ class RicochlimeGame extends Forge2DGame
   /// Not to be confused with [reproducibleGoldenMode] which turns off sprite
   /// animations and doesn't reduce moving elements.
   static bool reduceMotion = false;
-
-  /// Initializes the background music,
-  /// and starts playing it.
-  void _initBgMusic() {
-    if (disableBgMusic) return;
-    if (stows.bgmVolume.value < 0.01) return;
-    if (bgMusicInitialized) return;
-
-    log.info('Initializing bg music');
-    FlameAudio.bgm.initialize();
-    FlameAudio.bgm.play(
-      'bgm/Ludum_Dare_32_Track_4.ogg',
-      volume: stows.bgmVolume.value,
-    );
-    bgMusicInitialized = true;
-  }
-
-  Future<void> preloadBgMusic() async {
-    if (disableBgMusic) return;
-    if (stows.bgmVolume.value < 0.01) return;
-    await FlameAudio.audioCache.load('bgm/Ludum_Dare_32_Track_4.ogg');
-  }
-
-  void pauseBgMusic() {
-    if (disableBgMusic) return;
-    if (stows.bgmVolume.value < 0.01) return;
-    if (!bgMusicInitialized) return;
-
-    log.info('Fading out bg music');
-    _bgMusicFadeTimer?.cancel();
-    _bgMusicFadeTimer = _fadeBgmInOut(
-      startingVolume: FlameAudio.bgm.audioPlayer.volume,
-      targetVolume: 0,
-      onFinished: FlameAudio.bgm.pause,
-    );
-  }
-
-  void resumeBgMusic() {
-    if (disableBgMusic) return;
-    if (stows.bgmVolume.value < 0.01) return;
-    if (!bgMusicInitialized) _initBgMusic();
-    if (!bgMusicInitialized) return;
-
-    log.info('Fading in bg music');
-    _bgMusicFadeTimer?.cancel();
-    _bgMusicFadeTimer = _fadeBgmInOut(
-      startingVolume: FlameAudio.bgm.audioPlayer.volume,
-      targetVolume: stows.bgmVolume.value,
-      onFinished: null,
-    );
-  }
-
-  Timer _fadeBgmInOut({
-    required double startingVolume,
-    required double targetVolume,
-    required void Function()? onFinished,
-    int steps = 10,
-    int totalMs = 1000,
-  }) {
-    if (!FlameAudio.bgm.isPlaying) {
-      FlameAudio.bgm.resume();
-    }
-    return Timer.periodic(Duration(milliseconds: totalMs ~/ steps), (_) {
-      final newVolume =
-          FlameAudio.bgm.audioPlayer.volume +
-          (targetVolume - startingVolume) / steps;
-      final finished = targetVolume > startingVolume
-          ? newVolume >= targetVolume
-          : newVolume <= targetVolume;
-      if (finished) {
-        _bgMusicFadeTimer?.cancel();
-        _bgMusicFadeTimer = null;
-        FlameAudio.bgm.audioPlayer.setVolume(targetVolume);
-        onFinished?.call();
-        log.info('Finished fading bgm in/out to $targetVolume');
-      } else {
-        FlameAudio.bgm.audioPlayer.setVolume(newVolume);
-      }
-    });
-  }
 
   /// Imports the game state from [data], or resets the game if [data] is null.
   ///

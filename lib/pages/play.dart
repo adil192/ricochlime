@@ -26,7 +26,7 @@ class _PlayPageState extends State<PlayPage> {
     super.initState();
     RicochlimeGame.instance
       ..showGameOverDialog = showGameOverDialog
-      ..resumeBgMusic();
+      ..audio.playBgm();
     if (RicochlimeGame.instance.state.value == .gameOver) {
       WidgetsBinding.instance.addPostFrameCallback(
         (_) => RicochlimeGame.instance.gameOver(),
@@ -47,7 +47,7 @@ class _PlayPageState extends State<PlayPage> {
     RicochlimeGame.instance
       ..showGameOverDialog = null
       ..cancelCurrentTurn()
-      ..pauseBgMusic();
+      ..audio.pauseBgm();
     super.dispose();
   }
 
