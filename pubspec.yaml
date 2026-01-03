@@ -81,6 +81,7 @@ flutter:
     - assets/google_fonts/Atkinson_Hyperlegible/
     - assets/google_fonts/Silkscreen/
     - assets/audio/bgm/
+    - assets/audio/sfx/
 
 # ./scripts/generate_icons.sh
 icons_launcher:

@@ -317,7 +317,10 @@ class Monster extends BodyComponent with ContactCallbacks {
 
     if (isDead) return;
 
-    if (other is Bullet) hp -= 1;
+    if (other is Bullet) {
+      hp -= 1;
+      (game as RicochlimeGame).audio.playHitSfx();
+    }
   }
 }
 
