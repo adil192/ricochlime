@@ -13,7 +13,6 @@ settingsPage:
   gameplay: Игра
   accessibility: Доступность
   hyperlegibleFont: Большой шрифт
-  bgmVolume: Громкость фоновой музыки
   showUndoButton: Разрешить отмену бросков
   showReflectionInAimGuide: Показывать отскок в прицельной траектории
   biggerBullets: Большие мячики
@@ -22,6 +21,8 @@ settingsPage:
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
+  bgmVolume(OUTDATED): Громкость фоновой музыки
+  sfxVolume(OUTDATED): Громкость звуковых эффектов
   showFpsCounter(OUTDATED): Показать счетчик FPS
   stylizedPageTransitions(OUTDATED): Стилизованные переходы страниц
 gameOverPage: 

@@ -14,6 +14,8 @@ settingsPage:
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     Бұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.
+  bgmVolume(OUTDATED): Музыканың дыбыс деңгейі
+  sfxVolume(OUTDATED): Дыбыс әсерлерінің көлемі
   showFpsCounter(OUTDATED): FPS есептегішін көрсету
   stylizedPageTransitions(OUTDATED): Стильденген беттердің ауысуы
   showReflectionInAimGuide(OUTDATED): Мақсат нұсқаулығында рефлексияны көрсетіңіз
@@ -23,7 +25,6 @@ settingsPage:
   accessibility(OUTDATED): Қол жетімділік
   maxFps(OUTDATED): Максималды FPS
   showUndoButton(OUTDATED): Қозғалысты қайтаруға рұқсат беріңіз
-  bgmVolume(OUTDATED): Фондық музыканың дыбыс деңгейі
 gameOverPage: 
   title: Ойын бітті!
   highScoreNotBeaten: $p ұпай жинадыңыз!

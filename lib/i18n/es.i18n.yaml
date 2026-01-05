@@ -9,6 +9,8 @@ playPage:
   undo(OUTDATED): Deshacer movimiento
   highScore(OUTDATED): "Mejor: $p"
 settingsPage: 
+  bgmVolume(OUTDATED): Volumen de música
+  sfxVolume(OUTDATED): Volumen de efectos de sonido
   showFpsCounter(OUTDATED): Mostrar contador de FPS
   stylizedPageTransitions(OUTDATED): Transiciones de página estilizadas
   showReflectionInAimGuide(OUTDATED): Mostrar reflejo en la guía de objetivos.
@@ -19,7 +21,6 @@ settingsPage:
   maxFps(OUTDATED): FPS máx.
   showUndoButton(OUTDATED): Permitir deshacer movimientos
   title(OUTDATED): Ajustes
-  bgmVolume(OUTDATED): Volumen de la música de fondo
   appInfo(OUTDATED): Informacion de la applicacion
   licenseNotice(OUTDATED): |
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney

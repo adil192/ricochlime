@@ -17,7 +17,11 @@ class HomePage extends StatelessWidget {
 
   /// The last known value of the bgm volume,
   /// excluding when the volume is 0.
-  static double lastKnownOnVolume = 0.7;
+  static double lastKnownBgmVolume = 0.7;
+
+  /// The last known value of the sfx volume,
+  /// excluding when the volume is 0.
+  static double lastKnownSfxVolume = 0.7;
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +47,13 @@ class HomePage extends StatelessWidget {
                     style: const TextStyle(fontSize: kToolbarHeight),
                   ),
                   Row(
+                    spacing: 8,
                     children: [
                       ListenableBuilder(
                         listenable: stows.bgmVolume,
                         builder: (context, child) {
                           if (stows.bgmVolume.value > 0.05) {
-                            lastKnownOnVolume = stows.bgmVolume.value;
+                            lastKnownBgmVolume = stows.bgmVolume.value;
                           }
                           return NesTooltip(
                             message:
@@ -64,11 +69,38 @@ class HomePage extends StatelessWidget {
                           onPress: () {
                             stows.bgmVolume.value =
                                 stows.bgmVolume.value <= 0.05
-                                ? lastKnownOnVolume
+                                ? lastKnownBgmVolume
                                 : 0;
                           },
                           size: const Size.square(32),
                           icon: NesIcons.musicNote,
+                        ),
+                      ),
+                      ListenableBuilder(
+                        listenable: stows.sfxVolume,
+                        builder: (context, child) {
+                          if (stows.sfxVolume.value > 0.05) {
+                            lastKnownSfxVolume = stows.sfxVolume.value;
+                          }
+                          return NesTooltip(
+                            message:
+                                '${t.settingsPage.sfxVolume}: '
+                                '${stows.sfxVolume.value * 100 ~/ 1}%',
+                            child: Opacity(
+                              opacity: stows.sfxVolume.value <= 0.05 ? 0.25 : 1,
+                              child: child!,
+                            ),
+                          );
+                        },
+                        child: NesIconButton(
+                          onPress: () {
+                            stows.sfxVolume.value =
+                                stows.sfxVolume.value <= 0.05
+                                ? lastKnownSfxVolume
+                                : 0;
+                          },
+                          size: const Size.square(32),
+                          icon: NesIcons.bell,
                         ),
                       ),
                     ],

@@ -75,6 +75,8 @@ class _TranslationsSettingsPageEs extends TranslationsSettingsPageEn {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get bgmVolume => 'Volumen de música';
+	@override String get sfxVolume => 'Volumen de efectos de sonido';
 	@override String get showFpsCounter => 'Mostrar contador de FPS';
 	@override String get stylizedPageTransitions => 'Transiciones de página estilizadas';
 	@override String get showReflectionInAimGuide => 'Mostrar reflejo en la guía de objetivos.';
@@ -85,7 +87,6 @@ class _TranslationsSettingsPageEs extends TranslationsSettingsPageEn {
 	@override String get maxFps => 'FPS máx.';
 	@override String get showUndoButton => 'Permitir deshacer movimientos';
 	@override String get title => 'Ajustes';
-	@override String get bgmVolume => 'Volumen de la música de fondo';
 	@override String get appInfo => 'Informacion de la applicacion';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nEste programa no tiene ninguna garantía. Este es un software gratuito y puede redistribuirlo bajo ciertas condiciones.\n';
 }

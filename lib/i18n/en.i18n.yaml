@@ -14,7 +14,8 @@ settingsPage:
   accessibility: Accessibility
   hyperlegibleFont: Easy-to-read font
   stylizedPageTransitions: Stylized page transitions
-  bgmVolume: Bg music volume
+  bgmVolume: Music volume
+  sfxVolume: Sound effects volume
   showUndoButton: Allow undoing moves
   showReflectionInAimGuide: Show reflection in aim guide
   biggerBullets: Bigger bullets

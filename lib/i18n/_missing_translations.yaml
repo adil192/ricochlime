@@ -17,7 +17,8 @@ es:
     accessibility(OUTDATED): Accessibility
     hyperlegibleFont(OUTDATED): Easy-to-read font
     stylizedPageTransitions(OUTDATED): Stylized page transitions
-    bgmVolume(OUTDATED): Bg music volume
+    bgmVolume(OUTDATED): Music volume
+    sfxVolume(OUTDATED): Sound effects volume
     showUndoButton(OUTDATED): Allow undoing moves
     showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
     biggerBullets(OUTDATED): Bigger bullets
@@ -70,7 +71,8 @@ kk:
     accessibility(OUTDATED): Accessibility
     hyperlegibleFont(OUTDATED): Easy-to-read font
     stylizedPageTransitions(OUTDATED): Stylized page transitions
-    bgmVolume(OUTDATED): Bg music volume
+    bgmVolume(OUTDATED): Music volume
+    sfxVolume(OUTDATED): Sound effects volume
     showUndoButton(OUTDATED): Allow undoing moves
     showReflectionInAimGuide(OUTDATED): Show reflection in aim guide
     biggerBullets(OUTDATED): Bigger bullets
@@ -103,6 +105,8 @@ kk:
 ru: 
   settingsPage: 
     stylizedPageTransitions(OUTDATED): Stylized page transitions
+    bgmVolume(OUTDATED): Music volume
+    sfxVolume(OUTDATED): Sound effects volume
     showFpsCounter(OUTDATED): Show FPS counter
   shopPage: 
     buy1000Coins(OUTDATED): Buy 1000 coins

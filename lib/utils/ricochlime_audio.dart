@@ -109,6 +109,7 @@ class _AudioPool {
 
     _soLoud
       ..seek(handle, Duration.zero)
+      ..setVolume(handle, stows.sfxVolume.value)
       ..setPause(handle, false)
       ..schedulePause(handle, audioLength);
 
@@ -127,6 +128,7 @@ class _AudioPool {
   late final _loopingStartAt = audioLength * 0.9;
   Future<SoundHandle> _prepareHandle(AudioSource source) => _soLoud.play(
     source,
+    volume: stows.sfxVolume.value,
     paused: true,
     // Set looping to true to stop the handle being freed automatically.
     looping: true,

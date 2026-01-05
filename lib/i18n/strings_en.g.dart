@@ -110,8 +110,11 @@ class TranslationsSettingsPageEn {
 	/// en: 'Stylized page transitions'
 	String get stylizedPageTransitions => 'Stylized page transitions';
 
-	/// en: 'Bg music volume'
-	String get bgmVolume => 'Bg music volume';
+	/// en: 'Music volume'
+	String get bgmVolume => 'Music volume';
+
+	/// en: 'Sound effects volume'
+	String get sfxVolume => 'Sound effects volume';
 
 	/// en: 'Allow undoing moves'
 	String get showUndoButton => 'Allow undoing moves';

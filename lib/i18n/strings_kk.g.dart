@@ -76,8 +76,10 @@ class _TranslationsSettingsPageKk extends TranslationsSettingsPageEn {
 
 	// Translations
 	@override String get title => 'Баптау';
+	@override String get bgmVolume => 'Музыканың дыбыс деңгейі';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get sfxVolume => 'Дыбыс әсерлерінің көлемі';
 	@override String get showFpsCounter => 'FPS есептегішін көрсету';
 	@override String get stylizedPageTransitions => 'Стильденген беттердің ауысуы';
 	@override String get showReflectionInAimGuide => 'Мақсат нұсқаулығында рефлексияны көрсетіңіз';
@@ -87,7 +89,6 @@ class _TranslationsSettingsPageKk extends TranslationsSettingsPageEn {
 	@override String get accessibility => 'Қол жетімділік';
 	@override String get maxFps => 'Максималды FPS';
 	@override String get showUndoButton => 'Қозғалысты қайтаруға рұқсат беріңіз';
-	@override String get bgmVolume => 'Фондық музыканың дыбыс деңгейі';
 }
 
 // Path: gameOverPage

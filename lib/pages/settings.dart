@@ -83,6 +83,37 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
+          // Sound effects volume
+          Padding(
+            padding: listTilePadding,
+            child: NesContainer(
+              padding: EdgeInsets.zero,
+              child: ListTile(
+                tileColor: listTileColor,
+                shape: listTileShape,
+                contentPadding: listTileContentPadding,
+                title: Text(
+                  t.settingsPage.sfxVolume,
+                ),
+                leading: NesIcon(iconData: NesIcons.bell),
+                trailing: SizedBox(
+                  width: 200,
+                  child: ListenableBuilder(
+                    listenable: stows.sfxVolume,
+                    builder: (context, _) {
+                      return Slider.adaptive(
+                        value: stows.sfxVolume.value,
+                        onChanged: (value) {
+                          stows.sfxVolume.value = value;
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+
           // Whether to show the undo button
           Padding(
             padding: listTilePadding,

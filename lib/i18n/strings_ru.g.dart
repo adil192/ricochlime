@@ -80,6 +80,7 @@ class _TranslationsSettingsPageRu extends TranslationsSettingsPageEn {
 	@override String get accessibility => 'Доступность';
 	@override String get hyperlegibleFont => 'Большой шрифт';
 	@override String get bgmVolume => 'Громкость фоновой музыки';
+	@override String get sfxVolume => 'Громкость звуковых эффектов';
 	@override String get showUndoButton => 'Разрешить отмену бросков';
 	@override String get showReflectionInAimGuide => 'Показывать отскок в прицельной траектории';
 	@override String get biggerBullets => 'Большие мячики';
