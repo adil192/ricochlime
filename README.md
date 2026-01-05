@@ -61,6 +61,21 @@ Linux:
 [download_windows]: https://github.com/adil192/ricochlime/releases/download/v1.11.14/RicochlimeInstaller_v1.11.14.exe
 [download_appimage]: https://github.com/adil192/ricochlime/releases/download/v1.11.14/Ricochlime-1.11.14-x86_64.AppImage
 
+## Licenses
+
+- This repo (excluding assets) is licensed under the [AGPL-3.0](LICENSE.md) license.
+- Ricochlime uses third party works including audio assets, visual assets, and code packages, which are licensed separately.
+
+  All licenses are available in the app: Go to Settings >> App Info >> View Licenses.
+
+  Here is a non-exhaustive subset of those licenses:
+  | Asset | Purpose | License |
+  | --- | --- | --- |
+  | Abstraction - Music Loop Bundle | Background music | [Abstraction license](assets/audio/bgm/LICENSE.txt) |
+  | HitWood by [NoisyRedFox](https://freesound.org/people/NoisyRedFox/sounds/759825/) | Sound effect | [CC0](assets/audio/sfx/LICENSE) |
+  | Zelda-like tilesets and sprites by [ArMM1998](https://opengameart.org/content/zelda-like-tilesets-and-sprites) (modified by me) | Sprite images | [CC0](assets/images/LICENSE.md) |
+
+
 ## Technical
 
 The game is made with the [Flame](https://flame-engine.org/) game engine and [Flutter](https://flutter.dev/), allowing it to be deployed to a wide variety of platforms from a single codebase.
