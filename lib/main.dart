@@ -7,15 +7,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logging/logging.dart';
-import 'package:ricochlime/ads/iap.dart';
-import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/i18n/strings.g.dart';
 import 'package:ricochlime/nes/nes_theme.dart';
-import 'package:ricochlime/pages/home.dart';
-import 'package:ricochlime/utils/ricochlime_audio.dart';
+import 'package:ricochlime/pages/loading_page.dart';
 import 'package:ricochlime/utils/ricochlime_palette.dart';
 import 'package:ricochlime/utils/stows.dart';
 
+/// Also see [LoadingPage.tasks] for what is done during loading.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -25,18 +23,8 @@ Future<void> main() async {
     print('${record.level.name}: ${record.loggerName}: ${record.message}');
   });
 
-  unawaited(RicochlimeAudio.load());
   _addLicenses();
   GoogleFonts.config.allowRuntimeFetching = false;
-
-  await Future.wait([
-    LocaleSettings.useDeviceLocale(),
-    stows.highScore.waitUntilRead(),
-    GoogleFonts.pendingFonts([GoogleFonts.silkscreenTextTheme()]),
-    RicochlimeGame.instance.preloadSprites.future,
-  ]);
-
-  unawaited(RicochlimeIAP.init());
 
   runApp(TranslationProvider(child: const MyApp()));
 }
@@ -127,7 +115,7 @@ class _MyAppState extends State<MyApp> {
           secondary: RicochlimePalette.waterColorDark.darken(0.5),
         ),
       ),
-      home: const HomePage(),
+      home: const LoadingPage(),
     );
   }
 }
