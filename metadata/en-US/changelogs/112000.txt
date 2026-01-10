@@ -1,0 +1,2 @@
+• Added a sound effect for when a monster gets hit.
+• A loading bar will be briefly shown when you open the app.

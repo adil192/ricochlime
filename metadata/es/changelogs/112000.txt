@@ -1,0 +1,2 @@
+• Se agregó un efecto de sonido cuando un monstruo es golpeado. 
+• Se mostrará brevemente una barra de carga cuando abras la aplicación.
