@@ -97,7 +97,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
     _tallyTasks();
 
-    if (LoadingPage.tasks.every((task) => task.isComplete)) {
+    if (tasksCompleted >= tasksTotal) {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (context, _, _) => const HomePage(),
