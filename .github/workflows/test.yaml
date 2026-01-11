@@ -16,11 +16,11 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Setup cache (restore only)
         if: ${{ matrix.patch == 'foss' }}
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: |
             .dart_tool/
@@ -35,7 +35,7 @@ jobs:
 
       - name: Setup cache (restore and save)
         if: ${{ matrix.patch == 'regular' }}
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             .dart_tool/
@@ -65,6 +65,6 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         if: ${{ matrix.patch == 'regular' }}
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           files: coverage/lcov.info

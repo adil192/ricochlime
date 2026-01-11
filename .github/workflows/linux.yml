@@ -37,7 +37,7 @@ jobs:
     name: Build Linux (${{ matrix.arch.target-platform }})
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install apt dependencies
         uses: awalsh128/cache-apt-pkgs-action@latest
@@ -47,7 +47,7 @@ jobs:
           execute_install_scripts: true
 
       - name: Setup cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             .dart_tool/
@@ -99,7 +99,7 @@ jobs:
           tar -C AppDir -czvf $archiveName .
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Ricochlime-Archive-${{ matrix.arch.archive-suffix }}
           path: ${{ steps.compress.outputs.archiveName }}
