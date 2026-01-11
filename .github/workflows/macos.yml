@@ -44,9 +44,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
-      
-      - name: Remove dev dependencies
-        run: ./patches/remove_dev_dependencies.sh
 
       - name: Setup Flutter
         uses: adil192/setup-flutter-submodule@v1
@@ -75,11 +72,15 @@ jobs:
 
           xcode-project use-profiles --project macos/*.xcodeproj
 
+      - name: Remove dev dependencies
+        run: ./patches/remove_dev_dependencies.sh
       - run: flutter pub get
+      - name: Remove wasm libs
+        run: ./patches/remove_wasm_libs.sh
 
       - name: Build for macOS
         run: |
-          flutter build macos
+          flutter build macos --no-pub
 
       - name: Package for App Store
         id: package

@@ -60,9 +60,6 @@ jobs:
           xcodebuild -downloadPlatform iOS -version 18.0
           echo
 
-      - name: Remove dev dependencies
-        run: ./patches/remove_dev_dependencies.sh
-
       - name: Setup Flutter
         uses: adil192/setup-flutter-submodule@v1
         with:
@@ -85,12 +82,16 @@ jobs:
 
           xcode-project use-profiles --project ios/*.xcodeproj
 
+      - name: Remove dev dependencies
+        run: ./patches/remove_dev_dependencies.sh
       - run: flutter pub get
+      - name: Remove wasm libs
+        run: ./patches/remove_wasm_libs.sh
 
       - name: Build for iOS
         id: build
         run: |
-          flutter build ipa \
+          flutter build ipa --no-pub \
             --export-options-plist=$HOME/export_options.plist
 
           export ipaPath="Ricochlime_v${{ needs.get-version.outputs.buildName }}.ipa"

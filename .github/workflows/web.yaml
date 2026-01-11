@@ -37,19 +37,20 @@ jobs:
 
       - name: Install Pandoc
         run: sudo apt-get install -y pandoc
-      
-      - name: Remove dev dependencies
-        run: ./patches/remove_dev_dependencies.sh
-      - name: Remove proprietary dependencies
-        run: ./patches/foss.sh
 
       - name: Setup Flutter
         uses: adil192/setup-flutter-submodule@v1
         with:
           flutter-path: submodules/flutter
 
+      - name: Remove dev dependencies
+        run: ./patches/remove_dev_dependencies.sh
+      - name: Remove proprietary dependencies
+        run: ./patches/foss.sh
+      - run: flutter pub get
+
       - name: Build web
-        run: flutter build web --release
+        run: flutter build web --no-pub --release
 
       - name: Build privacy_policy.html
         run: ./scripts/build_privacy_policy_html.sh

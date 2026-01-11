@@ -51,20 +51,23 @@ jobs:
           key: ${{ runner.OS }}-ricochlime-windows-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
             ${{ runner.OS }}-ricochlime-windows-
-      
-      - name: Remove dev dependencies
-        shell: bash
-        run: ./patches/remove_dev_dependencies.sh
-      - name: Remove proprietary dependencies
-        shell: bash
-        run: ./patches/foss.sh
 
       - name: Setup Flutter
         uses: adil192/setup-flutter-submodule@v1
         with:
           flutter-path: submodules/flutter
 
+      - name: Remove dev dependencies
+        shell: bash
+        run: ./patches/remove_dev_dependencies.sh
+      - name: Remove proprietary dependencies
+        shell: bash
+        run: ./patches/foss.sh
       - run: flutter pub get
+        shell: bash
+      - name: Remove wasm libs
+        shell: bash
+        run: ./patches/remove_wasm_libs.sh
 
       - name: Build Windows
         shell: bash

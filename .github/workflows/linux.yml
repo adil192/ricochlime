@@ -61,11 +61,6 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-${{ matrix.arch.cache-name }}-
 
-      - name: Remove dev dependencies
-        run: ./patches/remove_dev_dependencies.sh
-      - name: Remove proprietary dependencies
-        run: ./patches/foss.sh
-
       - name: Setup Flutter
         uses: adil192/setup-flutter-submodule@v1
         with:
@@ -74,11 +69,17 @@ jobs:
       - name: Disable Flutter CLI animations
         run: flutter config --no-cli-animations
 
+      - name: Remove dev dependencies
+        run: ./patches/remove_dev_dependencies.sh
+      - name: Remove proprietary dependencies
+        run: ./patches/foss.sh
       - run: flutter pub get
+      - name: Remove wasm libs
+        run: ./patches/remove_wasm_libs.sh
 
       - name: Build Linux (${{ matrix.arch.target-platform }})
         run: |
-          flutter build linux \
+          flutter build linux --no-pub \
             --target-platform ${{ matrix.arch.target-platform }}
 
       - name: Compress Flutter build

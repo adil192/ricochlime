@@ -50,20 +50,20 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-ricochlime-ubuntu-
 
-      - name: FOSS patches
-        if: ${{ matrix.patch == 'foss' }}
-        run: |
-          ./patches/foss.sh
-
       - name: Setup Flutter
         uses: adil192/setup-flutter-submodule@v1
         with:
           flutter-path: submodules/flutter
 
+      - name: FOSS patches
+        if: ${{ matrix.patch == 'foss' }}
+        run: |
+          ./patches/foss.sh
+
       - run: flutter pub get
 
       - name: Run tests
-        run: flutter test --coverage
+        run: flutter test --no-pub --coverage
 
       - name: Upload coverage reports to Codecov
         if: ${{ matrix.patch == 'regular' }}

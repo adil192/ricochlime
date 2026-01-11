@@ -40,13 +40,6 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-ricochlime-ubuntu-
 
-      - name: Remove proprietary dependencies
-        run: ./patches/foss.sh
-        if: matrix.foss
-
-      - name: Remove dev dependencies
-        run: ./patches/remove_dev_dependencies.sh
-
       - name: Setup keystore
         env:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
@@ -72,10 +65,18 @@ jobs:
       - name: Disable Flutter CLI animations
         run: flutter config --no-cli-animations
 
+      - name: Remove proprietary dependencies
+        run: ./patches/foss.sh
+        if: matrix.foss
+
+      - name: Remove dev dependencies
+        run: ./patches/remove_dev_dependencies.sh
       - run: flutter pub get
+      - name: Remove wasm libs
+        run: ./patches/remove_wasm_libs.sh
 
       - name: Build apk
-        run: flutter build apk
+        run: flutter build apk --no-pub
 
       - name: Rename apk
         id: rename_apk
