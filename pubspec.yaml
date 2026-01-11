@@ -49,7 +49,7 @@ dependencies:
 
   shared_preferences: ^2.2.0
 
-  slang: ^4.4.0
+  slang: ^4.11.2
   slang_flutter: any
 
   stow_codecs: ^1.0.0
