@@ -12,11 +12,12 @@ on:
 jobs:
   check-flutter-submodule:
     name: Check if the Flutter submodule is up to date
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
+    if: ${{ github.repository == 'saber-notes/saber' }}
     timeout-minutes: 5
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Dart
         uses: dart-lang/setup-dart@v1
