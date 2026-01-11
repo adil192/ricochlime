@@ -67,4 +67,5 @@ jobs:
         if: ${{ matrix.patch == 'regular' }}
         uses: codecov/codecov-action@v5
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
