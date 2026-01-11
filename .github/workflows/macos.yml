@@ -45,6 +45,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
+      - name: Setup Xcode
+        run: |
+          echo "Selecting Xcode 26.1..."
+          sudo xcode-select -s /Applications/Xcode_26.1.app
+          xcode-select -p
+          echo
+
+          echo "Running Xcode first launch..."
+          xcodebuild -runFirstLaunch
+          echo
+
       - name: Setup Flutter
         uses: adil192/setup-flutter-submodule@v1
         with:
