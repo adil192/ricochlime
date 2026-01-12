@@ -97,6 +97,8 @@ jobs:
           export ipaPath="Ricochlime_v${{ needs.get-version.outputs.buildName }}.ipa"
           mv "$(find $(pwd) -name "*.ipa")" "$ipaPath"
           echo "ipaPath=$ipaPath" >> $GITHUB_OUTPUT
+        env:
+          NO_OPUS_OGG_LIBS: "1"
 
       - name: Restore keychain
         run: |

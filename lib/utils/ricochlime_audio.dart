@@ -15,10 +15,10 @@ final class RicochlimeAudio {
 
   static final _soLoudInitFuture = _soLoud.init(channels: .mono);
   static FutureOr<AudioSource> _hitSfxAudioSource = _soLoud.loadAsset(
-    'assets/audio/sfx/759825__noisyredfox__hitwood.ogg',
+    'assets/audio/sfx/759825__noisyredfox__hitwood.wav',
   );
   static FutureOr<AudioSource> _bgmAudioSource = _soLoud.loadAsset(
-    'assets/audio/bgm/Ludum_Dare_32_Track_4.ogg',
+    'assets/audio/bgm/Ludum_Dare_32_Track_4.wav',
   );
 
   /// Disable audio for testing purposes.
@@ -31,6 +31,7 @@ final class RicochlimeAudio {
     await _soLoudInitFuture;
     _hitSfxAudioSource = await _hitSfxAudioSource;
     _bgmAudioSource = await _bgmAudioSource;
+    _soLoud.setMaxActiveVoiceCount(32);
   }
 
   final log = Logger('RicochlimeAudio');

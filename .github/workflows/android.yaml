@@ -76,6 +76,8 @@ jobs:
 
       - name: Build apk
         run: flutter build apk --no-pub
+        env:
+          NO_OPUS_OGG_LIBS: "1"
 
       - name: Rename apk
         id: rename_apk
@@ -107,6 +109,8 @@ jobs:
       - name: Build aab
         if: ${{ matrix.foss == false }}
         run: flutter build appbundle
+        env:
+          NO_OPUS_OGG_LIBS: "1"
 
       - name: Rename aab
         if: ${{ matrix.foss == false }}

@@ -38,7 +38,7 @@ void _addLicenses() {
       '_ludum_dare_32_track_4',
     ], await rootBundle.loadString('assets/audio/bgm/LICENSE.txt'));
     yield LicenseEntryWithLineBreaks([
-      '_noisyredfox__hitwood.ogg',
+      '_noisyredfox__hitwood.wav',
     ], await rootBundle.loadString('assets/audio/sfx/LICENSE'));
     yield LicenseEntryWithLineBreaks(
       ['google_fonts'],

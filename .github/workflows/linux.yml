@@ -80,6 +80,8 @@ jobs:
         run: |
           flutter build linux --no-pub \
             --target-platform ${{ matrix.arch.target-platform }}
+        env:
+          NO_OPUS_OGG_LIBS: "1"
 
       - name: Compress Flutter build
         id: compress

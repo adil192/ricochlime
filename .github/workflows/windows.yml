@@ -70,8 +70,9 @@ jobs:
 
       - name: Build Windows
         shell: bash
-        run: |
-          flutter build windows
+        run: flutter build windows
+        env:
+          NO_OPUS_OGG_LIBS: "1"
 
       - name: Download Visual C++ Redistributable
         shell: bash

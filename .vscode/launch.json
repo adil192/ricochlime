@@ -7,19 +7,28 @@
     {
       "name": "ricochlime",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "env": {
+        "NO_OPUS_OGG_LIBS": "1"
+      }
     },
     {
       "name": "ricochlime (profile mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile"
+      "flutterMode": "profile",
+      "env": {
+        "NO_OPUS_OGG_LIBS": "1"
+      }
     },
     {
       "name": "ricochlime (release mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
+      "flutterMode": "release",
+      "env": {
+        "NO_OPUS_OGG_LIBS": "1"
+      }
     }
   ]
 }

@@ -54,6 +54,8 @@ jobs:
 
       - name: Build web
         run: flutter build web --no-pub --release
+        env:
+          NO_OPUS_OGG_LIBS: "1"
 
       - name: Build privacy_policy.html
         run: ./scripts/build_privacy_policy_html.sh
