@@ -1,0 +1,1 @@
+• Reduced app size by optimizing audio files.
