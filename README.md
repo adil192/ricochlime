@@ -64,14 +64,14 @@ Linux:
 ## Licenses
 
 - This repo (excluding assets) is licensed under the [AGPL-3.0](LICENSE.md) license.
-- Ricochlime uses third party works including audio assets, visual assets, and code packages, which are licensed separately.
+- Ricochlime uses third party works including audio assets, visual assets, and code packages, which are licensed independently.
 
   All licenses are available in the app: Go to Settings >> App Info >> View Licenses.
 
   Here is a non-exhaustive subset of those licenses:
   | Asset | Purpose | License |
   | --- | --- | --- |
-  | Abstraction - Music Loop Bundle | Background music | [Abstraction license](assets/audio/bgm/LICENSE.txt) |
+  | Abstraction - Music Loop Bundle | Background music | [CC0](assets/audio/bgm/LICENSE.txt) |
   | HitWood by [NoisyRedFox](https://freesound.org/people/NoisyRedFox/sounds/759825/) | Sound effect | [CC0](assets/audio/sfx/LICENSE) |
   | Zelda-like tilesets and sprites by [ArMM1998](https://opengameart.org/content/zelda-like-tilesets-and-sprites) (modified by me) | Sprite images | [CC0](assets/images/LICENSE.md) |
 

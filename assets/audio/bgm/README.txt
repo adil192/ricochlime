@@ -1,7 +1,10 @@
 Ricochlime notes:
 
-1. Converted from wav to ogg with this command: `oggenc -a Abstraction -t "Ludum Dare 32 - Track 4" -q 6 Ludum_Dare_32_Track_4.wav`. This brought the filesize down from 5.6MB to 0.9MB.
-2. Converted back to WAV (IMA ADPCM) due to codec restraints for FOSS builds with this command: `ffmpeg -i assets/audio/bgm/Ludum_Dare_32_Track_4.ogg -ac 1 -ar 22050 -c:a adpcm_ima_wav assets/audio/bgm/Ludum_Dare_32_Track_4.wav`. This also brought the filesize down from 0.9MB to 0.4MB.
+Due to codec restraints in FOSS builds, I had to convert this from OGG to WAV (IMA ADPCM) with this command:
+`ffmpeg -i "assets/audio/bgm/Ludum Dare 32 04.ogg" -ac 1 -ar 22050 -c:a adpcm_ima_wav assets/audio/bgm/Ludum_Dare_32_Track_4.wav`
+This also brought the filesize down from 0.9MB to 0.4MB.
+
+Also if you want to download the music loop bundle, it's the `music-loop-bundle-download_pre2023.zip` file at https://tallbeard.itch.io/music-loop-bundle.
 
 ---
 
