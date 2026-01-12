@@ -1,0 +1,1 @@
+• Tamaño reducido de la aplicación al eliminar el código específico de la web
