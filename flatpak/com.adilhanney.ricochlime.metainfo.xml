@@ -9,6 +9,9 @@
     <name>Ricochlime</name>
     <summary>Satisfying monster shooter</summary>
     <url type="homepage">https://github.com/adil192/ricochlime</url>
+    <url type="bugtracker">https://github.com/adil192/ricochlime/issues</url>
+    <url type="donation">https://github.com/sponsors/adil192</url>
+    <url type="vcs-browser">https://github.com/adil192/ricochlime</url>
 
     <developer id="com.adilhanney">
         <name>Adil Hanney</name>
