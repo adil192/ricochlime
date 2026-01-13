@@ -59,15 +59,23 @@
     <screenshots>
         <screenshot type="default">
             <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/1_home.png</image>
+            <caption>Main menu with quick volume controls and navigation to play, shop, tutorial, and settings.</caption>
         </screenshot>
         <screenshot type="default">
             <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/2_play.png</image>
+            <caption>Gameplay screenshot showcasing the player aiming between monsters to ricochet their shots.</caption>
         </screenshot>
         <screenshot type="default">
             <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/4_shop.png</image>
+            <caption>Shop with unlockable cosmetic bullet shapes and colors.</caption>
+        </screenshot>
+        <screenshot type="default">
+            <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/5_tutorial.png</image>
+            <caption>Tutorial explaining the game mechanics and controls.</caption>
         </screenshot>
         <screenshot type="default">
             <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/6_settings.png</image>
+            <caption>Settings for gameplay, accessibility, audio, performance, and app information.</caption>
         </screenshot>
     </screenshots>
 
