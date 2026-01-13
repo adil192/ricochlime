@@ -1,0 +1,26 @@
+// Project-local debug tasks
+//
+// For more documentation on how to configure debug tasks,
+// see: https://zed.dev/docs/debugger
+[
+  {
+    "label": "Ricochlime (debug)",
+    "adapter": "Dart",
+    "program": "lib/main.dart",
+    "type": "flutter",
+  },
+  {
+    "label": "Ricochlime (profile)",
+    "adapter": "Dart",
+    "program": "lib/main.dart",
+    "type": "flutter",
+    "args": ["--profile"],
+  },
+  {
+    "label": "Ricochlime (release)",
+    "adapter": "Dart",
+    "program": "lib/main.dart",
+    "type": "flutter",
+    "args": ["--release"],
+  },
+]

@@ -1,0 +1,33 @@
+{
+  "project_name": "Ricochlime",
+  "wrap_guides": [80],
+  "file_scan_exclusions": [
+    // Defaults from Zed
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    // For Ricochlime
+    "android/.gradle/",
+    "android/.kotlin/",
+    "submodules/*/*",
+    "linux/flutter/ephemeral/*",
+    "macos/Flutter/ephemeral/*",
+    "windows/flutter/ephemeral/*",
+    "**/.dart_tool/",
+    "**/.idea/",
+    "**/.vscode/",
+    "**/.flutter-plugins-dependencies",
+    "**/*.iml",
+  ],
+  "terminal": {
+    "env": {
+      "NO_OPUS_OGG_LIBS": "1",
+    },
+  },
+}
