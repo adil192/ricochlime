@@ -3,7 +3,7 @@ name: Publish to GitHub Pages
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -54,8 +54,6 @@ jobs:
 
       - name: Build web
         run: flutter build web --no-pub --release
-        env:
-          NO_OPUS_OGG_LIBS: "1"
 
       - name: Build privacy_policy.html
         run: ./scripts/build_privacy_policy_html.sh
@@ -70,8 +68,8 @@ jobs:
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
 
     # Deploy to the github-pages environment
     environment:

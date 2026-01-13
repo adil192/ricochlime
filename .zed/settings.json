@@ -25,9 +25,4 @@
     "**/.flutter-plugins-dependencies",
     "**/*.iml",
   ],
-  "terminal": {
-    "env": {
-      "NO_OPUS_OGG_LIBS": "1",
-    },
-  },
 }
