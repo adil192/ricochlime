@@ -77,6 +77,15 @@
     </branding>
 
     <releases>
+        <release version="1.12.3" date="2026-01-13">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.12.3</url>
+            <description>
+                <ul>
+                    <li>Reduced app size by removing unused icons</li>
+                    <li>Fixed arm64 Linux builds</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.12.2" date="2026-01-12">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.12.2</url>
             <description>
