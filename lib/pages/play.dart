@@ -20,13 +20,14 @@ class PlayPage extends StatefulWidget {
   State<PlayPage> createState() => _PlayPageState();
 }
 
-class _PlayPageState extends State<PlayPage> {
+class _PlayPageState extends State<PlayPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
     RicochlimeGame.instance
       ..showGameOverDialog = showGameOverDialog
       ..audio.playBgm();
+    WidgetsBinding.instance.addObserver(this);
     if (RicochlimeGame.instance.state.value == .gameOver) {
       WidgetsBinding.instance.addPostFrameCallback(
         (_) => RicochlimeGame.instance.gameOver(),
@@ -48,7 +49,19 @@ class _PlayPageState extends State<PlayPage> {
       ..showGameOverDialog = null
       ..cancelCurrentTurn()
       ..audio.pauseBgm();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case .resumed:
+        RicochlimeGame.instance.audio.playBgm();
+      case .detached || .inactive || .hidden || .paused:
+        RicochlimeGame.instance.audio.pauseBgm();
+    }
   }
 
   /// Whether the game over dialog is currently showing,
