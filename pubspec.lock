@@ -182,11 +182,12 @@ packages:
   flutter_soloud:
     dependency: "direct main"
     description:
-      name: flutter_soloud
-      sha256: "5d0277ab9e7516cc9c0558f739c158b638bb11ad2f4388a743d35eb3baf54b1c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.4.8"
+      path: "."
+      ref: f176d14316a8a00125f9091159a148be532850ff
+      resolved-ref: f176d14316a8a00125f9091159a148be532850ff
+      url: "https://github.com/adil192/flutter_soloud.git"
+    source: git
+    version: "3.4.9"
   flutter_test:
     dependency: "direct dev"
     description: flutter
