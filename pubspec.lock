@@ -185,7 +185,7 @@ packages:
       path: "."
       ref: f176d14316a8a00125f9091159a148be532850ff
       resolved-ref: f176d14316a8a00125f9091159a148be532850ff
-      url: "https://github.com/adil192/flutter_soloud.git"
+      url: "https://github.com/alnitak/flutter_soloud.git"
     source: git
     version: "3.4.9"
   flutter_test:

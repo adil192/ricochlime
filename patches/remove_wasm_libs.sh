@@ -19,7 +19,7 @@ fi
 echo "Using PUB_CACHE at: $PUB_CACHE"
 
 # Remove asset references in pubspec.yaml
-for pubspec_file in "$PUB_CACHE"/hosted/pub.dev/flutter_soloud-*/pubspec.yaml; do
+for pubspec_file in "$PUB_CACHE"/{hosted/pub.dev,git}/flutter_soloud-*/pubspec.yaml; do
   if [ ! -f "$pubspec_file" ]; then
     echo "Warning: pubspec.yaml not found in $pubspec_file"
     continue
@@ -29,18 +29,6 @@ for pubspec_file in "$PUB_CACHE"/hosted/pub.dev/flutter_soloud-*/pubspec.yaml; d
   # pubspec.yaml contains assets like `web/*.wasm` and `web/*.js`
   # Remove lines containing `web/*.wasm` and `web/*.js`
   sed -i.bak -E '/^[[:space:]]*-[[:space:]]*web\/.*\.(js|wasm)[[:space:]]*$/d' "$pubspec_file"
-done
-
-for dir in "$PUB_CACHE"/hosted/pub.dev/flutter_soloud-*/web; do
-  if [ ! -d "$dir" ]; then
-    echo "Warning: web directory not found in $dir"
-    continue
-  fi
-  echo "Removing WebAssembly files in $dir"
-
-  # Remove all .wasm and .js files in the web directory
-  rm -vf "$dir"/*.wasm
-  rm -vf "$dir"/*.js
 done
 
 echo "Done!"

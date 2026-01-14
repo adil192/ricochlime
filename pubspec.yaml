@@ -73,8 +73,7 @@ dependency_overrides:
   # https://github.com/alnitak/flutter_soloud/pull/395
   flutter_soloud:
     git:
-      url: https://github.com/adil192/flutter_soloud.git
-      # ref: fix/builds-for-linux-arm64
+      url: https://github.com/alnitak/flutter_soloud.git
       ref: f176d14316a8a00125f9091159a148be532850ff
 
 flutter:
