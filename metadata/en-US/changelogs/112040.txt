@@ -1,0 +1,1 @@
+Game music is paused when the game is backgrounded.

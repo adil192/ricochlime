@@ -1,0 +1,1 @@
+La música del juego se pausa cuando el juego está en segundo plano.

@@ -88,6 +88,15 @@
     </branding>
 
     <releases>
+        <release version="1.12.4" date="2026-01-14">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.12.4</url>
+            <description>
+                <ul>
+                    <li>Game music is paused when the game is backgrounded.</li>
+                    <li>Improved Flathub listing with more URLs and screenshot captions.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.12.3" date="2026-01-13">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.12.3</url>
             <description>
