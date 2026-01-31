@@ -190,11 +190,10 @@ packages:
   flutter_soloud:
     dependency: "direct main"
     description:
-      path: "."
-      ref: f176d14316a8a00125f9091159a148be532850ff
-      resolved-ref: f176d14316a8a00125f9091159a148be532850ff
-      url: "https://github.com/alnitak/flutter_soloud.git"
-    source: git
+      name: flutter_soloud
+      sha256: eaabeac993173aa06b58c720803bff67337f9913ea6c5ce701e0e186724f4b0f
+      url: "https://pub.dev"
+    source: hosted
     version: "3.4.9"
   flutter_test:
     dependency: "direct dev"

@@ -69,13 +69,6 @@ dev_dependencies:
   simplytranslate: ^2.0.1
   yaml: ^3.1.2
 
-dependency_overrides:
-  # https://github.com/alnitak/flutter_soloud/pull/395
-  flutter_soloud:
-    git:
-      url: https://github.com/alnitak/flutter_soloud.git
-      ref: f176d14316a8a00125f9091159a148be532850ff
-
 flutter:
   uses-material-design: true
 
