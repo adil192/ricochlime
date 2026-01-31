@@ -4,12 +4,10 @@ import 'package:flame/components.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ricochlime/flame/ricochlime_game.dart';
 import 'package:ricochlime/utils/ricochlime_audio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   test('getSkullTiles bottom rows stay consistent', () async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    SharedPreferences.setMockInitialValues({});
     RicochlimeAudio.disableAudio = true;
     RicochlimeGame.reproducibleGoldenMode = true;
     RicochlimeGame.instance.random = Random(123);

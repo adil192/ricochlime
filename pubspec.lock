@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.2"
+  code_assets:
+    dependency: transitive
+    description:
+      name: code_assets
+      sha256: "83ccdaa064c980b5596c35dd64a8d3ecc68620174ab9b90b6343b753aa721687"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   collection:
     dependency: transitive
     description:
@@ -206,14 +214,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.14.2+1"
+  glob:
+    dependency: transitive
+    description:
+      name: glob
+      sha256: c3f1ee72c96f8f78935e18aa8cecced9ab132419e8625dc187e1c2408efc20de
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.3"
   golden_screenshot:
     dependency: "direct dev"
     description:
       name: golden_screenshot
-      sha256: "2f7807322939ea921c593376c3d5f7c7b4b72e6c7bd8df927caff2b0d5f1d19a"
+      sha256: "10716886073feaae43d1fb4f4af45aece147717d99cb8065a6052f8c306ec7e7"
       url: "https://pub.dev"
     source: hosted
-    version: "9.1.2"
+    version: "10.0.0"
   google_fonts:
     dependency: "direct main"
     description:
@@ -238,6 +254,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  hooks:
+    dependency: transitive
+    description:
+      name: hooks
+      sha256: "5d309c86e7ce34cd8e37aa71cb30cb652d3829b900ab145e4d9da564b31d59f7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   http:
     dependency: transitive
     description:
@@ -314,10 +338,10 @@ packages:
     dependency: transitive
     description:
       name: json_annotation
-      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
+      sha256: "805fa86df56383000f640384b282ce0cb8431f1a7a2396de92fb66186d8c57df"
       url: "https://pub.dev"
     source: hosted
-    version: "4.9.0"
+    version: "4.10.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -346,10 +370,10 @@ packages:
     dependency: transitive
     description:
       name: lints
-      sha256: a5e2b223cb7c9c8efdc663ef484fdd95bb243bff242ef5b13e26883547fce9a0
+      sha256: "12f842a479589fea194fe5c5a3095abc7be0c1f2ddfa9a0e76aed1dbd26a87df"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.0"
+    version: "6.1.0"
   logging:
     dependency: "direct main"
     description:
@@ -406,6 +430,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  native_toolchain_c:
+    dependency: transitive
+    description:
+      name: native_toolchain_c
+      sha256: "89e83885ba09da5fdf2cdacc8002a712ca238c28b7f717910b34bcd27b0d03ac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.4"
   nes_ui:
     dependency: "direct main"
     description:
@@ -414,6 +446,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.0"
+  objective_c:
+    dependency: transitive
+    description:
+      name: objective_c
+      sha256: "983c7fa1501f6dcc0cb7af4e42072e9993cb28d73604d25ebf4dab08165d997e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.2.5"
   ordered_set:
     dependency: transitive
     description:
@@ -458,10 +498,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_foundation
-      sha256: "6d13aece7b3f5c5a9731eaf553ff9dcbc2eff41087fd2df587fd0fed9a3eb0c4"
+      sha256: "2a376b7d6392d80cd3705782d2caa734ca4727776db0b6ec36ef3f1855197699"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.1"
+    version: "2.6.0"
   path_provider_linux:
     dependency: transitive
     description:
@@ -534,6 +574,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.3"
+  pub_semver:
+    dependency: transitive
+    description:
+      name: pub_semver
+      sha256: "5bfcf68ca79ef689f8990d1160781b4bad40a3bd5e5218ad4076ddb7f4081585"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   screen_retriever:
     dependency: transitive
     description:
@@ -586,10 +634,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "83af5c682796c0f7719c2bbf74792d113e40ae97981b8f266fa84574573556bc"
+      sha256: cbc40be9be1c5af4dab4d6e0de4d5d3729e6f3d65b89d21e1815d57705644a6f
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.18"
+    version: "2.4.20"
   shared_preferences_foundation:
     dependency: transitive
     description:
@@ -647,18 +695,18 @@ packages:
     dependency: "direct main"
     description:
       name: slang
-      sha256: e97bbb72af7882e4f714b90a8a07f787ed2e5b6c901a1e2b7f73c11772247fa9
+      sha256: "13e3b6f07adc51ab751e7889647774d294cbce7a3382f81d9e5029acfe9c37b2"
       url: "https://pub.dev"
     source: hosted
-    version: "4.11.2"
+    version: "4.12.0"
   slang_flutter:
     dependency: "direct main"
     description:
       name: slang_flutter
-      sha256: a6ebc0a855faa62053f44d333ae3b3cde24945357e88506d1d3e7fb0d3fc0c70
+      sha256: "0a4545cca5404d6b7487cf61cf1fe56c52daeb08de56a7574ee8381fbad035a0"
       url: "https://pub.dev"
     source: hosted
-    version: "4.11.0"
+    version: "4.12.0"
   source_span:
     dependency: transitive
     description:
@@ -679,10 +727,10 @@ packages:
     dependency: transitive
     description:
       name: stow
-      sha256: "4b8dbb36bb4fdbd47e9c3d3ce434e32dd91c98dd1ed469c769d5ebeb90949948"
+      sha256: b918efab4a9d81efb8b5ff55a8b0ed60e9f7fcb6f6b88909fbebb47881830edb
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1+1"
+    version: "0.6.0"
   stow_codecs:
     dependency: "direct main"
     description:
@@ -695,10 +743,10 @@ packages:
     dependency: "direct main"
     description:
       name: stow_plain
-      sha256: a463db00b22d5793cd9afb1137ca54783a29aca1a12242d5760b0a101cb71f41
+      sha256: d2bd4d7138f23feab8eeab79a16551f641459a28db7ec0924eb4f944a7261d69
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "0.6.0"
   stream_channel:
     dependency: transitive
     description:
@@ -823,10 +871,10 @@ packages:
     dependency: transitive
     description:
       name: yaru
-      sha256: "704e10633b173d8f5308677d0879d31339204c5ae063aa904e46d8182e1cf191"
+      sha256: "859f062535a51585689f7d72904e9533f7b1df93c0fe2e860591cff8f9371162"
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.0"
+    version: "9.0.1"
   yaru_window:
     dependency: transitive
     description:
@@ -868,5 +916,5 @@ packages:
     source: hosted
     version: "0.0.4"
 sdks:
-  dart: ">=3.10.0 <4.0.0"
-  flutter: ">=3.38.0"
+  dart: ">=3.10.3 <4.0.0"
+  flutter: ">=3.38.4"

@@ -50,7 +50,7 @@ dependencies:
   slang_flutter: any
 
   stow_codecs: ^1.0.0
-  stow_plain: ^0.5.1
+  stow_plain: ^0.6.0
 
 dev_dependencies:
   args: ^2.5.0
@@ -60,7 +60,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  golden_screenshot: ^9.0.0
+  golden_screenshot: ^10.0.0
 
   icons_launcher: ^3.0.0
 
