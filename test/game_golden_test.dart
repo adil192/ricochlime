@@ -82,10 +82,10 @@ void main() {
       stows.highScore.value = 62;
     });
 
-    ShopItems.bulletColors[1].purchase(noCost: true);
     ShopItems.bulletColors[2].purchase(noCost: true);
-    ShopItems.bulletColors[7].purchase(noCost: true);
-    ShopItems.bulletColors[9].purchase(noCost: true);
+    ShopItems.bulletColors[3].purchase(noCost: true);
+    ShopItems.bulletColors[8].purchase(noCost: true);
+    ShopItems.bulletColors[10].purchase(noCost: true);
 
     _testGame(
       frameColors: ScreenshotFrameColors.dark,

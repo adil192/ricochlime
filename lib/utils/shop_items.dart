@@ -14,6 +14,7 @@ final _sharedPreferences = SharedPreferences.getInstance();
 abstract class ShopItems {
   static final bulletColors = List<BulletColorShopItem>.unmodifiable([
     BulletColorShopItem(color: Colors.white, price: -1),
+    BulletColorShopItem(color: Colors.black, price: -1),
     for (final color in [
       Colors.pink,
       RicochlimePalette.waterColor,
@@ -25,7 +26,6 @@ abstract class ShopItems {
       Colors.brown,
       Colors.indigo,
       Colors.red,
-      Colors.black,
     ])
       BulletColorShopItem(color: color, price: 200),
   ]);
