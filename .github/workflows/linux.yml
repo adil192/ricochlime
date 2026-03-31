@@ -99,7 +99,7 @@ jobs:
           tar -C AppDir -czvf $archiveName .
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: Ricochlime-Archive-${{ matrix.arch.archive-suffix }}
           path: ${{ steps.compress.outputs.archiveName }}
@@ -143,7 +143,7 @@ jobs:
           mv linux/AppImage/Ricochlime-*.AppImage       linux/AppImage/Ricochlime-${buildName}-${{ matrix.arch.archive-suffix }}.AppImage
           mv linux/AppImage/Ricochlime-*.AppImage.zsync linux/AppImage/Ricochlime-${buildName}-${{ matrix.arch.archive-suffix }}.AppImage.zsync
       - name: Upload artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: AppImage artifact (${{ matrix.arch.target-platform }})
           path: linux/AppImage/Ricochlime-*.AppImage*
