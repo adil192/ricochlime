@@ -4,41 +4,31 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-import 'dart:math';
 
-import 'package:ricochlime/utils/locales.dart';
-import 'package:ricochlime/utils/version.dart';
-import 'package:simplytranslate/simplytranslate.dart';
-import 'package:simplytranslate/src/langs/language.dart';
+import 'src/get_native_name.dart';
+import 'src/lms_translator.dart';
 
-const nearestLocaleCodes = <String, String>{};
+late final int buildNumber;
 
-Future<String> getEnglishChangelog() async {
-  final file = File('metadata/en-US/changelogs/$buildNumber.txt');
-  final changelog = await file.readAsString();
-  return changelog;
-}
-
-Future symlinkChangelog(String localeCode) async {
-  final fileNormal = File('metadata/$localeCode/changelogs/$buildNumber.txt');
-  final fileFDroid = Link(
-    'metadata/$localeCode/changelogs/${buildNumber}3.txt',
-  );
-  if (fileFDroid.existsSync()) return;
-  await fileFDroid.create(fileNormal.path);
+void copyChangelogForFdroid(String localeCode) async {
+  final normal = File('metadata/$localeCode/changelogs/$buildNumber.txt');
+  final fdroid = File('metadata/$localeCode/changelogs/${buildNumber}3.txt');
+  normal.copySync(fdroid.path);
 }
 
 void main() async {
-  final random = Random();
-
-  final useLibreEngine = random.nextBool();
-  print('Using ${useLibreEngine ? 'Libre' : 'Google'} translation engine...\n');
-  final translator = SimplyTranslator(
-    useLibreEngine ? EngineType.libre : EngineType.google,
+  buildNumber = int.parse(
+    await Process.runSync('grep', [
+      '-oP',
+      r'version:\s*\d+\.\d+\.\d+\+\K\d+',
+      'pubspec.yaml',
+    ]).stdout,
   );
 
-  final englishChangelog = await getEnglishChangelog();
-  print('English changelog for $buildName ($buildNumber):');
+  final englishChangelog = File(
+    'metadata/en-US/changelogs/$buildNumber.txt',
+  ).readAsStringSync();
+  print('English changelog for $buildNumber:');
   print(englishChangelog);
 
   if (englishChangelog.length > 500) {
@@ -50,83 +40,45 @@ void main() async {
     return;
   }
 
-  final localeCodes = localeNames.keys.toList();
+  final localeCodes = Directory('lib/i18n')
+      .listSync()
+      .whereType<File>()
+      .map((f) => f.uri.pathSegments.last)
+      .where((name) => name.endsWith('.i18n.yaml'))
+      .map((name) => name.replaceFirst('.i18n.yaml', ''))
+      .toList();
 
-  final String total = localeCodes.length.toString();
+  late final translator = LmsTranslator.create();
 
   var someTranslationsFailed = false;
-  for (int i = 0; i < localeCodes.length; i++) {
+  for (var i = 0; i < localeCodes.length; i++) {
     final localeCode = localeCodes[i];
-    final localeName = localeNames[localeCode];
+    late final localeName = getNativeName(localeCode);
 
     /// The step number and total number of steps.
     /// e.g. 1/10
-    final stepPrefix = '${(i + 1).toString().padLeft(total.length)}/$total';
+    final stepPrefix = '${(i + 1).toString().padLeft(2)}/${localeCodes.length}';
 
     if (localeCode == 'en') {
-      await symlinkChangelog('en-US');
-      print('$stepPrefix. Skipped $localeCode ($localeName)');
+      copyChangelogForFdroid('en-US');
       continue;
     }
 
     final file = File('metadata/$localeCode/changelogs/$buildNumber.txt');
     if (file.existsSync()) {
-      print(
-        '$stepPrefix. '
-        'Skipped $localeCode ($localeName) because it already exists',
-      );
       continue;
     } else {
-      print('$stepPrefix. Translating to $localeCode ($localeName)...');
+      print('$stepPrefix. Translating to $localeName ($localeCode)...');
     }
 
-    final String nearestLocaleCode;
-    if (LanguageList.contains(localeCode)) {
-      nearestLocaleCode = localeCode;
-    } else if (nearestLocaleCodes.containsKey(localeCode)) {
-      nearestLocaleCode = nearestLocaleCodes[localeCode]!;
-    } else if (LanguageList.contains(
-      localeCode.substring(0, localeCode.indexOf('-')),
-    )) {
-      nearestLocaleCode = localeCode.substring(0, localeCode.indexOf('-'));
-    } else {
-      print(
-        '${' ' * stepPrefix.length}  ! Language not supported, skipping...',
-      );
-      someTranslationsFailed = true;
-      continue;
-    }
-    if (localeCode != nearestLocaleCode) {
-      print('${' ' * stepPrefix.length}  - Selected $nearestLocaleCode');
-    }
-
-    String translatedChangelog;
-    try {
-      translatedChangelog = await translator
-          .translateSimply(englishChangelog, from: 'en', to: nearestLocaleCode)
-          .then((translation) => translation.translations.text)
-          .timeout(const Duration(seconds: 5));
-    } catch (e) {
-      print('${' ' * stepPrefix.length}  ! Translation failed, skipping...');
-      someTranslationsFailed = true;
-      continue;
-    }
+    var translatedChangelog = (await translator).translate(
+      englishChangelog,
+      to: '$localeName ($localeCode)',
+    );
 
     if (!translatedChangelog.endsWith('\n')) {
       // translations sometimes don't end with a newline
       translatedChangelog += '\n';
-    }
-
-    // Response might be something like
-    // "Invalid request: request (276) exceeds text limit (250)"
-    const failurePrefixes = [
-      'Invalid request: request (',
-      'None is not supported',
-    ];
-    if (failurePrefixes.any(translatedChangelog.startsWith)) {
-      print('${' ' * stepPrefix.length}  ! Translation invalid, skipping...');
-      someTranslationsFailed = true;
-      continue;
     }
 
     const bullet = '•';
@@ -159,12 +111,14 @@ void main() async {
 
     await file.create(recursive: true);
     await file.writeAsString(translatedChangelog);
-    await symlinkChangelog(localeCode);
+    copyChangelogForFdroid(localeCode);
   }
 
   if (someTranslationsFailed) {
     print('\nSome translations failed: please re-run this script.');
+    exit(1);
   } else {
     print('\nAll translations succeeded!');
+    exit(0);
   }
 }

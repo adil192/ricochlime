@@ -1,16 +1,15 @@
 #!/usr/bin/env dart
-// Run `dart scripts/translate_app.dart` to generate the changelogs.
-
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
-import 'package:simplytranslate/simplytranslate.dart';
-import 'package:simplytranslate/src/langs/language.dart';
 import 'package:yaml/yaml.dart';
 
-late SimplyTranslator translator;
+import 'src/get_native_name.dart';
+import 'src/lms_translator.dart';
+
+final translator = LmsTranslator.create();
 
 final Set<String> newlyTranslatedPaths = {};
 
@@ -20,58 +19,31 @@ Future<YamlMap> _getMissingTranslations() async {
   return loadYaml(yaml) as YamlMap;
 }
 
-String _nearestLocaleCode(String localeCode) {
-  const nearestLocaleCodes = <String, String>{};
-
-  if (LanguageList.contains(localeCode)) {
-    return localeCode;
-  } else if (nearestLocaleCodes.containsKey(localeCode)) {
-    return nearestLocaleCodes[localeCode]!;
-  } else if (LanguageList.contains(localeCode.split('-').first)) {
-    return localeCode.split('-').first;
-  } else {
-    throw 'No nearest language code found for $localeCode.';
-  }
-}
-
 /// Translate the given tree of strings in place.
 /// Note that the tree can contain lists, maps, and strings.
 Future<void> translateTree(
   String languageCode,
   YamlMap tree,
-  List<String> pathOfKeys,
+  List<Object> pathOfKeys,
 ) async {
   // first translate all direct descendants that are strings
   for (final key in tree.keys) {
     if (key is! String) continue;
     if (key.endsWith('(OUTDATED)')) continue;
 
-    final pathToKey = [...pathOfKeys, key].join('.');
-    if (newlyTranslatedPaths.contains('$languageCode/$pathToKey')) continue;
+    final childPathOfKeys = [...pathOfKeys, key];
+    final childPathString = childPathOfKeys.join('.');
+    if (newlyTranslatedPaths.contains('$languageCode/$childPathString')) {
+      continue;
+    }
 
     final value = tree[key];
     if (value is! String) continue;
 
-    final translated = await translateString(translator, languageCode, value);
+    final translated = await translateString(languageCode, value);
 
-    // error occured in translation, so skip for now
-    if (translated == null || translated == value) continue;
-
-    try {
-      await Process.run('dart', [
-        'run',
-        'slang',
-        'add',
-        languageCode,
-        pathToKey,
-        translated,
-      ]);
-    } catch (e) {
-      print('    Adding translation failed: $e');
-      errorOccurredInTranslatingTree = true;
-      continue;
-    }
-    newlyTranslatedPaths.add('$languageCode/$pathToKey');
+    _insert(languageCode, childPathOfKeys, translated);
+    newlyTranslatedPaths.add('$languageCode/$childPathString');
   }
 
   // then recurse
@@ -97,97 +69,56 @@ Future<void> translateTree(
 Future<void> translateList(
   String languageCode,
   YamlList list,
-  List<String> pathOfKeys,
+  List<Object> pathOfKeys,
 ) async {
   // first translate all direct descendants that are strings
-  for (int i = 0; i < list.length; ++i) {
-    final pathToKey = [...pathOfKeys, i].join('.');
-    if (newlyTranslatedPaths.contains('$languageCode/$pathToKey')) continue;
+  for (var i = 0; i < list.length; ++i) {
+    final childPathOfKeys = [...pathOfKeys, i];
+    final childPathString = childPathOfKeys.join('.');
+    if (newlyTranslatedPaths.contains('$languageCode/$childPathString')) {
+      continue;
+    }
 
     final value = list[i];
     if (value is! String) continue;
 
-    final translated = await translateString(translator, languageCode, value);
+    final translated = await translateString(languageCode, value);
 
-    // error occurred in translation, so skip for now
-    if (translated == null || translated == value) continue;
-
-    try {
-      await Process.run('dart', [
-        'run',
-        'slang',
-        'add',
-        languageCode,
-        pathToKey,
-        translated,
-      ]);
-    } catch (e) {
-      print('    Adding translation failed: $e');
-      errorOccurredInTranslatingTree = true;
-      continue;
-    }
-    newlyTranslatedPaths.add('$languageCode/$pathToKey');
+    _insert(languageCode, childPathOfKeys, translated);
+    newlyTranslatedPaths.add('$languageCode/$childPathString');
   }
 
   // then recurse
-  for (int i = 0; i < list.length; ++i) {
+  for (var i = 0; i < list.length; ++i) {
     // then recurse
     final value = list[i];
     if (value is String) {
       // already done
     } else if (value is YamlMap) {
-      await translateTree(languageCode, value, [...pathOfKeys, '$i']);
+      await translateTree(languageCode, value, [...pathOfKeys, i]);
     } else if (value is YamlList) {
-      await translateList(languageCode, value, [...pathOfKeys, '$i']);
+      await translateList(languageCode, value, [...pathOfKeys, i]);
     } else {
       throw Exception('Unknown type: ${value.runtimeType}');
     }
   }
 }
 
-Future<String?> translateString(
-  SimplyTranslator translator,
-  String languageCode,
-  String english,
-) async {
-  print(
-    '  Translating into $languageCode: '
-    '${english.length > 20 ? '${english.substring(0, 20)}...' : english}',
-  );
+Future<String> translateString(String localeCode, String english) async {
+  final short =
+      (english.length > 100 ? '${english.substring(0, 100)}...' : english)
+          .replaceAll('\n', '\\n');
+  final localeName = getNativeName(localeCode);
+  print('  Translating into $localeName ($localeCode): $short');
 
-  String translatedText;
-  try {
-    translatedText = await translator
-        .translateSimply(
-          english,
-          from: 'en',
-          to: _nearestLocaleCode(languageCode),
-        )
-        .then((translation) => translation.translations.text)
-        .timeout(const Duration(seconds: 10));
-  } catch (e) {
-    print('    Translation failed: $e');
-    errorOccurredInTranslatingTree = true;
-    return null;
-  }
-
-  final errorTexts = [
-    'Invalid request',
-    'None is not supported',
-    'Slowdown: 10 per 1 minute',
-  ];
-  if (errorTexts.any((error) => translatedText.contains(error))) {
-    print('    Translation failed: $translatedText');
-    errorOccurredInTranslatingTree = true;
-    return null;
-  }
-
-  return translatedText;
+  return (await translator).translate(english, to: '$localeName ($localeCode)');
 }
 
-bool errorOccurredInTranslatingTree = false;
+var errorOccurredInTranslatingTree = false;
 void main() async {
-  final random = Random();
+  await _runLive('dart', ['run', 'slang']);
+  await _runLive('dart', ['run', 'slang', 'analyze', '--full']);
+
   final missingTranslations = await _getMissingTranslations();
 
   final missingLanguageCodes = missingTranslations.keys
@@ -207,18 +138,10 @@ void main() async {
   );
 
   errorOccurredInTranslatingTree = true;
-  int attempts = 0;
-  while (errorOccurredInTranslatingTree && attempts < 5) {
+  var attempts = 0;
+  while (errorOccurredInTranslatingTree && attempts < 10) {
     errorOccurredInTranslatingTree = false;
     attempts++;
-
-    final useLibreEngine = random.nextBool();
-    print(
-      'Using ${useLibreEngine ? 'Libre' : 'Google'} translation engine...\n',
-    );
-    translator = SimplyTranslator(
-      useLibreEngine ? EngineType.libre : EngineType.google,
-    );
 
     for (final languageCode in missingLanguageCodes) {
       print('Translating $languageCode...');
@@ -227,18 +150,52 @@ void main() async {
       await translateTree(languageCode, tree, const []);
     }
 
-    if (errorOccurredInTranslatingTree) {
+    if (errorOccurredInTranslatingTree && attempts < 5) {
       print('\nError occurred. Retrying...');
     }
   }
-
-  // mark all newly translated paths as outdated
-  // for a human to review
-  final pathsWithoutLanguageCode = newlyTranslatedPaths
-      .map((e) => e.substring(e.indexOf('/') + 1))
-      .toSet();
-  for (final path in pathsWithoutLanguageCode) {
-    print('Marking $path as outdated...');
-    await Process.run('dart', ['run', 'slang', 'outdated', path]);
+  if (errorOccurredInTranslatingTree) {
+    print('\nError occurred too many times. Please rerun the script.');
   }
+
+  if (newlyTranslatedPaths.isNotEmpty) {
+    await _runLive('dart', ['run', 'slang', 'normalize']);
+    await _runLive('dart', ['run', 'slang']);
+    await _runLive('dart', ['run', 'slang', 'analyze', '--full']);
+  }
+}
+
+void _insert(String languageCode, List<Object> pathOfKeys, String translated) {
+  final query = StringBuffer();
+  for (var i = 0; i < pathOfKeys.length; ++i) {
+    var key = pathOfKeys[i];
+
+    if (key is int) {
+      query.writeAll(['[', key, ']']);
+    } else if (key is String) {
+      if (i == pathOfKeys.length - 1) {
+        key += '(OUTDATED)';
+      } else if (i == pathOfKeys.length - 2 && pathOfKeys.last is int) {
+        // can't put (OUTDATED) on the list index, so put it here
+        key += '(OUTDATED)';
+      }
+      query.writeAll(['.', jsonEncode(key)]);
+    }
+  }
+
+  _run('yq', [
+    '-i',
+    '$query = ${jsonEncode(translated)}',
+    'lib/i18n/$languageCode.i18n.yaml',
+  ]);
+}
+
+/// Runs a command silently and returns its output as a string.
+String _run(String exe, List<String> args) => Process.runSync(exe, args).stdout;
+
+/// Runs a command interactively, but cannot return its output.
+Future<void> _runLive(String exe, List<String> args) async {
+  final process = await Process.start(exe, args, mode: .inheritStdio);
+  final exitCode = await process.exitCode;
+  if (exitCode != 0) throw ProcessException(exe, args, '', exitCode);
 }

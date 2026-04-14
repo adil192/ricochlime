@@ -76,9 +76,9 @@ class _TranslationsSettingsPageKk extends TranslationsSettingsPageEn {
 
 	// Translations
 	@override String get title => 'Баптау';
-	@override String get bgmVolume => 'Музыканың дыбыс деңгейі';
 	@override String get appInfo => 'Қолданба ақпары';
 	@override String licenseNotice({required Object buildYear}) => 'Ricochlime  Copyright (C) 2023-${buildYear}  Adil Hanney\nБұл бағдарлама еш кепілдіксіз жеткізіледі. Ол еркін екенін ескере отырып, сіз оны кейбір шарттардың аясында еркін тарата аласыз.';
+	@override String get bgmVolume => 'Музыканың дыбыс деңгейі';
 	@override String get sfxVolume => 'Дыбыс әсерлерінің көлемі';
 	@override String get showFpsCounter => 'FPS есептегішін көрсету';
 	@override String get stylizedPageTransitions => 'Стильденген беттердің ауысуы';

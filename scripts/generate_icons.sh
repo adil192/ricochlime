@@ -47,6 +47,7 @@ resize_for_android_mipmap 72 162 hdpi
 resize_for_android_mipmap 96 216 xhdpi
 resize_for_android_mipmap 144 324 xxhdpi
 resize_for_android_mipmap 192 432 xxxhdpi
+cp -v android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png metadata/en-US/images/icon.png
 echo
 
 function resize_for_ios() {

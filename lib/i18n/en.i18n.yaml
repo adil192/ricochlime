@@ -1,14 +1,14 @@
 appName: Ricochlime
-homePage: 
+homePage:
   playButton: Play
   shopButton: Shop
   settingsButton: Settings
   tutorialButton: Tutorial
-playPage: 
+playPage:
   highScore: "Best: $p"
   undo: Undo move
   coins: Coins
-settingsPage: 
+settingsPage:
   title: Settings
   gameplay: Gameplay
   accessibility: Accessibility
@@ -25,19 +25,19 @@ settingsPage:
   licenseNotice: |-
     Ricochlime  Copyright (C) 2023-$buildYear  Adil Hanney
     This program comes with absolutely no warranty. This is free software, and you are welcome to redistribute it under certain conditions.
-gameOverPage: 
+gameOverPage:
   title: Game over!
   highScoreNotBeaten: You scored $p points!
   highScoreBeaten(rich): Your high score is now $pOld $pNew points!
   continueWithCoins: 100 to continue
   restartGameButton: Restart game
   homeButton: Home
-restartGameDialog: 
+restartGameDialog:
   title: Restart game?
   areYouSure: Are you sure you want to restart? You can't undo this
   waitCancel: Wait, cancel!
   yesImSure: Yes I'm sure!
-tutorialPage: 
+tutorialPage:
   tutorial: Tutorial
   dragAndRelease: Defeat the monsters by dragging to aim and releasing to shoot.
   pointAndClick: Defeat the monsters by moving your mouse to aim and clicking to shoot.
@@ -49,7 +49,7 @@ tutorialPage:
   moreMonsters: More rows of monsters will spawn each turn as you progress, so the skull line will move up.
   useCoinsInShop: Save up coins to unlock new items in the shop...
   orUseCoinsToContinue: "...or use them to continue after a game over."
-shopPage: 
+shopPage:
   title: Shop
   bulletColors: Bullet colors
   bulletShapes: Bullet shapes
