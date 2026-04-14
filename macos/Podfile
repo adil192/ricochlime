@@ -4,7 +4,7 @@ platform :osx, '10.15'
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 # Disable OGG codec binaries from flutter_soloud
-ENV['NO_OPUS_OGG_LIBS'] = '1'
+ENV['NO_XIPH_LIBS'] = '1'
 
 project 'Runner', {
   'Debug' => :debug,

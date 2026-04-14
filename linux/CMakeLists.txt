@@ -17,7 +17,8 @@ cmake_policy(SET CMP0063 NEW)
 set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
 
 # Disable OGG codec binaries from flutter_soloud
-set(ENV{NO_OPUS_OGG_LIBS} 1)
+set(ENV{NO_XIPH_LIBS} 1)
+set(ENV{TRY_SYSTEM_LIBS_FIRST} 1)
 
 # Root filesystem for cross-building.
 if(FLUTTER_TARGET_PLATFORM_SYSROOT)

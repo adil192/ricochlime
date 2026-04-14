@@ -11,7 +11,7 @@ set(BINARY_NAME "ricochlime")
 cmake_policy(VERSION 3.14...3.25)
 
 # Disable OGG codec binaries from flutter_soloud
-set(ENV{NO_OPUS_OGG_LIBS} 1)
+set(ENV{NO_XIPH_LIBS} 1)
 
 # Define build configuration option.
 get_property(IS_MULTICONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
