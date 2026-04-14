@@ -3,12 +3,11 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  screen_retriever_windows
-  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
   flutter_soloud
+  jni
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

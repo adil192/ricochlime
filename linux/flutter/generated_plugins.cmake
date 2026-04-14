@@ -3,14 +3,11 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  gtk
-  screen_retriever_linux
-  window_manager
-  yaru_window_linux
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
   flutter_soloud
+  jni
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

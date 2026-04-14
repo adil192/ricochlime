@@ -31,7 +31,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  flutter_soloud: ^3.4.8
+  flutter_soloud: ^4.0.2
 
   forge2d: any
 
@@ -42,7 +42,7 @@ dependencies:
 
   mini_sprite: ^0.1.0
 
-  nes_ui: ^0.27.0
+  nes_ui: ^0.30.0
 
   shared_preferences: ^2.2.0
 
@@ -60,7 +60,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  golden_screenshot: ^10.0.0
+  golden_screenshot: ^11.0.1
 
   icons_launcher: ^3.0.0
 
