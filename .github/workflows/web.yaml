@@ -42,12 +42,6 @@ jobs:
         with:
           flutter-path: submodules/flutter
 
-      - name: Reset cached flutter_soloud
-        # Reverts the effects of `./patches/remove_wasm_libs.sh` on the pub cache
-        run: rm -rf ${PUB_CACHE}/{hosted/pub.dev,git}/flutter_soloud-*
-
-      - name: Remove dev dependencies
-        run: ./patches/remove_dev_dependencies.sh
       - name: Remove proprietary dependencies
         run: ./patches/foss.sh
       - run: flutter pub get

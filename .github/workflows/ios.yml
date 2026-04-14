@@ -82,11 +82,7 @@ jobs:
 
           xcode-project use-profiles --project ios/*.xcodeproj
 
-      - name: Remove dev dependencies
-        run: ./patches/remove_dev_dependencies.sh
       - run: flutter pub get
-      - name: Remove wasm libs
-        run: ./patches/remove_wasm_libs.sh
 
       - name: Build for iOS
         id: build
