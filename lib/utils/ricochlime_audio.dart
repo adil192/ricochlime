@@ -45,7 +45,7 @@ final class RicochlimeAudio {
     _hitSfxPool = _AudioPool(await _hitSfxAudioSource, targetPoolSize: 10);
     await _hitSfxPool!.init();
 
-    _bgmHandle ??= await _soLoud.play(
+    _bgmHandle ??= _soLoud.play(
       await _bgmAudioSource,
       volume: 0,
       paused: true,
@@ -89,13 +89,23 @@ class _AudioPool {
   final AudioSource source;
   final Duration audioLength;
   final int targetPoolSize;
+  late final _loopingStartAt = audioLength * 0.9;
 
   /// A pool of handles ready to play.
   final _pool = Queue<SoundHandle>();
 
   Future<void> init() async {
     for (var i = 0; i < targetPoolSize; ++i) {
-      _pool.add(await _prepareHandle(source));
+      _pool.add(
+        _soLoud.play(
+          source,
+          volume: stows.sfxVolume.value,
+          paused: true,
+          // Set looping to true to stop the handle being freed automatically.
+          looping: true,
+          loopingStartAt: _loopingStartAt,
+        ),
+      );
     }
   }
 
@@ -125,14 +135,4 @@ class _AudioPool {
     }
     _pool.clear();
   }
-
-  late final _loopingStartAt = audioLength * 0.9;
-  Future<SoundHandle> _prepareHandle(AudioSource source) => _soLoud.play(
-    source,
-    volume: stows.sfxVolume.value,
-    paused: true,
-    // Set looping to true to stop the handle being freed automatically.
-    looping: true,
-    loopingStartAt: _loopingStartAt,
-  );
 }
