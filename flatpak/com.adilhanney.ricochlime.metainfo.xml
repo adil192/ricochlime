@@ -88,6 +88,14 @@
     </branding>
 
     <releases>
+        <release version="1.13.1" date="2026-04-14">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.13.1</url>
+            <description>
+                <ul>
+                    <li>Removed some unneeded audio libraries</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.13.0" date="2026-04-14">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.13.0</url>
             <description>
