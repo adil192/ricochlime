@@ -1,0 +1,3 @@
+To benefit accessibility, the black bullet color is now free.
+
+This release also tries to comply with Google's developer verification scheme while distributing outside of the Google Play Store.

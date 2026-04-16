@@ -1,0 +1,3 @@
+Para beneficiar la accesibilidad, el color de bala negro ahora es gratuito.
+
+Esta versión también intenta cumplir con el esquema de verificación de desarrolladores de Google mientras se distribuye fuera de la Google Play Store.
