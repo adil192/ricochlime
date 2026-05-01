@@ -151,10 +151,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_soloud
-      sha256: d9f832a6c16dcdc816faa9a95a055f60d4eff602c1432186843c6a76563d8d15
+      sha256: "30d297a3b9c603ce1a19b0cfd741425f37136fc11db76960c3068ef69fefa16f"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.2"
+    version: "4.0.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -605,14 +605,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
-  simplytranslate:
-    dependency: "direct dev"
-    description:
-      name: simplytranslate
-      sha256: "3137b221b088c589cd68d26192d753a3a6fe314b83d95fc9c96cd0a40b270772"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.2"
   sky_engine:
     dependency: transitive
     description: flutter

@@ -31,7 +31,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  flutter_soloud: ^4.0.2
+  flutter_soloud: ^4.0.3
 
   forge2d: any
 
