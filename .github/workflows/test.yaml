@@ -49,7 +49,7 @@ jobs:
             ${{ runner.OS }}-ricochlime-ubuntu-
 
       - name: Setup Flutter
-        uses: adil192/setup-flutter-submodule@v1
+        uses: adil192/setup-flutter-submodule@v3
         with:
           flutter-path: submodules/flutter
 
