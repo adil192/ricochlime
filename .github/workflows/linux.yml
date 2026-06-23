@@ -37,7 +37,7 @@ jobs:
     name: Build Linux (${{ matrix.arch.target-platform }})
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install apt dependencies
         uses: awalsh128/cache-apt-pkgs-action@latest
