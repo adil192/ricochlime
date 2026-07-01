@@ -31,7 +31,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  flutter_soloud: ^4.0.2
+  flutter_soloud: ^4.0.12
 
   forge2d: any
 
@@ -46,7 +46,7 @@ dependencies:
 
   shared_preferences: ^2.2.0
 
-  slang: ^4.11.2
+  slang: ^4.18.0
   slang_flutter: any
 
   stow_codecs: ^1.0.0
