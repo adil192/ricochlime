@@ -23,8 +23,8 @@ environment:
   flutter: '>=3.38.0'
 
 dependencies:
-  flame: ^1.8.1
-  flame_forge2d: ^0.19.0
+  flame: ^1.38.0
+  flame_forge2d: ^0.19.3+7
 
   flutter:
     sdk: flutter
@@ -46,7 +46,7 @@ dependencies:
 
   shared_preferences: ^2.2.0
 
-  slang: ^4.11.2
+  slang: ^4.18.0
   slang_flutter: any
 
   stow_codecs: ^1.0.0
@@ -66,7 +66,7 @@ dev_dependencies:
 
   intl: ^0.20.2
 
-  sealed_languages: ^3.1.0
+  sealed_languages: ^3.3.0
   yaml: ^3.1.2
 
 flutter:
