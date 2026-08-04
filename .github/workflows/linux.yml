@@ -40,11 +40,9 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Install apt dependencies
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: libgtk-3-dev cmake ninja-build libjsoncpp-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-good libunwind-dev libasound2-dev
-          version: 1.0
-          execute_install_scripts: true
+        run: |
+          sudo apt-get update
+          sudo apt-get install libgtk-3-dev cmake ninja-build libjsoncpp-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-good libunwind-dev libasound2-dev
 
       - name: Setup cache
         uses: actions/cache@v6
