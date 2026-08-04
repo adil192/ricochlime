@@ -47,6 +47,7 @@ void main() async {
       .where((name) => name.endsWith('.i18n.yaml'))
       .map((name) => name.replaceFirst('.i18n.yaml', ''))
       .toList();
+  final total = localeCodes.length.toString();
 
   late final translator = LmsTranslator.create();
 
@@ -57,7 +58,7 @@ void main() async {
 
     /// The step number and total number of steps.
     /// e.g. 1/10
-    final stepPrefix = '${(i + 1).toString().padLeft(2)}/${localeCodes.length}';
+    final stepPrefix = '${(i + 1).toString().padLeft(total.length)}/$total';
 
     if (localeCode == 'en') {
       copyChangelogForFdroid('en-US');
@@ -68,7 +69,7 @@ void main() async {
     if (file.existsSync()) {
       continue;
     } else {
-      print('$stepPrefix. Translating to $localeName ($localeCode)...');
+      print('$stepPrefix. Translating to $localeCode ($localeName)...');
     }
 
     var translatedChangelog = (await translator).translate(
