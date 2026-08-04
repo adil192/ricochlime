@@ -37,7 +37,7 @@ jobs:
     name: Build Linux (${{ matrix.arch.target-platform }})
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install apt dependencies
         uses: awalsh128/cache-apt-pkgs-action@latest
@@ -47,7 +47,7 @@ jobs:
           execute_install_scripts: true
 
       - name: Setup cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             .dart_tool/
