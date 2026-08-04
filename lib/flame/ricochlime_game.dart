@@ -581,6 +581,7 @@ class RicochlimeGame extends Forge2DGame
     return row;
   }
 
+  @override
   @Deprecated('RicochlimeGame is never expected to be disposed')
   void dispose() {
     _fpsStreamController.close();

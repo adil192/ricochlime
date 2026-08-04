@@ -3,11 +3,12 @@
 import 'dart:io';
 
 class LmsTranslator {
+  const LmsTranslator._();
+
   static const model = 'gemma-4-E4B-it-QAT';
   static const modelUrl =
       'https://huggingface.co/lmstudio-community/$model-GGUF';
 
-  const LmsTranslator._();
   static Future<LmsTranslator> create() async {
     print(
       'We are using LM Studio for automatic translations.\n'
