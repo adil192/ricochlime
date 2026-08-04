@@ -61,23 +61,30 @@
 
     <screenshots>
         <screenshot type="default">
-            <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/1_home.png</image>
-            <caption>Main menu with quick volume controls and navigation to play, shop, tutorial, and settings.</caption>
+            <image>
+                https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/1_home.png</image>
+            <caption>Main menu with quick volume controls and navigation to play, shop, tutorial,
+                and settings.</caption>
         </screenshot>
         <screenshot type="default">
-            <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/2_play.png</image>
-            <caption>Gameplay screenshot showcasing the player aiming between monsters to ricochet their shots.</caption>
+            <image>
+                https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/2_play.png</image>
+            <caption>Gameplay screenshot showcasing the player aiming between monsters to ricochet
+                their shots.</caption>
         </screenshot>
         <screenshot type="default">
-            <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/4_shop.png</image>
+            <image>
+                https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/4_shop.png</image>
             <caption>Shop with unlockable cosmetic bullet shapes and colors.</caption>
         </screenshot>
         <screenshot type="default">
-            <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/5_tutorial.png</image>
+            <image>
+                https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/5_tutorial.png</image>
             <caption>Tutorial explaining the game mechanics and controls.</caption>
         </screenshot>
         <screenshot type="default">
-            <image>https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/6_settings.png</image>
+            <image>
+                https://raw.githubusercontent.com/adil192/ricochlime/main/metadata/en-US/images/flathubScreenshots/6_settings.png</image>
             <caption>Settings for gameplay, accessibility, audio, performance, and app information.</caption>
         </screenshot>
     </screenshots>
@@ -88,6 +95,14 @@
     </branding>
 
     <releases>
+        <release version="1.14.0" date="2026-08-04">
+            <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.14.0</url>
+            <description>
+                <ul>
+                    <li>Minor maintenance updates, no functional changes</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.13.1" date="2026-04-14">
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.13.1</url>
             <description>
@@ -152,7 +167,8 @@
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.14</url>
             <description>
                 <ul>
-                    <li>Migrated AppImage builds to the `linuxdeploy` tool instead of the unmaintained `appimage-builder`.</li>
+                    <li>Migrated AppImage builds to the `linuxdeploy` tool instead of the
+                        unmaintained `appimage-builder`.</li>
                 </ul>
             </description>
         </release>
@@ -244,8 +260,10 @@
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.2</url>
             <description>
                 <ul>
-                    <li>Removed ads that showed up between turns, so now fullscreen ads are only shown after a game over.</li>
-                    <li>Fixed there being no page transitions when stylized page transitions were turned off.</li>
+                    <li>Removed ads that showed up between turns, so now fullscreen ads are only
+                        shown after a game over.</li>
+                    <li>Fixed there being no page transitions when stylized page transitions were
+                        turned off.</li>
                 </ul>
             </description>
         </release>
@@ -253,8 +271,10 @@
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.11.1</url>
             <description>
                 <ul>
-                    <li>Page transitions are faster by default and the old "faster page transitions" setting has been removed</li>
-                    <li>Disable the new "stylized page transitions" setting to use the system default</li>
+                    <li>Page transitions are faster by default and the old "faster page transitions"
+                        setting has been removed</li>
+                    <li>Disable the new "stylized page transitions" setting to use the system
+                        default</li>
                     <li>Improved handling of the aim guide so the number of dots changes less often</li>
                 </ul>
             </description>
@@ -272,7 +292,7 @@
             <url type="details">https://github.com/adil192/ricochlime/releases/tag/v1.10.1</url>
             <description>
                 <ul>
-                  <li>The aim guide now shows where the bullets will bounce off the wall.</li>
+                    <li>The aim guide now shows where the bullets will bounce off the wall.</li>
                 </ul>
             </description>
         </release>
