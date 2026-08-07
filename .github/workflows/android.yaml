@@ -102,20 +102,38 @@ jobs:
 
       - name: Build aab
         if: ${{ matrix.foss == false }}
-        run: flutter build appbundle
-
-      - name: Rename aab
-        if: ${{ matrix.foss == false }}
         run: |
+          flutter build appbundle
           mkdir -p output
           mv build/app/outputs/bundle/release/app-release.aab output/Ricochlime.aab
-
       - name: Upload aab artifact
         if: ${{ matrix.foss == false }}
         uses: actions/upload-artifact@v7
         with:
           name: Ricochlime-Android-PlayStore
           path: output/Ricochlime.aab
+
+      - name: Produce pubspec-fdroid.lock
+        if: ${{ matrix.foss == true }}
+        run: |
+          cp pubspec.lock pubspec-fdroid.lock
+          if grep -q in_app_purchase pubspec.lock; then
+            echo "FOSS patch not applied?"
+            exit 1
+          fi
+      - name: Upload pubspec-fdroid.lock artifact
+        if: ${{ matrix.foss == true }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: pubspec-fdroid.lock
+          path: pubspec-fdroid.lock
+          archive: false
+      - name: Upload pubspec-fdroid.lock to GitHub release
+        uses: svenstaro/upload-release-action@v2
+        if: ${{ matrix.foss == true && startsWith(github.ref, 'refs/tags/') }}
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: pubspec-fdroid.lock
 
   upload-to-play-store:
     name: Upload to Play Store
