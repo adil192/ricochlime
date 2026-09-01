@@ -23,30 +23,30 @@ environment:
   flutter: '>=3.38.0'
 
 dependencies:
-  flame: ^1.8.1
-  flame_forge2d: ^0.19.0
+  flame: ^1.38.2
+  flame_forge2d: ^0.20.0
 
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
 
-  flutter_soloud: ^4.0.2
+  flutter_soloud: ^4.1.7
 
   forge2d: any
 
-  google_fonts: ^6.1.0
+  google_fonts: ^8.2.1
 
   in_app_purchase: ^3.2.0
   logging: ^1.2.0
 
   mini_sprite: ^0.1.0
 
-  nes_ui: ^0.30.0
+  nes_ui: ^0.31.0
 
   shared_preferences: ^2.2.0
 
-  slang: ^4.11.2
+  slang: ^4.19.0
   slang_flutter: any
 
   stow_codecs: ^1.0.0
@@ -60,14 +60,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  golden_screenshot: ^11.0.1
+  golden_screenshot: ^12.0.0
 
   icons_launcher: ^3.0.0
 
   intl: ^0.20.2
 
   sealed_languages: ^3.1.0
-  yaml: ^3.1.2
+  yaml: ^3.1.4
 
 flutter:
   uses-material-design: true
